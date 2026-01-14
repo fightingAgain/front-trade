@@ -1,0 +1,88 @@
+# ===================== 通用忽略规则 =====================
+# 操作系统相关文件
+# Windows 系统临时文件
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN
+*.tmp
+*.temp
+
+# macOS 系统文件
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Icon?
+*.orig
+
+# Linux 系统文件
+*~
+.fuse_hidden*
+.directory
+.Trash-*
+.nfs*
+
+# ===================== 前端开发相关 =====================
+# 编辑器/IDE 配置文件（根据自己使用的工具选择保留）
+# VS Code
+.vscode/
+.idea/          # WebStorm/IntelliJ
+.project        # Eclipse
+.classpath
+.c9/
+*.launch
+.settings/
+*.sublime-workspace
+*.sublime-project
+*.swp
+*.swo
+
+# 构建/打包产物（前端打包工具生成的目录）
+dist/
+build/
+out/
+release/
+dist-*/
+build-*/
+
+# 依赖包目录（如果使用 npm/yarn/pnpm）
+node_modules/
+# pnpm 存储目录
+pnpm-lock.yaml
+# yarn 缓存
+.yarn/
+# npm 缓存
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+package-lock.json
+yarn.lock
+
+# 日志文件
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# 临时文件/缓存
+.cache/
+.tmp/
+temp/
+coverage/       # 测试覆盖率报告
+*.min.js.map    # 如果不需要提交压缩后的 js 映射文件
+*.min.css.map   # 如果不需要提交压缩后的 css 映射文件
+
+# ===================== 项目自定义忽略（可选） =====================
+# 本地配置文件（比如本地测试用的 config.js，不上库）
+local.config.js
+# 测试/模拟数据
+mock/
+test-data/
+# 个人开发的临时文件
+*.bak
+*.swp
