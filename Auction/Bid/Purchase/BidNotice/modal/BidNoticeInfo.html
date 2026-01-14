@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="pragma" content="no-cache">
+		<!-- 禁止浏览器从本地机的缓存中调阅页面内容 -->
+		<meta http-equiv="cache-control" content="no-cache, must-revalidate">
+		<meta http-equiv="expires" content="0">
+		<title>询比采购结果公示</title>
+		<style type="text/css">
+			.table th,
+			.table td {				
+				vertical-align: middle !important;
+			}
+		</style>
+	</head>
+	<link rel="stylesheet" href="../../../../media/js/bootstrap/css/bootstrap.css">
+	<link rel="stylesheet" href="../../../../media/js/datetimepicker/css/jquery.datetimepicker.css"/>
+	<body style="width: 99%;padding-left: 10px;padding-top: 10px;margin-bottom: 60px;">
+		<table class="table table-bordered" style="margin-bottom: 50px;" align="center">
+			<th colspan="4" class="active" >项目信息
+			</th>
+			<tr>
+				<td class="th_bg" width="20%" >采购项目名称</td>
+				<td colspan="3"  id="projectName"></td>
+			</tr>
+			<tr>
+				<td class="th_bg" >采购项目编号</td>
+				<td colspan="3"  id="projectCode"></td>
+			</tr>
+			<tr>
+				<td class="th_bg" >包件名称</td>
+				<td colspan="3"  id="packageName"></td>
+			</tr>
+			<tr>
+				<td class="th_bg" >包件编号</td>
+				<td colspan="3"  id="packageNum"></td>
+			</tr>
+			<tr>
+				<td class="th_bg" rowspan="2">是否公开</td>
+				<td colspan="3" ><input type="radio" id="isPublic" name="isPublic" value="0">公开<input type="radio" id="isPublic" name="isPublic" value="1">不公开</td>
+			</tr>
+			<tr>
+				<td colspan="3" ><span style="color: red;">温馨提示 【公开前台和后台均公示采购结果；不公开仅对参与项目的供应商公示】</span></td>
+			</tr>
+			<tr>
+				<td class="th_bg" >采购人名称</td>
+				<td colspan="3"  id="purchaserName"></td>
+			</tr>
+			<tr>
+				<td class="th_bg" >采购人地址</td>
+				<td colspan="3"  id="purchaserAddress"></td>
+			</tr>
+			<tr>
+				<td class="th_bg" >联系人</td>
+				<td   id="purchaserLinkmen"></td>
+				<td class="th_bg" width="20%" >联系电话</td>
+				<td   id="purchaserTel"></td>
+			</tr>
+			<tr>
+				<td class="th_bg" ><span style="color: red;" class="isWatch">*</span>公示开始时间</td>
+				<td ><input type="text" id="bidNoticeStartDate" name="bidNoticeStartDate" class="form-control update" /><span class="view" style="display: none;" id="bidNoticeStartDate1"> </span></td>
+				<td class="th_bg" width="20%" ><span style="color: red;" class="isWatch">*</span>公示截止时间</td>
+				<td  ><input type="text" id="bidNoticeEndDate" name="bidNoticeEndDate" class="form-control update" /><span class="view" style="display: none;" id="bidNoticeEndDate1"> </span></td>
+			</tr>
+			<tr class="noneddd">
+				<th colspan="2" class="active" style="text-align: left;border: none;">询比采购结果公示</th>
+				<td colspan="2" class="active" id="btns" style="text-align: right;border: none;"><button type="button" class="btn btn-primary btn-sm" id="addColumn">添加</button><button type="button" class="btn btn-primary btn-sm" style="margin-left: 10px;" id="delColumn">删除</button></td>
+			</tr>
+			
+			
+			<tr id="whyFailureTr">
+				<td class="th_bg" >失败原因</td>
+				<td colspan="3"  id="whyFailure"></td>
+			</tr>
+			<tbody id="isSupplier">			
+				<tr>
+					<td colspan="4" style="padding:inherit">
+						<form id="formBidNotice">
+							<table class="table table-bordered" id="bidNoticeTable" width="100%"></table>
+						</form>
+					</td>
+				</tr>
+			</tbody>
+			<tr class="employee">
+				<td class="th_bg" class="text-right">添加审核人</td>
+				<td colspan="3" >
+					<select id="employeeId" class="form-control" style="width: 180px;" name="checkerId"></select>
+				</td>
+			</tr>
+			<tr class="workflowList">
+			   <td class="active" style="font-weight: bold;text-align: left;"  colspan="4"><strong>审核记录</strong></td>
+			</tr>
+			<tr>
+			<td class="workflowList" colspan="4">
+				<table class="table  table-bordered"  id="workflowListDetail">
+					<tr>
+						<td colspan="5" style="text-align: center;">
+							当前没有审核记录
+						</td>	
+					</tr>
+				</table>
+			</td>
+		</table>
+		<div class="form-group rowLine" style="width: 100%;height: 50px;text-align:center;position: fixed;bottom: 0;background-color: #FFFFFF;margin-bottom:0px !important;padding-top: 10px;z-index: 9999999;">
+			<button type="button" style="width: 80px;" class="btn btn-primary" data-dismiss="modal" id="btn_submit">确定</button>
+			<button type="button" style="width: 80px;" class="btn btn-default" data-dismiss="modal" id="btn_close">关闭</button>
+		</div>
+	</body>
+	<script type="text/javascript" src="../../../../media/js/jquery/jquery.js"></script>
+	<script type="text/javascript" src="../../../../media/js/jquery/jquery.extend.js"></script>
+	<script type="text/javascript" src="../../../../media/js/bootstrap/js/bootstrap.js"></script>
+	<script type="text/javascript" src="../../../../media/js/bootstrap/js/bootstrap-table.min.js"></script>
+    <script type="text/javascript" src="../../../../media/js/bootstrap/js/bootstrap-table-zh-CN.min.js"></script>
+	<script type="text/javascript" src="../../../../media/js/layer/layer.js"></script>
+	<script type="text/javascript" src="../../../../media/js/layer/laydate.js"></script>
+	<script type="text/javascript" src="../../../../media/js/datetimepicker/js/jquery.datetimepicker.js" ></script>
+	<script type="text/javascript" src="../js/BidNoticeInfo.js"></script>
+	<script type="text/javascript" src="../../../../media/js/base/auditRecords.js"></script>
+
+</html>

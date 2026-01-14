@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="pragma" content="no-cache">
+		<!-- 禁止浏览器从本地机的缓存中调阅页面内容 -->
+		<meta http-equiv="cache-control" content="no-cache, must-revalidate">
+		<meta http-equiv="expires" content="0">
+		<title>竞价采购历史详情</title>
+		<link rel="stylesheet" href="../../../media/js/bootstrap/css/bootstrap.css">
+		<link rel="stylesheet" href="../../../media/js/bootstrap/css/bootstrap-table.css">
+		<style type="text/css">
+			.table td,
+			.table tr {
+				vertical-align: middle !important;
+			}
+			
+			input {}
+		</style>
+	</head>
+
+	<body style="width: 99%;padding-left: 10px;padding-top: 10px;margin-bottom: 60px;">
+		<div class="form-group">
+			<table class="table table-bordered">
+				<tr>
+					<td style="width:100px" class="th_bg">竞价方式</td>
+					<td id="auctionType" style="width:35%"></td>
+					<td style="width:120px" class="th_bg">参与竞价人数</td>
+					<td id="offerSupplierCount" style="width:35%"></td>
+				</tr>
+				<tr>
+					<td class="th_bg">项目名称</td>
+					<td id="projectName"></td>
+					<td class="th_bg">项目编号</td>
+					<td id="projectCode"></td>
+				</tr>
+				<tr>
+					<td class="th_bg">包件编号</td>
+					<td id="packageNum"></td>
+					<td class="th_bg">包件名称</td>
+					<td id="packageName"></td>
+				</tr>
+				<tr>
+					<td colspan="4"></td>
+				</tr>
+				<tr id="checkMes" style="display: none;">
+					<td colspan="4" class="active">审核记录</td>
+				</tr>
+				<tr id="checkPerson" style="display: none;">
+					<td colspan="4">
+						<table id="checkList" class="table table-bordered"></table>
+					</td>
+				</tr>
+
+				<!--<tr>
+
+					<table class="table table-bordered table-striped" id="biddingApproval">
+						<tr class="active">
+							<th colspan="4">采购审核</th>
+						</tr>
+						<tr id="auditrow1">
+
+							<td colspan="4" style="text-align:left ;">
+								<table id="biddingApprovalList" class="table table-bordered"></table>
+							</td>
+						</tr>
+
+					</table>
+
+				</tr>-->
+				<tr>
+					<table class="table table-bordered table-striped">
+						<tr id="resultAuditMsg">
+							<td colspan="4" class="active">会签记录</td>
+						</tr>
+						<tr id="resultAuditTable">
+							<td colspan="4" align="left">
+								<table class="table table-bordered table-striped" id="biddingApprovalRecord">
+
+								</table>
+							</td>
+						</tr>
+					</table>
+				</tr>
+
+			</table>
+
+			<div style="width: 100%;height:50px;">
+			</div>
+			<div style="width: 100%;height: 50px;text-align:center;position: fixed;bottom: 0;background-color: #FFFFFF;">
+				<button type="button" id="btn_close" class="btn btn-default" style="width: 100px;">关闭</button>
+			</div>
+		</div>
+	</body>
+	<script type="text/javascript" src="../../../media/js/jquery/jquery.min.js"></script>
+	<script type="text/javascript" src="../../../media/js/bootstrap/js/bootstrap.js"></script>
+	<script type="text/javascript" src="../../../media/js/bootstrap/js/bootstrap-table.min.js"></script>
+	<script type="text/javascript" src="../../../media/js/jquery/jquery.extend.js"></script>
+	<script type="text/javascript" src="../../../media/js/jquery/jquery.params.js"></script>
+	<script type="text/javascript" src="../../../media/js/base/common.js"></script>
+	<script type="text/javascript" src="../../../media/js/base/util.js"></script>
+	<script type="text/javascript" src="../../../media/js/layer/layer.js"></script>
+	<script type="text/javascript" src="../js/JMlookBidStateApproval.js"></script>
+
+</html>

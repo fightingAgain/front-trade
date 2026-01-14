@@ -1,0 +1,56 @@
+<!--
+ * @Author: your name
+ * @Date: 2020-09-09 15:38:53
+ * @LastEditTime: 2020-09-27 14:58:43
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: \FrameWork_bf\bidPrice\Review\projectManager\modal\projectData.html
+--> 
+<!-- 网页不会被缓存 -->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+	<head>
+		<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+		<meta http-equiv="pragma" content="no-cache">
+		<!-- 禁止浏览器从本地机的缓存中调阅页面内容 -->
+		<meta http-equiv="cache-control" content="no-cache, must-revalidate">
+		<meta http-equiv="expires" content="0">
+		<title>政府失信名单查询网站</title>
+		<style type="text/css">
+		</style>
+</head>
+<body>
+	<form id="formbackage" name="purchase">
+     <table class="table table-bordered " style="margin-bottom: 0px;">
+     	<tr>
+            <td colspan="4" style="font-weight: bold;border: none;" class="active">政府失信名单查询网站</td>
+        </tr>
+        <tr >
+            <td style="text-align: center;border: none;">
+				<img class="nameListWebsite" style="width: 100%;cursor: pointer;" src="../../../../media/image/reviewImg/gjqyxy.png" data-url="https://www.gsxt.gov.cn/index.html" >
+            </td>
+			<td style="text-align: center;border: none;">
+				<img class="nameListWebsite" style="width: 100%;cursor: pointer;" src="../../../../media/image/reviewImg/zgzfcgw.png" data-url="http://www.ccgp.gov.cn/" >
+			</td>
+        </tr>
+		<tr >
+		    <td style="text-align: center;border: none;">
+				<img class="nameListWebsite" style="width: 100%;cursor: pointer;" src="../../../../media/image/reviewImg/xyzg.png" data-url="https://www.creditchina.gov.cn/" >
+		    </td>
+			<td style="text-align: center;border: none;">
+				<img class="nameListWebsite" style="width: 100%;cursor: pointer;" src="../../../../media/image/reviewImg/jdcgw.png" data-url="https://www.plap.cn/" >
+			</td>
+		</tr>
+     </table>   
+ 	</form>
+	
+ </body>
+ <script>
+	$('#BtnShow').hide();
+	$('#reportContent').off('click','.nameListWebsite').on('click','.nameListWebsite', function(){
+		var surl = $(this).attr('data-url');
+		window.open(surl, "_blank");
+	});
+ </script>
+ </html>

@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="pragma" content="no-cache">
+		<!-- 禁止浏览器从本地机的缓存中调阅页面内容 -->
+		<meta http-equiv="cache-control" content="no-cache, must-revalidate">
+		<meta http-equiv="expires" content="0">
+		<title>查看结果通知书</title>
+		<link rel="stylesheet" href="../../../../media/js/bootstrap/css/bootstrap.min.css">
+		<style>
+			h3 {
+				font-weight: 700;
+				color: #1A8FFF;
+			}
+			
+			.resultContent {			
+				margin: auto;
+				background-image: url(../../../../media/image/images/watermarkOne.png);
+				overflow: auto;
+			}
+			.w-e-text-container { height: 250px !important;}
+			
+		</style>
+	</head>
+
+	<body style="width: 99%;padding-left: 10px;padding-top: 10px;">
+		<!--startprint1-->
+		<!--<div class='resultContent'>
+			<div class="isBid">
+				<h3 class="text-center">中选通知书</h3>
+				<p><font size="3"><span id="enterpriseName"></span>：</font></p>
+				<p style="text-indent:32px;"><font size="3">在我公司组织的 &nbsp;<span id="projectName"></span>&nbsp;项目(项目编号：<span id="projectCode"></span>)中，<span id="tenderType"></span>，确定贵公司为成交单位，成交金额<span id="bidPrice"></span><span id ='wan'></span>元。</font></p>
+				<p style="text-indent:32px;"><font size="3">请贵公司接此中选通知书后按规定与采购人签订合同。</font></p>
+				<p style="text-indent:32px;"><font size="3">特此通知。</font></p>		
+			</div>
+			<div class="isnotBid">
+				<h3 class="text-center">未中选通知书</h3>
+				<p><font size="3"><span id="enterpriseName"></span>：</font></p>
+				<p style="text-indent:32px;"><font size="3">在我公司组织的 &nbsp;<span id="projectName"></span>&nbsp;项目(项目编号：<span id="projectCode"></span>)中，贵公司未能成为中选单位。</font></p>
+				<p style="text-indent:32px;"><font size="3">感谢贵公司的参与。</font></p>
+				<p style="text-indent:32px;"><font size="3">特此通知。</font></p>
+				<p style="display: none;"><font size="3">特此通知。</font></p>
+			</div>
+			
+			<div class = 'gongzhang' style="position:relative;right:25px;text-align: right;margin-top: 150px;">
+				<img id='gz' width='150px' hight='150px' style="position: absolute;right: 10px;top:-70px"  />
+				<p><span style="" >东风(武汉)工程咨询有限公司</span></p>
+				<span style="" id="nowtime"></span>
+			</div>
+			
+		</div>-->
+		<div class='resultContent'>
+			<div id="NewsContent" style="padding: 25px;"></div>
+		</div>
+	</body>
+	<script type="text/javascript" src="../../../../media/js/jquery/jquery.js"></script>
+	<script type="text/javascript" src="../../../../media/js/jquery/jquery.params.js"></script>
+	<script type="text/javascript" src="../../../../media/js/jquery/jquery.extend.js"></script>
+	<script type="text/javascript" src="../../../../media/js/bootstrap/js/bootstrap.js"></script>
+   <script>
+   	function getUrlParam(name) {
+		var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); // 构造一个含有目标参数的正则表达式对象  
+		var r = window.location.search.substr(1).match(reg); // 匹配目标参数  
+		if(r != null) return unescape(r[2]);
+		return null; // 返回参数值  
+	}
+   	var BidNotice = JSON.parse(sessionStorage.getItem("BidNotice")); //操作数据行
+	var projectId;
+	var type = getUrlParam("type"); //update发布公示  view查看详情
+	var examType = getUrlParam("examType"); 
+
+	var enterpriseType = getUrlParam("enterpriseType"); 
+	var tenderTypeCode = sessionStorage.getItem("tenderTypeCode");
+	$(function() {
+		var para;
+		var para = {
+				id: BidNotice.id,
+				tenderType: tenderTypeCode,//0为询比采购，1为竞价采购，2为竞卖
+				examType:examType
+			}
+	    $.ajax({
+				url: top.config.bidhost + "/BidNoticeController/findBidNoticeInfo.do",
+				data: para,
+				async: false,
+				success: function(data) {
+					if(data.success) {
+						data = data.data;					 
+						$("#NewsContent").html(data.noticeContent)
+					}
+					
+				}
+			});
+	});
+
+
+
+
+
+
+
+
+
+   </script>
+</html>

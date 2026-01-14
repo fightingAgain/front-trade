@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="pragma" content="no-cache"><!-- 禁止浏览器从本地计算机的缓存中访问页面内容 -->
+	<meta http-equiv="cache-control" content="no-cache"><!-- 用于指定请求和响应遵循的缓存机制 -->
+	<meta http-equiv="expires" content="0"><!-- 用于设定网页的到期时间，一旦网页过期，必须到服务器上重新传输； -->
+	<link rel="stylesheet" href="../../../media/js/bootstrap/css/bootstrap.css" />
+	<link rel="stylesheet" href="../../../media/js/bootstrap/css/bootstrap-table.min.css" type="text/css" />
+	<link rel="stylesheet" href="../../../media/js/layer/mobile/need/layer.css" />
+	<title>评审项</title>
+	<style>
+		.hideBlock {
+			display: none;
+		}
+	</style>
+</head>
+
+<body>
+	<form id="formName" class="pageModel">
+		<table class="table table-bordered" id="checkTable">
+			<tr>
+				<td class="th_bg">评审项名称</td>
+				<td>
+					<span id="checkName"></span>
+				</td>
+			</tr>
+			<tr>
+				<td class="th_bg">评审项类型</td>
+				<td>
+					<span id="isBlind"></span>
+				</td>
+			</tr>
+			<tr>
+				<td class="th_bg">评审项说明</td>
+				<td>
+					<span id="checkStandard"></span>
+				</td>
+			</tr>
+			<tr>
+				<td class="th_bg">评审阶段</td>
+				<td>
+					<span id="checkStage"></span>
+				</td>
+			</tr>
+			<tr>
+				<td class="th_bg">评审方式</td>
+				<td>
+					<span id="checkType"></span>
+				</td>
+			</tr>
+			<tr class="checkType checkTypeCom">
+				<td class="th_bg">评审规则</td>
+				<td>
+					<span id="ratioMolecular" style="padding-right: 10px;"></span>评委评审合格才算合格
+				</td>
+			</tr>
+			<tr class="checkType checkType1 hideBlock">
+				<td class="th_bg">最大偏离项</td>
+				<td>
+					<span id="maxDeviate"></span>
+				</td>
+			</tr>
+			<tr class="checkType checkType1 hideBlock">
+				<td class="th_bg">是否计入偏离总项</td>
+				<td>
+					<span id="isAddToTotal"></span>
+				</td>
+			</tr>
+			<tr class="checkType checkType1 isAddPriceModule hideBlock">
+				<td class="th_bg">偏离<span class="checkType8">加</span>价</td>
+				<td>
+					<span id="isAddPrice"></span>
+				</td>
+			</tr>
+			<tr class="isAddPriceShow hideBlock">
+				<td class="th_bg"><span class="checkType8">加</span>价幅度</td>
+				<td>
+					<span id="addPriceRatio"></span>%
+				</td>
+			</tr>
+			<tr class="checkType checkType3 hideBlock">
+				<td class="th_bg">满分</td>
+				<td>
+					<span id="score"></span>
+				</td>
+			</tr>
+
+			<tr class="checkType checkType3 weightShow hideBlock">
+				<td class="th_bg">权重</td>
+				<td>
+					<span id="weight"></span>
+				</td>
+
+			</tr>
+			<tr class="checkType checkType3 hideBlock">
+				<td class="th_bg">打分类型</td>
+				<td>
+					<span id="nodeType"></span>
+				</td>
+			</tr>
+			<tr class="checkType checkType3 avgTypeShow hideBlock">
+				<td class="th_bg">计算方式</td>
+				<td>
+					<span id="avgType"></span>
+				</td>
+			</tr>
+			<tr class="checkType checkType3 hideBlock">
+				<td class="th_bg">打分方式</td>
+				<td>
+					<span id="scoreType"></span>
+				</td>
+			</tr>
+
+		</table>
+	</form>
+	<div class="bottom-btn">
+		<button type="button" class="btn btn-default" id="btnClose"><span
+				class="glyphicon glyphicon-remove"></span>关闭</button>
+	</div>
+	<script type="text/javascript" src="../../../media/js/jquery/jquery.js"></script>
+	<script type="text/javascript" src="../../../media/js/jquery/jquery.extend.js"></script>
+	<script type="text/javascript" src="../../../media/js/base/util.js"></script>
+	<script type="text/javascript" src="../../../media/js/base/common.js"></script>
+	<script type="text/javascript" src="../../../media/js/bootstrap/js/bootstrap.js"></script>
+	<script type="text/javascript" src="../../../media/js/layer/layer.js"></script>
+	<script type="text/javascript" src="../../../media/js/My97DatePicker/WdatePicker.js"></script>
+	<script type="text/javascript" src="../js/checkView.js"></script>
+</body>
+
+</html>

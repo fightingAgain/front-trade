@@ -1,0 +1,103 @@
+<!--
+ * @Author: your name
+ * @Date: 2020-12-08 15:01:31
+ * @LastEditTime: 2021-01-23 15:53:06
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: \FrameWork\bidPrice\Auction\Agent\AnswerAsk\CommitAsk.html
+--> 
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>提交问题</title>
+		<meta http-equiv="pragma" content="no-cache">
+		<!-- 禁止浏览器从本地机的缓存中调阅页面内容 -->
+		<meta http-equiv="cache-control" content="no-cache, must-revalidate">
+		<meta http-equiv="expires" content="0">
+		<meta charset="UTF-8">
+
+		<link rel="stylesheet" href="../../../../media/js/bootstrap/css/bootstrap.css" />
+		<link rel="stylesheet" type="text/css" href="../../../../media/js/bootstrap-fileinput-master/css/fileinput.min.css" />
+		<style>
+		
+			label{
+				font-weight:normal;
+			}
+			
+			.form-group{
+				margin: 0px;
+			}
+		</style>
+	</head>
+	<body>
+	
+		
+		<form id="form" name="AskAnswers">
+		<table class="table table-bordered"  style="width:99%;margin-left:3px;margin-top: 2px;" >
+				<tr>
+					<td style="width:20%" class="th_bg">项目名称</td>
+					<td>
+						<div class="form-group">
+							<input type="text" style="display: none;" id="projectId" name="projectId">
+							<label id="projectName" name="projectName"></label>
+						</div>
+					</td>
+					
+				</tr>
+				
+				<tr>
+					<td style="width:20%" class="th_bg">提问标题<i class="red">*</i></td>
+					<td>
+						<div class="form-group">
+							<input type="text" id= "askTitle" name="askTitle" class="form-control">
+						</div>
+					</td>
+					
+				</tr>
+				<tr>
+					<td style="width:20%" class="th_bg">提问内容<i class="red">*</i></td>
+					<td>
+						<div class="form-group">
+							<textarea type="text" id = "askContent" name="askContent" class="form-control" rows="10"></textarea>
+						</div>
+					</td>
+					
+				</tr>
+				<tr id="divEdit">
+					<td class="th_bg">
+						上传附件:
+					</td>
+					<td colspan="3">
+						<span id='fileIn' style="float:left;"><input type="file" class="fileloading" name="file" id="FileName"/></span>
+						<span style='float:left;color: red;'>上传格式(pdf、表格、文档、图片、压缩包)</span>
+					</td>
+				</tr>
+			</table>
+			<table class="table table-bordered" id="divShow" style="display: none;">
+				<tr class="active">
+					<td colspan="3">
+						附件
+					</td>
+				</tr>
+				<tr>
+					<td style="width: 50px;">序号</td>
+					<td>附件名称</td>
+					<td style="width:150px;text-align: center;">操作</td>
+				</tr>
+				<tbody id="imgList1"></tbody>
+			</table>
+			<input type="hidden" name="askEmployeeId" />
+		</form>
+		
+	</body>
+	
+	 <script src="../../../../media/js/jquery/jquery.min.js"></script>
+	 <script src="../../../../media/js/jquery/jquery.extend.js"></script>
+	 <script src="../../../../media/js/bootstrap/js/bootstrap.js"></script>
+	 <script type="text/javascript" src="../../../../media/js/layer/layer.js" ></script>
+	 <script type="text/javascript" src="../../../../media/js/bootstrap-fileinput-master/js/fileinput.js"></script>
+	 <script type="text/javascript" src="../../../../media/js/bootstrap-fileinput-master/js/locales/zh.js"></script>
+	 <script type="text/javascript" src="../../../../media/js/base/util.js"></script>
+	 
+	 <script type="text/javascript" src="js/addAsk.js" ></script>
+ </html>

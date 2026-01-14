@@ -1,0 +1,79 @@
+
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8">
+		<meta http-equiv="pragma" content="no-cache"><!-- 禁止浏览器从本地计算机的缓存中访问页面内容 --> 
+		<meta http-equiv="cache-control" content="no-cache"><!-- 用于指定请求和响应遵循的缓存机制 --> 
+		<meta http-equiv="expires" content="0"><!-- 用于设定网页的到期时间，一旦网页过期，必须到服务器上重新传输； -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>客服查看投标人的提问</title>
+    <link rel="stylesheet" href="../../../../media/js/layer/mobile/need/layer.css" />
+    <link rel="stylesheet" href="../../../../media/js/bootstrap/css/bootstrap.css" />
+    <link rel="stylesheet" href="../../../../media/js/stream/css/stream-v1.css" />
+    
+	<style>
+		html,body { height: 100%;width: 100%;}
+		.padding_button{
+			padding: 5px 8px !important;
+			line-height: 30px !important;
+		}
+		
+	</style>
+</head>
+
+<body>
+    <form class="pageModel" id="formEle" name="formName">
+        <table class="table table-bordered ">
+        	<tr>
+	            <td colspan="4" style="font-weight: bold;" class="active">基本信息
+	            </td>
+	        </tr>
+	        <tr>
+	        	<td class="th_bg">标段编号</td>
+                <td colspan="3">
+                    <span class="padding_button" id="interiorBidSectionCode"></span>
+                </td>
+               
+	        </tr>
+	        <tr>
+	        	 <td class="th_bg">标段名称</td>
+                <td colspan="3">
+                    <span class="padding_button" id="bidSectionName"></span>
+                </td>
+	        </tr>
+	        <tr>
+	        	<td class="th_bg">澄清截止时间</td>
+                <td colspan="3">
+                    <span class="padding_button" id="clarifyTime"></span>
+                </td>
+	        </tr>
+	        <tr>
+                <td colspan="4">
+                    <div id="askList">
+                    	
+                    </div>
+                </td>
+	        </tr>
+	        
+	    </table>
+        <div class="bottom-btn" style="z-index: 11000;">
+            <!--<button type="button" class="btn btn-primary" id="btnSave"><span class="glyphicon glyphicon-ok"></span>保存</button>
+            <button type="button" class="btn btn-primary" id="btnSubmit"><span class="glyphicon glyphicon-saved"></span>发送</button>-->
+            <button type="button" class="btn btn-default" id="btnClose"><span class="glyphicon glyphicon-remove"></span>关闭</button>
+        </div>
+    </form>
+    <script type="text/javascript" src="../../../../media/js/jquery/jquery.js"></script>
+    <script type="text/javascript" src="../../../../media/js/jquery/jquery.extend.js"></script>
+    <script type="text/javascript" src="../../../../media/js/base/util.js"></script>
+    <script type="text/javascript" src="../../../../media/js/base/common.js"></script>
+    <script type="text/javascript" src="../../../../media/js/bootstrap/js/bootstrap.js"></script>
+    <script type="text/javascript" src="../../../../media/js/stream/js/stream-v1.js"></script>
+    <script type="text/javascript" src="../../../../media/js/base/StreamUpload.js"></script>
+    <script type="text/javascript" src="../../../Model/js/public.js"></script>
+    <script type="text/javascript" src="../js/serviceAskView.js"></script>
+</body>
+
+</html>

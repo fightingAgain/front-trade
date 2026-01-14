@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="pragma" content="no-cache"><!-- 禁止浏览器从本地计算机的缓存中访问页面内容 --> 
+		<meta http-equiv="cache-control" content="no-cache"><!-- 用于指定请求和响应遵循的缓存机制 --> 
+		<meta http-equiv="expires" content="0"><!-- 用于设定网页的到期时间，一旦网页过期，必须到服务器上重新传输； -->
+		<title>购标情况查看</title>
+		<link rel="stylesheet" href="../../../media/js/bootstrap/css/bootstrap.css" />
+		<link rel="stylesheet" href="../../../media/js/bootstrap/css/bootstrap-table.min.css" type="text/css"/>
+		<style>
+			label {
+				font-weight: normal;
+			}
+			
+			body {
+				height: 100%;
+				width: 100%;
+			}
+			.calendar_icon{
+				color: #3995C8;
+			}
+			.padding_button{
+			padding: 5px 8px !important;
+			line-height: 30px !important;
+		}
+		</style>
+	</head>
+	<body>
+		<form  id="formName" class="pageModel">
+			<div class="panel-group" id="accordion">
+	    		<div class="panel panel-accordion panel-default">
+		    		<div class="panel-heading active"  role="tab" id="headingOne">  
+				 		<h4 class="panel-title">
+			            	<a  role="button" data-toggle="collapse" href="#collapseOne" aria-controls="collapseOne"  aria-expanded="true"  >
+			            		基本信息
+			            	</a>
+				 		</h4>  
+				   	</div>  
+				  	<div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">  
+				       	<div class="panel-body">
+				       		<table  class="table table-bordered ">
+				       			<tr>
+									<td  class="th_bg">标段编号</td>
+									<td colspan="3" style="text-align: left;">
+										<span id="interiorBidSectionCode"></span>
+									</td>
+								</tr>
+								<tr>
+									<td  class="th_bg">标段名称</td>
+									<td colspan="3" style="text-align: left;">
+										<span id="bidSectionName"></span>
+									</td>
+								</tr>
+								<tr>
+									<td  class="th_bg">招标文件费（元）</td>
+									<td>
+										<span id="fileCost"></span>
+									</td>
+									<td  class="th_bg">图纸文件费（元）</td>
+									<td>
+										<span id="drawCost"></span>
+									</td>
+								</tr>
+								<tr>
+									<td  class="th_bg">资格预审文件费（元）</td>
+									<td>
+										<span id="ysCost"></span>
+									</td>
+									<td  class="th_bg">金额合计（元）</td>
+									<td>
+										<span id="totalMoney"></span>
+									</td>
+									
+								</tr>
+				       		</table>
+			       		</div>
+		       		</div>
+	       		</div>
+	       		
+		    	<div class="panel panel-accordion panel-default">
+		    		<div class="panel-heading active"  role="tab" id="headingThree">  
+				 		<h4 class="panel-title">
+			            	<a class="collapsed" role="button" data-toggle="collapse" href="#collapseThree" aria-controls="collapseThree"  aria-expanded="false">
+			            		购标单位信息
+			            	</a>
+				 		</h4>  
+				   	</div>  
+				  	<div  id="collapseThree" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingThree">  
+				       	<div class="panel-body">
+				       		<!--<button type="button" style="float: right;margin-bottom: 10px;" class="btn btn-sm btn-primary" id="btnChoose">
+				       			<span class="glyphicon glyphicon-search"></span>选择
+				       		</button>-->
+				       		<table class="table table-bordered">
+						      	<tr>
+									<td  class="th_bg">单位名称</td>
+									<td colspan="3" style="text-align: left;">
+										<div id="supplierName"></div>
+									</td>
+								</tr>
+								<tr>
+									<td  class="th_bg">发票抬头</td>
+									<td>
+										<span id="invoice"></span>
+									</td>
+									<td  class="th_bg">下单日期</td>
+									<td>
+										<span id="createTime"></span>
+									</td>
+								</tr>
+								<tr>
+									<td  class="th_bg">开户行</td>
+									<td>
+										<span id="bank"></span>
+									</td>
+									<td  class="th_bg">银行帐号</td>
+									<td>
+										<span id="bankAccount"></span>
+									</td>
+								</tr>
+								<tr>
+									<td  class="th_bg">通讯地址</td>
+									<td>
+										<span id="address"></span>
+									</td>
+									<td  class="th_bg">邮政编码</td>
+									<td>
+										<span id="postalCode"></span>
+									</td>
+								</tr>
+								
+								<tr>
+									<td  class="th_bg">联系人姓名</td>
+									<td>
+										<span id="linkMen"></span>
+									</td>
+									<td  class="th_bg">电话</td>
+									<td>
+										<span id="linkTel"></span>
+									</td>
+								</tr>
+								<tr>
+									<td  class="th_bg">手机</td>
+									<td>
+										<span id="linkPhone"></span>
+									</td>
+									<td  class="th_bg">传真</td>
+									<td>
+										<span id="linkFax"></span>
+									</td>
+								</tr>
+								<tr>
+									<td  class="th_bg">EMAIL</td>
+									<td>
+										<span id="linkEmail"></span>
+									</td>
+									<td  class="th_bg"></td>
+									<td>
+										
+									</td>
+								</tr>
+								
+					        </table>   
+			       		</div>
+			       	</div>
+		    	</div>
+		    	<div class="panel panel-accordion panel-default checkReason" style="display: none;">
+		    		<div class="panel-heading active"  role="tab" id="headingFive">  
+				 		<h4 class="panel-title">
+			            	<a class="collapsed" role="button" data-toggle="collapse" href="#collapseFive" aria-controls="collapseFive"  aria-expanded="false">
+			            		审核原因
+			            	</a>
+				 		</h4>  
+				   	</div>  
+				  	<div  id="collapseFive" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingFive">  
+				       	<div class="panel-body">
+				       		<table class="table table-bordered">
+						      	<tr>
+									<td  class="th_bg">审核原因</td>
+									<td>
+										<textarea rows="5" name="reason" class="form-control" style="resize: none;"></textarea>
+									</td>
+									
+								</tr>
+					        </table>   
+			       		</div>
+			       	</div>
+		    	</div>
+		    	<div class="panel panel-accordion panel-default checkRecord">
+		    		<div class="panel-heading active"  role="tab" id="headingSix">  
+				 		<h4 class="panel-title">
+			            	<a class="collapsed" role="button" data-toggle="collapse" href="#collapseSix" aria-controls="collapseSix"  aria-expanded="false">
+			            		审核记录
+			            	</a>
+				 		</h4>  
+				   	</div>  
+				  	<div  id="collapseSix" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingSix">  
+				       	<div class="panel-body">
+				       		<table class="table table-bordered">
+						      	<tr>
+									<td  class="th_bg">审核状态</td>
+									<td>
+										<span id="states"></span>
+									</td>
+									
+								</tr>
+						      	<tr>
+									<td  class="th_bg">审核原因</td>
+									<td>
+										<span id="reason"></span>
+									</td>
+									
+								</tr>
+					        </table>   
+			       		</div>
+			       	</div>
+		    	</div>
+	   		</div>
+			
+		</form>
+	     
+	    <div class="bottom-btn">
+	    	<button type="button" class="btn btn-primary" id="btnPass" style="display: none;"><span class="glyphicon glyphicon-saved"></span>审核通过</button>
+        	<button type="button" class="btn btn-danger" id="btnNoPass" style="display: none;"><span class="glyphicon glyphicon-remove"></span>审核不通过</button>
+			<button type="button" class="btn btn-default" id="btnClose"><span class="glyphicon glyphicon-remove"></span>关闭</button>
+		</div>
+	     <script type="text/javascript" src="../../../media/js/jquery/jquery.js" ></script>
+		 <script type="text/javascript" src="../../../media/js/jquery/jquery.extend.js"></script>
+		 <script type="text/javascript" src="../../../media/js/base/common.js" ></script>
+		 <script type="text/javascript" src="../../../media/js/base/util.js" ></script>
+		 <script type="text/javascript" src="../../../media/js/bootstrap/js/bootstrap.js" ></script>
+		 <script type="text/javascript" src="../../../media/js/bootstrap/js/bootstrap-table.min.js"></script>
+		 <script type="text/javascript" src="../../../media/js/bootstrap/js/bootstrap-table-zh-CN.min.js"></script>
+		 <script type="text/javascript" src="../../../media/js/layer/layer.js"></script>
+		 <script type="text/javascript" src="../../../media/js/base/WorkflowInfoNew.js"></script>
+		 <script type="text/javascript" src="../../Model/js/public.js"></script>
+		 <script type="text/javascript" src="../js/signView.js" ></script>
+	</body>
+</html>

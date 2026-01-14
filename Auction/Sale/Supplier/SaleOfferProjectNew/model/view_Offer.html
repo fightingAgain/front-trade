@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="pragma" content="no-cache">
+	<!-- 禁止浏览器从本地机的缓存中调阅页面内容 -->
+	<meta http-equiv="cache-control" content="no-cache, must-revalidate">
+	<meta http-equiv="expires" content="0">
+	<title></title>
+	<link rel="stylesheet" href="../../../../../media/js/bootstrap/css/bootstrap.css" />
+	<link rel="stylesheet" href="../../../../../media/js/bootstrap/css/bootstrap-table.min.css">
+	<link rel="stylesheet" href="../../../../../media/js/bootstrap-fileinput-master/css/fileinput.min.css" type="text/css"/>
+    <link rel="stylesheet" href="../css/price.css" type="text/css"/>
+ 
+    <link rel="stylesheet" href="../css/swiper-bundle.min.css" type="text/css"/>
+	<style type="text/css">
+		.priceBox .rightPanel .submitBox .submitType .submitMain .item .inputTextBox #priceReduction .sp:after{
+			content:'';
+		}
+	</style>
+</head>
+
+<body>
+	<!--提醒信息框-->
+	<div class="detailed_notice"></div>
+    <div class="priceBox">
+        <div class="leftPanel">
+            <div id="auctionType" class="priceType"></div>
+            <div class="priceInfo">
+                <div class="item">
+                    <h4>包件编号</h4>
+                    <p data-field="packageNum"></p>
+                </div>
+                <div class="item">
+                    <h4>包件名称</h4>
+                    <p data-field="packageName"></p>
+                </div>
+                <div class="item">
+                    <h4>竞买人</h4>
+                    <p data-field="curUser"></p>
+                </div>
+                <div class="item">
+                    <h4>竞买号</h4>
+                    <p data-field="offerCode" class="number"></p>
+                </div>
+                <div class="item">
+                    <h4>竞卖类型</h4>
+                    <p data-field="auctionModel" class="type"></p>
+                </div>
+            </div>
+        </div>
+        <div class="rightPanel">
+
+            <div class="Time">
+				<div class="timeShow"><font id="day">00</font>时<font id="hour">00</font>分<font id="min">00</font>秒</div>
+				<div class="TimeBox">
+					<div class="TimeText"></div>
+					<div class="otherText"></div>
+				</div>
+                <div class="noticeBox"></div>
+			</div>
+			
+			<div class="submitBox device">
+				<div class="item">
+					<h4>商品名称</h4>
+					<p data-field="detailedName">暂无</p>
+				</div>
+				<div class="item">
+					<h4>品牌要求</h4>
+					<p data-field="brand">暂无</p>
+				</div>
+				<div class="item">
+					<h4>规格型号</h4>
+					<p data-field="detailedVersion">暂无</p>
+				</div>
+				<div class="item">
+					<h4>数量</h4>
+					<p data-field="detailedCount">暂无</p>
+				</div>
+				<div class="item">
+					<h4>单位</h4>
+					<p data-field="detailedUnit">暂无</p>
+				</div>
+			</div>
+            <!-- 自由竞价 & 按包件 -->
+            <div class="submitBox" id="submitBox" style="display: none;">
+                <div class="submitType single">
+                    <!-- <span class="nowPrice"></span> -->
+                    <div class="submitMain">
+                        <div class="item minPriceBox">
+                            <h4>当前最高报价 (<span class="quotationUnit"></span>)</h4>
+                            <p data-field="minPrice" class="minPrice">暂无</p>
+                        </div>
+                        <div class="item rawPriceBox">
+                            <h4>竞卖起价 (<span class="quotationUnit"></span>)</h4>
+                            <p data-field="rawPrice" class="rawPrice">暂无</p>
+                        </div>
+                        <div class="item myMinPriceBox">
+                            <h4>我的报价 (<span class="quotationUnit"></span>)</h4>
+                            <p data-field="myMinPrice"  class="myMinPrice">暂无</p>
+                        </div>
+                        <div class="item moneyChineseBox">
+                            <h4>报价大写</h4>
+                            <p data-field="moneyChinese" class="moneyChinese">暂无</p>
+							<p class="quotationType">-</p>
+                        </div>
+                        <div class="item inputBox">
+                            <h4 id="ReductionText">本轮报价 (<span class="quotationUnit"></span>)</h4>
+                            <div class="inputTextBox">
+                                <div class="inputText">
+                                    <input  oninput="if(value.length>16)value=value.slice(0,16)"  class="offerMoney" placeholder="请输入本轮报价" ckass="">
+                                </div>
+                                <div id="priceReduction" style="display: none;"></div>
+                            </div>
+                            <div class="priceReductionComputed" style="display: none;">
+                                <div class="text">涨价金额(<span class="quotationUnit"></span>):<span id="multiple">+0.00</span></div>
+                                <div class="text b">本次报价(<span class="quotationUnit"></span>):<font id="amountOfMoney" color="red"></font></div>
+                            </div>
+                            <div class="inputButton">
+                                <button class="submitButton auctionOffer">
+                                    提交本次报价
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+                
+            <!-- 自由竞价 -->
+            <!--报价记录 && 我的报价-->
+			<div class="priceLog" id="priceLog" style="display: none;">
+				<div class="offerLogsTableBox">
+                    <div class="tableName">报价记录</div>
+					<table id="offerLogsTable" class="table table-bordered"></table>
+				</div>
+				<div class="myOfferLogsTableBox">
+                    <div class="tableName">我的报价</div>
+					<table id="myOfferLogsTable" class="table table-bordered"></table>
+				</div>
+            </div>
+            
+            <!-- 自由竞价 & 按明细 -->
+            <div class="detailed" style="display:none;">
+                <div class="textBox">
+                    <div class="p1">您一共参加了<span  class="zong0">0</span>项竞价，目前有<span class="zong1">0</span>项为最低报价</div>
+                    <div class="p2">总报价：<span class="zong2">0</span><span class="quotationUnit"></span></div>
+                </div>
+                <div style="margin-bottom: 15px; box-shadow: 0 10px 10px #eee; border-radius: 3px; background: #fff;">
+                    <table id="detailedsTable" class="table table-bordered" style="margin-bottom:15px;"></table>
+                </div>
+                <div id="fileTablesBox">
+                    <table id="fileTables"></table>
+                </div>
+            </div>
+
+			<!-- 多轮竞价 & 不限轮次 -->
+			<div class="liTableBox" style="display: none;">
+				<table class="table table-bordered" id="liTable"></table>
+            </div>
+            
+
+            <!-- 多轮竞价 & 不限轮次 -> 竞价状态-->
+            <div class="curStageBox place swiper-container" style="display: none;">
+                <div class="place_box swiper-wrapper"></div>
+            </div>
+			<div id="offerDetail" style="width: 100%; text-align: center; "></div>
+			<table id="offerLogsTable"></table>
+		</div>
+    </div>
+</body>
+<script type="text/javascript" src="../../../../../media/js/jquery/jquery.js"></script>
+<script type="text/javascript" src="../../../../../media/js/jquery/jquery.extend.js"></script>
+<script type="text/javascript" src="../../../../../media/js/bootstrap/js/bootstrap.js"></script>
+<script type="text/javascript" src="../../../../../media/js/bootstrap/js/bootstrap-table.min.js"></script>
+<script type="text/javascript" src="../../../../../media/js/layer/layer.js"></script>
+<script type="text/javascript" src="../../../../../media/js/base/util.js"></script>
+<script type="text/javascript" src="../css/swiper/idangerous.swiper.min.js"></script>
+<script src="../js/offer.js"></script>
+ 
+</html>

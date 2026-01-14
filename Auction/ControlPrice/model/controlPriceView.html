@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8">
+		<meta http-equiv="pragma" content="no-cache"><!-- 禁止浏览器从本地计算机的缓存中访问页面内容 --> 
+		<meta http-equiv="cache-control" content="no-cache"><!-- 用于指定请求和响应遵循的缓存机制 --> 
+		<meta http-equiv="expires" content="0"><!-- 用于设定网页的到期时间，一旦网页过期，必须到服务器上重新传输； -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>查看项目</title>
+    <link rel="stylesheet" href="../../../media/js/layer/mobile/need/layer.css" />
+    <link rel="stylesheet" href="../../../media/js/bootstrap/css/bootstrap.css" />
+	<link rel="stylesheet" href="../../../media/js/bootstrap/css/bootstrap-table.css">
+	<style>
+		html,body { height: 100%;}
+	</style>
+</head>
+
+<body>
+	<div class="pageModel">
+		<div class="panel-group" id="accordion">
+    		<div class="panel panel-accordion panel-default">
+	    		<div class="panel-heading active"  role="tab" id="headingOne">  
+			 		<h4 class="panel-title">
+		            	<a  role="button" data-toggle="collapse" href="#collapseOne" aria-controls="collapseOne"  aria-expanded="true"  >
+		            		基本信息
+		            	</a>
+			 		</h4>  
+			   	</div>  
+			  	<div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">  
+			       	<div class="panel-body">
+			       		<table  class="table table-bordered ">
+			       			<tr>
+					        	<td class="th_bg">包件编号</td>
+				                <td colspan="3">
+				                    <span id="packageNum"></span>
+				                </td>
+					        </tr>
+					        <tr>
+					        	<td class="th_bg">包件名称</td>
+				                <td colspan="3">
+				                    <span id="packageName"></span>
+				                </td>
+					        </tr>
+					        <tr>
+				            	<td class="th_bg">控制价</td>
+				                <td colspan="3">
+				                    <span id="controlPrice"></span>&nbsp;元&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				                    <span id="controlPriceUpper" style="color: red;"></span>
+				                </td>
+				            </tr>
+							<tr>
+								<td class="th_bg">控制价发布</td>
+								<td colspan="3">
+									<span id="isControlPrice"></span>
+								</td>
+							</tr>
+							<tr>
+								<td class="th_bg">清标接口标准</td>
+							    <td colspan="3">
+									<span id="interfaceName"></span>
+								</td>
+							</tr>
+					        <!--<tr>
+				            	<td class="th_bg">招标控制价（大写）</td>
+				                <td colspan="3">
+				                	<span id="controlPriceUpper"></span>
+				                </td>
+				            </tr>-->
+				            <tr>
+				               <td class="th_bg">备注</td>
+				                <td colspan="3">
+				                    <span id="remark"></span>
+				                </td>
+				            </tr>
+			       		</table>
+		       		</div>
+	       		</div>
+       		</div>
+       		<div class="panel panel-accordion panel-default">
+	    		<div class="panel-heading active"  role="tab" id="headingTwo">  
+			 		<h4 class="panel-title">
+		            	<a class="collapsed" role="button" data-toggle="collapse" href="#collapseTwo" aria-controls="collapseTwo"  aria-expanded="false">
+		            		控制价清单
+		            	</a>
+			 		</h4>  
+			   	</div>  
+			  	<div  id="collapseTwo" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingTwo">  
+			       	<div class="panel-body">
+			       		<table id="filePriceContent">
+			       			
+			       		</table>   
+		       		</div>
+		       	</div>
+	    	</div>
+			<div class="panel panel-accordion panel-default">
+				<div class="panel-heading active"  role="tab" id="headingThree">  
+			 		<h4 class="panel-title">
+			        	<a class="collapsed" role="button" data-toggle="collapse" href="#collapseThree" aria-controls="collapseThree"  aria-expanded="false">
+			        		附件
+			        	</a>
+			 		</h4>  
+			   	</div>  
+			  	<div  id="collapseThree" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingThree">  
+			       	<div class="panel-body">
+			       		<table id="fileContent">
+			       			
+			       		</table>   
+			   		</div>
+			   	</div>
+			</div>
+	    	<div class="panel panel-accordion panel-default">
+	    		<div class="panel-heading active"  role="tab" id="headingNine">  
+			 		<h4 class="panel-title">
+		            	<a class="collapsed" role="button" data-toggle="collapse"  href="#collapseNine" aria-expanded="false" aria-controls="collapseNine">
+		            		历史控制价
+		            	</a>
+			 		</h4>  
+			   	</div>  
+			  	<div  id="collapseNine" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingNine">  
+			       	<div class="panel-body">
+			       		<table id="tenderNoticeList" class="table table-bordered table-striped" >
+					    	<thead>
+					    		<tr>
+					    			<th style="width: 50px; text-align: center;">序号</th>
+					    			<th>包件名称</th>
+					    			<th style="width: 150px; text-align: right;">控制价（元）</th>
+					    			<th style="width: 100px; text-align: center;">变更次数</th>
+					    			<th style="width: 150px; text-align: center;">发布时间</th>
+					    			
+					    		</tr>
+					    	</thead>
+					    	<tbody id="changeList"></tbody>
+					    </table>
+		       		</div>
+		       	</div>
+	    	</div>
+			<div class="panel panel-accordion panel-default record">
+				<div class="panel-heading active"  role="tab" id="headingTen">  
+			 		<h4 class="panel-title">
+			        	<a class="collapsed" role="button" data-toggle="collapse"  href="#collapseTen" aria-expanded="false" aria-controls="collapseTen">
+			        		流程审核记录
+			        	</a>
+			 		</h4>  
+			   	</div>  
+			  	<div  id="collapseTen" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingTen">  
+			       	<div class="panel-body">
+			       		<table class="table table-bordered" id="workflowListDetail">
+			       			
+			       		</table>
+			   		</div>
+			   	</div>
+			</div>
+   		</div>
+    </div>
+    <div class="bottom-btn">
+    	<button type="button" class="btn btn-primary" id="btnPass" style="display: none;"><span class="glyphicon glyphicon-saved"></span>审核通过</button>
+        <button type="button" class="btn btn-default" id="btnNoPass" style="display: none;"><span class="glyphicon glyphicon-remove"></span>审核不通过</button>
+        
+        <button type="button" class="btn btn-default" id="btnClose"><span class="glyphicon glyphicon-remove"></span>关闭</button>
+    </div>
+    <script type="text/javascript" src="../../../media/js/jquery/jquery.js"></script>
+    <script type="text/javascript" src="../../../media/js/jquery/jquery.extend.js"></script>
+    <script type="text/javascript" src="../../../media/js/base/common.js"></script>
+    <script type="text/javascript" src="../../../media/js/bootstrap/js/bootstrap.js"></script>
+	<script type="text/javascript" src="../../../media/js/bootstrap/js/bootstrap-table.js"></script>
+	<script type="text/javascript" src="../../../media/js/bootstrap/js/bootstrap-table-zh-CN.min.js"></script>
+    <script type="text/javascript" src="../../../media/js/base/auditRecords.js?verson=1.01"></script>
+	<script type="text/javascript" src="../../../media/js/Model/public.js?version=3.4.27"></script>
+    <!-- <script type="text/javascript" src="../../Model/js/public.js"></script> -->
+    <script type="text/javascript" src="../js/controlPriceView.js"></script>
+    <!-- <script src="../../../media/js/base/digital.js"></script> -->
+</body>
+
+</html>

@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+	<meta http-equiv="pragma" content="no-cache"><!-- 禁止浏览器从本地计算机的缓存中访问页面内容 --> 
+	<meta http-equiv="cache-control" content="no-cache"><!-- 用于指定请求和响应遵循的缓存机制 --> 
+	<meta http-equiv="expires" content="0"><!-- 用于设定网页的到期时间，一旦网页过期，必须到服务器上重新传输； -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>开标室</title>
+    <link rel="stylesheet" href="../../../css/style.css">
+    <style>
+    	.other { overflow: hidden;}
+    	.other img, .other span { float: left;}
+    	#roomContent { width: 43%; overflow: auto; float: left; white-space:nowrap; height: 50px;}
+    	#roomContent li {display: inline-block; margin-right: 10px;}
+    	#roomContent li a{
+		    padding:10px;
+		    color: #333;
+		    text-decoration: none;
+		    display: inline-block;
+    	}
+    	#roomContent li.active {
+    		background-color: #5daade;
+    		
+    	}
+    	#roomContent li.active a {
+    		color:#fff;
+    		
+    	}
+    	#roomContent::-webkit-scrollbar {
+		    height: 8px;
+		    background-color: #eee;
+		}
+		
+		#roomContent::-webkit-scrollbar-track {
+		    background-color: #eee;
+		}
+		
+		#roomContent::-webkit-scrollbar-thumb {
+		    background: #b9dfff;
+		}
+		
+		#roomContent {
+			scrollbar-face-color: #b9dfff; /*立体滚动条的颜色（包括箭头部分的背景色）*/
+			scrollbar-3dlight-color: #b9dfff; /*立体滚动条亮边的颜色*/
+			scrollbar-highlight-color: #b9dfff; /*滚动条的高亮颜色（左阴影？）*/
+			scrollbar-shadow-color: #b9dfff; /*立体滚动条阴影的颜色*/
+			scrollbar-darkshadow-color: #b9dfff; /*立体滚动条外阴影的颜色*/
+			scrollbar-track-color: #eee; /*立体滚动条背景颜色*/
+			scrollbar-base-color:#eee; /*滚动条的基色*/
+			scrollbar-arrow-color: #eee; /**//*三角箭头的颜色*/ 
+		}
+    </style>
+</head>
+<body id="formName">
+    <!-- &&&&& 头部信息 &&&&& -->
+   	<object id="UCAPI" classid="CLSID:18201fef-1ac1-4900-8862-5ec6154bb307" style="display: none;"></object>
+    <header>
+        <!-- &&&&& 标题 &&&&& -->
+        <div class="h-top">
+            <a href="#">
+                开标室
+            </a>
+        </div>
+        <!-- &&&&& 项目计时 &&&&& -->
+        <div class="h-time other">
+        	<!--<div class=""><span>20190425测试2-001-001</span></div>-->
+            <ul class="nav nav-tabs" id="roomContent"></ul>
+            <img src="../../../images/second.jpg" alt="时钟"/>
+            <span>开标倒计时：</span><span id="countDown">结束开标</span>
+            <button>
+                <img src="../../../images/timer.jpg" alt="">
+                已签到
+            </button>
+        </div>
+        <!-- &&&& 项目详情 &&&& -->
+        <div class="h-xq">
+            <span id="interiorBidSectionCode"></span>
+            <span id="bidSectionName"></span>
+        </div>
+    </header>
+    <!-- &&&& 开标内容详情 &&&&& -->
+    <div class="main">
+        <!-- &&&&& 开标看板 &&&&& -->
+        <div class="m-l openPanel">
+            <h2>开标看板</h2>
+            <div class="l-content">
+                <ul id="logBoard">
+                    
+                </ul>
+            </div>     
+        </div>
+        <!-- &&&&& 消息看板 &&&&& -->
+        <div class="m-l m-r openPanel">
+            <h2>消息看板</h2>
+            <div class="l-content r-content">
+                <ul id="msgBoard">
+                </ul>
+            </div>     
+        </div>
+    </div>
+    <!-- &&&&& 底部信息 &&&&&& -->
+    <footer>
+    	<button type="button" id="btnUKDecrypt" class="notStarted">UKey解密</button>
+		<button type="button" id="btnDecrypt" class="notStarted btnDecrypt">信封解密</button>
+		<button type="button" id="btnLetter" class="notStarted">投标函附录</button>
+		<button type="button" id="btnConfirm" class="notStarted">确认开标一览表</button>
+		<button type="button" id="btnSend" class="notStarted">发送消息</button>
+    </footer>
+    <script type="text/javascript" src="../../../../../media/js/jquery/jquery.js"></script>
+    <script type="text/javascript" src="../../../../../media/js/jquery/jquery.extend.js"></script>
+    <script type="text/javascript" src="../../../../../media/js/base/util.js"></script>
+    <script type="text/javascript" src="../../../../../media/js/base/common.js"></script>
+    <script type="text/javascript" src="../../../../../media/js/bootstrap/js/bootstrap.js"></script>
+    <script type="text/javascript" src="../../../../Model/js/public.js"></script>
+    <script type="text/javascript" src="../js/bidRoom.js"></script>
+</body>
+</html>

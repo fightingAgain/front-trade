@@ -1,0 +1,258 @@
+
+<link rel="stylesheet" href="../../../../media/js/layer/mobile/need/layer.css" />
+<link rel="stylesheet" href="../../../../media/js/layer/theme/default/laydate.css" />
+<link rel="stylesheet" href="../../../../media/js/bootstrap/css/bootstrap.css" />
+<link rel="stylesheet" href="../css/style.css" />
+<form id="form" name="purchase">
+     <table class="table table-bordered " style="width: 99%;padding-left: 10px;padding-top: 10px;margin-bottom: 0;">
+     	<tr>
+            <td colspan="4" style="font-weight: bold;" class="active">项目信息</td>
+        </tr>
+        <tr >
+            <td  class="th_bg">采购项目名称</td>
+            <td colspan="3" style="text-align: left;">
+            	<input type="text" name="project.projectName"  id="projectName" class="form-control"/>
+            	<input type="hidden" name="id"  id="purchaseId"/>
+            	<input type="hidden" name="project.id"  id="projectId"/>
+            	<input type="hidden" name="project.enterpriseId"  id="enterpriseId"/>
+            </td>
+        </tr>
+        <tr >
+            <td  class="th_bg">采购项目编号</td>
+            <td colspan="1" style="text-align: left;width: 260px;">
+            	<input type="text" name="project.projectCode" id="projectCode" class="form-control"/>
+            </td>
+            <td colspan="2" style="text-align: left;">
+                <input style="padding: 5px 15px ;" type="button" value="切换成为自动生成编码" id="readonly" class="btn btn-primary" name="readwrite" />
+                <input style="padding: 5px 15px ;" type="button" value="切换成为手动输入编码" class="none btn btn-primary" name="readwrite" id="write" />
+            </td>
+         </tr>
+         <tr >
+            <td  class="th_bg">项目名称</td>
+            <td colspan="3" style="text-align: left;">
+            	<input type="text" name="project.programmeName" id="programmeName" class="form-control"/>
+            </td>         
+           
+         </tr>
+         <tr>
+         	<td  class="th_bg">项目编号</td>
+            <td colspan="3" style="text-align: left;">
+            	<input type="text" name="project.programmeCode" id="programmeCode" class="form-control"/>
+            </td>
+         </tr>
+           <tr >
+            <td  class="th_bg">项目地址</td>
+            <td colspan="3" style="text-align: left;">
+            	<input type="text" name="project.programmeAddress" id="programmeAddress" class="form-control"/>
+            </td>
+         </tr>
+         <tr>
+         	<td  class="th_bg">是否代理项目</td>
+            <td colspan="3" style="text-align: left;">
+            	<input type="radio" name="project.isAgent" value="0"  onchange="isAgent(0)"/>非代理项目
+            	<input type="radio" name="project.isAgent" value="1" onchange="isAgent(1)"/>代理项目
+            </td>
+         </tr>
+         <tr>
+            <td colspan="4" style="font-weight: bold;" class="active">采购人信息</td>            
+         </tr>
+         <tr>
+            <td  class="th_bg">采购人名称<i class="red">*</i></td>
+            <td colspan="3" style="text-align: left;">
+            	<span id="purchaserNames" style="margin-right: 15px;"></span><input type="button" value="添加采购人信息" class="btn btn-primary agency" />
+            	<input type="hidden" name="purchaserName" id="purchaserName" class="form-control" readonly="readonly"/>
+            </td>
+         </tr>
+         <tr>
+            <td  class="th_bg">采购人地址<i class="red">*</i></td>
+            <td colspan="3" style="text-align: left;"><input type="text" name="purchaserAddress" id="purchaserAddress" class="form-control"/></td>
+         </tr>
+         <tr>
+            <td  class="th_bg">联系人<i class="red">*</i></td>
+            <td style="text-align: left;"><input type="text" name="purchaserLinkmen" id="purchaserLinkmen" class="form-control"/></td>
+            <td  class="th_bg">联系人电话<i class="red">*</i></td>
+            <td style="text-align: left;"><input type="text" name="purchaserTel" id="purchaserTel" class="form-control"/></td>
+         </tr>
+         <tr class="agency none">           
+            <td colspan="4" style="font-weight: bold;" class="active">代理人信息</td>
+         </tr>
+         <tr class="agency none">
+            <td  class="th_bg">代理机构名称<i class="red">*</i></td>
+            <td colspan="3" style="text-align: left;">
+            	<div id="agencyNames"></div>
+            	<input type="hidden" name="agencyName" id="agencyName" class="form-control" readonly="readonly"/>
+            </td>
+         </tr>
+         <tr class="agency none">
+            <td  class="th_bg">代理机构地址<i class="red">*</i></td>
+            <td colspan="3" style="text-align: left;"><input type="text" name="agencyAddress" id="agencyAddress" class="form-control"/></td>
+         </tr >
+         <tr class="agency none">
+            <td  class="th_bg">代理机构联系人<i class="red">*</i></td>
+            <td style="text-align: left;"><input type="text" name="agencyLinkmen" id="agencyLinkmen" class="form-control"/></td>
+            <td  class="th_bg">代理机构联系电话<i class="red">*</i></td>
+            <td style="text-align: left;"><input type="text" name="agencyTel" id="agencyTel" class="form-control"/></td>
+         </tr>
+         <tr>
+            <td colspan="4" style="font-weight: bold;" class="active">项目基本信息</td>
+         </tr>
+         <tr>
+            <td  class="th_bg">项目来源</td>
+            <td  style="text-align: left;">
+            	<select  name="project.projectSource" id="projectSource" class="form-control" disabled="disabled">
+            		<option value="0">首次发布公告</option>
+            		<option value="1">重新采购</option>
+            	</select>
+            </td>
+             <td  class="th_bg">项目类型</td>
+            <td  style="text-align: left;">
+            	<select  name="project.projectType" id="projectType" class="form-control">
+            		<option value="0">工程</option>
+            		<option value="1">货物</option>
+            		<option value="2">服务</option>
+            	</select>
+            </td>
+         </tr>
+         <tr >
+         	<td  class="th_bg">资金来源</td>
+            <td  style="text-align: left;">
+            	<select  name="sourceFundsId" class="form-control" id="sourceFunds">
+            		
+            	</select>
+            </td>
+            <td  class="th_bg">采购方式</td>
+            <td  style="text-align: left;">           	
+            	<input type="radio" name="project.tenderType" value="0"  checked="checked" />询价采购            	
+            </td>
+           
+         </tr>
+          <tr>
+            <td  class="th_bg">最少供应商数量</td>
+            <td  style="text-align: left;">
+            	<select name="supplierCount" class="form-control">
+            		<option value="1">最少一家</option>
+            		<option value="2">最少二家</option>
+            		<option value="3">最少三家</option>
+            	</select>
+            </td>
+             <td  class="th_bg">报价轮数</td>
+            <td  style="text-align: left;">
+            	<input type="radio" value="0"  name="priceCount" checked="checked" id="priceCount" />一轮报价
+            </td>
+         </tr>
+         <tr>
+            <td  class="th_bg">公开范围</td>
+            <td colspan="3" style="text-align: left;">
+            	<input type="radio" name="isPublic" value="0" checked="checked" onchange="Is_Public(0)"/>所有供应商
+            	<input type="radio" name="isPublic" value="1" onchange="Is_Public(1)" />所有本公司认证供应商
+            	<input type="radio" name="isPublic" value="2" onchange="Is_Public(2)" />仅限邀请供应商
+            	<input type="radio" name="isPublic" value="3" onchange="Is_Public(3)" />仅限邀请供应商
+            </td>
+         </tr>
+         <tr class=" none yao_btn" >
+            <td  class="th_bg">邀请供应商</td>
+            <td  colspan="4" style="text-align: left;">          	
+            	<input type="button" value="添加邀请供应商" class="btn btn-primary" onclick="add_supplier()"/>
+            </td>
+         </tr>
+         <tr class="none yao_btn">
+	            <td colspan="5" style="font-weight: bold;" class="active">邀请供应商</td>
+	     </tr>
+	     <tr>
+	     	<td colspan="5" class="none yao_btn">
+	     		<table class="table table-bordered searched" id="yao_table" style="margin-bottom: 0px;">
+     	
+ 				</table>
+	     	</td>
+	     </tr>
+	     <tr>
+            <td colspan="4" style="font-weight: bold;" class="active">项目时间安排</td>
+        </tr>
+     	<tr>
+     		<td  class="th_bg">公告开始时间<i class="red">*</i></td>
+     		<td>
+     			<input type="text" class="layui-input form-control" id="noticeStartDate" name="noticeStartDate">
+     		</td>
+     		<td  class="th_bg">公告截止时间<i class="red">*</i></td>
+     		<td >
+     			<input type="text" class="layui-input form-control" id="noticeEndDate" name="noticeEndDate">
+     		</td>
+     	</tr>
+     	<tr>
+     		<td  class="th_bg">提出澄清截止时间<i class="red">*</i></td>
+     		<td>
+     			<input type="text" class="layui-input form-control" id="askEndDate" name="askEndDate">
+     		</td >
+   		    <td style="text-align: left;" colspan="2" class="red">提出澄清截止时间不得晚于答复截止时间</td>
+     	</tr>
+     	<tr>
+     		<td  class="th_bg">答复截止时间<i class="red">*</i></td>
+     		<td>
+     			<input type="text" class="layui-input form-control" id="answersEndDate" name="answersEndDate">
+     		</td >
+     		<td style="text-align: left;" class="red" colspan="2">默认和报价截止时间相同</td>
+     	</tr>
+     	<tr>
+     		<td  class="th_bg">报价截止时间<i class="red">*</i></td>
+     		<td>
+     			<input type="text" class="layui-input form-control" id="bidEndDate" name="bidEndDate">
+     		</td>
+     		<td colspan="2" style="text-align: left;" class="red">需结合项目复杂难度合理设置</td>    		    		
+     	</tr>
+     	<tr>
+     		<td  class="th_bg">询价评审时间<i class="red">*</i></td>
+     		<td>
+     			<input type="text" class="layui-input form-control" name="checkEndDate" id="checkEndDate"  >
+     		</td> 
+     		<td colspan="2" style="text-align: left;" class="red">不能早于报价截止时间</td>
+     	</tr>
+     	<tr>
+     		<td  class="th_bg">询价采购小组</td>
+     		<td colspan="3" style="text-align: left;"><span class="red">温馨提示：询价采购小组成员由单数组成。</span><span class="red" style="margin-left: 50px;">详见：评审管理</span></td>
+     	</tr>
+     	<tr>
+     		<td colspan="4" style="font-weight: bold;" class="active">包件信息</td>
+     	</tr>
+     	<tr>
+     		<td colspan="5">
+     			<table class="table  table-bordered" style="margin-bottom: 0px;">
+			     	<thead>
+			     		<tr>
+				     		<th>包件名称</th>
+				     		<th>评审方式</th>
+				     		<th>操作</th>
+				     	</tr>
+			     	</thead>
+			     	<tbody id="tablebjb">    		
+			     	</tbody>    	
+			     </table>
+     		</td>
+     	</tr>
+     	<tr>
+		 	<td  class="th_bg">备注</td>
+		 	<td colspan="4"><textarea style="width: 90%;height: 50px;" name="content" class="form-control"></textarea></td>
+		 	<input type="hidden" name="project.projectState" value="0" />
+		 </tr>
+		 <tr class="employee">
+	 		<td  class="th_bg">添加审核人</td>
+	 		<td colspan="4" style="text-align: left;">
+	 			<select id="employeeId" class="form-control" style="width: 180px;" name="checkerId"></select>	 			
+	 		</td>
+	 	</tr>
+     </table>   
+ </form>
+ <form id="formbackage" name="projectPackages">
+ 	
+ </form>
+ <style>
+ .table > thead > tr > th, .table > tbody > tr > th, .table > tfoot > tr > th, .table > thead > tr > td, .table > tbody > tr > td, .table > tfoot > tr > td{
+ 	vertical-align: middle;
+ }
+ </style>
+ <script type="text/javascript" src="../../../../media/js/jquery/jquery.js" ></script>
+ <script type="text/javascript" src="../../../../media/js/jquery/jquery.extend.js"></script>
+ <script type="text/javascript" src="../../../../media/js/bootstrap/js/bootstrap.js" ></script>
+ <script type="text/javascript" src="../../../../media/js/layer/laydate.js" ></script>
+ <script type="text/javascript" src="../../../../media/js/layer/layer.js" ></script>
+ <script type="text/javascript" src="../../../../media/js/base/common.js" ></script>
+ <script type="text/javascript" src="../js/edit_model.js" ></script>

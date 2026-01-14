@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8">
+		<meta http-equiv="pragma" content="no-cache"><!-- 禁止浏览器从本地计算机的缓存中访问页面内容 --> 
+		<meta http-equiv="cache-control" content="no-cache"><!-- 用于指定请求和响应遵循的缓存机制 --> 
+		<meta http-equiv="expires" content="0"><!-- 用于设定网页的到期时间，一旦网页过期，必须到服务器上重新传输； -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>投标文件解密/确认查看</title>
+    <link rel="stylesheet" href="../../../../media/js/layer/mobile/need/layer.css" />
+    <link rel="stylesheet" href="../../../../media/js/bootstrap/css/bootstrap.css" />
+    <link rel="stylesheet" href="../../../../media/js/bootstrap/css/bootstrap-table.min.css" type="text/css"/>
+	<style>
+		html,body { height: 100%;}
+		.pretrial,.revise{
+			display: none;
+		}
+		.display_none{
+			display: none;
+		}
+	</style>
+</head>
+
+<body>
+	<div class="pageModel">
+		<table class="table table-bordered ">
+        	<tr>
+	            <td colspan="4" style="font-weight: bold;" class="active">签到信息</td>
+	        </tr>
+	        <!--<table class="table table-bordered tenders" id="bidList">
+	        	<thead>
+	        		<tr>
+		        		<th style="width: 50px;text-align: center;">序号</th>
+		        		<th style="width: 200px;text-align: center;">投标人</th>
+		        		<th style="width: 100px;text-align: center;">解密开始时间</th>
+		        		<th style="width: 100px;text-align: center;">解密结束时间</th>
+		        		<th style="width: 100px;text-align: center;">解密情况</th>
+		        		<th style="width: 100px;text-align: center;">报价确认情况</th>
+		        	</tr>
+	        	</thead>
+	        	<tbody></tbody>
+	        </table>-->
+	        <tr>
+	            <table class="table table-bordered tenders" id="bidList"></table>
+	        </tr>
+	    </table>
+	    <div class="bottom-btn" style="z-index: 11000;">
+            <button type="button" class="btn btn-default" id="btnClose"><span class="glyphicon glyphicon-remove"></span>关闭</button>
+        </div>
+	</div>
+	
+        
+   
+    <script type="text/javascript" src="../../../../media/js/jquery/jquery.js"></script>
+    <script type="text/javascript" src="../../../../media/js/jquery/jquery.extend.js"></script>
+    <script type="text/javascript" src="../../../../media/js/base/util.js"></script>
+    <script type="text/javascript" src="../../../../media/js/base/common.js"></script>
+    <!--<script src="../../../../media/js/wangEditor-3.1.1/release/wangEditor.js"></script>-->
+    <!--<script src="../../../../media/js/wangEditor-3.1.1/publicEditor.js"></script>-->
+    <script type="text/javascript" src="../../../../media/js/bootstrap/js/bootstrap.js"></script>
+    <script type="text/javascript" src="../../../../media/js/bootstrap/js/bootstrap-table.min.js"></script>
+	<script type="text/javascript" src="../../../../media/js/bootstrap/js/bootstrap-table-zh-CN.min.js"></script>
+    <script type="text/javascript" src="../js/fileDecrypt.js"></script>
+</body>
+
+</html>

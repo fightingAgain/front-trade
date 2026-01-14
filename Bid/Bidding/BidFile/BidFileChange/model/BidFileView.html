@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="pragma" content="no-cache"><!-- 禁止浏览器从本地计算机的缓存中访问页面内容 --> 
+		<meta http-equiv="cache-control" content="no-cache"><!-- 用于指定请求和响应遵循的缓存机制 --> 
+		<meta http-equiv="expires" content="0"><!-- 用于设定网页的到期时间，一旦网页过期，必须到服务器上重新传输； -->
+		<title>招标文件编辑页面</title>
+		<link rel="stylesheet" href="../../../../media/js/bootstrap/css/bootstrap.css" />
+		<link rel="stylesheet" href="../../../../media/js/bootstrap/css/bootstrap-table.min.css" type="text/css"/>
+		
+	</head>
+	<body>
+		<div  name="Filepurchase" style="width: 99%;padding-left: 10px;padding-top: 10px;margin-bottom: 60px;">
+			<div class="panel-group" id="accordion">
+	    		<div class="panel panel-accordion panel-default">
+		    		<div class="panel-heading active"  role="tab" id="headingOne">  
+				 		<h4 class="panel-title">
+			            	<a  role="button" data-toggle="collapse" href="#collapseOne" aria-controls="collapseOne"  aria-expanded="true"  >
+			            		基本信息
+			            	</a>
+				 		</h4>  
+				   	</div>  
+				  	<div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">  
+				       	<div class="panel-body">
+				       		<button type="button" class="btn btn-primary btn-sm " id="btnChoose" style="float: right;">
+			            		<span class="glyphicon glyphicon-folder-open"></span>选择招标文件
+			            	</button>
+				       		<table  class="table table-bordered ">
+				       			<tr>
+									<td  class="th_bg">标段编号</td>
+									<td colspan="3" style="text-align: left;">
+										<div id="interiorBidSectionCode"></div>
+									</td>
+								</tr>
+								<tr>
+									<td  class="th_bg">标段名称</td>
+									<td colspan="3" style="text-align: left;">
+										<div id="bidSectionName"></div>
+									</td>
+								</tr>
+								<tr class="change" style="display: none;">
+									<td  class="th_bg">标题</td>
+									<td colspan="3" style="text-align: left;">
+										<div id="docName"></div>
+									</td>
+								</tr>
+								<tr class="change" style="display: none;">
+									<td  class="th_bg">变更类型</td>
+									<td colspan="3">
+										<label style="padding-right: 20px;margin-bottom: 0;">
+					                    	<input type="checkbox" name="isChange" disabled="disabled" style="vertical-align: -2px;margin-right: 5px;" />
+					                    	招标文件变更
+					                    </label>
+										<label style="padding-right: 20px;margin-bottom: 0;">
+					                		<input type="checkbox" name="isReplenish" disabled="disabled" style="vertical-align: -2px;margin-right: 5px;" />
+					                		时间变更
+					                	</label>
+										<label class="isShowDeposit" style="padding-right: 20px;margin-bottom: 0;display: none;">
+											<input type="checkbox" name="isChangeDeposit" disabled="disabled" style="vertical-align: -2px;margin-right: 5px;" />
+											保证金变更
+										</label>
+									</td>
+								</tr>
+				       		</table>
+			       		</div>
+		       		</div>
+	       		</div>
+	       		<div class="panel panel-accordion panel-default fileWrap" style="display: none;">
+		    		<div class="panel-heading active"  role="tab" id="headingTwo">  
+				 		<h4 class="panel-title">
+			            	<a class="collapsed" role="button" data-toggle="collapse" href="#collapseTwo" aria-controls="collapseTwo"  aria-expanded="false">
+			            		招标文件
+			            	</a>
+				 		</h4>  
+				   	</div>  
+				  	<div  id="collapseTwo" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingTwo">  
+				       	<div class="panel-body">
+							<button type="button" class="btn btn-primary" id="btnPreview" style="display: none;">预览</button>
+				       		<div id="bidFile">
+				       			
+				       		</div>
+			       		</div>
+			       	</div>
+		    	</div>
+				<div class="panel panel-accordion panel-default drawShow" style="display: none;">
+					<div class="panel-heading active"  role="tab" id="headingFour">  
+				 		<h4 class="panel-title">
+				        	<a class="collapsed" role="button" data-toggle="collapse" href="#collapseFour" aria-controls="collapseFour"  aria-expanded="false">
+				        		图纸文件
+				        	</a>
+				 		</h4>  
+				   	</div>  
+				  	<div  id="collapseFour" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingFour">  
+				       	<div class="panel-body">
+				       		<div id="drawFile">
+				       			
+				       		</div>   
+				   		</div>
+				   	</div>
+				</div>
+		    	<div class="panel panel-accordion panel-default addendum" style="display: none;">
+		    		<div class="panel-heading active"  role="tab" id="headingThree">  
+				 		<h4 class="panel-title">
+			            	<a class="collapsed" role="button" data-toggle="collapse" href="#collapseThree" aria-controls="collapseThree"  aria-expanded="false">
+			            		时间变更
+			            	</a>
+				 		</h4>  
+				   	</div>  
+				  	<div  id="collapseThree" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingThree">  
+				       	<div class="panel-body">
+				       		<table class="table table-bordered">
+				       			<tr class="addendum">
+									<td class="th_bg">公告发布截止时间</td>
+									<td style="text-align: left;">
+										<span id="noticeEndTime"></span>
+									</td>
+									<td class="th_bg">招标文件获取截止时间</td>
+									<td style="text-align: left;">
+										<span id="docGetEndTime"></span>
+										
+									</td>
+								</tr>
+						      	<tr class="addendum">
+									<td class="th_bg">提出澄清截止时间</td>
+									<td style="text-align: left;">
+										<span id="clarifyTime"></span>
+									</td>
+									<td class="th_bg">答疑截止时间</td>
+									<td style="text-align: left;">
+										<span id="answersEndDate"></span>
+										
+									</td>
+								</tr>
+								<tr class="addendum">
+									<td class="th_bg">投标文件递交截止时间</td>
+									<td style="text-align: left;">
+										<span id="bidDocReferEndTime"></span>
+										
+									</td>
+									<td class="th_bg">开标时间</td>
+									<td style="text-align: left;">
+										<span id="bidOpenTime"></span>
+										
+									</td>
+								</tr>
+					        </table>   
+			       		</div>
+			       	</div>
+		    	</div>
+				<div class="panel panel-accordion panel-default changeDeposit" style="display: none;">
+					<div class="panel-heading active"  role="tab" id="headingSix">  
+				 		<h4 class="panel-title">
+				        	<a class="collapsed" role="button" data-toggle="collapse" href="#collapseSix" aria-controls="collapseSix"  aria-expanded="false">
+				        		保证金变更
+				        	</a>
+				 		</h4>  
+				   	</div>  
+				  	<div  id="collapseSix" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingSix">  
+				       	<div class="panel-body">
+							<table  class="table table-bordered ">
+								<tr>
+									<td class="th_bg">是否收取投标保证金</td>
+								    <td>
+										<span id="isCollectDeposit"></span>
+								    </td>
+									<td class="th_bg">保证金计算方式</td>
+									<td>
+										<span id="depositType"></span>
+									</td>
+								</tr>
+								<tr class="isCollectDeposit">
+									
+								    <td class="th_bg depositTit">保证金金额（<span style="color: #BB2413;">元</span>）</td>
+								    <td class="depositMain" colspan="3">
+								    	<div class="depositMoney" style="width: 260px;"><span id="depositMoney"></span></div>
+								    	<div class="depositRatio" style="display: none;width: 260px;"><span id="depositRatio"></span></div>
+								    </td>
+								</tr>
+							</table>
+				       		
+				       	</div>
+				    </div>
+				 </div>
+		    	
+		    	<div id="approval">
+		    		
+		    	</div>
+	   		</div>
+			
+		</div>
+	     
+	    <div style="width: 100%;height: 50px;text-align:center;position: fixed;bottom: 0;background-color: #FFFFFF;">
+			<button type="button" class="btn btn-default" id="btnClose"><span class="glyphicon glyphicon-remove"></span>关闭</button>
+		</div>
+		<form id="formFile"></form>
+	     <script type="text/javascript" src="../../../../media/js/jquery/jquery.js" ></script>
+		 <script type="text/javascript" src="../../../../media/js/jquery/jquery.extend.js"></script>
+		 <script type="text/javascript" src="../../../../media/js/base/common.js" ></script>
+		 <script type="text/javascript" src="../../../../media/js/base/util.js" ></script>
+		 <script type="text/javascript" src="../../../../media/js/bootstrap/js/bootstrap.js" ></script>
+		 <script type="text/javascript" src="../../../../media/js/bootstrap/js/bootstrap-table.min.js"></script>
+		 <script type="text/javascript" src="../../../../media/js/bootstrap/js/bootstrap-table-zh-CN.min.js"></script>
+		 <script type="text/javascript" src="../../../../media/js/layer/layer.js"></script>
+		 <script type="text/javascript" src="../../../../media/js/base/WorkflowInfoNew.js"></script>
+		 <script type="text/javascript" src="../../../../media/js/base/StreamUpload.js"></script>
+		 <script type="text/javascript" src="../../../Model/js/public.js"></script>
+		 <script type="text/javascript" src="../js/BidFileView.js?verson=1.03" ></script>
+	</body>
+</html>

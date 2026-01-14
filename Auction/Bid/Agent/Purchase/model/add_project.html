@@ -1,0 +1,51 @@
+<!--
+ * @Author: your name
+ * @Date: 2020-05-04 17:31:25
+ * @LastEditTime: 2020-09-07 15:22:27
+ * @LastEditors: your name
+ * @Description: In User Settings Edit
+ * @FilePath: \FrameWork_bf\bidPrice\Bid\Agent\Purchase\model\add_project.html
+--> 
+<head>	
+	<!-- 网页不会被缓存 -->
+	<meta http-equiv="pragma" content="no-cache">
+	<!-- 禁止浏览器从本地机的缓存中调阅页面内容 -->
+	<meta http-equiv="cache-control" content="no-cache, must-revalidate">
+	<meta http-equiv="expires" content="0">
+	<link rel="stylesheet" href="../../../../../media/js/bootstrap/css/bootstrap.css?verson=1.01" />
+	<link rel="stylesheet" href="../../../../../media/js/bootstrap/css/bootstrap-table.css?verson=1.01" />
+	<!-- 跳转到 -->
+	<link rel="stylesheet" href="../../../../../media/js/bootstrap/css/bootstrap-table-pagejump.css?verson=3.4.24">
+</head>
+ <div class="container" style="width: 99%;padding-left: 10px;padding-top: 10px;margin-bottom: 0;">
+        <div id="toolbar" >
+		 <div class="input-group" style="width:180px;float: left;padding-left: 10px;">
+    		<span class="input-group-addon">项目名称:</span>
+        	<input type="text" class="form-control" id="search_3" style="width:180px" >
+	    </div>
+		 <div class="btn-group">
+			<button id="eventquery" type="button" class="btn btn-primary">
+			   <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>查询
+			</button>	
+	       </div>
+		 </div>
+        <table class="table  table-bordered" id="table" >
+	    </table>     
+  </div>
+  <style>
+  	.fixed-table-body {
+	    overflow-x: auto;
+	    overflow-y: auto;
+	    /* height: auto; */
+	}
+  </style>
+ <script type="text/javascript" src="../../../../../media/js/jquery/jquery.js?verson=1.01" ></script>
+ <script type="text/javascript" src="../../../../../media/js/jquery/jquery.extend.js?verson=1.01"></script>
+ <script type="text/javascript" src="../../../../../media/js/base/common.js?verson=1.01" ></script>
+ <script type="text/javascript" src="../../../../../media/js/bootstrap/js/bootstrap.js?verson=1.01" ></script>
+ <script type="text/javascript" src="../../../../../media/js/bootstrap/js/bootstrap-table.min.js?verson=1.01" ></script>
+ <script type="text/javascript" src="../../../../../media/js/bootstrap/js/bootstrap-table-zh-CN.min.js?verson=1.01" ></script>
+ <!-- 分页跳转 -->
+ <script type="text/javascript" src="../../../../../media/js/bootstrap/js/bootstrap-table-pagejump.js?verson=3.4.24" ></script>
+ <script type="text/javascript" src="../../../../../media/js/layer/layer.js?verson=1.01"></script>
+ <script type="text/javascript" src="../js/add_project.js?verson=1.01" ></script>

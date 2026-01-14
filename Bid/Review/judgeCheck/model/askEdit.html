@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="pragma" content="no-cache"><!-- 禁止浏览器从本地计算机的缓存中访问页面内容 --> 
+		<meta http-equiv="cache-control" content="no-cache"><!-- 用于指定请求和响应遵循的缓存机制 --> 
+		<meta http-equiv="expires" content="0"><!-- 用于设定网页的到期时间，一旦网页过期，必须到服务器上重新传输； -->
+		<title>提交答疑</title>
+		<link rel="stylesheet" href="../../../media/js/bootstrap/css/bootstrap.css" />
+		<link rel="stylesheet" href="../../../media/js/stream/css/stream-v1.css" />
+		<style>
+			html,body { height: 100%;width: 100%;}
+			label {
+				font-weight: normal;
+			}
+			
+			.form-group {
+				margin: 0px;
+			}
+		</style>
+	</head>
+
+	<body>
+
+		<form id="formAnswers" name="AskAnswers" style="width:99%;margin-left:3px;margin-bottom: 100px;">
+			
+			<table class="table table-bordered">
+				<tr class="notPublicProject">
+					<td class="th_bg" >提问内容<span style='color: red;'>*</span></td>
+					<td colspan="3">
+						<div class="form-group">
+							<textarea type="text" id="askContent" name="askContent" class="form-control" rows="10"></textarea>
+						</div>
+					</td>
+				</tr>
+				<tr class="isPublicProject">
+					<td colspan="4">
+						<div id="container" name="askContent" style="width: 950px;margin: auto;"></div>
+						<!--<input type="hidden" name="askContent" id="askContent" value="" />-->
+					</td>
+				</tr>
+				<tr id="divEdit">
+					<td class="th_bg" style=" ">
+						上传附件
+					</td>
+					<td colspan="3">
+						<!--<input type="file" class="fileloading" name="file" id="FileName"/>
+						<span style='float:right;color: red;'>*上传格式(pdf、表格、文档、图片、压缩包)</span>-->
+						<button type="button" class="btn btn-primary" id="fileLoad"   style="float: right;margin-right: 50px;">
+		            		<span class="glyphicon glyphicon-folder-open"></span>选择文件
+		            	</button>
+					</td>
+				</tr>
+				<tr>
+		        	<td colspan="4">
+		        		<!--<div id="i_stream_files_queue"></div>-->
+		        		<div id="fileContent"></div>
+		        	</td>
+		        	
+		        </tr>
+			</table>
+			<table class="table table-bordered" id="divShow" style="display: none;">
+				<tr class="active">
+					<td colspan="3">
+						附件
+					</td>
+				</tr>
+				<tr>
+					<td style="width: 50px;">序号</td>
+					<td>附件名称</td>
+					<td style="width:150px;text-align: center;">操作</td>
+				</tr>
+				<tbody id="imgList1"></tbody>
+			</table>
+			<!--<div id="">
+				
+			</div>-->
+			<p class="red">温馨提示：所有提问与答复均需在评审结果汇总提交前完成！</p>
+		</form>
+		<div style="width: 100%;height: 50px;text-align:center;position: fixed;bottom: 0;background-color: #FFFFFF;z-index: 999;">
+			<button type="button" class="btn btn-primary" id="btnSubmit"><span class="glyphicon glyphicon-ok"></span>提交</button>
+			<button type="button" class="btn btn-default" id="btnClose"><span class="glyphicon glyphicon-remove"></span>关闭</button>
+		</div>
+	</body>
+	<script type="text/javascript" src="../../../media/js/jquery/jquery.js"></script>
+	<script type="text/javascript" src="../../../media/js/base/common.js"></script>
+	<script type="text/javascript" src="../../../media/js/jquery/jquery.extend.js"></script>
+	<script type="text/javascript" src="../../../media/js/bootstrap/js/bootstrap.js"></script>
+	<!-- 编辑器源码文件 -->
+	<!-- 编辑器源码文件 -->
+	<script type="text/javascript" src="../../../media/js/ueditor/ueditor.config.js"></script>
+	<script type="text/javascript" src="../../report/ueditor.report.config.js"></script>
+	<script type="text/javascript" src="../../../media/js/ueditor/ueditor.all.js"></script>
+	<script type="text/javascript" src="../../report/ueditor.report.plugins.js"></script>
+    <!--<script type="text/javascript" src="../../../media/js/ueditor/ueditor.config.js"></script>
+    <script type="text/javascript" src="../../../media/js/ueditor/ueditor.all.js"></script>-->
+	
+	<script type="text/javascript" src="../../../media/js/layer/layer.js"></script>
+	<script type="text/javascript" src="../../../media/js/stream/js/stream-v1.js"></script>
+	<script type="text/javascript" src="../../../media/js/base/util.js"></script>
+	<script type="text/javascript" src="../../../media/js/base/StreamUpload.js"></script>
+	<script type="text/javascript" src="../../public.js"></script>
+	<script type="text/javascript" src="../js/askEdit.js"></script>
+</html>

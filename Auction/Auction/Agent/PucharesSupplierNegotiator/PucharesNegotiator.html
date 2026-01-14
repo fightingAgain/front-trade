@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="pragma" content="no-cache">
+		<!-- 禁止浏览器从本地机的缓存中调阅页面内容 -->
+		<meta http-equiv="cache-control" content="no-cache, must-revalidate">
+		<meta http-equiv="expires" content="0">
+		<title>采购人价格谈判</title>
+		<style type="text/css">
+			label {
+				font-weight: normal;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="container-fluid">
+		<div id="toolbar" >
+		 	<div class="input-group" style="width:180px;float: left;">
+		 		<span class="input-group-addon">谈判状态</span>
+	        	<select class="form-control" name="checkState" id="checkState" style="width:190px">
+	        		<option value="">全部</option>
+	        		<option value="0">已谈判</option>
+	        		<option value="1">未谈判</option>
+	        		<option value="2">不谈判</option>
+	        	
+	        	</select>
+	      </div>
+	         <div class="input-group" style="width:180px;float: left;padding-left: 10px;">
+	        	<span class="input-group-addon">采购项目编号</span>		      
+		        <input type="text"  class="form-control" id="projectNumber" name="projectNumber" style="width:190px">
+	         </div>
+	         <div class="input-group" style="width:180px;float: left;padding-left: 10px;">
+	        	<span class="input-group-addon">采购项目名称</span>		      
+		        <input type="text"  class="form-control" id="projectName" name="projectName" style="width:190px">
+	         </div>
+			 <div class="btn-group" style="padding-left:10px;">
+			 	<button id="btnSearch" type="button" class="btn btn-primary">
+		          <span class="glyphicon glyphicon-search" aria-hidden="true">查询
+		        </button>		 	
+		
+		     </div>
+		</div>
+  		<table class="" data-toolbar="#toolbar" id="PucharesNegotiator"></table>  
+		
+		</div>
+	</body>
+	<script type="text/javascript" src="Auction/Auction/Agent/PucharesSupplierNegotiator/js/PucharesNegotiator.js"></script>
+</html>

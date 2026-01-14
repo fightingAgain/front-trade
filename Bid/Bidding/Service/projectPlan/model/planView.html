@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8">
+		<meta http-equiv="pragma" content="no-cache"><!-- 禁止浏览器从本地计算机的缓存中访问页面内容 --> 
+		<meta http-equiv="cache-control" content="no-cache"><!-- 用于指定请求和响应遵循的缓存机制 --> 
+		<meta http-equiv="expires" content="0"><!-- 用于设定网页的到期时间，一旦网页过期，必须到服务器上重新传输； -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>编辑包件信息</title>
+    <link rel="stylesheet" href="../../../../media/js/layer/mobile/need/layer.css" />
+    <link rel="stylesheet" href="../../../../media/js/bootstrap/css/bootstrap.css" />
+    <link rel="stylesheet" href="../../../../media/js/datetimepicker/css/jquery.datetimepicker.css">
+	<style>
+		html,body { height: 100%;}
+		.readonly{
+			border: none;
+		    background: none !important;
+		    outline: none !important;
+		    box-shadow: none !important;
+		}
+		.calendar_icon{
+			color: #3995C8;
+		}
+		.padding_button{
+			padding: 5px 8px !important;
+			line-height: 30px !important;
+		}
+		.set_height{
+		    display: inline-block;
+			padding: 6px 12px;
+		}
+	</style>
+</head>
+
+<body>
+    <form class="pageModel" id="formName" name="formName">
+        <table class="table table-bordered ">
+        	<tr>
+	            <td colspan="4" style="font-weight: bold;" class="active">标段基本信息</td>
+	        </tr>
+	        <tr>
+	        	<td class="th_bg">标段编号</td>
+                <td colspan="3">
+                	<span id="interiorBidSectionCode" class="set_height"></span>
+                </td>
+            	
+            </tr>
+            <tr>
+            	<td class="th_bg">标段名称</td>
+                <td colspan="3">
+                	<span id="bidSectionName" class="set_height"></span>
+                </td>
+            </tr>
+            <tr>
+	            <td colspan="4" style="font-weight: bold;" class="active">标段时间信息</td>
+	        </tr>
+	        <tr>
+            	<td class="th_bg timeName">招标公告发布开始时间</td>
+                <td>
+                	<span id="noticeSendTime" class="set_height"></span>
+                </td>
+                <td class="th_bg timeName">招标公告发布截止时间</td>
+                <td>
+                	<span id="noticeEndTime" class="set_height"></span>
+                </td>
+            </tr>
+            <tr>
+	        	<td class="th_bg timeName">招标文件发布时间</td>
+                <td colspan="3">
+                	<span id="docSendTime" class="set_height"></span>
+                </td>
+	        </tr>
+	        <tr>
+				<td class="th_bg timeName">提出澄清截止时间</td>
+				<td style="text-align: left;">
+					<span id="clarifyEndTime" class="set_height"></span>
+				</td>
+				<td class="th_bg timeName">答复截止时间</td>
+				<td style="text-align: left;">
+					<span id="answersEndDate" class="set_height"></span>
+				</td>
+			</tr>
+			<tr>
+				<td class="th_bg timeName">投标文件递交截止时间</td>
+				<td style="text-align: left;">
+					<span id="bidDocReferEndTime" class="set_height"></span>
+				</td>
+				<td class="th_bg timeName">开标时间</td>
+				<td style="text-align: left;">
+					<span id="bidOpenTime" class="set_height"></span>
+				</td>
+			</tr>
+			<tr>
+				<td class="th_bg timeName">评审委员会组建时间</td>
+				<td style="text-align: left;">
+					<span id="formatTime" class="set_height"></span>
+				</td>
+				<td class="th_bg timeName">评标时间</td>
+				<td style="text-align: left;">
+					<span id="checkStartDate" class="set_height"></span>
+				</td>
+			</tr>
+			<tr>
+				<td class="th_bg timeName">中标候选人公示开始时间</td>
+				<td style="text-align: left;">
+					<span id="publicityStartTime" class="set_height"></span>
+				</td>
+				<td class="th_bg timeName">中标候选人公示截止时间</td>
+				<td style="text-align: left;">
+					<span id="publicityEndTime" class="set_height"></span>
+				</td>
+			</tr>
+			<tr>
+				<td class="th_bg timeName">确定中标人时间</td>
+				<td style="text-align: left;">
+					<span id="sureBidderTime" class="set_height"></span>
+				</td>
+				<td class="th_bg timeName">中标结果通知书发送时间</td>
+				<td style="text-align: left;">
+					<span id="bidderNoticeTime" class="set_height"></span>
+				</td>
+			</tr>
+			<tr>
+				<td class="th_bg timeName">中标合同备案时间</td>
+				<td colspan="3" style="text-align: left;">
+					<span id="contractTime" class="set_height"></span>
+				</td>
+			</tr>
+			<tr>
+				<td class="th_bg">备注</td>
+				<td colspan="3" style="text-align: left;">
+					<span id="workPlan" class="set_height"></span>
+				</td>
+			</tr>
+            
+	        
+            
+        </table>
+    </form>
+    <div class="bottom-btn">
+        <button type="button" class="btn btn-default" id="btnClose"><span class="glyphicon glyphicon-remove"></span>关闭</button>
+    </div>
+    
+    <script type="text/javascript" src="../../../../media/js/jquery/jquery.js"></script>
+    <script type="text/javascript" src="../../../../media/js/jquery/jquery.extend.js"></script>
+    <script type="text/javascript" src="../../../../media/js/base/util.js"></script>
+    <script type="text/javascript" src="../../../../media/js/base/common.js"></script>
+    <script type="text/javascript" src="../../../../media/js/bootstrap/js/bootstrap.js"></script>
+    <script type="text/javascript" src="../../../../media/js/layer/layer.js"></script>
+    <script type="text/javascript" src="../../../../media/js/datetimepicker/js/jquery.datetimepicker.js"></script>
+    <script type="text/javascript" src="../../../Model/js/public.js"></script>
+    <script type="text/javascript" src="../js/planView.js"></script>
+    <!--<script type="text/javascript" src="../../Model/js/dataLinkage.js"></script>-->
+</body>
+
+</html>

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="pragma" content="no-cache"><!-- 禁止浏览器从本地计算机的缓存中访问页面内容 --> 
+		<meta http-equiv="cache-control" content="no-cache"><!-- 用于指定请求和响应遵循的缓存机制 --> 
+		<meta http-equiv="expires" content="0"><!-- 用于设定网页的到期时间，一旦网页过期，必须到服务器上重新传输； -->
+		<title>招标文件下载列表页面</title>
+		<link rel="stylesheet" href="../../../../media/js/bootstrap/css/bootstrap.css" />
+		<link rel="stylesheet" href="../../../../media/js/bootstrap/css/bootstrap-table.min.css" type="text/css"/>
+		<link rel="stylesheet" href="../../../../media/js/layer/mobile/need/layer.css" />
+	<!--	
+		<style>
+			tr .file-input{
+				display: inline-block;
+				text-align: left;
+				width: 98%;
+				margin-left: 10px;
+				margin-right: 10px;
+			}
+		</style>-->
+	</head>
+	<body>
+		<div  name="Filepurchase" class="pageModel">
+			<table class="table table-bordered " style="margin-bottom: 0px;">
+				
+				<tr>
+					<td colspan="4" style="font-weight: bold;" class="active">招标文件
+				</tr>
+				<tr>
+					<td colspan="4">
+						<table class="table table-bordered" id="fileList">
+							
+						</table>
+						<div>
+							提示：
+						</div>
+						<div class="red">1、制作文件时会抓取电脑及CA相关信息，若抓取异常则会导致参与项目失败，请预留足够时间或提前使用环境检测工具自测，如有问题，请及时联系客服人员，以免影响您参与项目。<a href="" target="_blank" id="environmentCheckDownload">（下载专区>环境检测及驱动安装）</a></div>
+						<div class="red">2、参与本项目投标需办理企业数字证书（企业CA）及法定代表人个人数字认证（法人CA）。使用CA对投标文件进行签章和加密，为了不影响各用户正常参与项目，请未办理CA的用户在参与项目前及时办理CA，CA在有效期内的用户请忽略本提醒。</div>
+					</td>
+				</tr>
+				<tr>
+					<td colspan="4" style="font-weight: bold;" class="active">相关附件
+				</tr>
+				<tr>
+					<td colspan="4">
+						<table class="table table-bordered" id="fileChangeList">
+						</table>
+					</td>
+				</tr>
+				<!--<tr>
+					<td colspan="4" style="font-weight: bold;" class="active">变更历史
+				</tr>
+				<tr>
+					<td colspan="4" id="changeHis">
+						
+					</td>
+				</tr>-->
+			</table>
+		</div>
+	     
+	    <div class="bottom-btn">
+			<button type="button" class="btn btn-default" id="btnClose"><span class="glyphicon glyphicon-remove"></span>关闭</button>
+		</div>
+		<form id="formFile"></form>
+	     <script type="text/javascript" src="../../../../media/js/jquery/jquery.js" ></script>
+		 <script type="text/javascript" src="../../../../media/js/jquery/jquery.extend.js"></script>
+		 <script type="text/javascript" src="../../../../media/js/base/common.js" ></script>
+		 <script type="text/javascript" src="../../../../media/js/base/util.js" ></script>
+		 <script type="text/javascript" src="../../../../media/js/bootstrap/js/bootstrap.js" ></script>
+		 <script type="text/javascript" src="../../../../media/js/bootstrap/js/bootstrap-table.min.js"></script>
+		 <script type="text/javascript" src="../../../../media/js/bootstrap/js/bootstrap-table-zh-CN.min.js"></script>
+		 <script type="text/javascript" src="../../../../media/js/base/StreamUpload.js"></script>
+		 <script src="../../../Model/js/public.js"></script>
+		 <script src="../../../../Order/Pay/js/payment.js"></script>
+		 <script src="../../../Model/js/checkServiceCost.js"></script>
+		 <script type="text/javascript" src="../js/FileDownloadList.js" ></script>
+	</body>
+</html>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="pragma" content="no-cache">
+		<!-- 禁止浏览器从本地机的缓存中调阅页面内容 -->
+		<meta http-equiv="cache-control" content="no-cache, must-revalidate">
+		<meta http-equiv="expires" content="0">
+		<title>查看结果通知书</title>
+		<link rel="stylesheet" href="../../../../../media/js/bootstrap/css/bootstrap.min.css">
+		<style>
+			h3 {
+				font-weight: 700;
+				color: #1A8FFF;
+			}
+			#edui1_iframeholder {				
+				margin: auto;
+				background-image: url(../../../../../media/image/images/watermark.png);
+				overflow: auto;
+			}
+			.w-e-text-container { height: 350px !important;}
+			
+		</style>
+	</head>
+
+	<body style="width: 99%;padding-left: 10px;padding-top: 10px; ">
+		<!--startprint1-->
+		<div style="position: relative;margin-bottom: 60px;" class="office">
+			<div class='resultContent'></div>
+			<img src='../../../../../media/image/images/watermark.png' width="100%" style="position: fixed;top:5px;left:5px"/>			
+		</div>
+		<div class = 'gongzhang' style="position:relative;right:25px;text-align: right;">
+			<img id='gz' width='150px' hight='150px' style="position: absolute;right: 10px;top:-200px" />				
+		</div>
+		<!--endprint1-->
+		<div style="width: 100%;height: 50px;text-align:center;position: fixed;bottom: 0;left:0;background-color: #FFFFFF;" class="btnSee">
+			<input type="button" name='button_export' title='打印' onclick=preview(1) value="打印" class="btn btn-primary btn-sm btnPreview" style="width: 80px;"><input type="button" name='' title='打印' onclick=saveEdit() value="保存" class="btn btn-primary btn-sm btnSave" style="width: 80px; display: none;">&nbsp;
+			<input type="button" id="btnClose" class="btn btn-primary btn-sm" style="width: 80px;" onclick=closeWin() value='关闭' >
+		</div>
+	</body>
+	<script type="text/javascript" src="../../../../../media/js/jquery/jquery.js"></script>
+	<script type="text/javascript" src="../../../../../media/js/jquery/jquery.params.js"></script>
+	<script type="text/javascript" src="../../../../../media/js/jquery/jquery.extend.js"></script>
+	<script type="text/javascript" src="../../../../../media/js/bootstrap/js/bootstrap.js"></script>
+	<script type="text/javascript" src="../../../../../media/js/layer/layer.js"></script>
+	<script type="text/javascript" src="../../../../../media/js/layer/laydate.js"></script>
+	<script type="text/javascript" src="../js/newViewResult.js"></script>
+</html>

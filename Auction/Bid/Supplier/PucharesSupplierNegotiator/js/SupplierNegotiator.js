@@ -1,0 +1,306 @@
+var searchUrl = config.bidhost + '/NegotiationController/pageNegotiationItemForSupplier.do';
+var updateNegotiatorItem = config.bidhost + "/NegotiationController/updateNegotiationItem"; //修改谈判明细
+var checkboxed = "";
+var nowDate=top.$("#systemTime").html()+" "+top.$("#sysTime").html();
+var tenderTypeCode=0;
+var examType=1;
+/*if(PAGEURL.split("?")[1]!=undefined){
+	tenderTypeCode = PAGEURL.split("?")[1].split("=")[1];; //0是询比采购  6是单一来源采购
+}else{
+	tenderTypeCode=0
+}*/
+
+if(PAGEURL.split("?")[1] != undefined){
+	if(PAGEURL.split("?")[1].split("=")[0] == "tenderType"){ //单一
+		tenderTypeCode =  PAGEURL.split("?")[1].split("=")[1];
+		examType = 1;
+	}
+	
+	if(PAGEURL.split("?")[1].split("=")[0] == "examType"){ //预审
+		examType = PAGEURL.split("?")[1].split("=")[1];
+		tenderTypeCode = 0;
+	}
+}else{//评审
+	
+	tenderTypeCode = 0;
+	examType = 1;
+}
+//页面加载后显示
+$(function() {
+	initTable();
+	//查询按钮
+	$("#btnSearch").on('click', function() {
+		$('#SupplierNegotiator').bootstrapTable('destroy');
+		initTable();
+	});
+		
+	//答复状态的改变
+	$("#checkState").change(function() {
+
+		$('#SupplierNegotiator').bootstrapTable('destroy');
+		initTable();
+
+	});
+});
+
+window.operateEvents = { //添加一个按钮对应的事件
+	
+	"click #btnCheck": function(e, value, row, index) {
+		nowDate=top.$("#systemTime").html()+" "+top.$("#sysTime").html();
+		if(GetTime(nowDate)>GetTime(row.endDate) && row.isAccept != '0' && row.isAccept != '1'){
+			add(row.id);
+			layer.confirm('已超过价格确认截止时间,默认为拒绝谈判', {
+				btn: ['确定'] //按钮
+			}, function(index) {
+				layer.close(index);
+				layer.open({
+					type: 2 //此处以iframe举例
+						,
+					title: '查看',
+					area: ['1100px', '600px'],
+					resize: false,
+					content: 'Auction/common/Supplier/PucharesSupplierNegotiator/sPriceNegotiator.html?type=check&tenderType='+row.tenderType+"&id=" + row.negotiation.packageId + '&isAgent='+row.isAgent
+						//确定按钮
+						,
+					success: function(layero, index) {
+						var body = layer.getChildFrame('body', index);
+						var iframeWin = layero.find('iframe')[0].contentWindow;
+		
+						iframeWin.show(row);
+					}
+				});
+			})
+			
+		}else{
+			layer.open({
+				type: 2 //此处以iframe举例
+					,
+				title: '查看',
+				area: ['1100px', '600px'],
+				resize: false,
+				content: 'Auction/common/Supplier/PucharesSupplierNegotiator/sPriceNegotiator.html?type=check&tenderType='+row.tenderType+"&id=" + row.negotiation.packageId + '&isAgent='+row.isAgent
+					//确定按钮
+					,
+				success: function(layero, index) {
+					var body = layer.getChildFrame('body', index);
+					var iframeWin = layero.find('iframe')[0].contentWindow;
+					
+					iframeWin.show(row);
+				}
+			});
+		}
+
+	},
+	"click #btnAnswer": function(e, value, row, index) {
+		if(row.isStopCheck != undefined && row.isStopCheck == 1) {
+			parent.layer.alert("温馨提示：该包件已项目失败！");
+			return;
+		}
+		var height = top.$(window).height() * 0.8;
+		var width = top.$(window).width() * 0.6;
+		layer.open({
+			type: 2,
+			title: '答复',
+			area: ['1100px', '600px'],
+			// maxmin: false, //该参数值对type:1和type:2有效。默认不显示最大小化按钮。需要显示配置maxmin: true即可
+			resize: false, //是否允许拉伸
+			content: 'Auction/common/Supplier/PucharesSupplierNegotiator/sPriceNegotiator.html?type=answer&tenderType='+row.tenderType + '&isAgent='+row.isAgent,
+			success: function(layero, index) {
+				var body = layer.getChildFrame('body', index);
+				var iframeWin = layero.find('iframe')[0].contentWindow;
+				iframeWin.show(row);
+			}
+		});
+	}
+}
+
+function AddFunction(value, row, index) { //把需要创建的按钮封装到函数中
+	sessionStorage.setItem("tenderTypeCode",tenderTypeCode);
+	nowDate=top.$("#systemTime").html()+" "+top.$("#sysTime").html();
+	//判断当前行的答复状态 0 接受 1不接受
+	if(row.isAccept == '0' || row.isAccept == '1' || GetTime(nowDate)>GetTime(row.endDate)) {
+		return [
+			'<button type="button" id="btnCheck" class="btn-xs btn btn-primary"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>查看</button>',
+		].join("")
+	} else {
+		return [
+			'<button type="button" id="btnAnswer" class="btn-xs btn btn-primary"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span>答复</button>',
+
+		].join("")
+	}
+}
+function initTable(){
+	//加载数据
+	$("#SupplierNegotiator").bootstrapTable({
+		url: searchUrl,
+		dataType: 'json',
+		method: 'get',
+		cache: false, // 是否使用缓存，默认为true，所以一般情况下需要设置一下这个属性（*）
+		locale: "zh-CN",
+		pagination: true, // 是否启用分页
+		showPaginationSwitch: false, // 是否显示 数据条数选择框
+		clickToSelect: true, //是否启用点击选中行
+		pageSize: 15, // 每页的记录行数（*）
+		pageNumber: 1, // table初始化时显示的页数
+		pageList:[10,15,20,25],
+		search: false, // 不显示 搜索框
+		sidePagination: 'server', // 服务端分页
+		classes: 'table table-bordered', // Class样式
+		//showRefresh : true, // 显示刷新按钮
+		silent: true, // 必须设置刷新事件
+		onCheck: function(row) {
+			checkboxed = row.id;
+		},
+		queryParams: function(params) {
+			var paramData = {
+				pageSize: params.limit,
+				pageNumber: (params.offset / params.limit) + 1, //页码
+				isAccept: $("#checkState").val(),
+				'packageName': $("#packageName").val(),
+				'packageNumber': $("#packageNumber").val(),
+				'enterpriseType':'06',
+				'tenderType': tenderTypeCode,//询比采购
+				'examType':examType
+			};
+			return paramData;
+		},
+		striped: true,
+		columns: [
+			[{
+					field: 'Id',
+					title: '序号',
+					align: 'center',
+					width: '50px',
+					formatter: function(value, row, index) {
+						var pageSize = $('#SupplierNegotiator').bootstrapTable('getOptions').pageSize || 15; //通过表的#id 可以得到每页多少条  
+						var pageNumber = $('#SupplierNegotiator').bootstrapTable('getOptions').pageNumber || 1; //通过表的#id 可以得到当前第几页  
+						return pageSize * (pageNumber - 1) + index + 1; //返回每条的序号： 每页条数 * （当前页 - 1 ）+ 序号 
+					}
+				},
+				{
+					field: 'negotiation.projectCode',
+					title: '采购项目编号',
+					align: 'left',
+				},
+				{
+					field: 'negotiation.projectName',
+					title: '采购项目名称',
+					align: 'left',
+					formatter:function(value, row, index){
+						if(row.negotiation.isPublic>1){
+							if(row.negotiation.projectSource==1){
+								return row.negotiation.projectName+'<span class="text-danger" style="font-weight: bold;">(重新采购)</span><span class="text-danger" style="font-weight: bold;">(邀请)</span>'
+							}else if(row.negotiation.projectSource==0){
+								return row.negotiation.projectName+'<span class="text-danger" style="font-weight: bold;">(邀请)</span>'
+							}
+							
+						}else{
+							if(row.negotiation.projectSource==1){
+								return row.negotiation.projectName+'<span class="text-danger" style="font-weight: bold;">(重新采购)</span>'
+							}else if(row.negotiation.projectSource==0){
+								return row.negotiation.projectName
+							}			    	
+						}
+					}
+				},
+				{
+					field: 'negotiation.packageNumber',
+					title: '包件编号',
+					align: 'left',
+					width: '200'
+				},
+				{
+					field: 'negotiation.packageName',
+					title: '包件名称',
+					align: 'left'
+				},
+				{
+					field: 'quotePriceUnit',
+					title: '报价单位',
+					align: 'left',
+					formatter: function(value, row, index) {
+						return (row.quotePriceName ? row.quotePriceName + "（" : "") + row.quotePriceUnit + (row.quotePriceName ? "）" : "");
+					}
+				},
+				{
+					field: 'negotiationPrice',
+					title: '谈判价格',
+					align: 'right',
+					width: '100'
+				},
+				{
+					field: 'endDate',
+					title: '谈判截止时间',
+					align: 'center',
+					width: '180'
+				},
+				{
+					field: 'isAccept',
+					title: '答复状态',
+					align: 'center',
+					width: '100',
+					formatter: function(value, row, index) {
+						
+						if(row.isAccept == "0") {
+							return "<label style='color:green;'>已接受</label>";
+						} else if(row.isAccept == "1") {
+							return "<label style='color:red;'>已拒绝</label>";
+						} else if(GetTime(nowDate)>GetTime(row.endDate) && row.isAccept != '0' && row.isAccept != '1') {
+							return "<label style='color:red;'>已拒绝</label>";
+						}else {
+							return "<label style='color:black;'>未答复</label>";
+						}
+					}
+				},
+				{
+					field: 'replyDate',
+					title: '答复时间',
+					align: 'center',
+					width: '180'
+				},
+				{
+					field: 'Button',
+					title: '操作',
+					align: 'center',
+					width: '100',
+					formatter: AddFunction, //表格中添加按钮
+					events: operateEvents, //给按钮注册事件
+
+				},
+
+			]
+		]
+	});
+}
+function GetTime(time){
+	var date=new Date(time).getTime();
+	
+	return date;
+};
+
+
+var negoItem;
+function add(id){
+	negoItem = {
+		'id': id,
+		'isAccept': '1',
+		'type': 0, //已超时
+		//'replyDate':endDate,
+	}
+	
+	
+	$.ajax({ //修改谈判明细
+		url: updateNegotiatorItem,
+		type: 'post',
+		async: true,
+		dataType: 'json',
+		data: negoItem,
+		success: function(data) {
+			if(data.success) {
+				$('#SupplierNegotiator').bootstrapTable('refresh', {url: searchUrl});
+			} else {
+				
+			}
+		}
+	});
+}

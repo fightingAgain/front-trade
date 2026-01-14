@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="pragma" content="no-cache"><!-- 禁止浏览器从本地计算机的缓存中访问页面内容 --> 
+		<meta http-equiv="cache-control" content="no-cache"><!-- 用于指定请求和响应遵循的缓存机制 --> 
+		<meta http-equiv="expires" content="0"><!-- 用于设定网页的到期时间，一旦网页过期，必须到服务器上重新传输； -->
+		<title>质疑查看页面</title>
+		<link rel="stylesheet" href="../../../../media/js/bootstrap/css/bootstrap.css" />
+		<link rel="stylesheet" type="text/css" href="../../../../media/js/bootstrap/css/bootstrap-table.css">
+	</head>
+	<style type="text/css">
+		.table_list{
+			/*border: 2px solid #ddd   ;*/
+		}
+		pre{
+		    display: block;
+		    padding: 10px;
+		    margin: 0px;
+		    font-size: 14px;
+		    line-height: 1.42857143;
+		    color: #555;
+		    word-break: break-all;
+		    word-wrap: break-word;
+		    background-color:#fff;
+		    border: none;
+		    border-radius: 0px;
+		}
+		.fixed-table-container{
+			border: none;
+		}
+	</style>
+
+	<body>
+		<div name="form" style="width: 99%;padding-left: 10px;padding-top: 10px;margin-bottom: 60px;">
+			<table class="table table-bordered" style="width:99%;margin-left:3px;margin-top: 10px;">	
+				<tr>
+					<td class="th_bg" >提问内容</td>
+					<td colspan="3">
+						<pre id="askContent"></pre>
+					</td>
+				</tr>
+				<tr>
+					<td class="th_bg" >提问附件</td>
+					<td colspan="3">
+						<table class="table table-bordered" id="askFlie">
+							
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td class="th_bg" >答复内容</td>
+					<td colspan="3">
+						<pre id="answerContent"></pre>
+					</td>
+				</tr>
+				<tr>
+					<td class="th_bg">
+						答复附件
+					</td>
+					<td colspan="3">
+						<table class="table table-bordered" id="answerFlie">
+							
+						</table>
+					</td>
+				</tr>		        
+			</table>
+		</div>
+
+		<div style="width: 100%;height: 50px;text-align:center;position: fixed;bottom: 0;background-color: #FFFFFF;">
+			<button type="button" class="btn btn-default" id="btnClose"><span class="glyphicon glyphicon-remove"></span>关闭</button>
+		</div>
+		<form id="form"></form>
+		<script type="text/javascript" src="../../../../media/js/jquery/jquery.js"></script>
+		<script type="text/javascript" src="../../../../media/js/jquery/jquery.extend.js"></script>
+		<script type="text/javascript" src="../../../../media/js/base/common.js"></script>
+		<script type="text/javascript" src="../../../../media/js/base/util.js"></script>
+		<script type="text/javascript" src="../../../../media/js/bootstrap/js/bootstrap.js"></script>
+		<script type="text/javascript" src="../../../../media/js/bootstrap/js/bootstrap-table.min.js"></script>
+		<script type="text/javascript" src="../../../../media/js/bootstrap/js/bootstrap-table-zh-CN.min.js"></script>
+		<script type="text/javascript" src="../../../../media/js/layer/layer.js"></script>
+		<script type="text/javascript" src="../js/answerView.js"></script>
+	</body>
+
+</html>

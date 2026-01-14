@@ -1,0 +1,264 @@
+<head>
+   <meta http-equiv="pragma" content="no-cache">
+   <!-- 禁止浏览器从本地机的缓存中调阅页面内容 -->
+   <meta http-equiv="cache-control" content="no-cache, must-revalidate">
+   <meta http-equiv="expires" content="0">
+</head>
+
+<!--[if lt IE 9]>
+   <script src="../../../../media/js/html5shiv.min.js"></script>
+   <script src="../../../../media/js/respond.js"></script>
+<![endif]-->
+<link rel="stylesheet" type="text/css" href="../../../../../media/js/layer/mobile/need/layer.css" />
+<link rel="stylesheet" type="text/css" href="../../../../../media/js/bootstrap/css/bootstrap.css" />
+<link rel="stylesheet" type="text/css" href="../../../../../media/js/bootstrap/css/bootstrap-table.min.css"
+   type="text/css" />
+<link rel="stylesheet" type="text/css"
+   href="../../../../../media/js/bootstrap-fileinput-master/css/fileinput.min.css" />
+<form id="form" name="Offer" style="width: 99%;padding-left: 10px;padding-top: 10px;margin-bottom: 200px;">
+   <table class="table table-bordered" style="margin-bottom: 0px;">
+      <tr>
+         <td colspan="4" style="font-weight: bold;" class="active">项目信息</td>
+         <input name="packageId" id="packageId" type="hidden">
+         <input name="projectId" id="projectId" type="hidden">
+         <input type="hidden" name="offerState" id="offerState" />
+         <input type="hidden" name="id" id="id" />
+      </tr>
+      <tr>
+         <td class="th_bg">采购项目名称</td>
+         <td style="text-align: left;width: 32%;">
+            <div id="projectName"></div>
+         </td>
+         <td class="th_bg">采购项目编号</td>
+         <td style="text-align: left;width: 32%;">
+            <div id="projectCode"></div>
+         </td>
+      </tr>
+      <tr>
+         <td class="th_bg">包件名称</td>
+         <td style="text-align: left;">
+            <div id="packageName"></div>
+         </td>
+         <td class="th_bg">包件编号</td>
+         <td style="text-align: left;">
+            <div id="packageNum"></div>
+         </td>
+      </tr>
+      <tr>
+         <td class="th_bg">采购人名称</td>
+         <td colspan="3" style="text-align: left;">
+            <div id="purchaserName"></div>
+         </td>
+      </tr>
+      <tr class="purchaserShow" style="display: none;">
+         <td class="th_bg">联系人</td>
+         <td style="text-align: left;">
+            <div id="purchaserLinkmen"></div>
+         </td>
+         <td class="th_bg">联系人电话</td>
+         <td style="text-align: left;">
+            <div id="purchaserTel"></div>
+         </td>
+      </tr>
+      <tr>
+         <td class="th_bg">报价截止日期</td>
+         <td style="text-align: left;">
+            <div id="offerEndDate"></div>
+         </td>
+         <td class="th_bg">确认回执单</td>
+         <td style="text-align: left;">
+            <button id="btnShowFile" type="button" class="btn btn-sm btn-primary receipt">
+               <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span> 预览
+            </button>
+            <button id="btnDownLoad" type="button" class="btn btn-sm btn-primary receipt">
+               <span class="glyphicon glyphicon-arrow-down" aria-hidden="true"></span> 下载
+            </button>
+         </td>
+      </tr>
+      <tr>
+         <td class="th_bg">供应商名称</td>
+         <td colspan="3" style="text-align: left;">
+            <div id="enterpriseName"></div>
+         </td>
+      </tr>
+      <tr>
+         <td class="th_bg">投标人代表<i class="red">*</i></td>
+         <td>
+            <input type="text" name="bidderProxy" class="form-control bidderProxy" style="margin-bottom: 10px;" />
+            <span class="red">温馨提示：响应文件中有《授权委托书》的，投标人代表填写委托代理人姓名；响应文件中无《授权委托书》的，投标人代表填写法定代表人姓名。填写姓名需与响应文件中保持一致。</span>
+         </td>
+         <td class="th_bg">投标人代表证件号码<i class="red">*</i></td>
+         <td>
+            <div class="dropdown-input-group input-group">
+               <div class="input-group-btn">
+
+                  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"
+                     aria-haspopup="true" aria-expanded="false">
+                     <input style="display: none;" type="text" name="bidderProxyCardType" id="bidderProxyCardType"
+                        value="1">
+                     <span class="input-group-label">身份证</span>
+                     <span class="caret"></span></button>
+                  <ul class="dropdown-menu">
+                     <li data-value="0"><a href="javascript:void 0;">身份证</a></li>
+                     <li data-value="1"><a href="javascript:void 0;">护照</a></li>
+                  </ul>
+               </div>
+               <input type="text" name="bidderProxyCard" id="bidderProxyCard" maxlength="18" class="form-control">
+            </div>
+         </td>
+      </tr>
+      <tr>
+         <td class="th_bg">项目负责人<i class="red">*</i></td>
+         <td>
+            <input type="text" name="projectLeader" class="form-control" style="margin-bottom: 10px;" />
+            <span class="red">温馨提示：项目负责人填写响应文件中“项目负责人/项目经理/总监理工程师”姓名。填写姓名需与响应文件中保持一致。</span>
+         </td>
+         <td class="th_bg">项目负责人证件号码<i class="red">*</i></td>
+         <td>
+            <div class="dropdown-input-group input-group">
+               <div class="input-group-btn">
+                  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"
+                     aria-haspopup="true" aria-expanded="false">
+                     <input style="display: none;" type="text" name="projectLeaderCardType" id="projectLeaderCardType"
+                        value="0">
+                     <span class="input-group-label">身份证</span>
+                     <span class="caret"></span></button>
+                  <ul class="dropdown-menu">
+                     <li data-value="0"><a href="javascript:void 0;">身份证</a></li>
+                     <li data-value="1"><a href="javascript:void 0;">护照</a></li>
+                  </ul>
+               </div>
+               <input type="text" name="projectLeaderCard" id="projectLeaderCard" class="form-control" maxlength="18">
+            </div>
+         </td>
+      </tr>
+   </table>
+   <div class="encipher-hide" id="offerForm"></div>
+   <table class="table table-bordered encipher-hide" style="margin-bottom: 0px;">
+      <tbody id="fileHtml"></tbody>
+   </table>
+   <div class="encipher-hide" id="offerFileList"></div>
+   <table class="table table-bordered encipher-show" style="margin-bottom: 0px;">
+      <tr>
+         <td colspan="4" style="font-weight: bold;" class="active">响应文件</td>
+      </tr>
+      <tr>
+         <td colspan="4"><span class="red"
+               style="font-size: 16px;">温馨提示:为保证响应文件递交成功，请至少在截止时间前2分钟上传文件，响应文件递交情况，以收到回执单为准!</span></td>
+      </tr>
+      <tr>
+         <td class="th_bg">上传响应文件<span class="red">*</span></td>
+         <td colspan="3">
+            <p class="red">温馨提示：请上传使用投标客户端编制的xywj格式响应文件（200M以内）</p>
+            <div class="uploaButton" style="display: none;">
+               <input type="file" class="fileloading" multiple name="files" accept=".xywj" id="responseFile" />
+            </div>
+            <table class="table table-bordered table-striped" id="responseFileTable"></table>
+         </td>
+      </tr>
+      <tr>
+         <td class="th_bg">其它附件</td>
+         <td colspan="3">
+            <p class="red">温馨提示：由于投标客户端加密仅支持200M以内的文件加密，如文件大于200M，可在此处补充上传，并按采购文件要求提供声明（若有）。<span
+                  style="font-weight:bold;">此处上传文件不得包含价格等敏感核心内容。</span></p>
+            <p class="red">请按每行报价文件目录中的模板分别上传对应文件。</p>
+            <div>
+               <table id="encipherOfferFileList" class="table table-bordered"></table>
+            </div>
+         </td>
+      </tr>
+      <tr>
+         <td class="th_bg">递交时间</td>
+         <td>
+            <span id="subDate">-</span>
+         </td>
+         <td class="th_bg">校验码</td>
+         <td>
+            <span id="md5Code">-</span>
+         </td>
+      </tr>
+   </table>
+   <table class="table table-bordered" style="margin-bottom: 0px;">
+      <tr class="active manifestShow encipher-hide" style="display: none;">
+         <th colspan="4">已报价工程量清单<span class="red"
+               style="font-size: 14px;font-weight: normal;">（注：只能上传xml、hbtb、hbkj、cos文件）</span></th>
+      </tr>
+      <tr class="manifestShow encipher-hide" style="display: none;">
+         <td colspan="4">
+            <div class="uploaButton" style="display: none;">
+               <input type="file" class="fileloading" multiple name="files" accept=".xml,.hbtb,.hbkj,.cos"
+                  id="priceFileName" />
+            </div>
+            <table class="table table-bordered table-striped" id="manifestTable">
+            </table>
+         </td>
+      </tr>
+      <tr class="active">
+         <th colspan="4">报价记录</th>
+      </tr>
+      <tr>
+         <td colspan="4" align="left">
+            <table class="table table-bordered table-striped" id="historyTable">
+            </table>
+         </td>
+      </tr>
+      <tr class="active encipher-hide">
+         <th colspan="4">确认操作记录</th>
+      </tr>
+      <tr class="encipher-hide">
+         <td colspan="4" align="left">
+            <table class="table table-bordered table-striped" id="qureyHistoryTable">
+            </table>
+         </td>
+      </tr>
+   </table>
+   <div id="formFile"></div>
+   <div id="btnFiles"
+      style="width: 100%;height: 50px;text-align:center;position: fixed;bottom: 0;background-color: #FFFFFF;z-index: 1000;">
+      <button type="button" id="btn_bao" class="btn btn-default" style="display: none;">保存</button>
+      <button type="button" id="btn_sign" class="btn btn-danger" style="display: none;">响应文件确认</button>
+      <button type="button" id="btn_submit" class="btn btn-primary" style="display: none;">递交</button>
+      <button type="button" id="btn_reset" class="btn btn-warning" style="display: none;">撤回</button>
+      <button type="button" id="btn_close" class="btn btn-default">取消</button>
+   </div>
+
+</form>
+<table id="tableExcel" style="visibility: hidden;"></table>
+<style>
+   .fileinput-button {
+      position: relative;
+      display: inline-block;
+      overflow: hidden;
+   }
+
+   .fileinput-button input {
+      position: absolute;
+      right: 0px;
+      top: 0px;
+      opacity: 0;
+      -ms-filter: 'alpha(opacity=0)';
+      font-size: 200px;
+   }
+</style>
+<script type="text/javascript" src="../../../../../media/js/jquery/jquery.js"></script>
+<script type="text/javascript" src="../../../../../media/js/base/util.js"></script>
+<script type="text/javascript" src="../../../../../media/js/jquery/jquery.ajax.js"></script>
+<script type="text/javascript" src="../../../../../media/js/jquery/jquery.params.js"></script>
+<script type="text/javascript" src="../../../../../media/js/base/common.js"></script>
+<script type="text/javascript" src="../../../../../media/js/bootstrap/js/bootstrap.js"></script>
+<script type="text/javascript" src="../../../../../media/js/layer/layer.js"></script>
+<script type="text/javascript" src="../../../../../media/js/xlsx.full.min.js"></script>
+<script type="text/javascript" src="../../../../../media/js/bootstrap-fileinput-master/js/fileinput.js"></script>
+<script type="text/javascript" src="../../../../../media/js/bootstrap-fileinput-master/js/locales/zh.js"></script>
+<script type="text/javascript" src="../../../../../media/js/bootstrap/js/bootstrap-table.min.js"></script>
+<script type="text/javascript" src="../../../../../media/js/bootstrap/js/bootstrap-table-zh-CN.min.js"></script>
+<script type="text/javascript" src="../../../../../media/js/base/base64js.min.js?verson=1.01"></script>
+<script type="text/javascript" src="../../../../../media/js/Model/public.js"></script>
+<script type="text/javascript" src="../../../../../media/js/base/md5.js"></script>
+<script type="text/javascript" src="../../../../../media/js/ca.js"></script>
+<script type="text/javascript" src="../../../../currencyControl/js/offerForm.js"></script>
+<script type="text/javascript" src="../../../../currencyControl/js/offerFileList.js"></script>
+<script type="text/javascript" src="../../../../currencyControl/js/subitemFile.js"></script>
+
+<script type="text/javascript" src="../js/operation.js"></script>
+<script type="text/javascript" src="../js/purchaseCaOffer.js"></script>

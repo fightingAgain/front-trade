@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>竞卖审核详情</title>
+		<link rel="stylesheet" href="../../../../../media/js/layer/theme/default/layer.css">
+<link rel="stylesheet" href="../../../../../media/js/layer/theme/default/laydate.css">
+		<link rel="stylesheet" href="../../../../../media/js/bootstrap/css/bootstrap.min.css">
+		<link rel="stylesheet" href="../../../../../media/js/bootstrap/css/bootstrap-table.min.css" />
+	</head>
+
+	<body style="width: 99%;padding-left: 10px;padding-top: 10px;">
+		<table class="table table-bordered " style="margin-bottom: 0px;">
+			<th colspan="4" class="active">项目信息</th>
+			<tr>
+				<td class="text-right">采购项目名称：</td>
+				<td>
+					<div id="projectName"></div>
+				</td>
+				<td class="text-right">采购项目编号：</td>
+				<td>
+					<div id="projectCode"></div>
+				</td>
+			</tr>
+
+			<tr>
+				<td colspan="4" class="active">竞卖时间</td>
+			</tr>
+			<tr>
+				<td class="text-right">竞卖开始时间：</td>
+				<td>
+					<div id="auctionStartDate"></div>
+				</td>
+				<td class="text-right">竞卖结束时间：</td>
+				<td>
+					<div id="auctionDateEnd"></div>
+				</td>
+			</tr>
+		</table>
+		<div class="bottom-btn" style="z-index: 11000;">
+			<button type="button" class="btn btn-default" id="btn_close"><span class="glyphicon glyphicon-remove"></span>关闭</button>
+		</div>
+		<style>
+			.table>thead>tr>th,
+			.table>tbody>tr>th,
+			.table>tfoot>tr>th,
+			.table>thead>tr>td,
+			.table>tbody>tr>td,
+			.table>tfoot>tr>td {
+				vertical-align: middle !important;
+			}
+		</style>
+		<script type="text/javascript" src="../../../../../media/js/jquery/jquery.min.js"></script>
+		<script type="text/javascript" src="../../../../../media/js/bootstrap/js/bootstrap.js"></script>
+		<script type="text/javascript" src="../../../../../media/js/bootstrap/js/bootstrap-table.min.js"></script>
+		<script type="text/javascript" src="../../../../../media/js/bootstrap/js/bootstrap-table-zh-CN.min.js"></script>
+		<script type="text/javascript" src="../../../../../media/js/jquery/jquery.extend.js"></script>
+		<script type="text/javascript" src="../../../../../media/js/base/common.js"></script>
+		<script src="../js/SaleTimeList.js" type="text/javascript" charset="utf-8"></script>
+
+	</body>
+
+</html>

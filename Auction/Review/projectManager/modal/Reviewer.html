@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="pragma" content="no-cache">
+		<!-- 禁止浏览器从本地机的缓存中调阅页面内容 -->
+		<meta http-equiv="cache-control" content="no-cache, must-revalidate">
+		<meta http-equiv="expires" content="0">
+		<title>评审报告审核人</title>
+		<link rel="stylesheet" type="text/css" href="../../../../media/js/bootstrap/css/bootstrap.css">
+		<link rel="stylesheet" type="text/css" href="../../../../media/js/bootstrap/css/bootstrap-table.css">
+	</head>
+	<style type="text/css">
+		.container-fluid {
+			margin-left:initial;
+		}
+	</style>
+	<body>
+		<div class="container-fluid" style="padding-left: 10px;width: 99%;">
+			<div id="toolbar">
+				<div class="form-group" style="margin-top:10px">
+					<div class="input-group" style="width:180px;float: left;padding-left: 10px;">
+						<span class="input-group-addon">用户姓名</span>
+						<input type="text" class="form-control" id="name" style="width: 200px;">
+					</div>
+					
+						<div class="input-group" style="width:180px;float: left;padding-left: 10px;">
+						<span class="input-group-addon">登录账号</span>
+						<input type="text" class="form-control" id="code" style="width: 200px;">
+					</div>
+					<div class="btn-group" style="padding-left:10px;">
+						<button type="button" style="margin-left:50px" id="btnQuery" class="btn btn-primary">
+							<span class="" aria-hidden="true"></span>查询
+						 </button>
+						<button id="SbmReviewer" type="button" class="btn btn-primary">
+							<span class="" aria-hidden="true"></span>确定
+						</button>
+					</div>
+					
+				</div>	 
+			</div>
+			<table id="Reviewertable" class=""></table>
+		</div>
+	</body>
+	<script type="text/javascript" src="../../../../media/js/jquery/jquery.js"></script>
+	<script type="text/javascript" src="../../../../media/js/jquery/jquery.ajax.js"></script>
+	<script type="text/javascript" src="../../../../media/js/bootstrap/js/bootstrap.js"></script>
+	<script type="text/javascript" src="../../../../media/js/bootstrap/js/bootstrap-table.min.js"></script>
+	<script type="text/javascript" src="../../../../media/js/bootstrap/js/bootstrap-table-zh-CN.min.js"></script>
+	<script type="text/javascript" src="../js/Reviewer.js"></script>
+	</body>
+
+</html>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>询比采购结果公示（供应商）</title>
+	</head>
+    <style>
+	 .table > thead > tr > th, 
+	 .table > tbody > tr > th, 
+	 .table > tfoot > tr > th, 
+	 .table > thead > tr > td, 
+	 .table > tbody > tr > td, 
+	 .table > tfoot > tr > td{
+	 	vertical-align: middle;
+	 }
+  </style>
+	<body>
+
+		<div class="container-fluid">
+
+			<div id="toolbar">
+				<div class="input-group" style="width:150px;float: left;margin-right: 10px;">
+					<span class="input-group-addon">项目名称</span>
+					<input type="text" class="form-control" name="projectName" id="projectName" style="width:180px">
+				</div>
+				
+				<div class="input-group" style="width:150px;float: left;margin-right: 10px;">
+					<span class="input-group-addon">项目编号</span>
+					<input type="text" class="form-control" name="projectCode" id="projectCode" style="width:180px">
+				</div>
+
+				<div class="input-group" style="width:150px;float: left;margin-right: 10px;">
+					<span class="input-group-addon">包件名称</span>
+					<input type="text" class="form-control" name="packageName" id="packageName" style="width:180px">
+				</div>
+
+				<div class="btn-group" style="padding-left:10px ;">
+
+					<button type="button" id="btnSearch" class="btn btn-primary">
+		                <span class="glyphicon glyphicon-search" aria-hidden="true"></span> 查 询
+		            </button>
+
+				</div>
+			</div>
+
+			<table id="BidNoticeSupplierList" class="" data-toolbar="#toolbar"></table>
+
+		</div>
+
+		<script src="Auction/common/Supplier/BidNotice/js/BidNoticeSupplierList.js"></script>
+	</body>
+
+</html>

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8">
+	<meta http-equiv="pragma" content="no-cache"><!-- 禁止浏览器从本地计算机的缓存中访问页面内容 --> 
+	<meta http-equiv="cache-control" content="no-cache"><!-- 用于指定请求和响应遵循的缓存机制 --> 
+	<meta http-equiv="expires" content="0"><!-- 用于设定网页的到期时间，一旦网页过期，必须到服务器上重新传输； -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>开标设置</title>
+    <style>
+    	.icon{
+    		margin-right: 3px;
+    	}
+    </style>
+</head>
+
+<body>
+	<form class="pageModel" id="formBidConfig" name="formBidConfig">
+		<input type="hidden" name="id" id="id" />
+		<input type="hidden" name="enterpriseId" id="enterpriseId" />
+        <table class="table table-bordered ">
+        	<tr>
+				<td  style="vertical-align: middle;border-right: 0px;background-color: #d3e5fc !important;box-shadow: 5px 0px 0px #59abf0 inset;">
+					<i class="glyphicon glyphicon-book" style="font-size: 18px;color: #95a4ad;margin-left: 15px;"></i>
+					<font size="4" style="color: #222222 !important;font-weight: 800;">开标设置</font>
+				</td>
+				<td colspan="3" style="width:300px; border-left: 0px;text-align: right;padding-right: 15px;background-color: #d3e5fc !important;" class="active">
+					<button id="btnSave" type="button" class="btn btn-sm btn-primary">
+			            <span class="glyphicon glyphicon-ok" aria-hidden="true"></span> 保存
+			        </button>
+				</td>
+			</tr>
+            <tr>
+                <td class="th_bg">解密总时长（分）<i class="red">*</i></td>
+                <td>
+                    <input type="text" name="decryptTotalTime" id="decryptTotalTime" class="form-control" datatype="num" errormsg="请输入解密总时长（秒）" style="width: 300px;" />
+                </td>
+                <td class="th_bg">签名总时长（分）<i class="red">*</i></td>
+                <td>
+                    <input type="text" name="signTime" id="signTime" class="form-control" datatype="num" errormsg="请输入签名总时长（秒）" style="width: 300px;" />
+                </td>
+            </tr>
+            <tr>
+                <td class="th_bg">开标执行方式<i class="red">*</i></td>
+                <td colspan="3">
+                	<select  name="openExecuteType" id="openExecuteType" class="form-control" id="drawingType" style="width: 300px;" >
+	            		<option value="1">自动下达开标指令</option>
+	            		<option value="2">手动下达开标指令</option>
+	            	</select>
+                </td>
+            </tr>
+        </table>
+    </form>
+    <script src="OpenTender/config/js/bidConfigInfo.js"></script>
+    
+</body>
+
+</html>

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8">
+		<meta http-equiv="pragma" content="no-cache"><!-- 禁止浏览器从本地计算机的缓存中访问页面内容 --> 
+		<meta http-equiv="cache-control" content="no-cache"><!-- 用于指定请求和响应遵循的缓存机制 --> 
+		<meta http-equiv="expires" content="0"><!-- 用于设定网页的到期时间，一旦网页过期，必须到服务器上重新传输； -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>添加评标报告</title>
+    <link rel="stylesheet" href="../../../media/js/layer/mobile/need/layer.css" />
+    <link rel="stylesheet" href="../../../media/js/bootstrap/css/bootstrap.css" />
+    <link rel="stylesheet" href="../../../media/js/bootstrap/css/bootstrap-table.css">
+	<style>
+		html,body { height: 100%;width: 100%;}
+		.input-group{
+			margin:10px 20px 5px;
+		}
+	</style>
+</head>
+
+<body>
+    <form class="pageModel" id="formName" name="formName">
+		<div class="input-group">
+			<span class="input-group-addon" style="width:110px">平台</span>
+			<select id="sysType"  class="form-control" style="width:340px;margin-right: 5px;">
+				<option value="DF">东风</option>
+				<option value="XY">襄阳</option>
+				<option value="BD">保定</option>
+				<option value="CA">长安</option>
+			</select>
+		</div>
+		<div class="input-group">
+			<span class="input-group-addon" style="width:110px">是否公共资源</span>
+			<select id="isPublicProject"  class="form-control" style="width:80px">
+				<option value="0">否</option>
+				<option value="1">是</option>
+			</select>
+		</div>
+		<div class="input-group">
+			<span class="input-group-addon" style="width:110px">评审会</span>
+			<select id="examType"  class="form-control" style="width:340px;margin-right: 5px;">
+				<option value="2">评标会</option>
+				<option value="1">资格预审会</option>
+			</select>
+		</div>
+		<div class="input-group">
+			<span class="input-group-addon" style="width:110px">招标项目类型</span>
+			<input type="text" class="form-control" id="tenderProjectType" style="width:340px;">
+		</div>
+		<div class="input-group">
+			<span class="input-group-addon" style="width:110px">专业类型</span>
+			<input type="text" class="form-control" id="tenderProjectClassifyCode" style="width:340px;">
+		</div>
+		<div class="input-group">
+			<span class="input-group-addon" style="width:110px">评标办法值</span>
+			<input class="form-control" id="checkType" style="width:340px;">
+		</div>
+		<div class="input-group">
+			<span class="input-group-addon" style="width:110px">评标办法</span>
+			<input type="hidden" id="checkTypeCode" />
+			<span class="form-control" id="checkTypeItemName" style="width:340px;"></span>
+		</div>
+		<div class="input-group">
+			<span class="input-group-addon" style="width:110px">评标办法名称</span>
+			<input class="form-control" id="checkTypeName" style="width:340px;">
+		</div>
+		<div class="input-group">
+			<span class="input-group-addon" style="width:110px">评标办法详情</span>
+			<input class="form-control" id="checkTypeDesc" style="width:340px;">
+		</div>
+    </form>
+	<div class="bottom-btn">
+		<button type="button" class="btn btn-primary" id="btnSubmit"><span class="glyphicon glyphicon-saved"></span>保存</button>
+		<button type="button" class="btn btn-default" id="btnClose"><span class="glyphicon glyphicon-remove"></span>取消</button>
+	</div>
+    <script type="text/javascript" src="../../../media/js/jquery/jquery.js"></script>
+    <script type="text/javascript" src="../../../media/js/jquery/jquery.extend.js"></script>
+    <script type="text/javascript" src="../../../media/js/base/common.js"></script>
+    <script type="text/javascript" src="../../../media/js/bootstrap/js/bootstrap.js"></script>
+    <script type="text/javascript" src="../../../media/js/layer/layer.js"></script>
+    <script type="text/javascript" src="../js/addCheckTypeInfo.js"></script>
+</body>
+
+</html>

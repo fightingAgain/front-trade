@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="pragma" content="no-cache"><!-- 禁止浏览器从本地计算机的缓存中访问页面内容 --> 
+		<meta http-equiv="cache-control" content="no-cache"><!-- 用于指定请求和响应遵循的缓存机制 --> 
+		<meta http-equiv="expires" content="0"><!-- 用于设定网页的到期时间，一旦网页过期，必须到服务器上重新传输； -->
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta http-equiv="X-UA-Compatible" content="ie=edge">
+		<title>项目编辑</title>
+		<link rel="stylesheet" href="../../../../media/js/layer/mobile/need/layer.css" />
+		<!--<link rel="stylesheet" type="text/css" href="../../../../media/js/bootstrap-fileinput-master/css/fileinput.css" />-->
+		<link rel="stylesheet" href="../../../../media/js/stream/css/stream-v1.css" />
+		<link rel="stylesheet" href="../../../../media/js/bootstrap/css/bootstrap.css" />
+		<link rel="stylesheet" href="../../../../media/js/bootstrap/css/bootstrap-table.css">
+		<style>
+			html,body { height: 100%;width: 100%;}
+			.readonly{
+				border: none;
+			    background: none !important;
+			    outline: none !important;
+			    box-shadow: none !important;
+			}
+			/*.file-input .kv-upload-progress{
+				display: none !important;
+			}*/
+			tr .file-input{
+				display: inline-block;
+				float: right;
+				margin-right: 50px;
+			}
+		</style>
+	</head>
+
+	<body>
+		<form class="pageModel" id="formName" name="formName">
+			<table class="table table-bordered">
+				<tr>
+					<td colspan="4" style="font-weight: bold;" class="active">项目信息</td>
+				</tr>
+				<tr>
+					<td class="th_bg">项目编号</td>
+					<td colspan="4">
+						<input type="text" name="projectCode" id="projectCode" class="form-control readonly" />
+					</td>
+				</tr>
+				<tr>
+					<!-- <td class="th_bg">项目法人<i class="red">*</i></td>
+                <td>
+                    <input type="text" name="legalPerson" class="form-control" datatype="*" errormsg="请正确输入项目法人" />
+                </td>-->
+					<td class="th_bg">项目名称<i class="red">*</i></td>
+					<td colspan="4">
+						<input type="text" name="projectName" id="projectName" class="form-control" datatype="*" errormsg="请正确输入项目名称" />
+						<input type="hidden" name="projectId" id="projectId" />
+					</td>
+				</tr>
+				<tr>
+					<!--<td class="th_bg">项目行业分类<i class="red">*</i></td>
+					<td>
+						<select class="form-control" name="industriesType" style="width: 180px;">
+							<option value="A01">农业</option>
+						</select>
+					</td>-->
+					<td class="th_bg">项目类别<i class="red">*</i></td>
+	                <td>
+	                	<select name="relateCode" id="relateCode" class="form-control" style="width: 180px;" selectName="relateCode">
+	                		<option value="0">无</option>
+	                		<option value="1">固定资产类项目</option>
+	                	</select>
+	                </td>
+					<td class="th_bg">项目所在行政区域<i class="red">*</i></td>
+					<td>
+						<div id="areaBlock"></div>
+					</td>
+				</tr>
+				<tr>
+					<!--<td class="th_bg">项目交易分类<i class="red">*</i></td>
+                <td>
+                	<select class="form-control" name="" style="width: 180px;"></select>
+                </td>-->
+                	<td class="th_bg">资金来源<i class="red">*</i></td>
+					<td>
+						<select name="fundSource" id="fundSource" class="form-control select" style="width: 180px;" selectName="fundSource" datatype="*" errormsg="请选择资金来源">
+						</select>
+					</td>
+					<td class="th_bg">招标人<i class="red">*</i></td>
+					<td>
+						<!--<select class="form-control" name="" style="width: 180px;"></select>-->
+						<input type="text" name="enterpriseName" id="enterpriseName" class="form-control" datatype="*" errormsg="请正确输入招标人" style="display: inline-block;" readonly="readonly" />
+						<input type="hidden" name="legalPerson" />
+					</td>
+					
+				</tr>
+				<tr>
+					<td class="th_bg">联系方式<i class="red">*</i></td>
+					<td>
+						<input type="text" name="contactInformation" datatype="phone" errormsg="请正确输入联系电话" class="form-control" />
+					</td>
+					<td class="th_bg">联系人<i class="red">*</i></td>
+					<td>
+						<input type="text" name="contactor" datatype="*" errormsg="请正确输入联系人" class="form-control" />
+					</td>
+				</tr>
+				<!-- <tr>
+                <td class="th_bg">是否存在投资项目统一代码</td>
+                <td>
+                   <label><input type="radio" name="relateCode" value="0" checked="checked">是</label>
+                    <label><input type="radio" name="relateCode" value="1">否</label>
+                </td>
+                <td class="th_bg">投资项目统一代码</td>
+                <td>
+                    <input type="text" name="contactInformation" class="form-control" />
+                </td>
+			</tr>-->
+
+				<!-- <tr>
+             	<td class="th_bg">行政监督部门<i class="red">*</i></td>
+                <td colspan="3">
+                	<select name="" id="" class="form-control" style="width: 300px;"></select>
+                	<input type="text" readonly="readonly" class="form-control" style="width: 300px; display: inline-block; margin-right: 5px;" /><button type="button" class="btn btn-primary">选择</button>
+                </td>
+            </tr>-->
+            <tr>
+                <td class="th_bg">项目行业分类<i class="red">*</i></td>
+                <td colspan="3">
+                    <!--<select class="form-control" id="industriesType" name="industriesType" style="width: 180px;">
+                    	<option value="A01">农业</option>
+                    </select>-->
+                    <div class="proIndustriesType"></div>
+                </td>
+            </tr>
+				<tr>
+					<td class="th_bg">项目地址<i class="red">*</i></td>
+					<td colspan="3">
+						<input type="text" name="address" class="form-control" datatype="*" errormsg="请正确输入项目地址" />
+					</td>
+				</tr>
+				<tr>
+					<td class="th_bg">出资比例<i class="red">*</i></td>
+					<td colspan="3">
+						<textarea class="form-control" rows="2" name="contributionScale"></textarea>
+					</td>
+				</tr>
+				<tr>
+					<td class="th_bg">项目规模<i class="red">*</i></td>
+					<td colspan="3">
+						<textarea class="form-control" rows="10" name="projectScale"></textarea>
+					</td>
+				</tr>
+				<tr>
+					<td colspan="4" style="font-weight: bold;" class="active">代理机构信息</td>
+				</tr>
+				<!--<tr>
+	        	<td class="th_bg">代理机构名称<i class="red">*</i></td>
+                <td colspan="3">
+                	<input type="text" name="xmyz" datatype="*" errormsg="请输入项目业主" class="form-control"/>
+                </td>
+	        </tr>-->
+				<tr>
+					<td class="th_bg">代理机构<i class="red">*</i></td>
+					<td colspan="3">
+						<input type="text" name="agencyEnterprisName" datatype="*" errormsg="请选择代理机构" class="form-control" style="display: inline-block;width: 80%;" readonly="readonly" />
+						<input type="hidden" name="agencyEnterprisId" />
+						<button type="button" class="btn btn-primary" id="btnTender">选择代理机构</button>
+					</td>
+				</tr>
+				<tr>
+					<td colspan="4" style="font-weight: bold;" class="active">招标人信息</td>
+				</tr>
+				<tr>
+					<td class="th_bg">项目业主</td>
+					<td colspan="3">
+						<input type="text" name="tenderees[0].projectOwner" class="form-control" />
+					</td>
+				</tr>
+				<tr>
+					<td class="th_bg">招标人<i class="red">*</i></td>
+					<td colspan="3">
+						<input type="text" name="tenderees[0].tendererName" id="mainTenderer" datatype="*" errormsg="请正确输入招标人" class="form-control" style="display: inline-block;" readonly="readonly" />
+						<input type="hidden" name="tenderees[0].tendererType" value="0" />
+						<input type="hidden" name="tenderees[0].tendererEnterprisId" />
+						<input type="hidden" name="tenderees[0].tendererCode" />
+						<input type="hidden" name="tenderees[0].tendererCodeType" />
+						<input type="hidden" name="tenderees[0].legalPerson" />
+						<!--<button type="button" class="btn btn-primary" id="btnTender">选择招标人</button>-->
+					</td>
+				</tr>
+				<tr>
+					<td class="th_bg">联系人<i class="red">*</i></td>
+					<td>
+						<input type="text" name="tenderees[0].agentName" datatype="*" errormsg="请正确输入招标联系人" class="form-control" />
+					</td>
+					<td class="th_bg">联系电话<i class="red">*</i></td>
+					<td>
+						<input type="text" name="tenderees[0].agentTel" datatype="phone" errormsg="请正确输入招标联系电话" class="form-control" />
+					</td>
+				</tr>
+				<!--<tr>
+					<td class="th_bg">法人代表<i class="red">*</i></td>
+					<td>
+						<input type="text" name="tenderees[0].legalPerson" datatype="*" errormsg="请正确输入招标法人代表" class="form-control" style="display: inline-block;" readonly="readonly" />
+					</td>
+					<td class="th_bg">组织机构/信用代码</td>
+					<td><input type="text" name="tenderees[0].zzjg " class="form-control" style="display: inline-block;" readonly="readonly" /></td>
+				</tr>
+				<tr>
+					<td class="th_bg">单位类型</td>
+					<td colspan="3">
+						<select type="text" name="tenderees[0].tendererCodeType" id="tendererCodeType" class="form-control" style="width: 180px;"></select>
+					</td>
+				</tr>-->
+				<tr>
+					<td class="th_bg">招标人地址<i class="red">*</i></td>
+					<td colspan="3">
+						<input type="text" name="tenderees[0].enterpriseAddress" datatype="*" errormsg="请正确输入招标人地址" class="form-control" />
+					</td>
+				</tr>
+				
+				<!--<tr>
+					<td class="th_bg">其他招标人</td>
+					<td colspan="3">
+						<button type="button" class="btn btn-primary" id="btnOtherTender">选择其他招标人</button>
+						<div id="enterpriseBlock"></div>
+					</td>
+				</tr>-->
+				<!--<tr>
+					<td class="th_bg">联系人<i class="red">*</i></td>
+					<td>
+						<input type="text" name="agencyName" datatype="*" errormsg="请正确输入代理机构联系人" class="form-control" />
+					</td>
+					<td class="th_bg">联系电话<i class="red">*</i></td>
+					<td>
+						<input type="text" name="agencyTel" datatype="phone" errormsg="请正确输入代理机构联系电话" class="form-control" />
+					</td>
+				</tr>
+				<tr>
+					<td class="th_bg">法人代表<i class="red">*</i></td>
+					<td>
+						<input type="text" name="agencyLegalPerson" datatype="*" errormsg="请正确输入代理机构法人代表" class="form-control" />
+					</td>
+					<td class="th_bg">代理机构地址<i class="red">*</i></td>
+					<td colspan="3">
+						<input type="text" name="agencyEnterpriseAddress" datatype="*" errormsg="请正确输入代理机构地址" class="form-control" />
+					</td>
+				</tr>-->
+				<tr>
+					<td colspan="4" style="font-weight: bold;" class="active">项目审批（核准/备案）文件</td>
+				</tr>
+				<tr>
+					<td class="th_bg">项目审批文件名</td>
+					<td>
+						<input type="text" name="approvalName" class="form-control" />
+					</td>
+					<td class="th_bg">项目审批文号</td>
+					<td>
+						<input type="text" name="approvalNumber" class="form-control" />
+					</td>
+				</tr>
+				<tr>
+					<td class="th_bg">项目审批单位</td>
+					<td>
+						<input type="text" name="approvalAuthority" class="form-control" />
+					</td>
+					<!--<td class="th_bg">核准/备案部门</td>
+                <td>
+                    <input type="text" name="" class="form-control" />
+                </td>-->
+				</tr>
+				<!--<tr>
+                <td class="th_bg">备注</td>
+                <td colspan="3">
+                    <textarea class="form-control" rows="3" name=""></textarea>
+                </td>
+			</tr>-->
+
+				<!--<tr>
+	            <td colspan="4" style="font-weight: bold;" class="active">项目投资组成</td>
+	        </tr>
+	        <tr>
+             	<td class="th_bg">资金来源<i class="red">*</i></td>
+                <td>
+                	<select name="fundSource" id="fundSource" class="form-control" style="width: 180px;" datatype="*" errormsg="请选择资金来源">
+                	</select>
+                </td>
+            	<td class="th_bg">项目投资总额</td>
+                <td>
+                    <input type="text" name="" id="" class="form-control" style="width: 200px; display: inline-block;" /> 万元
+                </td>
+            </tr>
+            <tr>
+            	<td rowspan="2" class="th_bg">投资构成<i class="red">*</i></td>
+                <td colspan="3">
+                	<span style="margin-left: 26px;">国有资金：</span><input type="text" name="" id="" class="form-control" style="width: 90px; display: inline-block;" /> 万元  &nbsp;&nbsp;<input type="text" name="" id="" class="form-control" style="width: 90px; display: inline-block;" />%
+                
+                    <span style="margin-left: 56px;">私有资金：</span><input type="text" name="" id="" class="form-control" style="width: 90px; display: inline-block;" /> 万元  &nbsp;&nbsp;<input type="text" name="" id="" class="form-control" style="width: 90px; display: inline-block;" />%
+                </td>
+            </tr>
+            <tr>
+             	
+                <td colspan="3">
+                	境内私人投资：<input type="text" name="" id="" class="form-control" style="width: 90px; display: inline-block;" /> 万元  &nbsp;&nbsp;<input type="text" name="" id="" class="form-control" style="width: 90px; display: inline-block;" />%
+                
+                    <span style="width: 100px; margin-left: 30px;">境外私人投资：</span><input type="text" name="" id="" class="form-control" style="width: 90px; display: inline-block;" /> 万元  &nbsp;&nbsp;<input type="text" name="" id="" class="form-control" style="width: 90px; display: inline-block;" />%
+                </td>
+            </tr>-->
+				<tr>
+					<td colspan="4" style="font-weight: bold;" class="active">委托合同/相关附件
+	            	<!--<input  id="update"  type="file" class="file-loading" name="file" multiple/></td>-->
+					<button type="button" class="btn btn-primary" id="fileLoad"   style="float: right;margin-right: 50px;">
+	            		<span class="glyphicon glyphicon-folder-open"></span>选择文件
+	            	</button>
+				</tr>
+				<!--<tr>
+		        	<td colspan="4">
+		        		<div id="i_stream_files_queue"></div>
+		        	</td>
+	        	</tr>-->
+				<tr>
+					<td colspan="4" id="fileContent">
+						<!--<table class="table table-bordered" id="fileList">
+							<thead>
+								<tr>
+									<th style="width: 50px; text-align: center;">序号</th>
+									<th style="width: 80%;">文件名</th>
+									<th>操作</th>
+								</tr>
+							</thead>
+							<tbody>
+
+							</tbody>
+						</table>-->
+					</td>
+				</tr>
+				<!--<tr>
+					<td colspan="4" style="font-weight: bold;" class="active">项目审核</td>
+				</tr>
+				<tr class="employee">
+					<td class="th_bg">添加审核人<i class="red">*</i></td>
+					<td colspan="3">
+						<select id="employeeId" class="form-control" style="width: 200px;" name="checkerId"></select>
+					</td>
+				</tr>-->
+			</table>
+		</form>
+		<div class="bottom-btn">
+			<button type="button" class="btn btn-primary" id="btnSave"><span class="glyphicon glyphicon-ok"></span>保存</button>
+			<button type="button" class="btn btn-primary" id="btnSubmit"><span class="glyphicon glyphicon-saved"></span>委托</button>
+			<button type="button" class="btn btn-default" id="btnClose"><span class="glyphicon glyphicon-remove"></span>关闭</button>
+		</div>
+
+		<script type="text/javascript" src="../../../../media/js/jquery/jquery.js"></script>
+		<script type="text/javascript" src="../../../../media/js/jquery/jquery.extend.js"></script>
+		<!--<script src="../../../../media/js/bootstrap-fileinput-master/js/fileinput.js"></script>-->
+		<script type="text/javascript" src="../../../../media/js/stream/js/stream-v1.js"></script>
+		<script type="text/javascript" src="../../../../media/js/base/util.js"></script>
+		<script type="text/javascript" src="../../../../media/js/base/common.js"></script>
+		<script type="text/javascript" src="../../../../media/js/bootstrap/js/bootstrap.js"></script>
+		<script src="../../../../media/js/bootstrap/js/bootstrap-table.js"></script>
+		<script src="../../../../media/js/bootstrap/js/bootstrap-table-zh-CN.min.js"></script>
+		<script type="text/javascript" src="../../../../media/js/layer/layer.js"></script>
+		
+		
+		<script type="text/javascript" src="../../../../media/js/base/WorkflowInfo.js"></script>
+		<script type="text/javascript" src="../../../../media/js/base/StreamUpload.js"></script>
+		<script type="text/javascript" src="../../../Model/js/dataLinkage.js"></script>
+		<script type="text/javascript" src="../../Model/js/multiLinkage.js"></script>
+		
+		<script type="text/javascript" src="../../../Model/js/public.js"></script>
+		<script type="text/javascript" src="../js/projectEdit.js"></script>
+	</body>
+
+</html>

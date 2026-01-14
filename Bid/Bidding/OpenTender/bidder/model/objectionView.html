@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8">
+		<meta http-equiv="pragma" content="no-cache"><!-- 禁止浏览器从本地计算机的缓存中访问页面内容 --> 
+		<meta http-equiv="cache-control" content="no-cache"><!-- 用于指定请求和响应遵循的缓存机制 --> 
+		<meta http-equiv="expires" content="0"><!-- 用于设定网页的到期时间，一旦网页过期，必须到服务器上重新传输； -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>招标公告</title>
+    <link rel="stylesheet" href="../../../../media/js/layer/mobile/need/layer.css" />
+    <link rel="stylesheet" href="../../../../media/js/bootstrap/css/bootstrap.css" />
+	<style>
+		html,body { height: 100%;width: 100%;}
+		.readonly{
+		    border: none;
+		    background: none !important;
+		    outline: none !important;
+		    box-shadow: none !important;
+		}
+		.pretrial,.revise{
+			display: none;
+		}
+		.enterFull{
+			position: absolute;
+			top: 0;
+			left: 0;
+			background: #ffffff;
+			visibility: visible;
+			filter: Alpha(opacity=90);
+		}
+		.display_none{
+			display: none;
+		}
+		.file-input .kv-upload-progress{
+			display: none !important;
+		}
+		tr .file-input{
+			display: inline-block;
+			float: right;
+			margin-right: 50px;
+		}
+		a,a:link,a:visited,a:hover,a:active{
+			color: #333333;
+			text-decoration: none;
+		}
+		.calendar_icon{
+			color: #3995C8;
+		}
+		.set_height{
+		    display: inline-block;
+			padding: 6px 12px;
+		}  
+	</style>
+</head>
+
+<body>
+    <form class="pageModel" id="addNotice" name="formName">
+        <table class="table table-bordered ">
+        	<tr>
+	            <td colspan="4" style="font-weight: bold;" class="active">基本信息
+	            </td>
+	        </tr>
+	        <tr>
+	        	<td class="th_bg">异议阶段</td>
+                <td colspan="3">
+                	<span class="set_height" id="objectionType"></span>
+                </td>
+	        </tr>
+	        <tr>
+	        	<td class="th_bg">标段名称</td>
+                <td colspan="3">
+                	<span class="set_height" id="bidSectionName"></span>
+                </td>
+	        </tr>
+	        <tr>
+	        	<td class="th_bg">异议标题</td>
+                <td colspan="3">
+                	<span class="set_height" id="objectionTitle"></span>
+                </td>
+	        </tr>
+	        <tr>
+	        	<td class="th_bg">异议内容</td>
+                <td colspan="3">
+                	<span class="set_height" id="objectionContent"></span>
+                </td>
+	        </tr>
+	        <tr>
+	        	<td class="th_bg">项目异议书上传</td>
+                <td colspan="3">
+	            	<div id="fileContent">
+	            		
+	            	</div>
+                </td>
+	        </tr>
+	        <tr>
+	        	<td class="th_bg">联系人</td>
+                <td>
+                	<span class="set_height" id="linkMan"></span>
+                </td>
+                <td class="th_bg">联系人手机号</td>
+                <td>
+                	<span class="set_height" id="linkMobile"></span>
+                </td>
+	        </tr>
+	        <tr class="back_reply">
+	        	<td class="th_bg">异议状态</td>
+                <td colspan="3">
+                	<span class="set_height" id="status"></span>
+                </td>
+	        </tr>
+	        <tr class="back">
+	        	<td class="th_bg">撤回说明</td>
+                <td colspan="3">
+                	<span class="set_height" id="instructions"></span>
+                </td>
+	        </tr>
+	        <tr class="reply">
+	        	<td class="th_bg">答复标题</td>
+                <td colspan="3">
+                	<span class="set_height" id="answersTitle"></span>
+                </td>
+	        </tr>
+	        <tr class="reply">
+	        	<td class="th_bg">答复内容</td>
+                <td colspan="3">
+                	<span class="set_height" id="answersContent"></span>
+                </td>
+	        </tr>
+	        <tr class="reply">
+	        	<td class="th_bg">异议答复函</td>
+                <td colspan="3">
+	            	<div id="replayContent">
+	            		
+	            	</div>
+                </td>
+	        </tr>
+	        <tr class="no_accept">
+	        	<td class="th_bg">不予受理通知书</td>
+                <td colspan="3">
+	            	<div id="noAcceptContent">
+	            		
+	            	</div>
+                </td>
+	        </tr>
+	    </table>
+        <div class="bottom-btn" style="z-index: 11000;">
+            <button type="button" class="btn btn-default" id="btnClose"><span class="glyphicon glyphicon-remove"></span>关闭</button>
+        </div>
+    </form>
+    <script type="text/javascript" src="../../../../media/js/jquery/jquery.js"></script>
+    <script type="text/javascript" src="../../../../media/js/jquery/jquery.extend.js"></script>
+    <script type="text/javascript" src="../../../../media/js/base/util.js"></script>
+    <script type="text/javascript" src="../../../../media/js/base/common.js"></script>
+    <script type="text/javascript" src="../../../../media/js/bootstrap/js/bootstrap.js"></script>
+    <script type="text/javascript" src="../js/StreamUpload.js"></script>
+    <script type="text/javascript" src="../js/public.js"></script>
+    <script type="text/javascript" src="../../../../media/js/base/WorkflowInfoNew.js"></script>
+    <script type="text/javascript" src="../js/objectionView.js"></script>
+</body>
+
+</html>

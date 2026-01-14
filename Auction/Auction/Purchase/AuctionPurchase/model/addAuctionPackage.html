@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="pragma" content="no-cache">
+		<!-- 禁止浏览器从本地机的缓存中调阅页面内容 -->
+		<meta http-equiv="cache-control" content="no-cache, must-revalidate">
+		<meta http-equiv="expires" content="0">
+		<link rel="stylesheet" href="../../../../../media/js/bootstrap/css/bootstrap.css" />
+		 <style>
+	        .fileinput-button {
+	            position: relative;
+	            display: inline-block;
+	            overflow: hidden;
+	        }
+	
+	        .fileinput-button input{
+	            position:absolute;
+	            right: 0px;
+	            top: 0px;
+	            opacity: 0;
+	            -ms-filter: 'alpha(opacity=0)';
+	            font-size: 200px;
+	        }
+	         .table > thead > tr > th, .table > tbody > tr > th, .table > tfoot > tr > th, .table > thead > tr > td, .table > tbody > tr > td, .table > tfoot > tr > td{
+			 	vertical-align: middle;
+			 }
+	    </style>	
+	</head>
+	<body>
+		<form id="formbackage">
+			<div class="container-fluid" style="width: 99%;padding-left: 10px;padding-top: 10px;">
+				<table class="table table-bordered" style=" margin-bottom: 0px;">
+					<tr>
+						<td style="width: 200px;" class="th_bg">包件名称<i class="red">*</i></td>
+						<td  style="text-align: left;">
+							<input type="text" name="packageName" id="packageName" class="form-control" />
+							<input type="hidden" name="auctionType" value="0"/><!--自由竞价-->
+							<input type="hidden" name="auctionModel" value="0" checked="checked" /><!--按包件-->
+							<input type="hidden" name="projectId" id="projectId" />
+							<input type="hidden" name="projectCode" id="projectCode" />
+						</td>
+					</tr>
+					<tr class="searched">
+						<td style="width: 200px;" class="th_bg">包件编号</td>
+						<td style="text-align: left;"><input type="text" name="packageNum" id="packageNum" class="form-control" /></td>
+						
+					</tr>		
+				</table>
+			</div>
+		</form>
+		<div class="bottom-btn" style="z-index: 11000;">
+				<button type="button" class="btn btn-default" id="btn_bao"><span class="glyphicon glyphicon-ok"></span>保存</button>
+				<button type="button" class="btn btn-default" id="btn_close"><span class="glyphicon glyphicon-remove"></span>关闭</button>
+		</div>
+		<script type="text/javascript" src="../../../../../media/js/jquery/jquery.js"></script>
+		<script type="text/javascript" src="../../../../../media/js/jquery/jquery.extend.js"></script>
+		<script type="text/javascript" src="../../../../../media/js/bootstrap/js/bootstrap.js"></script>
+		<script type="text/javascript" src="../../../../../media/js/base/common.js" ></script>
+		<script type="text/javascript" src="../../../../../media/js/layer/layer.js" ></script>
+		<script type="text/javascript" src="../js/addAuctionPackage.js"></script>
+	</body>
+</html>

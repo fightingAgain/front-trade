@@ -1,0 +1,45 @@
+<head>
+	<meta http-equiv="pragma" content="no-cache">
+	<!-- 禁止浏览器从本地机的缓存中调阅页面内容 -->
+	<meta http-equiv="cache-control" content="no-cache, must-revalidate">
+	<meta http-equiv="expires" content="0">
+</head>
+<link rel="stylesheet" href="../../../../../media/js/layer/mobile/need/layer.css" />
+<link rel="stylesheet" href="../../../../../media/js/layer/theme/default/laydate.css" />
+<link rel="stylesheet" href="../../../../../media/js/bootstrap/css/bootstrap.css" />
+<link rel="stylesheet" type="text/css" href="../../../../../media/js/bootstrap-fileinput-master/css/fileinput.min.css" />
+<form  id="form" name="purchase" style="width: 99%;padding-left: 10px;padding-top: 10px;margin-bottom: 0;">
+      <table class="table table-bordered " style="margin-bottom: 0px;">
+        <tr>
+            <td class="th_bg">竞卖项目名称<i class="red">*</i></td>
+            <td colspan="3" style="text-align: left;">
+            	<input type="text" name="project.projectName"  id="projectName" class="form-control"/>
+            	<input type="hidden" name="project.projectState" value="0"  id="projectState" class="form-control"/>
+            	<input type="hidden" name="project.isAgent" value="0"/>
+            	<input name="project.projectSource" type="hidden" value="0" />
+            	<input type="hidden" name="project.tenderType" value="2"/><!--询价采购-->                 
+              <input type="hidden" name="isPublic" value="0" />
+              <input type="hidden" name="projectType" value="0" />
+              <input type="hidden" name="isFile" value="0" />
+              <input type="hidden" name="project.projectType" value="1" />
+            </td>
+        </tr>
+        <tr>
+            <td class="th_bg">竞卖项目编号</td>
+            <td  style="text-align: left;">
+            	<input type="text" name="project.projectCode" id="projectCode" class="form-control"/>
+            </td>          
+        </tr>
+     </table>
+ </form>
+
+ <style>
+ .table > thead > tr > th, .table > tbody > tr > th, .table > tfoot > tr > th, .table > thead > tr > td, .table > tbody > tr > td, .table > tfoot > tr > td{
+ 	vertical-align: middle;
+ }
+ </style>
+ <script type="text/javascript" src="../../../../../media/js/jquery/jquery.js" ></script>
+ <script type="text/javascript" src="../../../../../media/js/jquery/jquery.extend.js"></script>
+ <script type="text/javascript" src="../../../../../media/js/base/common.js" ></script>
+ <script type="text/javascript" src="../../../../../media/js/bootstrap/js/bootstrap.js" ></script>
+ <script type="text/javascript" src="../js/add_model.js" ></script>

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>'Hello, world!' example</title>
+    <style type="text/css">
+        #the-canvas {
+            border:1px solid black; 
+            margin: auto;
+        }
+    </style>
+</head>
+<body>
+    <div id="the-canvas"></div>
+	<script type="text/javascript" src="../../../../media/js/jquery/jquery.js" ></script>
+	<script type="text/javascript" src="../../../../media/js/jquery/jquery.extend.js"></script>
+	<script type="text/javascript" src="../../../../media/js/base/common.js" ></script>
+	<script type="text/javascript" src="../../../../media/js/pdfjs/build/pdf.js"></script>
+   
+</body>
+<script type="text/javascript">
+    function viewPdf(projectIds,packageIds,examTypes){
+    //直接使用官网例子中的文档吧
+        //atob(  后台返回的把文档进行base64编码之后的String  )
+        var _url=$.parserUrlForToken(top.config.bidhost+"/CheckReportController/previewCheckReportPdf.do?projectId="+projectIds+"&packageId="+packageIds+"&examType="+examTypes);
+        var CMAP_URL = '../../../../media/js/pdfjs/web/cmaps/';//自己的pdfjs字库的路径
+        pdfjsLib.GlobalWorkerOptions.workerSrc ='../../../../media/js/pdfjs//build/pdf.worker.js';//自己的路径
+        var loadingTask = pdfjsLib.getDocument({
+           url: _url,
+            cMapUrl: CMAP_URL,
+            cMapPacked: true,
+            disableRange:true,
+        }); 
+        loadingTask.promise.then(function(pdf) {
+            var id = '';
+            var idTemplate = 'cw-pdf-';
+            var pageNum = pdf.numPages;
+            createSeriesCanvas(pageNum, idTemplate)
+            //将pdf渲染到画布上去
+            for (var i = 1; i <= pageNum; i++) {
+                id = idTemplate + i;
+                renderPDF(pdf, i, id);
+            }
+           
+        });
+    }
+    //创建和pdf页数等同的canvas数
+    function createSeriesCanvas(num, template) {
+        var id = '';
+        for (var j = 1; j <= num; j++) {
+            id = template + j;
+            createPdfContainer(id, 'pdfClass');
+        }
+    }
+    //创建
+    function createPdfContainer(id, className) {
+        var pdfContainer = document.getElementById('the-canvas');
+        var canvasNew = document.createElement('canvas');
+        canvasNew.id = id;
+        canvasNew.className = className;
+        pdfContainer.appendChild(canvasNew);
+    };
+    function renderPDF(pdf, i, id){
+        pdf.getPage(i).then(function(page) {
+            var scale = 1.5;
+            var viewport = page.getViewport(scale);
+            var canvas = document.getElementById(id);
+            var context = canvas.getContext('2d');
+            canvas.height = viewport.height;
+            canvas.width = viewport.width;
+            var renderContext = {
+                canvasContext: context,
+                viewport: viewport,
+            };
+            page.render(renderContext);
+        });
+    }
+</script>
+</html>

@@ -1,0 +1,302 @@
+<!-- 网页不会被缓存 -->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	<meta http-equiv="pragma" content="no-cache">
+	<!-- 禁止浏览器从本地机的缓存中调阅页面内容 -->
+	<meta http-equiv="cache-control" content="no-cache, must-revalidate">
+	<meta http-equiv="expires" content="0">
+	<link rel="stylesheet" href="../../../../media/js/layer/mobile/need/layer.css" />
+	<link rel="stylesheet" href="../../../../media/js/layer/theme/default/laydate.css" />
+	<link rel="stylesheet" href="../../../../media/js/bootstrap/css/bootstrap.css" />
+	<link rel="stylesheet" href="../../../../media/js/bootstrap/css/bootstrap-table.min.css" type="text/css" />
+	<link rel="stylesheet" href="../../../../media/js/datetimepicker/css/jquery.datetimepicker.css" type="text/css" />
+	<style type="text/css">
+		label {
+			font-weight: normal;
+		}
+
+		body {
+			font-weight: normal;
+			font-weight: '宋体';
+		}
+
+		pre {
+			/*font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;*/
+			font-size: 14px;
+			line-height: 1.42857143;
+			color: #333;
+			background: #fff;
+			/*border: none;*/
+			white-space: pre-wrap;
+			white-space: -moz-pre-wrap;
+			white-space: -pre-wrap;
+			white-space: -o-pre-wrap;
+			*word-wrap: break-word;
+			*white-space: normal;
+		}
+
+		.table>thead>tr>th,
+		.table>tbody>tr>th,
+		.table>tfoot>tr>th,
+		.table>thead>tr>td,
+		.table>tbody>tr>td,
+		.table>tfoot>tr>td {
+			vertical-align: middle;
+		}
+	</style>
+
+</head>
+
+<body>
+	<form id="formbackage" name="purchase" style="width: 99%;padding-left: 10px;padding-top: 10px;margin-bottom: 60px;">
+		<table class="table table-bordered " style="margin-bottom: 0px;">
+			<tr>
+				<td colspan="4" style="font-weight: bold;border: none;" class="active">项目信息</td>
+			</tr>
+			<tr>
+				<td class="th_bg">标段编号</td>
+				<td style="text-align: left;">
+					<div id="bidSectionCode"></div>
+				</td>
+				<td class="th_bg">标段名称</td>
+				<td style="text-align: left;">
+					<div id="bidSectionName"></div>
+				</td>
+			</tr>
+			<tr>
+				<td class="th_bg">项目类型</td>
+				<td style="text-align: left;">
+					<div id="projectType"></div>
+				</td>
+				<td class="th_bg">项目所属公司</td>
+				<td style="text-align: left;">
+					<div id="enterpriseName"></div>
+				</td>
+			</tr>
+			<tr>
+				<td class="th_bg">市场类型</td>
+				<td>
+					<div id="marketType"></div>
+				</td>
+				<td class="th_bg">项目经理所属处室</td>
+				<td style="text-align: left;">
+					<div id="departmentName"></div>
+				</td>
+			</tr>
+			<tr>
+				<td class="th_bg">项目经理</td>
+				<td style="text-align: left;">
+					<div id="tenderAgencyLinkmen"></div>
+
+				</td>
+				<td class="th_bg">项目归属处室</td>
+				<td style="text-align: left;">
+					<div id="projectDepartmentName"></div>
+				</td>
+			</tr>
+			<tr class="isAgent1">
+				<td class="th_bg">招标人/委托单位</td>
+				<td style="text-align: left;">
+					<div id="purchaserName"></div>
+				</td>
+				<td class="th_bg">采购员/招标人代表</td>
+				<td style="text-align: left;">
+					<div id="purchaserLinkmen"></div>
+				</td>
+			</tr>
+			<tr>
+				<td class="th_bg ">
+					交易平台
+				</td>
+				<td>
+					<div id="tenderDesk"></div>
+				</td>
+				<td class="th_bg ">
+					招标方式
+				</td>
+				<td>
+					<div id="tenderMode"></div>
+				</td>
+			</tr>
+			<tr>
+
+				<td class="th_bg ">
+					评审方法
+				</td>
+				<td colspan="3">
+					<div id="bidCheckType"></div>
+				</td>
+			</tr>
+			<tr>
+				<td class="th_bg ">
+					是否政府采购
+				</td>
+				<td>
+					<div id="publlcProcurement"></div>
+				</td>
+				<td class="th_bg ">
+					项目实施地点
+				</td>
+				<td>
+					<div id="projectImplementAdder"></div>
+				</td>
+			</tr>
+
+			<!-- <tr>
+							<td colspan="4" style="font-weight: bold;border: none;" class="active">时间安排</td> -->
+			<!-- <td class="active" style="text-align: right;border: none;" class="searched">
+								 <input class="btn btn-sm btn-primary ageinBtn" type="button" value="时间重置"/>	
+							 </td> -->
+			<!-- </tr> -->
+			<tr>
+				<td colspan="4" style="font-weight: bold;" class="active">项目时间安排</td>
+			</tr>
+			<tr>
+				<td style="width: 200px;" class="th_bg">派项时间</td>
+				<td style="text-align: left;">
+					<div id="subDate"></div>
+				</td>
+				<td style="width: 200px;" class="th_bg">开标时间</td>
+				<td style="text-align: left;">
+					<div id="bidOpenTime"></div>
+				</td>
+			</tr>
+			<tr>
+
+				<td style="width: 200px;" class="th_bg">中选通知书发出时间</td>
+				<td style="text-align: left;">
+					<div id="noticeSendTime"></div>
+				</td>
+				<td style="width: 200px;" class="th_bg">完成月份</td>
+				<td style="text-align: left;">
+					<div id="complectMonth"></div>
+				</td>
+			</tr>
+
+			<tr class="exceptionView1" style="display: none;">
+				<td colspan="4" style="font-weight: bold;" class="active">项目异常</td>
+			</tr>
+			<tr class="exceptionView2" style="display: none;">
+				<td class="th_bg" style="width: 250px;">异常</td>
+				<td style="text-align: left;">
+					<div id="exception"></div>
+				</td>
+				<td class="th_bg" style="width: 200px;">异常原因</td>
+				<td style="text-align: left;">
+					<div id="exceptionCause"></div>
+
+				</td>
+			</tr>
+			<tr>
+				<td colspan="4" style="font-weight: bold;" class="active">招标采购参数</td>
+			</tr>
+			<tr>
+				<td class="th_bg" style="width: 250px;">投标人家数</td>
+				<td style="text-align: left;">
+					<div id="tenderNumber"></div>
+				</td>
+				<td class="th_bg" style="width: 250px;" id="legalNameView1">中标人</td>
+				<td style="text-align: left;" id="legalNameView2">
+					<div id="legalName"></div>
+				</td>
+
+			</tr>
+
+			<tr>
+				<td class="th_bg" style="width: 200px;">委托金额（预算）（万元）</td>
+				<td style="text-align: left;">
+					<div id="entrsuSum"></div>
+				</td>
+				<td class="th_bg" style="width: 200px;">中标金额（万元）</td>
+				<td style="text-align: left;">
+					<div id="contractSettlementPrice"></div>
+				</td>
+
+			</tr>
+			<tr>
+				<td class="th_bg" style="width: 200px;">招标代理服务费-不打折（不含造价服务费）（万元）</td>
+				<td style="text-align: left;">
+					<div id="tenderAgenPrice"></div>
+				</td>
+				<td class="th_bg" style="width: 200px;">招标代理服务费（不含造价服务费）（万元）</td>
+				<td style="text-align: left;">
+					<div id="realAgentPrice"></div>
+				</td>
+
+			</tr>
+			<tr>
+				<td class="th_bg" style="width: 200px;">标书款（万元）</td>
+				<td style="text-align: left;">
+					<div id="tenderStyle"></div>
+				</td>
+				<td class="th_bg" style="width:200px;">服务费小计（万元）</td>
+				<td style="text-align: left;">
+					<div id="compositeServiceSubtoral"></div>
+				</td>
+			</tr>
+			<tr>
+				<td class="th_bg" style="width: 200px;">评审费小计（万元）</td>
+				<td style="text-align: left;">
+					<div id="reviewFeeSubtotal"></div>
+				</td>
+				<td class="th_bg" style="width:200px;">工作人员费用小计（万元）
+				</td>
+				<td style="text-align: left;">
+					<div id="staffCostSubtotal"></div>
+				</td>
+
+			</tr>
+			<tr>
+				<td class="th_bg" style="width: 200px;">综合服务费小计（包含专家餐费、住宿、交通、租赁开标室费用、打印、零食等）（万元）</td>
+				<td style="text-align: left;">
+					<div id="serviceFeleSubtotal"></div>
+				</td>
+				<td class="th_bg" style="width:200px;">项目成本费用小计（万元）</td>
+				<td style="text-align: left;">
+					<div id="projectCostSubtotal"></div>
+				</td>
+
+			</tr>
+			<tr>
+				<td class="th_bg" style="width: 200px;">费用到账状况</td>
+				<td style="text-align: left;" colspan="3">
+					<div id="payStatep"></div>
+				</td>
+
+
+			</tr>
+			<tr>
+				<td class="th_bg" style="width: 200px;">备注</td>
+				<td colspan="3" style="text-align: left;">
+					<div id="backups"></div>
+				</td>
+			</tr>
+			<tr class="record">
+				<td class="active" colspan="4" style="border: none;"><strong>流程审核记录</strong></td>
+			</tr>
+			<tr class="record">
+				<td colspan="4">
+					<table class="table table-bordered" id="workflowListDetail">
+
+					</table>
+				</td>
+			</tr>
+		</table>
+	</form>
+
+	<script type="text/javascript" src="../../../../media/js/jquery/jquery.js"></script>
+	<script type="text/javascript" src="../../../../media/js/jquery/jquery.extend.js"></script>
+	<script type="text/javascript" src="../../../../media/js/base/common.js"></script>
+	<script type="text/javascript" src="../../../../media/js/bootstrap/js/bootstrap.js"></script>
+	<script type="text/javascript" src="../../../../media/js/bootstrap/js/bootstrap-table.min.js"></script>
+	<script type="text/javascript" src="../../../../media/js/bootstrap/js/bootstrap-table-zh-CN.min.js"></script>
+
+	<!-- <script type="text/javascript" src="../js/supplierInfo.js"></script> -->
+	<script type="text/javascript" src="../../../../media/js/base/auditRecords.js"></script>
+	<script type="text/javascript" src="../js/ViewBidReport.js"></script>
+</body>
+
+</html>

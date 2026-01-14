@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+		<meta http-equiv="pragma" content="no-cache"><!-- 禁止浏览器从本地计算机的缓存中访问页面内容 --> 
+		<meta http-equiv="cache-control" content="no-cache"><!-- 用于指定请求和响应遵循的缓存机制 --> 
+		<meta http-equiv="expires" content="0"><!-- 用于设定网页的到期时间，一旦网页过期，必须到服务器上重新传输； -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>添加招标代表人</title>
+    <link rel="stylesheet" href="../../../../media/js/layer/mobile/need/layer.css" />
+    <link rel="stylesheet" href="../../../../media/js/bootstrap/css/bootstrap.css" />
+    <link rel="stylesheet" href="../../../../media/js/bootstrap/css/bootstrap-table.css">
+    <style>
+        html,body { height: 100%;}
+    </style>
+</head>
+
+<body>
+    	<div class="pageModel">
+	        <div id="toolbarTop">
+	            <div class="input-group">
+	                <span class="input-group-addon">姓名</span>
+	                <input type="text" class="form-control" name="userName" id="userName">
+	            </div>
+	            <div class="input-group">
+	                <span class="input-group-addon">帐号</span>
+	                <input type="text" class="form-control" name="logCode" id="logCode">
+	            </div>
+	            <div class="btn-group">
+	                <button type="button" id="eventquery" class="btn btn-primary">
+	                    <span class="glyphicon glyphicon-search" aria-hidden="true"></span> 查 询
+	                </button>
+	            </div>
+	        </div>
+	        <table class="table table-bordered" id="tableList">
+	    		<!--<tr>
+	    			<th style="width: 50px;"><input type="checkbox"></th>
+	    			<th style="width: 50px;">序号</th>
+	    			<th>姓名</th>
+	    			<th style="width: 120px; text-align: center;">联系方式</th>
+	    		</tr>
+	    		<tr>
+	    			<td><input type="checkbox"></td>
+	    			<td style="text-align: center;">1</td>
+	    			<td>某某</td>
+	    			<td style="text-align: center;">15211111111</td>
+	    		</tr>-->
+	    	</table>
+        </div>
+        <div class="bottom-btn">
+            <button type="button" class="btn btn-primary" id="btnSave"><span class="glyphicon glyphicon-ok"></span>确定</button>
+            <button type="button" class="btn btn-default" id="btnClose"><span class="glyphicon glyphicon-remove"></span>关闭</button>
+        </div>
+    <script src="../../../../media/js/jquery/jquery.js"></script>
+    <script src="../../../../media/js/jquery/jquery.extend.js"></script>
+    <script src="../../../../media/js/base/common.js"></script>
+    <script src="../../../../media/js/bootstrap/js/bootstrap.js"></script>
+    <script src="../../../../media/js/bootstrap/js/bootstrap-table.js"></script>
+    <script src="../../../../media/js/bootstrap/js/bootstrap-table-zh-CN.min.js"></script>
+    <script src="../js/supervisorList.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,127 @@
+<head>
+	<meta http-equiv="pragma" content="no-cache">
+	<!-- 禁止浏览器从本地机的缓存中调阅页面内容 -->
+	<meta http-equiv="cache-control" content="no-cache, must-revalidate">
+	<meta http-equiv="expires" content="0">
+</head>
+<link rel="stylesheet" href="../../../../../media/js/layer/mobile/need/layer.css" />
+<link rel="stylesheet" href="../../../../../media/js/layer/theme/default/laydate.css" />
+<link rel="stylesheet" href="../../../../../media/js/bootstrap/css/bootstrap.css" />
+
+<div style="width: 99%;padding-left: 10px;padding-top: 10px;margin-bottom: 0;">
+	<table class="table table-bordered">
+			<tr>
+				<td colspan="4" style="font-weight: bold;" class="active">项目信息</td>
+			</tr>
+			<tr>
+				<td class="th_bg" style="width: 20%;">采购项目名称</td>
+				<td style="text-align: left;">
+					<div id="projectName" /></div>
+	</td>
+	<td class="th_bg" style="width: 20%;">采购项目编号</td>
+	<td style="text-align: left;">
+		<div id="projectCode" /></div>
+	</td>
+	</tr>
+	
+	<tr>
+		<td class="th_bg" style="width: 20%;">包件名称</td>
+		<td style="text-align: left;">
+			<div id="packageName" /></div>
+		</td>
+		<td class="th_bg" style="width: 20%;">包件编号</td>
+		<td style="text-align: left;">
+			<div id="packageNum" /></div>
+		</td>
+	</tr>
+	<tr>
+		<td class="th_bg" style="width: 20%;">采购人名称</td>
+		<td colspan="3" style="text-align: left;">
+			<div id="purchaserName"></div>
+		</td>
+	</tr>
+	<!-- <tr>
+		<td class="th_bg" style="width: 20%;">联系人</td>
+		<td style="text-align: left;">
+			<div id="purchaserLinkmen"></div>
+		</td>
+		<td class="th_bg" style="width: 20%;">联系人电话</td>
+		<td style="text-align: left;">
+			<div id="purchaserTel" /></div>
+		</td>
+	</tr> -->
+	<tr>
+		<td class="th_bg" style="width: 20%;">报价截止日期</td>
+		<td style="text-align: left;" colspan="3">
+			<div id="offerEndDate"></div>
+		</td>
+	</tr>
+	<tr>
+		<td colspan="4" style="font-weight: bold;" class="active">询比采购报价</td>
+	</tr>
+	<tr>
+		<td class="th_bg" style="width: 20%;">供应商名称</td>
+		<td colspan="3" style="text-align: left;">
+			<div id="enterpriseNames"></div>
+		</td>
+	</tr>
+	<tr>
+		<td class="th_bg" style="width: 20%;">法人/被授权人</td>
+		<td style="text-align: left;">
+			<div id="legalPerson"></div>
+		</td>
+		<td class="th_bg" style="width: 20%;">联系方式（手机号）</td>
+		<td style="text-align: left;">
+			<div id="linkTel"></div>
+		</td>
+	</tr>
+	<tr>
+		<td colspan="4" style="font-weight: bold;" class="active">明细信息</td>
+	</tr>
+	<tr class="isOfferAttention" style="display:none">        
+		<td colspan="4" class="red" style="text-align: left;">
+				报价注意事项:<span id="offerAttention"></span>
+		</td>
+	</tr>
+	<tr>
+		<td colspan="4">
+			<table class=" table table-bordered" id="tabletr">
+			</table>
+			<table class=" table table-bordered" style="margin-bottom: 0px;">
+				<tr>
+					<td style="width: 50px">序号</td>
+					<td style="text-align:left">评审项名称</td>
+					<td style="text-align:left">文件名称</td>
+					<td style="width: 150px;text-align:left">文件大小</td>
+					<td style="width: 180px;">上传时间</td>					
+				</tr>
+				<tbody id="tablede">
+	
+				</tbody>
+			</table>
+		</td>
+	</tr>
+	
+	<tr class="active">
+		<th colspan="4">文件上传撤回记录</th>
+	</tr>
+	<tr>
+		<td colspan="4" align="left">
+			<table class="table table-bordered table-striped" id="historyFileTable">
+			</table>
+		</td>
+	</tr>
+	</table>
+	<div id="btnFiles" style="width: 100%;height: 50px;text-align:center;position: fixed;bottom: 0;background-color: #FFFFFF;">		
+		<button type="button" id="btn_close" class="btn btn-default" style="width: 100px;">关闭</button>
+	</div>
+</div>
+
+<script type="text/javascript" src="../../../../../media/js/jquery/jquery.js"></script>
+<script type="text/javascript" src="../../../../../media/js/jquery/jquery.extend.js"></script>
+<script type="text/javascript" src="../../../../../media/js/jquery/jquery.params.js"></script>
+<script type="text/javascript" src="../../../../../media/js/base/common.js"></script>
+<script type="text/javascript" src="../../../../../media/js/bootstrap/js/bootstrap.js"></script>
+<script type="text/javascript" src="../../../../../media/js/layer/layer.js"></script>
+<script type="text/javascript" src="../../../../../media/js/Model/public.js" ></script>
+<script type="text/javascript" src="../js/viewOffer.js"></script>

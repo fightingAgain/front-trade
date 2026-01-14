@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="pragma" content="no-cache">
+		<!-- 禁止浏览器从本地机的缓存中调阅页面内容 -->
+		<meta http-equiv="cache-control" content="no-cache, must-revalidate">
+		<meta http-equiv="expires" content="0">
+		<title>评审管理</title>
+		<link rel="stylesheet" type="text/css" href="../../../../media/js/bootstrap/css/bootstrap.css">
+		<link rel="stylesheet" type="text/css" href="../../../../media/js/bootstrap/css/bootstrap-table.css">
+		<link rel="stylesheet" type="text/css" href="../../../../media/js/datetimepicker/css/jquery.datetimepicker.css" type="text/css"/>
+		<!--<link rel="stylesheet" type="text/css" href="media/js/bootstrap-editable/css/bootstrap-editable.css">-->
+		<style>
+			.row div {
+				padding-top: 10px;
+				padding-bottom: 10px;
+				border: 1px solid rgba(86, 61, 124, .2);
+				border-top: 0px;
+				border-left: 0px;
+			}
+			
+			.topborder {
+				border-top: 1px solid rgba(86, 61, 124, .2) !important;
+			}
+			
+			.leftborder {
+				border-left: 1px solid rgba(86, 61, 124, .2) !important;
+			}
+			
+			.radio {
+				display: inline;
+			}
+			
+			.NowReviewerTalbe {
+				background-color: #FBFBFB;
+			}
+			
+			.spacing {
+				padding-top: 10px;
+			}
+			
+			.show {
+				opacity: 1;
+			}
+			
+			#ProjectCheckStateDiv table th,
+			#ProjectCheckStateDiv table td {
+				text-align: center;
+				vertical-align: middle!important;
+			}
+			
+			#myTab li a {
+				color: #FFFFFF !important;
+			}
+			
+			#myTab .active a {
+				color: #222 !important;
+				background: #fff !important;
+			}
+			
+			.table td,
+			.table th {
+				vertical-align: middle !important;
+				
+			}
+			
+			#checkTotalTable td{
+				white-space:pre-wrap !important;
+			}
+			
+			.itemChecks td{
+				white-space:pre-wrap !important;
+			}
+			
+			.checkItemReason ul { background: #fff;  z-index: 0;}
+
+			.checkItemReason li { height: 40px; line-height: 40px; text-align: center; border: 2px solid #F8F8F8;}
+			
+			.infoClass a {color:#666; display: block;}
+			
+		</style>
+	</head>
+
+	<body>
+		<table class="table table-bordered" style="width: 98%;margin: 15px;margin-bottom: 60px">
+			<tr>
+				<td class="th_bg">采购项目编号</td>
+				<td width="35%" id="projectCode"></td>
+				<td class="th_bg" >采购项目名称</td>
+				<td id="projectName"></td>
+			</tr>
+			<tr>
+				<td class="th_bg"   width="180px">包件编号</td>
+				<td width="35%" id="packageNum"></td>
+				<td class="th_bg"  width="180px">包件名称</td>
+				<td id="packageName"></td>
+			</tr>
+			<tr>
+				<td class="th_bg"   width="180px">评审方法</td>
+				<td width="35%" id="checkPlan" class="checkPlan"></td>
+				<td class="th_bg deviateNum"  width="180px">包件允许最大偏离项数</td>
+				<td class="deviateNum" id="deviateNum"></td>
+			</tr>			
+			<tr>
+				<td colspan="4" style="background-color: #3995C8;color: #ffffff;border-top: 0px solid;" id="fristTabtd">
+					<div id="fristTab" style="float: left;width: 1200px;overflow:hidden;">
+						<ul id="myTab" class="nav nav-tabs" style="border: none;">
+							<li class="active" value="#progress">
+								<a href="javascript:void(0)" data-toggle="tab">评审进度管理</a>
+							</li>
+							<li value="#PackageOffer" class="allOffers">
+								<a href="javascript:void(0)" data-toggle="tab">报价清单</a>
+							</li>
+							<li value="#subentry" class="allOffers">
+								<a href="javascript:void(0)" data-toggle="tab">分项报价表</a>
+							</li>
+							<li id="lidiv" value="#PriceFile" class="allOffer">
+								<a href="javascript:void(0)" data-toggle="tab">报价文件</a>
+							</li>							
+							<li value="#PriceCheck" class='liaPriceCheck'>
+								<a href="javascript:void(0)" id='liaPriceCheck' data-toggle="tab">价格评审</a>
+							</li>
+							<li value="#PriceCheckTotal">
+								<a href="javascript:void(0)" data-toggle="tab">评审记录汇总</a>
+							</li>
+							<li value="#CheckReport">
+								<a href="javascript:void(0)" data-toggle="tab">评审报告</a>
+							</li>
+							<li value="#raterAsks">
+								<a href="javascript:void(0)" data-toggle="tab">评审澄清</a>
+							</li>
+							<li id="corresponding"  value="#correspondings" style="display: none">
+								<a href="javascript:void(0)" data-toggle="tab">暗标对应关系</a>
+							</li>									
+						</ul>						
+					</div>
+					<div style="float: right;padding: 5px 0;background-color: #3995C8;color: #ffffff;border-top: 0px solid;" id="pervAndnext">
+						<button type="button" class="btn btn-primary" id="perv" style="width: 40px;height: 34px;margin: 0px;"><<</button>
+						<button type="button" class="btn btn-primary" id="next" style="width: 40px;height: 34px;margin: 0px;">>></button>
+						<a href="javascript:void(0)" class="btn btn-primary btn-sm StopCheckBtn" id="StopCheckPw" style="display: none">流标</a>
+						<a class="btn btn-primary btn-sm " id="downloadAllFile" href="javascript:void(0)">一键打包下载</a>
+					</div>
+				</td>
+			</tr>
+			<tr style="padding: 0;">
+				<td style="padding: 0;" colspan="4">
+					<div id="myTabContent" class="tab-content">
+						<!--评审进度管理-->
+						<div class="tab-pane fade show" id="progress">
+							<!--<div><span>项目评审进度</span>
+								
+							</div>-->
+							<div id="ProjectCheckStateDiv" style="width: 100%;overflow-y: auto;">
+							</div>
+							<div style="padding-bottom: 20px">
+								<span class="red StopCheck" style="font-weight: bold;display: none;" id="StopChecks">专家评委提出流标，</span>
+								<span class="red StopCheck" style="font-weight: bold;display: none;" id="StopCheckl">流标原因：<span id="viewReason"></span></span>								
+								<a  href="javascript:void(0)" class="btn btn-primary btn-sm StopCheckBtn" id="StopCheck" style="display: none">确认流标</a>
+							</div>
+							<table  class="table table-bordered ProjectCheckStateRestore" style="margin-bottom: 0px; border: none;display: none;">
+								<tr>
+									<td class="active">
+										评审恢复记录
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<table id="ProjectCheckStateRestoreTalbe"></table>
+									</td>
+								</tr>
+							</table>	
+						</div>
+						<!--报价清单-->
+						<div class="tab-pane fade spacing" id="PackageOffer" class="allOffers">
+							供应商报价
+							<div style="padding-bottom: 10px;">
+								<table id="PackageOfferTable"></table>
+							</div>
+							询比采购清单
+							<div>
+								<div style="width: 30%;float: left;">
+									<table id="packageDetailedsTable"></table>
+								</div>
+								<div style="width: 69%;float: right;left: 5px ;">
+									<table id="offerDetailedsTable"></table>
+								</div>
+							</div>
+
+						</div>
+						<!--分项报价表-->
+						<div class="tab-pane fade" id="subentry" class="allOffers">						
+							<div class="spacing" style="width: 100%;float: right;left: 5px ;">
+								<table id="subentryTable"></table>
+							</div>
+						</div>
+						<!--报价文件-->
+						<div class="tab-pane fade" id="PriceFile" class="allOffer">
+							<div class="spacing" style="width: 25%;float: left;">
+								<table id="fileEnterpriseTable"></table>
+							</div>
+							<div class="spacing" style="width: 74%;float: right;left: 5px ;">
+								<table id="fileTable"></table>
+							</div>
+						</div>
+						<!--价格评审-->
+						<div class="tab-pane fade" id="PriceCheck">
+							<div class="row spacing" style="margin: 0px;">
+								<div style="height: 45px;">
+									<span id="businessName" style="color: red;"></span>
+									<span id="weight" style="color: red;margin-left: 10px;"></span>
+									<!--<a id="isDeviate" class='btn btn-primary btn-sm' style='float: right;margin-right: 5px;'>查看偏离项明细</a>-->
+								</div>								
+								<div id="businessType" style="color: red;"></div>
+								<div id="businessContent" style="color: red;"></div>
+								<div style="height: 45px;display: none;" id="showDeviates">
+									<a  class='btn btn-primary btn-sm isDeviate' style='float: right;margin-right: 5px;'>查看偏离项明细</a>
+								</div>
+								<div style="height: 45px;display: none" id="savediv" class="isCreateType">
+									<a onclick='savepriceChecks()' class='btn btn-primary btn-sm PriceCheckBtn' style='float: right;margin-right: 5px;'>提交</a>
+									<a  class='btn btn-primary btn-sm isDeviate' style='float: right;margin-right: 5px;'>查看偏离项明细</a>
+								</div>
+							</div>
+							<div class="spacing">
+								<table id="PriceCheckTalbe"></table>
+							</div>							
+						</div>
+						<!--评审记录汇总-->
+						<div class="tab-pane fade" class="spacing" id="PriceCheckTotal">
+							<div class="spacing" style="padding-bottom: 10px;">
+								<span>评价项概况</span>
+								<div style="float: right;display: none" class="isCreateType">
+									<!--<a style="text-decoration: none;" class="btn btn-primary btn-sm" id="btnAddRemark">添加说明</a>-->
+									<button style="text-decoration: none;" class="btn btn-primary btn-sm PriceCheckBtn" id="savePriceCheckTotal">提交结果</button>
+									<button style="text-decoration: none;" class="btn btn-primary btn-sm PriceCheckBtn" id="editReport">生成报告</button>								
+									<button style="text-decoration: none;" class="btn btn-primary btn-sm PriceCheckBtn" id="viewCheckReport">预览</button>
+									<a style="text-decoration: none;margin-right: 5px;" class="btn btn-primary btn-sm PriceCheckBtn" id="downloadCheckReport">下载</a>
+								</div>
+							</div>
+							<div class="spacing">
+								<table class="table table-bordered" style="width: 98%;margin: 15px;">
+									<tr>
+										<td class="th_bg">评审地点<i class="text-danger">*</i></td>				
+										<td>
+											<input type="text" class="form-control" style="width: 400px;" id="checkPlace" />
+										</td>
+									</tr>
+									<tr>
+										<td class="th_bg">评审时间<i class="text-danger">*</i></td>										
+										<td>
+											<input type="text" class="form-control" style="width: 400px;" id="checkDate">
+										</td>
+									</tr>
+									<tr>
+										<td class="th_bg">说明</td>
+										<td><input type="text" class="form-control" style="width: 400px;" id="checkRemark"></td>										
+									</tr>
+								</table>								
+							</div>
+							<!--<div style="overflow-y: auto;height: 300px;">-->
+							<div style="width: 100%;">
+								<table id="checkTotalTable" class="table table-bordered"></table>
+							</div>
+							<!--</div>-->
+						</div>
+						<!--评审报告-->
+						<div class="tab-pane fade" id="CheckReport">
+							<div class="spacing" style="margin-bottom: 30px;">
+								<table id="CheckReportTable"></table>
+							</div>
+							<div id="isNeedSureShow" style="display: none;">
+								评委确认记录
+								<table id="isNeedSure" class="table  table-bordered" ></table>
+							</div>
+							审核记录
+							<table class="table  table-bordered" id="workflowListDetail">
+								<tr>
+									<td colspan="5">
+										当前没有审核记录
+									</td>
+								</tr>
+							</table>
+						</div>
+						<!--评审澄清-->
+						<div class="tab-pane fade" id="raterAsks">
+							<div style="margin: 5px;">供应商互动提问 <span style="color: red;">温馨提示：评审委员会可以要求供应商进行澄清说明，所有澄清问题的提出与答复均在本页面在线完成</span></div>
+							<div style="float: left; border: 1px #ddd solid;width: 25%;height: 300px;text-align: right;padding-top: 100px;">
+								<span style="margin-bottom: 5px;">互动消息：</span><br/>
+								<a href="#" type="button" class="btn btn-primary btn-sm" style="margin-bottom: 5px;">刷新</a><br/>
+								<a href="#" type="button" class="btn btn-primary btn-sm">自动刷新</a><br/>
+							</div>
+						</div>
+						<!--暗标对应关系-->
+						<div class="tab-pane fade " id="correspondings">
+							<div class="spacing">
+								<table id="correspondingsTable"></table>
+							</div>
+						</div>
+					</div>
+
+				</td>
+			</tr>
+		</table>
+		<div class="bottom-btn">
+			<button type="button" class="btn btn-primary" id="btnRefresh"><span class="glyphicon glyphicon-refresh"></span>刷新</button>
+	        <button type="button" class="btn btn-default" id="btnClose"><span class="glyphicon glyphicon-remove"></span>关闭</button>
+	    </div>
+	</body>
+	<script type="text/javascript" src="../../../../media/js/jquery/jquery.min.js"></script>
+	<script type="text/javascript" src="../../../../media/js/jquery/jquery.extend.js"></script>
+	<script type="text/javascript" src="../../../../media/js/base/util.js"></script>
+	<script type="text/javascript" src="../../../../media/js/bootstrap/js/bootstrap-table.min.js"></script>
+	<script type="text/javascript" src="../../../../media/js/bootstrap/js/bootstrap-table-zh-CN.min.js"></script>
+	<script type="text/javascript" src="../../../../media/js/layer/laydate.js"></script>
+	<script type="text/javascript" src="../../../../media/js/datetimepicker/js/jquery.datetimepicker.js" ></script>
+	<script type="text/javascript" src="js/PackageInfo.js"></script>
+	<script type="text/javascript" src="../../../../media/js/base/auditRecords.js"></script>
+</html>

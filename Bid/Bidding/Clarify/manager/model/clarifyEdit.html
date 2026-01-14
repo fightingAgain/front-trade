@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="pragma" content="no-cache"><!-- 禁止浏览器从本地计算机的缓存中访问页面内容 -->
+	<meta http-equiv="cache-control" content="no-cache"><!-- 用于指定请求和响应遵循的缓存机制 -->
+	<meta http-equiv="expires" content="0"><!-- 用于设定网页的到期时间，一旦网页过期，必须到服务器上重新传输； -->
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>招标公告</title>
+	<link rel="stylesheet" href="../../../../media/js/layer/mobile/need/layer.css" />
+	<link rel="stylesheet" href="../../../../media/js/bootstrap/css/bootstrap.css" />
+	<link rel="stylesheet" href="../../../../media/js/stream/css/stream-v1.css" />
+
+	<style>
+		html,
+		body {
+			height: 100%;
+			width: 100%;
+		}
+
+		.readonly {
+			border: none;
+			background: none !important;
+			outline: none !important;
+			box-shadow: none !important;
+		}
+
+		.padding_button {
+			padding: 5px 8px !important;
+			line-height: 30px !important;
+		}
+		.isBeAsk{
+			display: none;
+		}
+	</style>
+</head>
+
+<body>
+	<form class="pageModel" id="formEle" name="formName">
+		<div class="panel-group" id="accordion">
+			<div class="panel panel-accordion panel-default">
+				<div class="panel-heading active" role="tab" id="headingOne">
+					<h4 class="panel-title">
+						<a role="button" data-toggle="collapse" href="#collapseOne" aria-controls="collapseOne"
+							aria-expanded="true">
+							基本信息
+						</a>
+					</h4>
+				</div>
+				<div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+					<div class="panel-body">
+						<table class="table table-bordered ">
+							<tr class="isBeAsk">
+								<td class="th_bg">澄清类型<i class="red">*</i></td>
+								<td colspan="3">
+									<select name="clarifyType" class="form-control" style="width: 260px;">
+										<option value="4">招标文件</option>
+										<option value="1">资格预审文件</option>
+									</select>
+								</td>
+							</tr>
+							<tr class="isBeAsk">
+								<td class="th_bg">标段编号<i class="red">*</i></td>
+								<td colspan="3">
+									<span class="padding_button changeEmpty" id="interiorBidSectionCode"></span>
+									<!--<input type="text"  name="" id="interiorBidSectionCode" class="form-control readonly changeEmpty" readonly="readonly" style="width: 80%;display: inline-block;"/>-->
+									<input type="hidden" name="bidSectionId" class="changeEmpty" />
+									<button type="button" class="btn btn-primary" id="chooseBid"
+										style="display: none;"><span
+											class="glyphicon glyphicon-saved"></span>选择标段</button>
+								</td>
+
+							</tr>
+							<tr class="isBeAsk">
+								<td class="th_bg">标段名称<i class="red">*</i></td>
+								<td colspan="3">
+									<span class="padding_button changeEmpty" id="bidSectionName"></span>
+									<!--<input type="text"  name="" id="bidSectionName" class="form-control readonly changeEmpty" readonly="readonly"/>-->
+								</td>
+							</tr>
+
+							<tr class="isBeAsk">
+								<td class="th_bg">澄清截止时间<i class="red">*</i></td>
+								<td colspan="3">
+									<span class="padding_button changeEmpty" id="answersEndDate"></span>
+									<input type="hidden" name="answersEndDate"
+										class="form-control readonly changeEmpty" />
+								</td>
+							</tr>
+							<tr>
+								<td class="th_bg">澄清标题<i class="red">*</i></td>
+								<td colspan="3">
+									<input type="text" name="clarifyTitle" class="form-control" datatype="*"
+										errormsg="请输入澄清标题" />
+								</td>
+							</tr>
+							<tr>
+								<td class="th_bg">澄清内容<i class="red">*</i></td>
+								<td colspan="3">
+									<textarea name="clarifyContent" rows="5" cols="" class="form-control"
+										style="resize: none;" datatype="*" errormsg="请输入澄清内容"></textarea>
+								</td>
+							</tr>
+						</table>
+					</div>
+				</div>
+			</div>
+			<div class="panel panel-accordion panel-default">
+				<div class="panel-heading active" role="tab" id="headingTwo">
+					<h4 class="panel-title">
+						<a class="collapsed" role="button" data-toggle="collapse" href="#collapseTwo"
+							aria-controls="collapseTwo" aria-expanded="false">
+							澄清文件
+							<span class="red" style="font-size: 14px;font-weight: normal;">（请上传200M以内的文件）</span>
+						</a>
+					</h4>
+				</div>
+				<div id="collapseTwo" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingTwo">
+					<div class="panel-body">
+						<button type="button" class="btn btn-sm btn-primary" id="fileUp"
+							style="float: right;margin-right: 50px;">
+							<span class="glyphicon glyphicon-folder-open"></span>上传
+						</button>
+						<button type="button" id="fileLoad" style="display: none;"></button>
+						<div id="fileContent">
+
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="bottom-btn" style="z-index: 11000;">
+			<button type="button" class="btn btn-primary" id="btnSave"><span
+					class="glyphicon glyphicon-ok"></span>保存</button>
+			<button type="button" class="btn btn-primary" id="btnSubmit"><span
+					class="glyphicon glyphicon-saved"></span>发送</button>
+			<button type="button" class="btn btn-default" id="btnClose"><span
+					class="glyphicon glyphicon-remove"></span>取消</button>
+		</div>
+	</form>
+	<script type="text/javascript" src="../../../../media/js/jquery/jquery.js"></script>
+	<script type="text/javascript" src="../../../../media/js/jquery/jquery.extend.js"></script>
+	<script type="text/javascript" src="../../../../media/js/layer/layer.js"></script>
+	<script type="text/javascript" src="../../../../media/js/base/util.js"></script>
+	<script type="text/javascript" src="../../../../media/js/base/common.js"></script>
+	<script type="text/javascript" src="../../../../media/js/bootstrap/js/bootstrap.js"></script>
+	<script type="text/javascript" src="../../../../media/js/stream/js/stream-v1.js"></script>
+	<script type="text/javascript" src="../../../../media/js/base/StreamUpload.js"></script>
+	<script type="text/javascript" src="../../../../media/js/base/md5.js"></script>
+	<script type="text/javascript" src="../../../../media/js/ca.js"></script>
+	<!--<script type="text/javascript" src="../../../Model/js/sign.js"></script>-->
+	<script type="text/javascript" src="../../../Model/js/public.js"></script>
+	<script type="text/javascript" src="../js/clarifyEdit.js"></script>
+</body>
+
+</html>

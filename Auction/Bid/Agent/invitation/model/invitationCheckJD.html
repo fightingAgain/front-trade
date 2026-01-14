@@ -1,0 +1,162 @@
+<head>
+	<meta http-equiv="pragma" content="no-cache">
+	<!-- 禁止浏览器从本地机的缓存中调阅页面内容 -->
+	<meta http-equiv="cache-control" content="no-cache, must-revalidate">
+	<meta http-equiv="expires" content="0">
+	<!--[if lt IE 9]>
+	   <script src="../../../../media/js/html5shiv.min.js"></script>
+	   <script src="../../../../media/js/respond.js"></script>
+	<![endif]-->
+	<link rel="stylesheet" href="../../../../../media/js/layer/mobile/need/layer.css" type="text/css"/>
+	<link rel="stylesheet" href="../../../../../media/js/bootstrap/css/bootstrap.css" />
+	<link rel="stylesheet" href="../../../../../media/js/bootstrap/css/bootstrap-table.min.css" type="text/css"/>
+	<link rel="stylesheet" href="../../../../../media/js/layer/theme/default/laydate.css" type="text/css"/>
+	<link rel="stylesheet" href="../../../../../media/js/bootstrap-fileinput-master/css/fileinput.min.css" type="text/css"/>
+	<link rel="stylesheet" href="../../../../../media/js/datetimepicker/css/jquery.datetimepicker.css" type="text/css"/>
+	<link rel="stylesheet" href="../../../../../media/js/bootstrap/css/bootstrap-select.min.css" />
+</head>
+<body>
+<form id="formb" name="projectPackages" style="width: 98%;margin: 10px auto ;margin-bottom: 60px;">  
+	<div class="container-fluid">
+		<table class="table table-bordered" style="margin-bottom: 0px;">
+			<tbody class="JD_view" id="montage"></tbody>
+			<!-- <tr class="tenderTypeW">
+				<td colspan="4">
+					<div id="offerForm"></div>	        
+				</td>
+			</tr>
+			<tbody class="tenderTypeW" id="fileHtml"></tbody> -->
+			<tr class="showExam1">
+				<td colspan="1" style="font-weight: bold;border: none;" class="active">邀请供应商</td>
+				<td  colspan="3" style="text-align: right;border: none;" class="active">          	
+					<input type="button" value="追加邀请供应商" style="display: none" class="btn btn-primary addSupplier" onclick="add_supplier()"/>
+					<input type="button" value="追加邀请供应商发送短信" style="display: none" class="btn btn-primary sendMsg"/>
+				</td>
+
+			</tr>
+			<tr class="showExam1">
+				<td colspan="4" class="yao_btn">
+					<table class="table  table-bordered" style="margin-bottom: 0px;" id="yao_table"></table>
+				</td>
+			</tr>
+		</table>
+		<div id="depositHtml"></div>
+		<table class="table table-bordered" style="margin-bottom: 0px;">
+			<tr>
+				<td colspan="4" style="font-weight: bold;" class="active">时间安排</td>
+			</tr>
+			<tbody style="border:none ;" id="nowOrOld"></tbody>
+		</table>
+		<table class="table table-bordered" style="margin-bottom: 0px;">
+			<tr>
+				<td colspan="3" style="font-weight: bold;border: none;" class="active">预约信息</td>
+				<td class="active" style="text-align: right;border: none;" class="searched">
+					<input class="btn btn-sm btn-primary showOrder" type="button" style="display: none" onclick="orderRoom()" value="预约会议室"/>
+					<input class="btn btn-sm btn-primary colseOrder" type="button" style="display: none" id="colseOrder" value="取消预约"/>
+				</td>	
+			</tr>
+			<tr>
+				
+				<td class="th_bg">预约标题</td>
+				<td style="text-align: left;width: 320px;">
+					<div id="appointmentTitle"></div>
+				</td>
+				
+				<td  class="th_bg">会议室类型</td>
+				<td style="text-align: left;width: 320px;">
+					<!-- 1开标，2评审，9其他 -->
+					<div id="appointmentType"></div>
+				</td>
+			</tr>
+			<tr>
+				
+				<td class="th_bg">预约开始时间</td>
+				<td style="text-align: left;">
+					<div id="appointmentStartDate"></div>
+				</td>
+				
+				<td class="th_bg">预约截止时间</td>
+				<td style="text-align: left;">
+					<div id="appointmentEndDate"></div>
+				</td>
+			</tr>
+			<tr>
+				<td colspan="4">
+					<table id="biddingRooms"></table>
+				</td>		           	           
+
+			</tr>  	
+		</table>
+		
+		<table class="table table-bordered" style="margin-bottom: 0px;">
+			<tr>
+				<td class="active"  colspan="3" style="border: none;"><strong>邀请函信息</strong></td>
+				<td class="active" style="text-align: right;border: none;">
+					<input type="button" class="btn btn-primary" value="全屏预览" onclick="previewYl(1)"/>     			
+				</td>  
+			</tr>
+			<tr>   		
+				<td colspan="4" >
+					<div style="height: 400px;overflow-y: auto;">
+						<div id="remark" style="width: 820px;margin: auto;">
+						
+						</div>
+					</div>  			
+				</td>
+			</tr>
+			<tr class="record">
+			<td class="active"  colspan="4" style="border: none;"><strong>流程审核记录</strong></td>
+			</tr>
+			<tr class="record">
+				<td colspan="4">
+					<table class="table table-bordered" id="workflowListDetail">
+						
+					</table>
+				</td>
+			</tr>
+		</table>	
+	</div>
+	<div id="hiddenSupplier"></div>
+</form>
+<div style="width: 100%;height: 50px;text-align:center;position: fixed;bottom: 0;background-color: #FFFFFF;z-index: 100001;">
+	<button type="button" id="btn_close" class="btn btn-default"><span class="glyphicon glyphicon-remove"></span>关闭</button>
+</div>
+</body>
+<style>
+        .fileinput-button {
+            position: relative;
+            display: inline-block;
+            overflow: hidden;
+        }
+
+        .fileinput-button input{
+            position:absolute;
+            right: 0px;
+            top: 0px;
+            opacity: 0;
+            -ms-filter: 'alpha(opacity=0)';
+            font-size: 200px;
+        }
+    </style>
+ <script type="text/javascript" src="../../../../../media/js/jquery/jquery.js" ></script>
+ <script type="text/javascript" src="../../../../../media/js/base/common.js" ></script>
+ <script type="text/javascript" src="../../../../../media/js/jquery/jquery.extend.js" ></script>
+ <script type="text/javascript" src="../../../../../media/js/jquery/jquery.params.js" ></script>
+ <script type="text/javascript" src="../../../../../media/js/bootstrap/js/bootstrap.js" ></script>
+ <script type="text/javascript" src="../../../../../media/js/bootstrap/js/bootstrap-table.min.js"></script>
+ <script type="text/javascript" src="../../../../../media/js/bootstrap/js/bootstrap-table-zh-CN.min.js"></script>
+ <script type="text/javascript" src="../../../../../media/js/base/util.js"></script>
+ <script type="text/javascript" src="../../../../../media/js/base/digital.js" ></script>
+ <script type="text/javascript" src="../../../../../media/js/Model/public.js"></script>
+<!--  <script type="text/javascript" src="../../../../currencyControl/js/offerForm.js" ></script>
+<script type="text/javascript" src="../../../../currencyControl/js/subitemFile.js" ></script> -->
+ <script type="text/javascript" src="../../../../currencyControl/js/againDeposit.js"></script>
+ <script type="text/javascript" src="../js/invitationCheck.js" ></script>
+ <script type="text/javascript" src="../js/packageView.js" ></script>
+ <script type="text/javascript" src="../js/orderRoom.js" ></script>
+ <script type="text/javascript" src="../../Purchase/js/suppliment.js"></script>
+ <script type="text/javascript" src="../js/supplierInfo.js"></script>
+ <script type="text/javascript" src="../../Purchase/js/price.js"></script>
+ <script type="text/javascript" src="../../../../../media/js/preview.js" ></script>
+ <script type="text/javascript" src="../../../../../media/js/base/auditRecords.js"></script>
+

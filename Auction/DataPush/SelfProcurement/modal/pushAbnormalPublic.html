@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="pragma" content="no-cache">
+		<!-- 禁止浏览器从本地机的缓存中调阅页面内容 -->
+		<meta http-equiv="cache-control" content="no-cache, must-revalidate">
+		<meta http-equiv="expires" content="0">
+		<title>异常数据推送</title>
+		<link rel="stylesheet" href="../../../../media/js/bootstrap/css/bootstrap.css">
+		<link rel="stylesheet" href="../../../../media/js/bootstrap/css/bootstrap-table.min.css" />
+		<style type="text/css">
+			.table th,
+			.table td {				
+				vertical-align: middle !important;
+			}
+			.tenderType6{
+				display: none;
+			}
+		</style>
+	</head>
+	
+	<body style="width: 99%;padding-left: 10px;padding-top: 10px;margin-bottom: 0;">
+		<form id="DataPush">
+		<table class="table table-bordered" style="margin-bottom: 50px;" align="center">
+			<tr>
+	            <td colspan="4" style="font-weight: bold;" class="active">项目信息</td>
+	        </tr>
+			<tr>
+				<td class="th_bg" width="20%" ><span class="tenderType4">标段名称</span><span class="tenderType6">包件名称</span></td>
+				<td colspan="3"><span id="packageName"></span></td>
+			</tr>
+			<tr>
+				<td class="th_bg" ><span class="tenderType4">标段编号</span><span class="tenderType6">包件编号</span></td>
+				<td colspan="3"><span id="packageCode"></span></td>
+			</tr>
+			<tr>
+				<td class="th_bg" >答复截止时间</td>
+				<td>
+					<span id="ansEndDate"></span>
+				</td>
+				<td class="th_bg" >公告/邀请函发布时间</td>
+				<td>
+					<span id="ansSendDate"></span>
+				</td>
+			</tr>
+			<tr>
+				<td class="th_bg" >递交投标（采购）文件时间</td>
+				<td>
+					<span id="submitDate"></span>
+				</td>
+				<td class="th_bg" ><span class="tenderType4">投标截止时间</span><span class="tenderType6">报价截止时间</span></td>
+				<td>
+					<span id="bidEndDate"></span>
+				</td>
+			</tr>
+			<tr>
+				<td class="th_bg" ><span class="tenderType4">开标时间</span><span class="tenderType6">评审时间</span></td>
+				<td>
+					<span id="bidOpenDate"></span>
+				</td>
+				<td class="th_bg" >异常类型</td>
+				<td>
+					<select class="form-control isEdit" name="abnormalResult">
+						<option value="1">流标</option>
+						<option value="2">终止</option>
+					</select>
+				</td>
+			</tr>
+			<tr>
+				<td class="th_bg" >异常原因</td>
+				<td colspan="3" >
+					<input type="hidden" name="bidOpenDate"  value="" />
+					<input type="hidden" name="bidEndDate"  value="" />
+					<input type="hidden" name="submitDate"  value="" />
+					<input type="hidden" name="ansSendDate"  value="" />
+					<input type="hidden" name="ansEndDate"  value="" />
+					<textarea id="abnormalReason" name="abnormalReason" class="form-control isEdit"  ></textarea>
+				</td>
+			</tr>
+		</table>
+		</form>
+		<div class="form-group rowLine" style="width: 100%;height: 50px;text-align:center;position: fixed;bottom: 0;background-color: #FFFFFF;margin-bottom:0px !important;padding-top: 10px;z-index: 1000001;">
+			<button type="button" style="width: 80px;" class="btn btn-primary" data-dismiss="modal" id="btn_submit">确定推送</button>
+			<button type="button" style="width: 80px;" class="btn btn-default" data-dismiss="modal" id="btn_close">关闭</button>
+		</div>
+	</body>
+	<script type="text/javascript" src="../../../../media/js/jquery/jquery.js"></script>
+	<script type="text/javascript" src="../../../../media/js/jquery/jquery.extend.js"></script>
+	<script type="text/javascript" src="../../../../media/js/base/common.js"></script>
+	<script type="text/javascript" src="../../../../media/js/bootstrap/js/bootstrap.js"></script>
+	<script type="text/javascript" src="../../../../media/js/bootstrap/js/bootstrap-table.min.js"></script>
+    <script type="text/javascript" src="../../../../media/js/bootstrap/js/bootstrap-table-zh-CN.min.js"></script>
+	<script type="text/javascript" src="../../../../media/js/layer/layer.js"></script>
+	<script type="text/javascript" src="../js/pushAbnormalPublic.js"></script>
+</html>

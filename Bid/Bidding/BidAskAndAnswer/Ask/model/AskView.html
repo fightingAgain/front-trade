@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="pragma" content="no-cache"><!-- 禁止浏览器从本地计算机的缓存中访问页面内容 --> 
+		<meta http-equiv="cache-control" content="no-cache"><!-- 用于指定请求和响应遵循的缓存机制 --> 
+		<meta http-equiv="expires" content="0"><!-- 用于设定网页的到期时间，一旦网页过期，必须到服务器上重新传输； -->
+		<title>质疑查看页面</title>
+		<link rel="stylesheet" href="../../../../media/js/bootstrap/css/bootstrap.css" />
+
+	</head>
+
+	<body>
+		<div name="form" style="width: 99%;padding-left: 10px;padding-top: 10px;margin-bottom: 60px;">
+			<table tableframe=void  style="margin-bottom: 0px;width: 99%;">
+				<tr>
+					<td colspan="4" style="font-weight: bold;">
+						<!--<input id="FileName"  type="file" class="fileloading" name="files" multiple/></td>-->
+						<button type="button" style="float: right;" class="btn btn-primary" id="btnAskEdit"><span class="glyphicon glyphicon-upload"></span>我要质疑</button>
+					</td>
+				</tr>
+				<tr style="margin-top: 10px;">
+					<td colspan="4">
+						<div id="askList">
+						</div>
+					</td>
+				</tr>
+			</table>
+		</div>
+
+		<div style="width: 100%;height: 50px;text-align:center;position: fixed;bottom: 0;background-color: #FFFFFF;">
+			<button type="button" class="btn btn-default" id="btnClose"><span class="glyphicon glyphicon-remove"></span>关闭</button>
+		</div>
+		<form id="form"></form>
+		<script type="text/javascript" src="../../../../media/js/jquery/jquery.js"></script>
+		<script type="text/javascript" src="../../../../media/js/jquery/jquery.extend.js"></script>
+		<script type="text/javascript" src="../../../../media/js/base/common.js"></script>
+		<script type="text/javascript" src="../../../../media/js/base/util.js"></script>
+		<script type="text/javascript" src="../../../../media/js/bootstrap/js/bootstrap.js"></script>
+		<script type="text/javascript" src="../../../../media/js/layer/layer.js"></script>
+		<script type="text/javascript" src="../js/AskView.js"></script>
+	</body>
+
+</html>

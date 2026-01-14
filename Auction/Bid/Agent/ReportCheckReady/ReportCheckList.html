@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="pragma" content="no-cache">
+		<!-- 禁止浏览器从本地机的缓存中调阅页面内容 -->
+		<meta http-equiv="cache-control" content="no-cache, must-revalidate">
+		<meta http-equiv="expires" content="0">
+		<title>评审管理</title>
+	</head>
+
+	<body>
+		<div class="container-fluid">   
+		<form id="" class="form-horizontal">
+			<div class="form-group" style="margin-top:10px">
+				<div style="width: 915px;float:left;padding-left: 15px;">
+					<div class="input-group">
+						<span class="input-group-addon">预审状态</span>
+						<select class="form-control" id="checkResult" style="width:150px;">
+							<option value="0">未评审项目</option>
+							<option value="1">评审中</option>
+							<option value="2">评审完成</option>
+						</select>
+						<span class="input-group-addon">抽取状态</span>
+						<select class="form-control" id="isSendMess" style="width:150px;">
+							<option value="">--全部--</option>
+							<option value="1">抽取已完成</option>
+							<option value="0">抽取未完成</option>
+						</select>
+						<span class="input-group-addon">查询方式</span>
+						<select class="form-control" id="projectSelect" style="width: 150px;">
+							<option value="0">采购项目名称</option>
+							<option value="1">采购项目编号</option>
+						</select>
+						<input type="text" class="form-control" id="projectinput" style="width: 200px;">
+
+					</div>
+				</div>
+				<button type="button" id="btnQuery" class="btn btn-primary">
+            			<span class="glyphicon glyphicon-search">查询</span>
+            	</button>
+			</div>
+		</form>
+		<table class="table table-hover table-bordered" id="ReportChecktable"></table>
+		</div>
+	</body>
+	<script type="text/javascript" src="0502/Bid/ReportCheckReady/js/ReportCheck.js"></script>
+
+</html>

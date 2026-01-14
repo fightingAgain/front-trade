@@ -1,0 +1,115 @@
+<head>
+	<meta http-equiv="pragma" content="no-cache">
+	<!-- 禁止浏览器从本地机的缓存中调阅页面内容 -->
+	<meta http-equiv="cache-control" content="no-cache, must-revalidate">
+	<meta http-equiv="expires" content="0">
+</head>
+<link rel="stylesheet" href="../../../../../media/js/bootstrap/css/bootstrap.css" />
+<link rel="stylesheet" href="../../../../../media/js/bootstrap/css/bootstrap-table.css" />
+<div style="width: 99%;padding-left: 10px;padding-top: 10px;margin-bottom: 60px;">
+	<table class="table table-bordered ">
+		<tr>
+			<td style="width: 20%;" class="th_bg">项目编号</td>
+			<td style="text-align: left;">
+				<div id="projectCode"></div>
+			</td>
+			<td style="width: 20%;" class="th_bg">项目名称</td>
+			<td style="text-align: left;">
+				<div id="projectName"></div>
+			</td>
+		</tr>
+		<tr>
+			<td class="th_bg">包件编号</td>
+			<td style="text-align: left;">
+				<div id="packageNum"></div>
+			</td>
+			<td class="th_bg">包件名称</td>
+			<td style="text-align: left;">
+				<div id="packageName"></div>
+			</td>
+		</tr>
+		<tr>
+			<td class="th_bg">竞价开始时间</td>
+			<td colspan="3" style="text-align: left;" id="auctionStartDate"></td>
+		</tr>
+		<tr id="isShowPrice">
+			<td style="width: 200px;" class="th_bg">是否显示当前最低报价</td>
+			<td colspan="3">
+				<label><input type="radio" name="isShowPrice" value="0" disabled="disabled" />是</label>
+				<label><input type="radio" name="isShowPrice" value="1" checked="checked" disabled="disabled" />否</label>
+			</td>
+		</tr>
+		<tr>
+			<td class="th_bg">是否需要业主代表确认<i class="red"></i></td>
+			<td colspan="3" style="text-align: left;">
+				<input type="radio" name="isSupervise" value="1" onchange="Is_Supervise(1)" />是
+				<input type="radio" name="isSupervise" value="0" checked="checked" onchange="Is_Supervise(0)" />否
+			</td>
+		</tr>
+		<tr style="display: none;" id="Supervise">
+			<td colspan="1" class="th_bg">业主代表<i class="red"></i></td>
+			<td colspan="3" style="text-align: left;">
+				<input class="btn btn-primary" type="button" value="选择业主代表" onclick="add()" />
+			</td>
+		</tr>
+		<tr style="display: none;" id="SuperviseInfo">
+			<td colspan="4">
+				<table class="table table-bordered">
+					<thead>
+						<tr>
+							<th style="width: 50px;" class="text-center">序号</th>
+							<th class="text-center">姓名</th>
+							<th class="text-center">登录名</th>
+							<th class="text-center">手机号</th>
+							<th class="text-center">邮箱</th>
+						</tr>
+					</thead>
+
+					<tbody id="SuperviseList">
+						<!--<tr>
+							<td align="center" colspan="6">暂无数据</td>
+						</tr>-->
+
+					</tbody>
+				</table>
+			</td>
+		</tr>
+		
+		<tr>
+			<td colspan="4" class="active">竞价文件</td>
+		</tr>
+		<tr>
+			<td colspan="4" style="padding:inherit;border: 0px solid;">
+				<table class="table table-bordered" id="AuctionFileCheck" style="border: 0px solid;">
+				</table>
+			</td>
+		</tr>
+		<tr class="BidSituationRecord">
+			<th colspan="4" class="active">竞价文件下载记录</th>
+		</tr>
+		<tr class="BidSituationRecord">
+			<td colspan="4" align="left">
+				<table class="table table-bordered table-striped" id="PurchaseFileDownload">
+
+				</table>
+			</td>
+		</tr>
+	</table>
+
+	<div id="divButton" style=" width: 100%;height: 50px;text-align:center;position: fixed;bottom: 0;left:0;background-color: #FFFFFF;">
+		<button type="button" id="btnSave" class="btn btn-primary" style="width: 100px;">保 存</button>&nbsp;
+		<button type="button" id="btnClose" class="btn btn-primary" style="width: 100px;">关 闭 </button>
+	</div>
+</div>
+
+<script type="text/javascript" src="../../../../../media/js/jquery/jquery.js"></script>
+<script type="text/javascript" src="../../../../../media/js/jquery/jquery.extend.js"></script>
+<script type="text/javascript" src="../../../../../media/js/jquery/jquery.params.js"></script>
+<script type="text/javascript" src="../../../../../media/js/base/common.js"></script>
+<script type="text/javascript" src="../../../../../media/js/base/util.js"></script>
+<script type="text/javascript" src="../../../../../media/js/bootstrap/js/bootstrap.js"></script>
+<script type="text/javascript" src="../../../../../media/js/bootstrap/js/bootstrap-table.min.js"></script>
+<script type="text/javascript" src="../../../../../media/js/bootstrap/js/bootstrap-table-zh-CN.min.js"></script>
+<script type="text/javascript" src="../../../../../media/js/Model/public.js"></script>
+<script type="text/javascript" src="../js/OfferSetInfo.js"></script>
+<script src="../../../Agent/AuctionProjectPackage/js/buyRecord.js"></script>

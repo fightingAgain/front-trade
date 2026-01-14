@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8">
+		<meta http-equiv="pragma" content="no-cache"><!-- 禁止浏览器从本地计算机的缓存中访问页面内容 --> 
+		<meta http-equiv="cache-control" content="no-cache"><!-- 用于指定请求和响应遵循的缓存机制 --> 
+		<meta http-equiv="expires" content="0"><!-- 用于设定网页的到期时间，一旦网页过期，必须到服务器上重新传输； -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>招标公告</title>
+    <link rel="stylesheet" href="../../../../media/js/layer/mobile/need/layer.css" />
+    <link rel="stylesheet" href="../../../../media/js/bootstrap/css/bootstrap.css" />
+    
+	<style>
+		html,body { width: 100%;}
+		.readonly{
+		    border: none;
+		    background: none !important;
+		    outline: none !important;
+		    box-shadow: none !important;
+		}
+		.pretrial,.revise{
+			display: none;
+		}
+		.enterFull{
+			position: absolute;
+			top: 0;
+			left: 0;
+			background: #ffffff;
+			visibility: visible;
+			filter: Alpha(opacity=90);
+		}
+		.display_none{
+			display: none;
+		}
+		.file-input .kv-upload-progress{
+			display: none !important;
+		}
+		tr .file-input{
+			display: inline-block;
+			float: right;
+			margin-right: 50px;
+		}
+		a,a:link,a:visited,a:hover,a:active{
+			color: #333333;
+			text-decoration: none;
+		}
+		
+		
+	</style>
+</head>
+
+<body>
+    <form class="pageModel" id="addNotice" name="formName">
+    	<div class="panel-group" id="accordion">
+    		<div class="panel panel-accordion panel-default">
+	    		<div class="panel-heading active"  role="tab" id="headingOne">  
+			 		<h4 class="panel-title">
+		            	<a  role="button" data-toggle="collapse" href="#collapseOne" aria-controls="collapseOne"  aria-expanded="true"  >
+		            		基本信息
+		            	</a>
+			 		</h4>  
+			   	</div>  
+			  	<div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">  
+			       	<div class="panel-body">
+			       		<table  class="table table-bordered ">
+			       			<tr>
+					        	<td class="th_bg">标段编号</td>
+				                <td colspan="3">
+				                    <input type="text"  name="interiorBidSectionCode" id="interiorBidSectionCode" class="form-control readonly" readonly="readonly" />
+				                    <input type="hidden"  name="bidSectionId" id="bidSectionId" />
+				                    <input type="hidden"  name="examType" id="examType" />
+				                </td>
+				               
+					        </tr>
+					        <tr>
+					        	 <td class="th_bg">标段名称</td>
+				                <td colspan="3">
+				                    <input type="text"  name="bidSectionName" id="bidSectionName" class="form-control readonly" readonly="readonly" />
+				                </td>
+					        </tr>
+					        <tr>
+					        	 <td class="th_bg">招标项目名称</td>
+				                <td colspan="3">
+				                    <input type="text"  name="tenderProjectName" id="tenderProjectName" class="form-control readonly" readonly="readonly" />
+				                </td>
+					        </tr>
+					        <tr>
+					        	<td class="th_bg">评标时间</td>
+				                <td colspan="3">
+				                    <input type="text"  name="checkEndDate" id="checkEndDate" class="form-control readonly" readonly="readonly" />
+				                </td>
+					        </tr>
+					        <tr>
+					        	<td class="th_bg">项目经理</td>
+				                <td>
+				                    <input type="text"  name="tenderAgencyLinkmen" id="tenderAgencyLinkmen" class="form-control readonly" readonly="readonly" />
+				                </td>
+				                <td class="th_bg">联系电话</td>
+				                <td>
+				                    <input type="text"  name="tenderAgencyLinktel" id="tenderAgencyLinktel" class="form-control readonly" readonly="readonly" />
+				                </td>
+					        </tr>
+					        <tr>
+					        	<td class="th_bg">中标结果公告标题</td>
+				                <td colspan="3">
+				                    <input type="text"  name="noticeName" id="noticeName" class="form-control readonly" readonly="readonly" style="width: 70%;"/>
+				                </td>
+					        </tr>
+							<tr>
+								<td class="th_bg"><span >公示期（天）</span></td>
+								<td colspan="3">
+									<input type="text"  name="noticePeriod" id="noticePeriod" class="form-control readonly" readonly="readonly" style="width: 260px;"/>
+								</td>
+							</tr>
+					        <tr>
+					        	<td class="th_bg">公告开始时间</td>
+				                <td>
+				                	<div style="position: relative;width: 260px;">
+				                		<input type="text"  name="noticeStartTime" id="noticeStartTime" class="form-control readonly" readonly="readonly" datatype="*" errormsg="请选择公告开始时间"/>
+										<!--<span style="position: absolute; top: 10px;right: 10px; font-size:18px;cursor: pointer;background: #ffffff;" class="glyphicon glyphicon-calendar calendar_icon"></span>-->
+									</div>
+				                </td>
+				                <td class="th_bg">公告截止时间</td>
+				                <td>
+				                	<div style="position: relative;width: 260px;">
+				                		<input type="text"  name="noticeEndTime" id="noticeEndTime" class="form-control readonly" readonly="readonly" datatype="*" errormsg="请选择公告截止时间"/>
+										<!--<span style="position: absolute; top: 10px;right: 10px; font-size:18px;cursor: pointer;background: #ffffff;" class="glyphicon glyphicon-calendar calendar_icon"></span>-->
+									</div>
+				                    
+				                </td>
+					        </tr>
+					         <tr>
+					            <td class="th_bg" >中标人及中标价</td>
+					            <td  colspan="3">
+					            	<table class="table table-bordered " id="candidates">
+					            		
+					            	</table>
+					            </td>
+					        </tr>
+					        <!--<tr>
+					        	<td class="th_bg">公告形式</td>
+				                <td colspan="3">
+				                   
+				                    <input type="text"  name="modality" id="modality" class="form-control readonly" readonly="readonly" style="width: 70%;"/>
+				                </td>
+					        </tr>-->
+			       		</table>
+		       		</div>
+	       		</div>
+       		</div>
+       		<div class="panel panel-accordion panel-default">
+	    		<div class="panel-heading active"  role="tab" id="headingFour">  
+			 		<h4 class="panel-title">
+		            	<a class="collapsed" role="button" data-toggle="collapse" href="#collapseFour" aria-controls="collapseFour"  aria-expanded="false">
+		            		公告发布媒体
+		            	</a>
+			 		</h4>  
+			   	</div>  
+			  	<div  id="collapseFour" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingFour">  
+			       	<div class="panel-body">
+			       		<table class="table table-bordered">
+					      	<tr>
+					            <td colspan="4" class="media-box">
+					            	<!--<div><input type="checkbox" name="noticeMedia" value="001" disabled="disabled" style="margin-right: 5px;"/>东风综合网站</div>
+					            	<div><input type="checkbox" name="noticeMedia" value="002" disabled="disabled" style="margin-right: 5px;"/>湖北省公共服务平台</div>
+					            	<div><input type="checkbox" name="noticeMedia" value="000" disabled="disabled" style="margin-right: 5px;"/>国家公共服务平台</div>
+					            	<div><input type="checkbox" name="noticeMedia" value="003" disabled="disabled" style="margin-right: 5px;"/>襄阳市公共服务平台</div>
+					            	<div><input type="checkbox" name="noticeMedia" value="005" disabled="disabled" style="margin-right: 5px;"/>采招网</div>-->
+					            </td>
+					        </tr>
+				        </table>   
+		       		</div>
+		       	</div>
+	    	</div>
+       		<div class="panel panel-accordion panel-default">
+	    		<div class="panel-heading active"  role="tab" id="headingTwo">  
+			 		<h4 class="panel-title">
+		            	<a class="collapsed" role="button" data-toggle="collapse" href="#collapseTwo" aria-controls="collapseTwo"  aria-expanded="false">
+		            		公告基本信息
+		            	</a>
+			 		</h4>  
+			   	</div>  
+			  	<div  id="collapseTwo" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingTwo">  
+			       	<div class="panel-body">
+			       		<!-- <button type="button" class="btn btn-sm btn-primary fullScreen"   style="float: right;margin-right: 50px;margin-bottom: 10px;">
+		            		<span class="glyphicon glyphicon-fullscreen"></span>全屏
+		            	</button> -->
+			       		<table id="ueditorContent" class="table table-bordered">
+				        </table>   
+		       		</div>
+		       	</div>
+	    	</div>
+	    	<div class="panel panel-accordion panel-default">
+	    		<div class="panel-heading active"  role="tab" id="headingThree">  
+			 		<h4 class="panel-title">
+		            	<a class="collapsed" role="button" data-toggle="collapse" href="#collapseThree" aria-controls="collapseThree"  aria-expanded="false">
+		            		相关附件
+		            	</a>
+			 		</h4>  
+			   	</div>  
+			  	<div  id="collapseThree" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingThree">  
+			       	<div class="panel-body">
+			       		<div id="fileContent">
+			       			
+			       		</div>   
+		       		</div>
+		       	</div>
+	    	</div>
+	    	<div id="approval">
+	    		
+	    	</div>
+   		</div>
+    	
+        <div class="bottom-btn" style="z-index: 11000;">
+            <button type="button" class="btn btn-default" id="btnClose"><span class="glyphicon glyphicon-remove"></span>取消</button>
+        </div>
+    </form>
+    <script type="text/javascript" src="../../../../media/js/jquery/jquery.js"></script>
+    <script type="text/javascript" src="../../../../media/js/jquery/jquery.extend.js"></script>
+    <script type="text/javascript" src="../../../../media/js/base/util.js"></script>
+    <script type="text/javascript" src="../../../../media/js/base/common.js"></script>
+    <script type="text/javascript" src="../../../../media/js/base/UEditorFun.js"></script>
+	<script type="text/javascript" src="../../../../media/js/bootstrap/js/bootstrap.js"></script>
+    <script type="text/javascript" src="../../../../media/js/stream/js/stream-v1.js"></script>
+    <script type="text/javascript" src="../../../../media/js/base/StreamUpload.js"></script>
+    <script src="../../../Model/js/public.js"></script>
+    <script src="../../../../media/js/base/WorkflowInfoNew.js"></script>
+    <script type="text/javascript" src="../js/publicityHistoryView.js"></script>
+</body>
+
+</html>

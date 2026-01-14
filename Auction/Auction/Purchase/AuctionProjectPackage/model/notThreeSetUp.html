@@ -1,0 +1,46 @@
+<head>
+	<meta http-equiv="pragma" content="no-cache">
+	<!-- 禁止浏览器从本地机的缓存中调阅页面内容 -->
+	<meta http-equiv="cache-control" content="no-cache, must-revalidate">
+	<meta http-equiv="expires" content="0">
+</head>
+<link rel="stylesheet" href="../../../../../media/js/bootstrap/css/bootstrap.css" />
+<link rel="stylesheet" href="../../../../../media/js/bootstrap/css/bootstrap-table.css" />
+<link rel="stylesheet" href="../../../../../media/js/datetimepicker/css/jquery.datetimepicker.css"/>
+<div style="width: 99%;padding-left: 10px;padding-top: 10px;margin-bottom: 60px;">
+	<table class="table table-bordered ">
+		<tr>
+			<td colspan="2">参与竞价供应商<span id="offerCount"></span>家，不足3家，请选择开标处理措施:</td>
+		
+		</tr>
+		<tr>
+			<td colspan="2">
+				<input type="radio" name="supplierCountConfig" value="0" checked/>延长竞价结束时间    
+				<input type="radio" name="supplierCountConfig" value="1"/>结束本次竞价（流标处理） 
+				<span class="supplierCountConfig2"><input type="radio" name="supplierCountConfig" value="2"/>满足公司规定，允许开标</span>
+			</td>			
+		</tr>	
+		<tr id="isauctionEndTime" style="display: none">
+			<td class="th_bg">
+				竞价截止时间
+			</td>
+			<td>
+				<input type="text" readonly="readonly"  class="form-control" id="auctionEndTime"/>
+			</td>			
+		</tr>
+	</table>
+	<div id="divButton" style=" width: 100%;height: 50px;text-align:center;position: fixed;bottom: 0;left:0;background-color: #FFFFFF;">
+		<button type="button" id="btnSave" class="btn btn-primary" ><span class="glyphicon glyphicon-ok"></span>确认选择</button>
+		<button type="button" id="btnClose" class="btn btn-default"><span class="glyphicon glyphicon-remove"></span>稍后再说</button>
+	</div>
+</div>
+<script type="text/javascript" src="../../../../../media/js/jquery/jquery.js"></script>
+<script type="text/javascript" src="../../../../../media/js/jquery/jquery.extend.js"></script>
+<script type="text/javascript" src="../../../../../media/js/jquery/jquery.params.js"></script>
+<script type="text/javascript" src="../../../../../media/js/base/common.js"></script>
+<script type="text/javascript" src="../../../../../media/js/base/util.js"></script>
+<script type="text/javascript" src="../../../../../media/js/bootstrap/js/bootstrap.js"></script>
+<script type="text/javascript" src="../../../../../media/js/bootstrap/js/bootstrap-table.min.js"></script>
+<script type="text/javascript" src="../../../../../media/js/bootstrap/js/bootstrap-table-zh-CN.min.js"></script>
+<script type="text/javascript" src="../../../../../media/js/datetimepicker/js/jquery.datetimepicker.js" ></script>
+<script type="text/javascript" src="../js/notThreeSetUp.js"></script>

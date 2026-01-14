@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="pragma" content="no-cache">
+		<!-- 禁止浏览器从本地机的缓存中调阅页面内容 -->
+		<meta http-equiv="cache-control" content="no-cache, must-revalidate">
+		<meta http-equiv="expires" content="0">
+		<title>竞卖情况竞卖中查看</title>
+		<link rel="stylesheet" href="../../../../../media/js/bootstrap/css/bootstrap.css" />
+		<link rel="stylesheet" href="../../../../../media/js/bootstrap/css/bootstrap-table.css">
+		<link rel="stylesheet" href="../../../../../media/js/datetimepicker/css/jquery.datetimepicker.css"/>
+	
+		<style>
+			.container div {
+				text-align: center;
+			}
+			
+			table th,
+			table td {
+				vertical-align: middle;
+			}
+			
+			.table>tbody>tr>td {
+				vertical-align: middle;
+			}
+
+			#offerDetail span {
+				color: red;
+			}
+			
+			.timeInval,
+			.minPrice,.countDown,.notEliminatedCount {
+				font-size: 24px !important;
+				font-weight: bold;
+			}
+			
+			#detailofferRecordTable .no-records-found {
+				display: none;
+			}
+			
+			#packageofferRecordTable .no-records-found {
+				display: none;
+			}
+			
+			#roundAuctionRecordTable .no-records-found {
+				display: none;
+			}
+			.table > thead > tr > th, .table > tbody > tr > th, .table > tfoot > tr > th, .table > thead > tr > td, .table > tbody > tr > td, .table > tfoot > tr > td{
+			 	vertical-align: middle;
+			 }
+		</style>
+	</head>
+
+	<body style="width: 99%;padding: 10px;">
+		<div class="container">
+			<table class="table table-bordered" id="offerInfo">
+				<tr>
+					<td rowspan="3">
+						<h1 style="margin: 0px;padding: 0px;text-align: center;"></h1>
+					</td>
+					<th width="17%" class="th_bg">项目编号</th>
+					<td width="25%" data-field="packageNum"></td>
+					<th width="17%" class="th_bg">项目名称</th>
+					<td width="25%" data-field="packageName"></td>
+				</tr>
+				<tr class="myView">
+					<th class="th_bg">变更当前阶段截止时间</th>
+					<td style="width:250px">
+						<div class="form-group" style="margin-bottom: 0px;text-align: left;" >
+							<input type="text" readonly="readonly" data-field="curStageEndTime"
+								style="width: 180px;margin-bottom: 0px;display: inline-block;" class="form-control" id="StageEndTime"/>
+							<button style="vertical-align: middle;margin-left: 5px;" data-event='changeEndTime' class="btn btn-primary btn-sm">确定</button>
+						</div>
+					</td>
+					<th class="th_bg">当前阶段参与供应商数</th>
+					<td>
+						<span class="notEliminatedCount" style="color: red;"></span>
+					</td>
+				</tr>
+				<tr>
+					<td class="th_bg">竞卖开始时间</td>
+					<td colspan="3" style="text-align: left;" id="auctionStartDate"></td>
+				</tr>
+				<tr class="otherView" >
+					
+					<th  class="th_bg">当前阶段参与供应商数</th>
+					<td colspan="3">
+						<span class="notEliminatedCount" style="color: red;"></span>
+					</td>
+				</tr>
+			</table>
+			<div id="offerDetail" style="width: 100%;">
+				<div class="countDown"></div>
+			</div>
+		</div>
+	<script type="text/javascript" src="../../../../../media/js/jquery/jquery.js"></script>
+	<script type="text/javascript" src="../../../../../media/js/jquery/jquery.extend.js"></script>
+	<script type="text/javascript" src="../../../../../media/js/jquery/jquery.params.js"></script>
+	<script type="text/javascript" src="../../../../../media/js/bootstrap/js/bootstrap.js"></script>
+	<script type="text/javascript" src="../../../../../media/js/bootstrap/js/bootstrap-table.min.js"></script>
+	<script type="text/javascript" src="../../../../../media/js/bootstrap/js/bootstrap-table-zh-CN.min.js"></script>
+	<script type="text/javascript" src="../../../../../media/js/layer/layer.js"></script>
+	<script type="text/javascript" src="../../../../../media/js/layer/laydate.js"></script>
+	<script type="text/javascript" src="../../../../../media/js/datetimepicker/js/jquery.datetimepicker.js" ></script>
+	<script type="text/javascript" src="../../../../../media/js/base/util.js"></script>
+	<script src="../js/OfferViewInfo.js"></script>
+
+</html>

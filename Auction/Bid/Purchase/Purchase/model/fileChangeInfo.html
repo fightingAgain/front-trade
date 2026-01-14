@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<!-- 网页不会被缓存 -->
+	<meta http-equiv="pragma" content="no-cache">
+	<!-- 禁止浏览器从本地机的缓存中调阅页面内容 -->
+	<meta http-equiv="cache-control" content="no-cache, must-revalidate">
+	<meta http-equiv="expires" content="0">
+	<title></title>
+	<link rel="stylesheet" href="../../../../../media/js/bootstrap/css/bootstrap.css" />
+	<link rel="stylesheet" href="../../../../../media/js/bootstrap/css/bootstrap-table.min.css" type="text/css" />
+	<link rel="stylesheet" href="../../../../../media/js/bootstrap-fileinput-master/css/fileinput.min.css"
+		type="text/css" />
+</head>
+
+<body>
+	<div name="purchase" style="width: 99%;padding-left: 10px;padding-top: 10px;margin-bottom: 60px;">
+		<table class="table table-bordered " style="margin-bottom: 0px;">
+			<tr>
+				<td colspan="4" style="font-weight: bold;" class="active">包件基本信息</td>
+			</tr>
+			<tr>
+				<td style="width:250px;" class="th_bg">项目名称</td>
+				<td style="text-align: left;">
+					<div id="projectName"></div>
+				</td>
+				<td style="width:250px;" class="th_bg">项目编号</td>
+				<td style="text-align: left;">
+					<div id="projectCode"></div>
+				</td>
+			</tr>
+			<tr>
+				<td style="width:250px;" class="th_bg">包件名称</td>
+				<td style="text-align: left;">
+					<div id="packageName"></div>
+				</td>
+				<td style="width:250px;" class="th_bg">包件编号</td>
+				<td style="text-align: left;">
+					<div id="packageNum"></div>
+				</td>
+			</tr>
+			<td class="active" colspan="4" style="border: none;"><strong>文件变更记录</strong></td>
+			</tr>
+			<tr>
+				<td colspan="4">
+					<table class="table table-bordered" id="fileTables">
+
+					</table>
+				</td>
+			</tr>
+			<tr class="record">
+				<td class="active" colspan="4" style="border: none;"><strong>流程审核记录</strong></td>
+			</tr>
+			<tr class="record">
+				<td colspan="4">
+					<table class="table table-bordered" id="workflowListDetail">
+
+					</table>
+				</td>
+			</tr>
+		</table>
+	</div>
+
+	<div style="width: 100%;height: 50px;text-align:center;position: fixed;bottom: 0;background-color: #FFFFFF;">
+		<button type="button" id="btn_close" class="btn btn-default"><span
+				class="glyphicon glyphicon-remove"></span>关闭</button>
+	</div>
+	<form id="formFile"></form>
+	<script type="text/javascript" src="../../../../../media/js/jquery/jquery.js"></script>
+	<script type="text/javascript" src="../../../../../media/js/jquery/jquery.extend.js"></script>
+	<script type="text/javascript" src="../../../../../media/js/base/common.js"></script>
+	<script type="text/javascript" src="../../../../../media/js/base/util.js"></script>
+	<script type="text/javascript" src="../../../../../media/js/bootstrap/js/bootstrap.js"></script>
+	<script type="text/javascript" src="../../../../../media/js/bootstrap/js/bootstrap-table.min.js"></script>
+
+	<script type="text/javascript" src="../../../../../media/js/base/auditRecords.js"></script>
+	<script type="text/javascript" src="../js/fileInfo.js"></script>
+</body>
+<script>
+	var downloadFileUrl = config.bidhost + '/FileController/download.do';//下载文件
+	var searchUrlFile = config.bidhost + '/BidFileController/findFileList.do';
+	var packageInfo;
+	var examType = getUrlParam('examType');//预审采购文件还是询比采购文件
+	var projectId = getUrlParam('projectId');
+	var packageId = getUrlParam('packageId');
+	var keyId = getUrlParam('keyId');
+	var AccessoryList = [];
+	if (examType == 0) {
+		var WORKFLOWTYPE = "zgyswj";
+	} else {
+		var WORKFLOWTYPE = "xjcgwj";
+	}
+	$(function () {
+		du()
+	})
+	function du() {
+		$.ajax({
+			url: config.bidhost + '/ProjectReviewController/findProjectPackageInfo.do',
+			type: 'post',
+			//dataType:'json',
+			async: false,
+			//contentType:'application/json;charset=UTF-8',
+			data: {
+				"packageId": packageId
+			},
+			success: function (data) {
+				if (data.success) {
+					packageInfo = data.data;//包件信息	
+					$('div[id]').each(function () {
+						$(this).html(packageInfo[this.id]);
+					});
+				}
+
+			},
+
+			error: function (data) {
+				parent.layer.alert("获取失败")
+			}
+		});
+
+		getAccessoryList();
+		findWorkflowCheckerAndAccp(keyId);
+	};
+
+	function getAccessoryList() {
+		$.ajax({
+			type: "get",
+			url: searchUrlFile,
+			async: false,
+			dataType: 'json',
+			data: {
+				"bidFileCheckId": keyId,
+				//'examType':examType,
+
+			},
+			success: function (data) {
+				if (data.success == true) {
+					if (data.data.length > 0) {
+						AccessoryList = data.data;
+					}
+				}
+
+
+			}
+		});
+		fileTable();
+
+	};
+
+	function fileTable() {
+		$('#fileTables').bootstrapTable({
+			pagination: false,
+			undefinedText: "",
+			columns: [{
+				title: "序号",
+				align: "center",
+				halign: "center",
+				width: "50px",
+				formatter: function (value, row, index) {
+					return index + 1;
+				}
+			},
+			{
+				field: "fileName",
+				title: "文件名称",
+				align: "left",
+				halign: "left",
+
+			},
+			{
+				field: "type",
+				title: "文件类型",
+				visible: examType == 1 ? true : false,
+				align: "center",
+				halign: "center",
+				formatter: function (value, row, index) {
+					if (row.isClearFile == 1) {
+						return '清单文件'
+					} else {
+						return '采购文件'
+					}
+				}
+			},
+			{
+				field: "fileSize",
+				title: "文件大小",
+				align: "center",
+				halign: "center",
+				width: '120px'
+
+			},
+			{
+				field: "subDate",
+				title: "上传时间",
+				align: "center",
+				halign: "center",
+				width: '180px'
+
+			},
+			{
+				field: "userName",
+				title: "上传人",
+				align: "center",
+				halign: "center",
+				width: '100px'
+
+			},
+			{
+				field: "caoz",
+				title: "操作",
+				width: '200px',
+				halign: "center",
+				align: "center",
+				events: {
+					'click .fileDownload': function (e, value, row, index) {
+						var newUrl = downloadFileUrl + "?ftpPath=" + row.filePath + "&fname=" + row.fileName;
+						window.location.href = $.parserUrlForToken(newUrl);
+					},
+					'click .previewFile': function (e, value, row, index) {
+						openPreview(row.filePath);
+					},
+					'click .previewPurchaseFile': function (e, value, row, index) {
+						openPurchaseFilePreviewPage(row);
+					},
+				},
+				formatter: function (value, row, index) {
+					var filesnames = row.fileName.substring(row.fileName.lastIndexOf(".") + 1).toUpperCase();
+					var mixtbody = ""
+					mixtbody += "<a href='javascript:void(0)' class='btn btn-primary btn-xs fileDownload'>下载</a>&nbsp;&nbsp"
+					if (filesnames == 'PNG' || filesnames == 'JPG' || filesnames == 'JPGE' || filesnames == 'PDF') {
+						mixtbody += "<a href='javascript:void(0)' class='btn btn-primary btn-xs previewFile'>预览</a>"
+					}
+					if (row.systemStatus == 1) {
+						mixtbody += "<a href='javascript:void(0)' class='btn btn-primary btn-xs previewPurchaseFile'>预览</a>&nbsp;&nbsp"
+					}
+					return mixtbody;
+				}
+			}
+			]
+		});
+		$('#fileTables').bootstrapTable("load", AccessoryList); //重载数据
+	};
+	function getUrlParam(name) {
+		var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); // 构造一个含有目标参数的正则表达式对象  
+		var r = window.location.search.substr(1).match(reg); // 匹配目标参数  
+		if (r != null) return unescape(r[2]);
+		return null; // 返回参数值  
+	}
+
+	//关闭按钮
+	$("#btn_close").click(function () {
+		parent.layer.close(parent.layer.getFrameIndex(window.name));
+	});
+
+	function openPurchaseFilePreviewPage(row) {
+		parent.layer.open({
+			type: 2,
+			title: '采购文件预览',
+			id: 'packageSet',
+			area: ['80%', '90%'],
+			content: 'bidPrice/Public/PurchaseFilePreview/PurchaseFilePreview.html?packageId=' + row.packageId + '&examType=' + row.examType + '&id=' + row.id,
+		});
+	}
+
+</script>
+
+</html>

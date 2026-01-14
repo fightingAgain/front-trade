@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>项目</title>
+</head>
+<body>
+    <div class="container-fluid">       
+		<div id="toolbar" style="margin-bottom: 10px;">
+		    <div class="input-group" style="width:240px;float: left;margin-right: 15px;">
+	        	<span class="input-group-addon">公告类型:</span>
+	        	<select class="form-control" id="tenderType" onchange="searchTable()">
+	        		<option value="">全部公告</option>
+	        		<option value="0">询价采购公告</option>
+	        		<option value="1">竞价采购公告</option>
+	        		<option value="2">竞卖</option>	        		
+	        	</select>
+	    	</div>
+	    	<div class="input-group" style="width:150px;float: left;margin-right: 15px;">
+	    		<span class="input-group-addon">项目名称:</span>
+	        	<input type="text" class="form-control" id="projectName" style="width:150px">
+	    	</div>
+	    	<div class="input-group" style="width:150px;float: left;margin-right: 15px;">
+	    		<span class="input-group-addon">项目编号:</span>
+	        	<input type="text" class="form-control" id="projectCode" style="width:150px">
+	    	</div>
+	    	<div class="input-group" style="width:150px;float: left;margin-right: 15px;">
+	    		<span class="input-group-addon">企业名称:</span>
+	        	<input type="text" class="form-control" id="enterpriseName" style="width:150px">
+	    	</div>
+			<div class="btn-group" style="padding-left: 10px;">
+			 	<button id="eventquery" type="button" class="btn btn-primary">
+		          <span class="glyphicon glyphicon-search" aria-hidden="true">查询
+		        </button>			 				
+	        </div>
+		</div>		
+        <table class="table table-hover table-bordered" id="table">
+	    </table>     
+    </div>
+    <style>
+	 .table > thead > tr > th, 
+	 .table > tbody > tr > th, 
+	 .table > tfoot > tr > th, 
+	 .table > thead > tr > td, 
+	 .table > tbody > tr > td, 
+	 .table > tfoot > tr > td{
+	 	vertical-align: middle;
+	 }
+   </style>
+<script type="text/javascript" src="0502/Bid/SysPurchase/js/SysPurchase.js"></script>
+</body>
+</html>

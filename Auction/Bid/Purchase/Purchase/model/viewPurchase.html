@@ -1,0 +1,180 @@
+<!-- 网页不会被缓存 -->
+<meta http-equiv="pragma" content="no-cache">
+<!-- 禁止浏览器从本地机的缓存中调阅页面内容 -->
+<meta http-equiv="cache-control" content="no-cache, must-revalidate">
+<meta http-equiv="expires" content="0">
+<link rel="stylesheet" href="../../../../../media/js/layer/mobile/need/layer.css" />
+<link rel="stylesheet" href="../../../../../media/js/layer/theme/default/laydate.css" />
+<link rel="stylesheet" href="../../../../../media/js/bootstrap/css/bootstrap.css" />
+<link rel="stylesheet" href="../../../../../media/js/bootstrap/css/bootstrap-table.min.css" type="text/css"/>
+<style type="text/css">
+	label {
+		font-weight: normal;
+	}
+</style>
+<form id="form" name="purchase" style="width: 98%;padding-left: 1%;padding-top: 10px;margin-bottom: 60px;">
+     <table class="table table-bordered " style="margin-bottom: 0px;">
+     	<tr>
+            <td colspan="3" style="font-weight: bold;" class="active">项目信息</td>
+			<td style="text-align: right;border: none;box-shadow: none;" class="active">
+				<button type="button" id="btn_view_assign_project" class="btn btn-sm btn-primary isAssignProject" style="display: none;"><span class="glyphicon glyphicon-eye-open"></span>查看派项信息</button>
+			</td>
+        </tr>
+        <tr >
+            <td class="th_bg">采购项目名称</td>
+            <td style="text-align: left;">
+            	<div id="projectName"></div>           	
+            </td>
+            <td class="th_bg">采购项目编号</td>
+            <td style="text-align: left;">
+            	<div id="projectCode"></div>           	
+            </td>  
+        </tr>
+         <tr>
+         	<td class="th_bg" style="width:200px;">资金来源</td>
+            <td  style="text-align: left;">
+            	<div id="sourceFunds"></div>            	
+            </td> 
+         	<td class="th_bg" style="width: 200px;">项目类型</td>
+            <td  style="text-align: left;">
+            	<div id="projectTypeText"></div>            	
+            </td>
+         </tr>
+         <tr class="engineering">
+            <td class="th_bg">项目名称</td>
+            <td colspan="3" style="text-align: left;">
+            	<div id="programmeName"></div>
+            	
+            </td>         
+           
+         </tr>
+		 <tr>
+			<td class="th_bg">
+				所选地区
+			</td>
+			<td style="text-align: left;">
+				<span id="provinceName"></span>-
+				<span id="cityName"></span>
+			</td>
+			<td class="th_bg" style="width:200px;">资格审查方式</td>
+            <td  style="text-align: left;">
+            	<div id="examtype"></div>            	
+            </td>
+		</tr>
+		<tr class="isAssignProject" style="display: none;">
+			<td class="th_bg">
+				是否分包件
+			</td>
+			<td colspan="3">
+				<div id="isSubpackage"></div>
+			</td>
+		 </tr>
+		<tr>
+			<td class="th_bg">采购项目分类</td>
+			<td colspan="3">
+				<div id="tenderProjectClassify"></div>
+			</td>
+		</tr>
+		<tr>
+			<td class="th_bg">项目行业分类</td>
+			<td colspan="3">
+				<div id="industriesType"></div>
+			</td>
+		</tr>
+         <tr class="engineering">
+         	<td class="th_bg">项目编号</td>
+            <td colspan="3" style="text-align: left;">
+            	<div id="programmeCode"></div>           	
+            </td>
+         </tr>
+         <tr class="engineering">
+            <td class="th_bg">项目地址</td>
+            <td colspan="3" style="text-align: left;">
+            	<div id="programmeAddress"></div>            	
+            </td>
+         </tr>
+         <input type="hidden" name="project.isAgent" value="1"/>      
+		 <tr class="isAgent1">
+		    <td colspan="4" style="font-weight: bold;" class="active">代理机构信息</td>            
+		 </tr>
+		 <tr class="isAgent1">
+		    <td  class="th_bg">代理机构名称</td>
+		    <td colspan="3" style="text-align: left;">
+		    	<div id="agencyName"></div>
+		    </td>
+		 </tr>
+		 <tr class="isAgent1">
+		    <td  class="th_bg">代理机构地址</td>
+		    <td colspan="3" style="text-align: left;">
+		    	<div id="agencyAddress"></div>
+		    </td>
+		 </tr>
+		 <tr class="isAgent1">
+		    <td class="th_bg">代理机构联系人</td>
+		    <td style="text-align: left;">
+		    	<div id="agencyLinkmen"></div>
+		    </td>
+		    <td class="th_bg">代理机构联系电话</td>
+		    <td style="text-align: left;">
+		    	<div id="agencyTel"></div>
+		    </td>
+		 </tr>
+		 
+		 <tr>
+		    <td colspan="4" style="font-weight: bold;border: none;" class="active">采购人信息</td>
+		 </tr>
+		 <tr>
+		    <td class="th_bg">采购人名称</td>
+		    <td colspan="3" style="text-align: left;">
+		    	<div id = "purchaserName"></div>		    
+		    </td>
+		 </tr>
+		 <tr >
+		    <td class="th_bg">采购人地址</td>
+		    <td colspan="3" style="text-align: left;">
+				<div id = "purchaserAddress" ></div>				
+		    </td>
+		 </tr>
+		 <tr>
+		    <td class="th_bg">联系人</td>
+		    <td style="text-align: left;">
+		    	<!--<div id = "purchaserLinkmen" ></div>-->
+		    	<div id="purchaserLinkmen"></div>
+		    </td>
+		    <td class="th_bg">联系人电话</td>
+		    <td style="text-align: left;">
+		    	<div id="purchaserTel"></div>
+		    </td>
+		 </tr>                 	        	
+     	<tr>
+     		<td colspan="4" style="font-weight: bold;border: none;" class="active">包件信息</td>     		
+     	</tr>
+     	<tr id="projectMember">
+     		<td colspan="4">
+     			<table class="table  table-bordered" style="margin-bottom: 0px;" id="tablebjb">
+			     		
+			     </table>
+     		</td>
+     	</tr>	 	
+     </table>   
+ </form>
+  <div style="width: 100%;height: 50px;text-align:center;position: fixed;bottom: 0;background-color: #FFFFFF;">
+	<button type="button" id="btn_close" class="btn btn-default"><span class="glyphicon glyphicon-remove"></span>关闭</button>
+ </div>
+ <style>
+ .table > thead > tr > th, .table > tbody > tr > th, .table > tfoot > tr > th, .table > thead > tr > td, .table > tbody > tr > td, .table > tfoot > tr > td{
+ 	vertical-align: middle;
+ }
+ </style>
+ <script type="text/javascript" src="../../../../../media/js/jquery/jquery.js" ></script>
+ <script type="text/javascript" src="../../../../../media/js/jquery/jquery.extend.js"></script>
+ <script type="text/javascript" src="../../../../../media/js/base/common.js" ></script>
+ <script type="text/javascript" src="../../../../../media/js/bootstrap/js/bootstrap.js" ></script>
+ <script type="text/javascript" src="../../../../../media/js/bootstrap/js/bootstrap-table.min.js"></script>
+ <script type="text/javascript" src="../../../../../media/js/bootstrap/js/bootstrap-table-zh-CN.min.js"></script>
+ <script type="text/javascript" src="../../../../../media/js/layer/layer.js" ></script>
+ <script type="text/javascript" src="../../../../../media/js/Model/projectMembers.js" ></script>
+ <script type="text/javascript" src="../../../../../media/js/Model/public.js" ></script>
+ <script type="text/javascript" src="../../../../../media/js/Model/js/dataLinkage.js" ></script>
+ <script type="text/javascript" src="../js/viewPurchase.js?verson=1.02" ></script>
+ <script type="text/javascript" src="../js/packageTest.js"></script>

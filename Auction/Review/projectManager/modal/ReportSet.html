@@ -1,0 +1,178 @@
+<!--
+ * @Author: your name
+ * @Date: 2020-09-09 13:49:25
+
+ * @LastEditTime: 2021-01-23 10:14:43
+
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: \FrameWork_bf\bidPrice\Review\projectManager\modal\ReportSet.html
+--> 
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="pragma" content="no-cache">
+		<!-- 禁止浏览器从本地机的缓存中调阅页面内容 -->
+		<meta http-equiv="cache-control" content="no-cache, must-revalidate">
+		<meta http-equiv="expires" content="0">
+		<title>评审管理设置</title>
+		
+	</head>
+	<style type="text/css">
+		 a.disabled {
+            pointer-events: none;
+            filter: alpha(opacity=50); /*IE滤镜，透明度50%*/
+            -moz-opacity: 0.5; /*Firefox私有，透明度50%*/
+            opacity: 0.5; /*其他，透明度50%*/
+        }
+        
+        .selects{
+        	height:31px;
+        	width:220px;
+        }
+		.table>tbody>tr>td.th_bg, .table>tbody>tr>th.th_bg {
+			width:250px;
+		}
+		.fixed-table-container{
+			border: none;
+		}
+	</style>
+	<body>		
+		<div>
+			<table class="table table-bordered">
+				<tr >
+					<td colspan="2" style="font-weight: bold;border: none;" class="active"><font size="3" >评审设置</font></td>
+					<td colspan="2" class="active" style="border: none;text-align: right;">
+						<font size="4" class="buttonNone">关联包件：</font>
+						<div style="width: 230px;float: right;">
+
+							<select class="form-control selects isNotOrSure"  name="optionName" id="optionName" onchange=onLinkPackage(2)>
+								
+							</select>
+						
+						</div>						
+					</td>
+				</tr>
+				<tr >
+					<td class="th_bg" >在评委评审页面显示项目公告</td>
+					<td>
+						
+						<input type="radio" class="isNotOrSure" name="isShowProject" value="1" />否&nbsp;
+						<input type="radio" class="isNotOrSure" name="isShowProject" value="0"/>是&nbsp;
+					</td>
+					<td class="th_bg" >在评委评审页面显示<span class="examTypeName">评审报告</span></td>
+					<td>
+						
+						<input type="radio" class="isNotOrSure" name="isShowReport" value="1" />否&nbsp;
+						<input type="radio" class="isNotOrSure" name="isShowReport" value="0" />是&nbsp;
+					</td>
+				</tr>
+				<tr class="examTypeShow" style="display: none;">
+					<!--<td class="th_bg" >所有评委确认评审报告</td>
+					<td >
+						
+						<input type="radio" class="isNotOrSure" name="isNeedSure" value="0" checked />否&nbsp;
+						<input type="radio" class="isNotOrSure" name="isNeedSure" value="1" />是&nbsp;
+					</td>-->
+					<!-- <td class="th_bg">价格评审执行人</td>
+					<td colspan="3">
+						<input type="radio" class="isNotOrSure" name="isPriceCheck" value="0"/>项目经理&nbsp;
+						<input type="radio" class="isNotOrSure" name="isPriceCheck" value="1" />专家评委&nbsp;	
+					</td> -->
+				</tr>
+				<tr class="isNotDoubleEnvelope" style="display: none;">
+					<td class="th_bg">在评委评审页面显示报价一览表</td>
+					<td >
+						<input type="radio" class="isNotOrSure" name="isShowOffer" value="1" />否&nbsp;
+						<input type="radio" class="isNotOrSure"name="isShowOffer" value="0"/>是&nbsp;						
+					</td>
+					<td colspan="2">
+						<span class="red">选择是，则当评审开始后，评委评审就显示报价一览表；</span></br>
+						<span class="red">选择否，则当评审进行到价格评审环节时，才显示报价一览表。</span>
+					</td>
+				</tr>
+				<tr class="isNotDoubleEnvelope" style="display: none;">
+					<td class="th_bg">在<span class="isEnterpriseType">采购人和代理机构</span>页面显示报价一览表</td>
+					<td >
+						<input type="radio" class="isNotOrSure" name="isShowAllOffer" value="1" />否&nbsp;
+						<input type="radio" class="isNotOrSure" name="isShowAllOffer" value="0"/>是&nbsp;
+					</td>
+					<td colspan="2">
+						<span class="red encipherHide">选择是，则当评审开始后，<span class="isEnterpriseType">采购人和代理机构</span>页面就显示报价一览表；</span>
+						<span class="red encipherShow" style="display: none;">选择是，则当开启结束后，<span class="isEnterpriseType">采购人和代理机构</span>页面就显示报价一览表；</span>
+						</br>
+						<span class="red">选择否，则当评审进行到价格评审环节时，才显示报价一览表。</span>
+					</td>
+				</tr>
+				<tr>
+					<td class="th_bg" >评委查看评审项结果</td>
+					<td colspan="3">
+						
+						<input type="radio" class="isNotOrSure" name="isShowCheckListResult" value="1" />否&nbsp;
+						<input type="radio" class="isNotOrSure" name="isShowCheckListResult" value="0"/>是&nbsp;
+					</td>
+				</tr>
+				<tr style="display: none" class="isCheckListResult">					
+					<td colspan="4">
+						<table id="checkListResult" class="table table-bordered"></table>
+					</td>
+				
+				</tr>								
+				<tr>
+					<td class="th_bg" style="vertical-align:middle;">设置业主代表</td>
+					<td  colspan="3" >
+						
+						<input type="radio" class="isNotOrSure" name="isSetChecker" value="1" />否&nbsp;
+						<input type="radio" class="isNotOrSure" name="isSetChecker" value="0" />是&nbsp;&nbsp;&nbsp;
+						<button class="btn btn-primary btn-sm isStopCheck" id="addReviewer" onclick=addReviewer(2)>选择业主代表</button>
+					</td>
+				</tr>
+				<tr class ='isJoinCheck'>
+					<td class="th_bg" >业主代表参与<span class="examTypeName">评审报告</span>审核</td>
+					<td colspan="3" >
+						
+						<input type="radio" class="isNotOrSure" name="isJoinCheck" value="1" />否&nbsp;
+						<input type="radio" class="isNotOrSure" name="isJoinCheck" value="0" />是&nbsp;
+					</td>
+				</tr>
+				<tr >
+					<td colspan="4" style="padding:inherit;border: 0px solid;">
+						<table id="NowReviewerTalbe" style="border:0px solid;"></table>
+					</td>
+				</tr>
+				<tr class ='isPromiss' style="display: none;">
+					<td class="th_bg" >评委CA签订承诺书</td>
+					<td>
+						<input type="radio" class="isCanSignIn" name="isNeedSignPromise" value="1" />是&nbsp;
+						<input type="radio" class="isCanSignIn" name="isNeedSignPromise" value="0" />否&nbsp;
+						<button class="btn btn-primary btn-sm" id="addAnnounce" style="display: none;">业主声明材料<br/><span id="announceState"></span></button>
+						
+					</td>
+					<td colspan="2">
+						<span class="red">选择是，评委需使用CA进行承诺书签订</span></br>
+						<span class="red isAgentTips" style="display: none;">选择否，前提为“业主声明材料”已提交并审批通过。选择后评委无需签订承诺书</span>
+						<span class="red notAgentSignPromiseTips" style="display: none;">选择否，评委无需签订承诺书</span>
+					</td>
+				</tr>
+				<tr class ='isSignReport' style="display: none;">
+					<td class="th_bg" >评委CA签订评审报告</td>
+					<td>
+						<input type="radio" class="isCanSignReport" name="isNeedSignReport" value="1" />是&nbsp;
+						<input type="radio" class="isCanSignReport" name="isNeedSignReport" value="0" />否&nbsp;
+						<button class="btn btn-primary btn-sm" id="addReportAnnounce" style="display: none;">业主声明材料<br/><span id="reportAannounceState"></span></button>
+						
+					</td>
+					<td colspan="2">
+						<span class="red">选择是，评委需使用CA进行评审报告签名</span></br>
+						<span class="red isAgentReportTips" style="display: none;">选择否，前提为“业主声明材料”已提交并审批通过。选择后评委无需签署评审报告</span>
+						<span class="red notAgentReportTips" style="display: none;">选择否，评委无需签署评审报告</span>
+					</td>
+				</tr>
+			</table>
+			<table id="NowReviewerTalbe" class="table table-bordered"></table>
+		</div>	
+	</body>
+	
+    <script type="text/javascript" src="../js/ReportSet.js"></script>
+</html>

@@ -1,0 +1,517 @@
+//时间选择期
+function time(examType){
+	$(".ageinBtn").on('click',function(){
+		$(".ageinTime").val("")
+	})
+	$(".ageinTime").on('change',function(){
+		var time = $(this).val();
+		var r = new RegExp("^((\\d{2}(([02468][048])|([13579][26]))[\\-\\/\\s]?((((0?[13578])|(1[02]))[\\-\\/\\s]?((0?[1-9])|([1-2][0-9])|(3[01])))|(((0?[469])|(11))[\\-\\/\\s]?((0?[1-9])|([1-2][0-9])|(30)))|(0?2[\\-\\/\\s]?((0?[1-9])|([1-2][0-9])))))|(\\d{2}(([02468][1235679])|([13579][01345789]))[\\-\\/\\s]?((((0?[13578])|(1[02]))[\\-\\/\\s]?((0?[1-9])|([1-2][0-9])|(3[01])))|(((0?[469])|(11))[\\-\\/\\s]?((0?[1-9])|([1-2][0-9])|(30)))|(0?2[\\-\\/\\s]?((0?[1-9])|(1[0-9])|(2[0-8]))))))(\\s((([0-1][0-9])|(2?[0-3]))\\:([0-5]?[0-9])))?$");		
+		if(!r.test(time)){
+			parent.layer.alert('请输入正确格式的日期');
+			$(this).val("")
+		}
+	});
+	//公告截止时间
+	$('#noticeEndDate').datetimepicker({
+		step:5,
+		lang:'ch',
+		format: 'Y-m-d H:i',		
+		onShow:function(){
+			var nowSysDate=top.$("#systemTime").html()+" "+top.$("#sysTime").html();
+			if(NewDate(packageInfo.noticeStartDate)>NewDate(nowSysDate)){	
+				var noticeMin=packageInfo.noticeStartDate
+			}else{
+				var noticeMin=nowSysDate
+			}	
+			$('#noticeEndDate').datetimepicker({						
+					minDate:NewDateT(noticeMin)
+			})
+		},
+		onClose:function(e) {
+			$("#sellFileEndDate").val($('#noticeEndDate').val());
+			if(packageInfo.isSign==1){
+					$("#signEndDate").val($('#noticeEndDate').val());
+			}
+			
+		},
+	});
+	
+	//提出澄清截止时间
+	$('#askEndDate').datetimepicker({
+			step:5,
+			lang:'ch',
+			format: 'Y-m-d H:i',				
+			onShow:function(){		
+				var nowSysDate=top.$("#systemTime").html()+" "+top.$("#sysTime").html();			
+				if($('#noticeEndDate').val()!=""){
+					if(NewDate($('#noticeEndDate').val())>NewDate(nowSysDate)){	
+						var askEndMin=NewDateT($('#noticeEndDate').val()+':00');
+					}else{
+						var askEndMin=NewDateT(nowSysDate);
+					}					
+				}else{
+					var askEndMin=NewDateT(nowSysDate);										
+				};				
+				$('#askEndDate').datetimepicker({						
+						minDate:askEndMin,
+						//maxDate:askEndMax,
+				})
+			},
+	});
+	//答复截止时间
+	
+	$('#answersEndDate').datetimepicker({
+			step:5,
+			lang:'ch',
+			format: 'Y-m-d H:i',			
+			onShow:function(){
+				var nowSysDate=top.$("#systemTime").html()+" "+top.$("#sysTime").html();
+				var answersMinDate=""
+				if(NewDate($('#askEndDate').val())>NewDate(nowSysDate)){//如果存在判断提出澄清截止时间跟当前时间，
+					answersMinDate=$('#askEndDate').val()+':00';//如果提出澄清截止时间大于当前时间，则询比的最小值是报价时间
+				}else{
+					answersMinDate=nowSysDate//小于当前时间。询比的最小时间则为当前时间
+				}
+				$('#answersEndDate').datetimepicker({						
+						minDate:NewDateT(answersMinDate)
+				})
+			},
+	});
+	//报价截止时间
+	$('#bidEndDate').datetimepicker({
+		step:5,
+		lang:'ch',
+		format: 'Y-m-d H:i',
+		onShow:function(){
+			var nowSysDate=top.$("#systemTime").html()+" "+top.$("#sysTime").html();
+			if($('#noticeEndDate').val()!=""){
+				if(NewDate($('#noticeEndDate').val())>NewDate(nowSysDate)){	
+					var bidEndMin=$('#noticeEndDate').val()+':00';
+				}else{
+					var bidEndMin=nowSysDate//否则则是当前时间为最小值
+				}						
+			}else{
+				var bidEndMin=nowSysDate//否则则是当前时间为最小值
+			}													
+			$('#bidEndDate').datetimepicker({						
+					minDate:NewDateT(bidEndMin),
+					//maxDate:NewDateT(bidEndMax),
+			})
+		},			
+	});	
+	
+	//询比评审时间或预审评审时间
+	$('#checkEndDate').datetimepicker({
+		step:5,
+		lang:'ch',
+		format: 'Y-m-d H:i',
+		onShow:function(){			
+			var  checkEndMinDate="";//询比评审时间或预审评审时间的最小时间判断
+			var nowSysDate=top.$("#systemTime").html()+" "+top.$("#sysTime").html();
+			if(examType==1){//当为后审时，存在报价文件，则询比时间的最小值必须大于报价文件
+				if($('#bidEndDate').val()!=""){//判断是否存在报价时间
+					if(NewDate($('#bidEndDate').val())>NewDate(nowSysDate)){//如果存在判断报价时间跟当前时间，
+						checkEndMinDate=$('#bidEndDate').val()+':00';//如果报价时间大于当前时间，则询比的最小值是报价时间
+					}else{
+						checkEndMinDate=nowSysDate//小于当前时间。询比的最小时间则为当前时间
+					}
+					
+				}else{
+					checkEndMinDate=nowSysDate//不存在则是当前时间
+				}
+			}else if(examType==0){//当为预审时，则是资格预审申请文件递交截止时间是预审评审的最小值				
+				if($('#submitExamFileEndDate').val()!=""){//判断是否存在格预审申请文件递交截止时间					
+					if(NewDate($('#submitExamFileEndDate').val())>NewDate(nowSysDate)){//如果格预审申请文件递交截止时间大于当前时间						
+						checkEndMinDate=$('#submitExamFileEndDate').val()+':00';//预审评审的最小时间则是格预审申请文件递交截止时间
+					}else{
+						checkEndMinDate=nowSysDate//否则则是当前时间为最小值
+					}			
+				}else{
+					checkEndMinDate=nowSysDate//不存在则是当前时间
+				}
+			}					
+			$('#checkEndDate').datetimepicker({						
+					minDate:NewDateT(checkEndMinDate),				
+			})
+	    },
+	});
+	$('#submitExamFileEndDate').datetimepicker({
+		step:5,
+		lang:'ch',
+		format: 'Y-m-d H:i',
+		onShow:function(){
+			var submitExamMinDate = "";
+			var nowSysDate=top.$("#systemTime").html()+" "+top.$("#sysTime").html();
+			if($('#noticeEndDate').val()!=""){
+				if(NewDate($('#noticeEndDate').val())>NewDate(nowSysDate)){//如果格预审申请文件递交截止时间大于当前时间
+					submitExamMinDate=$('#noticeEndDate').val()+':00';//预审评审的最小时间则是格预审申请文件递交截止时间
+				}else{
+					submitExamMinDate=nowSysDate//否则则是当前时间为最小值
+				}
+			}else{
+				submitExamMinDate=nowSysDate//否则则是当前时间为最小值
+			}				
+			$('#submitExamFileEndDate').datetimepicker({						
+					minDate:NewDateT(submitExamMinDate),				
+			})
+	    },
+	});
+};
+
+function examTime(examTypeShow){
+	$(".ageinBtn").on('click',function(){
+		$(".ageinTime").val("")
+	})
+	$(".ageinTime").on('change',function(){
+		var time = $(this).val();
+		var r = new RegExp("^((\\d{2}(([02468][048])|([13579][26]))[\\-\\/\\s]?((((0?[13578])|(1[02]))[\\-\\/\\s]?((0?[1-9])|([1-2][0-9])|(3[01])))|(((0?[469])|(11))[\\-\\/\\s]?((0?[1-9])|([1-2][0-9])|(30)))|(0?2[\\-\\/\\s]?((0?[1-9])|([1-2][0-9])))))|(\\d{2}(([02468][1235679])|([13579][01345789]))[\\-\\/\\s]?((((0?[13578])|(1[02]))[\\-\\/\\s]?((0?[1-9])|([1-2][0-9])|(3[01])))|(((0?[469])|(11))[\\-\\/\\s]?((0?[1-9])|([1-2][0-9])|(30)))|(0?2[\\-\\/\\s]?((0?[1-9])|(1[0-9])|(2[0-8]))))))(\\s((([0-1][0-9])|(2?[0-3]))\\:([0-5]?[0-9])))?$");		
+		if(!r.test(time)){
+			parent.layer.alert('请输入正确格式的日期');
+			$(this).val("")
+		}
+	});
+	//公告截止时间
+	$('#noticeEndDate').datetimepicker({
+		step:5,
+		lang:'ch',
+		format: 'Y-m-d H:i',
+		onShow:function(){	
+			var nowSysDate=top.$("#systemTime").html()+" "+top.$("#sysTime").html();			
+			if(NewDate(packageInfo.noticeStartDate)>NewDate(nowSysDate)){	
+				var noticeMin=packageInfo.noticeStartDate
+			}else{
+				var noticeMin=nowSysDate
+			}
+			$('#noticeEndDate').datetimepicker({						
+					minDate:NewDateT(noticeMin)
+			})
+		},
+		onClose:function(e) {
+			$("#sellFileEndDate").val($("#noticeEndDate").val());			
+			$("#acceptEndDate").val($("#noticeEndDate").val());
+			if(packageInfo.isSign==1){					
+				$("#signEndDate").val($("#noticeEndDate").val())
+			}
+		},
+	});
+	$('#askEndDate').datetimepicker({
+		step:5,
+		lang:'ch',
+		format: 'Y-m-d H:i',		
+		onShow:function(){
+			var nowSysDate=top.$("#systemTime").html()+" "+top.$("#sysTime").html();
+			if($('#noticeEndDate').val()!=""){
+				if(NewDate($('#noticeEndDate').val())>NewDate(nowSysDate)){	
+					var askEndMin=NewDateT($('#noticeEndDate').val()+':00');
+				}else{
+					var askEndMin=NewDateT(nowSysDate);
+				}					
+			}else{
+				var askEndMin=NewDateT(nowSysDate);
+			};
+			$('#askEndDate').datetimepicker({						
+					minDate:askEndMin,					
+			})
+		},	
+	});
+	$('#answersEndDate').datetimepicker({
+		step:5,
+		lang:'ch',
+		format: 'Y-m-d H:i',
+		onShow:function(){
+			var nowSysDate=top.$("#systemTime").html()+" "+top.$("#sysTime").html();
+			var answersMinDate=""
+			if($('#askEndDate').val()!=""){//判断是否存在提出澄清截止时间
+				if(NewDate($('#askEndDate').val())>NewDate(nowSysDate)){//如果存在判断提出澄清截止时间跟当前时间，
+					answersMinDate=$('#askEndDate').val()+':00';//如果提出澄清截止时间大于当前时间，则询比的最小值是报价时间
+				}else{
+					answersMinDate=nowSysDate//小于当前时间。询比的最小时间则为当前时间
+				}					
+			}else{
+				answersMinDate=nowSysDate//小于当前时间。询比的最小时间则为当前时间
+			}
+			$('#answersEndDate').datetimepicker({						
+					minDate:NewDateT(answersMinDate)
+			})
+		},
+	});
+	$('#bidEndDate').datetimepicker({
+		step:5,
+		lang:'ch',
+		format: 'Y-m-d H:i',
+		onShow:function(){
+			var nowSysDate=top.$("#systemTime").html()+" "+top.$("#sysTime").html();
+			if($('#noticeEndDate').val()!=""){
+				if(NewDate($('#noticeEndDate').val())>NewDate(nowSysDate)){	
+					var bidEndMin=$('#noticeEndDate').val()+':00';
+				}else{
+					var bidEndMin=nowSysDate//否则则是当前时间为最小值
+				}						
+			}else{
+				var bidEndMin=nowSysDate//否则则是当前时间为最小值
+			};										
+			$('#bidEndDate').datetimepicker({						
+					minDate:NewDateT(bidEndMin),
+					//maxDate:NewDateT(bidEndMax),
+			})
+		},	
+	});
+	//接受邀请截止时间
+	$('#acceptEndDate').datetimepicker({
+		step:5,
+		lang:'ch',
+		format: 'Y-m-d H:i',		
+		onShow:function(){	
+			var nowSysDate=top.$("#systemTime").html()+" "+top.$("#sysTime").html();		
+			$('#acceptEndDate').datetimepicker({										
+				minDate:NewDateT(nowSysDate)
+			})
+		},
+		onClose:function(e) {
+			if(packageInfo.isSellPriceFile==0){
+				$("#sellPriceFileEndDate").val($('#acceptEndDate').val())
+			}
+		},
+	});
+	$('#checkEndDate').datetimepicker({
+			step:5,
+			lang:'ch',
+			format: 'Y-m-d H:i',			
+			onShow:function(){	
+				var nowSysDate=top.$("#systemTime").html()+" "+top.$("#sysTime").html();			
+				if($('#bidEndDate').val()!=""){
+						if(NewDate($('#bidEndDate').val())>NewDate(nowSysDate)){	
+							var checkEndMin=$('#bidEndDate').val()+':00';
+						}else{
+							var checkEndMin=nowSysDate//否则则是当前时间为最小值
+						}						
+					}else{
+						var checkEndMin=nowSysDate//否则则是当前时间为最小值						
+					};
+				$('#checkEndDate').datetimepicker({					
+					minDate:NewDateT(checkEndMin)
+				})
+			},			
+	});
+};
+
+function datetimepickers(examType){
+	var timeList="";
+	timeList+='<tr>'
+		timeList+='<td  class="th_bg" >'+ (examType==1?'公告开始时间':'资格预审公告开始时间') +'</td>'
+		timeList+='<td style="text-align: left;">'
+			timeList+='<div id="oldnoticeStartDate">'+ (packageInfo.noticeStartDate!=undefined?packageInfo.noticeStartDate.substring(0,16):"") +'</div>'	     			
+		timeList+='</td>'
+		timeList+='<td  class="th_bg" style="width:250px;">'+ (examType==1?'公告截止时间':'资格预审公告截止时间') +'</td>'
+		timeList+='<td style="text-align: left;">'
+			timeList+='<div id="oldnoticeEndDate">'+ (packageInfo.noticeEndDate!=undefined?packageInfo.noticeEndDate.substring(0,16):"")+'</div>'
+		timeList+='</td>'     		
+	timeList+='</tr>'
+	if(packageInfo.isSign==1){
+		timeList+='<tr>'     		
+			timeList+='<td class="th_bg" style="width:250px;">报名开始时间</td>'
+			timeList+='<td class=""style="text-align: left;">'
+				timeList+='<div id="oldsignStartDate">'+ (packageInfo.signStartDate!=undefined?packageInfo.signStartDate.substring(0,16):"")+'</div>'					
+			timeList+='</td>'
+			timeList+='<td class="th_bg" style="width:250px;">报名截止时间</td>'
+			timeList+='<td style="text-align: left;">'
+				timeList+='<div id="oldsignEndDate">'+ (packageInfo.signEndDate!=undefined?packageInfo.signEndDate.substring(0,16):"")+'</div>'		
+			timeList+='</td>'
+		timeList+='</tr>'
+	}  
+	if(examType==1){			   	
+		timeList+='<tr>'
+			timeList+='<td  class="th_bg" >原始提出澄清截止时间</td>'
+			timeList+='<td style="text-align: left;">'
+				timeList+='<div id="oldaskEndDate">'+(packageInfo.askEndDate!=undefined?packageInfo.askEndDate.substring(0,16):"")+'</div>'   			
+			timeList+='</td >'
+			  timeList+='<td  class="th_bg" >提出澄清截止时间</td>'
+			timeList+='<td style="text-align: left;">'
+				timeList+='<input type="text" autocomplete="off" data-min="noticeEndDate" data-max="answersEndDate" data-datename="提出澄清截止时间" class="btn btn-default ageinTime" id="askEndDate"  name="askEndDate" style="width: 200px;text-align: left;">'
+			timeList+='</td >'
+		timeList+='</tr>'
+		timeList+='<tr>'
+			timeList+='<td  class="th_bg" >原始答复截止时间</td>'
+			timeList+='<td style="text-align: left;">'
+				timeList+='<div id="oldanswersEndDate">'+(packageInfo.answersEndDate!=undefined?packageInfo.answersEndDate.substring(0,16):"")+'</div>'  			
+			timeList+='</td >'
+			  timeList+='<td  class="th_bg" >答复截止时间</td>'
+			timeList+='<td style="text-align: left;">'
+				timeList+='<input type="text" autocomplete="off" data-min="answersEndDate" data-datename="答复截止时间" class="btn btn-default ageinTime" id="answersEndDate"  name="answersEndDate" style="width: 200px;text-align: left;">'
+			timeList+='</td >'
+		timeList+='</tr>'
+		timeList+='<tr>'
+			timeList+='<td  class="th_bg" >原始报价截止时间</td>'
+			timeList+='<td style="text-align: left;">'
+				timeList+='<div id="oldofferEndDate">'+(packageInfo.offerEndDate!=undefined?packageInfo.offerEndDate.substring(0,16):"")+'</div>'   			
+			timeList+='</td>'
+			timeList+='<td  class="th_bg" >报价截止时间</td>'
+			timeList+='<td  style="text-align: left;">'
+				timeList+='<input type="text" autocomplete="off" data-min="'+ (packageInfo.isSign==1?'signStartDate':'noticeEndDate') +'" data-max="checkEndDate" data-datename="报价截止时间" class="btn btn-default ageinTime" name="offerEndDate"  id="bidEndDate"  style="width: 200px;text-align: left;">'
+			timeList+='</td>'    		    		
+		timeList+='</tr>'
+		timeList+='<tr>'
+			timeList+='<td  class="th_bg" >原始询比评审时间</td>'
+			timeList+='<td style="text-align: left;">'
+				timeList+='<div id="oldcheckEndDate">'+(packageInfo.checkEndDate!=undefined?packageInfo.checkEndDate.substring(0,16):"")+'</div>'       			
+			timeList+='</td>'
+			timeList+='<td  class="th_bg" >询比评审时间</td>'
+			timeList+='<td  style="text-align: left;">'
+				timeList+='<input type="text" autocomplete="off" data-min="offerEndDate" data-datename="询比评审时间" class="btn btn-default ageinTime" name="checkEndDate"  id="checkEndDate"  style="width: 200px;text-align: left;">'
+			timeList+='</td>'    		    		
+		timeList+='</tr>'
+   }else{		
+		timeList+='<tr>'
+			timeList+='<td  class="th_bg" >原始资格预审提出澄清截止时间</td>'
+			timeList+='<td style="text-align: left;">'
+				timeList+='<div id="oldexamAskEndDate">'+(packageInfo.examAskEndDate!=undefined?packageInfo.examAskEndDate.substring(0,16):"")+'</div>'     			
+			timeList+='</td >'
+			  timeList+='<td  class="th_bg" >资格预审提出澄清截止时间</td>'
+			timeList+='<td style="text-align: left;">'
+				timeList+='<input type="text" autocomplete="off" data-min="noticeEndDate" data-max="examAnswersEndDate" data-datename="资格预审提出澄清截止时间" class="btn btn-default ageinTime" id="askEndDate" name="examAskEndDate"  style="width: 200px;text-align: left;">'
+			timeList+='</td >'    	
+		timeList+='</tr>' 
+		timeList+='<tr>'     		
+			timeList+='<td  class="th_bg" >原始资格预审答复截止时间</td>'
+			timeList+='<td style="text-align: left;">'
+				timeList+='<div id="oldexamAnswersEndDate">'+(packageInfo.examAnswersEndDate!=undefined?packageInfo.examAnswersEndDate.substring(0,16):"") +'</div>'
+			timeList+='</td >'
+			  timeList+='<td  class="th_bg" >资格预审答复截止时间</td>'
+			timeList+='<td style="text-align: left;">'
+				timeList+='<input type="text" autocomplete="off" data-min="noticeEndDate" data-max="examAnswersEndDate" data-datename="资格预审提出澄清截止时间" class="btn btn-default ageinTime" id="answersEndDate" name="examAnswersEndDate"  style="width: 200px;text-align: left;">'
+			timeList+='</td >'
+		timeList+='</tr>'
+		timeList+='<tr>'
+			timeList+='<td  class="th_bg" >原资格预审申请文件递交截止时间</td>'
+			timeList+='<td style="text-align: left;">'
+				timeList+='<div id="oldsubmitExamFileEndDate">'+(packageInfo.submitExamFileEndDate!=undefined?packageInfo.submitExamFileEndDate.substring(0,16):"")+'</div>' 
+			timeList+='</td>'
+			timeList+='<td  class="th_bg" ><span class="examCheckEndDate">资格预审申请文件递交截止时间</span></td>'
+			timeList+='<td  style="text-align: left;">'
+				timeList+='<input type="text" autocomplete="off" data-min="'+ (packageInfo.isSign==1?'signStartDate':'noticeEndDate') +'" data-max="examCheckEndDate" data-datename="资格预审申请文件递交截止时间" class="btn btn-default ageinTime" name="submitExamFileEndDate" id="submitExamFileEndDate"   style="width: 200px;text-align: left;">'
+			timeList+='</td>'    		    		
+		timeList+='</tr>'
+		timeList+='<tr>'
+			timeList+='<td  class="th_bg" >原始预审评审时间</td>'
+			timeList+='<td style="text-align: left;">'
+				timeList+='<div id="oldexamCheckEndDate">'+(packageInfo.examCheckEndDate!=undefined?packageInfo.examCheckEndDate.substring(0,16):"")+'</div>' 
+			timeList+='</td>'
+			timeList+='<td  class="th_bg" ><span class="examCheckEndDate">预审评审时间</span></td>'
+			timeList+='<td  style="text-align: left;">'
+				timeList+='<input type="text" autocomplete="off"  data-min="submitExamFileEndDate"  data-datename="预审评审时间" class="btn btn-default ageinTime" name="examCheckEndDate" id="checkEndDate"   style="width: 200px;text-align: left;">'
+			timeList+='</td>'    		    		
+		timeList+='</tr>'
+   }
+	$('#timeList').html(timeList);
+	time(examType);
+}
+function examDatetimepicker(examType){
+	var timeList="";
+		if(examType==1){
+			timeList+='<tr>'
+			   timeList+='<td  class="th_bg" >接受邀请开始时间</td>'
+	     		timeList+='<td style="text-align: left;">'
+	     			timeList+='<div id="oldnoticeStartDate">'+ (packageInfo.noticeStartDate!=undefined?packageInfo.noticeStartDate.substring(0,16):"") +'</div>'	     			
+	     		timeList+='</td>'
+	     		timeList+='<td  class="th_bg" style="width:250px;">接受邀请截止时间</td>'
+	     		timeList+='<td style="text-align: left;">'
+	     			timeList+='<div id="oldnoticeEndDate">'+ (packageInfo.noticeEndDate!=undefined?packageInfo.noticeEndDate.substring(0,16):"")+'</div>'
+	     			timeList+='<input type="hidden"  id="acceptEndDate" name="acceptEndDate"/>'
+	     		timeList+='</td>'     		
+	     	timeList+='</tr>'
+	     	if(packageInfo.isSign==1){
+	     		timeList+='<tr class="isSignDateNone">'     		
+		     		timeList+='<td class="th_bg" style="width:250px;">报名开始时间</td>'
+					timeList+='<td class=""style="text-align: left;">'
+						timeList+='<div id="oldsignStartDate">'+ (packageInfo.signStartDate!=undefined?packageInfo.signStartDate.substring(0,16):"")+'</div>'					
+					timeList+='</td>'
+		     		timeList+='<td class="th_bg" style="width:250px;">报名截止时间</td>'
+					timeList+='<td style="text-align: left;">'
+						timeList+='<div id="oldsignEndDate">'+ (packageInfo.signEndDate!=undefined?packageInfo.signEndDate.substring(0,16):"")+'</div>'
+					timeList+='</td>'
+		        timeList+='</tr>'
+	     	} 
+	    }    	    	
+		timeList+='<tr>'
+			timeList+='<td  class="th_bg" >原始提出澄清截止时间</td>'
+			timeList+='<td style="text-align: left;">'
+				timeList+='<div id="oldaskEndDate">'+(packageInfo.askEndDate!=undefined?packageInfo.askEndDate.substring(0,16):"")+'</div>'  			
+			timeList+='</td >'
+			timeList+='<td  class="th_bg" >提出澄清截止时间</td>'
+			timeList+='<td style="text-align: left;">'
+				timeList+='<input type="text" autocomplete="off" data-min="noticeEndDate"  data-max="answersEndDate" data-datename="提出澄清截止时间" class="btn btn-default ageinTime" id="askEndDate"  name="askEndDate" style="width: 200px;text-align: left;">'
+				timeList+='<input type="hidden" class="btn btn-default ageinTime"  id="sellPriceFileStartDate" name="sellPriceFileStartDate" value="'+ packageInfo.noticeStartDate +'"  style="width: 200px;text-align: left;">'
+			timeList+='</td >'
+		timeList+='</tr>'
+		timeList+='<tr>'
+			timeList+='<td  class="th_bg" >原始答复截止时间</td>'
+			timeList+='<td style="text-align: left;">'
+				timeList+='<div id="oldanswersEndDate">'+(packageInfo.answersEndDate!=undefined?packageInfo.answersEndDate.substring(0,16):"") +'</div>'   			
+			timeList+='</td >'
+			timeList+='<td  class="th_bg" >答复截止时间</td>'
+			timeList+='<td style="text-align: left;">'
+				timeList+='<input type="text" autocomplete="off" data-min="askEndDate"  data-datename="答复截止时间" class="btn btn-default ageinTime" id="answersEndDate"  name="answersEndDate" style="width: 200px;text-align: left;">'
+			timeList+='</td >'
+		timeList+='</tr>'
+		if(examType==0){
+			timeList+='<tr>'
+				timeList+='<td class="th_bg" >原始接受邀请截止时间</td>'
+				timeList+='<td  style="text-align: left;" >'
+					timeList+='<div id="oldacceptEndDate">'+(packageInfo.acceptEndDate!=undefined?packageInfo.acceptEndDate.substring(0,16):"")+'</div>'
+				timeList+='</td>' 
+				timeList+='<td class="th_bg" >接受邀请截止时间</td>'
+				timeList+='<td  style="text-align: left;">'
+					timeList+='<input type="text" autocomplete="off" data-min="today" data-max="offerEndDate"  data-datename="接受邀请截止时间" class="btn btn-default ageinTime"  id="acceptEndDate" name="acceptEndDate" style="width: 200px;text-align: left;">'	     			
+					timeList+='<input type="hidden" class="btn btn-default ageinTime"  id="sellPriceFileEndDate" name="sellPriceFileEndDate" style="width: 200px;text-align: left;">'
+					
+				timeList+='</td>'
+			timeList+='</tr>'	     
+		}
+		timeList+='<tr>'
+			timeList+='<td  class="th_bg" >原始报价截止时间</td>'
+			timeList+='<td style="text-align: left;">'
+				timeList+='<div id="oldofferEndDate">'+(packageInfo.offerEndDate!=undefined?packageInfo.offerEndDate.substring(0,16):"") +'</div>'   			
+			timeList+='</td>'
+			timeList+='<td  class="th_bg" >报价截止时间</td>'
+			timeList+='<td  style="text-align: left;">'
+				timeList+='<input type="text" autocomplete="off" data-min="'+(examType==0?'acceptEndDate':'noticeEndDate') +'" data-max="checkEndDate"  data-datename="报价截止时间" class="btn btn-default ageinTime" name="offerEndDate"  id="bidEndDate"  style="width: 200px;text-align: left;">'
+			timeList+='</td>'    		    		
+		timeList+='</tr>'
+		timeList+='<tr>'
+			timeList+='<td  class="th_bg" >原始询比评审时间</td>'
+			timeList+='<td style="text-align: left;">'
+				timeList+='<div id="oldcheckEndDate">'+(packageInfo.checkEndDate!=undefined?packageInfo.checkEndDate.substring(0,16):"")  +'</div>'       			
+			timeList+='</td>'
+			timeList+='<td  class="th_bg" >询比评审时间</td>'
+			timeList+='<td  style="text-align: left;">'
+				timeList+='<input type="text" autocomplete="off" data-min="offerEndDate"  data-datename="询比评审时间" class="btn btn-default ageinTime" name="checkEndDate"  id="checkEndDate"  style="width: 200px;text-align: left;">'
+			timeList+='</td>'    		    		
+		timeList+='</tr>'
+	$('#timeList').html(timeList);
+	examTime(examType);
+}
+function NewDate(str){
+  if(!str){  
+    return 0;  
+  }  
+  arr=str.split(" ");  
+  d=arr[0].split("-");  
+  t=arr[1].split(":");
+  var date = new Date();   
+  date.setUTCFullYear(d[0], d[1] - 1, d[2]);   
+  date.setUTCHours(t[0]-8, t[1]);
+  return date.getTime();  
+} 
+function NewDateT(str){  
+  if(!str){  
+    return 0;  
+  }  
+  arr=str.split(" ");  
+  d=arr[0].split("-");  
+  t=arr[1].split(":");
+  var date = new Date(); 
+ 
+  date.setUTCFullYear(d[0], d[1] - 1, d[2]);   
+  date.setUTCHours(t[0]-8, t[1], t[2], 0);
+  return date;  
+}

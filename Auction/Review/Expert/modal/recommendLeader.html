@@ -1,0 +1,47 @@
+<!--
+ * @Author: your name
+ * @Date: 2020-09-09 15:43:28
+ * @LastEditTime: 2020-09-27 17:15:30
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: \FrameWork_bf\bidPrice\Review\projectManager\modal\progress.html
+--> 
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="pragma" content="no-cache">
+		<!-- 禁止浏览器从本地机的缓存中调阅页面内容 -->
+		<meta http-equiv="cache-control" content="no-cache, must-revalidate">
+		<meta http-equiv="expires" content="0">
+		<title>推选组长</title>
+	</head>
+	<body style="overflow:auto;">
+		<table class='table table-bordered recommendLeaderTable'>
+			<tr><td class="active" colspan="4">推选组长</td></tr>
+			<tr><td class="th_bg expertTile">组长</td><td class="expertList" colspan="3"></td></tr>
+		</table>
+		<div id="leaderTable">
+		    <table class='table table-bordered'>
+		        <tr>
+		            <td class="active">推选记录</td>
+		            <td class="active" style="width:300px">
+		                <div class="input-group" style="width:200px">
+		                    <span class="input-group-addon" style="background:none;border: none;">历史次数</span>
+		                    <select id="hisSelect" class="form-control"></select>
+		                    </div>
+		                </td>
+		            </tr>
+		        <tr>
+					<td colspan="3">
+						<table class='table table-bordered' id='leaderLs'></table>
+						<div class="showExplain red" style="margin-top: 10px;display: none;">评标（评审）结束后，招标人（采购人）代表、招标代理机构项目经理将对东风咨询有限公司专家库专家进行出勤、纪律、能力和履职等情况进行评价。评价详情可登录“专家库管理系统”专家考评页面查看个人履职评价。</div>
+					</td>
+		        </tr>
+		    </table>
+		</div>
+	</body>
+	<script type="text/javascript" src="../js/recommendLeader.js"></script>
+</html>
+

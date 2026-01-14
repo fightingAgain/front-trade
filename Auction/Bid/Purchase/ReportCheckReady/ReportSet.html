@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="pragma" content="no-cache">
+		<!-- 禁止浏览器从本地机的缓存中调阅页面内容 -->
+		<meta http-equiv="cache-control" content="no-cache, must-revalidate">
+		<meta http-equiv="expires" content="0">
+		<title>评审管理设置</title>
+		<link rel="stylesheet" type="text/css" href="../../../../media/js/bootstrap/css/bootstrap.css">
+		<link rel="stylesheet" type="text/css" href="../../../../media/js/bootstrap/css/bootstrap-table.css">
+		<link rel="stylesheet" href="../../../../media/js/bootstrap/css/bootstrap-select.min.css" />
+	</head>
+	<style type="text/css">
+		 a.disabled {
+            pointer-events: none;
+            filter: alpha(opacity=50); /*IE滤镜，透明度50%*/
+            -moz-opacity: 0.5; /*Firefox私有，透明度50%*/
+            opacity: 0.5; /*其他，透明度50%*/
+        }
+        
+        .selects{
+        	height:31px;
+        	width:220px;
+        }
+        
+        
+	
+		.table>tbody>tr>td.th_bg, .table>tbody>tr>th.th_bg {
+			width:290px;
+		}
+	</style>
+	<body style="overflow:auto;">
+		<!--<ul class="nav nav-tabs" style="margin-left: 12px;display: none;" id="myTab">
+	       	<li class="active" ><a href="#me"  data-toggle="tab" >项目预审</a></li>
+	      	<li><a href="#other" data-toggle="tab" >项目评审</a></li>
+		</ul>-->
+		
+		<table class="table table-bordered" style="width: 98%;margin: 10px;">
+			<tr class="active">
+				<td colspan="4">包件信息</td>
+			</tr>
+			<tr>
+				<td class="th_bg" width="30%" >项目编号</td>
+				<td id="projectCode"></td>
+				<td class="th_bg" >项目名称</td>
+				<td  id="projectName"></td>
+				
+			</tr>
+
+			<tr>
+				<td class="th_bg" >包件编号</td>
+				<td id="packageNum"></td>	
+				<td class="th_bg" >包件名称</td>
+				<td id="packageName"></td>
+			</tr>
+
+			<tr>
+				<td class="th_bg" >采购方式</td>
+				<td id="tenderType"></td>
+				<td class = 'th_bg' >资格预审时间</td>
+				<td id="examCheckEndDate"></td>
+				
+			</tr>
+			
+			<tr >
+				<td  colspan="2" class="active" style="font-weight: bold;border: none;">资格预审设置</td>
+				<td  colspan="2" class="active" style="border: none;text-align: right;">
+					<font size="4" class="buttonNone">关联包件：</font>
+					<div style="width: 230px;float: right;">
+					<select class="form-control selects"  name="optionName" id="optionName" onchange=onLinkPackage(1)>
+	        			
+	        		</select>
+     				</div>	
+     			</td>
+			</tr>
+			
+			<tr  >
+				<td class="th_bg" >是否在评委评审页面显示预审公告</td>
+				<td  colspan="3">
+					<input type="radio" name="isShowProject" value="1" />否&nbsp;
+					<input type="radio" name="isShowProject" value="0"/>是&nbsp;
+				</td>
+			</tr>
+			<tr >
+				<td class="th_bg">是否在评委评审页面显示资格预审评审报告</td>
+				<td  colspan="3">
+					<input type="radio" name="isShowReport" value="1" />否&nbsp;
+					<input type="radio" name="isShowReport" value="0" />是&nbsp;
+				</td>
+			</tr >
+			<tr >
+				<td class="th_bg" style="vertical-align:middle;">是否设置监标人</td>
+				<td colspan="3" >
+					<input type="radio" name="isSetChecker" value="1" />否&nbsp;
+					<input type="radio" name="isSetChecker" value="0" />是&nbsp;&nbsp;&nbsp;
+					<button class="btn btn-primary btn-sm" id="addReviewer" onclick=addReviewer(1)>选择监标人</button>
+				</td>
+			</tr>
+			<tr class = 'isJoinCheck'  >
+				<td class="th_bg">监标人是否参与预审报告审核</td>
+				<td  colspan="3" >
+					<input type="radio" name="isJoinCheck" value="1" />否&nbsp;
+					<input type="radio" name="isJoinCheck" value="0" />是&nbsp;
+				</td>
+			</tr>
+			<tr >
+				<td colspan="4" style="padding:inherit;border: 0px solid;">
+					<table id="NowReviewerTalbe" style="border:0px solid;"></table>
+				</td>
+			</tr>
+
+		</table>
+		
+		
+	</body>
+	<script type="text/javascript" src="../../../../media/js/jquery/jquery.min.js"></script>
+	<script type="text/javascript" src="../../../../media/js/jquery/jquery.extend.js"></script>
+	<script type="text/javascript" src="../../../../media/js/layer/layer.js"></script>
+	<script type="text/javascript" src="../../../../media/js/bootstrap/js/bootstrap.js" ></script>
+	<script type="text/javascript" src="../../../../media/js/bootstrap/js/bootstrap-table.min.js"></script>
+	<script type="text/javascript" src="../../../../media/js/bootstrap/js/bootstrap-select.min.js" ></script>
+	<script type="text/javascript" src="../../../../media/js/bootstrap/js/defaults-zh_CN.min.js" ></script>
+	<script type="text/javascript" src="../../../../media/js/bootstrap/js/bootstrap-table-zh-CN.min.js"></script>
+</html>
+<script>
+	var url = top.config.bidhost;
+	var projectId = getUrlParam('projectId');
+	var isSendMess = getUrlParam('isSendMess');
+	var packageId = getUrlParam('packageId');
+	//var nowDate = new Date();
+	var examType = "";
+	var packageCount="";
+	var checkCount = "";
+	var examCheckEndDate ="";
+	var checkEndDate = "";
+	var packages = [];
+	var types;
+	$(function(){
+		//查询项目信息
+		$.ajax({
+			url: url + "/CheckController/getPurchaseCheckState.do",
+			data: {
+				id: projectId,
+				packageId:packageId
+			},
+			async: false,
+			success: function(data) {
+	
+				if(data.success) {
+					
+					
+					if(data.data.packageList){
+						packages = data.data.packageList;
+					}
+					
+					//初始化
+					//showTable();
+					
+					
+					//赋值
+					showMsg();
+					
+					medias();
+				}
+			}
+		})
+	})
+	
+
+	function medias(){
+		
+		var op = "";
+		//op = "<option value='0' >关联包件</option>"
+		if(packages.length > 0){
+			//有包件	
+			for(var i=0;i<packages.length;i++){
+				op+="<option value="+packages[i].id+">"+packages[i].packageName+"</option>"
+			}
+		}else{
+			op = "<option value='0' >无</option>"
+		}
+		
+		
+		$("#optionName").html(op);
+		$("#optionName").val(["0"]);
+		
+	}
+	
+	function onLinkPackage(temp){
+		var va = $("#optionName").val();
+		var vaName = $("#optionName :selected").text();
+		if(va != 0 && va != 1){
+			layer.confirm(temp==1?"确定关联包件"+vaName+"的资格预审设置吗？":"确定关联包件"+vaName+"的评审设置吗？", {
+				btn: ['确定', '取消'] //按钮
+			}, function(index1) {
+				//修改
+				$.ajax({
+					type: "post",
+					data: {
+						projectId:ProjectData.projectId,
+						packageId:ProjectData.packageId,
+						upPackageId:va,
+						checkType:temp,
+					},
+					url: url + "/CheckController/updateLinkProjectChecker.do",
+					success: function(data) {
+						if(data.success) {
+							//$("input[name='isleader']").val([row.id]);
+							window.location.reload();
+							parent.layer.alert("设置成功");
+						} else {
+							parent.layer.alert(data.message);
+						}
+					}
+				});
+				
+				layer.close(index1);
+			})
+		}
+	}
+
+	
+	function showMsg(){
+		$.ajax({
+			url: url + "/CheckController/getPurchaseCheck.do",
+			data: {
+				id: getUrlParam("projectId"),
+				packageId:packageId,
+				checkType:1
+			},
+			async: false,
+			success: function(data) {
+	
+				if(data.success) {
+					
+					ProjectData = data.data;
+					
+					if(ProjectData.checkItemInfos.length >0){
+						//评委已有打分记录
+						$('input').attr('disabled',true);
+						$('select').attr('disabled',true);
+						
+						$('button').hide();
+					}
+					
+					sessionStorage.setItem("ProjectData", JSON.stringify(ProjectData));
+	                isAgents=ProjectData.isAgent
+	                
+	                //评审
+                	$("#projectCode").html(ProjectData.projectCode);
+					$("#projectName").html(ProjectData.projectName);
+					$("#packageNum").html(ProjectData.packageNum);
+					$("#packageName").html(ProjectData.packageName);
+					//$("#checkEndDate").html(ProjectData.checkEndDate || "");
+					$("#examCheckEndDate").html(ProjectData.examCheckEndDate || "")
+					$("#tenderType").html(['询价采购', '竞价采购', '竞卖', '询价报价', '招标采购', '谈判采购', '单一来源采购', '框架协议采购', '战略协议采购'][ProjectData.tenderType]);
+					$("input[name=isShowCollect]").val([ProjectData.isShowCollect]);
+					$("input[name=isShowReport]").val([ProjectData.isShowReport]);
+					$("input[name=isSetChecker]").val([ProjectData.isSetChecker]);
+					$("input[name=isShowOffer]").val([ProjectData.isShowOffer]);
+					$("input[name=isShowProject]").val([ProjectData.isShowProject]);
+					
+					$("input[name=isSendResult]").val([ProjectData.isSendResult]);
+					$("input[name=isJoinCheck]").val([ProjectData.isJoinCheck]);
+					if(ProjectData.isSetChecker == "1") { //不设置评审报告审核人时，隐藏表格
+						$("#NowReviewerTalbe").hide();
+						$("#addReviewer").attr("disabled", "disabled");
+						//if(types == 1){
+							//预审
+							$(".isJoinCheck").hide();
+						//}
+					}
+					
+					//绑定审核人
+					BindReviewer(ProjectData.reviewReportCheckers);
+					if(isAgents==1){
+	                	$('input[type="radio"]').attr('disabled',true);
+	                	$('button').hide();
+	                	$('select').hide();
+	                	$('.buttonNone').hide()
+	                }
+				}
+			}
+		});
+			
+	}
+	
+	function addReviewer(temp){
+		if(ProjectData.checkReport == "已完成") {
+			return top.layer.alert("预审报告已生成，无法更换监标人");	
+		}
+		parent.layer.open({
+			type: 2,
+			area: ['800px', '600px'],
+			maxmin: false, //该参数值对type:1和type:2有效。默认不显示最大小化按钮。需要显示配置maxmin: true即可
+			resize: false, //是否允许拉伸
+			title: "添加预审报告监标人",
+			content: 'Auction/common/Purchase/ReportCheck/Reviewer.html?checkType='+temp,
+			end: function(index, layro) {
+				var Reviewer_data = JSON.parse(sessionStorage.getItem("Reviewer_data"));
+				for(x in Reviewer_data) {
+					delete Reviewer_data[x]["0"];
+				}
+				if(Reviewer_data != null) {
+					var para = {
+						projectId: ProjectData.projectId,
+						packageId: ProjectData.packageId,
+						projectCheckerId: ProjectData.id,
+						employeeId: Reviewer_data[0].id,
+						checkType:temp //1为预审
+					}
+					$.ajax({
+						type: "post",
+						data: para,
+						url: url + "/CheckController/saveReviewReportChecker.do",
+						success: function(data) {
+							if(data.success) {
+								$("#NowReviewerTalbe").bootstrapTable('load', Reviewer_data);
+								sessionStorage.setItem("Reviewer_data", null);
+								layer.alert("保存成功");
+							} else {
+								layer.alert("保存失败");
+							}
+						}
+					});
+				}
+			}
+		})
+	}
+	
+	function BindReviewer(data) {
+		$("#NowReviewerTalbe").bootstrapTable({
+			data: data,
+			columns: [{
+				field: 'id',
+				title: '序号',
+				width: '50px',
+				cellStyle: {
+					css: {
+						"text-align": "center"
+					}
+				},
+				formatter: function(value, row, index) {
+					return index + 1;
+				}
+			}, {
+				field: 'employeeName',
+				title: '姓名',
+				formatter: function(value, row, index) {
+					return row.employeeName || row.userName;
+				}
+			}, {
+				field: 'logCode',
+				title: '登录名'
+			}, {
+				field: 'tel',
+				title: '手机号'
+			}, {
+				field: 'email',
+				title: '邮箱'
+			}]
+		});
+	};
+	
+	$('input:radio').change(function() {
+		var para = {
+			id: ProjectData.id,
+			projectId: ProjectData.projectId,
+			packageId:ProjectData.packageId,
+			checkType:1
+		}
+		//var name = this.name.substring(0,this.name.length-1);
+		para[this.name] = this.value;
+		$.ajax({
+			type: "post",
+			data: para,
+			url: url + "/CheckController/updateProjectChecker.do",
+			success: function(data) {
+				if(data.success) {
+					parent.layer.alert("设置成功");
+				} else {
+					parent.layer.alert("设置失败");
+				}
+				if(para.hasOwnProperty('isSetChecker')) {
+					//移除弹出框选中项
+					sessionStorage.removeItem("Reviewer_data");
+					if(para.isSetChecker == "1") {
+						$("#NowReviewerTalbe").hide();
+						$("#addReviewer").attr("disabled", "disabled");
+						//if(types == 1){
+							$(".isJoinCheck").hide();
+						//}
+						
+						//移除table数据
+						refreshReviewer([]);
+					} else {
+						//if(types == 1){
+							$(".isJoinCheck").show();
+						//}
+						
+						$("#NowReviewerTalbe").show();
+						$("#addReviewer").removeAttr("disabled");
+					}
+				}
+	
+			}
+		});
+	})
+	
+	function refreshReviewer(data) {
+		$("#NowReviewerTalbe").bootstrapTable('load', data);
+	}
+	
+	function getUrlParam(name) {
+		var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); // 构造一个含有目标参数的正则表达式对象  
+		var r = window.location.search.substr(1).match(reg); // 匹配目标参数  
+		if(r != null) return unescape(r[2]);
+		return null; // 返回参数值  
+	}
+	
+
+</script>

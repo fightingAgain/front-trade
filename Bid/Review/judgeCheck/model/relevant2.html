@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>东风交易中心（襄阳专区）</title>
+		<!-- 禁止浏览器从本地机的缓存中调阅页面内容 -->
+	    <meta http-equiv="Pragma" content="no-cache">
+	    <!-- 用来防止别人在框架里调用你的页面 -->
+	    <meta http-equiv="Window-target" content="_top">
+	    <!-- content的参数有all，none，index，noindex，follow，nofollow，默认是all -->
+	    <meta name="robots" content="none">
+	    <!-- 收藏图标 -->
+	    <link rel="Shortcut Icon" href="../../../media/image/logo.ico">
+	    <!-- 网页不会被缓存 -->
+	    <meta http-equiv="Cache-Control" content="no-cache, must-revalidate">
+	    <!-- 解决部分兼容性问题，如果安装了GCF，则使用GCF来渲染页面，如果未安装GCF，则使用最高版本的IE内核进行渲染。 -->
+	    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	   
+	    <!-- 页面按原比例显示 -->
+	    <meta name="viewport" content="width=device-width, initial-scale=1">	   
+	  	<link rel="stylesheet" type="text/css" href="../../../media/js/layer/mobile/need/layer.css" />
+	    <link rel="stylesheet" type="text/css" href="../../../media/js/bootstrap/css/bootstrap.css" />
+	    <link rel="stylesheet" type="text/css" href="../../../media/js/bootstrap/css/bootstrap-table.min.css">
+	</head>
+	<body style="padding: 10px;">
+		<table class="table table-bordered mainTable" style="margin-bottom: 0;">
+			<tr class="cprice" style="display: none;">
+            	<td colspan="2" class="active">控制价</td>
+            </tr>
+            <tr class="cprice" style="display: none;">
+            	<td class="th_bg">控制价（元）</td>
+            	<td id="controlPrice"></td>
+            </tr>
+			<tr>
+            	<td colspan="2" class="active">招标文件</td>
+            </tr>
+            <tr>
+            	<td colspan="2">
+            		<button type="button" class="btn btn-primary btn-sm tenderFile" style="margin-bottom: 10px;">下载招标文件zip</button>
+            		<table class="table table-bordered" id="tendersFileList"></table>
+            	</td>
+            	
+            </tr>
+            <tr class="bid_file">
+            	<td colspan="2" class="active">招标文件变更</td>
+            </tr>
+            <tr class="bid_file">
+            	<td colspan="2">
+            		
+            		<table class="table table-bordered" id="FileSupplementList"></table>
+            	</td>
+            </tr>
+			<tr class="openList">
+				<td colspan="2" class="active">开标记录表</td>
+			</tr>
+			<tr  class="openList">
+				<td colspan="2">
+					<table class="table table-bordered" id="openList"></table>
+				</td>
+
+			</tr>
+            <tr class="bidFileList">
+            	<td colspan="2" class="active">投标文件</td>
+            </tr>
+            <tr class="bidFileList">
+            	<td colspan="2">
+            		<table class="table table-bordered" id="bidFileList"></table>
+            	</td>
+            </tr>
+            <tr class="bondList">
+            	<td colspan="2" class="active">保证金递交情况</td>
+            </tr>
+            <tr class="bondList">
+            	<td colspan="2">
+            		<table class="table table-bordered" id="bondList"></table>
+            	</td>
+            </tr>
+           	<tr>
+            	<td colspan="2" class="active">澄清回复</td>
+            </tr>
+            <tr>
+            	<td colspan="2">
+            		<table class="table table-bordered" id="clarifyList"></table>
+            	</td>
+            	
+            </tr>
+            
+            <!--<tr>
+            	<td colspan="2" class="active">MAC相关信息</td>
+            </tr>
+            <tr>
+            	<td colspan="2">
+            		<table class="table table-bordered" id="macList"></table>
+            	</td>
+            	
+            </tr>-->
+    	</table>
+	</body>
+	<script type="text/javascript" src="../../../media/js/jquery/jquery.js" ></script>
+	<script type="text/javascript" src="../../../media/js/jquery/jquery.extend.js"></script>
+	<script type="text/javascript" src="../../../media/js/base/common.js" ></script>
+	<script type="text/javascript" src="../../../media/js/base/util.js" ></script>
+	<script type="text/javascript" src="../../../media/js/bootstrap/js/bootstrap.js" ></script>
+	<script type="text/javascript" src="../../../media/js/bootstrap/js/bootstrap-table.min.js"></script>
+	<script type="text/javascript" src="../../../media/js/bootstrap/js/bootstrap-table-zh-CN.min.js"></script>
+	<script type="text/javascript" src="../../../media/js/layer/layer.js"></script>
+	<script type="text/javascript" src="../js/relevant.js"></script>
+</html>

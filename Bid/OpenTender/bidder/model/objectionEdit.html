@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8">
+		<meta http-equiv="pragma" content="no-cache"><!-- 禁止浏览器从本地计算机的缓存中访问页面内容 --> 
+		<meta http-equiv="cache-control" content="no-cache"><!-- 用于指定请求和响应遵循的缓存机制 --> 
+		<meta http-equiv="expires" content="0"><!-- 用于设定网页的到期时间，一旦网页过期，必须到服务器上重新传输； -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>招标公告</title>
+    <link rel="stylesheet" href="../../../media/js/layer/mobile/need/layer.css" />
+    <link rel="stylesheet" href="../../../media/js/bootstrap/css/bootstrap.css" />
+    <link rel="stylesheet" href="../../../media/js/stream/css/stream-v1.css" />
+    <link rel="stylesheet" href="../../../media/js/datetimepicker/css/jquery.datetimepicker.css">
+    
+	<style>
+		html,body { height: 100%;width: 100%;}
+		.readonly{
+		    border: none;
+		    background: none !important;
+		    outline: none !important;
+		    box-shadow: none !important;
+		}
+		.pretrial,.revise{
+			display: none;
+		}
+		.enterFull{
+			position: absolute;
+			top: 0;
+			left: 0;
+			background: #ffffff;
+			visibility: visible;
+			filter: Alpha(opacity=90);
+		}
+		.display_none{
+			display: none;
+		}
+		.file-input .kv-upload-progress{
+			display: none !important;
+		}
+		tr .file-input{
+			display: inline-block;
+			float: right;
+			margin-right: 50px;
+		}
+		a,a:link,a:visited,a:hover,a:active{
+			color: #333333;
+			text-decoration: none;
+		}
+		.calendar_icon{
+			color: #3995C8;
+		}
+		.padding_button{
+			padding: 5px 8px !important;
+			line-height: 30px !important;
+		}
+		input[type=number] {  
+		    -moz-appearance:textfield;  
+		}  
+		input[type=number]::-webkit-inner-spin-button,  
+		input[type=number]::-webkit-outer-spin-button {  
+		    -webkit-appearance: none;  
+		    margin: 0;  
+		}  
+	</style>
+</head>
+
+<body>
+    <form class="pageModel" id="addNotice" name="formName">
+        <table class="table table-bordered ">
+        	<tr>
+	            <td colspan="4" style="font-weight: bold;" class="active">基本信息
+	            </td>
+	            <input type="hidden"  name="id" id="dataId" />
+	            <input type="hidden"  name="bidSectionId" id="bidSectionId" />
+	            <input type="hidden"  name="objectionType" id="objectionType" value="5"/>
+	        </tr>
+	        <tr>
+	        	<td class="th_bg">异议标题<i class="red">*</i></td>
+                <td colspan="3">
+                    <input type="text"  name="objectionTitle" id="objectionTitle" class="form-control"  datatype="*" errormsg="请输入异议标题"/>
+                </td>
+	        </tr>
+	        <tr>
+	        	<td class="th_bg">异议内容<i class="red">*</i></td>
+                <td colspan="3">
+                    <textarea name="objectionContent" id="objectionContent" class="form-control" style="resize: none;" rows="5" cols="" datatype="*" errormsg="请输入异议内容"></textarea>
+                </td>
+	        </tr>
+	        <tr>
+	        	<td class="th_bg">项目异议书上传</td>
+                <td colspan="3">
+                    <button type="button" class="btn btn-sm btn-primary" id="fileUp"   style="float: right;margin-right: 50px;">
+	            		<span class="glyphicon glyphicon-folder-open"></span>选择文件
+	            	</button>
+	            	<button id="fileLoad" type="button" style="display: none;"></button>
+	            	<div id="fileContent" style="margin-top: 50px;">
+	            		
+	            	</div>
+                </td>
+	        </tr>
+	        <tr>
+	        	<td class="th_bg">联系人<i class="red">*</i></td>
+                <td>
+                    <input type="text"  name="linkMan" id="linkMan" class="form-control" style="width: 260px;"/>
+                </td>
+                <td class="th_bg">联系人手机号<i class="red">*</i></td>
+                <td>
+                    <input type="text"  name="linkMobile" id="linkMobile" class="form-control" style="width: 260px;"/>
+                </td>
+	        </tr>
+	    </table>
+        <div class="bottom-btn" style="z-index: 11000;">
+            <button type="button" class="btn btn-primary" id="btnSave"><span class="glyphicon glyphicon-ok"></span>保存</button>
+            <button type="button" class="btn btn-primary" id="btnSubmit"><span class="glyphicon glyphicon-saved"></span>提交</button>
+            <button type="button" class="btn btn-default" id="btnClose"><span class="glyphicon glyphicon-remove"></span>取消</button>
+        </div>
+    </form>
+    <script type="text/javascript" src="../../../media/js/jquery/jquery.js"></script>
+    <script type="text/javascript" src="../../../media/js/jquery/jquery.extend.js"></script>
+    <script type="text/javascript" src="../../../media/js/base/util.js"></script>
+    <script type="text/javascript" src="../../../media/js/base/common.js"></script>
+    <script type="text/javascript" src="../../../media/js/bootstrap/js/bootstrap.js"></script>
+    <script type="text/javascript" src="../../../media/js/datetimepicker/js/jquery.datetimepicker.js"></script>
+    <script type="text/javascript" src="../../../media/js/stream/js/stream-v1.js"></script>
+    <script type="text/javascript" src="../js/StreamUpload.js"></script>
+    <script type="text/javascript" src="../js/public.js"></script>
+    <script type="text/javascript" src="../../../media/js/base/WorkflowInfoNew.js"></script>
+    <script type="text/javascript" src="../../../media/js/base/md5.js"></script>
+	<script type="text/javascript" src="../../../media/js/ca.js"></script>
+    <script type="text/javascript" src="../js/objectionEdit.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta http-equiv="pragma" content="no-cache"><!-- 禁止浏览器从本地计算机的缓存中访问页面内容 --> 
+	<meta http-equiv="cache-control" content="no-cache"><!-- 用于指定请求和响应遵循的缓存机制 --> 
+	<meta http-equiv="expires" content="0"><!-- 用于设定网页的到期时间，一旦网页过期，必须到服务器上重新传输； -->
+    <title>招标异常</title>
+    <link rel="stylesheet" href="../../../../media/js/layer/mobile/need/layer.css" />
+    <link rel="stylesheet" href="../../../../media/js/bootstrap/css/bootstrap.css" />
+    <link rel="stylesheet" href="../../../../media/js/stream/css/stream-v1.css" />
+	<style>
+		html,body { width: 100%;}
+		.readonly {
+			border: none;
+			background: none !important;
+			outline: none !important;
+			box-shadow: none !important;
+		}
+		.isShow { display: none;}
+		.bottom-btn { z-index: 10005;}
+	</style>
+</head>
+
+<body>
+    <form class="pageModel" id="formName" name="formName">
+    	<div class="panel-group" id="accordion">
+    		<div class="panel panel-accordion panel-default">
+	    		<div class="panel-heading active"  role="tab" id="headingOne">  
+			 		<h4 class="panel-title">
+		            	<a  role="button" data-toggle="collapse"  href="#collapseOne" aria-expanded="true" aria-controls="collapseOne" >标段信息</a>
+			 		</h4>  
+			   	</div>  
+			  	<div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">  
+			       	<div class="panel-body">
+			       		<button type="button" class="btn btn-primary btn-sm " id="btnChoose" style="float:right;display:none;margin-bottom:10px;">选择标段</button>
+			       		<table class="table table-bordered">
+					        <tr>
+					        	<td class="th_bg">标段编号</td>
+					        	<td colspan="3"><span id="interiorBidSectionCode"></span></td>
+					        </tr>
+					        <tr>
+					        	<td class="th_bg">标段名称</td>
+					        	<td colspan="3"><span id="bidSectionName"></span></td>
+					        </tr>
+					        <tr>
+					        	<td class="th_bg">招标异常提出单位<i class="red">*</i></td>
+					        	<td colspan="3"><input type="text" class="form-control" name="enterpriseName" datatype="*" errormsg="招标异常提出单位"/></td>
+					        </tr>
+					        <tr>
+					        	<td class="th_bg">招标异常名称<i class="red">*</i></td>
+					        	<td colspan="3">
+					        		<input type="text" class="form-control" name="excepitonName" datatype="*" errormsg="请输入招标异常名称" />
+									<div class="notice_title_tips">请勿包含下列特殊字符：空格 * & ￥ @  / \</div>
+								</td>
+					        </tr>
+					        <tr>        	
+					        	<td class="th_bg">招标异常类型<i class="red">*</i></td>
+					        	<td>
+					        		<select name="exceptionTypes" class="form-control" datatype="*" errormsg="请选择招标异常类型" style="width: auto;">
+					        			<option value="">--请选择--</option>
+					        			<option value="1">招标终止</option>
+					        			<option value="2">招标失败</option>
+					        		</select>
+					        	</td>
+					        	<td class="th_bg">异常原因<i class="red">*</i></td>
+					        	<td>
+					        		<select name="abnormalReason" class="form-control" datatype="*" errormsg="请选择异常原因" style="width: auto;">
+					        			<option value="">---请选择---</option>
+					        			<option value="1">购标人数不足</option>
+					        			<option value="2">开标解密成功不足三家</option>
+					        			<option value="3">评标结束后合格不足三家</option>
+					        			<option value="4">资格预审合格不足规定家数</option>
+					        			<option value="5">招标人监督部门不认可</option>
+					        			<option value="6">招标人提出撤项要求</option>
+					        			<option value="8">成功递交投标文件家数不足</option>
+					        			<option value="7">其他原因</option>
+					        		</select>
+					        	</td>
+					        </tr>
+					        <tr>
+					        	
+					        	<td class="th_bg">对外公示<i class="red">*</i></td>
+					        	<td>
+					        		<label style="padding-left: 20px;margin-bottom: 0;">
+				                		<input type="radio" name="foreign" value="1" style="vertical-align: -2px;margin-right: 5px;" >是
+				                	</label>
+				                    <label style="padding-left: 20px;margin-bottom: 0;">
+				                    	<input type="radio" name="foreign" value="0" checked="checked" style="vertical-align: -2px;margin-right: 5px;" >否
+				                    </label>
+					        	</td>
+					        	<td class="th_bg isShow"><span >公示期（天）</span><i class="red">*</i></td>
+					        	<td class="isShow">
+					        	    <input type="number" name="noticePeriod" id="noticePeriod" value="3" datatype="*" errormsg="请正确输入公示期" class="form-control" style="width: 260px;"/>
+					        	</td>
+					        </tr>
+					        <tr class="isShow">
+					        	<td class="th_bg"><span>公示开始时间<i class="red">*</i></span></td>
+					        	<td>
+					        		<div style="position: relative;width: 200px;display: inline-block;">
+					                    <input type="text"  name="exceptionStartTime" id="exceptionStartTime" class="form-control Wdate" autocomplete="off" errormsg="请输入公示开始时间"/>
+				
+					               </div>
+					        	</td>
+					        	<td class="th_bg"><span>公示结束时间<i class="red">*</i></span></td>
+					        	<td>
+					        		<div style="position: relative;width: 200px;display: inline-block;">
+					                    <input type="text"  name="exceptionEndTime" id="exceptionEndTime" class="form-control" readonly="readonly" autocomplete="off" errormsg="请输入公示结束时间"/>
+					                </div>
+					        	</td>
+					        </tr>
+					        <tr>
+					        	<td class="th_bg">异常情况描述<i class="red">*</i></td>
+					        	<td colspan="3">
+					        		<textarea class="form-control" name="excepitonInfor" datatype="*" errormsg="请输入异常情况描述" style="resize: none;" rows="3"></textarea>
+					        	</td>
+					        </tr>
+					        <tr>
+					        	<td class="th_bg">项目经理<i class="red">*</i></td>
+					        	<td><input type="text" class="form-control" name="enterprisePerson" datatype="*" errormsg="请输入项目经理"/></td>
+					        	<td class="th_bg">联系电话<i class="red">*</i></td>
+					        	<td><input type="text" class="form-control" name="enterprisePersonTel" datatype="mobile" errormsg="请输入联系电话"/></td>
+					        </tr>
+					    </table>
+			       	</div>
+			    </div>
+			</div>
+			<div class="panel panel-accordion panel-default isShow">
+	    		<div class="panel-heading active"  role="tab" id="headingTwo">  
+			 		<h4 class="panel-title">
+		            	<a  role="button" data-toggle="collapse"  href="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo" >公示发布媒体</a>
+			 		</h4>  
+			   	</div>  
+			  	<div id="collapseTwo" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingTwo">  
+			       	<div class="panel-body">
+			       		<table class="table table-bordered">
+			       			<tr class="isShow">
+					            <td colspan="4" class="media-box">					            	
+					            	<!--<div><input type="checkbox" name="noticeMedia" value="6" checked="checked" style="margin-right: 5px;"/>襄阳市人民政府门户网站</div>
+					            	<div><input type="checkbox" name="noticeMedia" value="7" checked="checked" style="margin-right: 5px;"/>襄阳市公共资源交易网</div>
+					            	<div><input type="checkbox" name="noticeMedia" value="2" checked="checked" class="isLaw" style="margin-right: 5px;"/>湖北省公共资源交易电子服务平台</div>-->
+					            </td>
+					        </tr>
+			       		</table>
+			       	</div>
+			    </div>
+			</div>
+			<div class="panel panel-accordion panel-default isShow">
+	    		<div class="panel-heading active"  role="tab" id="headingFour">  
+			 		<h4 class="panel-title">
+		            	<a  role="button" data-toggle="collapse"  href="#collapseFour" aria-expanded="true" aria-controls="collapseFour" >公告基本信息</a>
+			 		</h4>  
+			   	</div>  
+			  	<div id="collapseFour" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingFour">  
+			       	<div class="panel-body">
+			       		<table id="ueditorContent" class="table table-bordered isShow">
+					        <!-- <tr class="isShow">
+				                <td class="th_bg">公示模板<i class="red">*</i></td>
+				                <td colspan="3">
+				                    <select class="form-control" name="noticeTemplate" id="noticeTemplate" style="width: 260px;display: inline-block;">
+					                	<option value="">请选择公示模板</option>
+					                	
+					                </select>
+					                <button type="button" class="btn btn-primary" id="btnModel" style="vertical-align:top;"><span class="glyphicon glyphicon-refresh" style="vertical-align:-2px;"></span>生成模板</button>
+					                <button type="button" class="btn btn-primary btn-sm fullScreen"   style="float: right;margin-right: 50px;">
+					            		<span class="glyphicon glyphicon-fullscreen"></span>全屏编辑
+					            	</button>
+				                </td>
+				            </tr>
+				            <tr class="isShow">
+				            	<td colspan="4">
+				            		<div id="container" name="content"></div>
+				            		<input type="hidden" name="excepitonContent" id="excepitonContent" value="" />
+				            	</td>
+				            </tr> -->
+			       		</table>
+			       	</div>
+			    </div>
+			</div>
+			<div class="panel panel-accordion panel-default">
+	    		<div class="panel-heading active"  role="tab" id="headingThree">  
+			 		<h4 class="panel-title">
+		            	<a  role="button" data-toggle="collapse"  href="#collapseThree" aria-expanded="true" aria-controls="collapseThree" >异常报告附件</a>
+			 		</h4>  
+			   	</div>  
+			  	<div id="collapseThree" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingThree">  
+			       	<div class="panel-body">
+			       		<button type="button" class="btn btn-primary btn-sm " id="fileUp" style="float: right;margin-bottom: 10px;">
+		            		<span class="glyphicon glyphicon-folder-open"></span>选择文件
+		            	</button>
+		            	<button type="button"  id="fileLoad" style="display: none;"></button>
+			       		<div id="fileContent"></div>
+			       	</div>
+			   </div>
+			</div>
+			<div id="approval"></div>
+    	</div>
+		
+
+        <div class="bottom-btn">
+            <button type="button" class="btn btn-primary" id="btnSave"><span class="glyphicon glyphicon-ok"></span>保存</button>
+            <button type="button" class="btn btn-primary" id="btnSubmit"><span class="glyphicon glyphicon-saved"></span>提交审核</button>
+            <button type="button" class="btn btn-default" id="btnClose"><span class="glyphicon glyphicon-remove"></span>关闭</button>
+        </div>
+    </form>
+    <script type="text/javascript" src="../../../../media/js/jquery/jquery.js"></script>
+    <script type="text/javascript" src="../../../../media/js/jquery/jquery.extend.js"></script>
+    <script type="text/javascript" src="../../../../media/js/base/util.js"></script>
+    <script type="text/javascript" src="../../../../media/js/base/common.js"></script>
+    <script type="text/javascript" src="../../../../media/js/base/UEditorFun.js"></script>
+	<script type="text/javascript" src="../../../../media/js/bootstrap/js/bootstrap.js"></script>
+    <!-- 编辑器源码文件 -->
+    <script type="text/javascript" src="../../../../media/js/ueditor/ueditor.config.js"></script>
+    <script type="text/javascript" src="../../../../media/js/ueditor/ueditor.all.js"></script>
+    <script type="text/javascript" src="../../../../media/js/My97DatePicker/WdatePicker.js"></script>
+	 <script type="text/javascript" src="../../../../media/js/base/md5.js"></script>
+	 <script type="text/javascript" src="../../../../media/js/ca.js"></script>
+	 <!--<script type="text/javascript" src="../../../Model/js/sign.js"></script>-->
+    <script type="text/javascript" src="../../../Model/js/public.js"></script>
+    <script type="text/javascript" src="../../../../media/js/stream/js/stream-v1.js"></script>
+	<script type="text/javascript" src="../../../../media/js/base/StreamUpload.js"></script>
+	<script type="text/javascript" src="../../../../media/js/base/WorkflowInfoNew.js"></script>
+    <script type="text/javascript" src="../js/abnormalEdit.js"></script>
+</body>
+
+</html>

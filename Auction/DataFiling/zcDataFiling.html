@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <meta name="description" content="" />
+        <meta name="keywods" content="" />
+        <title>资料归档</title>
+        <style>
+            .input-group {
+                float: left;
+                width: 120px;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container-fluid ">
+            <div style="padding-bottom: 10px;">
+                <div class="input-group" style="padding-right:15px;margin-top: 5px">
+                    <span class="input-group-addon">审核状态</span>
+                    <select class="form-control" style="width: 120px;" id="itemState">
+                    	<!--全部、未提交、审核中、审核通过、审核不通过-->
+                    	<option value="">全部</option>
+                        <option value="0">未归档</option>
+                        <option value="1">已提交</option>
+                        <option value="2">审核通过</option>
+                        <option value="3">审核不通过</option>	
+                        <option value="6">待驳回</option>	
+                    </select>
+                </div>	
+                <div class="input-group" style="padding-right:15px;margin-top: 5px">
+                    <span class="input-group-addon">采购类型</span>
+                    <select class="form-control" style="width: 140px;" id="tenderType">
+                        <option value="">全部</option>
+                        <option value="0">询比采购</option>
+                        <option value="1">竞价采购</option>
+                        <option value="2">竞卖采购</option>
+                        <!--<option value="3">询比报价</option>
+                        <option value="4">招标采购</option>
+                        <option value="5">谈判采购</option>-->
+                        <option value="6">单一来源采购</option>
+                        <!--<option value="7">框架协议采购</option>
+                        <option value="8">战略协议采购</option>-->
+                    </select>
+                </div>
+                <div class="input-group" style="width:150px;float: left;padding-right: 15px;margin-top: 5px">
+                    <span class="input-group-addon">项目名称</span>
+                    <input type="text" class="form-control" name="projectName" id="projectName" style="width:140px">
+                </div>
+
+                <div class="input-group" style="width:150px;float: left;padding-right: 15px;margin-top: 5px">
+                    <span class="input-group-addon">项目编号</span>
+                    <input type="text" class="form-control" name="projectCode" id="projectCode" style="width:140px">
+                </div>    
+                <div class="btn-group" style="margin-top: 5px">
+                    <button type="button" id="btnQuery" class="btn btn-primary">
+                    <span class="glyphicon glyphicon-search" aria-hidden="true"></span>查询
+                    </button>
+                </div>
+            </div>
+            <table id="DataFilingTable"></table>
+        </div>
+        <script src="Auction/DataFiling/js/zcDataFiling.js"></script>
+    </body>
+</html>

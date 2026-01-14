@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8">
+		<meta http-equiv="pragma" content="no-cache"><!-- 禁止浏览器从本地计算机的缓存中访问页面内容 --> 
+		<meta http-equiv="cache-control" content="no-cache"><!-- 用于指定请求和响应遵循的缓存机制 --> 
+		<meta http-equiv="expires" content="0"><!-- 用于设定网页的到期时间，一旦网页过期，必须到服务器上重新传输； -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>招标公告</title>
+    <link rel="stylesheet" href="../../../../../media/js/layer/mobile/need/layer.css" />
+    <link rel="stylesheet" href="../../../../../media/js/bootstrap/css/bootstrap.css" />
+    <link rel="stylesheet" href="../../../../../media/js/stream/css/stream-v1.css" />
+    
+	<style>
+		html,body { height: 100%;width: 100%;}
+		.readonly{
+		    border: none;
+		    background: none !important;
+		    outline: none !important;
+		    box-shadow: none !important;
+		}
+		.file-input .kv-upload-progress{
+			display: none !important;
+		}
+		tr .file-input{
+			display: inline-block;
+			float: right;
+			margin-right: 50px;
+		}
+		.padding_button{
+			padding: 5px 8px !important;
+			line-height: 30px !important;
+		}
+		.calendar_icon{
+			color: #3995C8;
+		}
+		th{
+			/*padding: 14px 8px !important;*/
+			line-height: 30px !important;
+		}
+		input[type=number] {  
+		    -moz-appearance:textfield;  
+		}  
+		input[type=number]::-webkit-inner-spin-button,  
+		input[type=number]::-webkit-outer-spin-button {  
+		    -webkit-appearance: none;  
+		    margin: 0;  
+		}  
+		.stream-total-tips{
+			display: none;
+		}
+		.stream-main-upload-box{
+			border: none;
+		}
+		.set_height{
+		    display: inline-block;
+			padding: 6px 12px;
+		}
+	</style>
+</head>
+
+<body>
+    <form class="pageModel" id="addNotice" name="formName">
+    	<div class="panel-group" id="accordion">
+    		<div class="panel panel-accordion panel-default">
+	    		<div class="panel-heading active"  role="tab" id="headingOne">  
+			 		<h4 class="panel-title">
+		            	<a  role="button" data-toggle="collapse" href="#collapseOne" aria-controls="collapseOne"  aria-expanded="true"  >
+		            		基本信息
+		            	</a>
+			 		</h4>  
+			   	</div>  
+			  	<div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">  
+			       	<div class="panel-body">
+			       		<table  class="table table-bordered ">
+			       			<tr>
+					        	<td class="th_bg"><span >标段编号</td>
+				                <td colspan="3">
+				                    <input type="text"  name="interiorBidSectionCode" id="interiorBidSectionCode" class="form-control readonly" readonly="readonly" style="width: 260px;" />
+				                    <input type="hidden"  name="bidSectionId" id="bidSectionId" />
+				                    <input type="hidden"  name="examType" id="examType" />
+				                </td>
+				               
+					        </tr>
+					        <tr>
+					        	 <td class="th_bg"><span >标段名称</td>
+				                <td colspan="3">
+				                    <input type="text"  name="bidSectionName" id="bidSectionName" class="form-control readonly" readonly="readonly" style="display:inline-block" />
+				                </td>
+					        </tr>
+					        <tr>
+				                <td class="th_bg"><span >评标办法</td>
+				                <td colspan="3">
+				                	<span id="checkType" class="set_height"></span>
+				                </td>
+					        </tr>
+					        <tr>
+					        	<td class="th_bg"><span >评审开始时间</span><i class="red">*</i></td>
+				                <td >
+				                	<div style="position: relative;width: 260px;">
+				                		<input type="text"  name="checkStartDate" id="checkStartDate" class="form-control Wdate" style="width: 260px;" datatype="*" errormsg="请选择评审开始时间"/>
+									</div>
+				                </td>
+				                <td class="th_bg"><span >评审结束时间</span><i class="red">*</i></td>
+				                <td >
+				                	<div style="position: relative;width: 260px;">
+				                		<input type="text"  name="checkEndDate" id="checkEndDate" class="form-control Wdate" style="width: 260px; " datatype="*" errormsg="请选择评审结束时间"/>
+									</div>
+				                </td>
+					        </tr>
+					        <tr>
+					        	<td class="th_bg"><span >评审地点</span><i class="red">*</i></td>
+				                <td colspan="3">
+				                    <input type="text"  name="address" id="address" class="form-control " datatype="*" errormsg="请正确输入评审地点" />
+				                </td>
+					        </tr>
+			       		</table>
+		       		</div>
+	       		</div>
+       		</div>
+       		<div class="panel panel-accordion panel-default">
+	    		<div class="panel-heading active"  role="tab" id="headingTwo">  
+			 		<h4 class="panel-title">
+		            	<a class="collapsed" role="button" data-toggle="collapse" href="#collapseTwo" aria-controls="collapseTwo"  aria-expanded="false">
+		            		评标结果
+		            	</a>
+			 		</h4>  
+			   	</div>  
+			  	<div  id="collapseTwo" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingTwo">  
+			       	<div class="panel-body">
+			       		<table class="table table-bordered">
+					      	<tr>
+					        	<td colspan="4" >
+					            	<table class="table table-bordered " id="bidResult">
+					            		
+					            	</table>
+					            </td>
+					        </tr>
+				            <tr>
+					        	<td class="th_bg"><span >评审报告</span><i class="red">*</i></td>
+				                <td colspan="3" style="line-height: 30px;">
+				                    <input type="hidden"  name="fileUrl" id="fileUrl" class="form-control "  datatype="*" errormsg="请上传评审报告"/>
+				                    <span style="display: inline-block;width: 400px; padding-left: 12px;" id="fileName"></span>
+				                    <button type="button" class="btn btn-sm btn-primary" id="fileUpload"  style="display:inline-block;margin-left: 50px;">
+					            		<span class="glyphicon glyphicon-upload"></span>上传评审报告
+					            	</button>
+					            	<!--<button type="button"  id="fileUpload" style="display: none;"></button>-->
+					            	<button type="button" class="btn btn-sm btn-primary" id="preview"  style="display:none;margin-left: 20px;">
+					            		<span class="glyphicon glyphicon-eye-open"></span>预览
+					            	</button>
+					            	<span style="color: red;">请上传pdf类型文件</span>
+				                </td>
+				                
+					        </tr>
+					        <tr>
+					        	<td colspan="4">
+					        		<div id="i_stream_files_queue"></div>
+					        	</td>
+					        	
+					        </tr>
+				            <tr>
+					            <td class="th_bg"><span >评标附件</span></td>
+					            <td colspan="3">
+					            	<button type="button" class="btn btn-primary btn-sm " id="btnLoad"   style="float: right;margin-right: 50px;">
+					            		<span class="glyphicon glyphicon-folder-open"></span>上传
+					            	</button>
+					            	<button type="button"  id="fileLoad" style="display: none;"></button>
+					            	<div id="fileContent" style="margin-top: 45px;">
+					            		
+					            	</div>
+					            </td>
+					        </tr>
+				        </table>   
+		       		</div>
+		       	</div>
+	    	</div>
+	    	<div id="approval">
+	    		
+	    	</div>
+   		</div>
+        <div class="bottom-btn" style="z-index: 11000;">
+            <button type="button" class="btn btn-primary" id="btnSave"><span class="glyphicon glyphicon-ok"></span>保存</button>
+            <button type="button" class="btn btn-primary" id="btnSubmit"><span class="glyphicon glyphicon-saved"></span>提交</button>
+            <button type="button" class="btn btn-default" id="btnClose"><span class="glyphicon glyphicon-remove"></span>取消</button>
+        </div>
+    </form>
+    <script type="text/javascript" src="../../../../../media/js/jquery/jquery.js"></script>
+    <script type="text/javascript" src="../../../../../media/js/jquery/jquery.extend.js"></script>
+    <script type="text/javascript" src="../../../../../media/js/base/util.js"></script>
+    <script type="text/javascript" src="../../../../../media/js/base/common.js"></script>
+    <script type="text/javascript" src="../../../../../media/js/bootstrap/js/bootstrap.js"></script>
+    <script type="text/javascript" src="../../../../../media/js/My97DatePicker/WdatePicker.js"></script>
+    <script type="text/javascript" src="../../../../../media/js/stream/js/stream-v1.js"></script>
+    <script type="text/javascript" src="../../../../../media/js/base/WorkflowInfoNew.js"></script>
+    <script type="text/javascript" src="../../../../../media/js/base/StreamUpload.js"></script>
+    <script src="../../../../Model/js/public.js"></script>
+    <script src="../../../../../media/js/base/WorkflowInfoNew.js"></script>
+    <script type="text/javascript" src="../js/resultEntryEdit.js"></script>
+</body>
+
+</html>

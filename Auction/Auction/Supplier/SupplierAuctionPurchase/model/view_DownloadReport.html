@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="pragma" content="no-cache">
+	<!-- 禁止浏览器从本地机的缓存中调阅页面内容 -->
+	<meta http-equiv="cache-control" content="no-cache, must-revalidate">
+	<meta http-equiv="expires" content="0">
+	<title>添加下载文件信息记录页面</title>
+
+	<link rel="stylesheet" href="../../../../../media/js/bootstrap/css/bootstrap.css">
+	<link rel="stylesheet" href="../../../../../media/js/bootstrapvalidator/css/bootstrapValidator.css">
+	<link rel="stylesheet" href="../../../../../media/js/layer/mobile/need/layer.css" type="text/css" />
+	<style>
+		.form-group {
+			margin-bottom: 0;
+		}
+	</style>
+</head>
+
+<body style="width: 99%;padding-left: 10px;padding-top: 10px;margin-bottom: 0;">
+
+	<form id="addDownLoadInfo">
+		<table class="table table-bordered" id="DownloadReportInfo">
+			<tr class="active">
+			<tr>
+				<td class="th_bg" style="vertical-align: middle;">
+					联系人<span style="color: red;">*</span>
+				</td>
+				<td colspan="2">
+					<div class="form-group">
+						<input type="text" name="linkMan" id="linkMan" placeholder="请输入联系人"
+							class="form-control"></label>
+					</div>
+				</td>
+			</tr>
+			<tr>
+				<td class="th_bg" style="vertical-align: middle;">
+					联系方式(手机号)<span style="color: red;">*</span>
+				</td>
+				<td colspan="2">
+					<div class="form-group">
+
+
+						<input name="linkTel" id="linkTel" placeholder="请输入联系方式(手机号)" class="form-control"></input>
+					</div>
+				</td>
+			</tr>
+			<tr>
+				<td class="th_bg" style="vertical-align: middle;">
+					常用邮箱<span style="color: red;">*</span>
+				</td>
+				<td colspan="2">
+					<div class="form-group">
+
+
+						<input name="linkEmail" id="linkEmail" placeholder="请输入常用邮箱" class="form-control"></input>
+						<input name="examType" id="examType" type="hidden" />
+					</div>
+				</td>
+			</tr>
+			<tr class="isShowCard" style="display: none;">
+				<td class="th_bg" style="vertical-align: middle;">
+					证件类型<span style="color: red;">*</span>
+				</td>
+				<td colspan="2">
+					<label style="padding-right:20px;margin-bottom: 0;">
+						<input type="radio" name="linkCardType" value="0" checked="checked"style="vertical-align: -2px;margin-right: 5px;" >身份证
+					</label>
+					<label style="padding-right:20px;margin-bottom: 0;">
+						<input type="radio" name="linkCardType" value="1" style="vertical-align: -2px;margin-right: 5px;" >护照
+					</label>
+				</td>
+			</tr>
+			<tr class="isShowCard" style="display: none;">
+				<td class="th_bg" style="vertical-align: middle;">证件号码<i class="red">*</i></td>
+				<td colspan="2">
+					<div class="form-group">
+						<input class="form-control" type="text" name="linkCard" id="linkCard" class="form-control"/>
+					</div>
+				</td>
+			</tr>
+		</table>
+		<div style="margin-top: 4px; color: #BB2413;" role="alert">
+			<strong>温馨提示：</strong>请输入真实的联系人信息，以便接受系统给您发送的短信；姓名应填写全称，不得填写某先生、某女士或者拼音；证件号码应真实有效，避免错漏，否则将有被判定为“提供虚假信息”的风险。
+		</div>
+
+		<div style="width: 100%;height: 50px;text-align:center;position: fixed;bottom: 0;background-color: #FFFFFF;">
+			<button type="button" class="btn btn-primary" id="btn_submit"><span
+					class="glyphicon glyphicon-ok"></span>提交</button>
+			<button type="button" class="btn btn-default" id="btn_close"><span
+					class="glyphicon glyphicon-remove"></span>关闭</button>
+		</div>
+	</form>
+
+
+
+	<script type="text/javascript" src="../../../../../media/js/jquery/jquery.min.js"></script>
+	<script type="text/javascript" src="../../../../../media/js/jquery/jquery.extend.js"></script>
+	<script type="text/javascript" src="../../../../../media/js/layer/layer.js"></script>
+	<script type="text/javascript" src="../../../../../media/js/base/common.js"></script>
+	<script type="text/javascript" src="../../../../../media/js/bootstrap/js/bootstrap.js"></script>
+	<script type="text/javascript" src="../../../../../media/js/bootstrapvalidator/js/bootstrapValidator.js"></script>
+	<script type="text/javascript" src="../../../../../media/js/Model/public.js"></script>
+	<script src="../js/view_DownloadReport.js"></script>
+
+</body>
+
+</html>

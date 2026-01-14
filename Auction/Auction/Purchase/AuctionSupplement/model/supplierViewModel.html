@@ -1,0 +1,74 @@
+<head>
+	<meta http-equiv="pragma" content="no-cache">
+	<!-- 禁止浏览器从本地机的缓存中调阅页面内容 -->
+	<meta http-equiv="cache-control" content="no-cache, must-revalidate">
+	<meta http-equiv="expires" content="0">
+</head>
+
+<link rel="stylesheet" href="../../../../media/js/bootstrap/css/bootstrap.css" />
+
+<style>
+	div {
+		text-align: left;
+	}
+</style>
+
+<body style="width: 99%;padding-left: 10px;padding-top: 10px;margin-bottom: 0;">
+
+	<table class="table  table-bordered" style="margin-bottom: 10px;">
+		<tr>
+			<td  class="th_bg" width="20%" >采购项目编号</td>
+			<td style="text-align: left;">
+				<div id="ProjectCode"></div>
+			</td>
+			<td  class="th_bg" width="20%" >采购项目名称</td>
+			<td style="text-align: left;">
+				<div id="ProjectName"></div>
+			</td>
+		</tr>
+		<tr class="packageView" style="display: none;">
+			<td  class="th_bg" width="20%" >项目包件编号</td>
+			<td style="text-align: left;">
+				<div id="PackageNum"></div>
+			</td>
+			<td  class="th_bg" width="20%" >项目包件名称</td>
+			<td style="text-align: left;">
+				<div id="PackageName"></div>
+			</td>
+		</tr>
+		<tr class="Score">
+			<td  class="th_bg" >补遗截止时间</td>
+			<td colspan="3" style="text-align: left;">
+				<div id="NoticeEndDate"></div>
+			</td>
+		</tr>
+		<!--<tr>
+			<td><strong>添加补遗</strong></td>
+			<td calss="searched" colspan="3" style="text-align: left;"><input type="button" class="btn btn-sm btn-primary" value="添加" onclick="add()" /></td>
+		</tr>-->
+	</table>
+	<table class="table  table-bordered">
+		<tr>
+			<th width="50px">序号</th>
+			<th style="text-align:left">询价采购补遗标题</th>
+			<th width="180px">发布时间</th>
+			<th width="80px">操作</th>
+		</tr>
+		<tbody id="table" style="border-top:0px solid !important">
+
+		</tbody>
+
+	</table>
+
+	<div class="form-group rowLine" style="width: 100%;height: 50px;text-align:center;position: fixed;bottom: 0;background-color: #FFFFFF;margin-bottom:0px !important;padding-top: 10px;">
+		<button type="button" class="btn btn-primary btn-sm" id="addSupplement">添加补遗</button>
+		<button type="button" class="btn btn-default btn-sm" id="btn_close">关闭</button>
+	</div>
+	<script type="text/javascript" src="../../../../media/js/jquery/jquery.js"></script>
+	<script type="text/javascript" src="../../../../media/js/jquery/jquery.extend.js"></script>
+	<script type="text/javascript" src="../../../../media/js/jquery/jquery.params.js"></script>
+	<script type="text/javascript" src="../../../../media/js/base/common.js"></script>
+	<script type="text/javascript" src="../../../../media/js/bootstrap/js/bootstrap.js"></script>
+	<script type="text/javascript" src="../../../../media/js/layer/layer.js"></script>
+	<script type="text/javascript" src="../js/supplierViewModel.js"></script>
+</body>

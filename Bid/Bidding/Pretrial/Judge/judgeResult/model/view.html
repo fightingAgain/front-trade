@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8">
+		<meta http-equiv="pragma" content="no-cache"><!-- 禁止浏览器从本地计算机的缓存中访问页面内容 --> 
+		<meta http-equiv="cache-control" content="no-cache"><!-- 用于指定请求和响应遵循的缓存机制 --> 
+		<meta http-equiv="expires" content="0"><!-- 用于设定网页的到期时间，一旦网页过期，必须到服务器上重新传输； -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>资格预审结果</title>
+    <link rel="stylesheet" href="../../../../../media/js/layer/mobile/need/layer.css" />
+    <link rel="stylesheet" href="../../../../../media/js/bootstrap/css/bootstrap.css" />
+    <link rel="stylesheet" href="../../../../../media/js/stream/css/stream-v1.css" />
+    
+	<style>
+		html,body { width: 100%;}
+		.readonly{
+		    border: none;
+		    background: none !important;
+		    outline: none !important;
+		    box-shadow: none !important;
+		}
+		.file-input .kv-upload-progress{
+			display: none !important;
+		}
+		tr .file-input{
+			display: inline-block;
+			float: right;
+			margin-right: 50px;
+		}
+		.padding_button{
+			padding: 5px 8px !important;
+			line-height: 30px !important;
+		}
+		.calendar_icon{
+			color: #3995C8;
+		}
+		th{
+			/*padding: 14px 8px !important;*/
+			line-height: 30px !important;
+		}
+		input[type=number] {  
+		    -moz-appearance:textfield;  
+		}  
+		input[type=number]::-webkit-inner-spin-button,  
+		input[type=number]::-webkit-outer-spin-button {  
+		    -webkit-appearance: none;  
+		    margin: 0;  
+		}  
+		.stream-total-tips{
+			display: none;
+		}
+		.stream-main-upload-box{
+			border: none;
+		}
+		.set_height{
+		    display: inline-block;
+			padding: 6px 12px;
+		}
+	</style>
+</head>
+
+<body>
+    <form class="pageModel" id="addNotice" name="formName">
+    	<div class="panel-group" id="accordion">
+    		<div class="panel panel-accordion panel-default">
+	    		<div class="panel-heading active"  role="tab" id="headingOne">  
+			 		<h4 class="panel-title">
+		            	<a  role="button" data-toggle="collapse" href="#collapseOne" aria-controls="collapseOne"  aria-expanded="true"  >
+		            		基本信息
+		            	</a>
+			 		</h4>  
+			   	</div>  
+			  	<div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">  
+			       	<div class="panel-body">
+			       		<table  class="table table-bordered ">
+			       			<tr>
+					        	<td class="th_bg">标段编号</td>
+				                <td colspan="3">
+				                	<span id="interiorBidSectionCode" class="set_height"></span>
+				                    <input type="hidden"  name="bidSectionId" id="bidSectionId" />
+				                    <input type="hidden"  name="examType" id="examType" value="1"/>
+				                </td>
+				               
+					        </tr>
+					        <tr>
+					        	 <td class="th_bg">标段名称</td>
+				                <td colspan="3">
+				                	<span id="bidSectionName" class="set_height"></span>
+				                </td>
+					        </tr>
+					        <tr>
+					        	<td class="th_bg">招标项目类型</td>
+				                <td colspan="3">
+				                	<span id="checkType" class="set_height"></span>
+				                </td>
+					        </tr>
+					        <tr>
+					        	<td class="th_bg">项目负责人</td>
+				                <td colspan="3">
+				                	<span id="tenderAgencyLinkmen" class="set_height"></span>
+				                </td>
+					        </tr>
+					        <!--<tr>
+					        	<td class="th_bg">监标人</td>
+				                <td colspan="3">
+				                	<span id="" class="set_height"></span>
+				                </td>
+					        </tr>-->
+					        <tr>
+					        	<td class="th_bg">资格预审申请截止时间</td>
+				                <td colspan="3">
+				                	<span id="bidDocReferEndTime" class="set_height"></span>
+				                </td>
+					        </tr>
+					        <!--<tr>
+					        	<td class="th_bg">资格预审报告</td>
+				                <td colspan="3" style="line-height: 30px;">
+				                    <input type="hidden"  name="fileUrl" id="fileUrl" class="form-control "  datatype="*" errormsg="请上传资格预审报告"/>
+				                    <span style="display: inline-block;width: 400px; padding-left: 12px;" id="fileName"></span>
+				                    <button type="button" class="btn btn-sm btn-primary" id="fileUpload"  style="display:inline-block;margin-left: 50px;">
+					            		<span class="glyphicon glyphicon-upload"></span>上传
+					            	</button>
+					            	<button type="button" class="btn btn-sm btn-primary" id="preview"  style="display:none;margin-left: 20px;">
+					            		<span class="glyphicon glyphicon-eye-open"></span>预览
+					            	</button>
+					            	<span style="color: red;">请上传pdf类型文件</span>
+				                </td>
+				                
+					        </tr>
+					        <tr>
+					        	<td colspan="4">
+					        		<div id="i_stream_files_queue"></div>
+					        	</td>
+					        	
+					        </tr>-->
+			       		</table>
+		       		</div>
+	       		</div>
+       		</div>
+       		<div class="panel panel-accordion panel-default">
+	    		<div class="panel-heading active"  role="tab" id="headingTwo">  
+			 		<h4 class="panel-title">
+		            	<a class="collapsed" role="button" data-toggle="collapse" href="#collapseTwo" aria-controls="collapseTwo"  aria-expanded="false">
+		            		资格预审评审情况
+		            	</a>
+			 		</h4>  
+			   	</div>  
+			  	<div  id="collapseTwo" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingTwo">  
+			       	<div class="panel-body">
+			       		<table class="table table-bordered">
+					      	<tr>
+					        	<td colspan="4" >
+					        		<!--<div style="overflow: auto;width: ;">-->
+					        			<table class="table table-bordered" id="bidResult">
+					        				
+						            	</table>
+					        		<!--</div>-->
+					            	
+					            </td>
+					        </tr>
+					        <tr>
+					        	<td class="th_bg">资格预审结果是否公示</td>
+				                <td colspan="3">
+				                	<label style="padding-right:20px;margin-bottom: 0;">
+				                		<input type="radio" name="isPublish" disabled="disabled" value="1" style="vertical-align: -2px;margin-right: 5px;" >是
+				                	</label>
+				                    <label style="padding-right:20px;margin-bottom: 0;">
+				                    	<input type="radio" name="isPublish" disabled="disabled" value="0" style="vertical-align: -2px;margin-right: 5px;" >否
+				                    </label>
+				                </td>
+					        </tr>
+							<tr class="isPublish">
+								<td class="th_bg"><span >公示期（天）</span></td>
+								<td colspan="3">
+									<span class="set_height" id="noticePeriod"></span>
+								</td>
+							</tr>
+					        <tr class="isPublish">
+					        	<td class="th_bg">公示开始时间</td>
+				                <td>
+				                	<span id="noticeStartTime" class="set_height"></span>
+				                </td>
+				                <td class="th_bg">公示截止时间</td>
+				                <td>
+				                	<span id="noticeEndTime" class="set_height"></span>
+				                </td>
+					        </tr>
+					        <tr class="isPublish">
+					        	<td class="th_bg">公示发布媒体</td>
+				                <td colspan="3" class="media-box">
+				                	
+				                </td>
+					        </tr>
+					        <tr class="isPublish">
+					        	<td class="th_bg">公示内容</td>
+				                <td colspan="3">
+									<table id="ueditorContent" class="table table-bordered">
+
+									</table>
+				                	<!-- <div id="passedApplicantList" class="set_height"></div> -->
+				                </td>
+					        </tr>
+				        </table>   
+		       		</div>
+		       	</div>
+	    	</div>
+	    	<div id="approval">
+	    		
+	    	</div>
+   		</div>
+        <div class="bottom-btn" style="z-index: 11000;">
+        	<button type="button" class="btn btn-primary" id="btnPass" style="display: none;"><span class="glyphicon glyphicon-saved"></span>审核通过</button>
+	        <button type="button" class="btn btn-default" id="btnNoPass" style="display: none;"><span class="glyphicon glyphicon-remove"></span>审核不通过</button>
+        	<button type="button" class="btn btn-default" id="btnPrint" onclick="printbox();"><span class="glyphicon glyphicon-saved"></span>打印</button>
+            <button type="button" class="btn btn-default" id="btnClose"><span class="glyphicon glyphicon-remove"></span>关闭</button>
+        </div>
+    </form>
+    <script type="text/javascript" src="../../../../../media/js/jquery/jquery.js"></script>
+    <script type="text/javascript" src="../../../../../media/js/jquery/jquery.extend.js"></script>
+    <!-- 编辑器源码文件 -->
+    <script type="text/javascript" src="../../../../../media/js/ueditor/ueditor.config.js"></script>
+    <script type="text/javascript" src="../../../../../media/js/ueditor/ueditor.all.js"></script>
+    <script type="text/javascript" src="../../../../../media/js/base/util.js"></script>
+    <script type="text/javascript" src="../../../../../media/js/base/common.js"></script>
+    <script type="text/javascript" src="../../../../../media/js/base/UEditorFun.js"></script>
+	<script type="text/javascript" src="../../../../../media/js/bootstrap/js/bootstrap.js"></script>
+    <script type="text/javascript" src="../../../../../media/js/My97DatePicker/WdatePicker.js"></script>
+    <script type="text/javascript" src="../../../../../media/js/stream/js/stream-v1.js"></script>
+    <script type="text/javascript" src="../../../../../media/js/base/WorkflowInfoNew.js"></script>
+    <script type="text/javascript" src="../../../../../media/js/base/StreamUpload.js"></script>
+    <script src="../../../../Model/js/public.js"></script>
+    <!--<script src="../../../../../media/js/base/WorkflowInfoNew.js"></script>-->
+    <script type="text/javascript" src="../js/view.js"></script>
+</body>
+
+</html>

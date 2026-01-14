@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="pragma" content="no-cache"><!-- 禁止浏览器从本地计算机的缓存中访问页面内容 --> 
+		<meta http-equiv="cache-control" content="no-cache"><!-- 用于指定请求和响应遵循的缓存机制 --> 
+		<meta http-equiv="expires" content="0"><!-- 用于设定网页的到期时间，一旦网页过期，必须到服务器上重新传输； -->
+		<title>提交答疑</title>
+		<link rel="stylesheet" href="../../../media/js/bootstrap/css/bootstrap.css" />
+		<style>
+			html,body { height: 100%;width: 100%;}
+			label {
+				font-weight: normal;
+			}
+			
+			.form-group {
+				margin: 0px;
+			}
+		</style>
+	</head>
+
+	<body>
+
+		<form id="formAnswers" name="AskAnswers" style="width:99%;margin-left:3px;margin-bottom: 100px;padding: 10px 20px;">
+			<div style="padding: 10px 0px;font-size: 16px;font-weight: 600;">参与竞争性投票的投标人：</div>
+			<div class="bidderTable"></div>
+			<table class="table table-bordered">
+				<tr>
+					<td colspan="2" style="color: darkred;">
+						温馨提示：该标段投标人不足3家，请投票决定竞争性。
+					</td>
+				</tr>
+				<tr >
+					<td>
+						原因
+					</td>
+					<td>
+						<textarea id="reason" class="form-control"></textarea>
+					</td>
+				</tr>
+			</table>
+		</form>
+		<div style="width: 100%;height: 50px;text-align:center;position: fixed;bottom: 0;background-color: #FFFFFF;">
+			<button type="button" class="btn btn-primary" id="btnSubmit"><span class="glyphicon glyphicon-ok"></span>存在竞争性</button>
+			<button type="button" class="btn btn-default" id="btnClose"><span class="glyphicon glyphicon-remove"></span>不存在竞争性</button>
+		</div>
+	</body>
+	<script type="text/javascript" src="../../../media/js/jquery/jquery.js"></script>
+	<script type="text/javascript" src="../../../media/js/base/common.js"></script>
+	<script type="text/javascript" src="../../../media/js/jquery/jquery.extend.js"></script>
+	<script type="text/javascript" src="../../../media/js/bootstrap/js/bootstrap.js"></script>
+	<script type="text/javascript" src="../../../media/js/layer/layer.js"></script>
+	<script type="text/javascript" src="../../../media/js/base/util.js"></script>
+	<script type="text/javascript" src="../../public.js"></script>
+	<script type="text/javascript">
+		var isCompeteListUrl=config.Reviewhost+"/BidCompeteController/saveBidCompeteItem.do";//竞争性投票
+		var thisFrame = parent.window.document.getElementById("layerPackage").getElementsByTagName("iframe")[0].id;
+		var bidders;
+		function competeList(bidSectionId,examType,compeletId,bidder,callback){
+			bidders = bidder;
+			if(bidders && bidders.length > 0){
+				var html1 = '<table class="table table-bordered">'
+					html1 += '<thead>';
+						html1 += '<tr>';
+							html1 += '<th style="text-align: center;width: 50px;">序号</th>';
+							html1 += '<th>投标人</th>';
+							html1 += '<th style="text-align: center;width: 100px;">操作</th>';
+						html1 += '</tr></thead><tbody>';
+				for(var i = 0;i<bidders.length;i++){
+					html1 += '<tr><td style="text-align: center;width: 50px;">'+(i+1)+'</td>';
+					html1 += '<td>'+bidders[i].enterpriseName+'</td>';
+					html1 += '<td style="text-align: center;width: 100px;"><button  type="button" class="btn btn-primary btn-sm btnFile" data-index="'+i+'">招投标文件</button></td>';
+					html1 += '</tr>';
+				}
+				html1 += '</tbody></table>';
+				$(html1).appendTo('.bidderTable')
+				
+			}
+			$("#btnSubmit").on('click',function(){
+				$.ajax({
+					type:"get",
+					url:isCompeteListUrl,
+					async:false,
+					data:{
+						'bidSectionId':bidSectionId,
+						'examType':examType,
+						'checkId':compeletId,
+						'resultType':1,
+						'reason':$("#reason").val()
+						
+					},
+					success:function(res){
+						if(res.success){
+						    if(callback){
+                                callback();
+							}
+						    top.layer.alert('投票成功！');
+							var index = top.layer.getFrameIndex(window.name);
+							top.layer.close(index);
+						}else{
+							top.layer.close(res.message);
+						}
+					}
+				})
+			})
+			$("#btnClose").on('click',function(){
+				if($("#reason").val().replace(/\s+/g,"")==""){
+					top.layer.alert('温馨提示：请填写不存在竞争性的原因');					
+					return
+				}
+				$.ajax({
+					type:"get",
+					url:isCompeteListUrl,
+					async:false,
+					data:{
+						'bidSectionId':bidSectionId,
+						'examType':examType,
+						'checkId':compeletId,
+						'resultType':0,
+						'reason':$("#reason").val()						
+					},
+					success:function(res){
+						if(res.success){
+							top.layer.alert('投票成功！');
+							var index = top.layer.getFrameIndex(window.name);
+							top.layer.close(index);
+						}else{
+							top.layer.close(res.message);
+						}
+					}
+				})
+			})
+			$('.bidderTable').on('click','.btnFile',function(){
+				var index = $(this).attr('data-index');
+				var surl="showBidFile.html";
+				sessionStorage.setItem('bidSectionId',bidSectionId);
+				sessionStorage.setItem('supplierId',bidders[index].supplierId);
+				sessionStorage.setItem('examType',examType);
+				window.open(surl, "_blank");
+			});
+			
+		}
+
+        /**
+         * 获取当前投标人
+         * @returns
+         */
+        function getCurrBidders(){
+            return bidders;
+        }
+	</script>
+</html>

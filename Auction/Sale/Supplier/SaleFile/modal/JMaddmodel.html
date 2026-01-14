@@ -1,0 +1,85 @@
+<head>
+	<meta http-equiv="pragma" content="no-cache">
+	<!-- 禁止浏览器从本地机的缓存中调阅页面内容 -->
+	<meta http-equiv="cache-control" content="no-cache, must-revalidate">
+	<meta http-equiv="expires" content="0">
+</head>
+<link rel="stylesheet" href="../../../../../media/js/bootstrap/css/bootstrap.css" />
+<link rel="stylesheet" href="../../../../../media/js/bootstrap/css/bootstrap-table.css" />
+<link rel="stylesheet" href="../../../../../media/js/layer/mobile/need/layer.css" />
+<link rel="stylesheet" href="../../../../../media/js/layer/theme/default/laydate.css" />
+<link rel="stylesheet" type="text/css" href="../../../../../media/js/bootstrap-fileinput-master/css/fileinput.min.css" />
+<link rel="stylesheet" href="../../../../../media/js/bootstrap/css/bootstrap-select.min.css" />
+<form id="form" name="purchase" style="width: 99%;padding-left: 10px;padding-top: 10px;">
+	<table class="table table-bordered " style="margin-bottom: 60px;">
+		<tr>
+			<td colspan="4" style="font-weight: bold;" class="active">车辆信息</td>
+			<!--<input type="hidden" name="project.projectState"  id="projectState" class="form-control"/>           	
+				<input name="project.projectSource" type="hidden" value="0" id="projectSource"/>
+				<input type="hidden" name="project.tenderType" value="2" id="tenderType"/>                           
+				<input type="hidden" name="isFile" value="0" id="isFile"/>  
+				<input type="hidden" name="isPublic" value="0" id="isPublic"/>
+				<input type="hidden" name="project.isAgent" value="1" id="isAgent"/>
+				<input type="hidden" name="id" id="purchaseId"/>
+				<input type="hidden" name="project.id"  id="projectId"/>-->
+		</tr>
+		<tr class="add_tr searched">
+			<td class="th_bg">车牌<i class="red">*</i></td>
+			<td style="text-align: left;"><input type="text" name="plate" id="plate" class="form-control" datatype="*" errormsg="车牌不能为空"/></td>
+			<td class="th_bg">车辆型号<i class="red">*</i></td>
+			<td style="text-align: left;"><input type="text" name="model" id="model" class="form-control" datatype="*" errormsg="车辆型号不能为空"/></td>
+		</tr>
+		<tr class="add_tr searched">
+			<td class="th_bg">总质量（千克）<i class="red">*</i></td>
+			<td style="text-align: left;"><input type="text" name="weight" id="weight" class="form-control priceNumber" datatype="*" errormsg="总质量不能为空"/></td>
+			<td class="th_bg">附件地址<i class="red">*</i></td>
+			<td style="text-align: left;">
+				<div style="height: 34px;line-height: 34px">
+					<span id='fileIn' style="float:left;"> </span>
+					<span id="SignfileName"></span>
+					<input type="file" class="fileloading" name="files" id="FileName">
+					<a href="javascript:;" class="btn btn-danger btn-sm" style="display: none;float: left;" id="delFile">删除</a>
+
+					<a href="javascript:;" class="btn btn-primary btn-sm" style="display: none;float: left;" id="lookFile"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>预览</a>
+					<a href="javascript:;" class="btn btn-primary btn-sm" style="display: none;float: left;" id="downFile"><span class="glyphicon glyphicon-arrow-down" aria-hidden="true"></span>下载</a>
+					<input type="hidden" name="fileName" id="fileName">
+					<input type="hidden" name="path" id="path">
+					<input type="hidden" name="filesize" id="filesize">
+				</div>
+			</td>
+		</tr>
+
+	</table>
+</form>
+<div class="bottom-btn" style="z-index: 11000;">
+	<button type="button" class="btn btn-primary" id="btnsubmit"><span class="glyphicon glyphicon-ok"></span>保存</button>
+	<button type="button" class="btn btn-default" id="btnClose"><span class="glyphicon glyphicon-remove"></span>关闭</button>
+</div>
+<style>
+	.table>thead>tr>th,
+	.table>tbody>tr>th,
+	.table>tfoot>tr>th,
+	.table>thead>tr>td,
+	.table>tbody>tr>td,
+	.table>tfoot>tr>td {
+		vertical-align: middle;
+	}
+	
+	input.file-caption-name {
+		height: auto;
+	}
+</style>
+ <script type="text/javascript" src="../../../../../media/js/jquery/jquery.js" ></script>
+<script type="text/javascript" src="../../../../../media/js/bootstrap/js/bootstrap.js"></script>
+<script type="text/javascript" src="../../../../../media/js/jquery/jquery.extend.js"></script>
+<script type="text/javascript" src="../../../../../media/js/base/common.js"></script>
+<script type="text/javascript" src="../../../../../media/js/base/util.js"></script>
+<script type="text/javascript" src="../../../../../media/js/base/ProvinceCityData.js"></script>
+<script type="text/javascript" src="../../../../../media/js/bootstrap/js/bootstrap-table.min.js"></script>
+<script type="text/javascript" src="../../../../../media/js/bootstrap/js/bootstrap-table-zh-CN.min.js"></script>
+<script type="text/javascript" src="../../../../../media/js/bootstrap-fileinput-master/js/fileinput.js"></script>
+<script type="text/javascript" src="../../../../../media/js/bootstrap-fileinput-master/js/locales/zh.js"></script>
+<script type="text/javascript" src="../../../../../media/js/bootstrap/js/bootstrap-select.min.js"></script>
+<script type="text/javascript" src="../../../../../media/js/bootstrap/js/defaults-zh_CN.min.js"></script>
+
+<script type="text/javascript" src="../js/JMaddmodel.js"></script>

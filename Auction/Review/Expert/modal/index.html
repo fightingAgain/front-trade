@@ -1,0 +1,103 @@
+<!--
+ * @Author: your name
+ * @Date: 2020-09-12 11:11:03
+ * @LastEditTime: 2021-01-21 09:13:53
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: \FrameWork_bf\bidPrice\Review\Expert\modal\index.html
+--> 
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="pragma" content="no-cache">
+		<!-- 禁止浏览器从本地机的缓存中调阅页面内容 -->
+		<meta http-equiv="cache-control" content="no-cache, must-revalidate">
+		<meta http-equiv="expires" content="0">
+		<title>评审管理</title>
+		<link rel="stylesheet" type="text/css" href="../../../../media/js/bootstrap/css/bootstrap.css">
+		<link rel="stylesheet" type="text/css" href="../../../../media/js/bootstrap/css/bootstrap-table.min.css">
+		<link rel="stylesheet" type="text/css" href="../../../../media/js/bootstrap/css/bootstrap-select.min.css" />
+        <link rel="stylesheet" type="text/css" href="../../../../media/js/datetimepicker/css/jquery.datetimepicker.css"/>
+		<link rel="stylesheet" type="text/css" href="../../../../media/js/bootstrap-fileinput-master/css/fileinput.min.css?verson=1.01" type="text/css"/>
+		<link rel="stylesheet" type="text/css" href="../../public/css/style.css"/>
+		<style>
+			a[aria-expanded=true]{
+				background: #fff !important;
+			}
+			a[aria-expanded=false]{
+				background: none !important;
+			}
+		</style>
+		<!--<link rel="stylesheet" type="text/css" href="media/js/bootstrap-editable/css/bootstrap-editable.css">-->
+	</head>
+
+	<body>
+        <div class="chear">
+            <div class="left">
+                <ul id="menu" style="overflow-y: auto;">
+                </ul>
+            </div>
+            <div class="right">
+							<div style="display: none;margin: 20px 0 0 15px;" class="showNTB">			
+								<span class="red StopCheck" style="font-weight: bold;" id="StopChecks">专家评委提出项目失败，</span>
+								<span class="red StopCheck" style="font-weight: bold;" id="StopCheckl">项目失败原因：<span id="viewReason"></span></span>									
+							</div>
+				<div id="topHeader" style="min-height: 150px;margin: 0px 15px;border-bottom: 1px solid #ccc;position: relative;">
+					<div style="position: absolute; bottom: 10px;left: 10px;z-index: 999;color: #BB2413;" class="tipsOfStart"></div>
+					<div style="position: absolute; bottom: 10px;right: 30px;z-index: 999;">		
+						<button class="btn btn-primary btn-sm envelopeLevelFile" data-envelopelevel="1" style="display: none"><span class="glyphicon glyphicon-download"></span>第一信封打包下载</button>
+						<button class="btn btn-primary btn-sm envelopeLevelFile2" data-envelopelevel="2" style="display: none"><span class="glyphicon glyphicon-download"></span>第二信封打包下载</button>
+                        <button class="btn btn-primary btn-sm" id="fileCheck" style="display: none"><span class="glyphicon glyphicon-download"></span><span class="examTypeName">采购文件下载</span></button>
+						<button class="btn btn-primary btn-sm " id="downloadAllFile" style="display: none"><span class="glyphicon glyphicon-download"></span>一键打包下载</button>
+						<button class="btn btn-danger btn-sm stopCheck" id="stopCheck" style="display: none"><span class="glyphicon glyphicon-remove"></span>项目失败</button>
+					</div>
+
+					<div  style="line-height: 24px;font-size: 14px; height: 100%;position: absolute;left: 0;overflow-y: auto;padding: 10px 0px;width: 100%;">
+						<div id="detaildivList" style="width: 60%; height: 100%"></div>
+					</div>
+					
+				</div>
+				
+                <div id="reportContent" style="overflow-y: auto;"></div>
+			</div>
+			<div class="bottom-btn" style="border-top: 1px solid #ccc">
+				<button type="button" class="btn btn-primary btn-strong signBtn " style="margin-left:5px;background-color:#e43636 ;border-color: #e43636; display: none;" disabled="disabled" id="btnSign"><span class="glyphicon glyphicon-saved"></span>签章</button>
+				<button type="button" class="btn btn-primary btn-strong " style="margin-left:5px;background-color:#e43636 ;border-color: #e43636; display: none;" id="btnSignReport"><span class="glyphicon glyphicon-saved"></span>签名</button>
+				<button type="button" class="btn btn-primary btn-strong signBtn " style="margin-left:5px;background-color:#e43636 ;border-color: #e43636; display: none;" id="btnConfirm"><span class="glyphicon glyphicon-saved"></span>确认回避信息</button>
+				<!--<button type="button" class="btn btn-danger" id="btnSignature">签章</button>-->
+				<button type="button" class="btn btn-primary" id="btnRefresh"><span class="glyphicon glyphicon-refresh"></span>刷新</button>
+				<button type="button" class="btn btn-default" id="btnClose"><span class="glyphicon glyphicon-remove"></span>关闭</button>
+			</div>
+        </div>	
+	</body>
+	<script type="text/javascript" src="../../../../media/js/base/common.js"></script>
+	<script type="text/javascript" src="../../../../media/js/jquery/jquery.min.js"></script>
+	<script type="text/javascript" src="../../../../media/js/jquery/jquery.ajax.js"></script>
+	<script type="text/javascript" src="../../../../media/js/base/util.js"></script>
+	<script type="text/javascript" src="../../../../media/js/bootstrap/js/bootstrap.js" ></script>
+	<script type="text/javascript" src="../../../../media/js/bootstrap/js/bootstrap-table.min.js"></script>
+	<script type="text/javascript" src="../../../../media/js/bootstrap/js/bootstrap-table-zh-CN.min.js"></script>
+	<script type="text/javascript" src="../../../../media/js/layer/laydate.js"></script>
+    <script type="text/javascript" src="../../../../media/js/datetimepicker/js/jquery.datetimepicker.js" ></script>
+	<script type="text/javascript" src="../../../../media/js/base/auditRecords.js"></script>
+	<script type="text/javascript" src="../../../../media/js/layer/layer.js"></script>
+	
+	<script type="text/javascript" src="../../../../media/js/bootstrap/js/bootstrap-select.min.js" ></script>
+	<script type="text/javascript" src="../../../../media/js/bootstrap/js/defaults-zh_CN.min.js" ></script>
+	<script type="text/javascript" src="../../../../media/js/base/ProvinceCityData.js"></script>
+	<script type="text/javascript" src="../../../../media/js/bootstrap-fileinput-master/js/fileinput.js?verson=1.01"></script>
+	<script type="text/javascript" src="../../../../media/js/bootstrap-fileinput-master/js/locales/zh.js?verson=1.01"></script>
+	<script type="text/javascript" src="../../../../Bidding/Model/js/public.js"></script>
+	<script type="text/javascript" src="../../../../media/js/Model/public.js"></script>
+	<script type="text/javascript" src="../../../../media/js/base/md5.js"></script>
+	<script type="text/javascript" src="../../../../media/js/ca.js"></script>
+	<script type="text/javascript" src="../../../currencyControl/js/offerForm.js" ></script>
+	<script type="text/javascript" src="../../../currencyControl/js/subitemFile.js" ></script>
+	<script type="text/javascript" src="../../public/js/bigNumber.js" ></script>
+	<script type="text/javascript" src="../../public/js/base64.js" ></script>
+	<script type="text/javascript" src="../../public/js/public.js" ></script>
+	<script type="text/javascript" src="../js/packageView.js" ></script>
+	<script type="text/javascript" src="../js/index.js"></script>
+</html>

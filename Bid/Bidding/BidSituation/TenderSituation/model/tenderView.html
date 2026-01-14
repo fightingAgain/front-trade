@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8">
+		<meta http-equiv="pragma" content="no-cache"><!-- 禁止浏览器从本地计算机的缓存中访问页面内容 --> 
+		<meta http-equiv="cache-control" content="no-cache"><!-- 用于指定请求和响应遵循的缓存机制 --> 
+		<meta http-equiv="expires" content="0"><!-- 用于设定网页的到期时间，一旦网页过期，必须到服务器上重新传输； -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>招标公告</title>
+    <link rel="stylesheet" href="../../../../media/js/layer/mobile/need/layer.css" />
+    <link rel="stylesheet" href="../../../../media/js/bootstrap/css/bootstrap.css" />
+    <style>
+    	.voucher{
+    		display: none;
+    	}
+    </style>
+	<style>
+		html,body { height: 100%;width: 100%;}
+		.readonly{
+		    border: none;
+		    background: none !important;
+		    outline: none !important;
+		    box-shadow: none !important;
+		}
+		.pretrial,.revise{
+			display: none;
+		}
+		.enterFull{
+			position: absolute;
+			top: 0;
+			left: 0;
+			background: #ffffff;
+			visibility: visible;
+			filter: Alpha(opacity=90);
+		}
+		.display_none{
+			display: none;
+		}
+		.file-input .kv-upload-progress{
+			display: none !important;
+		}
+		tr .file-input{
+			display: inline-block;
+			float: right;
+			margin-right: 50px;
+		}
+		a,a:link,a:visited,a:hover,a:active{
+			color: #333333;
+			text-decoration: none;
+		}
+		.padding_button{
+			padding: 5px 8px !important;
+			line-height: 30px !important;
+		}
+		.stream-total-tips{
+			display: none;
+		}
+		.set_height{
+		    display: inline-block;
+			padding: 6px 12px;
+		}
+	</style>
+</head>
+
+<body>
+    <form class="pageModel" id="addNotice" name="formName">
+    	<div class="panel-group" id="accordion">
+    		<div class="panel panel-accordion panel-default">
+	    		<div class="panel-heading active"  role="tab" id="headingOne">  
+			 		<h4 class="panel-title">
+		            	<a  role="button" data-toggle="collapse" href="#collapseOne" aria-controls="collapseOne"  aria-expanded="true"  >
+		            		标段信息
+		            	</a>
+			 		</h4>  
+			   	</div>  
+			  	<div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">  
+			       	<div class="panel-body">
+			       		<table  class="table table-bordered ">
+			       			<tr>
+					        	<td class="th_bg"><span >标段编号</span></td>
+				                <td colspan="3">
+				                	<span class="set_height" id="interiorBidSectionCode"></span>
+				                    <!--<input type="text"  name="" id="interiorBidSectionCode" class="form-control readonly" readonly="readonly" />-->
+				                    <!--<input type="hidden"  name="bidSectionId" id="bidSectionId" />-->
+				                    <!--<input type="hidden"  name="examType" id="examType" />-->
+				                </td>
+				               
+					        </tr>
+					        <tr>
+					        	 <td class="th_bg"><span >标段名称</span></td>
+				                <td colspan="3">
+				                	<span class="set_height" id="bidSectionName"></span>
+				                    <!--<input type="text"  name="" id="bidSectionName" class="form-control readonly" readonly="readonly" />-->
+				                </td>
+					        </tr>
+			       		</table>
+		       		</div>
+	       		</div>
+       		</div>
+       		<div class="panel panel-accordion panel-default">
+	    		<div class="panel-heading active"  role="tab" id="headingTwo">  
+			 		<h4 class="panel-title">
+		            	<a class="collapsed" role="button" data-toggle="collapse" href="#collapseTwo" aria-controls="collapseTwo"  aria-expanded="false">
+		            		递交情况
+		            	</a>
+			 		</h4>  
+			   	</div>  
+			  	<div  id="collapseTwo" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingTwo">  
+			       	<div class="panel-body">
+			       		<table class="table table-bordered " id="situationList">
+		        			<thead>
+		        				<tr>
+		        					<th style="width: 50px;text-align: center;">序号</th>
+		        					<th>投标人名称</th>
+		        					<th style="width: 150px;text-align: center;">递交情况</th>
+		        					<th style="width: 200px;text-align: center;">递交时间</th>
+		        					<th style="width: 100px;text-align: center;">是否签到</th>
+		        					<th style="width: 100px;text-align: center;">是否解密</th>
+		        					<th style="width: 100px;text-align: center;">回执单</th>
+		        					<th style="width: 100px;text-align: center;">历史回执</th>
+		        					<th style="width: 100px;text-align: center;">解密文件</th>
+		        				</tr>	
+		        			</thead>
+		        			<tbody>
+		        				
+		        			</tbody>
+		        		</table>   
+		       		</div>
+		       	</div>
+		       	<!---->
+		       	<div class="panel panel-accordion panel-default bidderHide">
+	    		<div class="panel-heading active"  role="tab" id="headingTwo">  
+			 		<h4 class="panel-title">
+		            	<a class="collapsed" role="button" data-toggle="collapse" href="#collapseTwo" aria-controls="collapseTwo"  aria-expanded="false">
+		            		投标文件递交记录
+		            	</a>
+			 		</h4>  
+			   	</div>  
+			  	<div  id="collapseTwo" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingTwo">  
+			       	<div class="panel-body">
+						<div class="table-responsive">
+							<table class="table table-bordered" id="ipList">
+							 <thead>
+								 <tr>
+									 <th style="min-width: 200px;">投标人名称</th>
+									 <!-- <th style="min-width: 100px;">递交人账号</th> -->
+									 <!-- <th style="min-width: 220px;">上传投标文件的IP</th> -->
+									 <th style="min-width: 100px;">递交时间</th>
+								 </tr>	
+							 </thead>
+							 <tbody id="ipTable">
+								 
+							 </tbody>
+						 </table> 
+					 </div>
+					</div>
+				</div>
+			</div>
+		       	<!---->
+	    	</div>
+   		</div>
+    	
+        <div class="bottom-btn" style="z-index: 11000;">
+            <button type="button" class="btn btn-default" id="btnClose"><span class="glyphicon glyphicon-remove"></span>关闭</button>
+        </div>
+    </form>
+    <script type="text/javascript" src="../../../../media/js/jquery/jquery.js"></script>
+    <script type="text/javascript" src="../../../../media/js/jquery/jquery.extend.js"></script>
+    <script type="text/javascript" src="../../../../media/js/bootstrap/js/bootstrap.js"></script>
+    <script type="text/javascript" src="../../../../media/js/base/common.js"></script>
+    <script type="text/javascript" src="../../../../media/js/base/util.js"></script>
+    <script src="../../../Model/js/public.js"></script>
+    <script type="text/javascript" src="../js/tenderView.js"></script>
+</body>
+
+</html>

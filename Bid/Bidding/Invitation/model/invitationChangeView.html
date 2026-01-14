@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8">
+		<meta http-equiv="pragma" content="no-cache"><!-- 禁止浏览器从本地计算机的缓存中访问页面内容 --> 
+		<meta http-equiv="cache-control" content="no-cache"><!-- 用于指定请求和响应遵循的缓存机制 --> 
+		<meta http-equiv="expires" content="0"><!-- 用于设定网页的到期时间，一旦网页过期，必须到服务器上重新传输； -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>邀请函</title>
+    <link rel="stylesheet" href="../../../media/js/layer/mobile/need/layer.css" />
+    <link rel="stylesheet" href="../../../media/js/bootstrap/css/bootstrap.css" />
+    <!--<link rel="stylesheet"  href="../../../../media/js/bootstrap-fileinput-master/css/fileinput.css"/>-->
+    <link rel="stylesheet" href="../../../media/js/stream/css/stream-v1.css" />
+    
+	<style>
+		html,body {width: 100%;}
+		.readonly{
+		    border: none;
+		    background: none !important;
+		    outline: none !important;
+		    box-shadow: none !important;
+		}
+		.pretrial,.revise{
+			display: none;
+		}
+		.enterFull{
+			position: absolute;
+			top: 0;
+			left: 0;
+			background: #ffffff;
+			visibility: visible;
+			filter: Alpha(opacity=90);
+		}
+		.display_none{
+			display: none;
+		}
+		.file-input .kv-upload-progress{
+			display: none !important;
+		}
+		tr .file-input{
+			display: inline-block;
+			float: right;
+			margin-right: 50px;
+		}
+		a,a:link,a:visited,a:hover,a:active{
+			color: #333333;
+			text-decoration: none;
+		}
+		.calendar_icon{
+			color: #3995C8;
+		}
+		.set_height{
+		    display: inline-block;
+			padding: 6px 12px;
+		}
+		.table-comm>tbody>tr>td { width: 38%;}
+		/*.table-comm>tbody>tr>td.th_bg, .table>tbody>tr>th.th_bg {
+			width: 12%;
+		}*/
+		
+	</style>
+</head>
+
+<body>
+    <form class="pageModel" id="addNotice" name="formName">
+    	<div class="panel-group" id="accordion">
+    		<div class="panel panel-accordion panel-default">
+	    		<div class="panel-heading active"  role="tab" id="headingOne">  
+			 		<h4 class="panel-title">
+		            	<a  role="button" data-toggle="collapse" href="#collapseOne" aria-controls="collapseOne"  aria-expanded="true"  >
+		            		基本概况
+		            	</a>
+			 		</h4>  
+			   	</div>  
+			  	<div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">  
+			       	<div class="panel-body">
+			       		<table  class="table table-bordered table-comm">
+			       			<tr>
+					        	<td class="th_bg">招标项目编号</td>
+				                <td colspan="3">
+				                	<span id="interiorTenderProjectCode" class="set_height"></span>
+				                </td>
+					        </tr>
+					        <tr>
+					        	<td class="th_bg">招标项目名称</td>
+				                <td>
+				                	<span id="tenderProjectName" class="set_height"></span>
+				                </td>
+					        	<td class="th_bg">招标项目类型</td>
+				                <td>
+				                	<span id="tenderProjectTypeTxt" class="set_height"></span>
+				                </td>
+				               <!-- <td class="th_bg">招标方式</td>
+				                <td>
+				                	<span id="tenderMode" class="set_height"></span>
+				                </td>-->
+				                
+					        </tr>
+					        <tr>
+					        	<td class="th_bg">标段编号</td>
+				                <td colspan="3">
+				                	<span id="interiorBidSectionCode" class="set_height"></span>
+				                </td>
+				           </tr>
+				           <tr>
+				                <td class="th_bg">标段名称</td>
+				                <td>
+				                	<span id="bidSectionName" class="set_height"></span>
+				                </td>
+					        	<td class="th_bg">开标方式</td>
+					        	<td>
+					        		<span id="bidOpenType" class="set_height"></span>
+					        	</td>
+					        </tr>
+					        <tr>
+					        	<td class="th_bg">招标人</td>
+				                <td colspan="3">
+				                	<span id="tendererName" class="set_height"></span>
+				                </td>
+					        </tr>
+					        <!--<tr>
+					        	<td class="th_bg">联系人</td>
+				                <td>
+				                	<span id="agentName" class="set_height"></span>
+				                </td>
+				                <td class="th_bg">联系人电话</td>
+				                <td>
+				                	<span id="agentTel" class="set_height"></span>
+				                </td>
+					        </tr>-->
+					        <tr>
+					        	<td class="th_bg">招标代理机构</td>
+				                <td>
+				                	<span id="tenderAgencyName" class="set_height"></span>
+				                </td>
+					        <!--<tr>
+					        	<td class="th_bg">联系人</td>
+				                <td>
+				                	<span id="tenderAgencyName" class="set_height"></span>
+				                </td>
+				                <td class="th_bg">联系电话</td>
+				                <td>
+				                	<span id="tenderAgencyLinktel" class="set_height"></span>
+				                </td>
+					        </tr>-->
+					        	<td class="th_bg">项目经理</td>
+				                <td>
+				                	<span id="employeeName" class="set_height"></span>
+				                </td>
+					        </tr>
+			       		</table>
+		       		</div>
+	       		</div>
+       		</div>
+       		<!--<div class="panel panel-accordion panel-default">
+	    		<div class="panel-heading active"  role="tab" id="headingTwo">  
+			 		<h4 class="panel-title">
+		            	<a class="collapsed" role="button" data-toggle="collapse" href="#collapseTwo" aria-controls="collapseTwo"  aria-expanded="false">
+		            		标段信息
+		            	</a>
+			 		</h4>  
+			   	</div>  
+			  	<div  id="collapseTwo" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingTwo">  
+			       	<div class="panel-body">
+			       		<table class="table table-bordered table-comm">
+					      	<tr>
+					        	<td class="th_bg">标段编号</td>
+				                <td>
+				                	<span id="interiorBidSectionCode" class="set_height"></span>
+				                </td>
+				                <td class="th_bg">标段名称</td>
+				                <td>
+				                	<span id="bidSectionName" class="set_height"></span>
+				                </td>
+					        </tr>
+				        </table>   
+		       		</div>
+		       	</div>
+	    	</div>
+	    	<div class="panel panel-accordion panel-default">
+	    		<div class="panel-heading active"  role="tab" id="headingThree">  
+			 		<h4 class="panel-title">
+		            	<a class="collapsed" role="button" data-toggle="collapse" href="#collapseThree" aria-controls="collapseThree"  aria-expanded="false">
+		            		招标人与招标代理
+		            	</a>
+			 		</h4>  
+			   	</div>  
+			  	<div  id="collapseThree" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingThree">  
+			       	<div class="panel-body">
+			       		<table class="table table-bordered table-comm">
+					      	
+				        </table>   
+		       		</div>
+		       	</div>
+	    	</div>-->
+	    	<!--<div class="panel panel-accordion panel-default">
+	    		<div class="panel-heading active"  role="tab" id="headingFour">  
+			 		<h4 class="panel-title">
+		            	<a class="collapsed" role="button" data-toggle="collapse" href="#collapseFour" aria-controls="collapseFour"  aria-expanded="false">
+		            		会议室信息
+		            	</a>
+			 		</h4>  
+			   	</div>  
+			  	<div  id="collapseFour" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingFour">  
+			       	<div class="panel-body">
+			       		<table class="table table-bordered tenders" id="roomList">
+			       			
+			        	</table>
+		       		</div>
+		       	</div>
+	    	</div>-->
+	    	<div class="panel panel-accordion panel-default">
+	    		<div class="panel-heading active"  role="tab" id="headingFive">  
+			 		<h4 class="panel-title">
+		            	<a class="collapsed" role="button" data-toggle="collapse" href="#collapseFive" aria-controls="collapseFive"  aria-expanded="false">
+		            		邀请函基本信息
+		            	</a>
+			 		</h4>  
+			   	</div>  
+			  	<div  id="collapseFive" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingFive">  
+			       	<div class="panel-body">
+			       		<table class="table table-bordered">
+					      	<tr>
+					        	<td class="th_bg">邀请函标题</td>
+					        	<td colspan="3">
+					        		<span id="bidInviteTitle" class="set_height"></span>
+					        	</td>
+					        </tr>
+					        <!--<tr>
+					        	<td class="th_bg">招标文件标书费用金额（元）</td>
+				                <td colspan="3">
+				                	<span id="projectCosts[0].payMoney" class="set_height price"></span>
+				                </td>
+					        </tr>-->
+					        <tr>
+					        	<td class="th_bg">投标邀请发出时间</td>
+				                <td>
+				                	<span id="bidInviteIssueTime" class="set_height"></span>
+				                </td>
+				                <td class="th_bg">投标邀请回复截止时间</td>
+				                <td>
+				                	<span id="inviteAnswersEndDate" class="set_height"></span>
+				                </td>
+					        </tr>
+					        <!-- <tr>
+					        	<td class="th_bg">招标文件发布时间</td>
+				                <td colspan="3">
+				                	<span id="docGetStartTime" class="set_height"></span>
+				                </td>
+					        </tr>-->
+					        <tr>
+					        	<td class="th_bg"><span class="tender">招标文件获取开始时间</span><span class="pretrial">资格预审文件获取开始时间</span></td>
+				                <td>
+				                	<span id="docGetStartTime" class="set_height"></span>
+				                </td>
+				                <td class="th_bg"><span class="tender">招标文件获取截止时间</span><span class="pretrial">资格预审文件获取截止时间</span></td>
+				                <td>
+				                	<span id="docGetEndTime" class="set_height"></span>
+				                </td>
+					        </tr>
+					        <tr>
+								<td class="th_bg timeName">提出澄清截止时间</td>
+								<td style="text-align: left;">
+									<span id="clarifyTime" class="set_height"></span>
+								</td>
+								<td class="th_bg timeName">答复截止时间</td>
+								<td style="text-align: left;">
+									<span id="answersEndDate" class="set_height"></span>
+								</td>
+							</tr>
+					        <tr>
+				                <td class="th_bg"><span class="tender">投标文件递交截止时间</span><span class="pretrial">资格预审申请文件递交截止时间</span></td>
+				                <td>
+				                	<span id="bidDocReferEndTime" class="set_height"></span>
+				                </td>
+					        	<td class="th_bg"><span class="tender">开标时间</span><span class="pretrial">开启时间</span></td>
+				                <td>
+				                	<span id="bidOpenTime" class="set_height"></span>
+				                </td>
+					        </tr>
+					       <!--<tr>
+					        	<td class="th_bg">公告发布责任人</td>
+				                <td colspan="3">
+				                	<span id="bulletinDuty" class="set_height"></span>
+				                </td>
+					        </tr>-->
+					        <tr>
+					        	<td class="th_bg">招标文件获取方式</td>
+					        	<td>
+					        		<span id="signUpType" class="set_height"></span>
+					        	</td>
+					        	<td class="th_bg">投标文件递交方法</td>
+					        	<td>
+					        		<span id="deliverFileType" class="set_height"></span>
+					        	</td>
+					        </tr>
+					        <tr>
+					        	<td class="th_bg">开标地点</td>
+					        	<td colspan="3">
+					        		<span id="openAddress" class="set_height"></span>
+					        	</td>
+					        </tr>
+					        <!--<tr>
+					        	<td class="th_bg">投标资格</td>
+					        	<td colspan="3">
+					        		<span id="biddingQualification" class="set_height"></span>
+					        	</td>
+					        </tr>-->
+				        </table>   
+		       		</div>
+		       	</div>
+	    	</div>
+	    	<div class="panel panel-accordion panel-default">
+	    		<div class="panel-heading active"  role="tab" id="headingSix">  
+			 		<h4 class="panel-title">
+		            	<a class="collapsed" role="button" data-toggle="collapse" href="#collapseSix" aria-controls="collapseSix"  aria-expanded="false">
+		            		邀请投标人
+		            	</a>
+			 		</h4>  
+			   	</div>  
+			  	<div  id="collapseSix" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingSix">  
+			       	<div class="panel-body">
+			       		<div id="biderBlock"></div> 
+		       		</div>
+		       	</div>
+	    	</div>
+	    	<div class="panel panel-accordion panel-default">
+	    		<div class="panel-heading active"  role="tab" id="headingSeven">  
+			 		<h4 class="panel-title">
+		            	<a class="collapsed" role="button" data-toggle="collapse" href="#collapseSeven" aria-controls="collapseSeven"  aria-expanded="false">
+		            		邀请函内容
+		            	</a>
+			 		</h4>  
+			   	</div>  
+			  	<div  id="collapseSeven" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingSeven">  
+			       	<div class="panel-body">
+			       		<!-- <button type="button" class="btn btn-primary btn-sm fullScreen"   style="float: right;margin-right: 50px;margin-bottom: 10px;">
+		            		<span class="glyphicon glyphicon-fullscreen"></span>全屏
+		            	</button> -->
+		            	<table id="ueditorContent" class="table table-bordered ">
+		            	</table>
+			       		
+		       		</div>
+		       	</div>
+	    	</div>
+	    	
+	    	<div class="panel panel-accordion panel-default">
+	    		<div class="panel-heading active"  role="tab" id="headingEight">  
+			 		<h4 class="panel-title">
+		            	<a class="collapsed" role="button" data-toggle="collapse" href="#collapseEight" aria-controls="collapseEight"  aria-expanded="false">
+		            		相关附件
+		            	</a>
+			 		</h4>  
+			   	</div>  
+			  	<div  id="collapseEight" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingEight">  
+			       	<div class="panel-body">
+			       		<div id="fileContent"></div>
+		       		</div>
+		       	</div>
+	    	</div>
+	    	<!--<div id="approval"></div>-->
+   		</div>
+        <div class="bottom-btn" style="z-index: 11000;">
+            <button type="button" class="btn btn-default" id="btnClose"><span class="glyphicon glyphicon-remove"></span>关闭</button>
+        </div>
+    </form>
+    <script type="text/javascript" src="../../../media/js/jquery/jquery.js"></script>
+    <script type="text/javascript" src="../../../media/js/jquery/jquery.extend.js"></script>
+    <script type="text/javascript" src="../../../media/js/base/util.js"></script>
+    <script type="text/javascript" src="../../../media/js/base/common.js"></script>
+    <script type="text/javascript" src="../../../media/js/base/UEditorFun.js"></script>
+	<script type="text/javascript" src="../../../media/js/bootstrap/js/bootstrap.js"></script>
+    <script type="text/javascript" src="../../../media/js/stream/js/stream-v1.js"></script>
+    <script type="text/javascript" src="../../Model/js/public.js"></script>
+    <script type="text/javascript" src="../../../media/js/base/WorkflowInfoNew.js"></script>
+    <script type="text/javascript" src="../../Model/js/dataLinkage.js"></script>
+    <script type="text/javascript" src="../../../media/js/base/StreamUpload.js"></script>
+    <script type="text/javascript" src="../../Model/js/orderRoom.js"></script>
+    <script type="text/javascript" src="../js/invitationChangeView.js"></script>
+</body>
+
+</html>

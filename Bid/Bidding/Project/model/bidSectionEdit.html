@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8">
+		<meta http-equiv="pragma" content="no-cache"><!-- 禁止浏览器从本地计算机的缓存中访问页面内容 --> 
+		<meta http-equiv="cache-control" content="no-cache"><!-- 用于指定请求和响应遵循的缓存机制 --> 
+		<meta http-equiv="expires" content="0"><!-- 用于设定网页的到期时间，一旦网页过期，必须到服务器上重新传输； -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>编辑包件信息（预审、后审）</title>
+    <link rel="stylesheet" href="../../../media/js/layer/mobile/need/layer.css" />
+    <link rel="stylesheet" href="../../../media/js/bootstrap/css/bootstrap.css" />
+	<style>
+		html,body { height: 100%;}
+		.readonly{
+			border: none;
+		    background: none !important;
+		    outline: none !important;
+		    box-shadow: none !important;
+		}
+		.calendar_icon{
+			color: #3995C8;
+		}
+		/* .projectShow, .goodsShow { display: none;} */
+		.isOnline { display: none;}
+		/*.table-comm>tbody>tr>td { width: 35%;}*/
+		.table-comm>tbody>tr>td.th_bg, .table>tbody>tr>th.th_bg {
+			width: 15%;
+		}
+		/* .examType1,.signUpShow,.controlShow{
+			display: none;
+		} */
+	</style>
+</head>
+
+<body>
+    <form class="pageModel" id="formName" name="formName">
+        <table class="table table-bordered table-comm">
+        	<tr>
+	            <td colspan="4" style="font-weight: bold;" class="active">标段信息</td>
+	        </tr>
+	        <tr class="bidCode" style="display: none;">
+            	<td class="th_bg">标段编号<i class="red">*</i></td>
+                <td colspan="3">
+                    <input type="text" name="interiorBidSectionCode" id="interiorBidSectionCode" readonly="readonly" class="form-control readonly" errormsg="请正确输入标段编号"/>
+                </td>
+            </tr>
+            <tr>
+            	<td class="th_bg">标段名称<i class="red">*</i></td>
+                <td colspan="3">
+                    <input type="text" name="bidSectionName" id="bidSectionName" maxlength="150" class="form-control bidFileEdit" datatype="*" errormsg="请正确输入标段名称" />
+					<input type="hidden" name="interiorTenderProjectCode" id="interiorTenderProjectCode">
+				</td>
+            </tr>
+            <tr>
+            	<td class="th_bg">标段分类<i class="red">*</i></td>
+            	<td colspan="3" class="allowEdit">
+					<div class="tenderProjectClassifyCodeTxt"></div>
+				</td>
+            </tr>
+            <tr>
+            	<td class="th_bg">标段合同估算价<i class="red">*</i></td>
+            	<td colspan="3" class="allowEdit">
+            		<input type="text" class="form-control bidFileEdit" name="contractReckonPrice" style="width: 150px;display: inline-block;text-align: right;" onblur="OnInputs(this)" datatype="positiveNum" errormsg="请正确输入标段合同估算价" />
+            		<select name="priceUnit" class="form-control bidFileEdit" style="width: 80px;display: inline-block;">
+                    	<option value="1">万元</option>
+                    	<option value="0">元</option>
+                    </select>
+                    <select name="currencyCode" class="form-control bidFileEdit" style="width: 100px;display: inline-block;">
+                    	<option value="156">人民币</option>
+                    </select>
+            	</td>
+            </tr>
+			<!-- <tr>
+				<td class="th_bg">招标方式<i class="red">*</i></td>
+			    <td>
+			        <label style="padding-right:20px;margin-bottom: 0;">
+			        	<input type="radio" checked="checked" name="tenderMode" id="" value="1" style="vertical-align: -2px;margin-right: 5px;" />公开招标
+			        </label>
+			        <label style="padding-right:20px;margin-bottom: 0;">
+			        	<input type="radio" name="tenderMode" id="" value="2" style="vertical-align: -2px;margin-right: 5px;" />邀请招标
+			        </label>
+			    </td>
+				<td class="th_bg">资格审查方式<i class="red">*</i></td>
+			    <td>
+			    	<label style="padding-right:20px;margin-bottom: 0;">
+			        	<input type="radio" checked="checked" name="examType" id="" value="2" style="vertical-align: -2px;margin-right: 5px;" />资格后审
+			        </label>
+			    	<label style="padding-right:20px;margin-bottom: 0;">
+			    		<input type="radio" name="examType" id="" value="1" style="vertical-align: -2px;margin-right: 5px;" />资格预审
+			    	</label>
+			    </td>
+			</tr> -->
+            <tr id="transactionProcess">
+            	<td class="th_bg">交易流程</td>
+                <td colspan="3">
+                	<label style="padding-right:20px;margin-bottom: 0;">
+                		<input type="radio" checked="checked" name="process" id="" value="1" class="bidFileEdit" style="vertical-align: -2px;margin-right: 5px;" />全流程线上
+                	</label>
+                    <label style="padding-right:20px;margin-bottom: 0;">
+                    	<input type="radio" name="process" id="" value="2" class="bidFileEdit" style="vertical-align: -2px;margin-right: 5px;" />线上线下相结合
+                    </label>
+                </td>
+			</tr>
+            
+	        
+            <tr>
+            	<td class="th_bg">联合体投标</td>
+                <td colspan="3">
+                    <label style="padding-right: 20px;margin-bottom: 0;">
+                		<input type="radio" checked="checked" name="syndicatedFlag" class="bidFileEdit" id="" value="1" style="vertical-align: -2px;margin-right: 5px;" />允许
+                	</label>
+                    <label style="padding-right: 20px;margin-bottom: 0;">
+                    	<input type="radio" name="syndicatedFlag" id="" class="bidFileEdit" value="0" style="vertical-align: -2px;margin-right: 5px;" />不允许
+                    </label>
+                </td>
+            </tr>
+            <tr class="syndMain">
+            	<td class="th_bg">联合体投标要求<i class="red">*</i></td>
+            	<td colspan="3">
+            		<textarea style="resize:none;" class="form-control bidFileEdit" rows="10" placeholder="联合体投标要求..." name="consortiumBidding" id="consortiumBidding" datatype="*" errormsg="请输入联合体投标要求" ></textarea>
+            	</td>
+            </tr>
+	        <tr>
+            	<td class="th_bg">标段内容（范围/规模）<i class="red">*</i></td>
+                <td colspan="3">
+                	<textarea style="resize:none;" class="form-control bidFileEdit" rows="10" placeholder="范围和规模..." name="bidSectionContent" datatype="*" errormsg="请输入标段内容"></textarea>
+                </td>
+           </tr>
+            <tr>
+            	<td class="th_bg">投标人资格条件<i class="red">*</i></td>
+                <td colspan="3">
+                	<textarea style="resize:none;" class="form-control bidFileEdit" rows="10" placeholder="投标人资格条件..." name="bidQualification" datatype="*" errormsg="请输入投标人资格条件"></textarea>
+                </td>
+            </tr>
+            <tr class="re_tender">
+            	<td class="th_bg">历史投标人<i class="red">*</i></td>
+            	<td colspan="3">
+            		<div id="re_tender">
+            			<table class="table table-bordered">
+            				<thead>
+            					<tr>
+            						<th style="width: 50px;">序号</th>
+            						<th>投标人名称</th>
+            						<th style="width: 200px;">是否免除本次招标文件费用</th>
+            					</tr>
+            				</thead>
+            				<tbody>
+            					
+            				</tbody>
+            			</table>
+            		</div>
+            	</td>
+            </tr>
+			
+        </table>
+    </form>
+    <div class="bottom-btn">
+        <button type="button" class="btn btn-primary" id="btnSave" style="display: none;"><span class="glyphicon glyphicon-ok"></span>保存</button>
+        <button type="button" class="btn btn-primary" id="btnReSubmit" style="display: none;"><span class="glyphicon glyphicon-ok"></span>提交</button>
+        <button type="button" class="btn btn-primary" id="btnSubmit"><span class="glyphicon glyphicon-ok"></span>保存</button>
+        <button type="button" class="btn btn-default" id="btnClose"><span class="glyphicon glyphicon-remove"></span>取消</button>
+    </div>
+    
+    <script type="text/javascript" src="../../../media/js/jquery/jquery.js"></script>
+    <script type="text/javascript" src="../../../media/js/jquery/jquery.extend.js"></script>
+    <script type="text/javascript" src="../../../media/js/base/util.js"></script>
+    <script type="text/javascript" src="../../../media/js/base/common.js"></script>
+    <script type="text/javascript" src="../../../media/js/bootstrap/js/bootstrap.js"></script>
+    <script type="text/javascript" src="../../../media/js/layer/layer.js"></script>
+    <script type="text/javascript" src="../../../media/js/My97DatePicker/WdatePicker.js"></script>
+    <script type="text/javascript" src="../../Model/js/public.js"></script>
+    
+    <script type="text/javascript" src="../../Model/js/dataLinkage.js"></script>
+    <script type="text/javascript" src="../../Model/js/multiLinkage.js"></script>
+    <script type="text/javascript" src="../js/bidSectionEdit.js"></script>
+	<script type="text/javascript" src="../js/bidSectionHtml.js"></script>
+</body>
+
+</html>

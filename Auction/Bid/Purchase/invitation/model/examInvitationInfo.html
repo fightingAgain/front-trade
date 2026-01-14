@@ -1,0 +1,309 @@
+<head>
+	<meta http-equiv="pragma" content="no-cache">
+	<!-- 禁止浏览器从本地机的缓存中调阅页面内容 -->
+	<meta http-equiv="cache-control" content="no-cache, must-revalidate">
+	<meta http-equiv="expires" content="0">
+	<!--[if lt IE 9]>
+	   <script src="../../../../media/js/html5shiv.min.js"></script>
+	   <script src="../../../../media/js/respond.js"></script>
+	<![endif]-->
+	<link rel="stylesheet" href="../../../../../media/js/layer/mobile/need/layer.css" type="text/css"/>
+	<link rel="stylesheet" href="../../../../../media/js/bootstrap/css/bootstrap.css" />
+	<link rel="stylesheet" href="../../../../../media/js/bootstrap/css/bootstrap-table.min.css" type="text/css"/>
+	<link rel="stylesheet" href="../../../../../media/js/layer/theme/default/laydate.css" type="text/css"/>
+	<link rel="stylesheet" href="../../../../../media/js/bootstrap-fileinput-master/css/fileinput.min.css" type="text/css"/>
+	<link rel="stylesheet" href="../../../../../media/js/datetimepicker/css/jquery.datetimepicker.css" type="text/css"/>
+	<link rel="stylesheet" href="../../../../../media/js/bootstrap/css/bootstrap-select.min.css" />
+	<link rel="stylesheet" href="../../../../../media/js/bootstrap-fileinput-master/css/fileinput.min.css" type="text/css"/>
+	<script type="text/javascript" charset="utf-8" src="../../../../../media/js/ueditor/ueditor.config.js"></script>
+	<script type="text/javascript" charset="utf-8" src="../../../../../media/js/ueditor/ueditor.all.js"> </script>
+	<!--建议手动加在语言，避免在ie下有时因为加载语言失败导致编辑器加载失败-->
+	<!--这里加载的语言文件会覆盖你在配置项目里添加的语言类型，比如你在配置项目里配置的是英文，这里加载的中文，那最后就是中文-->
+	<script type="text/javascript" charset="utf-8" src="../../../../../media/js/ueditor/lang/zh-cn/zh-cn.js"></script>
+</head>
+<form id="formb" name="projectPackages" style="width: 99%;padding-left: 10px;padding-top: 10px;margin-bottom: 60px;">  
+<div class="container-fluid">
+	<table class="table table-bordered" style="margin-bottom: 0px;">
+		<tr>
+			<td class="th_bg" style="width:200px;">包件名称<i class="red">*</i></td>
+			<td>
+				<div id="packageName"></div>
+				<input type="hidden" name="packageName" id="Package_Name" class="form-control"/>
+				<input type="hidden" name="id" id="packageId"/>
+				<input type="hidden" name="projectId" id="projectId"/>
+				<input type="hidden" name="sort" id="sort"/>				
+				<input type="hidden" name="examType" id="examType" value="0"/>	
+				<input type="hidden" name="settingNotice"  value="0"/>
+			</td>
+			<td class="th_bg" style="width:200px;">包件编号</td>
+			<td>
+				<div id="packageNum"></div>
+				<input type="hidden" name="packageNum" id="Package_Num" class="form-control"/>
+			</td>
+		</tr>
+		<tr>
+			<td class="th_bg" style="width:200px;">项目类型</td>
+			<td>
+				<div id="dataTypeNames"></div>
+				<input type="hidden" id="dataTypeName" name="dataTypeName" class="form-control" />
+				<input type="hidden" name="dataTypeId" id="dataTypeId"/>
+				<input type="hidden" name="dataTypeCode" id="dataTypeCode" />
+			</td>	
+			<td class="th_bg" style="width:200px;">资格审查方式</td>
+			<td  style="text-align: left;" >
+				<div>资格预审</div>            	
+			</td>	
+		</tr>
+		<tr>
+			<td class="th_bg" style="width:200px;">评审方法<i class="red showExam0">*</i></td>
+			<td colspan="3">		
+				<div>
+					<input type="radio" name="checkPlan"  value="0"/>综合评分法
+					<input type="radio" name="checkPlan"  value="1"/>最低评标价法
+					<input type="radio" name="checkPlan"  value="3"/>最低投标价法
+					<input type="radio" name="checkPlan"  value="5"/>经评审的最低投标价法
+					<input type="radio" name="checkPlan"  value="2"/>经评审的最低价法(价格评分)			
+				</div>					
+			</td>
+		</tr>
+		<!--<tr id="DeviateNum">
+			<td class="th_bg" style="width:200px;">允许最大偏离项数<i class="red">*</i></td>
+			<td colspan="3" >
+				<div class="showExam1">
+					<div id="deviate"></div>					
+				</div>
+				<div class="showExam0">
+					<input id="deviate"   name="deviate" class="form-control"/>
+				</div>	
+				
+			</td>			
+		</tr>-->
+	    <tr>
+	    	<td class="th_bg" style="width:200px;">是否发售报价文件</td>
+    		<td class="colspan3_pril">
+    			<input type="radio"  value="0" name="isSellPriceFile" checked="checked"/>是
+    			<input type="radio"  value="1" name="isSellPriceFile" />否  			
+    		</td>
+    		<td class="th_bg isFtimew" style="width:200px;">
+    			<span>采购文件费</span>/(元)
+    		</td>
+    		<td class="isFtimew">
+    			<input type="text"   name="projectPrices[0].price" id="pricel" class="form-control prices priceNumber" style="width:200px"/>
+    			<input type="hidden" name="projectPrices[0].payWay" >
+				<input type="hidden" name="projectPrices[0].priceId">
+				<input type="hidden" name="projectPrices[0].priceName">	
+    			<input type="hidden" name="projectPrices[0].payTime"/>
+    			<input type="hidden" name="projectPrices[0].payType"/>
+    		</td>
+	    </tr>
+		<tr>
+            <!--<td style="width:250px;" class="th_bg">公开范围</td>
+            <td style="text-align: left;">
+            	<div id="isPublic"></div>
+            </td>-->
+            <td style="width:250px;" class="th_bg">最少供应商数量</td>
+         	<td style="text-align: left;" colspan="3">
+            	<div class="btn-group" role="group">            	   
+				  <button type="button" class="btn btn-default" id="reduceNum" style="width: 40px;height: 34px;"><span class="glyphicon glyphicon-minus" aria-hidden="true"></span></button>
+				  <input type="text" class="btn btn-default" value="1"  name="inviteSupplierCount" id="inviteSupplierCount" readonly="readonly" style="width: 60px;">				  
+				  <button type="button" class="btn btn-default" id="addNum" style="width: 40px;height: 34px;"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button>
+				</div>
+            </td>
+       </tr>
+       <!-- <tr>
+			<td colspan="4">
+				<div id="offerForm"></div>	        
+			</td>
+		</tr>
+		<tbody id="fileHtml"></tbody> -->
+       <!--<tr>
+    		<td class="th_bg" style="width:200px;">是否需要提供分项报价表</td>
+    		<td colspan="3" >
+    			<input type="radio" name="isOfferDetailedItem" value="0" checked="checked"/>需要
+    			<input type="radio" name="isOfferDetailedItem" value="1" />不需要
+    		</td>
+		</tr>
+		<tr>
+			<td  class="th_bg" style="width:250px;">报价注意事项</td>
+			<td colspan="3" style="text-align: left;" class="packNone">
+				<textarea name="offerAttention" id="offerAttention" style="width: 100%;height: 50px;"></textarea>
+			</td>
+		</tr>-->
+		<!--<tr>
+			<td colspan="4" >
+				<div>提示：默认为需要提供分项报价表，提供较为复杂、明细数量较多的报价数据或者分项需要供应商提供报价数据</div>
+			</td>
+		</tr>-->
+		<tr class="gys">
+			<td colspan="3" style="font-weight: bold;" class="active">邀请供应商信息</td>
+			<td style="text-align: right;border: none;" class="active">          	
+				<input type="button" value="添加邀请供应商" class="btn btn-primary addSupplier" onclick="add_supplier()"/>
+			</td>
+		</tr>
+		<tr class="gys">
+			<td colspan="4" >
+				<table id="table"  class="table  table-bordered"></table>					
+			</td>
+		</tr>
+		<tr>
+            <td colspan="3" style="font-weight: bold;border: none;" class="active">时间安排</td>
+            <td class="active" style="border: none;text-align: right;" class="searched">
+     			<input class="btn btn-primary ageinBtn" type="button" value="时间重置"/>	
+     		</td>
+       	</tr>
+      	<tbody id="timeList"></tbody>
+		<tr>
+			<td colspan="3" style="font-weight: bold;border: none;" class="active">预约信息</td>
+			<td class="active" style="text-align: right;border: none;" class="searched">
+				<input class="btn btn-sm btn-primary showOrder" type="button" style="display: none" onclick="orderRoom()" value="预约会议室"/>
+				<input class="btn btn-sm btn-primary colseOrder" type="button" style="display: none" id="colseOrder" value="取消预约"/>		
+			 </td>
+		</tr>
+		<tr>
+			<td style="width:250px;" class="th_bg">预约标题</td>
+			<td style="text-align: left;">
+				<div id="appointmentTitle"></div>
+			</td>
+			<td style="width:250px;" class="th_bg">会议室类型</td>
+			 <td style="text-align: left;" colspan="3">
+				<!-- 1开标，2评审，9其他 -->
+				<div id="appointmentType"></div>
+			</td>
+		</tr>
+		<tr>
+			<td style="width:250px;" class="th_bg">预约开始时间</td>
+			<td style="text-align: left;">
+				<div id="appointmentStartDate"></div>
+			</td>
+			<td style="width:250px;" class="th_bg">预约截止时间</td>
+			 <td style="text-align: left;" colspan="3">
+				<div id="appointmentEndDate"></div>
+			</td>
+		</tr>
+		<tr>
+			<td colspan="4">
+				<table id="biddingRooms"></table>
+			</td>		           	           
+		</tr>
+		<!--<tr>
+			<td class="active"   style="border: none;"><strong>明细信息</strong></td>
+			<td colspan="3" style="border: none;text-align: right;" class="active">
+				<input type="button" class="btn btn-primary" value="添加" onclick="add_min()"/>
+				<input type="button" class="btn btn-primary" value="导出模板" onclick="exportExcel(4)"/>
+				<span class="btn btn-primary fileinput-button">
+		            <span>导入</span>
+		            <input type="file" onchange="importf(this)">
+		        </span>				
+			</td>
+		</tr>
+		
+    	
+		<tr>
+			<td colspan="4">
+				<table class="table  table-bordered" style="margin-bottom:5px ;" id="tbodym">		         
+		       </table>		        
+			</td>
+			<input type="hidden" name="isTax" value="1" />
+			<input name="tax"  id="tax"  value="6" type="hidden"/>
+		</tr>		         	       	-->
+	 	<tr>
+	 		<td colspan="4" style="font-weight: bold;border: none;" class="active">邀请函信息设置</td>
+     		<!-- <td class="active" style="text-align: right;border: none;">
+     			<input type="button" class="btn btn-primary" value="预览" onclick="preview()"/>
+     			<input type="button" class="btn btn-primary" value="全屏编辑" onclick="fullScree()"/>
+     		</td>  -->    			
+        </tr>	 
+				<tr>
+					<td colspan="4">
+						<table class="table table-bordered" id="ueditorContent"></table>
+					</td>
+				</tr>	
+		<!-- <tr>
+			<td class="th_bg">选择邀请函模板</td>
+			<td colspan="3">
+				<select class="form-control" name="templateId" id="noticeTemplate" style="width: 260px;display: inline-block;">
+					
+				</select>
+				<button type="button" class="btn btn-primary" id="btnModel" style="vertical-align:top;"><span class="glyphicon glyphicon-refresh" style="vertical-align:-2px;"></span>生成邀请函内容</button>
+			</td>
+		</tr> -->
+	 	<tr>
+	 		<td  colspan="4">
+	 			<script id="editor" type="text/plain" style="width:100%;height:500px;"></script>
+	 			<input type="hidden" name="examRemark" id="examRemark"/>		 				 			
+	 		</td>
+	 	</tr>
+    </table>	
+</div>
+	
+	<div id="hiddenSupplier"></div>
+</form>
+<div style="width: 100%;height: 50px;text-align:center;position: fixed;bottom: 0;background-color: #FFFFFF;z-index: 100001;">
+	<button type="button" id="btn_bao" class="btn btn-default offerBtn fileBtn" style="width: 100px;">保存</button>
+	<button type="button" id="btn_submit" class="btn btn-primary offerBtn fileBtn" style="width: 100px;">发送邀请函</button>
+	<button type="button" id="btn_close" class="btn btn-default" style="width: 100px;">退出</button>
+</div>
+<style>
+        .fileinput-button {
+            position: relative;
+            display: inline-block;
+            overflow: hidden;
+        }
+
+        .fileinput-button input{
+            position:absolute;
+            right: 0px;
+            top: 0px;
+            opacity: 0;
+            -ms-filter: 'alpha(opacity=0)';
+            font-size: 200px;
+        }
+        .nav-tabs > li.active > a, .nav-tabs > li.active > a:hover, .nav-tabs > li.active > a:focus {
+		    color: #555;
+		    cursor: default;
+		    background-color: #f1f1f1;
+		    border: 1px solid #ddd;
+		    border-bottom-color: transparent;
+		}
+    </style>
+<script type="text/javascript" src="../../../../../media/js/jquery/jquery.js" ></script>
+<script type="text/javascript" src="../../../../../media/js/base/common.js" ></script>
+<script type="text/javascript" src="../../../../../media/js/jquery/jquery.extend.js" ></script>
+<script type="text/javascript" src="../../../../../media/js/jquery/jquery.params.js" ></script>
+<script type="text/javascript" src="../../../../../media/js/bootstrap/js/bootstrap.js" ></script>
+<script type="text/javascript" src="../../../../../media/js/bootstrap/js/bootstrap-table.min.js"></script>
+<script type="text/javascript" src="../../../../../media/js/bootstrap/js/bootstrap-table-zh-CN.min.js"></script>
+<script type="text/javascript" src="../../../../../media/js/bootstrap/js/bootstrap-select.min.js" ></script>
+<script type="text/javascript" src="../../../../../media/js/bootstrap/js/defaults-zh_CN.min.js" ></script>
+<script type="text/javascript" src="../../../../../media/js/bootstrap-fileinput-master/js/fileinput.js"></script>
+<script type="text/javascript" src="../../../../../media/js/bootstrap-fileinput-master/js/locales/zh.js"></script>
+<script type="text/javascript" src="../../../../../media/js/xlsx.full.min.js" ></script>
+<script type="text/javascript" src="../../../../../media/js/base/util.js"></script>
+<script type="text/javascript" src="../../../../../media/js/layer/layer.js" ></script>
+<script type="text/javascript" src="../../../../../media/js/layer/laydate.js" ></script>
+<script type="text/javascript" src="../../../../../media/js/My97DatePicker/WdatePicker.js"></script>
+<!-- <script type="text/javascript" src="../../../../../media/js/datetimepicker/js/jquery.datetimepicker.js" ></script> -->
+<script type="text/javascript" src="../../../../../media/js/datetimepicker/js/timePicker.js" ></script>
+<script type="text/javascript" src="../../../../../media/js/base/digital.js" ></script>
+
+ <script type="text/javascript" src="../../../../../media/js/bootstrap-fileinput-master/js/fileinput.js"></script>
+ <script type="text/javascript" src="../../../../../media/js/bootstrap-fileinput-master/js/locales/zh.js"></script>
+<!--  <script type="text/javascript" src="../../../../currencyControl/js/offerForm.js" ></script>
+<script type="text/javascript" src="../../../../currencyControl/js/subitemFile.js" ></script> -->
+<script type="text/javascript" src="../../../../../media/js/base/UEditorFun.js" ></script>
+<script type="text/javascript" src="../js/examInvitationInfo.js" ></script>
+<!-- 公告模板 -->
+<script type="text/javascript" src="../../../../TempManager/tempPublic.js"></script>
+<!-- end -->
+<script type="text/javascript" src="../js/orderRoom.js" ></script>
+<script type="text/javascript" src="../../Purchase/js/timeDate.js"></script>
+<script type="text/javascript" src="../../Purchase/js/price.js"></script>
+<script type="text/javascript" src="../../Purchase/js/medias.js"></script>
+<script type="text/javascript" src="../../../../../media/js/preview.js" ></script>
+<script type="text/javascript" src="../../../../../media/js/fullScreen.js" ></script>
+<script>
+	//实例化编辑器
+//建议使用工厂方法getEditor创建和引用编辑器实例，如果在某个闭包下引用该编辑器，直接调用UE.getEditor('editor')就能拿到相关的实例
+var ue = UE.getEditor('editor');
+
+</script>

@@ -1,0 +1,115 @@
+<head>
+	<meta http-equiv="pragma" content="no-cache">
+	<!-- 禁止浏览器从本地机的缓存中调阅页面内容 -->
+	<meta http-equiv="cache-control" content="no-cache, must-revalidate">
+	<meta http-equiv="expires" content="0">
+</head>
+
+<!--[if lt IE 9]>
+   <script src="../../../../media/js/html5shiv.min.js"></script>
+   <script src="../../../../media/js/respond.js"></script>
+<![endif]-->
+<link rel="stylesheet" type="text/css" href="../../../../../media/js/layer/mobile/need/layer.css" />
+<link rel="stylesheet" type="text/css" href="../../../../../media/js/bootstrap/css/bootstrap.css" />
+<link rel="stylesheet" type="text/css" href="../../../../../media/js/bootstrap-fileinput-master/css/fileinput.min.css" />
+<!--<link rel="stylesheet" type="text/css" href="../css/style.css" />-->
+<form id="form" name="Offer" style="width: 99%;padding-left: 10px;padding-top: 10px;margin-bottom: 80px;">
+     <table  class="table table-bordered" style="margin-bottom: 0px;">
+     	 <tr>
+			<td colspan="4" style="font-weight: bold;" class="active">项目信息</td>
+		 </tr>
+         <tr>
+            <td class="th_bg" style="width: 20%;">采购项目名称</td>
+            <td style="text-align: left;"><div id="projectName"></div></td>
+            <td class="th_bg" style="width: 20%;">项目编号</td>
+            <td style="text-align: left;"><div id="projectCode"></div></td>  
+         </tr>
+         <tr>
+         	<td class="th_bg" style="width: 20%;">包件名称</td>
+            <td style="text-align: left;"><div id="packageName"></div></td>
+            <td class="th_bg" style="width: 20%;">包件编号</td>
+            <td style="text-align: left;"><div id="packageNum"></div></td>            
+         </tr>
+         <tr>
+            <td class="th_bg" style="width: 20%;">采购人名称</td>
+            <td style="text-align: left;"><div id="purchaserName"></div></td>
+            <td class="th_bg" style="width: 20%;">确认回执单</td>
+            <td style="text-align: left;">
+            	<button id="btnShowFile" type="button"  class="btn btn-sm btn-primary receipt">
+		                 <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span> 预览
+	           </button>
+	            <button id="btnDownLoad" type="button" class="btn btn-sm btn-primary receipt">
+	                 <span class="glyphicon glyphicon-arrow-down" aria-hidden="true"></span> 下载
+	           </button>
+            </td>
+         </tr>
+        <tr>         	
+         	<td colspan="4" style="overflow-y: auto;">
+         		<div style="width: 100%;max-height: 300px;padding: 5px;">
+         			<table class=" table table-bordered" style="margin-bottom: 0px;" >
+			     	<tr>
+			     		<td style="width: 50px">序号</td>
+			     		<td style="text-align: left;">评审项名称</td>
+			     		<td style="text-align: left;">文件名称</td>			     					     		
+			     		<td class="auditTimeout" style="width: 340px">操作<span class="text-danger ">(注：只能上传文档、表格、JPG图片、PDF格式和压缩文件)</span></td>			     		
+			     	</tr>
+			     	<tbody id="tablede">
+			     		  		
+			     	</tbody>
+		        </table>
+         		</div>
+                
+         	</td>
+         </tr>
+		<tr class="active">
+			<th colspan="4">文件记录</th>
+			</tr>
+			<tr>
+				<td colspan="4" align="center">
+					<table class="table table-bordered table-striped" id="historyExamFileTable">
+					</table>
+				</td>
+			</tr>
+		</tr>
+     </table>  
+     
+ </form>
+ <table id="tableExcel" style="visibility: hidden;"></table>
+ 		<div style="width: 100%;height: 50px;text-align:center;position: fixed;bottom: 0;background-color: #FFFFFF;">
+			<button type="button" id="btn_bao" class="btn btn-default" style="width: 100px;">保存</button>
+			<button type="button" id="btn_submit" class="btn btn-primary" style="width: 100px;">提交</button>
+			<button type="button" id="btn_close" class="btn btn-default" style="width: 100px;">取消</button>
+		</div>
+ <style>
+        .fileinput-button {
+            position: relative;
+            display: inline-block;
+            overflow: hidden;
+        }
+
+        .fileinput-button input{
+            position:absolute;
+            right: 0px;
+            top: 0px;
+            opacity: 0;
+            -ms-filter: 'alpha(opacity=0)';
+            font-size: 200px;
+        }
+         .table > thead > tr > th, .table > tbody > tr > th, .table > tfoot > tr > th, .table > thead > tr > td, .table > tbody > tr > td, .table > tfoot > tr > td{
+		 	vertical-align: middle;
+		 }
+    </style>	
+ <script type="text/javascript" src="../../../../../media/js/jquery/jquery.js" ></script>
+ <script type="text/javascript" src="../../../../../media/js/base/util.js" ></script>
+ <script type="text/javascript" src="../../../../../media/js/jquery/jquery.extend.js"></script>
+ <script type="text/javascript" src="../../../../../media/js/jquery/jquery.params.js"></script>
+ <script type="text/javascript" src="../../../../../media/js/base/common.js" ></script>
+ <script type="text/javascript" src="../../../../../media/js/bootstrap/js/bootstrap.js" ></script>
+ <script type="text/javascript" src="../../../../../media/js/layer/layer.js" ></script>
+ <script type="text/javascript" src="../../../../../media/js/xlsx.full.min.js" ></script>
+ <script type="text/javascript" src="../../../../../media/js/export.js" ></script>
+ <script type="text/javascript" src="../../../../../media/js/bootstrap-fileinput-master/js/fileinput.js"></script>
+ <script type="text/javascript" src="../../../../../media/js/bootstrap-fileinput-master/js/locales/zh.js"></script>
+ <script type="text/javascript" src="../../../../../media/js/bootstrap/js/bootstrap-table.min.js"></script>
+ <script type="text/javascript" src="../../../../../media/js/bootstrap/js/bootstrap-table-zh-CN.min.js"></script>
+ <script type="text/javascript" src="../js/signInfo.js" ></script>

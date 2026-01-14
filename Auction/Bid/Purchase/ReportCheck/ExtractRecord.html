@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="pragma" content="no-cache">
+		<!-- 禁止浏览器从本地机的缓存中调阅页面内容 -->
+		<meta http-equiv="cache-control" content="no-cache, must-revalidate">
+		<meta http-equiv="expires" content="0">
+		<title>抽取历史</title>
+		<link rel="stylesheet" type="text/css" href="../../../../media/js/bootstrap/css/bootstrap.css">
+		<link rel="stylesheet" type="text/css" href="../../../../media/js/bootstrap/css/bootstrap-table.css">
+	</head>
+	<body>
+		<!--startprint"-->
+		<table class="" style="margin:15px;width: 96%;margin-bottom: 60px">
+			<tr>
+				<td colspan="4" style="font-size: 16px;text-align: center;">抽取历史</td>
+			</tr>
+			<tr>
+				<td width="15%" style="text-align: right;">项目名称：</td>
+				<td width="35%" id="projectName"></td>
+				<td width="15%" style="text-align: right;">项目编号：</td>
+				<td width="35%" id="projectCode"></td>
+			</tr>
+			<tr>
+				<td style="text-align: right;" ><span  id = 'checkTime'>询比评审时间：</span></td>
+				<td colspan="3" id="bidDatatime"></td>
+			</tr>
+			<tr height="30px"></tr>
+			<tr>
+				<td colspan="4" style="text-align: center;">抽取操作历史记录</td>
+			</tr>
+			
+			<tbody id="dynamicTable"></tbody>
+		</table>
+		<!--endprint-->
+		<div style="width: 100%;height: 50px;text-align:center;position: fixed;bottom: 0;left:0;background-color: #FFFFFF;" class="btnSee">
+			<button type="button" name='button_export' onclick=preview() class="btn btn-primary btn-sm btnPreview"><span class="glyphicon glyphicon-print"></span>打印</button>
+			<button type="button" name='button_export' onclick=closeWin() class="btn btn-default btn-sm btnPreview"><span class="glyphicon glyphicon-remove"></span>关闭</button>			
+		</div>
+	</body>
+	<script type="text/javascript" src="../../../../media/js/jquery/jquery.js"></script>
+	<script type="text/javascript" src="../../../../media/js/jquery/jquery.extend.js"></script>
+	<script type="text/javascript" src="../../../../media/js/bootstrap/js/bootstrap.js"></script>
+	<script type="text/javascript" src="../../../../media/js/bootstrap/js/bootstrap-table.min.js"></script>
+	<script type="text/javascript" src="../../../../media/js/bootstrap/js/bootstrap-table-zh-CN.min.js"></script>
+	<script type="text/javascript" src="js/ExtractRecord.js"></script>
+	</body>
+
+</html>

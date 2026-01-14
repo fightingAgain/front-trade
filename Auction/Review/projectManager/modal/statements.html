@@ -1,0 +1,87 @@
+<!--
+ * @Author: your name
+ * @Date: 2020-09-09 15:43:28
+ * @LastEditTime: 2020-09-27 17:15:30
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: \FrameWork_bf\bidPrice\Review\projectManager\modal\progress.html
+--> 
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="pragma" content="no-cache">
+		<!-- 禁止浏览器从本地机的缓存中调阅页面内容 -->
+		<meta http-equiv="cache-control" content="no-cache, must-revalidate">
+		<meta http-equiv="expires" content="0">
+		<title>业主声明材料</title>
+		<link rel="stylesheet" href="../../../../media/js/layer/mobile/need/layer.css" />
+		<link rel="stylesheet" href="../../../../media/js/layer/theme/default/laydate.css" />
+		<link rel="stylesheet" href="../../../../media/js/bootstrap/css/bootstrap.css" />
+		<link rel="stylesheet" href="../../../../media/js/bootstrap-fileinput-master/css/fileinput.min.css?verson=1.01" type="text/css"/>
+		<link rel="stylesheet" href="../../../../media/js/bootstrap/css/bootstrap-table.min.css" type="text/css"/>
+		<style type="text/css">
+			.th_bg{
+				width: 120px !important;
+			}
+		</style>
+	</head>
+	<body style="overflow:auto;">
+		<form id="formbackage" name="purchase" style="padding: 5px 10px 55px 10px;">
+			<table class="table table-bordered " style="margin-bottom: 0px;">
+				<tr>
+					<td colspan="4" style="font-weight: bold;border: none;" class="active">业主声明材料</td>
+				</tr>
+				<tr >
+					<td class="th_bg">说明<i class="red">*</i></td>
+					<td style="text-align: left;" colspan="3">
+						<textarea rows="3" class="form-control" name="description" maxlength="1000" style="resize: none;display: none;"></textarea>        	
+						<div id="description" style="display: none;"></div>
+					</td>
+					
+				</tr>
+				<tr>
+					<td class="th_bg">附件<i class="red">*</i></td>
+					<td style="text-align: left;" colspan="3">
+						<input type="file" class="fileloading" multiple name="files" id="FileName" />
+						<table class="table" id="fileTables"></table>
+					</td>
+				</tr>
+				<tr>
+					<td colspan="4" style="font-weight: bold;border: none;" class="active">审批信息</td>
+				</tr>
+				<tr class="employee" style="display: none;">
+					<td  class="th_bg">选择审批人<i class="red">*</i></td>
+					<td colspan="3" style="text-align: left;">
+						<select id="employeeId"  class="form-control" style="width: 200px;" name="checkerId"></select>	 			
+					</td>
+				</tr>
+				<tr>
+					<td colspan="4">
+						<table class="table table-bordered" id="workflowListDetail">
+							
+						</table>
+					</td>
+				</tr>
+			</table>
+		</form>
+		<div style="width: 100%;height: 50px;text-align:center;position: fixed;bottom: 0;background-color: #FFFFFF;z-index: 100001">
+			<button type="button" id="btn_bao" class="btn btn-default offerBtn" ><span class="glyphicon glyphicon-saved"></span>保存</button>
+			<button type="button" id="btn_submit" class="btn btn-primary offerBtn" ><span class="glyphicon glyphicon-saved"></span>提交</button>
+			<button type="button" id="btn_close" class="btn btn-default"><span class="glyphicon glyphicon-remove"></span>关闭</button>
+		</div>
+	</body>
+	<script type="text/javascript" src="../../../../media/js/jquery/jquery.js" ></script>
+	<script type="text/javascript" src="../../../../media/js/jquery/jquery.extend.js"></script>
+	<script type="text/javascript" src="../../../../media/js/base/common.js" ></script>
+	<script type="text/javascript" src="../../../../media/js/base/util.js" ></script>
+	<script type="text/javascript" src="../../../../media/js/bootstrap/js/bootstrap.js" ></script>
+	<script type="text/javascript" src="../../../../media/js/bootstrap/js/bootstrap-table.min.js"></script>
+	<script type="text/javascript" src="../../../../media/js/bootstrap/js/bootstrap-table-zh-CN.min.js"></script>
+	<script type="text/javascript" src="../../../../media/js/bootstrap-fileinput-master/js/fileinput.js?verson=1.01"></script>
+	<script type="text/javascript" src="../../../../media/js/bootstrap-fileinput-master/js/locales/zh.js?verson=1.01"></script>
+	<script type="text/javascript" src="../../../../media/js/base/auditRecords.js"></script>
+	<script type="text/javascript" src="../js/statements.js"></script>
+</html>
+

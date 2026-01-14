@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="pragma" content="no-cache">
+		<!-- 禁止浏览器从本地机的缓存中调阅页面内容 -->
+		<meta http-equiv="cache-control" content="no-cache, must-revalidate">
+		<meta http-equiv="expires" content="0">
+		<link rel="stylesheet" href="../../../../../media/js/bootstrap/css/bootstrap.css">
+		<link rel="stylesheet" href="../../../../../media/js/bootstrap/css/bootstrap-table.css">
+		<title></title>
+		<style>
+			.pagination-info{
+				display: none;
+			}
+			.table-hover tbody tr:hover>td,.table-hover tbody tr:hover>th{background-color:#FFFFFF}
+			.fixed-table-header{
+				border-bottom: 0.1px solid #ddd
+			}
+			th.colstyle {
+				height: 81px !important;
+			}
+			.label-inline{
+				margin-bottom: 0;
+			} 
+			.label-inline input { vertical-align: -2px;margin-right: 5px;}
+		</style>
+	</head>
+	<body>
+		<div class="pageModel">
+			<table id='detailPackageList' class="table"></table>
+		</div>
+		<div class="bottom-btn">
+			<button type="button" id="btn_submit" class="btn btn-primary">提交</button>
+			<button type="button" id="btn_close" class="btn btn-default">关闭</button>
+		</div>
+		<script type="text/javascript" src="../../../../../media/js/jquery/jquery.min.js"></script>
+		<script type="text/javascript" src="../../../../../media/js/jquery/jquery.extend.js"></script>
+		<script type="text/javascript" src="../../../../../media/js/bootstrap/js/bootstrap.js"></script>
+		<script type="text/javascript" src="../../../../../media/js/bootstrap/js/bootstrap-table.min.js"></script>
+		<script type="text/javascript" src="../../../../../media/js/jquery/jquery.params.js"></script>
+		<script type="text/javascript" src="../../../../../media/js/base/common.js"></script>
+		<script type="text/javascript" src="../../../../../media/js/base/util.js"></script>
+		<script type="text/javascript" src="../../../../../media/js/layer/layer.js"></script>
+		<script type="text/javascript" src="../js/detailInfo.js"></script>
+	</body>
+</html>

@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="zh">
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="pragma" content="no-cache"><!-- 禁止浏览器从本地计算机的缓存中访问页面内容 --> 
+		<meta http-equiv="cache-control" content="no-cache"><!-- 用于指定请求和响应遵循的缓存机制 --> 
+		<meta http-equiv="expires" content="0"><!-- 用于设定网页的到期时间，一旦网页过期，必须到服务器上重新传输； -->
+	    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+		<title></title>
+		<link rel="stylesheet" href="../../../../media/js/layer/mobile/need/layer.css" />
+	    <link rel="stylesheet" href="../../../../media/js/bootstrap/css/bootstrap.css" />
+	</head>
+	<style type="text/css">
+		/**{
+			padding: 0;
+			margin: 0;
+		}*/
+		li{
+			list-style: none;
+			padding: 5px 0;
+		}
+		#memberList{
+			padding-left: 150px;
+			padding-top: 20px;
+		}
+		#memberList input{
+			vertical-align: -2px;
+			margin-right: 20px;
+		}
+		.content{
+			padding-left: 30px;
+		}
+		.glyphicon{
+			margin-right: 2px;
+			vertical-align: -1px;
+		}
+		.padding_button{
+			padding: 5px 8px !important;
+			line-height: 30px !important;
+		}
+	</style>
+	<body>
+		<form class="pageModel" id="addNotice" name="formName">
+			<table class="table table-bordered">
+	        	<tr>
+		            <td colspan="4" style="font-weight: bold;" class="active">评审委员会</td>
+		        </tr>
+		        <tr>
+		        	<td class="th_bg">标段编号</td>
+		        	<td><span id="interiorBidSectionCode"></span></td>
+		        	
+		        </tr>
+		        <tr>
+		        	<td class="th_bg">标段名称</td>
+		        	<td><span id="bidSectionName"></span></td>
+		        </tr>
+		        <tr>
+		        	<td class="th_bg">评审委员会成员</td>
+		        	<td colspan="3" id="member"></td>
+		        </tr>
+	        </table>
+	        <!--<table class="table table-bordered">
+	        	<tr>
+	        		<td colspan="2" style="font-weight: bold;" class="active">投票结果
+		            	<button type="button" class="btn btn-primary" id="recommendAgain"   style="float: right;margin-right: 50px;display: none;">
+		            		<span class="glyphicon glyphicon-repeat"></span>重新推荐
+		            	</button>
+		            </td>
+		            <td colspan="2" style="font-weight: bold; box-shadow:5px 0px 0px #59abf0 inset;" class="active">历史投票结果</td>
+	        	</tr>
+	        	<tr>
+	        		<td colspan="2" style="vertical-align: top;">
+	        			<div style="margin-top: 44px;">
+	        				<table class="table table-bordered" id="recommendResult">
+				        		<thead>
+				        			<tr>
+				        				<th style="width: 50px;text-align:center;">序号</th>
+				        				<th>评委</th>
+				        				<th style="width: 100px;text-align:center;">票数</th>
+				        			</tr>
+				        		</thead>
+				        		<tbody></tbody>
+				        	</table>
+	        			</div>
+	        		</td>
+	        		<td colspan="2" >
+	        			<div style="margin-bottom: 10px;">
+	        				<select id="resultNum" class="form-control" style="width: 180px;" >
+	                		
+	                		</select>
+	        			</div>
+	        			
+	        			<div>
+	        				<table class="table table-bordered" id="recommendHistory">
+			        	 
+			        		</table>
+	        			</div>
+	        		</td>
+	        	</tr>
+	        	<tr>
+	        		
+	        	</tr>
+	        </table>-->
+			<table class="table table-bordered">
+	        	<tr>
+		            <td colspan="4" style="font-weight: bold;" class="active ">投票结果
+		            	<button type="button" class="btn btn-sm btn-primary" id="recommendAgain"   style="float: right;margin-right: 50px;display: none;">
+		            		<span class="glyphicon glyphicon-repeat"></span>重新推荐
+		            	</button>
+		            </td>
+		        </tr>
+		        <tr>
+		        	<td colspan="4">
+		        		<table class="table table-bordered" id="recommendResult">
+			        		<thead>
+			        			<tr>
+			        				<th style="width: 50px;text-align:center;">序号</th>
+			        				<th>评委</th>
+			        				<th style="width: 100px;text-align:center;">得票数</th>
+			        			</tr>
+			        		</thead>
+			        		<tbody></tbody>
+			        	</table>
+		        	</td>
+		        </tr>
+	        </table>
+	        <table class="table table-bordered">
+	        	<tr>
+		            <td colspan="4" style="font-weight: bold;" class="active">历史投票结果</td>
+		        </tr>
+		        <tr id="resultNumWrap" style="display: none;">
+		        	<td colspan="4" >
+		        		<select id="resultNum" class="form-control" style="width: 180px;" >
+	                		
+	                	</select>
+		        	</td>
+		        </tr>
+		        <tr>
+		        	<td colspan="4">
+		        		<table class="table table-bordered" id="recommendHistory">
+			        	 
+			        	</table>
+		        	</td>
+		        </tr>
+	        </table>
+			
+			<div class="bottom-btn">
+		        <button type="button" class="btn btn-default" id="btnClose"><span class="glyphicon glyphicon-remove"></span>关闭</button>
+		    </div>
+		</form>
+		<script type="text/javascript" src="../../../../media/js/jquery/jquery.js" ></script>
+		<script type="text/javascript" src="../../../../media/js/jquery/jquery.extend.js"></script>
+		<script type="text/javascript" src="../../../../media/js/base/common.js" ></script>
+		<script type="text/javascript" src="../../../../media/js/base/util.js" ></script>
+		<script type="text/javascript" src="../../../../media/js/bootstrap/js/bootstrap.js" ></script>
+		<script type="text/javascript" src="../../../../media/js/layer/layer.js"></script>
+		<script type="text/javascript" src="../../../Model/js/public.js"></script>
+	    <script type="text/javascript" src="../js/recommendResult.js"></script>
+	</body>
+</html>

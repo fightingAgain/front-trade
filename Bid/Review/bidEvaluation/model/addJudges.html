@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="pragma" content="no-cache"><!-- 禁止浏览器从本地计算机的缓存中访问页面内容 -->
+    <meta http-equiv="cache-control" content="no-cache"><!-- 用于指定请求和响应遵循的缓存机制 -->
+    <meta http-equiv="expires" content="0"><!-- 用于设定网页的到期时间，一旦网页过期，必须到服务器上重新传输； -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>添加投标人</title>
+    <link rel="stylesheet" href="../../../media/js/layer/mobile/need/layer.css" />
+    <link rel="stylesheet" href="../../../media/js/bootstrap/css/bootstrap.css" />
+    <style>
+        .table>tr>td
+            {
+            vertical-align: middle;
+        }
+        
+    </style>
+</head>
+
+<body>
+    <form id="editExpert" class="pageModel">
+        <table class="table table-bordered " style="margin-bottom: 0px;">
+        	<tr>
+				<td colspan="7" class="active">基本信息</td>
+			</tr>
+            <tr>
+                <td class="th_bg">所在单位名称<i class="red">*</i></td>
+                <td>
+                    <input type="text" name="company" id="company" class="form-control" onkeyup="this.value=this.value.replace(/[, ]/g,'')" style="width:100%"/>
+                </td>
+            </tr>
+            <tr>
+                <td class="th_bg">姓名<i class="red">*</i></td>
+                <td>
+                    <input type="text" name="expertName" id="expertName" class="form-control" datatype="*" errormsg="请输入姓名"/>
+                </td>
+            </tr>
+            <tr>
+                <td class="th_bg">证件类型<i class="red">*</i></td>
+                <td>
+                	<label style="padding-right:20px;margin-bottom: 0;">
+                		<input type="radio" name="idCardType" value="01" checked="checked" style="vertical-align: -2px;margin-right: 5px;" >居民身份证
+                	</label>
+                    <label style="padding-right:20px;margin-bottom: 0;">
+                    	<input type="radio" name="idCardType" value="08" style="vertical-align: -2px;margin-right: 5px;" >护照
+                    </label>
+                	<!--<select id="idCardType" name="idCardType" class="form-control" style="width: 260px;">
+	                    <option value="01">居民身份证</option>
+	                    <option value="08">护照</option>
+	                </select>-->
+                </td>
+            </tr>
+            <tr>
+                <td class="th_bg">证件号码<i class="red">*</i></td>
+                <td>
+                    <input type="text" name="idCard" id="idCard" class="form-control" datatype="*" errormsg="请正确输入号码"/>
+                </td>
+            </tr>
+            <tr>
+                <td class="th_bg">手机<i class="red">*</i></td>
+                <td>
+                    <input type="text" name="phoneNumber" id="phoneNumber" class="form-control" datatype="*" errormsg="请正确手机号码"/>
+                </td>
+            </tr>
+            <tr>
+                <td class="th_bg">职务</td>
+                <td>
+                    <input type="text" name="duty" id="duty" class="form-control" />
+                </td>
+            </tr>
+            <tr>
+                <td class="th_bg">技术职称</td>
+                <td>
+                    <input type="text" name="professional" id="professionalName" class="form-control" />
+                </td>
+            </tr>
+        </table>
+
+
+
+        <div class="bottom-btn">
+            <button type="button" style="width: 100px; margin-right: 10px;" class="btn btn-primary btn-sm" data-dismiss="modal" id="btnSubmit">确定</button>
+            <button type="button" style="width: 100px;" class="btn btn-default btn-sm" data-dismiss="modal" id="btnClose">取消</button>
+        </div>
+    </form>
+    <script src="../../../media/js/jquery/jquery.js"></script>
+    <script src="../../../media/js/jquery/jquery.extend.js"></script>
+    <script src="../../../media/js/base/common.js"></script>
+    <script src="../../../media/js/bootstrap/js/bootstrap.js"></script>
+    <script src="../../../media/js/base/util.js"></script>
+    <script src="../js/addJudges.js"></script>
+</body>
+
+</html>

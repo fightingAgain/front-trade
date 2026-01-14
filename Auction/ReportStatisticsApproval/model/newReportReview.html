@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta http-equiv="pragma" content="no-cache">
+		<meta http-equiv="cache-control" content="no-cache, must-revalidate">
+		<meta http-equiv="expires" content="0">
+		<title></title>
+	</head>
+	<link rel="stylesheet" href="../../../media/js/bootstrap/css/bootstrap.css" />
+	<link rel="stylesheet" href="../../../media/js/layer/mobile/need/layer.css" />
+	<link rel="stylesheet" href="../../../media/js/bootstrap/css/bootstrap-table.min.css" type="text/css" />
+
+	<body>
+		<form id="formbackage" name="purchase" style="width: 99%;padding-left: 10px;padding-top: 10px;margin-bottom: 60px;">
+			<table class="table table-bordered" align="center">
+				<tr>
+					<td colspan="4" style="font-weight: bold;" class="active">项目信息</td>
+				</tr>
+				<tr>
+					<td class="th_bg">标段/包件编号</td>
+					<td style="width: 320px;">
+						<div id="bidSectionCode" style="float: left;"></div>
+						<!-- <button type="button" id="changeName" class="btn btn-primary" style="float: right;margin-right: 5px;"><span class="	glyphicon glyphicon-refresh"></span>切换</button>
+						<button type="button" id="changeNameCz" class="btn btn-primary" style="float: right;margin-right: 5px;"><span class="	glyphicon glyphicon-refresh"></span>重置</button> -->
+						<!-- <p class="red" style="width: 100%;display: inline-block;margin-top: 10px;margin-bottom: 0px;">*若默认带出业主项目编号，请点击"切换"更改为系统项目编号，谨慎操作!</p> -->
+					</td>
+					<td class="th_bg">系统外编号</td>
+					<td>
+						<div id="outSystemNumber"></div>
+					</td>
+				</tr>
+				<tr>
+					<td class="th_bg">标段/包件名称</td>
+					<td colspan="3">
+						<div id="bidSectionName"></div>
+					</td>
+				</tr>
+				<tr>
+					<td class="th_bg">招标人/委托单位</td>
+					<td>
+						<div id="purchaserName"></div>
+					</td>
+					<td class="th_bg">项目归属部门</td>
+					<td>
+						<div id="projectDepartmentName"></div>
+					</td>
+				</tr>
+				<tr>
+					<td class="th_bg">项目归属处室</td>
+					<td>
+						<div id="projectOfficeName"></div>
+					</td>
+					<td class="th_bg">市场类型</td>
+					<td>
+						<div id="marketType"></div>
+					</td>
+				</tr>
+				<tr>
+					<td class="th_bg">代理机构</td>
+					<td>
+						<div id="enterpriseName"></div>
+					</td>
+					<td class="th_bg">项目实施地点(省/市)</td>
+					<td>
+						<div id="projectImplementAdder"></div>
+					</td>
+				</tr>
+				<tr>
+					<td class="th_bg">委托金额（预算）</td>
+					<td>
+
+						<div style="float: left;" id="entrsuSum"></div><span style="float: left;">元</span>
+					</td>
+					<td class="th_bg">项目分配时间</td>
+					<td>
+						<div id="bidOpeningEndTime"></div>
+					</td>
+				</tr>
+				<tr>
+					<td class="th_bg">项目经理</td>
+					<td>
+						<div id="tenderAgencyLinkmen"></div>
+					</td>
+					<td class="th_bg"></td>
+					<td></td>
+				</tr>
+				<!--采购信息-->
+				<tr>
+					<td colspan="4" style="font-weight: bold;" class="active">采购信息</td>
+				</tr>
+				<tr>
+					<td class="th_bg">采购员/招标人代表</td>
+					<td>
+						<div id="purchaserLinkmen"></div>
+					</td>
+					<td class="th_bg">采购员联系电话</td>
+					<td>
+						<div id="purchaserLinkphone"></div>
+					</td>
+				</tr>
+				<tr>
+					<td class="th_bg">采购员联系邮箱</td>
+					<td>
+						<div id="purchaserLinkemail"></div>
+					</td>
+					<td class="th_bg">项目类型</td>
+					<td>
+						<div id="projectType"></div>
+					</td>
+				</tr>
+				<tr>
+					<td class="th_bg">采购方式</td>
+					<td>
+						<div id="tenderType"></div>
+					</td>
+					<td class="th_bg">交易平台</td>
+					<td>
+						<div id="tenderDesk"></div>
+					</td>
+				</tr>
+				<tr>
+					<td class="th_bg">是否为政府采购</td>
+					<td colspan="3">
+						<span id="publlcProcurement"></span>
+					</td>
+				</tr>
+				<tr>
+					<td class="th_bg">评审方法</td>
+					<td>
+
+						<div id="bidCheckType"></div>
+					</td>
+					<td class="th_bg">公开/邀请</td>
+					<td>
+						<div id="tenderMode"></div>
+					</td>
+				</tr>
+				<tr>
+					<td class="th_bg">项目状态</td>
+					<td>
+						<div id="projectState"></div>
+					</td>
+					<td class="th_bg">公告发布时间</td>
+					<td>
+						<div id="noticeStartDate"></div>
+					</td>
+				</tr>
+				<tr>
+					<td class="th_bg bidOpenTime">开标时间/评审/报价时间</td>
+					<td>
+						<div id="bidOpenTime"></div>
+					</td>
+					<td class="th_bg">开标地点</td>
+					<td>
+						<div id="bidOpenAdder"></div>
+					</td>
+				</tr>
+				<tr>
+					<td class="th_bg">参加开标的投标人家数</td>
+					<td colspan="3">
+						<div id="tenderNumber"></div>
+					</td>
+				</tr>
+				<!--费用信息-->
+				<tr>
+					<td colspan="4" style="font-weight: bold;" class="active">
+						费用信息
+						<button type="button" id="yuan" class="btn btn-primary" style="border: 0px;width: 70px;">元</button>
+						<button type="button" id="wanyuan" class="btn" style="border: 0px;width: 70px;">万元</button>
+					</td>
+				</tr>
+				<tr>
+					<td class="th_bg">评审费小计</td>
+					<td>
+						<div id="reviewFeeSubtotal"></div>
+					</td>
+					<td class="th_bg">工作人员费用小计</td>
+					<td>
+						<div id="staffCostSubtotal"></div>
+					</td>
+				</tr>
+				<tr>
+					<td class="th_bg">综合服务费小计
+						<br /><span class="red" style="font-style:oblique">(注:包含专家餐费、打印、交通、租赁开标室费用、打印、零食等)</span></td>
+					<td>
+						<div id="serviceFeleSubtotal"></div>
+					</td>
+					<td class="th_bg">项目成本费用小计</td>
+					<td>
+						<div id="projectCostSubtotal"></div>
+					</td>
+				</tr>
+				<tr>
+					<td class="th_bg">中标通知书发出时间/项目终止时间</td>
+					<td>
+
+						<div id="noticeSendTime"></div>
+					</td>
+					<td class="th_bg"><span class="noBusiness">完成月份</span></td>
+					<td>
+						<div id="complectMonth" class="noBusiness"></div>
+					</td>
+				</tr>
+				<tr>
+					<td class="th_bg">中标人</td>
+					<td>
+						<div id="legalName"></div>
+
+					</td>
+					<td class="th_bg">是否存在正式异议/投诉</td>
+					<td>
+						<div id="isObjection"></div>
+					</td>
+				</tr>
+				<tr>
+					<td class="th_bg">多个中标人时备注</td>
+					<td colspan="3">
+						<div id="manyBidderRemark"></div>
+					</td>
+
+				</tr>
+				<tr>
+					<td class="th_bg">中标联系人
+						<br /><span class="red" style="font-style:oblique">注：当存在多个中标人时,按格式 中标人A,中标人联系人A';中标人B,中标人联系人B'...</span>
+					</td>
+					<td colspan="3">
+						<div id="manyBidderLinkmen"></div>
+					</td>
+				</tr>
+				<tr>
+					<td class="th_bg">中标人联系电话
+					<br /><span class="red" style="font-style:oblique">注：当存在多个中标人时,按格式 中标人A,中标人联系电话A'‘;中标人B,中标人联系电话B'’...</span>
+					</td>
+					<td colspan="3">
+						<div id="manyBidderLinkphone"></div>
+					</td>
+				</tr>
+				<tr>
+					<td class="th_bg">中标人联系邮箱
+					<br /><span class="red" style="font-style:oblique">注：当存在多个中标人时,按格式 中标人A,中标人联系邮箱A'‘‘;中标人B,中标人联系邮箱B'’’...</span>
+					</td>
+					<td colspan="3">
+						<div id="manyBidderLinkemail"></div>
+					</td>
+				</tr>
+				<tr>
+					<td class="th_bg fzb">成交人合计报价金额</td>
+					<td class="fzb">
+						<div id="dealTotalAmount"></div>
+					</td>
+					<td class="th_bg">合计中标金额</td>
+					<td>
+						<div id="contractSettlementPriceSum"></div>
+					</td>
+				</tr>
+				<tr>
+					<td class="th_bg">合计代理服务费-按代理合同计取
+						<br /><span class="red" style="font-style:oblique">(收到的全部费用,含非招标项目的评审费等供应商直接支付的费用，不含造价咨询费、标书费)</span>
+					</td>
+					<td>
+						<div id="agencyServiceNoFee"></div>
+					</td>
+					<td class="th_bg">合计代理服务费<br />
+						<span class="red" style="font-style:oblique">(收到的全部费用,含非招标项目的评审费等供应商直接支付的费用,不含造价咨询费、标书费，代理服务费实收金额，与代理合同计算方式不一致时，应当先经审批。)</span>
+					</td>
+					<td>
+						<div id="agencyServiceFee"></div>
+					</td>
+				</tr>
+				<tr>
+					<td class="th_bg feeConfirmVersion">业务收入：合计招标代理服务费</td>
+					<td class="feeConfirmVersion">
+						<div id="businessIncomeServiceFee"></div>
+					</td>
+					<td class="th_bg">造价咨询费</td>
+					<td>
+						<div id="costConsultingFee"></div>
+					</td>
+				</tr>
+				<tr>
+					<td class="th_bg">采购文件售卖金额（元/份）</td>
+					<td>
+						<div id="filePrice" class="filePrice"></div>
+					</td>
+					<td class="th_bg">合计标书款</td>
+					<td>
+						<div id="totalBidAmount"></div>
+					</td>
+				</tr>
+				<tr>
+					<td class="th_bg">不含造价咨询服务费小计</td>
+					<td>
+						<div id="notCostConsultingFee"></div>
+
+					</td>
+					<td class="th_bg">含造价咨询费服务费小计</td>
+					<td>
+						<div id="haveCostConsultingFee"></div>
+					</td>
+				</tr>
+				<tr>
+					<td class="th_bg">最终收入确认（含税，元）</td>
+					<td style="text-align: left;">
+						<div id="finalIncome"></div>
+					</td>
+					<td class="th_bg">投标保证金实退日期</td>
+					<td style="text-align: left;">
+						<div id="refundActualTime"></div>
+					</td>
+				</tr>
+				<tr>
+					<td class="th_bg">备注</td>
+					<td colspan="3">
+						<div id="backups"></div>
+					</td>
+				</tr>
+				<tr class="files">
+					<td colspan="4" style="font-weight: bold;" class="active">附件信息</td>
+				</tr>
+				<tr class="files">
+					<td colspan="4">
+						<div id="fileContent">
+							
+						</div>   
+					</td>
+				</tr>
+				<tr>
+					<table class="table  table-bordered " id="tableWorkflow">
+						<tr class="active">
+							<th colspan="2">审核</th>
+						</tr>
+						<tr id="auditrow1">
+							<td class="th_bg" width="20%">审核状态</td>
+							<td style="text-align: left;">
+								<input type="radio" name="auditState" value="0" />通过
+								<input type="radio" name="auditState" value="1" />不通过
+
+							</td>
+						</tr>
+						<tr id="auditrow2">
+							<td class="th_bg" width="20%">选择审核人</td>
+							<td>
+								<select name="" id="employeeId" class="form-control" style="width: 180px;">
+
+								</select>
+							</td>
+						</tr>
+						<tr class="searched" id="auditrow3">
+							<td class="th_bg" width="20%">审核说明</td>
+							<td><textarea rows="5" class="form-control" style="width: 90%;height: 80px;" name="content"></textarea></td>
+						</tr>
+					</table>
+				</tr>
+				<tr>
+					<table class="table table-bordered table-striped" id="CheckResult">
+
+						<tr>
+							<td colspan="4" class="active">审核记录</td>
+						</tr>
+						<tr>
+							<td colspan="4">
+								<table id="workflowListDetail" class="table table-bordered"></table>
+							</td>
+						</tr>
+
+					</table>
+				</tr>
+
+				<div style="width: 100%;height:50px;">
+				</div>
+			</table>
+		</form>
+		<div class="bottom-btn" style="z-index: 11000;">
+			<button type="button" class="btn btn-primary" id="btn_submit"><span class="glyphicon glyphicon-ok"></span>提交审核</button>
+			<button type="button" class="btn btn-default" id="btn_close"><span class="glyphicon glyphicon-remove"></span>关闭</button>
+		</div>
+		<style>
+			.table>thead>tr>th,
+			.table>tbody>tr>th,
+			.table>tfoot>tr>th,
+			.table>thead>tr>td,
+			.table>tbody>tr>td,
+			.table>tfoot>tr>td {
+				vertical-align: middle;
+			}
+		</style>
+		<script type="text/javascript" src="../../../media/js/jquery/jquery.js"></script>
+		<script type="text/javascript" src="../../../media/js/jquery/jquery.extend.js"></script>
+		<script type="text/javascript" src="../../../media/js/jquery/jquery.params.js"></script>
+		<script type="text/javascript" src="../../../media/js/base/common.js"></script>
+		<script type="text/javascript" src="../../../media/js/bootstrap/js/bootstrap.js"></script>
+		<script type="text/javascript" src="../../../media/js/bootstrap/js/bootstrap-table.min.js"></script>
+		<script type="text/javascript" src="../../../media/js/bootstrap/js/bootstrap-table-zh-CN.min.js"></script>
+		<script type="text/javascript" src="../../../media/js/layer/layer.js"></script>
+		<script type="text/javascript" src="../../../media/js/base/ProvinceCityData.js"></script>
+		<script type="text/javascript" src="../../../media/js/base/auditRecords.js"></script>
+		<script type="text/javascript" src="../../../media/js/base/WorkflowInfo.js"></script>
+		<script type="text/javascript" src="../../../media/js/stream/js/stream-v1.js"></script>
+		<script type="text/javascript" src="../../../media/js/base/StreamUpload.js"></script>
+		<script type="text/javascript" src="../../../Bidding/Model/js/multiLinkage.js"></script>
+		<script type="text/javascript" src="../../../Bidding/Model/js/public.js"></script>
+		<script type="text/javascript" src="../js/newReportReview.js"></script>
+	</body>
+
+</html>

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+	<head>
+	    <meta charset="UTF-8">
+		<meta http-equiv="pragma" content="no-cache"><!-- 禁止浏览器从本地计算机的缓存中访问页面内容 --> 
+		<meta http-equiv="cache-control" content="no-cache"><!-- 用于指定请求和响应遵循的缓存机制 --> 
+		<meta http-equiv="expires" content="0"><!-- 用于设定网页的到期时间，一旦网页过期，必须到服务器上重新传输； -->
+		<title>申请淘汰</title>
+		<link rel="stylesheet" href="../../../../media/js/layer/mobile/need/layer.css" />
+	    <link rel="stylesheet" href="../../../../media/js/bootstrap/css/bootstrap.css" />
+	    <link rel="stylesheet" href="../../../../media/js/bootstrap/css/bootstrap-table.css">
+	</head>
+	<body>
+		<form class="pageModel" id="formName" name="formName">
+        	<table class="table table-bordered">
+        		<tr>
+        			<td class="th_bg">发起人</td>
+        			<td>某某</td>
+        			<td class="th_bg">发起时间</td>
+        			<td>2019-03-29</td>
+        		</tr>
+	            <tr>
+	            	<td class="th_bg">淘汰原因</td>
+	                <td colspan="3">
+	                	<textarea rows="5" class="form-control" style="resize: none;"></textarea>
+	                </td>
+	            </tr>
+	            <tr>
+	            	<td class="th_bg">是否同意</td>
+	                <td colspan="3">
+	                	<label style="padding-right: 20px;margin-bottom: 0;">
+                			<input type="radio" checked="checked" name="tenderMode" value="1" style="vertical-align: -2px;margin-right: 5px;">同意
+                		</label>
+	                	<label style="margin-bottom: 0;">
+                			<input type="radio" name="tenderMode" value="2" style="vertical-align: -2px;margin-right: 5px;">不同意
+                		</label>
+	                </td>
+	            </tr>
+	            <tr>
+	            	<td class="th_bg">申请淘汰结果</td>
+	            	<td colspan="3">
+	            		<table class="table table-bordered">
+				    		<tr>
+				    			<th style="width: 50px;">序号</th>
+				    			<th>评委</th>
+				    			<th>结果</th>
+				    			<th>时间</th>
+				    		</tr>
+				    		<tr>
+				    			<td style="text-align: center;">1</td>
+				    			<td>某某</td>
+				    			<td>同意</td>
+				    			<td>2019-03-29</td>
+				    		</tr>
+				    		<tr>
+				    			<td colspan="4">经所有评委投票，同意该申请，淘汰投标人****</td>
+				    		</tr>
+				    	</table>
+	            	</td>
+	            </tr>
+	        </table>
+	        <div class="bottom-btn">
+		        <button type="button" class="btn btn-primary" id="btnSubmit"><span class="glyphicon glyphicon-saved"></span>确定</button>
+		        <button type="button" class="btn btn-default" id="btnClose"><span class="glyphicon glyphicon-remove"></span>关闭</button>
+		    </div>
+		</form>
+		
+		<script type="text/javascript" src="../../../../media/js/jquery/jquery.js" ></script>
+		<script type="text/javascript" src="../../../../media/js/jquery/jquery.extend.js"></script>
+		<script type="text/javascript" src="../../../../media/js/base/common.js" ></script>
+		<script type="text/javascript" src="../../../../media/js/base/util.js" ></script>
+		<script type="text/javascript" src="../../../../media/js/bootstrap/js/bootstrap.js" ></script>
+		<script type="text/javascript" src="../../../../media/js/layer/layer.js"></script>
+		<script type="text/javascript" src="../../../Model/js/public.js"></script>
+		<script type="text/javascript" src="../js/applyEliminate.js" ></script>
+	</body>
+</html>

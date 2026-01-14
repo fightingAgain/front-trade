@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="pragma" content="no-cache"><!-- 禁止浏览器从本地计算机的缓存中访问页面内容 --> 
+		<meta http-equiv="cache-control" content="no-cache"><!-- 用于指定请求和响应遵循的缓存机制 --> 
+		<meta http-equiv="expires" content="0"><!-- 用于设定网页的到期时间，一旦网页过期，必须到服务器上重新传输； -->
+		<title>支付方式选择--页面</title>
+		<link rel="stylesheet" href="../../../../../media/js/bootstrap/css/bootstrap.css" />
+		<link rel="stylesheet" href="../../../../../media/js/layer/mobile/need/layer.css" />
+		
+		<!--<style>
+			tr .file-input{
+				display: inline-block;
+				text-align: left;
+				width: 98%;
+				margin-left: 10px;
+				margin-right: 10px;
+			}
+		</style>-->
+	</head>
+	<body>
+		<div  name="Filepurchase" style="width: 99%;padding-left: 10px;padding-top: 10px;margin-bottom: 60px;">
+			<table class="table table-bordered " style="margin-bottom: 0px;">
+				<tr>
+					<td class="th_bg" >支付方式选择<i class="red">*</i></td>
+					<td colspan="3">
+						<input type="radio" id="payForm" name="payForm" value="0" checked="checked">微信支付&nbsp;&nbsp;
+						<input type="radio" id="payForm" name="payForm" value="1">支付宝支付&nbsp;&nbsp;
+						<input type="radio" id="payForm" name="payForm" value="2">银联支付&nbsp;&nbsp;
+					</td>
+				</tr>
+				
+			</table>
+		</div>
+	     
+	    <div style="width: 100%;height: 50px;text-align:center;position: fixed;bottom: 0;background-color: #FFFFFF;">
+			<button type="button" class="btn btn-primary" id="btnSubmit"><span class="glyphicon glyphicon-ok"></span>确定</button>
+			<button type="button" class="btn btn-default" id="btnClose"><span class="glyphicon glyphicon-remove"></span>关闭</button>
+		</div>
+		<form id="formFile"></form>
+	     <script type="text/javascript" src="../../../../../media/js/jquery/jquery.js" ></script>
+		 <script type="text/javascript" src="../../../../../media/js/jquery/jquery.extend.js"></script>
+		 <script type="text/javascript" src="../../../../../media/js/base/common.js" ></script>
+		 <script type="text/javascript" src="../../../../../media/js/base/util.js" ></script>
+		 <script type="text/javascript" src="../../../../../media/js/bootstrap/js/bootstrap.js" ></script>
+		 <script type="text/javascript" src="../../../../../media/js/layer/layer.js"></script>
+		 <script type="text/javascript" src="../js/PayFormChoose.js" ></script>
+	</body>
+</html>

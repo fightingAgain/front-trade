@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="pragma" content="no-cache"><!-- 禁止浏览器从本地计算机的缓存中访问页面内容 -->
+	<meta http-equiv="cache-control" content="no-cache"><!-- 用于指定请求和响应遵循的缓存机制 -->
+	<meta http-equiv="expires" content="0"><!-- 用于设定网页的到期时间，一旦网页过期，必须到服务器上重新传输； -->
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>异议处理统计表</title>
+	<link rel="stylesheet" href="media/js/bootstrap/css/bootstrap-table-fixed-columns.css" />
+	<style>
+		.table tr th{
+    		vertical-align: middle !important;
+		}
+		.table {
+			background-color: #fff;
+		}
+	</style>
+</head>
+
+<body>
+	<div class="container-fluid">
+		<!--查询模块-->
+		<div id="toolbarTop" class="clearfix">
+			<div class="input-group">
+				<span class="input-group-addon">年月<span style="color: red;">*</span></span>
+				<input type="text" class="form-control Wdate" name="dataTime" id="dataTime" autocomplete="off" />
+			</div>
+			<div class="input-group">
+				<span class="input-group-addon">标段（包件）编号</span>
+				<input type="text" class="form-control" name="packageCode" id="packageCode">
+			</div>
+			<div class="input-group">
+				<span class="input-group-addon">标段（包件）名称</span>
+				<input type="text" class="form-control" name="packageName" id="packageName">
+			</div>
+			<div class="input-group">
+				<span class="input-group-addon">采购类型</span>
+				<select id="tenderType" class="form-control" style="width: 150px;">
+					<option value="">全部</option>
+				</select>
+			</div>
+			<div class="input-group">
+				<span class="input-group-addon">招标（采购）人</span>
+				<input type="text" class="form-control" name="tendererName" id="tendererName">
+			</div>
+			<div class="input-group">
+				<span class="input-group-addon">招标组织形式</span>
+				<select id="tenderOrganizeForm" class="form-control" style="width: 150px;">
+					<option value="">全部</option>
+					<option value="2">委托采购</option>
+					<option value="1">自行采购</option>
+				</select>
+			</div>
+
+			<div class="input-group">
+				<span class="input-group-addon">项目经理</span>
+				<input type="text" class="form-control" name="tenderAgencyLinkmen" id="tenderAgencyLinkmen">
+			</div>
+
+
+			<div class="btn-group">
+				<button type="button" id="btnSearch" class="btn btn-primary">
+					<span class="glyphicon glyphicon-search"></span>查询
+				</button>
+				<button type="button" id="btnExport" class="btn btn-primary">
+					<span class="glyphicon glyphicon-download-alt"></span>导出
+				</button>
+			</div>
+		</div>
+		<p><font color="red">报表说明：异议数量-投标人（供应商）本月提交异议数量；修改文件/招标无效/投标无效/中标无效/未修改文件/未变更结果-本月项目经理异议处理完毕数量；
+			驳回(小计)=未修改文件+未变更结果；不受理-本月项目经理不予受理异议数量；撤回-本月投标人（供应商）撤回异议数量；正在处理-异议未结案数量（异议当前存量，排除异议处理完毕、不予受理、撤回）。
+			驳回拆分为未修改文件、未变更结果两个子类功能上线前，“未修改文件”、“未变更结果”列显示为空（含2024年3月、4月、5月数据）。</font></p>
+		<!--带分页表格-->
+		<table id="projectList" class="table">
+
+		</table>
+
+
+	</div>
+	<script type="text/javascript" src="media/js/My97DatePicker/WdatePicker.js"></script>
+	<script src="Auction/objectionStaticManage/js/objectionStaticList.js"></script>
+	<script type="text/javascript" src="media/js/bootstrap/js/bootstrap-table-fixed-columns2.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="pragma" content="no-cache">
+		<!-- 禁止浏览器从本地机的缓存中调阅页面内容 -->
+		<meta http-equiv="cache-control" content="no-cache, must-revalidate">
+		<meta http-equiv="expires" content="0">
+		<title>查看澄清内容</title>
+		<link rel="stylesheet" href="../../../../media/js/bootstrap/css/bootstrap.css">
+		<link rel="stylesheet" href="../../../../media/js/bootstrap/css/bootstrap-table.min.css">
+		<style>
+		
+			label{
+				font-weight:normal;
+			}
+			pre {
+				font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+			    font-size: 14px;
+			    line-height: 1.42857143;
+			    color: #333;
+				background: #fff;
+				border: none;
+				white-space: pre-wrap;
+				white-space: -moz-pre-wrap;
+				white-space: -pre-wrap;
+				white-space: -o-pre-wrap;
+				*word-wrap: break-word;
+				*white-space : normal ;  
+			}
+		</style>
+	</head>
+	<body>
+		
+		<table class="table table-bordered " style="width: 98%;margin-left: 7px;margin-top: 5px;">
+			<tr class="isAskType" style="display: none">
+				<td class="th_bg" style="width:20%;"><span class="ys"></span>提问标题</td>
+				<td colspan="2">
+					<div style="float: left;width: 90%;">
+						<label id="askTitle" name="askTitle"></label>
+					</div>
+					<div style="float: left;width: 10%;">
+						<button id="btnViewPDF" style="display: none;" type="button" class="btn btn-primary btn-sm" onClick="btnViewPDF()" ><span class="glyphicon glyphicon-edit"></span>查看回执</button>
+					</div>
+				</td>
+			</tr >
+			<tr class="isAskType" style="display: none">
+				<td class="th_bg" style="width:20%;"><span class="ys"></span>提问人</td>
+				<td colspan="2"><label id="askUser" name="askUser"></label></td>
+			</tr>
+			<tr class="isAskType" style="display: none">
+				<td class="th_bg"  ><span class="ys"></span>提问时间</td>
+				<td colspan="2"><label id="askDate" name="askDate"></label></td>
+			</tr>
+			<tr class="isAskType" style="display: none">
+				<td class="th_bg" ><span class="ys"></span>提问内容</td>
+				<td colspan="2"><pre id="askContent" name="askContent"></pre></td>
+			</tr>
+			<!-- <tr class="isAskType">
+				<td class="th_bg" ><span class="ys"></span>答复人</td>
+				<td colspan="2"><label id="answerUser" name="answerUser"></label></td>
+			</tr> -->
+			<tr>
+				<td class="th_bg" ><span class="ys"></span>答复时间</td>
+				<td colspan="2"><label id="answersDate" name="answersDate"></label></td>
+			</tr>
+			<tr>
+				<td class="th_bg" ><span class="ys"></span>答复内容</td>
+				<td colspan="2"><pre id="answersContent" name="answersContent"></pre></td>
+			</tr>
+		</table>
+		<table class="table table-bordered isAskType " style="width: 98%;margin-left: 7px;display: none">
+			<tr class="active">
+				<td colspan="3">
+					<font><span class="ys"></span>提问附件</font>
+				</td>
+			</tr>
+			<tr>
+				<td style="width: 50px;">序号</td>
+				<td>答复文件名称</td>
+				<td style="width:150px;text-align: center;">操作</td>
+			</tr>
+			<tbody id="askFile"></tbody>
+		</table>
+		<table class="table table-bordered " style="width: 98%;margin-left: 7px;">
+			<tr class="active">
+				<td colspan="3">
+					<font><span class="ys"></span>答复附件</font>
+				</td>
+			</tr>
+			<tr>
+				<td style="width: 50px;">序号</td>
+				<td>答复附件名称</td>
+				<td style="width:150px;text-align: center;">操作</td>
+			</tr>
+			<tbody id="answersFile"></tbody>
+		</table>
+	</body>
+	<script src="../../../../media/js/jquery/jquery.min.js"></script>
+	<script src="../../../../media/js/bootstrap/js/bootstrap.js"></script>
+	<script src="../../../../media/js/jquery/jquery.extend.js"></script>
+	
+	<script>
+		var findFileUrl = parent.config.AuctionHost + "/PurFileController/list.do";
+		var dowoloadFileUrl = parent.config.FileHost + '/FileController/download.do';//下载文件
+		var askFiles; 
+		var answersFiles;
+		var askId;	
+		var pdfUrl;
+		function show(obj){
+			var answersUrl = parent.config.AuctionHost + '/AskAnswersController/findAskAnswersInfo.do';//下载文件
+			askId = obj.id;
+			if(obj.askType==0){
+				$(".isAskType").show()
+			}else{
+				$(".isAskType").hide()
+			}
+			$.ajax({
+				type: "post",
+				url: answersUrl,
+				datatype: 'json',
+				data: {					
+					id:askId,
+					enterpriseType: '06'
+				},
+				async: true,
+				success: function(data) {
+					if(data.success) {
+						var res = data.data;
+						if(data.data.pdfUrl){
+							pdfUrl=data.data.pdfUrl
+							$('#btnViewPDF').show()
+						}
+						$("#askTitle").text(res.askTitle); //标题
+						$("#answersContent").text(res.answersContent); //答复详情
+						$("#askContent").text(res.askContent); //提问详情
+						$("#askUser").text(res.askEnterpriseName); //答复详情
+						$("#answerUser").text(res.answerEnterpriseName); //提问详情
+						$("#askDate").text(res.askDate); //提问时间
+						$("#answersDate").text(res.answersDate); //答复时间		
+					}
+				}
+			});	   
+	        //查询提问附件
+	        $.ajax({
+				type: "post",
+				url: findFileUrl,
+				datatype: 'json',
+				data: {
+					modelName:'JJ_PUR_ASK_ANSWERS',
+					modelId:askId,					
+				},
+				async: true,
+				success: function(data) {
+					if(data.success) {
+						askFiles = data.data;
+						if(askFiles.length>0){
+							setImage();
+						}						
+					}
+				}
+			});
+			
+			//查询答复文件
+			$.ajax({
+				type: "post",
+				url: findFileUrl,
+				datatype: 'json',
+				data: {
+					model2Name:'JJ_PUR_ASK_ANSWERS',
+					model2Id:askId,					
+				},
+				async: true,
+				success: function(data) {
+					if(data.success) {
+						answersFiles = data.data;
+						setImage2();
+					}
+				}
+			});
+		}
+		//预览澄清回执
+		function btnViewPDF(){
+			parent.openPreview(pdfUrl);
+		}
+		
+		//附件表格信息
+		function setImage() {
+			$("#askFile").empty();
+			for(var i = 0; i < askFiles.length; i++) {
+				var filesnames = askFiles[i].fileName.substring(askFiles[i].fileName.lastIndexOf(".") + 1).toUpperCase();
+				var strHtml = "<tr><td style='text-align:center;'>" + (i + 1) + "</td>";
+				strHtml += "<td >" + askFiles[i].fileName + "</td><td style='text-align: center;'>";
+				if(filesnames == 'PNG'||filesnames == 'JPG'||filesnames == 'JPGE'||filesnames == 'PDF'){
+					strHtml += "<a  href='javascript:void(0)' class='btn-sm btn-primary' style='text-decoration:none' onclick=showImage('" + askFiles[i].filePath + "')><span class='glyphicon glyphicon-picture' aria-hidden='true'></span>&nbsp预览</a>&nbsp;&nbsp;"
+				}
+				strHtml += "<a href='javascript:void(0)' class='btn-sm btn-primary' style='text-decoration:none' onclick=downloadFile1(\"" + i + "\")><span class='glyphicon glyphicon-download' aria-hidden='true'></span>下载</a></td></tr>&nbsp;&nbsp;"
+				$("#askFile").append(strHtml);
+			}
+		}
+		
+		function setImage2() {
+			$("#answersFile").empty();
+			for(var i = 0; i < answersFiles.length; i++) {
+				var filesnames = answersFiles[i].fileName.substring(answersFiles[i].fileName.lastIndexOf(".") + 1).toUpperCase();
+				var strHtml = "<tr><td style='text-align:center;'>" + (i + 1) + "</td>";
+				strHtml += "<td >" + answersFiles[i].fileName + "</td><td style='text-align: center;'>";
+				if(filesnames == 'PNG'||filesnames == 'JPG'||filesnames == 'JPGE'||filesnames == 'PDF'){
+					strHtml += "<a  href='javascript:void(0)' class='btn-sm btn-primary' style='text-decoration:none' onclick=showImage('" + answersFiles[i].filePath + "')><span class='glyphicon glyphicon-picture' aria-hidden='true'></span>&nbsp预览</a>&nbsp;&nbsp;"
+				}
+				strHtml += "<a href='javascript:void(0)' class='btn-sm btn-primary' style='text-decoration:none' onclick=downloadFile2(\"" + i + "\")><span class='glyphicon glyphicon-download' aria-hidden='true'></span>下载</a></td></tr>&nbsp;&nbsp;"
+				$("#answersFile").append(strHtml);
+			}
+		}
+		//文件下载
+		function downloadFile1(i) {
+			var newUrl =dowoloadFileUrl + '?ftpPath=' + askFiles[i].filePath + '&fname=' + askFiles[i].fileName;
+			window.location.href = $.parserUrlForToken(newUrl);
+		}
+		
+		function downloadFile2(i) {
+			var newUrl =dowoloadFileUrl + '?ftpPath=' + answersFiles[i].filePath + '&fname=' + answersFiles[i].fileName;
+			window.location.href = $.parserUrlForToken(newUrl);
+		}
+		//展示图片
+		function showImage(obj) {
+			parent.openPreview(obj, "850px", "600px");
+		}
+		
+		function getQueryString(name) {
+			var reg = new RegExp('(^|&)' + name + '=([^&]*)(&|$)', 'i');
+			var r = window.location.search.substr(1).match(reg);
+			if(r != null) {
+				return unescape(r[2]);
+			}
+		}
+		
+	</script>
+</html>

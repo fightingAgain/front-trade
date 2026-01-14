@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="pragma" content="no-cache">
+		<!-- 禁止浏览器从本地机的缓存中调阅页面内容 -->
+		<meta http-equiv="cache-control" content="no-cache, must-revalidate">
+		<meta http-equiv="expires" content="0">
+		<title>查看评委组</title>
+		<link rel="stylesheet" type="text/css" href="../../../../media/js/bootstrap/css/bootstrap.css">
+		<link rel="stylesheet" type="text/css" href="../../../../media/js/bootstrap/css/bootstrap-table.css">
+	</head>
+	<body>
+		<table class="table table-bordered">
+			<tr>
+				<td class="th_bg" style="width: 100px;">包件名称</td>
+				<td style="text-align: left;">
+					<div id="packageName"></div>
+				</td>
+				<td class="th_bg" style="width: 100px;">包件编号</td>
+				<td style="text-align: left;">
+					<div id="packageNum"></div>
+				</td>
+			</tr>
+			<tr>
+				<td class="th_bg" style="width: 100px;">评委组成员</td>
+				<td colspan="3" style="text-align: left;">
+					<div id="projectCheckerItems"></div>
+				</td>				
+			</tr>
+			<tr>
+				<td class="active" colspan="2" style="border: none;">评委组长推荐记录</td>
+				<td class="active" colspan="2" style="text-align: right;border: none;">					
+	        		<select id="expertTimes" name="expertTimes" class="form-control"  style="width:180px;height: 24px;padding: 3px 5px;font-size: 12px;display: inherit;">	
+	        			
+	        		</select>
+				</td>				
+			</tr>
+			<tr>
+				<td colspan="4">
+					<table class="table table-bordered" id="table" ></table>
+				</td>
+			</tr>
+		</table>
+		<div style="width: 100%;height: 50px;text-align:center;position: fixed;bottom: 0;background-color: #FFFFFF;z-index: 100001">			
+			<button type="button" id="btn_close" class="btn btn-default" style="width: 100px;">退出</button>
+		 </div>
+	</body>
+	<script type="text/javascript" src="../../../../media/js/jquery/jquery.min.js"></script>
+	<script type="text/javascript" src="../../../../media/js/base/util.js"></script>
+	<script type="text/javascript" src="../../../../media/js/jquery/jquery.extend.js"></script>
+	<script type="text/javascript" src="../../../../media/js/bootstrap/js/bootstrap-table.min.js"></script>
+	<script type="text/javascript" src="../../../../media/js/bootstrap/js/bootstrap-table-zh-CN.min.js"></script>
+	<script>
+		$("#btn_close").on('click',function(){
+			top.layer.closeAll()
+		})
+		function getUrlParam(name) {
+			var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); // 构造一个含有目标参数的正则表达式对象  
+			var r = window.location.search.substr(1).match(reg); // 匹配目标参数  
+			if(r != null) return unescape(r[2]);
+			return null; // 返回参数值  
+		}
+		var packageId=getUrlParam('packageId');
+		var examType=getUrlParam('examType');
+		var projectId=getUrlParam('projectId');
+		$(function(){
+			 initTable();
+		})
+		function initTable() {
+			var reportData="";
+			$.ajax({   	
+			   	url:top.config.bidhost+'/ExpertLeaderController/findProjectAndCheckItems.do',//修改包件的接口
+			   	type:'get',
+			   	//dataType:'json',
+			   	async:false,
+			   	//contentType:'application/json;charset=UTF-8',
+			   	data:{
+			   		'packageId':packageId,
+			   		'examType':examType,			   		
+			   	},
+			   	success:function(data){			   		
+			   		if(data.success==true){
+			   			reportData=data.data			   						   					   			
+			   		}else{	   			
+			   			return false;
+			   		}
+			   	}   	
+			});
+			var projectCheckerList="";
+			for(var i=0;i<reportData.projectCheckerItems.length;i++){
+				
+				projectCheckerList+='<span>'+ reportData.projectCheckerItems[i].expertName + (reportData.projectCheckerItems[i].isLeader==1?'(组长)':'') +'</span>'+((i+1)<reportData.projectCheckerItems.length?'、':'')
+			}
+			$("#projectCheckerItems").html(projectCheckerList);
+			$("#packageName").html(reportData.packageName+(reportData.packageSource==1?'<span class="red">(重新采购)</span>':''));
+			$("#packageNum").html(reportData.packageNum);
+			var expertTimeList="";
+			if(reportData.expertTimes==0){
+				expertTimeList="<option value=''>无历史记录</option>";
+			}else{
+				for(var i=0;i<reportData.expertTimes;i++){
+					expertTimeList+='<option value="'+ (i+1) +'">第'+ (i+1)+'次记录</option>';
+				};
+				
+			};	
+			table(1);
+			$("#expertTimes").html(expertTimeList);			
+			$("#expertTimes").on('change',function(){
+				if($(this).val()!=""){
+					table($(this).val());
+				};				
+			});		
+		};
+		function table(num){			
+			var projectCheckerList=""
+			$.ajax({   	
+			   	url:top.config.bidhost+'/ExpertLeaderController/findExpertList.do',//修改包件的接口
+			   	type:'get',
+			   	//dataType:'json',
+			   	async:false,
+			   	//contentType:'application/json;charset=UTF-8',
+			   	data:{
+			   		'packageId':packageId,
+			   		'examType':examType,
+			   		'expertTimes':num
+			   	},
+			   	success:function(data){			   		
+			   		if(data.success==true){
+			   			projectCheckerList=data.data;
+			   			
+			   		}
+			   	}   	
+			});
+			if(projectCheckerList.length>7){
+				var auto='304'
+			}else{
+				var auto='auto';
+				
+			}	
+			
+			$('#table' ).bootstrapTable({
+				pagination: false,
+				undefinedText: "",
+				height:auto,				
+				columns: [			
+				    {
+						title: "序号",
+						align: "center",
+						halign: "center",
+						width: "50px",
+						formatter: function(value, row, index) {
+							return index + 1;
+						}
+					},
+					{
+						field: "expertName",
+						title: "评委名称",
+						align: "center",
+						halign: "center",
+					},
+					{
+						field: "votes",
+						title: "得票数",
+						align: "center",
+						halign: "center",
+						width: "50px",
+		
+					}
+				]
+			});
+			$('#table').bootstrapTable("load", projectCheckerList); //重载数据
+			$('.fixed-table-container').css('padding-bottom','0');
+		}
+	</script>
+</html>

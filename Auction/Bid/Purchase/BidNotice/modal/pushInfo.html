@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="pragma" content="no-cache">
+		<!-- 禁止浏览器从本地机的缓存中调阅页面内容 -->
+		<meta http-equiv="cache-control" content="no-cache, must-revalidate">
+		<meta http-equiv="expires" content="0">
+		<title>数据推送</title>
+		<link rel="stylesheet" href="../../../../../media/js/bootstrap/css/bootstrap.css">
+		<link rel="stylesheet" href="../../../../../media/js/bootstrap/css/bootstrap-table.min.css" />
+		<link rel="stylesheet" href="../../../../../media/js/bootstrap-fileinput-master/css/fileinput.min.css" type="text/css"/>
+		<style type="text/css">
+			.table th,
+			.table td {				
+				vertical-align: middle !important;
+			}
+			.fileinput-button {
+				position: relative;
+				display: inline-block;
+				overflow: hidden;
+			}
+
+			.fileinput-button input{
+				position:absolute;
+				right: 0px;
+				top: 0px;
+				opacity: 0;
+				-ms-filter: 'alpha(opacity=0)';
+				font-size: 200px;
+			}
+			#tableList input[type=file], #tableList .file-input{display: none;}
+		</style>
+	</head>
+	
+	<body style="width: 99%;padding-left: 10px;padding-top: 10px;margin-bottom: 0;">
+		<table class="table table-bordered" style="margin-bottom: 50px;" align="center">
+			<tr>
+	            <td colspan="4" style="font-weight: bold;" class="active">项目信息</td>
+	        </tr>
+			<tr>
+				<td class="th_bg" width="20%" >采购项目名称</td>
+				<td colspan="1"  id="projectName"></td>
+				<td   class="th_bg" rowspan="2">推送状态</td>
+				<td rowspan="2" id="dataType" style="font-weight: 900;font-size: 21px;color: red;"></td>
+			</tr>
+			<tr>
+				<td class="th_bg" >采购项目编号</td>
+				<td colspan="1"  id="projectCode"></td>
+			</tr>
+			<!--<tr>
+				<td class="th_bg" >答复截止时间</td>
+				<td colspan="3" id="ansEndDatea"></td>
+			</tr>-->
+			<tr>
+				<td class="th_bg" >公告发出时间</td>
+				<td id="ansSengDatea"></td>
+				<td class="th_bg" >答复截止时间</td>
+				<td id="ansEndDatea"></td>
+			</tr>
+			<tr>
+				<td class="th_bg" >采购文件发布时间</td>
+				<td id="submitDatea"></td>
+				<td class="th_bg" >评审时间</td>
+				<td id="techReviewDatea"></td>
+				
+			</tr>
+			<tr>
+				<td class="th_bg" >评审报告生成时间</td>
+				<td id="reportDatea"></td>
+				<td class="th_bg" >结果通知书发送时间</td>
+				<td id="noticeSendDatea"></td>
+			</tr>
+			<tr>
+	            <td colspan="4" style="font-weight: bold;" class="active">答疑记录</td>
+	        </tr>
+	        <tr>
+	        	<td colspan="4">
+	        		<div id="answerList" style="padding: 10px;">
+	        			
+					</div>
+					<div id="fileList11"></div>
+	        	</td>
+	        </tr>
+	        <tr>
+	            <td colspan="4" style="font-weight: bold;" class="active">澄清记录</td>
+	        </tr>
+	        <tr>
+	        	<td colspan="4">
+	        		<div id="clarifyList" style="padding: 10px;">
+	        			
+	        		</div>
+	        	</td>
+	        </tr>
+	        <tr>
+	            <td colspan="4" style="font-weight: bold;" class="active">谈判记录</td>
+	        </tr>
+	        <tr>
+	        	<td colspan="4">
+	        		<div id="talksList" style="padding: 10px;">
+	        			
+					</div>
+					<div id="fileList13"></div>
+	        	</td>
+	        </tr>
+	        <tr>
+	            <td colspan="4" style="font-weight: bold;" class="active">候选供应商</td>
+	        </tr>
+	        <tr>
+	        	<td colspan="4">
+	        		<div id="supplierList">
+	        			
+	        		</div>
+	        	</td>
+	        </tr>
+	        <tr>
+	            <td colspan="4" style="font-weight: bold;" class="active">评审报告</td>
+	        </tr>
+	        <tr>
+	        	<td colspan="4">
+	        		<div id="fileList15"></div>
+	        	</td>
+			</tr>
+			<tr>
+	            <td colspan="4" style="font-weight: bold;" class="active">供应商相关附件</td>
+	        </tr>
+	        <tr>
+	        	<td colspan="4">
+	        		<div id="tableList"></div>
+	        	</td>
+	        </tr>
+			<!--<th colspan="4" class="active" >答疑记录</th>
+			
+			<th colspan="4" class="active" >澄清记录</th>
+			<th colspan="4" class="active" >谈判记录</th>
+			<th colspan="4" class="active" >候选供应商</th>-->
+			
+		
+			<!--<tr class="noneddd">
+				<th colspan="4" class="active" style="text-align: left;border: none;"><span id="examTypeName">询比采购结果公示</span></th>
+			</tr>-->
+		</table>
+		<div class="form-group rowLine" style="width: 100%;height: 50px;text-align:center;position: fixed;bottom: 0;background-color: #FFFFFF;margin-bottom:0px !important;padding-top: 10px;z-index: 1000001;">
+			<button type="button" style="width: 80px;" class="btn btn-primary" data-dismiss="modal" id="btn_submit">确定推送</button>
+			<button type="button" style="width: 80px;" class="btn btn-default" data-dismiss="modal" id="btn_close">关闭</button>
+		</div>
+		<input type="file" class="fileloading" multiple name="files" style="display: none"/>
+	</body>
+	<script type="text/javascript" src="../../../../../media/js/jquery/jquery.js"></script>
+	<script type="text/javascript" src="../../../../../media/js/jquery/jquery.extend.js"></script>
+	<script type="text/javascript" src="../../../../../media/js/bootstrap/js/bootstrap.js"></script>
+	<script type="text/javascript" src="../../../../../media/js/bootstrap/js/bootstrap-table.min.js"></script>
+	<script type="text/javascript" src="../../../../../media/js/bootstrap/js/bootstrap-table-zh-CN.min.js"></script>
+	<script type="text/javascript" src="../../../../../media/js/bootstrap-fileinput-master/js/fileinput.js"></script>
+	<script type="text/javascript" src="../../../../../media/js/bootstrap-fileinput-master/js/locales/zh.js"></script>
+	<script type="text/javascript" src="../../../../../media/js/layer/layer.js"></script>
+	<script type="text/javascript" src="../js/pushInfo.js"></script>
+</html>

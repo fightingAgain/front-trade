@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<link rel="stylesheet" type="text/css" href="../../../media/js/layer/mobile/need/layer.css" />
+	    <link rel="stylesheet" type="text/css" href="../../../media/js/bootstrap/css/bootstrap.css" />
+	    <link rel="stylesheet" type="text/css" href="../../../media/js/bootstrap/css/bootstrap-table.css">
+	</head>
+	<body>
+		<div style="margin-bottom: 60px;padding: 5px;">
+			<table class="table table-bordered"  id="mainTable"></table>
+		</div>
+		
+		<div class="bottom-btn">	      
+	        <button type="button" class="btn btn-default" id="btnClose"><span class="glyphicon glyphicon-remove"></span>关闭</button>
+	    </div>
+	</body>
+	<script type="text/javascript" src="../../../media/js/jquery/jquery.js" ></script>
+	<script type="text/javascript" src="../../../media/js/jquery/jquery.extend.js"></script>
+	<script type="text/javascript" src="../../../media/js/base/common.js" ></script>
+	<script type="text/javascript" src="../../../media/js/base/util.js" ></script>
+	<script type="text/javascript" src="../../../media/js/bootstrap/js/bootstrap.js" ></script>
+	<script type="text/javascript" src="../../../media/js/bootstrap/js/bootstrap-table.min.js"></script>
+	<script type="text/javascript" src="../../../media/js/bootstrap/js/bootstrap-table-zh-CN.min.js"></script>
+	<script>
+		var bidSectionId=getUrlParam("bidSectionId");//标段Id
+		var bidCheckId=getUrlParam("bidCheckId");//评标id
+		var examType=getUrlParam("examType");
+		var checkType=getUrlParam("checkType");
+		var checkUrl=config.Reviewhost+"/ReviewControll/findCheckLastResultByCheckId.do";
+		var checkData;
+		if(checkType==0){
+			var checkTypeTitle="合格制"
+		};
+		if(checkType==1){
+			var checkTypeTitle="偏离制"
+		};
+		if(checkType==2){
+			var checkTypeTitle="响应制"
+		};
+		if(checkType==3){
+			var checkTypeTitle= "打分制"
+		};
+		//关闭
+		$("#btnClose").click(function(){
+			var index = top.layer.getFrameIndex(window.name); 
+			top.layer.close(index); 
+		});
+		$.ajax({
+			type:"post",
+			url:checkUrl,
+			async:false,
+			data:{
+//				'projectId':projectId,
+				'bidSectionId':bidSectionId,
+				'examType':examType,
+				'bidCheckId':bidCheckId
+			},
+			success:function(res){
+				if(res.success){
+					checkData=res.data	
+				}else{				
+					top.layer.alert(res.message);				
+				}
+			}
+		});
+		$('#mainTable').bootstrapTable({
+			pagination: false,
+			undefinedText: "",
+			height: 490,
+			columns: [{
+				    field: "xuhao",
+					title: "序号",
+					align: "center",
+					halign: "center",
+					width: "50px",
+					formatter: function(value, row, index) {
+						return index + 1;
+					}
+				},
+				{
+					field: "enterpriseName",
+					title: "投标人",
+					align: "left",
+					halign: "left",									
+				},
+				{
+					field: "checkType",
+					title: "评标方法",
+					halign: "center",
+					align: "center",
+					width:'100',
+					formatter: function(value, row, index) {
+					 	return	checkTypeTitle
+					}
+				},
+				{
+					field: "status",
+					title: checkType==3?"分值":"评标结果",
+					halign: "left",
+					align: "left",	
+					width:'400',
+					formatter: function(value, row, index) {
+						if(checkType==3){
+							return	row.score;
+						}else{
+							return	value;
+						}
+					 	
+					}
+				},					
+				
+				
+			]
+		});
+		$('#mainTable').bootstrapTable("load", checkData); //重载数据	
+	</script>
+</html>

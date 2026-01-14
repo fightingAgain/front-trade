@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>代理机构专区-询比采购公告列表</title>
+		<!-- 网页不会被缓存 -->
+		<meta http-equiv="pragma" content="no-cache">
+		<!-- 禁止浏览器从本地机的缓存中调阅页面内容 -->
+		<meta http-equiv="cache-control" content="no-cache, must-revalidate">
+		<meta http-equiv="expires" content="0">
+	</head>
+	<style>
+		.table > thead > tr > th,
+		.table > tbody > tr > th,
+		.table > tfoot > tr > th,
+		.table > thead > tr > td,
+		.table > tbody > tr > td,
+		.table > tfoot > tr > td{
+			vertical-align: middle;
+		}
+		.clearTime {
+			position: absolute;
+			right: 1px;
+			top: -4px;
+			z-index: 10;
+			font-size: 31px;
+			padding: 0 5px;
+			cursor: pointer;
+		}
+		.time div {
+			display: block!important;
+		}
+		.today_button{
+			display: none !important
+		}
+  </style>
+	<body>
+		<div class="container-fluid">
+			<div id="toolbar">
+	        	<div class="input-group" style="width:180px;float: left;padding-left: 10px;">
+	    			<span class="input-group-addon">项目名称</span>
+	        		<input type="text" class="form-control" name="projectName" id="projectName" style="width:180px">
+	        	</div>
+				<div class="input-group time" style="width: 200px;float: left;padding-left: 10px;position: relative;">
+					<span class="input-group-addon">开始时间</span>
+					<input type="text" class="form-control" name="startDate" id="startDate" style="cursor:pointer;width: 150px;" />
+					<span class="clearTime">×</span>
+				</div>
+				<div class="input-group time" style="width: 200px;float: left;padding-left: 10px;position: relative;">
+					<span class="input-group-addon">截止时间</span>
+					<input type="text" class="form-control" name="endDate" id="endDate" style="cursor:pointer;width: 150px;" />
+					<span class="clearTime">×</span>
+				</div>
+	        	<div class="btn-group" style="padding-left:10px;">
+		    		<button type="button" id="btnSearch" class="btn btn-primary">
+		                <span class="glyphicon glyphicon-search" aria-hidden="true"></span> 查 询
+		            </button>		      
+	    		</div>
+	    	</div>    	
+		<table class="table table-hover table-bordered" id="table"></table>
+	</div>		
+	<script type="text/javascript" src="Bidding/AppointManager/js/appointList.js"></script>
+	
+	</body>
+</html>

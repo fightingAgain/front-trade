@@ -1,0 +1,77 @@
+<head>
+	<meta http-equiv="pragma" content="no-cache">
+	<!-- 禁止浏览器从本地机的缓存中调阅页面内容 -->
+	<meta http-equiv="cache-control" content="no-cache, must-revalidate">
+	<meta http-equiv="expires" content="0">
+</head>
+<link rel="stylesheet" href="../../../../../media/js/bootstrap/css/bootstrap.css" />
+<form id="form" class="container-fluid" style="width: 99%;padding-left: 10px;padding-top: 10px;">
+	<table class="table table-bordered" style=" margin-bottom: 0px;">
+		<tr>
+			<td style="width: 200px;" class="th_bg">
+				材料设备名称<i class="red">*</i>
+			</td>
+			<td style="text-align: left;">
+				<input type="text"  id="detailedName" name="detailedName" placeholder="请输入材料设备名称" class="form-control">
+				<input type="hidden" name="packageId" id="packageId" />
+				<input type="hidden" name="id" id="detailedId" />
+			</td>
+		</tr>
+		<tr>
+			<td style="width: 200px;" class="th_bg">
+				品牌要求
+			</td>
+			<td style="text-align: left;">
+				<textarea type="text" style="height: 80px;"  name="brand" id="brand" placeholder="请输入品牌要求" class="form-control"></textarea>				
+			</td>
+		</tr>
+		<tr>
+			<td style="width: 200px;" class="th_bg">
+				型号规格<i class="red">*</i>
+			</td>
+			<td style="text-align: left;">
+				<textarea type="text" style="height: 80px;" name="detailedVersion"   id="detailedVersion" placeholder="请输入型号规格" class="form-control"></textarea>	
+			</td>
+		</tr>
+		<tr>
+			<td style="width: 200px;" class="th_bg">
+				数量<i class="red">*</i>
+			</td>
+			<td style="text-align: left;">
+				<input type="text"  id="detailedCount" name="detailedCount" placeholder="请输入数量" class="form-control">
+			</td>
+		</tr>
+		<tr>
+			<td style="width: 200px;" class="th_bg">
+				单位<i class="red">*</i>
+			</td>
+			<td style="text-align: left;">
+				<input id="detailedUnit" name="detailedUnit" class="form-control" />
+			</td>
+		</tr>
+		<tr>
+			<td style="width: 200px;" class="th_bg">
+				采购预算（元）
+			</td>
+			<td style="text-align: left;">
+				<input id="budget" name="budget" class="form-control" />
+			</td>
+		</tr>
+		<tr>
+			<td style="width: 200px;" class="th_bg">
+				备注
+			</td>
+			<td style="text-align: left;">
+				<textarea id="detailedContent" name="detailedContent" class="form-control"></textarea>
+			</td>
+		</tr>
+	</table>
+	<div style="width: 100%;height: 50px;text-align:center;position: fixed;bottom: 0;background-color: #FFFFFF;z-index: 100001;">
+		<button type="button" id="btn_submit" class="btn btn-primary" style="width: 100px;">确定</button>
+		<button type="button" id="btn_close" class="btn btn-default" style="width: 100px;">关闭</button>
+	</div>
+</form>
+ <script type="text/javascript" src="../../../../../media/js/jquery/jquery.js" ></script>
+ <script type="text/javascript" src="../../../../../media/js/jquery/jquery.extend.js"></script>
+ <script type="text/javascript" src="../../../../../media/js/jquery/jquery.params.js" ></script>
+ <script type="text/javascript" src="../js/checkListItem.js"></script>

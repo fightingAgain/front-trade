@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="pragma" content="no-cache"><!-- 禁止浏览器从本地计算机的缓存中访问页面内容 --> 
+	<meta http-equiv="cache-control" content="no-cache"><!-- 用于指定请求和响应遵循的缓存机制 --> 
+	<meta http-equiv="expires" content="0"><!-- 用于设定网页的到期时间，一旦网页过期，必须到服务器上重新传输 -->
+	<title>文件开启情况</title>
+</head>
+<body>
+	<div class="container-fluid">
+		<div id="toolbar">
+        	<div class="input-group" style="width:180px;float: left;">
+    			<span class="input-group-addon">项目编号</span>
+        		<input class="form-control" type="text" id="bidSectionCode" style="width:200px">	
+        	</div>
+        	<div class="input-group" style="width:180px;float: left;padding-left: 10px;">
+    			<span class="input-group-addon">标段名称</span>
+        		<input class="form-control" type="text" id="bidSectionName" style="width:180px">	
+        	</div>	        	
+        	<div class="btn-group" style="padding-left:10px ;">
+	    		<button type="button" id="btnSearch" class="btn btn-primary"><span class="glyphicon glyphicon-search" aria-hidden="true"></span>查询</button>
+    		</div>
+    	</div>
+		<table id="listTable" class="table table-hover table-bordered"></table>
+	</div>
+	<script type="text/javascript" src="OpenTender/bidder/js/public.js"></script>
+	<script type="text/javascript" src="OpenTender/fileOpen/bidder/js/pretrialFileOpenList.js"></script>
+</body>
+</html>

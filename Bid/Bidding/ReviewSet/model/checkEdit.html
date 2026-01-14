@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="pragma" content="no-cache"><!-- 禁止浏览器从本地计算机的缓存中访问页面内容 --> 
+		<meta http-equiv="cache-control" content="no-cache"><!-- 用于指定请求和响应遵循的缓存机制 --> 
+		<meta http-equiv="expires" content="0"><!-- 用于设定网页的到期时间，一旦网页过期，必须到服务器上重新传输； -->
+		<link rel="stylesheet" href="../../../media/js/bootstrap/css/bootstrap.css" />
+		<link rel="stylesheet" href="../../../media/js/bootstrap/css/bootstrap-table.min.css" type="text/css"/>
+		<link rel="stylesheet" href="../../../media/js/layer/mobile/need/layer.css" />
+		<title>评审项</title>
+		<style>
+			.hideBlock { display: none;}
+		</style>
+	</head>
+	<body>
+		<form id="formName" class="pageModel">
+			<table class="table table-bordered" id="checkTable">
+				<tr>
+					<td class="th_bg">评审项名称<i class="red">*</i></td>
+					<td>
+						<input type="text" class="form-control" name="checkName" datatype="*" errormsg="请输入评审项名称" />
+					</td>
+				</tr>
+				<tr>
+					<td class="th_bg">评审项说明</td>
+					<td>
+						<textarea rows="3" class="form-control" name="checkStandard" style="resize: none;"></textarea>
+					</td>
+				</tr>
+				<tr>
+					<td class="th_bg">评审阶段</td>
+					<td>
+						<label style="padding-right:20px;margin-bottom: 0;">
+	                		<input type="radio" name="checkStage" value="1" checked="checked" style="vertical-align: -2px;margin-right: 5px;" >初步评审
+	                	</label>
+						<label style="padding-right:20px;margin-bottom: 0;">
+	                		<input type="radio" name="checkStage" value="2" style="vertical-align: -2px;margin-right: 5px;" >详细评审
+	                	</label>
+					</td>
+				</tr>
+				<tr>
+					<td class="th_bg">评审方式</td>
+					<td>
+						<label style="padding-right:20px;margin-bottom: 0;">
+	                		<input type="radio" name="checkType" value="0" checked="checked" style="vertical-align: -2px;margin-right: 5px;" >合格制
+	                	</label>
+						<label style="padding-right:20px;margin-bottom: 0;">
+	                		<input type="radio" name="checkType" value="1" style="vertical-align: -2px;margin-right: 5px;" >偏离制
+	                	</label>
+						<label style="padding-right:20px;margin-bottom: 0;">
+	                		<input type="radio" name="checkType" value="2" style="vertical-align: -2px;margin-right: 5px;" >响应制
+	                	</label>
+						<label style="padding-right:20px;margin-bottom: 0;display: none;">
+	                		<input type="radio" name="checkType" value="3" style="vertical-align: -2px;margin-right: 5px;" >打分制
+	                	</label>
+						<span class="red">温馨提示：切换评审方式将清空分项内容，请谨慎操作！</span>
+					</td>
+				</tr>
+				<tr class="bidType" style="display: none;">
+					<td class="th_bg">评审项类型</td>
+					<td>
+						<label style="padding-right:20px;margin-bottom: 0;">
+	                		<input type="radio" name="isBlind" value="0" checked="checked" style="vertical-align: -2px;margin-right: 5px;" >明标
+	                	</label>
+						<label style="padding-right:20px;margin-bottom: 0;">
+	                		<input type="radio" name="isBlind" value="1" style="vertical-align: -2px;margin-right: 5px;" >暗标
+	                	</label>
+					</td>
+				</tr>
+				<tr class="checkType checkTypeCom">
+					<td class="th_bg">评审规则<i class="red">*</i></td>
+					<td>
+						<input type="text" name="ratioMolecular" style="width: 50px;display: inline-block;" value="1" data-validate="positiveInt" errormsg="请正确输入评审规则"> /
+						<input type="text" name="ratioDenominator" style="width: 50px;display: inline-block;" value="2" data-validate="positiveInt" errormsg="请正确输入评审规则">
+						评委评审合格才算合格
+					</td>
+				</tr>
+				<tr class="checkType checkType1 hideBlock">
+					<td class="th_bg">最大偏离项<i class="red">*</i></td>
+					<td>
+						<input type="text" name="maxDeviate" data-validate="positiveInt" errormsg="请正确输入最大偏离项" style="width: 100px;display: inline-block;">
+					</td>
+				</tr>
+				<tr class="checkType checkType1 hideBlock">
+					<td class="th_bg">是否计入偏离总项</td>
+					<td>
+						<label style="padding-right:20px;margin-bottom: 0;">
+	                		<input type="radio" name="isAddToTotal" value="1" checked="checked" style="vertical-align: -2px;margin-right: 5px;" >是
+	                	</label>
+						<label style="padding-right:20px;margin-bottom: 0;">
+	                		<input type="radio" name="isAddToTotal" value="0" style="vertical-align: -2px;margin-right: 5px;" >否
+	                	</label>
+					</td>
+				</tr>
+				<tr class="checkType checkType1 isAddPriceModule hideBlock">
+					<td class="th_bg">偏离<span class="checkType8">加</span>价</td>
+					<td>
+						<label style="padding-right:20px;margin-bottom: 0;">
+	                		<input type="radio" name="isAddPrice" value="1" checked="checked" style="vertical-align: -2px;margin-right: 5px;" >是
+	                	</label>
+						<label style="padding-right:20px;margin-bottom: 0;">
+	                		<input type="radio" name="isAddPrice" value="0" style="vertical-align: -2px;margin-right: 5px;" >否
+	                	</label>
+					</td>
+				</tr>
+				<tr class="isAddPriceShow hideBlock">
+					<td class="th_bg"><span class="checkType8">加</span>价幅度<i class="red">*</i></td>
+					<td>
+						<input type="text" name="addPriceRatio" class="form-control addPriceRatio" data-validate="n0-100" errormsg="请正确输入加价幅度" style="width: 100px;display: inline-block;"> %
+					</td>
+				</tr>
+				<tr class="checkType checkType3 hideBlock">
+					<td class="th_bg">满分<i class="red">*</i></td>
+					<td>
+						<input type="text" name="score" value="100" class="form-control" data-validate="decimal2" errormsg="请正确输入满分" style="width: 100px;display: inline-block;">
+					</td>
+				</tr>
+				
+				<tr class="checkType checkType3 weightShow hideBlock">
+					<td class="th_bg">权重<i class="red">*</i></td>
+					<td>
+						<input type="text" name="weight" class="form-control weight" data-validate="n0-1" errormsg="请正确输入权重" style="width: 100px;display: inline-block;">
+						<span class="red">范围：0~1(2位小数)</span>
+					</td>
+					
+				</tr>
+				<tr class="checkType checkType3 hideBlock">
+					<td class="th_bg">打分类型</td>
+					<td>
+						<label style="padding-right:20px;margin-bottom: 0;">
+	                		<input type="radio" name="nodeType1" value="1" checked="checked" style="vertical-align: -2px;margin-right: 5px;" >商务打分
+	                	</label>
+						<label style="padding-right:20px;margin-bottom: 0;">
+	                		<input type="radio" name="nodeType1" value="2" style="vertical-align: -2px;margin-right: 5px;" >技术打分
+	                	</label>
+						<label style="padding-right:20px;margin-bottom: 0;">
+	                		<input type="radio" name="nodeType1" value="3" style="vertical-align: -2px;margin-right: 5px;" >价格打分
+	                	</label>
+						<label style="padding-right:20px;margin-bottom: 0;">
+	                		<input type="radio" name="nodeType1" value="9" style="vertical-align: -2px;margin-right: 5px;" >其他
+	                	</label>
+					</td>
+				</tr>
+				<tr class="checkType checkType3 avgTypeShow hideBlock">
+					<td class="th_bg">计算方式</td>
+					<td>
+						<label style="padding-right:20px;margin-bottom: 0;">
+	                		<input type="radio" name="avgType" value="0" checked="checked" style="vertical-align: -2px;margin-right: 5px;">各评委去掉一个最高分和一个最低分求平均分
+	                	</label>
+						<label style="padding-right:20px;margin-bottom: 0;">
+	                		<input type="radio" name="avgType" value="1" style="vertical-align: -2px;margin-right: 5px;">算术平均分
+	                	</label>
+						<label style="padding-right:20px;margin-bottom: 0;">
+	                		<input type="radio" name="avgType" value="2" style="vertical-align: -2px;margin-right: 5px;">分项得分求和，分项得分为各评委去掉一个最高分和一个最低分后的平均分
+	                	</label>
+					</td>
+				</tr>
+				<tr class="checkType checkType3 hideBlock">
+					<td class="th_bg">打分方式</td>
+					<td>
+						<label style="padding-right:20px;margin-bottom: 0;">
+	                		<input type="radio" name="scoreType" value="0" checked="checked" style="vertical-align: -2px;margin-right: 5px;" >评委打分
+	                	</label>
+						<label style="padding-right:20px;margin-bottom: 0;">
+	                		<input type="radio" name="scoreType" value="1" style="vertical-align: -2px;margin-right: 5px;" >自动打分
+	                	</label>
+					</td>
+				</tr>
+				
+			</table>
+		</form>
+		<div class="bottom-btn">
+			<button type="button" class="btn btn-primary" id="btnSave"><span class="glyphicon glyphicon-ok"></span>保存</button>
+			<button type="button" class="btn btn-default" id="btnClose"><span class="glyphicon glyphicon-remove"></span>关闭</button>
+		</div>
+		<script type="text/javascript" src="../../../media/js/jquery/jquery.js"></script>
+	    <script type="text/javascript" src="../../../media/js/jquery/jquery.extend.js"></script>
+	    <script type="text/javascript" src="../../../media/js/base/util.js"></script>
+	    <script type="text/javascript" src="../../../media/js/base/common.js"></script>
+	    <script type="text/javascript" src="../../../media/js/bootstrap/js/bootstrap.js"></script>
+	    <script type="text/javascript" src="../../../media/js/layer/layer.js"></script>
+	    <script type="text/javascript" src="../../../media/js/My97DatePicker/WdatePicker.js"></script>
+	    <script type="text/javascript" src="../js/checkEdit.js"></script>
+	</body>
+</html>

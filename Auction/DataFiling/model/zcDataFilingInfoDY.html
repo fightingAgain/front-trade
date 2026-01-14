@@ -1,0 +1,213 @@
+<!-- 网页不会被缓存 -->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+	<head>
+		<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+		<meta http-equiv="pragma" content="no-cache">
+		<!-- 禁止浏览器从本地机的缓存中调阅页面内容 -->
+		<meta http-equiv="cache-control" content="no-cache, must-revalidate">
+		<meta http-equiv="expires" content="0">
+		<link rel="stylesheet" href="../../../media/js/layer/mobile/need/layer.css" />
+		<link rel="stylesheet" href="../../../media/js/layer/theme/default/laydate.css" />
+		<link rel="stylesheet" href="../../../media/js/bootstrap/css/bootstrap.css" />
+		<link rel="stylesheet" href="../../../media/js/bootstrap/css/bootstrap-table.min.css" type="text/css"/>
+		<link rel="stylesheet" href="../../../media/js/bootstrap-fileinput-master/css/fileinput.min.css" type="text/css"/>
+        <title>资格预审</title>	
+</head>
+<body>
+<form id="formbackage" name="purchase" style="width: 99%;padding-left: 10px;padding-top: 10px;margin-bottom: 60px;">
+	<div class="panel-group" id="accordion">
+		<div class="panel panel-accordion panel-default">
+			<div class="panel-heading active" role="tab" id="headingOne">
+				<h4 class="panel-title">
+					<a role="button" data-toggle="collapse" href="#collapseOne" aria-controls="collapseOne"
+						aria-expanded="true">
+						项目信息
+					</a>
+				</h4>
+			</div>
+			<div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+				<div class="panel-body">
+					<table class="table table-bordered">
+						<tr >
+						    <td class="th_bg">采购项目名称</td>
+						    <td style="text-align: left;min-width: 280px;">
+						    	<div id="projectName"></div>
+						    </td>
+						    <td class="th_bg">采购项目编号</td>
+						    <td style="text-align: left;min-width: 280px;">
+						    	<div id="projectCode"></div>
+						    </td>
+						</tr>
+						<tr>
+							<td style="width:250px;"  class="th_bg">包件名称</td>
+							<td  style="text-align: left;">
+								<div id="packageName"></div>
+							</td>
+							<td style="width:250px;"  class="th_bg">包件编号</td>
+							<td style="text-align: left;">
+								<div id="packageNum"></div>
+							</td>
+						</tr>
+						<tr>
+							<td style="width:250px;"  class="th_bg"><span class="pdfName" >基本信息</span></td>
+							<td  style="text-align: left;" colspan="3">
+								<table id="tablePdf" data-title="基本信息"></table>
+						</tr>
+					</table>
+				</div>
+			</div>
+		</div>
+		<div class="panel panel-accordion panel-default pretrial">
+			<div class="panel-heading active" role="tab" id="headingTwo">
+				<h4 class="panel-title">
+					<a class="collapsed" role="button" data-toggle="collapse" href="#collapseTwo"
+						aria-controls="collapseTwo" aria-expanded="true">
+						单一来源阶段
+					</a>
+				</h4>
+			</div>
+			<div id="collapseTwo" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingTwo">
+				<div class="panel-body">
+					<table class="table table-bordered">
+						<tr>
+							<td style="width:250px;"  class="th_bg dy"><span class="pdfName" >邀请函信息</span></td>
+							<td  style="text-align: left;">
+								<table id="tablePdf" data-title="邀请函信息"></table>
+							</td>
+							<td style="width:250px;"  class="th_bg"><span class="pdfName" >采购文件信息</span></td>
+							<td style="text-align: left;">
+								<table id="tablePdf" data-title="采购文件信息"></table>
+							</td>
+						</tr>
+						<tr>
+							<td style="width:250px;"  class="th_bg"><span class="pdfName" >采购文件购买信息</span></td>
+							<td  style="text-align: left;">
+								<table id="tablePdf" data-title="采购文件购买信息"></table>
+							</td>
+							<td style="width:250px;"  class="th_bg dy"><span class="pdfName" >单一来源控制价信息</span></td>
+							<td style="text-align: left;">
+								<table id="tablePdf" data-title="单一来源控制价信息"></table>
+							</td>
+						</tr>
+						<tr>
+							<td style="width:250px;"  class="th_bg dy"><span class="pdfName" >单一来源报价文件递交情况</span></td>
+							<td style="text-align: left;">
+								<table id="tablePdf" data-title="单一来源报价文件递交情况"></table>
+							</td>
+							<td style="width:250px;"  class="th_bg"><span class="pdfName" >保证金递交情况</span></td>
+							<td  style="text-align: left;">
+								<table id="tablePdf" data-title="保证金递交情况"></table>
+							</td>
+						</tr>
+						<tr>
+							<td style="width:250px;"  class="th_bg dy"><span class="pdfName" >单一来源报价情况</span></td>
+							<td  style="text-align: left;">
+								<table id="tablePdf" data-title="单一来源报价情况"></table>
+							</td>
+							<td style="width:250px;"  class="th_bg dy"><span class="pdfName" >单一来源评审设置</span></td>
+							<td style="text-align: left;">
+								<table id="tablePdf" data-title="单一来源评审设置"></table>
+							</td>
+						</tr>
+						<tr>
+							<td style="width:250px;"  class="th_bg dy"><span class="pdfName" >单一来源评审评委抽取记录</span></td>
+							<td style="text-align: left;">
+								<table id="tablePdf" data-title="单一来源评审评委抽取记录"></table>
+							</td>
+							<td style="width:250px;"  class="th_bg dy"><span class="pdfName" >单一来源评审报告</span></td>
+							<td style="text-align: left;">
+								<table id="tablePdf" data-title="单一来源评审报告"></table>
+							</td>
+						</tr>
+						<tr>
+							<td style="width:250px;"  class="th_bg xb"><span class="pdfName" >单一来源评审清标资料</span></td>
+							<td style="text-align: left;">
+								<table id="tablePdf" data-title="单一来源评审清标资料"></table>
+							</td>
+							<td style="width:250px;"  class="th_bg dy"><span class="pdfName" >单一来源评审评委澄清</span></td>
+							<td style="text-align: left;">
+								<table id="tablePdf" data-title="单一来源评审评委澄清"></table>
+							</td>
+						</tr>
+						<tr>
+							<td style="width:250px;"  class="th_bg dy"><span class="pdfName" >单一来源采购价格谈判</span></td>
+							<td style="text-align: left;">
+								<table id="tablePdf" data-title="单一来源采购价格谈判"></table>
+							</td>
+							<td style="width:250px;"  class="th_bg dy"><span class="pdfName" >单一来源采购结果公示</span></td>
+							<td style="text-align: left;">
+								<table id="tablePdf" data-title="单一来源采购结果公示"></table>
+							</td>
+						</tr>
+						<tr>
+							<td style="width:250px;"  class="th_bg dy"><span class="pdfName" >单一来源采购结果通知</span></td>
+							<td style="text-align: left;">
+								<table id="tablePdf" data-title="单一来源采购结果通知"></table>
+							</td>
+							<td style="width:250px;"  class="th_bg dy"><span class="pdfName" >单一来源采购异常</span></td>
+							<td  style="text-align: left;">
+								<table id="tablePdf" data-title="单一来源采购异常"></table>
+							</td>
+						</tr>
+						<tr>
+							<td style="width:250px;"  class="th_bg xb"><span class="pdfName" >其他资料</span></td>
+							<td  style="text-align: left;" colspan="3">
+								<table id="tablePdf" data-title="其他资料"></table>
+							</td>
+						</tr>
+						<tr>
+							<td style="width:250px;"  class="th_bg"><span class="pdfName">企业名称变更一览表</span></td>
+							<td  style="text-align: left;" colspan="3">
+								<table id="tablePdf" data-title="企业名称变更一览表"></table>
+							</td>
+						</tr>
+						<tr class="employee" >
+							<td class="th_bg">添加审核人</td>
+							<td colspan="3" style="text-align: left;">
+								<select id="employeeId" class="form-control" style="width: 180px;" name="checkerId"></select>
+							</td>
+						</tr>
+						<tr class="record" style="display: none;">
+							<td class="active"  colspan="4" style="border: none;"><strong>流程审核记录</strong></td>
+						</tr>
+						 <tr class="record" style="display: none;">
+						   <td colspan="4">
+								<table class="table table-bordered" id="workflowListDetail">
+									
+								</table>
+							</td>
+						 </tr>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+ </form>
+ <div class="bottom-btn">
+	<button type="button" class="btn btn-primary" id="downLoadAll">一键打包</button>
+	<button type="button" class="btn btn-default isbtn" id="btnBao" style="display:none;"><span class="glyphicon glyphicon-refresh"></span>保存</button>
+	<button type="button" class="btn btn-primary isbtn" id="btnsubtime" style="display:none;"><span class="glyphicon glyphicon-refresh"></span>提交</button>
+	<button type="button" class="btn btn-default" id="btnClose"><span class="glyphicon glyphicon-remove"></span>关闭</button>
+</div>
+<style>
+	.table_list_box{
+		table-layout:fixed !important;
+	}
+</style>
+ <script type="text/javascript" src="../../../media/js/jquery/jquery.js" ></script>
+ <script type="text/javascript" src="../../../media/js/jquery/jquery.extend.js"></script>
+ <script type="text/javascript" src="../../../media/js/base/common.js" ></script>
+ <script type="text/javascript" src="../../../media/js/base/util.js" ></script>
+ <script type="text/javascript" src="../../../media/js/bootstrap/js/bootstrap.js" ></script>
+ <script type="text/javascript" src="../../../media/js/bootstrap/js/bootstrap-table.min.js"></script>
+ <script type="text/javascript" src="../../../media/js/bootstrap/js/bootstrap-table-zh-CN.min.js"></script>
+ <script type="text/javascript" src="../../../media/js/bootstrap-fileinput-master/js/fileinput.js"></script>
+ <script type="text/javascript" src="../../../media/js/bootstrap-fileinput-master/js/locales/zh.js"></script>
+ <script type="text/javascript" src="../../../media/js/Model/archivingRollback/js/embed.js"></script>
+ <!-- <script type="text/javascript" src="../../../media/js/base/auditRecordsFZB.js"></script> -->
+ <script type="text/javascript" src="../js/zcDataFilingInfo.js"></script>
+ <script type="text/javascript" src="../../../media/js/base/auditRecords.js"></script>
+ </body>
+ </html>

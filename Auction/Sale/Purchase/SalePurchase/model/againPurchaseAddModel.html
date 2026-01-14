@@ -1,0 +1,90 @@
+<head>
+	<meta http-equiv="pragma" content="no-cache">
+	<!-- 禁止浏览器从本地机的缓存中调阅页面内容 -->
+	<meta http-equiv="cache-control" content="no-cache, must-revalidate">
+	<meta http-equiv="expires" content="0">
+</head>
+<link rel="stylesheet" href="../../../../../media/js/layer/mobile/need/layer.css" />
+<link rel="stylesheet" href="../../../../../media/js/bootstrap/css/bootstrap.css" />
+<link rel="stylesheet" href="../../../../../media/js/bootstrap/css/bootstrap-table.min.css" type="text/css"/>
+<table class="table table-bordered" style="width: 99%;padding-left: 10px;padding-top: 10px;margin-bottom: 0;">
+	<tr>
+	 	<td class="th_bg">竞卖项目</td>
+	 	<td colspan="3" style="text-align: left;"><button onclick="selet()" class="btn btn-primary">选择</button></td>
+	</tr>
+	<tr>
+	 	<td class="th_bg" width="20%">项目名称<sup class="red">*</sup></td>
+	 	<td colspan="3" style="text-align: left;"><div id="projectName"></div></td>
+	</tr>
+	<tr>
+	 	<td class="th_bg" width="20%">项目编号</td>
+	 	<td colspan="3" style="text-align: left;"><div id="projectCode"></div></td>
+	</tr>
+	<tr>
+	 	<td class="th_bg" width="20%">竞卖人名称</td>
+	 	<td colspan="3" style="text-align: left;"><div id="purchaserName"></div></td>
+	</tr>
+	<tr>
+	 	<td class="th_bg" width="20%">竞卖人地址</td>
+	 	<td colspan="3"style="text-align: left;"><div id="purchaserAddress"></div></td>
+	</tr>
+	<tr>
+	 	<td class="th_bg" width="20%">联系人</td>
+	 	<td style="text-align: left;"><div id="purchaserLinkmen"></div></td>
+	 	<td class="th_bg" width="20%">联系电话</td>
+	 	<td style="text-align: left;"><div id="purchaserTel"></div></td>
+	</tr>
+	<tr>
+        <td colspan="4" style="font-weight: bold;" class="active">竞卖参数</td>
+    </tr>
+ 	<tr>
+		<td class="th_bg">竞卖方式</td>
+		<td colspan="4" style="text-align: left;">
+			<div id="auctionTypeText"></div>
+		</td>
+	</tr>
+	<tr>
+		<td class="th_bg" style="width: 25%;">竞卖类型</td>
+		<td colspan="4" style="text-align: left;">
+			<div id="dataTypeName"></div>												
+		</td>
+	</tr>
+	<tr>
+	    <td colspan="4" style="font-weight: bold;" class="active">项目基本信息</td>
+	</tr>
+	<tr class="fjwzjmzz">
+        <td class="th_bg">商品名称<i class="red">*</i></td>
+        <td colspan="3" style="text-align: left;">
+        	<div id="detailedName"></div>           	
+        </td>
+    </tr>
+    <tr class="fjwzjmzz">
+	    <td class="th_bg">商品详情</td>
+	    <td colspan="3" style="text-align: left;">
+	    	<div id="detailedContent"></div>	        	
+	    </td>
+	</tr>
+    <tr class="fjwzjmzz">
+        <td class="th_bg">竞卖人资质要求<i class="red">*</i></td>
+        <td colspan="3" style="text-align: left;">
+        	<div id="detailedRemark"></div>	        	
+        </td>
+    </tr>
+	<tr class="fjwz">
+		<td colspan="4">
+			<table class="table  table-bordered " id="materialList"></table>
+		</td>
+	</tr>
+</table>
+<div class="bottom-btn" style="z-index: 11000;">
+	<button type="button" class="btn btn-primary" id="btn_save"><span class="glyphicon glyphicon-ok"></span>确定重新竞卖</button>
+	<button type="button" class="btn btn-default" id="btn_close"><span class="glyphicon glyphicon-remove"></span>取消</button>
+</div>
+ <script type="text/javascript" src="../../../../../media/js/jquery/jquery.js" ></script>
+ <script type="text/javascript" src="../../../../../media/js/jquery/jquery.extend.js"></script>
+ <script type="text/javascript" src="../../../../../media/js/base/common.js" ></script>
+ <script type="text/javascript" src="../../../../../media/js/bootstrap/js/bootstrap.js" ></script>
+ <script type="text/javascript" src="../../../../../media/js/bootstrap/js/bootstrap-table.min.js"></script>
+ <script type="text/javascript" src="../../../../../media/js/bootstrap/js/bootstrap-table-zh-CN.min.js"></script>
+ <script type="text/javascript" src="../../../../../media/js/layer/layer.js" ></script>
+ <script type="text/javascript" src="../js/againAddModel.js" ></script>

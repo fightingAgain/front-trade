@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta http-equiv="pragma" content="no-cache"><!-- 禁止浏览器从本地计算机的缓存中访问页面内容 --> 
+	<meta http-equiv="cache-control" content="no-cache"><!-- 用于指定请求和响应遵循的缓存机制 --> 
+	<meta http-equiv="expires" content="0"><!-- 用于设定网页的到期时间，一旦网页过期，必须到服务器上重新传输； -->
+    <title>开标结果录入</title>
+    <link rel="stylesheet" href="../../../../media/js/layer/mobile/need/layer.css" />
+    <link rel="stylesheet" href="../../../../media/js/bootstrap/css/bootstrap.css" />
+	<style>
+		html,body { height: 100%;}
+	</style>
+</head>
+
+<body>
+    <form class="pageModel" id="formName" name="formName">
+    	<table class="table table-bordered">
+    		<tr>
+	            <td colspan="4" style="font-weight: bold;" class="active">投标人信息</td>
+	        </tr>
+    		<tr>
+            	<td class="th_bg">投标人名称</td>
+                <td colspan="3">
+                    <span id="bidderName"></span>
+                </td>
+            </tr>
+            <tr>
+            	<td class="th_bg">是否提交保证金<i class="red">*</i></td>
+                <td colspan="3">
+                    <input style="vertical-align: -2px;margin-right: 5px;margin-left: 5px;" type="radio" name="isCommitMargin" value="1" checked="checked"/>是&nbsp;&nbsp;&nbsp;
+                    <input style="vertical-align: -2px;margin-right: 5px;margin-left: 5px;" type="radio" name="isCommitMargin" value="0"/>否&nbsp;&nbsp;&nbsp;
+                </td>
+                
+			</tr>
+			<tr>
+				<td class="th_bg">保证金递交方式<i class="red">*</i></td>
+                <td colspan="3">
+                    <input style="vertical-align: -2px;margin-right: 5px;margin-left: 5px;" type="checkbox" name="marginPayForm" value="0"/>资金现金&nbsp;&nbsp;&nbsp;
+					<input style="vertical-align: -2px;margin-right: 5px;margin-left: 5px;" type="checkbox" name="marginPayForm" value="1"/>银行保函&nbsp;&nbsp;&nbsp;
+					<input style="vertical-align: -2px;margin-right: 5px;margin-left: 5px;" type="checkbox" name="marginPayForm"value="2"/>担保&nbsp;&nbsp;&nbsp;
+					<input style="vertical-align: -2px;margin-right: 5px;margin-left: 5px;" type="checkbox" name="marginPayForm"  value="3"/>电汇&nbsp;&nbsp;&nbsp;
+					<input style="vertical-align: -2px;margin-right: 5px;margin-left: 5px;" type="checkbox" name="marginPayForm" value="4"/>汇票&nbsp;&nbsp;&nbsp;
+					<input style="vertical-align: -2px;margin-right: 5px;margin-left: 5px;" type="checkbox" name="marginPayForm"  value="5"/>支票&nbsp;&nbsp;&nbsp;
+					<input style="vertical-align: -2px;margin-right: 5px;margin-left: 5px;" type="checkbox" name="marginPayForm" value="6"/>其他
+                </td> 
+			</tr>
+			<tr>
+				<td class="th_bg">价款形式代码<i class="red">*</i></td>
+				<td>
+					<select name="priceFormCode" class="form-control">
+						<option value="1">金额</option>
+						<option value="2">费率或其他类型报价</option>
+					</select>
+				</td>
+				<td class="th_bg">投标人类别<i class="red">*</i></td>
+				<td>
+					<select class="form-control select" selectName="tendererCodeType" name="bidderCodeType" id="bidderCodeType" style="display: inline-block; width: auto;"></select>
+				</td>
+			</tr>
+			<tr class="otherPriceBlock" style="display: none;">
+				<td class="th_bg">费率或其它类型报价<i class="red">*</i></td>
+				<td colspan="3">
+					<textarea rows="2" type="text" name="otherBidPrice" class="form-control" style="resize: none;" errormsg="请输入费率或其它类型报价"></textarea>
+				</td>
+			</tr>
+			<tr class="bidPriceBlock" style="display: none;">
+				<td class="th_bg">投标报价金额<i class="red">*</i></td>
+				<td colspan="3">
+					<input type="text" name="bidPrice" class="form-control" style="width: 120px;display: inline-block;" errormsg="请输入投标报价金额">
+					<select name="priceUnit" id="priceUnit" class="form-control" style="width: 80px;display: inline-block;">
+                    	<option value="1" selected="selected">万元</option>
+                    	<option value="0">元</option>
+                    </select>
+                    <select name="priceCurrency" id="priceCurrency" class="form-control" style="width: 100px;display: inline-block;" >
+                    	<option value="156">人民币</option>
+                    </select>
+				</td>
+				
+			</tr>
+			<tr>
+				<td class="th_bg">投标工期<i class="red">*</i></td>
+				<td>
+					<input type="text" name="timeLimit" class="form-control" datatype="num" errormsg="请正确输入投标工期" style="display: inline-block; width: 120px;">&nbsp;&nbsp;天
+				</td>
+				<td class="th_bg">投标文件递交时间<i class="red">*</i></td>
+				<td>
+					<div style="position: relative;width: 260px;">
+						<input type="text" name="checkinTime" id="checkinTime" class="form-control Wdate" style="width: 260px;" datatype="*" errormsg="请选择投标文件递交时间">
+						<!--<span style="position: absolute; top: 10px;right: 10px; font-size:18px;cursor: pointer;background: #ffffff;color: #3995C8;" onclick="$('#checkinTime').focus()" class="glyphicon glyphicon-calendar calendar_icon"></span>-->
+					</div>
+				</td>
+			</tr>
+			
+    	</table>
+    	
+        <div class="bottom-btn">
+            <button type="button" class="btn btn-primary" id="btnSave"><span class="glyphicon glyphicon-ok"></span>保存</button>
+        <button type="button" class="btn btn-default" id="btnClose"><span class="glyphicon glyphicon-remove"></span>关闭</button>
+        </div>
+    </form>
+    <script type="text/javascript" src="../../../../media/js/jquery/jquery.js"></script>
+    <script type="text/javascript" src="../../../../media/js/jquery/jquery.extend.js"></script>
+    <script type="text/javascript" src="../../../../media/js/base/util.js"></script>
+    <script type="text/javascript" src="../../../../media/js/base/common.js"></script>
+    <script type="text/javascript" src="../../../../media/js/bootstrap/js/bootstrap.js"></script>
+    <script type="text/javascript" src="../../../../media/js/My97DatePicker/WdatePicker.js"></script>
+    <script type="text/javascript" src="../../../Model/js/public.js"></script>
+    <script type="text/javascript" src="../js/bidderEdit.js"></script>
+</body>
+
+</html>

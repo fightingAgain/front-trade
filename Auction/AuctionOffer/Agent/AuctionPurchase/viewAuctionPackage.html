@@ -1,0 +1,113 @@
+<head>
+	<meta http-equiv="pragma" content="no-cache">
+	<!-- 禁止浏览器从本地机的缓存中调阅页面内容 -->
+	<meta http-equiv="cache-control" content="no-cache, must-revalidate">
+	<meta http-equiv="expires" content="0">
+</head>
+
+<link rel="stylesheet" href="../../../../media/js/layer/layer.js"/>
+<link rel="stylesheet" href="../../../../media/js/bootstrap/css/bootstrap.css" />
+<link rel="stylesheet" href="../../../../media/js/datetimepicker/css/jquery.datetimepicker.css"/>
+<link rel="stylesheet" href="../../../../media/js/bootstrap/css/bootstrap-table.min.css" type="text/css"/>
+<form id="packageForm">
+	<div class="container-fluid" style="width: 99%;padding-left: 10px;padding-top: 10px;margin-bottom: 60px;">
+		<table class="table table-bordered" style=" margin-bottom: 0px;">
+			<tr>
+				<td colspan="4" style="font-weight: bold;border: none;" class="active">包件信息</td>				
+			</tr>
+			<tr>
+				<td style="width: 200px;" class="th_bg">包件编号</td>
+				<td style="text-align: left;width: 300px">
+					<div id="packageCode"></div>
+					<input type="hidden" name="packageCode" />
+				</td>
+				<td style="width: 200px;" class="th_bg">包件名称</td>
+				<td  style="text-align: left;">
+					<div id="packageName"></div>
+					<input type="hidden" name="packageId"/>
+					<input type="hidden" name="packageName"/>
+				</td>
+				
+			</tr>
+			<!-- <tr>
+				<td style="width: 200px;" class="th_bg">采购人名称</td>
+				<td  style="text-align: left;" class="isAgencyNameCols" colspan="3">
+					<div id="purchaserName"></div>
+					<input type="hidden" name="purchaserName"/>					
+				</td>
+				<td style="width: 200px; display: none;" class="th_bg isAgencyName">代理机构名称</td>
+				<td style="text-align: left; display: none;" class="isAgencyName">
+					<div id="agencyName"></div>
+					<input type="hidden" name="agencyName"/>
+				</td>
+			</tr> -->
+			<tr>
+				<td colspan="4" style="font-weight: bold;border: none;" class="active">竞价参数设置</td>				
+			</tr>
+			<tr>
+				<td style="width: 200px;" class="th_bg">竞价方式</td>
+				<td  style="text-align: left;" colspan="3">
+						<div id="biddingType"></div>						
+				</td>			
+			</tr>						
+		</table>
+		<table class="table table-bordered" style=" margin-bottom: 0px;" id="biddingTable"></table>
+		<table class="table table-bordered" style=" margin-bottom: 0px;">
+			<tr>
+				<td colspan="4" style="border: none;" class="active">材料设备信息
+					
+				</td>				
+			</tr>
+			<tr>
+				<td colspan="4">				
+					<table class="table table-hover table-bordered" id="tbodym">
+					
+					</table>
+				</td>
+			</tr>		
+			<tr>
+				<td class="th_bg"l>其他说明</td>
+				<td colspan="3">
+					<div id="remark"></div>
+				</td>
+			</tr> 
+		</table>
+	</div>
+</form>
+	
+<div class="bottom-btn" style="z-index: 11000;">
+	<button type="button" class="btn btn-default" id="btnClose"><span class="glyphicon glyphicon-remove"></span>关闭</button>
+</div>
+<style>
+        .fileinput-button {
+            position: relative;
+            display: inline-block;
+            overflow: hidden;
+        }
+
+        .fileinput-button input{
+            position:absolute;
+            right: 0px;
+            top: 0px;
+            opacity: 0;
+            -ms-filter: 'alpha(opacity=0)';
+            font-size: 200px;
+        }
+         .table > thead > tr > th, .table > tbody > tr > th, .table > tfoot > tr > th, .table > thead > tr > td, .table > tbody > tr > td, .table > tfoot > tr > td{
+		 	vertical-align: middle;
+		 }
+    </style>	
+ <script type="text/javascript" src="../../../../media/js/jquery/jquery.js" ></script>
+ <script type="text/javascript" src="../../../../media/js/jquery/jquery.extend.js"></script>
+ <script type="text/javascript" src="../../../../media/js/jquery/jquery.params.js"></script>
+ <script type="text/javascript" src="../../../../media/js/base/common.js" ></script>
+ <script type="text/javascript" src="../../../../media/js/base/util.js" ></script>
+ <script type="text/javascript" src="../../../../media/js/bootstrap/js/bootstrap.js" ></script>
+ <script type="text/javascript" src="../../../../media/js/bootstrap-fileinput-master/js/fileinput.js"></script>
+ <script type="text/javascript" src="../../../../media/js/bootstrap-fileinput-master/js/locales/zh.js"></script>
+ <script type="text/javascript" src="../../../../media/js/bootstrap/js/bootstrap-table.min.js"></script>
+ <script type="text/javascript" src="../../../../media/js/bootstrap/js/bootstrap-table-zh-CN.min.js"></script>
+ <script type="text/javascript" src="../../../../media/js/datetimepicker/js/jquery.datetimepicker.js" ></script>
+ <script type="text/javascript" src="../../../../media/js/xlsx.full.min.js" ></script>
+ <script type="text/javascript" src="../../../../media/js/layer/layer.js" ></script>
+ <script type="text/javascript" src="js/viewAuctionPackage.js" ></script>

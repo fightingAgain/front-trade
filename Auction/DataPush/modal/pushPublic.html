@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="pragma" content="no-cache">
+		<!-- 禁止浏览器从本地机的缓存中调阅页面内容 -->
+		<meta http-equiv="cache-control" content="no-cache, must-revalidate">
+		<meta http-equiv="expires" content="0">
+		<title>数据推送(招标、询比)</title>
+		<link rel="stylesheet" href="../../../media/js/bootstrap/css/bootstrap.css">
+		<link rel="stylesheet" href="../../../media/js/bootstrap/css/bootstrap-table.min.css" />
+		<link rel="stylesheet" href="../../../media/js/stream/css/stream-v1.css" />
+		<!-- <link rel="stylesheet" href="../../../media/js/bootstrap-fileinput-master/css/fileinput.min.css" type="text/css"/> -->
+		<style type="text/css">
+			.table th,
+			.table td {				
+				vertical-align: middle !important;
+			}
+			/* #tableList input[type=file], #tableList .file-input{display: none;} */
+			.itemBox, .summaryBox{
+				margin-right: 5px !important;
+			}
+			.file-input .kv-upload-progress{
+				display: none !important;
+			}
+			.fileUp div{
+				display: none;
+			}
+			.stream-total-tips{
+				display: none;
+			}
+			.stream-main-upload-box{
+				border-color: #ffffff;
+			}
+			.table{
+				margin-bottom: 0px !important;
+			}
+			input[type=file]{display: none;}
+		</style>
+	</head>
+	
+	<body style="width: 99%;padding-left: 10px;padding-top: 10px;margin-bottom: 0;padding-bottom: 55px;">
+		<form id="DataPush">
+			<table class="table table-bordered" id="tenderType4" align="center">
+				<tr>
+					<td colspan="4" style="font-weight: bold;background-color: #d3e5fc">项目信息</td>
+				</tr>
+				<tr>
+					<td  class="th_bg" >标段编号</td>
+					<td colspan="3">
+						<div id="packageCode"></div>
+					</td>
+				</tr>
+				<tr>
+					<td  class="th_bg" >标段名称</td>
+					<td colspan="3">
+						<div id="packageName"></div>
+					</td>
+				</tr>
+				<tr>
+					<td  class="th_bg" >招标方式</td>
+					<td>
+						<div id="tenderMode"></div>
+					</td>
+					<td  class="th_bg" >资格审查方式</td>
+					<td>
+						<div id="examType"></div>
+					</td>
+				</tr>
+				<tr>
+					<td  class="th_bg" class="tenderMode">公告发布时间</td>
+					<td>
+						<div id="ansSengDatea"></div>
+					</td>
+					<td  class="th_bg" >招标文件获取开始时间</td>
+					<td>
+						<div id="submitDatea"></div>
+					</td>
+				</tr>
+				<tr>
+					<td  class="th_bg" >答复截止时间</td>
+					<td>
+						<div id="ansEndDatea"></div>
+					</td>
+					<td  class="th_bg" >评审开始时间</td>
+					<td>
+						<div id="techReviewDatea"></div>
+					</td>
+				</tr>
+				<tr>
+					<td  class="th_bg" >评审报告生成时间</td>
+					<td>
+						<div id="reportDatea"></div>
+					</td>
+					<td  class="th_bg" >中标通知书发出时间</td>
+					<td>
+						<div id="noticeSendDatea"></div>
+					</td>
+				</tr>
+			</table>
+			<table class="table table-bordered" id="tenderType6" align="center">
+				<tr>
+					<td colspan="4" style="font-weight: bold;background-color: #d3e5fc">项目信息</td>
+				</tr>
+				<tr>
+					<td  class="th_bg" >包件编号</td>
+					<td colspan="3">
+						<div id="projectCode"></div>
+					</td>
+				</tr>
+				<tr>
+					<td  class="th_bg" >包件名称</td>
+					<td colspan="3">
+						<div id="packageName"></div>
+					</td>
+				</tr>
+				<tr>
+					<td  class="th_bg" >公开范围</td>
+					<td>
+						<div id="isPublic"></div>
+					</td>
+					<td  class="th_bg" >资格审查方式</td>
+					<td>
+						<div id="examType"></div>
+					</td>
+				</tr>
+				<tr>
+					<td  class="th_bg" ><span class="isPublic">公告发布时间</span></td>
+					<td>
+						<div id="ansSengDatea"></div>
+					</td>
+					<td  class="th_bg" >采购文件获取开始时间</td>
+					<td>
+						<div id="getFileData"></div>
+					</td>
+				</tr>
+				<tr>
+					<td  class="th_bg" >答复截止时间</td>
+					<td>
+						<div id="ansEndDatea"></div>
+					</td>
+					<td  class="th_bg" >评审开始时间</td>
+					<td>
+						<div id="techReviewDatea"></div>
+					</td>
+				</tr>
+				<tr>
+					<td  class="th_bg" >评审报告生成时间</td>
+					<td>
+						<div id="reportDatea"></div>
+					</td>
+					<td  class="th_bg" >中选通知书发出时间</td>
+					<td>
+						<div id="bidNoticeDatea"></div>
+					</td>
+				</tr>
+			</table>
+			<table class="table table-bordered" id="pushBox"></table>
+			<!-- <table class="table table-bordered">
+				<tr>
+					<td colspan="4" style="font-weight: bold;background-color: #d3e5fc"><input type="checkbox" class="summaryBox" data-type="cgbjzl" id="cgbjzl" />采购报价资料</td>
+				</tr>
+				<tr>
+					<td  class="th_bg" ><input type="checkbox" class="cgbjzl itemBox" data-item="cgbjzl" />采购公告</td>
+					<td colspan="3">
+						<button type="button" class="btn btn-primary btn-xs" >上传</button>
+						<div class="row contant_"></div>
+						<div class="progress_cont" id="fileContent_"></div>
+					</td>
+				</tr>
+			</table> -->
+		</form>
+		
+		<div class="form-group rowLine" style="width: 100%;height: 50px;text-align:center;position: fixed;bottom: 0;background-color: #FFFFFF;margin-bottom:0px !important;padding-top: 10px;z-index: 1000001;">
+			<!-- <button type="button" class="btn btn-primary isEdit" style="display: none;" data-dismiss="modal" id="btn_bao"><span class="glyphicon glyphicon-saved"></span>保存</button> -->
+			<input type="checkbox" id="choseAll" style="margin-right: 5px;vertical-align: -2px;" />全选
+			<button type="button" class="btn btn-primary isEdit" data-dismiss="modal" id="btn_submit" style="margin-left: 20px;"><span class="glyphicon glyphicon-saved"></span>推送（<span id="selectNumber">0</span>）</button>
+			<button type="button" class="btn btn-default" data-dismiss="modal" id="btn_close"><span class="glyphicon glyphicon-remove"></span>取消</button>
+		</div>
+	</body>
+	<script type="text/javascript" src="../../../media/js/jquery/jquery.js"></script>
+	<script type="text/javascript" src="../../../media/js/jquery/jquery.extend.js"></script>
+	<script type="text/javascript" src="../../../media/js/bootstrap/js/bootstrap.js"></script>
+	<script type="text/javascript" src="../../../media/js/bootstrap/js/bootstrap-table.min.js"></script>
+	<script type="text/javascript" src="../../../media/js/bootstrap/js/bootstrap-table-zh-CN.min.js"></script>
+	<script type="text/javascript" src="../../../media/js/layer/layer.js"></script>
+	<script type="text/javascript" src="../../../media/js/stream/js/stream-v1.js"></script>
+	<script type="text/javascript" src="../../../media/js/base/common.js"></script>
+	<script type="text/javascript" src="../js/pushPublic.js"></script>
+</html>

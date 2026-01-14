@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="pragma" content="no-cache"><!-- 禁止浏览器从本地计算机的缓存中访问页面内容 --> 
+		<meta http-equiv="cache-control" content="no-cache"><!-- 用于指定请求和响应遵循的缓存机制 --> 
+		<meta http-equiv="expires" content="0"><!-- 用于设定网页的到期时间，一旦网页过期，必须到服务器上重新传输； -->
+		<title></title>
+	</head>
+	<body>
+		<div id="pdf_view_box">
+			<div>
+				<button class="prev">Previous</button>
+				<button class="next">Next</button>
+				<span>Page: <input type="text" class="page_num" style="text-align: right;" /> <span class="page_count"></span></span>
+			</div>
+			<canvas class="the-canvas"></canvas>
+		</div>
+		<div id="pdf_view_box_1">
+			<div>
+				<button class="prev">Previous</button>
+				<button class="next">Next</button>
+				<span>Page: <input type="text" class="page_num" style="text-align: right;" /> <span class="page_count"></span></span>
+			</div>
+			<canvas class="the-canvas"></canvas>
+		</div>
+			
+			
+			
+		<div style="width: 100%;height: 50px;text-align:center;position: fixed;bottom: 0;background-color: #FFFFFF;z-index: 999;">
+			<button type="button" class="btn btn-default" id="btnClose"><span class="glyphicon glyphicon-remove"></span>关闭</button>
+		</div>
+	</body>
+	<script type="text/javascript" src="../../media/js/jquery/jquery.js"></script>
+	<script type="text/javascript" src="../../media/js/base/common.js"></script>
+	<script type="text/javascript" src="../../media/js/jquery/jquery.extend.js"></script>
+	<script type="text/javascript" src="../../media/js/bootstrap/js/bootstrap.js"></script>
+	<script type="text/javascript" src="../pdfjs/build/pdf.js"></script>
+	<script type="text/javascript" src="../pdfjs/build/pdf.worker.js"></script>
+	<script>
+		function pdfjs_Extend(dom, obj){
+			$('#' + dom + ' .the-canvas').attr('id', dom + '_canvas')
+			var _canvas = document.getElementById(dom + '_canvas');
+			var _ctx = _canvas.getContext('2d');
+			var default_obj = {
+				pdfDoc: null,
+				pageNum: 1,
+				pageRendering: false,
+				pageNumPending: null,
+				scale: 1.5,
+				canvas: _canvas,
+				ctx: _ctx
+			};
+			this.dom = dom;  //当前要追加的对象
+			this.new_obj = $.extend({},default_obj,obj);
+			// this.init();
+			this.init = function(){
+				var _this = this;
+				
+				PDFJS.getDocument({url:_this.new_obj.url,rangeChunkSize:64*1024,disableAutoFetch:true,endPage: 10}).then(function(pdfDoc_) {
+					_this.new_obj.pdfDoc = pdfDoc_;
+					// _this.dom.find('.page_count').text(_this.new_obj.pdfDoc.numPages)
+					$('#' + _this.dom + ' .page_count').text(_this.new_obj.pdfDoc.numPages)
+					// document.getElementById('page_count').textContent = pdfDoc.numPages;
+				
+					// Initial/first page rendering
+					_this.renderPage(_this.new_obj.pageNum);
+				});
+				
+				//上一页
+				$('#' + _this.dom).on('click','.prev',function(){
+					_this.onPrevPage()
+				});
+				//下一页
+				$('#' + _this.dom).on('click','.next',function(){
+					_this.onNextPage()
+				})
+			};
+			this.init()
+		}
+		pdfjs_Extend.prototype = {
+			// init: function(){
+			// 	var _this = this;
+				
+			// 	PDFJS.getDocument({url:_this.new_obj.url,rangeChunkSize:64*1024,disableAutoFetch:true,endPage: 10}).then(function(pdfDoc_) {
+			// 		_this.new_obj.pdfDoc = pdfDoc_;
+			// 		// _this.dom.find('.page_count').text(_this.new_obj.pdfDoc.numPages)
+			// 		$('#' + _this.dom + ' .page_count').text(_this.new_obj.pdfDoc.numPages)
+			// 		// document.getElementById('page_count').textContent = pdfDoc.numPages;
+				
+			// 		// Initial/first page rendering
+			// 		_this.renderPage(_this.new_obj.pageNum);
+			// 	});
+				
+			// },
+			//初始化方法
+			renderPage: function (num) { 
+				var _this = this;
+				_this.new_obj.pageRendering = true;
+				// Using promise to fetch the page
+				_this.new_obj.pdfDoc.getPage(num).then(function (page) {
+					var viewport = page.getViewport(_this.new_obj.scale);
+					_this.new_obj.canvas.height = viewport.height;
+					_this.new_obj.canvas.width = viewport.width;
+			
+					// Render PDF page into canvas context
+					var renderContext = {
+						canvasContext: _this.new_obj.ctx,
+						viewport: viewport
+					};
+					var renderTask = page.render(renderContext);
+			
+					// Wait for rendering to finish
+					renderTask.promise.then(function () {
+						_this.new_obj.pageRendering = false;
+						if (_this.new_obj.pageNumPending !== null) {
+							// New page rendering is pending
+							renderPage(_this.new_obj.pageNumPending);
+							_this.new_obj.pageNumPending = null;
+						}
+					});
+				});
+				// Update page counters
+				// this.dom.find('.page_num').val(num)
+				$('#' + this.dom + ' .page_num').val(num)
+				// document.getElementById('page_num').textContent = num;
+			},
+			queueRenderPage: function (num) {
+				var _this = this;
+				if (_this.new_obj.pageRendering) {
+					_this.new_obj.pageNumPending = num;
+				} else {
+					_this.renderPage(num);
+				}
+			},
+			//上一页
+			onPrevPage: function () {
+				var _this = this;
+				if (_this.new_obj.pageNum <= 1) {
+					return;
+				}
+				_this.new_obj.pageNum--;
+				_this.queueRenderPage(_this.new_obj.pageNum);
+			},
+			//下一页
+			onNextPage: function () {
+				var _this = this;
+				if (_this.new_obj.pageNum >= _this.new_obj.pdfDoc.numPages) {
+					return;
+				}
+				_this.new_obj.pageNum++;
+				_this.queueRenderPage(_this.new_obj.pageNum);
+			}
+		}
+		$(function(){
+			var url_pdf = top.config.FileHost + '/fileRangeView'+'/20200707/be1c96f43d914b88a7a841d691d10e34/055a8bd6eafd49dd81e147c944c0fa36/204/xyzf/8b21a7c8866bded318878ef518b8186d/A42010064250000BN002001.PDF';
+			// pdfjs_Extend('pdf_view_box', url_pdf , 900);
+			var zbwj = new pdfjs_Extend('pdf_view_box',{url: url_pdf,pageNum: 100});
+			// zbwj.init();
+			
+		//关闭当前窗口
+			$("#btnClose").click(function() {
+				var index = top.layer.getFrameIndex(window.name);
+				top.layer.close(index);
+			});
+			
+		})
+	</script>
+</html>

@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="pragma" content="no-cache">
+		<!-- 禁止浏览器从本地机的缓存中调阅页面内容 -->
+		<meta http-equiv="cache-control" content="no-cache, must-revalidate">
+		<meta http-equiv="expires" content="0">
+		<title>查看谈判详情</title>
+		<link rel="stylesheet" href="../../../../media/js/bootstrap/css/bootstrap.css">
+		<link rel="stylesheet" href="../../../../media/js/bootstrap/css/bootstrap-table.css">
+		<style type="text/css">
+			label {
+				font-weight: normal;
+			}
+			pre {
+				font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+			    font-size: 14px;
+			    line-height: 1.42857143;
+			    color: #333;
+				background: #fff;
+				border: none;
+				white-space: pre-wrap;
+				white-space: -moz-pre-wrap;
+				white-space: -pre-wrap;
+				white-space: -o-pre-wrap;
+				*word-wrap: break-word;
+				*white-space : normal ;  
+			}
+		</style>
+	</head>
+	<body>
+		<table id = "priceNegotiator" class="table table-bordered" style="width: 98%;margin-top: 5px;margin-left: 5px;">
+     		
+			<tr>
+				<td class="th_bg" style="width: 160px;">谈判对象</td>
+				<td colspan="3"><label id="supplierName"></label></td>
+			</tr>	
+			<tr>
+				<td class="th_bg">报价单位</td>
+				<td><label id="quotePriceUnit" ></label></td>
+				<td class="th_bg" >采购人发起的谈判价格</td>
+				<td><label id="negotiationPrice"></label></td>
+			</tr>
+			<tr>
+				<td class="th_bg" >发起谈判时间</td>
+				<td><label id="subDate"></label></td>
+				<td class="th_bg" >价格确认截止时间</td>
+				<td><label id="endDate"></label></td>
+			</tr>
+			<tr>
+				<td class="th_bg" >采购人发出的谈判内容</td>
+				<td colspan="3"><pre id="content"></pre></td>
+			</tr>
+			
+			<tr>
+				<td class="th_bg" >供应商回复状态</td>
+				<td><label id="isAccept"></label></td>
+				<td class="th_bg" >供应商回复价格</td>
+				<td><label id="replyPrice"></label></td>
+			</tr>			
+			<tr>
+				<td class="th_bg" >供应商回复时间</td>
+				<td colspan="3"><label id="replyDate"></label></td>
+			</tr>		
+			
+			<tr>
+				<td class="th_bg" >供应商回复内容</td>
+				<td colspan="3"><pre id="replyContent"></pre></td>
+			</tr>
+			
+			<tr>
+	            <td colspan="4" style="font-weight: bold;border: none;" class="active">上传附件</td>          
+	        </tr>
+		 	<td colspan="4">
+	    		<table  class="table table-bordered" id="fileTables" style="margin-bottom: 0;">
+	    			     	                       
+	            </table>
+	    	</td> 
+		</table>
+		
+	</body>
+	 <script type="text/javascript" src="../../../../media/js/jquery/jquery.js" ></script>
+	 <script src="../../../../media/js/jquery/jquery.extend.js"></script>
+     <script type="text/javascript" src="../../../../media/js/base/util.js" ></script>
+	 <script type="text/javascript" src="../../../../media/js/bootstrap/js/bootstrap.js" ></script>
+	 <script type="text/javascript" src="../../../../media/js/bootstrap/js/bootstrap-table.min.js"></script>
+	 <script src="../../../../media/js/bootstrap/js/bootstrap-table-zh-CN.min.js"></script>
+	 <script type="text/javascript" src="../../../../media/js/layer/layer.js" ></script>
+	<script>
+		var findFiles =parent.config.bidhost+ "/PurFileController/list.do";//查找文件
+		var downloadFileUrl = parent.config.bidhost + '/FileController/download.do';//下载文件
+		function tableShow(obj,items){//谈判记录 谈判明细		
+			if(obj.quotePriceUnit){
+				$("#quotePriceUnit").html(obj.quotePriceUnit);
+			}
+			$("#supplierName").text(items.supplierName);
+			$("#subDate").text(items.subDate);
+			$("#negotiationPrice").text(items.negotiationPrice);
+			$("#endDate").text(items.endDate);
+			$("#content").text(items.content);
+			if(items.isAccept == '1'){//不接受
+				$("#isAccept").text("不接受");
+			}else if(items.isAccept == '0'){
+				$("#isAccept").text("已接受");
+			}else{
+				$("#isAccept").text("未答复");
+			}
+			
+			$("#replyPrice").text(items.replyPrice);
+			$("#replyDate").text(items.replyDate);
+			$("#replyContent").text(items.replyContent);
+			
+			//文件下载
+			fileDownloads(items.id);
+		}		
+		var fileList;
+		function fileDownloads(id){
+			//根据modelId和modelName查找所有的附件
+			$.ajax({
+				type: "post",
+				url:findFiles,
+				async: true,
+				data:{'modelId':id,'modelName':"JJ_PUR_NEGOTIATION_ITEM"},
+				datatype: 'json',
+				success: function(data) {
+					if(data.success) {
+					
+						fileList = data.data;	
+						fileTable(fileList)
+					} 
+				}
+			});
+			
+		}
+		
+		//文件下载
+		function fileDownload(filePath,fileName){
+			var newUrl = downloadFileUrl + "?ftpPath=" + filePath + "&fname=" + fileName;
+		    window.location.href = $.parserUrlForToken(newUrl); 
+		};
+		//预览
+		function previewFile(filePath) {
+			openPreview(filePath);
+		}
+		function fileTable(fileList){
+			$('#fileTables').bootstrapTable({
+				pagination: false,
+				undefinedText: "",
+				columns: [{
+						title: "序号",
+						align: "center",
+						halign: "center",
+						width: "50px",
+						formatter: function(value, row, index) {
+							return index + 1;
+						}
+					},
+					{
+						field: "fileName",
+						title: "文件名称",
+						align: "left",
+						halign: "left",
+		
+					},
+					{
+						field: "fileSize",
+						title: "文件大小",
+						align: "center",
+						halign: "center",
+						width:'120px'
+		
+					},
+					{
+						field: "subDate",
+						title: "上传时间",
+						align: "center",
+						halign: "center",
+						width:'180px'
+		
+					},
+					{
+						field: "userName",
+						title: "上传人",
+						align: "center",
+						halign: "center",
+						width:'100px'
+		
+					},
+					{
+						field: "caoz",
+						title: "操作",
+						width:'200px',
+						halign: "center",
+						align: "center",
+						events:{
+							'click .fileDownload':function(e, value, row, index){
+								var newUrl = downloadFileUrl + "?ftpPath=" + row.filePath + "&fname=" + row.fileName ;
+		    					window.location.href = $.parserUrlForToken(newUrl); 
+							},
+							'click .previewFile':function(e, value, row, index){
+								openPreview(row.filePath);
+							},
+						},
+						formatter:function(value, row, index){	
+						var filesnames = row.fileName.substring(row.fileName.lastIndexOf(".") + 1).toUpperCase();
+						var mixtbody=""  
+							mixtbody +="<a href='javascript:void(0)' class='btn btn-primary btn-xs fileDownload'>下载</a>&nbsp;&nbsp"
+							if(filesnames == 'PNG'||filesnames == 'JPG'||filesnames == 'JPGE'||filesnames == 'PDF'){	
+								mixtbody +="<a href='javascript:void(0)' class='btn btn-primary btn-xs previewFile'>预览</a>&nbsp;&nbsp"
+							}               
+						return mixtbody
+						}
+						 
+					}
+				]
+			});
+			$('#fileTables').bootstrapTable("load", fileList); //重载数据
+		};
+	</script>
+</html>

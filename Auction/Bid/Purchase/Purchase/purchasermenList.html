@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<!-- 网页不会被缓存 -->
+		<meta http-equiv="pragma" content="no-cache">
+		<!-- 禁止浏览器从本地机的缓存中调阅页面内容 -->
+		<meta http-equiv="cache-control" content="no-cache, must-revalidate">
+		<meta http-equiv="expires" content="0">
+		<title></title>
+		<link rel="stylesheet" href="../../../../media/js/bootstrap/css/bootstrap.min.css">
+		<link rel="stylesheet" href="../../../../media/js/bootstrap/css/bootstrap-treeview.min.css">
+		<link rel="stylesheet" href="../../../../media/js/bootstrap/css/bootstrap-select.min.css">
+		<link rel="stylesheet" href="../../../../media/js/bootstrap/css/bootstrap-table.min.css" />
+		<!-- 跳转到 -->
+		<link rel="stylesheet" href="../../../../media/js/bootstrap/css/bootstrap-table-pagejump.css?verson=3.4.24">
+	</head>
+	<style>
+	 .table > thead > tr > th, 
+	 .table > tbody > tr > th, 
+	 .table > tfoot > tr > th, 
+	 .table > thead > tr > td, 
+	 .table > tbody > tr > td, 
+	 .table > tfoot > tr > td{
+	 	vertical-align: middle;
+	 }
+  </style>
+	<body style="padding: 0px 20px;">
+		<div class="form-group user" style="margin-bottom: 5px;">
+			<div class="input-group" style="float: left; padding-bottom: 5px;">
+				<span class="input-group-addon">姓名</span>
+				<input type="text" class="form-control" id="username" style="width:150px; margin-right: 10px;">
+				<button type="button" id="btnSearch" class="btn btn-primary search">
+	                <span class="glyphicon glyphicon-search" aria-hidden="true"></span>查询
+	           </button>
+			</div>
+		</div>
+		<table class="table table-bordered" id="userList"></table>
+		<script type="text/javascript" src="../../../../media/js/jquery/jquery.js" ></script>
+		<script type="text/javascript" src="../../../../media/js/jquery/jquery.extend.js"></script>
+		<script type="text/javascript" src="../../../../media/js/bootstrap/js/bootstrap.js" ></script>
+ 		<script type="text/javascript" src="../../../../media/js/bootstrap/js/bootstrap-table.min.js" ></script>
+		<!-- 分页跳转 -->
+		<script type="text/javascript" src="../../../../media/js/bootstrap/js/bootstrap-table-pagejump.js?verson=3.4.24" ></script>
+		<script type="text/javascript" src="../../../../media/js/base/util.js"></script>
+		<script type="text/javascript" src="js/purchasermenList.js"></script>
+		<script>
+			
+		</script>
+	</body>
+</html>

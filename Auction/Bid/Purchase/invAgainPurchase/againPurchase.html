@@ -1,0 +1,55 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+	<title>重新采购</title>
+</head>
+<body>
+    <body>
+    <div class="container-fluid">       
+		<div id="toolbar" >
+		<div class="input-group" style="width:180px;float: left;">
+			<span class="input-group-addon">审核状态</span>
+    		<select id="packageState" class="form-control" style="width:180px;">
+    			<option value="">全部</option>
+    			<option value="2">审核通过</option>
+    			<option value="1">待审核</option>
+    			<option value="3">审核不通过</option>
+    			<option value="5">待提交</option>
+    		</select>
+        </div>	        	
+    	<div class="input-group" style="width:180px;float: left;padding-left: 10px;">
+			<span class="input-group-addon">包件名称</span>
+    		<input type="text" class="form-control" name="packageName" id="packageName" style="width:180px">	
+    	</div>
+    	<div class="input-group" style="width:180px;float: left;padding-left: 10px;">
+			<span class="input-group-addon">包件编号</span>
+    		<input type="text" class="form-control" name="packageNum" id="packageNum" style="width:180px">	
+    	</div>	   
+		 <div class="btn-group">
+		 	<button type="button" id="btnSearch" class="btn btn-primary">
+                <span class="glyphicon glyphicon-search" aria-hidden="true"></span> 查 询
+           </button>	 			 	
+			<button id="btn_add" type="button" class="btn btn-primary" onclick="add_bao()">
+			   <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>重新采购
+			</button>
+	        </div>
+		 </div>
+		
+        <table class="table table-hover table-bordered" id="table">
+	    </table>     
+  	</div>
+ 	<style>
+		 .table > thead > tr > th, 
+		 .table > tbody > tr > th, 
+		 .table > tfoot > tr > th, 
+		 .table > thead > tr > td, 
+		 .table > tbody > tr > td, 
+		 .table > tfoot > tr > td{
+		 	vertical-align: middle;
+		 }
+
+  	</style>
+<script type="text/javascript" src="Auction/common/Purchase/invAgainPurchase/js/againPurchase.js"></script>
+
+</body>
+</html>

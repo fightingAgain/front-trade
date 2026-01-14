@@ -1,0 +1,64 @@
+<!--
+ * @Author: your name
+ * @Date: 2020-09-09 15:44:24
+ * @LastEditTime: 2020-10-09 16:48:03
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: \FrameWork_bf\bidPrice\Review\projectManager\modal\PriceCheck.html
+--> 
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="pragma" content="no-cache">
+		<!-- 禁止浏览器从本地机的缓存中调阅页面内容 -->
+		<meta http-equiv="cache-control" content="no-cache, must-revalidate">
+		<meta http-equiv="expires" content="0">
+		<title>价格评审</title>
+	</head>
+	<body style="overflow:auto;">
+        <div class="spacing" id="businessContent1" style="margin: 0px;position: relative;">
+            <div style="width: 100%;max-height: 200px;overflow: auto;line-height: 22px;font-size:14px">
+                <div style="height: 45px;">
+                    <span id="businessName" style="color: red;"></span>
+                    <span id="weight" style="color: red;margin-left: 10px;"></span>
+                                
+                </div>								
+                <div id="businessType" style="color: red;line-height: 22px;font-size:14px"></div>
+                <div id="businessContent" style="color: red;line-height: 22px;font-size:14px"></div>
+               
+            </div>
+            
+            <div style="position: absolute;bottom: 0px; right: 10px;">
+                
+                <div style="height: 45px;display: none;" id="showDeviates">
+                    <button  class='btn btn-primary btn-sm isDeviate' style='float: right;margin-right: 5px;'><span class='glyphicon glyphicon-eye-open'></span>查看偏离项明细</button>
+                </div>
+                <div style="height: 45px;display: none" id="savediv" class="isCreateType">
+                    <button onclick='savepriceChecks()' class='btn btn-primary btn-sm PriceCheckBtn isStopCheck'><span class='glyphicon glyphicon-saved'></span>提交</button>
+                    <button  class='btn btn-primary btn-sm isDeviate'><span class='glyphicon glyphicon-eye-open'></span>查看偏离项明细</button>
+                </div>
+            </div>
+            
+        </div>
+        <div class="spacing" id="businessContent2" style="overflow: auto;">
+            <div class="tenderTypeW" style="color: red;line-height: 22px;font-size:14px;display: none;">报价单位：<span id="quotePriceUnit"></span></div>
+            <table id="PriceCheckTalbe"></table>
+            <table class="table table-bordered" style="width: 100%;margin: 0px;border: none">
+                <tr>
+                    <td class="th_bg">备注</td>
+                    <td>
+                        <textarea class="form-control" style="width: 100%;height: 50px;display: none;" name="priceCheckRemark" id="priceCheckRemark"></textarea>
+                        <div id="priceCheckRemarkHtml" style="display: none;">
+    
+                        </div>
+                    </td>										
+                </tr>
+            </table>
+        </div>
+        
+	</body>
+	<script type="text/javascript" src="../js/PriceCheck.js"></script>
+	<script type="text/javascript" src="../js/MathTools.js"></script>
+</html>

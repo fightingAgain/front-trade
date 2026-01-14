@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8">
+		<meta http-equiv="pragma" content="no-cache"><!-- 禁止浏览器从本地计算机的缓存中访问页面内容 --> 
+		<meta http-equiv="cache-control" content="no-cache"><!-- 用于指定请求和响应遵循的缓存机制 --> 
+		<meta http-equiv="expires" content="0"><!-- 用于设定网页的到期时间，一旦网页过期，必须到服务器上重新传输； -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>项目编辑</title>
+    <link rel="stylesheet" href="../../../../media/js/layer/mobile/need/layer.css" />
+    <link rel="stylesheet" href="../../../../media/js/bootstrap/css/bootstrap.css" />
+    <link rel="stylesheet" href="../../../../media/js/stream/css/stream-v1.css" />
+	<style>
+		html,body { height: 100%;width: 100%;}
+		.readonly{
+			border: none;
+		    background: none !important;
+		    outline: none !important;
+		    box-shadow: none !important;
+		}
+		.file-input .kv-upload-progress{
+			display: none !important;
+		}
+		tr .file-input{
+			display: inline-block;
+			float: right;
+			margin-right: 50px;
+		}
+		/*button span{
+			margin-right: 5px;
+		}*/
+		.padding_button{
+			padding: 5px 8px !important;
+			line-height: 30px !important;
+		}
+	</style>
+</head>
+
+<body>
+    <form class="pageModel" id="formName" name="formName">
+    	<div class="panel-group" id="accordion">
+    		<div class="panel panel-accordion panel-default">
+	    		<div class="panel-heading active"  role="tab" id="headingOne">  
+			 		<h4 class="panel-title">
+		            	<a  role="button" data-toggle="collapse" href="#collapseOne" aria-controls="collapseOne"  aria-expanded="true"  >
+		            		基本信息
+		            	</a>
+			 		</h4>  
+			   	</div>  
+			  	<div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">  
+			       	<div class="panel-body">
+			       		<table  class="table table-bordered ">
+			       			<tr>
+				            	<td class="th_bg">委托合同<i class="red">*</i></td>
+				                <td colspan="3">
+				                    <input type="text" id="contractName" name="contractName" class="form-control " datatype="*" errormsg="请输入委托合同名称" />
+				                </td>
+				           	</tr>
+				            <tr>
+				            	<td class="th_bg">招标人<i class="red">*</i></td>
+				                <td colspan="3">
+				                    <input type="text"  id="enterpriseName" name="tendererEnterprisName" readonly="readonly" class="form-control readonly" class="form-control" style="width: 70%;display: inline-block;" datatype="*" errormsg="请选择招标人名称" />
+				                    <input type="hidden" name="tendererEnterprisId" id="tendererEnterprisId" />
+				                    <button type="button" class="btn btn-primary btn-sm " id="tenterChoose">
+					            		<span class="glyphicon glyphicon-folder-open"></span>选择招标人
+					            	</button>
+				                </td>
+				            </tr>
+				            <tr>
+				            	<td class="th_bg">招标代理机构</td>
+				                <td colspan="3">
+				                    <input type="text" id="agencyEnterprisName" name="agencyEnterprisName"  class="form-control readonly" readonly="readonly" datatype="*" errormsg="请输入招标代理机构名称" />
+				                    <input type="hidden" name="agencyEnterprisId" id="agencyEnterprisId" />
+				                </td>
+				            </tr>
+				            <tr>
+				            	<td class="th_bg">招标代理范围<i class="red">*</i></td>
+				            	<td colspan="3">
+				                    <textarea class="form-control" name="agencyRange" id="agencyRange" style="resize: none;" rows="5" datatype="*" errormsg="请输入招标代理范围"></textarea>
+				                </td>
+				            </tr><tr>
+				            	<td class="th_bg">招标代理权限<i class="red">*</i></td>
+				            	<td colspan="3">
+				                    <textarea class="form-control" name="agencyAuthority" id="agencyAuthority" style="resize: none;" rows="5" datatype="*" errormsg="请输入招标代理权限"></textarea>
+				                </td>
+				            </tr>
+			       		</table>
+		       		</div>
+	       		</div>
+       		</div>
+       		<div class="panel panel-accordion panel-default">
+	    		<div class="panel-heading active"  role="tab" id="headingTwo">  
+			 		<h4 class="panel-title">
+		            	<a class="collapsed" role="button" data-toggle="collapse" href="#collapseTwo" aria-controls="collapseTwo"  aria-expanded="false">
+		            		委托合同
+	            			<span class="red" style="font-size: 14px;font-weight: normal;">（请上传200M以内的文件）</span>
+		            	</a>
+			 		</h4>  
+			   	</div>  
+			  	<div  id="collapseTwo" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingTwo">  
+			       	<div class="panel-body">
+			       		<button type="button" class="btn btn-primary btn-sm " id="fileUp" style="float: right;margin-bottom: 10px;">
+		            		<span class="glyphicon glyphicon-folder-open"></span>上传
+		            	</button>
+		            	<button type="button"  id="fileLoad" style="display: none;"></button>
+			       		<div id="fileContent"></div> 
+		       		</div>
+		       	</div>
+	    	</div>
+   		</div>
+    </form>
+    <div class="bottom-btn">
+        <button type="button" class="btn btn-primary" id="btnSave"><span class="glyphicon glyphicon-ok"></span>保存</button>
+        <button type="button" class="btn btn-primary" id="btnSubmit"><span class="glyphicon glyphicon-saved"></span>确认</button>
+        <button type="button" class="btn btn-default" id="btnClose"><span class="glyphicon glyphicon-remove"></span>取消</button>
+    </div>
+    
+    <script type="text/javascript" src="../../../../media/js/jquery/jquery.js"></script>
+    <script type="text/javascript" src="../../../../media/js/jquery/jquery.extend.js"></script>
+    <script type="text/javascript" src="../../../../media/js/base/common.js"></script>
+    <script type="text/javascript" src="../../../../media/js/base/util.js"></script>
+    <script type="text/javascript" src="../../../../media/js/bootstrap/js/bootstrap.js"></script>
+    <script type="text/javascript" src="../../../../media/js/stream/js/stream-v1.js"></script>
+    <!--<script type="text/javascript" src="../../../../media/js/bootstrap/js/bootstrap-table.js"></script>-->
+    <!--<script type="text/javascript" src="../../../../media/js/bootstrap/js/bootstrap-table-zh-CN.min.js"></script>-->
+    <script type="text/javascript" src="../../../../media/js/layer/layer.js"></script>
+    <script type="text/javascript" src="../../../Model/js/public.js"></script>
+    <!--<script type="text/javascript" src="../../Model/js/dataLinkage.js"></script>-->
+    <script type="text/javascript" src="../../../../media/js/base/StreamUpload.js"></script>
+    <script type="text/javascript" src="../js/entrustContractEdit.js"></script>
+   
+</body>
+
+</html>

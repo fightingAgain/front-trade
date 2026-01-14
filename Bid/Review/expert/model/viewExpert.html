@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8">
+		<meta http-equiv="pragma" content="no-cache"><!-- 禁止浏览器从本地计算机的缓存中访问页面内容 --> 
+		<meta http-equiv="cache-control" content="no-cache"><!-- 用于指定请求和响应遵循的缓存机制 --> 
+		<meta http-equiv="expires" content="0"><!-- 用于设定网页的到期时间，一旦网页过期，必须到服务器上重新传输； -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>查看评委</title>
+    <link rel="stylesheet" href="../../../media/js/layer/mobile/need/layer.css" />
+    <link rel="stylesheet" href="../../../media/js/bootstrap/css/bootstrap.css" />
+    <link rel="stylesheet" href="../../../media/js/bootstrap/css/bootstrap-table.css">
+</head>
+
+<body>
+    <form class="pageModel" id="formName" name="formName">
+    	<table class="table table-bordered ">
+        	<tr >
+	            <td colspan="4" style="font-weight: bold;" class="active">评委信息</td>
+	        </tr>
+	        <tr>
+            	<td class="th_bg">专家名称</td>
+                <td colspan="3">
+                	<div id="expertName">
+                	</div>
+                </td>
+            </tr>
+            <tr>
+            	<td class="th_bg">专家类别</td>
+                <td colspan="3">
+                	<div id="expertType">
+                	</div>
+                </td>
+                <!--<td class="th_bg">是否为组长</td>
+                <td >
+                	<div id="isChairMan">
+                	</div>
+                </td>-->
+            </tr>
+            <tr>
+                <td class="th_bg">身份证号码</td>
+                <td >
+                	<div id="idCard">
+                	</div>
+                </td>
+                <td class="th_bg">专家电话号码</td>
+                <td >
+                	<div id="phoneNumber">
+                	</div>
+                </td>
+            </tr>
+            <tr>
+            	<td class="th_bg">职称</td>
+                <td colspan="3">
+                	<div id="duty">
+                	</div>
+                </td>
+            </tr>
+            <tr>
+                <td class="th_bg">工作单位</td>
+                <td colspan="3">
+                	<div id="company">
+                	</div>
+                </td>
+            </tr>
+    	</table>
+    </form>
+    <div class="bottom-btn">
+        <button type="button" class="btn btn-default" id="btnClose"><span class="glyphicon glyphicon-remove"></span>关闭</button>
+    </div>
+    
+    <script type="text/javascript" src="../../../media/js/jquery/jquery.js"></script>
+    <script type="text/javascript" src="../../../media/js/jquery/jquery.extend.js"></script>
+    <script type="text/javascript" src="../../../media/js/base/util.js"></script>
+    <script type="text/javascript" src="../../../media/js/base/common.js"></script>
+    <script type="text/javascript" src="../../../media/js/bootstrap/js/bootstrap.js"></script>
+    <script type="text/javascript" src="../../../media/js/layer/layer.js"></script>
+    
+    <script type="text/javascript" src="../../public.js"></script>
+    <script type="text/javascript" src="../js/viewtExpert.js"></script>
+   
+</body>
+
+</html>

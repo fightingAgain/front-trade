@@ -1,0 +1,65 @@
+<!--
+ * @Author: your name
+ * @Date: 2019-10-31 20:39:15
+ * @LastEditTime: 2020-07-09 18:32:07
+ * @LastEditors: your name
+ * @Description: In User Settings Edit
+ * @FilePath: \FrameWork\bidPrice\Bid\Purchase\ReportCheck\ReportCheckList.html
+--> 
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="pragma" content="no-cache">
+		<!-- 禁止浏览器从本地机的缓存中调阅页面内容 -->
+		<meta http-equiv="cache-control" content="no-cache, must-revalidate">
+		<meta http-equiv="expires" content="0">
+		<title>评审管理</title>
+	</head>
+
+	<body>
+		<div class="container-fluid">   
+		<div id="toolbar">
+			<div class="form-group" style="margin-top:10px">
+				<div class="input-group" style="width:200px;float: left;padding-left:15px">
+					<span class="input-group-addon">项目评审状态</span>
+					<select class="form-control" id="checkResult" style="width:200px;">
+						<option value="">全部</option>
+						<option class="ready"  value="组建评审委员会">组建评审委员会</option>
+						<option class="ready" value="组建完成，评审未开始">组建完成，评审未开始</option>
+						<option class="ready1"  value="资格审查中">资格审查中</option>
+						<option class="ready2"  value="资格审查完成">资格审查完成</option>
+					</select>
+				 </div>
+					<!--<span class="input-group-addon">抽取状态</span>
+					<select class="form-control" id="isSendMess" style="width:150px;">
+						<option value="">--全部--</option>
+						<option value="1">抽取已完成</option>
+						<option value="0">抽取未完成</option>
+					</select>-->
+					
+					<div class="input-group" style="width:180px;float: left;padding-left: 10px;">
+						<span class="input-group-addon">项目名称</span>
+						<input type="text" class="form-control" id="projectName" style="width: 200px;">
+					</div>
+					
+					 <div class="input-group" style="width:180px;float: left;padding-left: 10px;">
+						<span class="input-group-addon">包件名称</span>
+						<input type="text" class="form-control" id="packageName" style="width: 200px;">
+					</div>
+					<div class="btn-group" style="padding-left:10px;">
+						<button type="button" id="btnQuery" class="btn btn-primary">
+		        			<span class="glyphicon glyphicon-search">查询</span>
+		       			</button>
+					</div>
+				
+			</div>
+			 
+		</div>
+		<table class="table table-hover table-bordered" id="ReportChecktable"></table>
+		</div>
+	</body>
+	<script type="text/javascript" src="Auction/common/Purchase/ReportCheck/js/ReportCheck.js"></script>
+
+</html>

@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="pragma" content="no-cache">
+		<!-- 禁止浏览器从本地机的缓存中调阅页面内容 -->
+		<meta http-equiv="cache-control" content="no-cache, must-revalidate">
+		<meta http-equiv="expires" content="0">
+		<title>竞卖 竞低价 补遗审核详情</title>
+		<link rel="stylesheet" href="../../../media/js/bootstrap/css/bootstrap.css" />
+		<link rel="stylesheet" href="../../../media/js/bootstrap/css/bootstrap-table.min.css" />
+	</head>
+
+	<body style="width:99%; padding-left: 10px; padding-top: 10px;">
+
+		<table class="table table-bordered " style="margin-bottom: 15px;">
+			<th colspan="4" class="active">补遗信息</th>
+			<tr>
+				<td class="th_bg"  width="20%">采购项目编号</td>
+				<td width="30%">
+					<div id="projectCode"></div>
+				</td>
+				<td class="th_bg"  width="20%">采购项目名称</td>
+				<td width="30%">
+					<div id="projectName"></div>
+				</td>
+			</tr>
+			<tr class="Score">
+				<td class="th_bg" >补遗截止时间</td>
+				<td colspan="3">
+					<div id="supplementEndDate"></div>
+				</td>
+			</tr>
+
+			<tr class="add_tr">
+				<td class="th_bg"  width="20%">标题</td>
+				<td colspan="3">
+					<div id="title" style="word-break: break-all;white-space: normal;"></div>
+				</td>
+			</tr>
+			<tr class="add_tr ">
+				<td class="th_bg" >是否变更时间</td>
+				<td colspan="3">
+					<div id="isChangeDate"></div>
+				</td>
+			</tr>
+			<tbody id='supplementTime'>
+				<tr class="add_tr " id="auctionStartDatetr">
+					<td class="th_bg"  id="startTime"></td>
+					<td>
+						<div id="auctionStartDate"></div>
+					</td>
+					<td class="th_bg"  id="oldStartTime"></td>
+					<td>
+						<div id="oldAuctionStartDate"></div>
+					</td>
+				</tr>
+				<tr class="add_tr ">
+					<td class="th_bg" >公告截止时间</td>
+					<td>
+						<div id="noticeEndDate"></div>
+					</td>
+					<td class="th_bg" >原始公告截止时间</td>
+					<td>
+						<div id="oldNoticeEndDate"></div>
+					</td>
+				</tr>
+
+				<tr class="add_tr ">
+					<td class="th_bg" >提出澄清截止时间</td>
+					<td>
+						<div id="askEndDate"></div>
+					</td>
+					<td class="th_bg" >原始提出澄清截止时间</td>
+					<td>
+						<div id="oldAskEndDate"></div>
+					</td>
+				</tr>
+				<tr class="add_tr ">
+					<td class="th_bg" >答复截止时间</td>
+					<td >
+						<div id="answersEndDate"></div>
+					</td>
+					<td class="th_bg" >原始答复截止时间</td>
+					<td>
+						<div id="oldAnswersEndDate"></div>
+					</td>
+				</tr>
+				
+				<tr class="add_tr " id="auctionEndDatetr" style="display: none;">
+					<td class="th_bg" >报价截止时间</td>
+					<td >
+						<div id="auctionEndDate"></div>
+					</td>
+					<td class="th_bg" >原始报价截止时间</td>
+					<td>
+						<div id="oldAuctionEndDate"></div>
+					</td>
+				</tr>
+				
+				
+				<tr class="add_tr " id="fileEndDatetr">
+					<td class="th_bg"  id="subFileEndTime"></td>
+					<td>
+						<div id="fileEndDate"></div>
+					</td>
+					<td class="th_bg"  id="oldSubFileEndTime"></td>
+					<td>
+						<div id="oldFileEndDate"></div>
+					</td>
+				</tr>
+				<tr class="add_tr " id="fileCheckEndDatetr">
+					<td class="th_bg"  id="checkFileEndTime"></td>
+					<td>
+						<div id="fileCheckEndDate"></div>
+					</td>
+					<td class="th_bg"  id="oldCheckFileEndTime"></td>
+					<td>
+						<div id="oldFileCheckEndDate"></div>
+					</td>
+				</tr>
+
+			</tbody>
+			<tr class="add_tr ">
+				<td class="th_bg" >说明</td>
+				<td colspan="3">
+					<div id="supplement" style="word-break: break-all;white-space: normal;"></div>
+				</td>
+			</tr>
+			<th colspan="4" class="active">补遗附件</th>
+			<tr>
+				<td colspan="4">
+					<table class="table table-bordered" id="AccessoryList">
+
+					</table>
+				</td>
+			</tr>
+		</table>
+
+		<table class="table  table-bordered " id="tableWorkflow">
+			<tr class="active">
+				<th colspan="2">审核</th>
+			</tr>
+			<tr id="auditrow1">
+				<td class="th_bg"  width="20%">审核状态</td>
+				<td style="text-align: left;">
+					<input type="radio" name="auditState" value="0" />通过
+					<input type="radio" name="auditState" value="1" />不通过
+
+				</td>
+			</tr>
+			<tr id="auditrow2">
+				<td class="th_bg"  width="20%">选择审核人</td>
+				<td>
+					<select name="" id="employeeId" class="form-control" style="width: 180px;">
+
+					</select>
+				</td>
+			</tr>
+			<tr class="searched" id="auditrow3">
+				<td class="th_bg"  width="20%">审核说明</td>
+				<td><textarea rows="5"  class="form-control"  style="width: 90%;height: 80px;" name="content"></textarea></td>
+			</tr>
+		</table>
+
+		<table class="table table-bordered" id="workflowList">
+			<tr class="active">
+				<th>审核流程</th>
+			</tr>
+			<tr>
+				<td>
+					<table class="table table-bordered" id="workflowListDetail"></table>
+				</td>
+			</tr>
+		</table>
+
+		<div style="width: 100%;height:70px;">
+		</div>
+		<div style="width: 100%;height: 50px;text-align:center;position: fixed;bottom: 0;background-color: #FFFFFF;">
+			<button type="button" id="btn_submit" class="btn btn-primary" style="width: 100px;">确定</button>
+			<button type="button" id="btn_close" class="btn btn-default" style="width: 100px;">关闭</button>
+		</div>
+
+		<script type="text/javascript" src="../../../media/js/jquery/jquery.js"></script>
+		<script type="text/javascript" src="../../../media/js/jquery/jquery.extend.js"></script>
+		<script type="text/javascript" src="../../../media/js/jquery/jquery.params.js"></script>
+		<script type="text/javascript" src="../../../media/js/base/common.js"></script>
+		<script type="text/javascript" src="../../../media/js/bootstrap/js/bootstrap.js"></script>
+		<script type="text/javascript" src="../../../media/js/bootstrap/js/bootstrap-table.min.js"></script>
+		<script type="text/javascript" src="../../../media/js/bootstrap/js/bootstrap-table-zh-CN.min.js"></script>
+		
+		<script type="text/javascript" src="../../../media/js/base/WorkflowInfo.js"></script>
+		<script type="text/javascript" src="../js/SupplementAuctionAndSaleCheckListInfo.js"></script>
+	</body>
+
+</html>

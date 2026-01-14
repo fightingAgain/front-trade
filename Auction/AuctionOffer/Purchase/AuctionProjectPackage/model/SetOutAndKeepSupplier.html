@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="pragma" content="no-cache">
+		<!-- 禁止浏览器从本地机的缓存中调阅页面内容 -->
+		<meta http-equiv="cache-control" content="no-cache, must-revalidate">
+		<meta http-equiv="expires" content="0">
+		<title>选择淘汰和保留供应商数</title>
+		<link rel="stylesheet" href="../../../../media/js/bootstrap/css/bootstrap.css">
+	</head>
+
+	<body style="width:99%; padding-left: 10px; padding-top: 10px;margin: 0px;">
+		<table class="table table-bordered">
+			<tr class="first">
+				<td class="th_bg">第1轮淘汰供应商数</td>
+				<td>
+					<input type="text" class="form-control" id="firstOutSupplier" />
+				</td>
+			</tr>
+			<tr class="first">
+				<td class="th_bg">第1轮最低保留供应商数</td>
+				<td>
+					<input type="text" class="form-control" id="firstKeepSupplier" />
+				</td>
+			</tr>
+			<tr class="second">
+				<td class="th_bg">第2轮淘汰供应商数</td>
+				<td>
+					<input type="text" class="form-control" id="secondOutSupplier" />
+				</td>
+			</tr>
+			<tr class="second">
+				<td class="th_bg">第2轮最低保留供应商数</td>
+				<td>
+					<input type="text" class="form-control" id="secondKeepSupplier" />
+				</td>
+			</tr>
+		</table>
+		<div style="width: 100%;height:50px;">
+		</div>
+		<div style="width: 100%;height: 50px;text-align:center;position: fixed;bottom: 0;background-color: #FFFFFF;">
+			<button type="button" id="btn_submit" class="btn btn-primary btn-sm" style="width: 100px;">确定</button>
+			<button type="button" id="btn_close" class="btn btn-default btn-sm" style="width: 100px;">关闭</button>
+		</div>
+
+	</body>
+	<script type="text/javascript" src="../../../../media/js/jquery/jquery.min.js"></script>
+	<script type="text/javascript" src="../../../../media/js/jquery/jquery.extend.js"></script>
+	<script type="text/javascript" src="../../../../media/js/jquery/jquery.params.js"></script>
+	<script type="text/javascript" src="../../../../media/js/base/common.js"></script>
+	<script type="text/javascript" src="../js/SetOutAndKeepSupplier.js"></script>
+
+</html>

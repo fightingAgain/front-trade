@@ -1,0 +1,198 @@
+<head>
+	<meta http-equiv="pragma" content="no-cache">
+	<!-- 禁止浏览器从本地机的缓存中调阅页面内容 -->
+	<meta http-equiv="cache-control" content="no-cache, must-revalidate">
+	<meta http-equiv="expires" content="0">
+	<link rel="stylesheet" href="../../../../../media/js/layer/mobile/need/layer.css" />
+	<link rel="stylesheet" href="../../../../../media/js/bootstrap/css/bootstrap.css" />
+	<link rel="stylesheet" href="../../../../../media/js/bootstrap/css/bootstrap-table.min.css" />
+	<link rel="stylesheet" href="../../../../../media/js/bootstrap-fileinput-master/css/fileinput.min.css" type="text/css"/>
+	<script type="text/javascript" charset="utf-8" src="../../../../../media/js/ueditor/ueditor.config.js"></script>
+	<script type="text/javascript" charset="utf-8" src="../../../../../media/js/ueditor/ueditor.all.js"> </script>
+	<!--建议手动加在语言，避免在ie下有时因为加载语言失败导致编辑器加载失败-->
+	<!--这里加载的语言文件会覆盖你在配置项目里添加的语言类型，比如你在配置项目里配置的是英文，这里加载的中文，那最后就是中文-->
+	<script type="text/javascript" charset="utf-8" src="../../../../../media/js/ueditor/lang/zh-cn/zh-cn.js"></script>
+</head>
+<form id="formb" name="projectPackages" style="width: 99%;padding-left: 10px;padding-top: 10px;margin-bottom:60px;">
+<div class="container-fluid">
+	<table class="table table-bordered" style="margin-bottom: 0px;">
+		<tr>
+			<td colspan="4" class="active" style="border: none;"><strong>包件基本信息</strong></td>
+			
+		</tr>
+		<tr>
+			<td class="th_bg">包件名称</td>
+			<td style="text-align: left;">
+				<div id="packageName"></div>
+			</td>
+			<td class="th_bg">包件编号</td>
+			<td  style="text-align: left;"><div id="packageNum"></div></td>
+		</tr>
+		<tr>
+			<td class="th_bg">评审方法</td>
+			<td  style="text-align: left;">
+				<div id="checkPlan"></div>								
+			</td>
+			<td class="th_bg">评审模板</td>
+			<td style="text-align: left;">
+				<select id="tempCheckPlan" name="tempCheckPlan" class="form-control">										
+				</select>								
+			</td>
+		</tr>
+				  
+		
+		<tr class="tenderTypeW" style="display: none">
+			<td class="th_bg isDoubleEnvelopeCol" style="width:250px;" rowspan="2">双信封</td>
+			<td style="text-align: left;" colspan="3">
+				<input type="checkbox"  name="doubleEnvelope" value="1" disabled="disabled"/>启用双信封				
+			</td>					
+		</tr>
+		<tr class="isDoubleEnvelope" style="display: none">	
+			<td style="text-align: left;" colspan="3">
+				<input type="checkbox" name="isReadSecondLetter" id="isReadSecondLetter" value="1" disabled="disabled"/>未通过第一信封的供应商，第二封信不予读取				
+			</td>					
+		</tr>
+		<tr class="tenderTypeW" style="display: none">
+			<td class="th_bg isOpenDarkDocCols" style="width:250px;" rowspan="2">暗标</td>
+			<td style="text-align: left;" colspan="3">
+				<input type="checkbox" name="isOpenDarkDoc" id=" isOpenDarkDoc"  value="1" disabled="disabled"/>启用暗标			
+			</td>					
+		</tr>
+		<tr class="isOpenDarkDocShow" style="display: none">	
+			<td style="text-align: left;" colspan="3">
+				暗标编码供应商对照显示机制
+				<input type="radio" name="darkSupCode" value="0"/>最后一个暗标评审项评审后	
+				<input type="radio" name="darkSupCode" value="1"/>全部评审项评审结束或流标			
+			</td>					
+		</tr>
+		<tr id="DeviateNum">
+			<td  class="th_bg" style="width:250px;">允许最大偏离项数<i class="red">*</i></td>
+			<td colspan="3" style="text-align: left;"><input id="deviate"   name="deviate" class="form-control"/></td>			
+		</tr>
+		<tr>
+			<td colspan="3" class="active" style="border: none;"><strong>综合评审</strong></td>
+			<td class="active" style="text-align: right;border: none;"  class="searched">
+			<!-- <input class=" btn btn-primary" type="button" value="选择评审项模板" onclick="chooseTemp()"/> -->
+			<input class=" btn btn-primary" type="button" value="添加评审项" onclick="site()" placeholder=""/>			
+			<!--<input class="btn btn-primary" type="button" value="导入评审项信息" style="margin-left: 15px;" />-->
+			</td>
+		</tr>				  
+		<tr>
+			<td colspan="4"  style="padding: 0;">
+				<button type="button" class="btn btn-default" id="perv" style="width: 40px;height: 44px;margin: 0px;float: left;display: none"><<</button>
+				<div style="float: left;width: 850px;overflow:hidden;" id="ulTab">					
+					<ul id="checkList1" class="nav nav-tabs" style="border-bottom: none;">
+					
+					</ul>					
+				</div>				
+				<button type="button" class="btn btn-default" id="next" style="width: 40px;height: 44px;margin: 0px;display: none">>></button>		
+				<div class="btn-group" style="margin-right: 10px;float: right;margin-top: 10px;">
+					
+					 <a href="javascript:void(0)" id="btn_edit" type="button" class="btn-sm btn-primary" onclick="edit()" style="text-decoration:none;margin-right:10px">
+						  编辑
+				     </a>
+				     <a href="javascript:void(0)" id="btn_delete" type="button" class="btn-sm btn-danger" onclick="deleteChenk()" style="text-decoration:none">
+					             删除
+					 </a>
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td colspan="4">
+				<div id="packageDetail" class="tab-content" style="text-align: left;">
+					
+				</div>				
+			</td>			
+		</tr>
+		<tr>
+			<td colspan="4"><div id="clearBiddingWrap"></div></td>
+		</tr>
+		<tr class="tenderTypeW">
+				<td colspan="4">
+					<div id="offerFileList"></div>
+				</td>
+			</tr>
+	</table>
+	<!--<div id="offerFileList" class="tenderTypeW"></div>-->
+	
+	<table class="table table-bordered tenderTypeW" style="margin-bottom: 0px;">
+		<tr>
+			<td class="active"  colspan="4"><strong>价格评审</strong></td>
+		</tr>
+		<tr class="tenderTypeW">
+			<td style="width:250px;" class="th_bg">向供应商展示价格评审<i class="red">*</i></td>
+			<td colspan="3" style="text-align: left;">
+				<input name="isShowPriceSet" type="radio" value="0" checked>展示
+				<input name="isShowPriceSet" type="radio" value="1">不展示
+			</td>
+		</tr>
+		<tr class="tenderTypeW">
+			<td style="width:250px;" class="th_bg">报价评分类型<i class="red">*</i></td>
+			<td colspan="3" style="text-align: left;">
+				<div id="scoreType"></div>
+				
+			</td>
+		</tr>
+		<tbody class="table  table-bordered tenderTypeW"  id="Assessment"></tbody>
+	</table>
+	<!--审核-->
+	 <table class="table table-bordered employee" style="margin-bottom: 0px;">
+           <tr>
+                <td colspan="4" style="font-weight: bold;" class="active">审核</td>
+            </tr>
+            <!--<tr id="checkerV">
+                <td class="th_bg">添加审核人</td>
+                <td colspan="4" style="text-align: left;">
+                    <select id="employeeId" class="form-control" style="width: 180px;" name="checkerId"><option value="">请选择审核人员</option><option value="0e4843f1661b48548c50edf71be4d498">采购员1</option></select>
+                </td>
+            </tr>-->
+            <div id="checkerV"></div>
+		 <tr>
+			<td class="th_bg">添加审核人</td>
+			<td colspan="3" >
+				<select id="employeeId" class="form-control" style="width: 180px;" name="checkerId"></select>
+			</td>
+		</tr>
+       </table>
+
+</div>
+</form>
+<div class="bottom-btn" style="z-index: 100001">
+		<button type="button" class="btn btn-primary" id="btnSubmit"><span class="glyphicon glyphicon-saved"></span>提交</button>
+		<button type="button" class="btn btn-default" id="btnClose"><span class="glyphicon glyphicon-remove"></span>关闭</button>
+	</div>
+<style>
+        .fileinput-button {
+            position: relative;
+            display: inline-block;
+            overflow: hidden;
+        }
+
+        .fileinput-button input{
+            position:absolute;
+            right: 0px;
+            top: 0px;
+            opacity: 0;
+            -ms-filter: 'alpha(opacity=0)';
+            font-size: 200px;
+        }     
+    </style>
+ <script type="text/javascript" src="../../../../../media/js/jquery/jquery.js" ></script>
+ <script type="text/javascript" src="../../../../../media/js/jquery/jquery.ajax.js" ></script>
+ <script type="text/javascript" src="../../../../../media/js/jquery/jquery.params.js" ></script>
+ <script type="text/javascript" src="../../../../../media/js/bootstrap/js/bootstrap.js" ></script>
+ <script type="text/javascript" src="../../../../../media/js/bootstrap/js/bootstrap-table.min.js"></script>
+ <script type="text/javascript" src="../../../../../media/js/bootstrap/js/bootstrap-table-zh-CN.min.js"></script>
+ <script type="text/javascript" src="../../../../../media/js/base/common.js" ></script>
+ <script type="text/javascript" src="../../../../../media/js/layer/layer.js" ></script>
+ <script type="text/javascript" src="../../../../../media/js/base/digital.js" ></script>
+ <script type="text/javascript" src="../../../../../media/js/bootstrap-fileinput-master/js/fileinput.js"></script>
+<script type="text/javascript" src="../../../../../media/js/bootstrap-fileinput-master/js/locales/zh.js"></script>
+<script type="text/javascript" src="../../../../../media/js/base/clearBiddingSet.js" ></script>
+ <script type="text/javascript" src="../../../../currencyControl/js/offerFileList.js" ></script>
+
+ <script type="text/javascript" src="../js/packageCheckUpdate.js" ></script>
+ <script type="text/javascript" src="../js/businessPriceSetInfoPS.js"></script>
+ <script type="text/javascript" src="../../Purchase/js/packageTest.js"></script>
+  <script type="text/javascript" src="../../../../../media/js/base/auditRecords.js"></script>
+

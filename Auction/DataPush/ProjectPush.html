@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="pragma" content="no-cache">
+		<!-- 禁止浏览器从本地机的缓存中调阅页面内容 -->
+		<meta http-equiv="cache-control" content="no-cache, must-revalidate">
+		<meta http-equiv="expires" content="0">
+		<title>数据推送</title>
+		<link rel="stylesheet" href="../../media/js/bootstrap/css/bootstrap.css">
+		<link rel="stylesheet" href="../../media/js/bootstrap/css/bootstrap-table.min.css" />
+		<link rel="stylesheet" href="../../media/js/bootstrap-fileinput-master/css/fileinput.min.css" type="text/css"/>
+		<style type="text/css">
+			.page .header {
+                text-align: center;
+            }
+            .page .footer {
+                text-align: center;
+            }
+		</style>
+	</head>
+	
+	<body>
+		<div id="app" class="page">
+            <div class="header">
+                <h2>项目推送测试</h2>
+            </div>
+            <table class="table table-bordered">
+                <tr>
+                    <td class="th_bg">项目编号</td>
+                    <td>
+                        <input v-model="model.projectCode" type="text" class="form-control">
+                    </td>
+                </tr>
+                <tr>
+                    <td class="th_bg">项目名称</td>
+                    <td>
+                        <input v-model="model.projectName" type="text" class="form-control">
+                    </td>
+                </tr>
+                <tr>
+                    <td class="th_bg">采购方式</td>
+                    <td>
+                        <select class="form-control" v-model="model.tenderType">
+                            <option :value="el.value" v-for="el in tenderTypeOptions">{{ el.label }}</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="th_bg">是否委托项目</td>
+                    <td>
+                        <select class="form-control" v-model="model.isAgent">
+                            <option :value="el.value" v-for="el in isAgentOptions">{{ el.label }}</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="th_bg">资格审查方式</td>
+                    <td>
+                        <select class="form-control" v-model="model.examType">
+                            <option :value="el.value" v-for="el in examTypeOptions">{{ el.label }}</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="th_bg">评审方法</td>
+                    <td>
+                        <select class="form-control" v-model="model.checkPlan">
+                            <option :value="el.value" v-for="el in checkPlanOptions">{{ el.label }}</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="th_bg">公开范围</td>
+                    <td>
+                        <select class="form-control" v-model="model.isPublic">
+                            <option :value="el.value" v-for="el in isPublicOptions">{{ el.label }}</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="th_bg">预审评审方法</td>
+                    <td>
+                        <select class="form-control" v-model="model.examCheckPlan">
+                            <option :value="el.value" v-for="el in examCheckPlanOptions">{{ el.label }}</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="th_bg">回调地址</td>
+                    <td>
+                        <input v-model="model.callbackUrl" type="text" class="form-control">
+                    </td>
+                </tr>
+            </table>
+            <div class="footer">
+                <button type="button" class="btn btn-primary" @click="handleConfirm"><span class="glyphicon glyphicon-saved"></span>确认</button>
+            </div>
+        </div>
+	</body>
+	<script type="text/javascript" src="../../media/js/jquery/jquery.js"></script>
+	<script type="text/javascript" src="../../media/js/jquery/jquery.extend.js"></script>
+    <script type="text/javascript" src="../../media/js/base/common.js"></script>
+	<script type="text/javascript" src="../../media/js/bootstrap/js/bootstrap.js"></script>
+	<script type="text/javascript" src="../../media/js/bootstrap/js/bootstrap-table.min.js"></script>
+	<script type="text/javascript" src="../../media/js/bootstrap/js/bootstrap-table-zh-CN.min.js"></script>
+	<script type="text/javascript" src="../../media/js/bootstrap-fileinput-master/js/fileinput.js"></script>
+	<script type="text/javascript" src="../../media/js/bootstrap-fileinput-master/js/locales/zh.js"></script>
+	<script type="text/javascript" src="../../media/js/My97DatePicker/WdatePicker.js"></script>
+	<script type="text/javascript" src="../../media/js/layer/layer.js"></script>
+    <script type="text/javascript" src="../../media/js/vue/vue.global.prod.js"></script>
+    <script type="text/javascript">
+        
+        function getRandomCode(len) {
+            var out = []
+            var arr = ['A', 'B', 'C', 'D', 'E', 'F', 'G'];
+            for(i = 0; i < len; i++) {
+                out.push(arr[Math.floor(Math.random() * arr.length)])
+            }
+            return out.join('');
+        }
+        const { createApp } = Vue
+        createApp({
+            computed: {
+                checkPlanOptions() {
+                    var options1 = [
+                        {
+                            label: '综合评分法',
+                            value: 0,
+                        }, {
+                            label: '最低评标价法',
+                            value: 1,
+                        }, {
+                            label: '经评审的最低价法(价格评分)',
+                            value: 2
+                        }, {
+                            label: '最低投标价法',
+                            value: 3,
+                        }, {
+                            label: '经评审的最高投标价法',
+                            value: 4,
+                        }, {
+                            label: '经评审的最低投标价法',
+                            value: 5,
+                        }
+                    ];
+                    var options2 = [
+                        {
+                            label: '经评审的最低价法',
+                            value: 3,
+                        }, {
+                            label: '最低投标价法',
+                            value: 4,
+                        }, {
+                            label: '最低评标价法',
+                            value: 5,
+                        }, {
+                            label: '经评审的最低投标价法(非日产)',
+                            value: 6,
+                        }, {
+                            label: '经评审的最低投标价法 (日产)',
+                            value: 7,
+                        }, {
+                            label: '经评审的最高投标价法',
+                            value: 8,
+                        }, {
+                            label: '综合评估法(无权重)',
+                            value: 9,
+                        }, {
+                            label: '综合评估法(权重)',
+                            value: 10,
+                        }
+                    ]
+                    return this.model.tenderType === 4 ? options2 : options1;
+                }
+            },
+            data() {
+                return {
+                    examCheckPlanOptions: [
+                        {
+                            label: '合格制',
+                            value: 0,
+                        }, {
+                            label: '有限数量制',
+                            value: 1,
+                        }
+                    ],
+                    isPublicOptions: [
+                        {
+                            label: '所有供应商',
+                            value: 0,
+                        }, {
+                            label: '所有本公司认证供应商',
+                            value: 1,
+                        }, {
+                            label: '仅限邀请供应商',
+                            value: 2,
+                        }, {
+                            label: '仅邀请本公司认证供应商',
+                            value: 3,
+                        }
+                    ],
+                    examTypeOptions: [
+                        {
+                            label: '资格预审',
+                            value: 0,
+                        }, {
+                            label: '资格后审',
+                            value: 1,
+                        }
+                    ],
+                    tenderTypeOptions: [
+                        {
+                            label: '询比采购',
+                            value: 0,
+                        }, {
+                            label: '竞价采购',
+                            value: 1,
+                        }, {
+                            label: '竞卖采购',
+                            value: 2,
+                        }, {
+                            label: '招标采购',
+                            value: 4,
+                        }, {
+                            label: '单一来源采购',
+                            value: 6
+                        }
+                    ],
+                    isAgentOptions: [
+                        {
+                            label: '自行采购',
+                            value: 0,
+                        }, {
+                            label: '委托项目',
+                            value: 1,
+                        }
+                    ],
+                    model: {}
+                }
+            },
+            mounted() {
+                this.init();
+            },
+            methods: {
+                init() {
+                    this.model = {
+                        "projectId": Date.now(),
+                        "projectCode": "dfCS-" + getRandomCode(10),
+                        "projectName": "东风平台推送测试项目-" + getRandomCode(5),
+                        // 采购方式  0-询比采购 1-竞价采购 2-竞卖采购  4-招标采购  6-单一来源采购
+                        "tenderType": 4,
+                        "dataTypeCode": "",
+                        // 是否委托项目 0-自行采购 1-委托项目
+                        "isAgent": 1,
+                        "proviceCity": "湖北省-武汉市",
+                        "purchaserName": "微微测试单位",
+                        "purchaserAddress": "采购人地址",
+                        "purchaserLinkmen": "采购员1",
+                        "purchaserLinkmenUserName": "cgy01",
+                        "purchaserTel": "18086009861",
+                        // 资格审查方式 0-资格预审 1-资格后审
+                        "examType": 1,
+                        /**
+                         * 评审方法 
+                            询比、单一：0-综合评分法 1-最低评标价法 2-经评审的最低价法(价格评分) 3-最低投标价法 4-经评审的最高投标价法
+                            招标：3-经评审的最低价法4-最低投标价法 5-最低评标价法   6-经评审的最低投标价法(非日产) 7-经评审的最低投标价法 (日产) 8-经评审的最高投标价法 9-综合评估法(无权重) 10-综合评估法(权重)
+                        */
+                        "checkPlan": 3,
+                        "budget": "1000000",
+                        // 是否需提供分项报价表 0-需要 1-不需要 默认0
+                        "isOfferDetailedItem": "1",
+                        "supplierCount": "3",
+                        // 公开范围 0-所有供应商 1-所有本公司认证供应商 2-仅限邀请供应商 3-仅邀请本公司认证供应商 竞询价项目必须 默认0
+                        "isPublic": "0",
+                        // 预审评审方法 0-合格制 1-有限数量制 默认0
+                        "examCheckPlan": "0",
+                        "approvalNumber": "20231206",
+                        "approvalName": "20231206001",
+                        "approvalAuthority": "",
+                        "requireName": "",
+                        // 采购人社会统一信用码
+                        "organNo": "123323434434234234",
+                        "callbackUrl":"10.129016.190",
+                        "excepitonUrl":'10.129.16.190'
+                    }
+                    // const _self = this;
+                    // $.ajax({
+                    //     type:"post",
+                    //     url: config.tenderHost + '/getEmployeeInfo.do',
+                    //     async: true,
+                    //     success: function(data){
+                    //         if(data.success){
+                    //             var entryData = data.data;
+                    //             // _self.model.purchaserName = entryData.userName;
+                    //             // _self.model.purchaserLinkmen = entryData.userName;
+                    //             // _self.model.purchaserLinkmenUserName = entryData.logCode;
+                    //             // _self.model.purchaserTel = entryData.tel;
+                    //             // _self.model.organNo = entryData.enterpriseCode;
+                    //         }
+                    //     },
+                    // })
+                },
+                handleConfirm() {
+                    var params = {
+                        "dataCode": "projectInfo",
+                        "platformCode": "00270014",
+                        "abbreviationCode": "dfzx",
+                        "token": "MDMzY2IzZWMzNmVjNGQwMTU0ZjFiNGIzOWIzMDQ4MDg2YTFmMDgyNA==",
+                        "version": "V2.0",
+                        "data": this.model,
+                    };
+                    if ([2, 3].includes(this.model.isPublic)) {
+                        this.model.bidders = [
+                            {
+                                bidderName: '测试投标人十一',
+                                bidderCode: '9142000000111222B2',
+                                bidderContact: 'dfcsqy11',
+                                bidderTel: '18671771429'
+                            }, {
+                                bidderName: '测试企业十四',
+                                bidderCode: '9142000000111222B5',
+                                bidderContact: 'dfcsqy14',
+                                bidderTel: '18671771429'
+                            }
+                        ]
+                    }
+                    var url = '/DTCService/receive';
+                    $.ajax({
+                        type: "post",
+                        url: url,
+                        async: true,
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        data: JSON.stringify(params),
+                        success: (data) => {
+                            if (data.success) {
+                                this.init();
+                            }
+                            layer.alert(data.message);
+                        },
+                    })
+                }
+            }
+        }).mount('#app')
+        
+    </script>
+</html>

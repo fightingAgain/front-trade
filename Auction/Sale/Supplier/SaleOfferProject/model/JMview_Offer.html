@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+	<meta http-equiv="pragma" content="no-cache">
+	<!-- 禁止浏览器从本地机的缓存中调阅页面内容 -->
+	<meta http-equiv="cache-control" content="no-cache, must-revalidate">
+	<meta http-equiv="expires" content="0">
+	<link rel="stylesheet" href="../../../../../media/js/bootstrap/css/bootstrap.css" />
+	
+	<style>
+		.container div {
+			text-align: center;
+		}
+
+		table th,
+		table td {
+			text-align: center;
+			vertical-align: middle;
+		}
+
+		.table>tbody>tr>td {
+			vertical-align: middle;
+		}
+
+		span {
+			color: red;
+		}
+
+		.timeInval,
+		.maxPrice {
+			font-size: 24px !important;
+			font-weight: bold;
+		}
+	</style>
+</head>
+
+<body style="width: 99%;padding-left: 10px;padding-top: 10px;">
+	<div class="container-fluid">
+		<table class="table table-bordered" id="offerInfo">
+			<tr>
+				<td rowspan="3" width="15%">
+					<h1 style="margin: 0px;"></h1>
+				</td>
+				<th class="th_bg" width="15%">项目编号</th>
+				<td width="22.5%" data-field="packageNum">					
+				</td>
+				<th class="th_bg" width="15%">项目名称</th>
+				<td width="22.5%" data-field="packageName">
+					
+				</td>
+			</tr>
+			<tr>
+				<th>竞卖人</th>
+				<td data-field="curUser">
+				</td>
+				<th>竞卖号</th>
+				<td>
+				</td>
+			</tr>
+		</table>
+		<div id="offerDetail" style="width: 100%;"></div>
+	</div>
+</body>
+ <style>
+ .table > thead > tr > th, .table > tbody > tr > th, .table > tfoot > tr > th, .table > thead > tr > td, .table > tbody > tr > td, .table > tfoot > tr > td{
+ 	vertical-align: middle;
+ }
+ </style>
+<script type="text/javascript" src="../../../../../media/js/jquery/jquery.js"></script>
+<script type="text/javascript" src="../../../../../media/js/jquery/jquery.extend.js"></script>
+<script type="text/javascript" src="../../../../../media/js/bootstrap/js/bootstrap.js"></script>
+<script type="text/javascript" src="../../../../../media/js/bootstrap/js/bootstrap-table.min.js"></script>
+<script type="text/javascript" src="../../../../../media/js/layer/layer.js"></script>
+<script type="text/javascript" src="../../../../../media/js/base/util.js"></script>
+<script src="../js/JMoffer.js"></script>
+
+
+</html>

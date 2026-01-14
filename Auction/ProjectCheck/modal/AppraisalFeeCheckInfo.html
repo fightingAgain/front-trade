@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
+<!--[if IE 9]> <html lang="en" class="ie9"> <![endif]-->
+<!--[if !IE]><!-->
+<html lang="cn" >
+	<!--<![endif]-->
+	<!-- BEGIN HEAD -->
+	<head>
+		<meta charset="utf-8" />
+        <!-- 网页不会被缓存 -->
+        <meta http-equiv="pragma" content="no-cache">
+        <!-- 禁止浏览器从本地机的缓存中调阅页面内容 -->
+        <meta http-equiv="cache-control" content="no-cache, must-revalidate">
+        <meta http-equiv="expires" content="0">
+        <title>评审费审核</title>
+        <link rel="stylesheet" href="../../../../media/js/layer/mobile/need/layer.css" />
+        <link rel="stylesheet" href="../../../../media/js/layer/theme/default/laydate.css" />
+        <link rel="stylesheet" href="../../../../media/js/bootstrap/css/bootstrap.css" />
+        <link rel="stylesheet" href="../../../../media/js/bootstrap/css/bootstrap-select.min.css" />
+        <link rel="stylesheet" href="../../../../media/js/bootstrap/css/bootstrap-table.min.css" />
+        <link rel="stylesheet" href="../../../../media/js/bootstrap-fileinput-master/css/fileinput.min.css" type="text/css"/>
+        <style type="text/css">
+            label {
+                font-weight: normal;
+            }
+            .table > thead > tr > th, .table > tbody > tr > th, .table > tfoot > tr > th, .table > thead > tr > td, .table > tbody > tr > td, .table > tfoot > tr > td{
+                vertical-align: middle;
+            }
+        </style>
+    </head>
+    <body>
+        <form id="formName" name="purchase" style="width: 99%;padding-left: 10px;padding-top: 10px;margin-bottom: 60px;">  
+            <div class="panel-group" id="accordion">
+                <div class="panel panel-accordion panel-default">
+                    <div class="panel-heading active" role="tab" id="headingOne">  
+                        <h4 class="panel-title">
+                        <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">项目信息</a>
+                        </h4>  
+                    </div>  
+                        <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">  
+                            <div class="panel-body">
+                            <table class="table table-bordered " style="margin-bottom: 0px;">                    
+                                <tr>
+                                    <td  class="th_bg" style="width: 180px">项目编号</td>
+                                    <td  style="text-align: left;" colspan="3">
+                                        <div id="projectCode"></div>              
+                                    </td>
+                                                                        
+                                </tr>
+                                <tr>                                       
+                                    <td  class="th_bg" style="width: 180px">项目名称</td>
+                                    <td  style="text-align: left;" >
+                                        <span id="projectName"></span> 
+                                        <input name="projectId" id="projectId" type="hidden"/>   
+                                        <!-- <input style="text-align: right;" type="button"  id="addProject" class="btn btn-primary" value="选择项目"/>                                                                           -->
+                                    </td>  
+                                    <td  style="text-align: left;" colspan="3">
+                                        <span id="applyCount"></span>              
+                                    </td>    
+                                </tr>
+                                <tr>
+                                    <td  class="th_bg" style="width: 180px">包件编号</td>
+                                    <td  style="text-align: left;">
+                                        <div id="packageNum"></div>              
+                                    </td> 
+                                    <td  class="th_bg" style="width: 180px">包件名称</td>
+                                    <td  style="text-align: left;">
+                                        <div id="packageName"></div> 
+                                        <input name="packageId" id="packageId" type="hidden"/>                                       
+                                    </td>
+                                      
+                                </tr>
+                                <tr>
+                                    <td  class="th_bg" style="width: 180px">资格审查方式</td>
+                                    <td  style="text-align: left;">
+                                        <div id="examType"></div>                                                                   
+                                    </td>
+                                    <td  class="th_bg" style="width: 180px">项目经理</td>
+                                    <td  style="text-align: left;">
+                                        <div id="userName"></div>              
+                                    </td>   
+                                </tr>
+                                <tr>
+                                    <td class="th_bg" style="width: 180px">评审地点<i class="red">*</i></td>
+                                    <td >
+                                        <span id="provinceName"></span>-<span id="cityName"></span>
+                                                                                           
+                                    </td>
+                                    <td class="th_bg" style="width: 180px">费用承担方<i class="red">*</i></td>
+                                    <td >
+                                       <div id="feeUnderparty"></div>                
+                                    </td> 
+                                </tr>
+                                                              
+                            </table>
+                                                                 
+                        </div>  
+                    </div>  
+                </div>
+                <div class="panel panel-accordion panel-default">
+                    <div class="panel-heading active" role="tab" id="headingFour">  
+                            <h4 class="panel-title">
+                            <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseFour" aria-expanded="false" aria-controls="collapseFour">关联包件</a>
+                            </h4>  
+                        </div>  
+                        <div id="collapseFour" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFour">  
+                            <div class="panel-body">                                                
+                                <table id="relevanceTable"></table>
+                            </div>
+                        </div>
+                </div> 
+                <div class="panel panel-accordion panel-default">
+                    <div class="panel-heading active" role="tab" id="headingTwo">  
+                            <h4 class="panel-title">
+                            <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">评审费信息</a>
+                            </h4>  
+                        </div>  
+                        <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">  
+                            <div class="panel-body">                                               
+                                <table id="bidsectionTable"></table>
+                                <table class="table table-bordered " style="margin-bottom: 0px;">  
+                                    <tr>
+                                        <td class="th_bg" style="width: 180px">评审费总体说明</td>
+                                        <td>
+                                            <div  id="feeRemark"></div>
+                                        </td> 
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                </div> 
+                <div class="panel panel-accordion panel-default">
+                    <div class="panel-heading active" role="tab" id="headingThree">  
+                            <h4 class="panel-title">
+                            <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">评审费附件</a>
+                            </h4>  
+                        </div>  
+                        <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">  
+                            <div class="panel-body">
+                                <table  class="table table-bordered " style="margin-bottom: 0px;">
+                                    <tr>
+                                        <td class="th_bg" style="width: 180px">
+                                            评审费A表
+                                        </td>
+                                        <td style="width: 35%">
+                                            <div  class="fileBlock">   
+                                                <div id="saveFile1"></div>                                           
+                                            </div>
+                                           
+                                        </td>
+                                        <td class="th_bg" style="width: 180px">
+                                            评审费B表
+                                        </td>
+                                        <td>
+                                            <div  class="fileBlock"> 
+                                                <div id="saveFile2"></div>                                              
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="th_bg">
+                                            其他附件
+                                        </td> 
+                                        <td colspan="3">
+                                            
+                                        </td>                                     
+                                    </tr>
+                                    <tr>
+                                        <td colspan="4">
+                                            <table class="table table-bordered" id="fileTable"></table>
+                                        </td>
+                                    </tr>
+                                </table>
+                                  
+                            </div>
+                        </div>
+                </div>
+                <div class="panel panel-accordion panel-default">
+                    <div class="panel-heading active" role="tab" id="headingSix">  
+                        <h4 class="panel-title">
+                        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseSix" aria-expanded="false" aria-controls="collapseSix">评审费历史记录</a>
+                        </h4>  
+                    </div>  
+                    <div id="collapseSix" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingSix">  
+                        <div class="panel-body">                                              
+                            <table id="financeTable" class="table table-bordered"></table>                    
+                        </div>
+                    </div>
+                </div>
+                <div id="approval"></div>   
+            </div> 
+            
+        </form>
+        <div class="bottom-btn">   
+            <button type="button" class="btn btn-default" id="btnPass"><span class="glyphicon glyphicon-ok"></span>通过</button>
+            <button type="button" class="btn btn-primary" id="btnNoPass"><span class="glyphicon glyphicon-saved"></span>不通过</button>         
+            <button type="button" class="btn btn-default" id="btnClose"><span class="glyphicon glyphicon-remove"></span>关闭</button>
+        </div>
+        <script type="text/javascript" src="../../../media/js/jquery/jquery.js"></script>
+        <script type="text/javascript" src="../../../media/js/jquery/jquery.extend.js"></script>
+        <script type="text/javascript" src="../../../media/js/base/common.js"></script>
+        <!-- <script type="text/javascript" src="../../../media/js/base/util.js"></script> -->
+        <script type="text/javascript" src="../../../media/js/base/ProvinceCityData.js"></script>
+        <script type="text/javascript" src="../../../media/js/bootstrap/js/bootstrap.js"></script>
+        <script type="text/javascript" src="../../../media/js/bootstrap-fileinput-master/js/fileinput.js"></script>
+        <script type="text/javascript" src="../../../media/js/bootstrap-fileinput-master/js/locales/zh.js"></script>
+        <script type="text/javascript" src="../../../media/js/stream/js/stream-v1.js"></script>
+        <script type="text/javascript" src="../../../media/js/bootstrap/js/bootstrap-table.js"></script>
+        <script type="text/javascript" src="../../../media/js/bootstrap/js/bootstrap-table-zh-CN.min.js"></script>
+        <script type="text/javascript" src="../../../media/js/layer/layer.js"></script>
+        <script type="text/javascript" src="../../../media/js/base/workFlow.js" ></script>
+        <script type="text/javascript" src="../js/AppraisalFeeCheck.js" ></script>
+        <script type="text/javascript" src="../../../view/Sys/checkPrice/js/relevance.js" ></script>
+        <script type="text/javascript" src="../../../view/Sys/checkPrice/js/checkFile.js" ></script>
+        <script type="text/javascript" src="../../../view/Sys/checkPrice/js/financeInfo.js" ></script>
+    </body>
+</html>

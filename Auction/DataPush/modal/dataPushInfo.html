@@ -1,0 +1,213 @@
+<!--
+ * @Author: your name
+ * @Date: 2020-10-13 13:48:24
+
+ * @LastEditTime: 2020-11-28 19:15:17
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: \FrameWork\bidPrice\DataPush\modal\dataPushInfo.html
+--> 
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="pragma" content="no-cache">
+		<!-- 禁止浏览器从本地机的缓存中调阅页面内容 -->
+		<meta http-equiv="cache-control" content="no-cache, must-revalidate">
+		<meta http-equiv="expires" content="0">
+		<title>数据推送</title>
+		<link rel="stylesheet" href="../../../media/js/bootstrap/css/bootstrap.css">
+		<link rel="stylesheet" href="../../../media/js/bootstrap/css/bootstrap-table.min.css" />
+		<link rel="stylesheet" href="../../../media/js/bootstrap-fileinput-master/css/fileinput.min.css" type="text/css"/>
+		<style type="text/css">
+			.table th,
+			.table td {				
+				vertical-align: middle !important;
+			}
+			.fileinput-button {
+				position: relative;
+				display: inline-block;
+				overflow: hidden;
+			}
+
+			.fileinput-button input{
+				position:absolute;
+				right: 0px;
+				top: 0px;
+				opacity: 0;
+				-ms-filter: 'alpha(opacity=0)';
+				font-size: 200px;
+			}
+			#tableList input[type=file], #tableList .file-input{display: none;}
+		</style>
+	</head>
+	
+	<body style="width: 99%;padding-left: 10px;padding-top: 10px;margin-bottom: 0;">
+		<form id="DataPush">
+			<table class="table table-bordered" style="margin-bottom: 50px;" align="center">
+				<tr>
+					<td colspan="4" style="font-weight: bold;" class="active">项目信息</td>
+				</tr>
+				<tr>
+					<td class="th_bg" width="20%" >采购项目名称</td>
+					<td id="projectName"></td>
+					<td  class="th_bg" >推送状态</td>
+					<td id="dataType" style="font-weight: 900;font-size: 21px;color: red;"></td>
+				</tr>
+				<tr>
+					<td class="th_bg" >采购项目编号</td>
+					<td id="projectCode"></td>
+					<td class="th_bg" >公告发出时间<i class="red isEdit" style="display: none;">*</i></td>
+					<td>
+						<input type="text" class="form-control ageinTime Wdate isEdit" name="ansSengDatea"  errormsg='请选择公告发出时间' style="display: none;"/>
+						<div id="ansSengDatea" class="isView" style="display: none;"></div>
+					</td>				
+				</tr>
+				<tr>
+					<td class="th_bg" >原项目id<i class="red isEdit" style="display: none;">*</i></td>
+					<td colspan="3">
+						<input type="text" class="form-control isEdit" name="oldProjectId"  errormsg='请输入项目id' style="display: none;"/>
+						<div id="oldProjectId" class="isView" style="display: none;"></div>
+					</td>									
+				</tr>
+				<tr>	
+					<td class="th_bg" >答复截止时间<i class="red isEdit" style="display: none;">*</i></td>
+					<td >
+						<input type="text" class="form-control ageinTime Wdate isEdit" name="ansEndDatea" errormsg='请选择答复截止时间' style="display: none;"/>
+						<div id="ansEndDatea" class="isView" style="display: none;"></div>
+					</td>
+					<td class="th_bg" >招投标（采购）文件时间<i class="red isEdit" style="display: none;">*</i></td>
+					<td >
+						<input type="text" class="form-control ageinTime Wdate isEdit" name="submitDatea" errormsg='请选择招投标（采购）文件时间' style="display: none;"/>
+						<div id="submitDatea" class="isView" style="display: none;"></div>
+					</td>
+				</tr>
+				<tr>
+					<td class="th_bg" >技术标评价时间<i class="red isEdit" style="display: none;">*</i></td>
+					<td>
+						<input type="text" class="form-control ageinTime Wdate isEdit" name="techReviewDatea" errormsg='技术标评价时间' style="display: none;"/>
+						<div id="techReviewDatea" class="isView" style="display: none;"></div>
+					</td>	
+					<td class="th_bg" >商务标评价时间<i class="red isEdit" style="display: none;">*</i></td>
+					<td>
+						<input type="text" class="form-control ageinTime Wdate isEdit" name="busReviewDatea" errormsg='商务标评价时间'  style="display: none;"/>
+						<div id="busReviewDatea" class="isView" style="display: none;"></div>
+					</td>			
+				</tr>
+				<tr>
+					<td class="th_bg" >评审报告生成时间<i class="red isEdit" style="display: none;">*</i></td>
+					<td>
+						<input type="text" class="form-control ageinTime Wdate isEdit" name="reportDatea"  errormsg='评审报告生成时间' style="display: none;"/>
+						<div id="reportDatea" class="isView" style="display: none;"></div>
+					</td>
+					<td class="th_bg" >结果通知书发送时间<i class="red isEdit" style="display: none;">*</i></td>
+					<td>
+						<input type="text" class="form-control ageinTime Wdate isEdit" name="noticeSendDatea" errormsg='结果通知书发送时间'  style="display: none;"/>
+						<div id="noticeSendDatea" class="isView" style="display: none;"></div>
+					</td>
+				</tr>
+				<tr>
+					<td class="th_bg" >报价类型<i class="red isEdit" style="display: none;">*</i></td>
+					<td class="iscolspan">
+						<select class="form-control isEdit" name="priceType" style="display: none;">
+							<option value="1">金额</option>
+							<option value="9">费率</option>
+						</select>
+						<div id="priceType" class="isView" style="display: none;"></div>
+					</td>
+					<td class="th_bg priceType1" >金额单位</td>
+					<td class="priceType1">
+						<select class="form-control isEdit priceUnit" name="priceUnit" style="display: none;">
+							<option value="0">元</option>
+							<option value="1">万元</option>
+						</select>
+						<div id="priceUnit" class="isView" style="display: none;"></div>
+					</td>
+				</tr>
+				<tr>
+					<td class="th_bg">其他报价类型说明</td>
+					<td colspan="3">
+						<textarea style="resize: none" class="form-control isEdit" name="priceContent" style="display: none;" ></textarea>
+						<div id="priceContent" class="isView" style="display: none;"></div>
+					</td>
+				</tr>
+				<tr>
+					<td colspan="4" style="font-weight: bold;" class="active">答疑记录</td>
+				</tr>
+				<tr>
+					<td colspan="4">
+						<div id="answerList" style="padding: 10px;">
+							
+						</div>
+						<div id="fileList11"></div>
+					</td>
+				</tr>
+				<tr class="tender" style="display: none;">
+					<td colspan="4" style="font-weight: bold;" class="active">澄清记录</td>
+				</tr>
+				<tr class="tender" style="display: none;">
+					<td colspan="4">
+						<div id="clarifyList" style="padding: 10px;">
+							
+						</div>
+					</td>
+				</tr>
+				<tr>
+					<td colspan="4" style="font-weight: bold;" class="active">谈判记录</td>
+				</tr>
+				<tr>
+					<td colspan="4">
+						<div id="talksList" style="padding: 10px;">
+							
+						</div>
+						<div id="fileList13"></div>
+					</td>
+				</tr>
+				<tr>
+					<td colspan="4" style="font-weight: bold;" class="active">候选供应商</td>
+				</tr>
+				<tr>
+					<td colspan="4">
+						<div id="supplierList">
+							
+						</div>
+					</td>
+				</tr>
+				<tr class="tender" style="display: none;">
+					<td colspan="4" style="font-weight: bold;" class="active">评审报告</td>
+				</tr>
+				<tr class="tender" style="display: none;">
+					<td colspan="4">
+						<div id="fileList15"></div>
+					</td>
+				</tr>
+				<tr>
+					<td colspan="4" style="font-weight: bold;" class="active">供应商相关附件</td>
+				</tr>
+				<tr>
+					<td colspan="4">
+						<div id="tableList"></div>
+					</td>
+				</tr>
+			</table>
+		</form>
+		
+		<div class="form-group rowLine" style="width: 100%;height: 50px;text-align:center;position: fixed;bottom: 0;background-color: #FFFFFF;margin-bottom:0px !important;padding-top: 10px;z-index: 1000001;">
+			<button type="button" class="btn btn-primary isEdit" style="display: none;" data-dismiss="modal" id="btn_bao"><span class="glyphicon glyphicon-saved"></span>保存</button>
+			<button type="button" class="btn btn-primary isEdit" style="display: none;" data-dismiss="modal" id="btn_submit"><span class="glyphicon glyphicon-saved"></span>确定推送</button>
+			<button type="button" class="btn btn-default" data-dismiss="modal" id="btn_close"><span class="glyphicon glyphicon-remove"></span>关闭</button>
+		</div>
+		<input type="file" class="fileloading" multiple name="files" style="display: none"/>
+	</body>
+	<script type="text/javascript" src="../../../media/js/jquery/jquery.js"></script>
+	<script type="text/javascript" src="../../../media/js/jquery/jquery.extend.js"></script>
+	<script type="text/javascript" src="../../../media/js/bootstrap/js/bootstrap.js"></script>
+	<script type="text/javascript" src="../../../media/js/bootstrap/js/bootstrap-table.min.js"></script>
+	<script type="text/javascript" src="../../../media/js/bootstrap/js/bootstrap-table-zh-CN.min.js"></script>
+	<script type="text/javascript" src="../../../media/js/bootstrap-fileinput-master/js/fileinput.js"></script>
+	<script type="text/javascript" src="../../../media/js/bootstrap-fileinput-master/js/locales/zh.js"></script>
+	<script type="text/javascript" src="../../../media/js/My97DatePicker/WdatePicker.js"></script>
+	<script type="text/javascript" src="../../../media/js/layer/layer.js"></script>
+	<script type="text/javascript" src="../js/dataPushInfo.js"></script>
+</html>

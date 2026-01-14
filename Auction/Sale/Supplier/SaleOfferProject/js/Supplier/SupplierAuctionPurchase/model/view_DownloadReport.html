@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="pragma" content="no-cache">
+		<!-- 禁止浏览器从本地机的缓存中调阅页面内容 -->
+		<meta http-equiv="cache-control" content="no-cache, must-revalidate">
+		<meta http-equiv="expires" content="0">
+		<title>添加下载文件信息记录页面</title>
+		
+		<link rel="stylesheet" href="../../../../../media/js/bootstrap/css/bootstrap.css">
+		<link rel="stylesheet" href="../../../../../media/js/bootstrapvalidator/css/bootstrapValidator.css">
+		<link rel="stylesheet" href="../../../../../media/js/layer/mobile/need/layer.css" type="text/css"/>
+	</head>
+	<body style="width: 99%;padding-left: 10px;padding-top: 10px;margin-bottom: 0;">
+		
+		<form id="addDownLoadInfo" >
+		<table class="table table-bordered" id="DownloadReportInfo">
+			<tr class="active">
+				<tr>
+					<td  class="th_bg" style="vertical-align: middle;">
+						 联系人<span style="color: red;">*</span>
+					</td>
+					<td  colspan="2" class="form-group">
+						<input type="text" name="linkMan" id="linkMan" placeholder="请输入联系人" class="form-control"></label>
+					</td>
+				</tr>
+				<tr>
+					<td  class="th_bg" style="vertical-align: middle;">
+						 联系方式(手机号)<span style="color: red;">*</span>
+					</td>
+					<td  colspan="2" class="form-group">
+						<input name="linkTel" id="linkTel" placeholder="请输入联系方式(手机号)" class="form-control"></input>
+					</td>
+				</tr>
+				<tr>
+					<td  class="th_bg" style="vertical-align: middle;">
+						 常用邮箱<span style="color: red;">*</span>
+					</td>
+					<td  colspan="2" class="form-group">
+						<input name="linkEmail" id="linkEmail" placeholder="请输入常用邮箱" class="form-control"></input>
+						<input name="examType" id="examType" type="hidden" />
+					</td>
+				</tr>				
+	    </table>
+	    
+	    		
+	    	<div class="form-group rowLine" style="text-align: center;">
+				<button type="button" style="width: 100px;" class="btn btn-primary btn-sm" data-dismiss="modal" id="btn_submit">保存</button>
+				<button type="button" style="width: 100px;" class="btn btn-default btn-sm" data-dismiss="modal" id="btn_close">关闭</button>
+			</div>
+		</form>
+		
+		
+		
+		<script type="text/javascript" src="../../../../../media/js/jquery/jquery.min.js"></script>
+		<script type="text/javascript" src="../../../../../media/js/jquery/jquery.extend.js"></script>
+		 <script type="text/javascript" src="../../../../../media/js/layer/layer.js" ></script>
+		<script type="text/javascript" src="../../../../../media/js/base/common.js"></script>
+		<script type="text/javascript" src="../../../../../media/js/bootstrap/js/bootstrap.js"></script>
+		<script type="text/javascript" src="../../../../../media/js/bootstrapvalidator/js/bootstrapValidator.js"></script>
+		
+		<script src="../js/view_DownloadReport.js"></script>
+		
+	</body>
+</html>

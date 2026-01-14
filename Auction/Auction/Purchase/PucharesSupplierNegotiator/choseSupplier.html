@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="pragma" content="no-cache">
+	<!-- 禁止浏览器从本地机的缓存中调阅页面内容 -->
+	<meta http-equiv="cache-control" content="no-cache, must-revalidate">
+	<meta http-equiv="expires" content="0">
+	<title>选择供应商</title>
+	<link rel="stylesheet" href="../../../../media/js/bootstrap/css/bootstrap.css">
+	<link rel="stylesheet" href="../../../../media/js/bootstrap/css/bootstrap-table.css">
+</head>
+
+<body style="width: 98%;margin: 10px auto;">
+	<div id="toolbar" style="margin-bottom: 10px;">
+		<div class="input-group" style="width:180px;float: left;">
+			<span class="input-group-addon">供应商名称:</span>
+			<input type="text" class="form-control" id="enterpriseName" name="enterpriseName" style="width:190px">
+		</div>
+		<div class="btn-group" style="padding-left:10px;">
+			<button id="btnSearch" type="button" class="btn btn-primary">
+				<span class="glyphicon glyphicon-search" aria-hidden="true">查询
+			</button>
+		</div>
+	</div>
+	<table class="" data-toolbar="#toolbar" id="SupplierList"></table>
+</body>
+<script type="text/javascript" src="../../../../media/js/jquery/jquery.js"></script>
+<script type="text/javascript" src="../../../../media/js/jquery/jquery.extend.js"></script>
+<script type="text/javascript" src="../../../../media/js/bootstrap/js/bootstrap-table.min.js"></script>
+<script type="text/javascript" src="../../../../media/js/bootstrap/js/bootstrap-table-zh-CN.min.js"></script>
+<script type="text/javascript" src="../../../../media/js/bootstrap/js/bootstrap.js"></script>
+<script type="text/javascript" src="../../../../media/js/jquery/jquery.extend.js"></script>
+<script type="text/javascript" src="../../../../media/js/layer/layer.js"></script>
+
+</html>
+<script>
+	var searchUrl = parent.config.AuctionHost + "/AuctionOfferController/findAuctionOffer.do";
+	var getAuctionUrl = parent.config.AuctionHost + "/AuctionProjectPackageController/findAuctionProjectPackageById.do";
+	var checkboxed;
+	var type = getUrlParam("type");
+	var projectId;
+	var packageId;
+
+	function getData(obj) {
+		projectId = obj.projectId;
+		packageId = obj.packageId;
+		getAuctionType();
+		supplierListShow();
+	}
+
+
+	//查询按钮
+	$("#btnSearch").on('click', function () {
+		$('#SupplierList').bootstrapTable('refresh', { url: searchUrl });
+
+	});
+
+	window.operateEvents = {//添加一个按钮对应的事件
+
+		"click #btnChoose": function (e, value, row, index) {
+			//选择供应商,
+			var thisFrame = parent.window.document.getElementById("addNegotiator").getElementsByTagName("iframe")[0].id;
+			var dcmt = parent.$('#' + thisFrame)[0].contentWindow;
+			var supplierName = row.enterpriseName || row.supplierEnterpriseName;
+			dcmt.$("#supplierName").show();
+			dcmt.$("#supplierName").text(supplierName);
+			dcmt.getSupplier(row);
+
+			parent.layer.close(parent.layer.getFrameIndex(window.name));
+		},
+
+		"click #btnUnderline": function (e, value, row, index) {
+			//选择供应商,
+			var thisFrame = parent.window.document.getElementById("negotiators").getElementsByTagName("iframe")[0].id;
+			var dcmt = parent.$('#' + thisFrame)[0].contentWindow;
+			var supplierName = row.enterpriseName || row.supplierEnterpriseName;
+			//dcmt.$("#supplierName").show();
+			dcmt.$("#supplierName").text(supplierName);
+			dcmt.getSupplier(row);
+			parent.layer.close(parent.layer.getFrameIndex(window.name));
+		},
+	}
+
+	function AddFunction(value, row, index) {//把需要创建的按钮封装到函数中
+		if (type == 0) {
+			return [
+				'<a href="javascript:void(0)" id="btnUnderline" class="btn-sm btn-primary" style="text-decoration:none" ><span class="glyphicon glyphicon-ok" aria-hidden="true"></span>选择</a>',
+			].join("")
+		} else {
+			return [
+				'<a href="javascript:void(0)" id="btnChoose" class="btn-sm btn-primary" style="text-decoration:none" ><span class="glyphicon glyphicon-ok" aria-hidden="true"></span>选择</a>',
+			].join("")
+		}
+	}
+	// 利用包件id查询当前auctiontype
+	function getAuctionType() {
+		$.ajax({
+			type: "post",
+			url: getAuctionUrl,
+			data: { packageId: packageId },
+			async: false,
+			success: function (res) {
+				if (res.success && res.data.auctionType == 7) {
+					searchUrl = parent.config.AuctionHost + "/AuctionSfcSingleOfferesController/getOffersSupplierName.do";
+				}
+				console.log(res)
+			}
+		});
+	}
+	//初始化表格
+	function supplierListShow() {
+		$("#SupplierList").bootstrapTable({
+			url: searchUrl,
+			dataType: 'json',
+			method: 'get',
+			cache: false, // 是否使用缓存，默认为true，所以一般情况下需要设置一下这个属性（*）
+			locale: "zh-CN",
+			pagination: true, // 是否启用分页
+			showPaginationSwitch: false, // 是否显示 数据条数选择框
+			clickToSelect: true, //是否启用点击选中行
+			pageSize: 15, // 每页的记录行数（*）
+			pageNumber: 1, // table初始化时显示的页数
+			pageList: [5, 10, 25, 50],
+			height:'515',
+			toolbar: '#toolbar', // 工具栏ID
+			search: false, // 不显示 搜索框
+			sidePagination: 'server', // 服务端分页
+			classes: 'table table-bordered', // Class样式
+			//showRefresh : true, // 显示刷新按钮
+			silent: true, // 必须设置刷新事件
+			onCheck: function (row) {
+				checkboxed = row.id;
+			},
+			queryParams: function (params) {
+				var paramData = {
+					pageSize: params.limit,
+					pageNumber: (params.offset / params.limit) + 1,   //页码
+					//supplierName:$("#checkState").val(),
+					'projectId': projectId,
+					'packageId': packageId,
+					'enterpriseName': $("#enterpriseName").val(),
+					'isEliminated': 0,
+				};
+				return paramData;
+			},
+			striped: true,
+			columns: [[
+				{
+					field: 'Id',
+					title: '序号',
+					align: 'center',
+					width: '50px',
+					formatter: function (value, row, index) {
+						var pageSize = $('#PucharesNegotiator').bootstrapTable('getOptions').pageSize || 15; //通过表的#id 可以得到每页多少条  
+						var pageNumber = $('#PucharesNegotiator').bootstrapTable('getOptions').pageNumber || 1; //通过表的#id 可以得到当前第几页  
+						return pageSize * (pageNumber - 1) + index + 1; //返回每条的序号： 每页条数 * （当前页 - 1 ）+ 序号 
+					}
+				},
+				{
+					title: '供应商',
+					formatter: function (value, row, index) {
+						return row.enterpriseName || row.supplierEnterpriseName
+					}
+				},
+				{
+					field: 'Button',
+					title: '操作',
+					formatter: AddFunction,//表格中添加按钮
+					events: operateEvents,//给按钮注册事件	
+				},
+
+			]]
+		});
+	}
+
+	function getUrlParam(name) {
+		var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); // 构造一个含有目标参数的正则表达式对象  
+		var r = window.location.search.substr(1).match(reg); // 匹配目标参数  
+		if (r != null) return unescape(r[2]);
+		return null; // 返回参数值  
+	}
+</script>

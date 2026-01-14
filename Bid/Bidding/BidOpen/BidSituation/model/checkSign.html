@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8">
+		<meta http-equiv="pragma" content="no-cache"><!-- 禁止浏览器从本地计算机的缓存中访问页面内容 --> 
+		<meta http-equiv="cache-control" content="no-cache"><!-- 用于指定请求和响应遵循的缓存机制 --> 
+		<meta http-equiv="expires" content="0"><!-- 用于设定网页的到期时间，一旦网页过期，必须到服务器上重新传输； -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>查看签到信息</title>
+    <link rel="stylesheet" href="../../../../media/js/layer/mobile/need/layer.css" />
+    <link rel="stylesheet" href="../../../../media/js/bootstrap/css/bootstrap.css" />
+    <link rel="stylesheet" href="../../../../media/js/bootstrap/css/bootstrap-table.css">
+	<style>
+		html,body { height: 100%;}
+		.pretrial,.revise{
+			display: none;
+		}
+		.display_none{
+			display: none;
+		}
+	</style>
+</head>
+
+<body>
+	<div class="pageModel">
+		<table class="table table-bordered ">
+        	<tr>
+	            <td colspan="4" style="font-weight: bold;" class="active">签到信息</td>
+	        </tr>
+	        <table id="tableList" class="" data-toolbar="">
+	        	
+	        </table>
+	    </table>
+	    <div class="bottom-btn" style="z-index: 11000;">
+            <button type="button" class="btn btn-default" id="btnClose"><span class="glyphicon glyphicon-remove"></span>关闭</button>
+        </div>
+	</div>
+	<script type="text/javascript" src="../../../../media/js/base/common.js"></script>
+    <script type="text/javascript" src="../../../../media/js/jquery/jquery.js"></script>
+    <script src="../../../../media/js/bootstrap/js/bootstrap.js"></script>
+    <script src="../../../../media/js/bootstrap/js/bootstrap-table.js"></script>
+    <script src="../../../../media/js/bootstrap/js/bootstrap-table-zh-CN.min.js"></script>
+    <script src="../../../../media/js/jquery/jquery.extend.js"></script>
+    <script src="../../../../media/js/base/util.js"></script>
+
+    <script type="text/javascript" src="../js/checkSign.js"></script>
+</body>
+
+</html>

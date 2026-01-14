@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="pragma" content="no-cache"><!-- 禁止浏览器从本地计算机的缓存中访问页面内容 --> 
+		<meta http-equiv="cache-control" content="no-cache"><!-- 用于指定请求和响应遵循的缓存机制 --> 
+		<meta http-equiv="expires" content="0"><!-- 用于设定网页的到期时间，一旦网页过期，必须到服务器上重新传输； -->
+		<link rel="stylesheet" href="../../../media/js/bootstrap/css/bootstrap.css" />
+		<link rel="stylesheet" href="../../../media/js/bootstrap/css/bootstrap-table.min.css" type="text/css"/>
+		<link rel="stylesheet" href="../../../media/js/layer/mobile/need/layer.css" />
+		<title>评审项</title>
+	</head>
+	<body>
+		<form id="formName" class="pageModel">
+			<table class="table table-bordered">
+		      	<tr class="keyModule" style="display: none;">
+					<td class="th_bg">是否关键要求</td>
+					<td>
+						<label style="padding-right:20px;margin-bottom: 0;">
+	                		<input type="radio" name="isKey" value="1" checked="checked" style="vertical-align: -2px;margin-right: 5px;" >是
+	                	</label>
+						<label style="padding-right:20px;margin-bottom: 0;">
+	                		<input type="radio" name="isKey" value="0" style="vertical-align: -2px;margin-right: 5px;">否
+	                	</label>
+					</td>
+				</tr>
+				<tr class="scoreModule" style="display: none;">
+					<td class="th_bg">分值<i class="red">*</i></td>
+					<td>
+						<input type="text" class="form-control" name="score" style="width: 260px;" data-validate="decimal2" errormsg="请正确输入分值（最多带两位小数的正数）">
+					</td>
+					
+				</tr>
+				<tr class="scoreModule" style="display: none;">
+					<td class="th_bg">打分类型<i class="red">*</i></td>
+					<td>
+						<select name="itemScoreType" id="itemScoreType" class="form-control">
+							<option value="1">主观分</option>
+							<option value="2">客观分</option>
+						</select>
+					</td>
+					
+				</tr>
+				<tr>
+					<td class="th_bg">评价内容<i class="red">*</i></td>
+					<td>
+						<textarea rows="4" class="form-control" name="checkName" style="resize: none;" datatype="*" errormsg="请正确输入评价内容"></textarea>
+					</td>
+					
+				</tr>
+				<tr>
+					<td class="th_bg">评价标准<i class="red">*</i></td>
+					<td>
+						<textarea rows="6" class="form-control" name="checkStandard" style="resize: none;" datatype="*" errormsg="请正确输入评价标准"></textarea>
+					</td>
+				</tr>
+				<tr>
+					<td class="th_bg">备注</td>
+					<td>
+						<textarea rows="2" class="form-control" name="remark" style="resize: none;"></textarea>
+					</td>
+				</tr>
+			</table>
+		</form>
+		<div class="bottom-btn">
+			<button type="button" class="btn btn-primary" id="btnSave"><span class="glyphicon glyphicon-ok"></span>保存</button>
+			<button type="button" class="btn btn-default" id="btnClose"><span class="glyphicon glyphicon-remove"></span>关闭</button>
+		</div>
+		<script type="text/javascript" src="../../../media/js/jquery/jquery.js"></script>
+	    <script type="text/javascript" src="../../../media/js/jquery/jquery.extend.js"></script>
+	    <script type="text/javascript" src="../../../media/js/base/util.js"></script>
+	    <script type="text/javascript" src="../../../media/js/base/common.js"></script>
+	    <script type="text/javascript" src="../../../media/js/bootstrap/js/bootstrap.js"></script>
+	    <script type="text/javascript" src="../../../media/js/layer/layer.js"></script>
+	    <script type="text/javascript" src="../../../media/js/My97DatePicker/WdatePicker.js"></script>
+	    <script type="text/javascript" src="../js/itemEdit.js?version=3.4.25"></script>
+	</body>
+</html>

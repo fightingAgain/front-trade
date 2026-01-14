@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<title>资料归档审核</title>
+		<meta http-equiv="pragma" content="no-cache">
+		<!-- 禁止浏览器从本地机的缓存中调阅页面内容 -->
+		<meta http-equiv="cache-control" content="no-cache, must-revalidate">
+		<meta http-equiv="expires" content="0">
+	</head>
+	<style>
+		.input-group {
+			float: left;
+			width: 120px;
+		}
+	</style>
+	<body>
+		<div class="container-fluid ">
+			<div style="padding-bottom: 10px;">
+				<div class="input-group" style="padding-right:15px;">
+					<span class="input-group-addon">审核状态</span>
+					<select class="form-control" id="checkState" style="width: 120px;">
+						<option value="0">全部</option>
+						<option value="1">待审核</option>
+						<option value="2">审核通过</option>
+						<option value="3">审核未通过</option>
+						
+					</select>
+				</div>
+				<div class="input-group" style="padding-right:15px;">
+					<span class="input-group-addon">项目类型</span>
+					<select class="form-control" style="width: 140px;" id="tenderType">
+						<option value="0">询价采购</option>						
+                        <option value="6">单一来源采购</option>	
+                        <option value="1">竞价采购</option>
+                        <option value="1">竞卖</option>						
+					</select>
+				</div>
+				<div class="input-group" style="width:150px;float: left;padding-right: 15px;">
+					<span class="input-group-addon">项目名称</span>
+					<input type="text" class="form-control" name="projectName" id="projectName" style="width:140px">
+				</div>
+				<div class="input-group" style="width:150px;float: left;padding-right: 15px;">
+					<span class="input-group-addon">项目编号</span>
+					<input type="text" class="form-control" name="projectCode" id="projectCode" style="width:140px">
+				</div>
+				<div class="btn-group">
+					<button type="button" id="btnQuery" class="btn btn-primary">
+            		<span class="glyphicon glyphicon-search" aria-hidden="true"></span>查询
+          		</button>
+				</div>
+			</div>
+			<table id="ProjectAuditTable"></table>
+		</div>
+	</body>
+	<script type="text/javascript" src="Auction/ProjectCheck/js/fillingCheckList.js"></script>
+
+</html>

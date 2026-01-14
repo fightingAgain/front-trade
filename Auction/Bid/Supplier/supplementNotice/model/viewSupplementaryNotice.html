@@ -1,0 +1,75 @@
+<link rel="stylesheet" href="../../../../../media/js/layer/mobile/need/layer.css" type="text/css"/>
+<link rel="stylesheet" href="../../../../../media/js/bootstrap/css/bootstrap.css" />
+<link rel="stylesheet" href="../../../../../media/js/bootstrap/css/bootstrap-table.min.css" type="text/css"/>
+<div style="width: 99%;padding-left: 10px;padding-top: 10px;margin-bottom: 10px;">
+	<table class="table table-bordered " style="margin-bottom: 0px;">
+     	<tr>
+			<td style="width:250px;"  class="th_bg">包件名称</td>
+			<td  style="text-align: left;">
+				<div id="packageName"></div>
+			</td>
+			<td style="width:250px;"  class="th_bg">包件编号</td>
+			<td style="text-align: left;">
+				<div id="packageNum"></div>
+			</td>
+		</tr>
+		<tr>
+			<td style="width:250px;"  class="th_bg">补充通知标题</td>
+			<td  style="text-align: left;" colspan="3">
+				<div id="title"></div>
+			</td>			
+		</tr>
+		<tr>
+            <td colspan="4" style="font-weight: bold;border: none;display: none;" class="active" id="isChangeDate">时间安排</td>         
+        </tr>
+        <tbody id="nowOrOld"></tbody>	 		 
+	 	<tr class="noticeContent">
+            <td colspan="3" style="font-weight: bold;border: none;" class="active">补充通知</td>   
+			<td style="font-weight: bold;border: none;" class="active">
+				<button id="btnViewPDF" style="display: none;" type="button" class="btn btn-primary btn-sm" onClick="btnViewPDF()" ><span class="glyphicon glyphicon-edit"></span>查看回执</button>
+			</td>       
+        </tr>
+	 	<tr class="noticeContent">
+	 		<td  colspan="4">
+	 			<div id="remark" style="height: 150px;overflow-y: auto;padding: 10px;">
+	 				
+	 			</div>	 				 			
+	 		</td>
+	 	</tr>
+	 	<tr>
+            <td colspan="4" style="font-weight: bold;border: none;" class="active">补充通知附件</td>          
+        </tr>
+	 	<td colspan="4">
+    		<table  class="table table-bordered" id="fileTables" style="margin-bottom: 0;">
+    			     	                       
+            </table>
+    	</td> 
+	</table>
+</div>
+			
+<!-- </form>-->
+<style>
+	.table>thead>tr>th,
+	.table>tbody>tr>th,
+	.table>tfoot>tr>th,
+	.table>thead>tr>td,
+	.table>tbody>tr>td,
+	.table>tfoot>tr>td {
+		vertical-align: middle;		
+	}
+</style>
+<script type="text/javascript" src="../../../../../media/js/jquery/jquery.js"></script>
+<script type="text/javascript" src="../../../../../media/js/jquery/jquery.extend.js"></script>
+<script type="text/javascript" src="../../../../../media/js/jquery/jquery.params.js"></script>
+<script type="text/javascript" src="../../../../../media/js/base/common.js"></script>
+<script type="text/javascript" src="../../../../../media/js/base/util.js" ></script>
+<script type="text/javascript" src="../../../../../media/js/bootstrap/js/bootstrap.js"></script>
+<script type="text/javascript" src="../../../../../media/js/bootstrap/js/bootstrap-table.min.js"></script>
+<script type="text/javascript" src="../../../../../media/js/bootstrap/js/bootstrap-table-zh-CN.min.js"></script>
+<script type="text/javascript" src="../../../../../media/js/layer/layer.js" ></script>
+<script type="text/javascript" src="../../../../../media/js/base/digital.js" ></script>
+<script type="text/javascript" src="../js/viewSupplementaryNotice.js"></script>
+<script type="text/javascript" src="../js/suppliment.js"></script>
+
+
+

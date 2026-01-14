@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="pragma" content="no-cache"><!-- 禁止浏览器从本地计算机的缓存中访问页面内容 --> 
+	<meta http-equiv="cache-control" content="no-cache"><!-- 用于指定请求和响应遵循的缓存机制 --> 
+	<meta http-equiv="expires" content="0"><!-- 用于设定网页的到期时间，一旦网页过期，必须到服务器上重新传输； -->	
+	<title>开标大厅</title>
+	<link rel="Shortcut Icon" href="../../../media/image/logo.ico">
+    <link rel="stylesheet" href="../../css/bidRoom.css" />
+	<script type="text/javascript" src="../../../media/js/jquery/jquery.min.js"></script>
+	<script type="text/javascript" src="../../../media/js/jquery/jquery.extend.js"></script>
+	<script type="text/javascript" src="../../../media/js/bootstrap/js/bootstrap.js"></script>
+	<script type="text/javascript" src="../../../media/js/layer/layer.js"></script>
+	<script type="text/javascript" src="../../../media/js/base/common.js"></script>
+	<script type="text/javascript" src="../../../media/js/stream/js/stream-v1.js"></script>
+	<script type="text/javascript" src="../../../media/js/base/util.js"></script>
+	<script type="text/javascript" src="../../../media/js/base/md5.js"></script>
+	<script type="text/javascript" src="../../../media/js/ca.js"></script>
+	<script type="text/javascript" src="../js/bidRoom.js?v=3.4.4.2"></script>
+	<script type="text/javascript" src="../js/caSignIn.js"></script>
+	<script src="../js/multibrowser.js"></script>
+</head>
+<body>
+	<input id="stageStates" hidden="hidden"/>
+	<!--头部信息 -->
+	<div class="top">
+		<div class="openState">
+			<span class="openTit">当前阶段</span>
+			<span id="current" class="openStep">解密</span>
+		</div>
+		<div class="djs">
+	    	<img src="../../images/time.png">
+	     	<div class="djs-rt">倒计时
+		     	<span class="djsTime" id="hoursOne">0</span><span class="djsTime" id="hoursTwo">0</span><span class="djsTxt">时</span>
+		     	<span class="djsTime" id="minuteOne">0</span><span class="djsTime" id="minuteTwo">0</span><span class="djsTxt">分</span>
+		     	<span class="djsTime" id="secondOne">0</span><span class="djsTime" id="secondTwo">0</span><span class="djsTxt">秒</span>
+		    </div>
+	    </div>
+	    <div class="loginInfo">
+	    	<span>欢迎您,</span>
+	    	<span class="username" id="userName"></span>
+	    </div>
+		<div class="curTime">
+			<span id="ymd"></span>
+	   		<span id="hms"></span>
+		</div>
+	</div>
+	
+	<!--开标进度-->
+	<div class="progress">
+		<div class="open-progress clearfix">
+			<div id="js_2" class="step4"><span class="step-name">结束</span></div>
+			<div id="qd_1" class="step step1"><i></i><span class="step-name">签到</span></div>
+			<div id="jm_2" class="step step1"><i></i><span class="step-name">解密</span></div>
+			<div id="qm_2" class="step step1"><i></i><span class="step-name">签名</span></div>
+		</div>
+	</div>
+
+	<!--大厅-->
+	<div class="dating_qd">
+		<div class="dtl_qd ">
+  			<div class="dtl_t">
+  				<p style="width:100%;max-height: 65px;overflow: auto;"><span id="ptitle" scrollamount="3">xxx项目开标大厅</span></p>
+  			</div>
+  			<div class="dtl_ner_qd" style="overflow: auto;">
+				<ul id="chartWin"></ul>
+  			</div>
+ 		</div>
+ 		<div class="dtr_qd">
+ 			<div class="dtr_t">
+ 				<div class="dtr_t-l" >
+ 					<img src="../../images/qd_27.jpg" class="left tbx" />
+ 					<p>今日开标（共<span id="nums">N</span>个）</p>
+ 				</div>
+ 			</div>
+ 
+ 			<div class="dtr_n" style="position: relative;">
+ 				<div style="width:100%;height:calc(100% - 60px);overflow: auto;">
+  					<ul id="pojectsData">
+  					</ul>
+  				</div>	
+  				<div class="an_qd" >
+					<!--<div id="handlerBtn" class="tb tb_jd"></div>
+					<div style="display: none;">
+						<input id="phare" type="hidden" />
+						<input id="keytext" type="hidden" />
+						<input id="fileUrl" type="hidden" />
+					</div>-->
+				</div>
+				<div class="an" style="width:100%;text-align:right;position: absolute;bottom: 10px;">
+					<a id="handlerBtn" onclick="handleBidEachStage(this)" sid="" phare="" keytext="" fileUrl="" style="display: none;">签到</a>
+					<a id="offerBtn" onclick="offerBtn()" pdfurl="" style="display: none;">查看报价</a>
+					<a id="kbyy" onclick="openObjection()" style="display: none;">开标异议</a>
+					<a id="kbylb" onclick="kbySchedule(this)" pdfurl="" style="display: none;">开标一览表</a>
+					<a onclick="custom_close()">退出</a>
+				</div>
+ 			</div>
+ 		</div>
+	</div>
+	
+	<!--对话框-->
+	<div class="buihua" style="height:100px;">
+		<textarea id="msg" class="zw1" placeholder="请输入..."  maxlength="300"></textarea>
+		<button id="sendBtn" class="tj" onclick="chatWithMananger()"  style="float: right;width:120px;margin-right:30px;margin-top: 35px">发送</button>
+	</div>
+</body>
+</html>

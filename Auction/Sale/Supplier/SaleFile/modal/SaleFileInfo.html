@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title>竞卖递交详情</title>
+	<link rel="stylesheet" href="../../../../../media/js/bootstrap/css/bootstrap.css">
+	<link rel="stylesheet" type="text/css"
+		href="../../../../../media/js/bootstrap-fileinput-master/css/fileinput.css" />
+	<link rel="stylesheet" href="../../../../../media/js/bootstrap/css/bootstrap-table.css" />
+	<style>
+		table td {
+			white-space: normal;
+		}
+
+		#classId {
+			height: auto !important;
+		}
+		.dropdown-input-group {
+			min-width: 320px;
+		}
+	</style>
+</head>
+
+<body style="width: 99%;padding-left: 10px;padding-top: 10px;">
+	<table class="table table-bordered " style="margin-bottom: 15px;">
+		<th class="active" colspan="4">项目信息</th>
+		<tr class="add_tr">
+			<td class="text-right">采购项目名称：</td>
+			<td>
+				<div id="projectName"></div>
+			</td>
+			<td class="text-right">采购项目编号：</td>
+			<td>
+				<div id="projectCode"></div>
+			</td>
+		</tr>
+		<tr>
+			<td class="text-right">竞卖文件提交截止时间：</td>
+			<td>
+				<div id="fileEndDate"></div>
+			</td>
+			<td class="text-right">竞卖文件审核截止时间：</td>
+			<td>
+				<div id="fileCheckEndDate"></div>
+			</td>
+		</tr>
+		<tr>
+			<td class="th_bg">投标人代表<i class="red" style="display: none;">*</i></td>
+			<td>
+				<span class="view" id="bidderProxy" style="display: none;"></span>
+				<input type="text" name="bidderProxy" class="form-control edit"
+					style="display: none;margin-bottom: 10px;" />
+				<span class="red edit"
+					style="display: none;">温馨提示：响应文件中有《授权委托书》的，投标人代表填写委托代理人姓名；响应文件中无《授权委托书》的，投标人代表填写法定代表人姓名。填写姓名需与响应文件中保持一致。</span>
+			</td>
+			<td class="th_bg">投标人代表证件号码<i class="red">*</i></td>
+			<td>
+				<div class="dropdown-input-group input-group">
+					<div class="input-group-btn">
+						<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"
+							aria-haspopup="true" aria-expanded="false">
+							<input style="display: none;" type="text" name="bidderProxyCardType"
+								id="bidderProxyCardType" value="1">
+							<span class="input-group-label">身份证</span>
+							<span class="caret"></span></button>
+						<ul class="dropdown-menu">
+							<li data-value="0"><a href="javascript:void 0;">身份证</a></li>
+							<li data-value="1"><a href="javascript:void 0;">护照</a></li>
+						</ul>
+					</div>
+					<input type="text" name="bidderProxyCard" id="bidderProxyCard" maxlength="18" class="form-control">
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td class="th_bg">项目负责人<i class="red" style="display: none;">*</i></td>
+			<td>
+				<span class="view" id="projectLeader" style="display: none;"></span>
+				<input type="text" name="projectLeader" class="form-control edit"
+					style="display: none;margin-bottom: 10px;" />
+				<span class="red edit"
+					style="display: none;">温馨提示：项目负责人填写响应文件中“项目负责人/项目经理/总监理工程师”姓名。填写姓名需与响应文件中保持一致。</span>
+			</td>
+			<td class="th_bg">项目负责人证件号码<i class="red">*</i></td>
+			<td>
+				<div class="dropdown-input-group input-group">
+					<div class="input-group-btn">
+						<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"
+							aria-haspopup="true" aria-expanded="false">
+							<input style="display: none;" type="text" name="projectLeaderCardType"
+								id="projectLeaderCardType" value="0">
+							<span class="input-group-label">身份证</span>
+							<span class="caret"></span></button>
+						<ul class="dropdown-menu">
+							<li data-value="0"><a href="javascript:void 0;">身份证</a></li>
+							<li data-value="1"><a href="javascript:void 0;">护照</a></li>
+						</ul>
+					</div>
+					<input type="text" name="projectLeaderCard" id="projectLeaderCard" class="form-control"
+						maxlength="18">
+				</div>
+			</td>
+		</tr>
+		<tr id='divEdit'>
+			<td class="text-right">递交竞卖文件：</td>
+			<td colspan="3">
+				<p><input type="file" class="fileloading" multiple name="files" id="FileName" /></p>
+				<p style="color:red; font-size: 18px; font-weight: bold;">
+					<strong>温馨提示：</strong>
+					请确认响应文件中是否已按采购文件格式要求完成盖章及签字。
+				</p>
+				<p class="text-danger">提示：响应文件将在递交截止时间后统一审核，审核不通过的响应文件将不可重复递交，供应商应在响应文件递交截止时间前自行检查，如需修改可自行撤回响应文件，修改后重新提交。</p>
+			</td>
+		</tr>
+		<tr>
+			<th class="active subfile" colspan="4">上传文件</th>
+		</tr>
+
+		<tr class="subfile">
+			<td colspan="4">
+				<!--文件列表-->
+				<table class="table" id="files"></table>
+			</td>
+		</tr>
+
+		<th class="active uploadFile" colspan="4">已上传文件</th>
+		<tr class="uploadFile">
+			<td colspan="4">
+				<!--文件列表-->
+				<table class="table" id="uploadedfiles"></table>
+			</td>
+		</tr>
+		<tr class="active">
+			<th colspan="4">递交记录</th>
+		</tr>
+		<tr>
+			<td colspan="4">
+				<table class="table table-bordered table-striped" id="historySignTable">
+				</table>
+			</td>
+		</tr>
+		<th class="active record" colspan="4">审核记录</th>
+		<tr class="record">
+			<td colspan="4">
+				<!--审核记录列表-->
+				<table class="table table-bordered" id="AuctionCheckRecord">
+
+				</table>
+			</td>
+		</tr>
+	</table>
+
+	<div style="width: 100%;height: 70px;">
+	</div>
+	<div style="width: 100%;height: 50px;text-align:center;position: fixed;bottom: 0;background-color: #FFFFFF;">
+		<button type="button" id="btn_sign" class="btn btn-danger" style="display: none;">响应文件确认</button>
+		<button type="button" id="btn_submit" class="btn btn-primary" style="width: 100px;display: none;">递交</button>
+		<button type="button" id="btn_back" class="btn btn-warning" style="display: none;">撤回</button>
+		<button type="button" id="btn_close" class="btn btn-default" style="width: 100px;">关闭</button>
+	</div>
+
+	<script type="text/javascript" src="../../../../../media/js/jquery/jquery.min.js"></script>
+	<script type="text/javascript" src="../../../../../media/js/bootstrap/js/bootstrap.js"></script>
+	<script type="text/javascript" src="../../../../../media/js/bootstrap/js/bootstrap-table.min.js"></script>
+	<script type="text/javascript" src="../../../../../media/js/bootstrap/js/bootstrap-table-zh-CN.min.js"></script>
+	<script src="../../../../../media/js/bootstrap-fileinput-master/js/fileinput.js"></script>
+	<script src="../../../../../media/js/bootstrap-fileinput-master/js/locales/zh.js"></script>
+	<script type="text/javascript" src="../../../../../media/js/jquery/jquery.extend.js"></script>
+	<script type="text/javascript" src="../../../../../media/js/base/common.js"></script>
+	<script type="text/javascript" src="../../../../../media/js/base/util.js"></script>
+	<script type="text/javascript" src="../../../../../media/js/Model/public.js?version=3.4.25"></script>
+	<script src="../js/SaleFileInfo.js?version=3.4.25" type="text/javascript" charset="utf-8"></script>
+</body>
+
+</html>

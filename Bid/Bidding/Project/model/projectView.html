@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8">
+		<meta http-equiv="pragma" content="no-cache"><!-- 禁止浏览器从本地计算机的缓存中访问页面内容 --> 
+		<meta http-equiv="cache-control" content="no-cache"><!-- 用于指定请求和响应遵循的缓存机制 --> 
+		<meta http-equiv="expires" content="0"><!-- 用于设定网页的到期时间，一旦网页过期，必须到服务器上重新传输； -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>查看项目</title>
+    <link rel="stylesheet" href="../../../media/js/layer/mobile/need/layer.css" />
+    <link rel="stylesheet" href="../../../media/js/bootstrap/css/bootstrap.css" />
+	<style>
+		html,body { height: 100%;}
+		.set_height{
+		    display: inline-block;
+			padding: 6px 12px;
+		}  
+		
+		
+		
+		
+	</style>
+</head>
+
+<body>
+	<div class="pageModel">
+		
+		<div class="panel-group" id="accordion">
+    		<div class="panel panel-accordion panel-default">
+	    		<div class="panel-heading active"  role="tab" id="headingOne">  
+			 		<h4 class="panel-title">
+		            	<a  role="button" data-toggle="collapse"  href="#collapseOne" aria-expanded="true" aria-controls="collapseOne" >项目信息</a>
+			 		</h4>  
+			   	</div>  
+			  	<div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">  
+			       	<div class="panel-body">
+			       		<table  class="table table-bordered ">
+			       			<tr>
+				            	<td class="th_bg">项目编号</td>
+				                <td colspan="3">
+				                    <span id="interiorProjectCode" class="set_height"></span>
+				                </td>
+				            </tr>
+					        <tr>
+				            	<td class="th_bg">项目名称</td>
+				                <td colspan="3">
+				                	<span id="projectName" class="set_height"></span>
+				                </td>
+				            </tr>
+				            <tr>
+				                <td class="th_bg">项目所在行政区域</td>
+				                <td colspan="3">
+				                    <span id="areaBlock" class="set_height"></span>
+				                </td>
+				            </tr>
+				            <tr style="display: none;">
+				            	<td class="th_bg">固定资产类项目</td>
+				                <td colspan="3">
+				                	<span id="relateCode" class="set_height"></span>
+				                </td>
+				            </tr>
+				            <tr>
+				            	<td class="th_bg">招标人</td>
+				                <td colspan="3">
+				                	<span id="legalPerson" class="set_height"></span>
+				                </td>
+				            </tr>
+				            
+				            <tr>
+				            	<td class="th_bg">联系人</td>
+				                <td >
+				                    <span id="contactor" class="set_height"  style="width: 260px;"></span>
+				                </td>
+				            	 <td class="th_bg">联系方式</td>
+				                <td >
+				                    <span id="contactInformation" class="set_height"  style="width: 260px;"></span>
+				                </td>
+				            </tr>
+				            
+				            <tr>
+				            	<td class="th_bg" >资金来源</td>
+				                <td colspan="3">
+				                    <span id="fundSource" class="set_height" optionName="fundSource"></span>
+				                </td>
+				            </tr>
+				            <tr>
+				               <td class="th_bg">项目行业分类</td>
+				                <td colspan="3">
+				                    <span id="proIndustriesType" class="set_height" ></span>
+				                </td>
+				            </tr>
+				            <tr>
+				            	<td class="th_bg">出资比例</td>
+				                <td colspan="3">
+				                    <span id="contributionScale" class="set_height" ></span>
+				                </td>
+				            </tr>
+				            <tr>
+				            	 <td class="th_bg">项目地址</td>
+				                <td colspan="3">
+				                    <span id="address" class="set_height" ></span>
+				                </td>
+				            </tr>
+				            <tr>
+				            	<td class="th_bg">项目规模</td>
+				                <td colspan="3">
+				                    <span id="projectScale" class="set_height" ></span>
+				                </td>
+				            </tr>
+			       		</table>
+		       		</div>
+	       		</div>
+       		</div>
+       		<div class="panel panel-accordion panel-default">
+	    		<div class="panel-heading active"  role="tab" id="headingTwo">  
+			 		<h4 class="panel-title">
+		            	<a class="collapsed" role="button" data-toggle="collapse"  href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">项目审批（核准/备案）文件</a>
+			 		</h4>  
+			   	</div>  
+			  	<div  id="collapseTwo" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingTwo">  
+			       	<div class="panel-body">
+			       		<table class="table table-bordered">
+					      	<tr>
+				                <td class="th_bg">项目审批文件名</td>
+				                <td>
+				                	<span id="approvalName" class="set_height" ></span>
+				                </td>
+				                <td class="th_bg">项目审批文号</td>
+				                <td>
+				                    <span id="approvalNumber" class="set_height" ></span>
+				                </td>
+							</tr>
+							<tr>
+				                <td class="th_bg">项目审批单位</td>
+				                <td colspan="3">
+				                    <span id="approvalAuthority" class="set_height" ></span>
+				                </td>
+							</tr>
+				        </table>   
+		       		</div>
+		       	</div>
+	    	</div>
+	    	<div class="panel panel-accordion panel-default">
+	    		<div class="panel-heading active"  role="tab" id="headingThree">  
+			 		<h4 class="panel-title">
+		            	<a class="collapsed" role="button" data-toggle="collapse" href="#collapseThree" aria-controls="collapseThree"  aria-expanded="false">
+		            		相关附件
+		            	</a>
+			 		</h4>  
+			   	</div>  
+			  	<div  id="collapseThree" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingThree">  
+			       	<div class="panel-body">
+			       		<div id="fileContent">
+			       			
+			       		</div>  
+		       		</div>
+		       	</div>
+	    	</div>
+	    	<div id="approval"></div>
+   		</div>
+		
+    </div>
+    <div class="bottom-btn">
+    	<button type="button" class="btn btn-primary" id="btnPass" style="display: none;"><span class="glyphicon glyphicon-saved"></span>审核通过</button>
+        <button type="button" class="btn btn-default" id="btnNoPass" style="display: none;"><span class="glyphicon glyphicon-remove"></span>审核不通过</button>
+        <button type="button" class="btn btn-default" id="btnClose" style="display: none;"><span class="glyphicon glyphicon-remove"></span>关闭</button>
+    </div>
+    <script type="text/javascript" src="../../../media/js/jquery/jquery.js"></script>
+    <script type="text/javascript" src="../../../media/js/jquery/jquery.extend.js"></script>
+    <script type="text/javascript" src="../../../media/js/base/common.js"></script>
+    <script type="text/javascript" src="../../../media/js/bootstrap/js/bootstrap.js"></script>
+    <script type="text/javascript" src="../../Model/js/public.js"></script>
+    
+    <script type="text/javascript" src="../../../media/js/base/WorkflowInfoNew.js"></script>
+    <script type="text/javascript" src="../../../media/js/base/StreamUpload.js"></script>
+    <script type="text/javascript" src="../../Model/js/dataLinkage.js"></script>
+    <script type="text/javascript" src="../../Model/js/multiLinkage.js"></script>
+    <script type="text/javascript" src="../js/projectView.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="pragma" content="no-cache">
+		<!-- 禁止浏览器从本地机的缓存中调阅页面内容 -->
+		<meta http-equiv="cache-control" content="no-cache, must-revalidate">
+		<meta http-equiv="expires" content="0">
+		<title>企业信息列表</title>
+	</head>
+	
+	<body>
+		
+		<div class="container" style="width: 100%;">
+		
+		<div id="toolbarTop" class="clearfix">
+        	<div class="input-group float-left" style="width: 180px;">
+        		<span class="input-group-addon">企业名称</span>
+        		<input type="text" class="form-control" id="legalName" style="width:180px;margin-right: 5px;">
+        	</div>	
+        	<div class="input-group float-left" style="width: 180px;">
+        		<span class="input-group-addon">企业代码</span>
+        		<input type="text" class="form-control" name="legalCode" id="enterpriseCode" style="width:180px;margin-right: 5px;">
+    		</div>
+    		
+    		<div class="btn-group">
+	    		<button type="button" id="btnSearch" class="btn btn-primary">
+	                <span class="glyphicon glyphicon-search" aria-hidden="true">查 询</span> 
+	            </button>
+	            <button id="btnAdd" type="button" class="btn btn-primary">
+	                <span class="glyphicon glyphicon-plus"></span>设置默认值
+	            </button>
+    		</div>
+    	</div>	
+			<table class="table table-hover table-bordered" id="enterPrisetable" ></table>
+		</div>
+		
+		<script type="text/javascript" src="OpenTender/config/js/EnterpriseList.js"></script>
+	</body>
+</html>

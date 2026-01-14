@@ -1,0 +1,66 @@
+
+<link rel="stylesheet" href="../../../../media/js/layer/mobile/need/layer.css"/>
+<link rel="stylesheet" href="../../../../media/js/bootstrap/css/bootstrap.css" />
+<link rel="stylesheet" href="../css/style.css" /> 
+<div style="width: 99%;padding-left: 10px;padding-top: 10px;">
+	 <table class="table table-bordered" style="margin-bottom: 0;">
+	<tr>
+	 	<td  class="th_bg" width="20%" >采购项目</td>
+	 	<td colspan="3" style="text-align: left;"><button class="btn btn-primary" onclick="selet()">选择</button></td>
+	</tr>
+	<tr>
+	 	<td  class="th_bg" width="20%" ><sup class="red">*</sup>项目名称</td>
+	 	<td colspan="3" style="text-align: left;"><div id="projectName"></div></td>
+	</tr>
+	<tr>
+	 	<td  class="th_bg" width="20%" >项目编号</td>
+	 	<td colspan="3" style="text-align: left;"><div id="projectCode"></div></td>
+	</tr>
+	<tr>
+	 	<td  class="th_bg" width="20%" >采购人名称</td>
+	 	<td colspan="3" style="text-align: left;"><div id="purchaserName"></div></td>
+	</tr>
+	<tr>
+	 	<td  class="th_bg" width="20%" >采购人地址</td>
+	 	<td colspan="3"style="text-align: left;"><div id="purchaserAddress"></div></td>
+	</tr>
+	<tr>
+	 	<td  class="th_bg" width="20%" >联系人</td>
+	 	<td style="text-align: left;"><div id="purchaserLinkmen"></div></td>
+	 	<td  class="th_bg" width="20%" >联系电话</td>
+	 	<td style="text-align: left;"><div id="purchaserTel"></div></td>
+	</tr>
+	<tr style="text-align: center;">
+	    <td colspan="4" style="font-weight: bold;" class="active">采购包件</td>
+	</tr>
+	<tr>
+		<table class="table  table-bordered" >
+			<thead>
+				<tr>
+					<th style="width: 50px;">序号</th>
+					<th style="text-align: left;">包件名称</th>
+					<th style="text-align: left;">包件编号</th>
+					<th style="width: 50px;">操作</th>
+				</tr>
+			</thead>
+			<tbody id="tablebjb">
+				
+			</tbody>
+			
+		</table>
+	</tr>
+</table>
+</div>
+
+ <style>
+ .table > thead > tr > th, .table > tbody > tr > th, .table > tfoot > tr > th, .table > thead > tr > td, .table > tbody > tr > td, .table > tfoot > tr > td{
+ 	vertical-align: middle;
+ 	text-align: center;
+ }
+ </style>
+ <script type="text/javascript" src="../../../../media/js/jquery/jquery.js" ></script>
+ <script type="text/javascript" src="../../../../media/js/jquery/jquery.extend.js"></script>
+ <script type="text/javascript" src="../../../../media/js/base/common.js" ></script>
+ <script type="text/javascript" src="../../../../media/js/bootstrap/js/bootstrap.js" ></script>
+ <script type="text/javascript" src="../../../../media/js/layer/layer.js" ></script>
+ <script type="text/javascript" src="../js/add_model.js" ></script>

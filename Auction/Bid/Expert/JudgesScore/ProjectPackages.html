@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="pragma" content="no-cache">
+		<!-- 禁止浏览器从本地机的缓存中调阅页面内容 -->
+		<meta http-equiv="cache-control" content="no-cache, must-revalidate">
+		<meta http-equiv="expires" content="0">
+		<title></title>
+		<link rel="stylesheet" type="text/css" href="../../../media/js/bootstrap/css/bootstrap.css">
+		<link rel="stylesheet" type="text/css" href="../../../media/js/bootstrap/css/bootstrap-table.css">
+	</head>
+    <style>
+	 .table > thead > tr > th, 
+	 .table > tbody > tr > th, 
+	 .table > tfoot > tr > th, 
+	 .table > thead > tr > td, 
+	 .table > tbody > tr > td, 
+	 .table > tfoot > tr > td{
+	 	vertical-align: middle;
+	 }
+  </style>
+	<body>
+		<div class="container">
+			<table class="table table-bordered">
+				<tr>
+					<th class="th_bg" width="20%" >采购项目编号:</th>
+					<td width="25%" data-field="projectCode"></td>
+					<th class="th_bg" width="20%" >采购项目名称:</th>
+					<td width="25%" data-field="projectName"></td>
+				</tr>
+				<tr>
+					<th class="th_bg">采购方式:</th>
+					<td data-field="tenderType"></td>
+					<th class="th_bg">询价评审时间:</th>
+					<td data-field="checkEndDate"></td>
+				</tr>
+			</table>
+			<table class="table table-bordered" id="packages"></table>
+		</div>
+	</body>
+	<script type="text/javascript" src="../../../media/js/jquery/jquery.min.js"></script>
+	<script type="text/javascript" src="../../../media/js/jquery/jquery.extend.js"></script>
+	<script type="text/javascript" src="../../../media/js/layer/layer.js"></script>
+	<script type="text/javascript" src="../../../media/js/bootstrap/js/bootstrap-table.min.js"></script>
+	<script>
+	    var expertIds = sessionStorage.getItem('expertId');
+		$.get(top.config.bidhost + '/WaitCheckProjectController/getWaitProjectPackages.do', {
+			projectId: location.hash.substr(1),
+			expertId:expertIds
+		}, function(res) {
+			if(res.success) {
+				$('td[data-field]').each(function() {
+					if($(this).data('field') == 'tenderType') {
+						$(this).html(['询价采购', '竞价采购', '竞卖', '询价报价', '招标采购', '谈判采购', '单一来源采购', '框架协议采购', '战略协议采购'][res.data[$(this).data('field')]]);
+					} else
+						$(this).html(res.data[$(this).data('field')]);
+				})
+				bindPackages(res.data.projectPackages);
+			}
+		})
+        
+		function bindPackages(packages) {
+			$("#packages").bootstrapTable({
+				data: packages,
+				columns: [{
+					field: 'packageName',
+					title: '包件名称'
+				}, {
+					field: 'checkPlan',
+					title: '评审方法',
+					formatter: function(value, row, index) {
+						return value == "0" ? "综合评分法" : "最低价法";
+					}
+				}, {
+					field: 'expertCheckState',
+					title: '评审状态',
+					formatter: function(value, row, index) {
+						return "<span style='color:" + (value == "完成打分" ? "green" : "red") + "'>" + value + "</span>";
+					}
+				}, {
+					title: '操作',
+					events: {
+						'click .btn-check': function(e, value, row, index) {
+							//							$.post(top.config.bidhost + '/AuctionProjectPackageController/verifyPackage.do',{id:row.id},function(res){
+							//								if(!res.success) return layer.alert(res.message);
+							var index = top.layer.open({
+								type: 2,
+								title: "评审管理",
+								area: ['100%', '100%'],
+								btn: ["刷新", "关闭"],
+								content: $.parserUrlForToken('0502/Bid/JudgesScore/ExpertCheckInfo.html') + '&packageId=' + row.packageId + "&projectId=" + row.projectId + "&checkPlan=" + row.checkPlan+'&expertId='+expertIds,
+								btn1: function(index, layero) {
+									parent.window[layero.find('iframe')[0]['name']].location.reload();
+								}
+							});
+							//							})
+						}
+					},
+					formatter: function(value, row, index) {
+						if(row.expertCheckState == "完成打分") {
+							return "<button class='btn btn-xs btn-primary btn-check'>查看</button>";
+						} else {
+							return "<button class='btn btn-xs btn-primary btn-check'>评审</button>";
+						}
+					}
+				}]
+			});
+		}
+	</script>
+
+</html>

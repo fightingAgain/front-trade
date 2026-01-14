@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="zh">
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="pragma" content="no-cache"><!-- 禁止浏览器从本地计算机的缓存中访问页面内容 --> 
+		<meta http-equiv="cache-control" content="no-cache"><!-- 用于指定请求和响应遵循的缓存机制 --> 
+		<meta http-equiv="expires" content="0"><!-- 用于设定网页的到期时间，一旦网页过期，必须到服务器上重新传输； -->
+	    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+	    <title>会议预约情况查看</title>
+	    
+		<link href="media/js/fullcalendar/packages/core/main.css" rel="stylesheet" />
+		<link href="media/js/fullcalendar/packages/daygrid/main.css" rel="stylesheet" />
+    
+	    <!--<link rel="stylesheet" href="media/js/bootstrap/css/bootstrap-table-fixed-columns.css">-->
+	</head>
+	<style>
+		/*table td,table th{
+			white-space:nowrap;
+			text-overflow:ellipsis;
+			overflow:hidden;
+		}*/
+		table td,table th{
+			white-space:normal;
+		}
+		.fc-content{
+			font-size: 20px;
+		}
+	
+	</style>
+	<body>
+		<div class="container-fluid">
+        	<div id="calendar"></div>
+
+    	</div>
+    	<script src="media/js/fullcalendar/packages/core/main.js"></script>
+    	<script src="media/js/fullcalendar/packages/daygrid/main.js"></script>
+    	<script src="Bidding/Service/Order/js/orderView.js"></script>
+	</body>
+</html>

@@ -1,0 +1,112 @@
+<head>
+		<meta http-equiv="pragma" content="no-cache">
+		<!-- 禁止浏览器从本地机的缓存中调阅页面内容 -->
+		<meta http-equiv="cache-control" content="no-cache, must-revalidate">
+		<meta http-equiv="expires" content="0">
+	</head>
+	<link rel="stylesheet" href="../../../../../media/js/layer/mobile/need/layer.css" />
+	<link rel="stylesheet" href="../../../../../media/js/layer/theme/default/laydate.css" />
+	<link rel="stylesheet" type="text/css" href="../../../../../media/js/bootstrap-fileinput-master/css/fileinput.min.css" />
+	<link rel="stylesheet" href="../../../../../media/js/bootstrap/css/bootstrap-select.min.css" />
+	<link rel="stylesheet" href="../../../../../media/js/bootstrap/css/bootstrap.css" />
+	<link rel="stylesheet" href="../../../../../media/js/bootstrap/css/bootstrap.min.css">
+	<link rel="stylesheet" href="../../../../../media/js/bootstrap/css/bootstrap-table.min.css" />
+	<form  id="form" name="purchase" style="width: 99%;padding-left: 10px;padding-top: 10px;">
+		<table class="table table-bordered" style="margin-bottom: 60px;"> 
+			<tr>
+				<td colspan="4" style="font-weight: bold;" class="active">基本信息</td>
+			</tr>
+			<tr class="basic">
+				<td class="text-right">供应商名称：</td>
+				<td>
+					<div id="legalName"></div>
+				</td>
+				<td class="text-right">法人名称：</td>
+				<td>
+					<div id="legalRepresent"></div>
+				</td>
+			</tr>
+			<tr class="basic">
+				<td class="text-right">联系人：</td>
+				<td>
+					<div id="legalContact"></div>
+				</td>
+				<td class="text-right">联系人电话：</td>
+				<td>
+					<div id="legalContactPhone"></div>
+				</td>
+			</tr>
+			<tr class="basic">
+				<td class="text-right">联系人地址：</td>
+				<td>
+					<div id="legalContactAddress"></div>
+				</td>
+				<td class="text-right">开户行帐号：</td>
+				<td>
+					<div id="basicAccountNo"></div>
+				</td>
+			</tr>
+			<tr class="basic">
+				<td class="text-right">委托人：</td>
+				<td>
+					<div class="divclient" id="divclient"></div>
+				</td>
+				<td class="text-right">委托人身份证号：</td>
+				<td>
+					<div id="divclientsId" class="divclientsId"></div>
+				</td>
+			</tr>
+			<tr>
+				<td colspan="4" style="font-weight: bold;" class="active">车辆信息</td>
+				<!--<input type="hidden" name="project.projectState"  id="projectState" class="form-control"/>           	
+				<input name="project.projectSource" type="hidden" value="0" id="projectSource"/>
+				<input type="hidden" name="project.tenderType" value="2" id="tenderType"/>                           
+				<input type="hidden" name="isFile" value="0" id="isFile"/>  
+				<input type="hidden" name="isPublic" value="0" id="isPublic"/>
+				<input type="hidden" name="project.isAgent" value="1" id="isAgent"/>
+				<input type="hidden" name="id" id="purchaseId"/>
+				<input type="hidden" name="project.id"  id="projectId"/>-->
+			</tr>
+			<tr  class="add_tr">
+				<td colspan="4">
+					<!--车辆信息-->
+					<table class="table" id="vehcartabel"></table>
+			    </td>
+			</tr>
+			<!--<tr class="add_tr searched">
+				<td class="th_bg">车牌</td>
+				<td style="text-align: left;"><div id="plate"></div>
+				<td class="th_bg">车辆型号</td>
+				<td style="text-align: left;"><div id="model"></div></td>     
+			</tr>
+			<tr class="add_tr searched">
+				<td class="th_bg">总质量</td>
+				<td style="text-align: left;"><div id="weight"></div></td>
+				<td class="th_bg">附件地址</td>
+				<td style="text-align: left;">
+					<div id="path"></div>
+				</td>
+			</tr>	-->
+		 </table>
+	 </form>
+	 <div class="bottom-btn" style="z-index: 11000;">
+		<button type="button" class="btn btn-primary" id="btnsubmit"><span class="glyphicon glyphicon-ok"></span>审核</button>
+		<button type="button" class="btn btn-default" id="btnClose"><span class="glyphicon glyphicon-remove"></span>关闭</button>
+	</div>
+	 <style>
+	 .table > thead > tr > th, .table > tbody > tr > th, .table > tfoot > tr > th, .table > thead > tr > td, .table > tbody > tr > td, .table > tfoot > tr > td{
+		 vertical-align: middle;
+	 }
+	 </style>
+	 <script type="text/javascript" src="../../../../../media/js/jquery/jquery.min.js"></script>
+	 <script type="text/javascript" src="../../../../../media/js/jquery/jquery.extend.js"></script>
+	 <script type="text/javascript" src="../../../../../media/js/base/common.js" ></script>
+	 <script type="text/javascript" src="../../../../../media/js/base/ProvinceCityData.js"></script>
+	 <script type="text/javascript" src="../../../../../media/js/bootstrap/js/bootstrap-table.min.js"></script>
+	<script type="text/javascript" src="../../../../../media/js/bootstrap/js/bootstrap-table-zh-CN.min.js"></script>
+	 <script type="text/javascript" src="../../../../../media/js/bootstrap-fileinput-master/js/fileinput.js"></script>
+	 <script type="text/javascript" src="../../../../../media/js/bootstrap-fileinput-master/js/locales/zh.js"></script>
+	 <script type="text/javascript" src="../../../../../media/js/bootstrap/js/bootstrap-select.min.js" ></script>
+	 <script type="text/javascript" src="../../../../../media/js/bootstrap/js/defaults-zh_CN.min.js" ></script>
+	 <script type="text/javascript" src="../../../../../media/js/base/util.js"></script>
+	 <script type="text/javascript" src="../js/JMauditmodel.js" ></script>

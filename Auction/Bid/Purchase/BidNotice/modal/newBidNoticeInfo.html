@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="pragma" content="no-cache">
+		<!-- 禁止浏览器从本地机的缓存中调阅页面内容 -->
+		<meta http-equiv="cache-control" content="no-cache, must-revalidate">
+		<meta http-equiv="expires" content="0">
+		<title>询比采购结果公示</title>
+		<link rel="stylesheet" href="../../../../../media/js/bootstrap/css/bootstrap.css">
+		<link rel="stylesheet" href="../../../../../media/js/bootstrap/css/bootstrap-table.min.css" />
+		<link rel="stylesheet" href="../../../../../media/js/bootstrap/css/bootstrap-select.min.css" />
+		<link rel="stylesheet" href="../../../../../media/js/datetimepicker/css/jquery.datetimepicker.css"/>
+		<script type="text/javascript" charset="utf-8" src="../../../../../media/js/ueditor/ueditor.config.js"></script>
+		<script type="text/javascript" charset="utf-8" src="../../../../../media/js/ueditor/ueditor.all.js"> </script>
+		<!--建议手动加在语言，避免在ie下有时因为加载语言失败导致编辑器加载失败-->
+		<!--这里加载的语言文件会覆盖你在配置项目里添加的语言类型，比如你在配置项目里配置的是英文，这里加载的中文，那最后就是中文-->
+		<script type="text/javascript" charset="utf-8" src="../../../../../media/js/ueditor/lang/zh-cn/zh-cn.js"></script>
+		<style type="text/css">
+			.table th,
+			.table td {				
+				vertical-align: middle !important;
+			}
+			.resultContent {				
+				margin: auto;
+				background-image: url(../../../../../media/image/images/watermarkOne.png);
+				overflow: auto;
+			}
+			#edui1_iframeholder {				
+				margin: auto;
+				background-image: url(../../../../../media/image/images/watermarkOne.png);
+				overflow: auto;
+			}
+		</style>
+	</head>
+	
+	<body style="width: 99%;padding-left: 10px;padding-top: 10px;margin-bottom: 0;">
+		<table class="table table-bordered" style="margin-bottom: 50px;" align="center">
+			<th colspan="4" class="active" >项目信息
+			</th>
+			<tr>
+				<td class="th_bg" width="20%" >采购项目名称</td>
+				<td colspan="3"  id="projectName"></td>
+			</tr>
+			<tr>
+				<td class="th_bg" >采购项目编号</td>
+				<td colspan="3"  id="projectCode"></td>
+			</tr>
+			<tr>
+				<td class="th_bg" >包件名称</td>
+				<td colspan="3"  id="packageName"></td>
+			</tr>
+			<tr>
+				<td class="th_bg" >包件编号</td>
+				<td colspan="3"  id="packageNum"></td>
+			</tr>
+			<tr>
+				<td class="th_bg" rowspan="2">是否公开</td>
+				<td colspan="3" ><input type="radio" id="isPublic" name="isPublic" value="0">公开<input type="radio" id="isPublic" name="isPublic" value="1">不公开</td>
+			</tr>
+			<tr>
+				<td colspan="3" ><span style="color: red;">温馨提示 【公开前台和后台均公示采购结果；不公开仅对参与项目的供应商公示】</span></td>
+			</tr>
+			<tr>
+				<td class="th_bg" >采购人名称</td>
+				<td colspan="3"  id="purchaserName"></td>
+			</tr>
+			<tr>
+				<td class="th_bg" >采购人地址</td>
+				<td colspan="3"  id="purchaserAddress"></td>
+			</tr>
+			<tr>
+				<td class="th_bg" >联系人</td>
+				<td   id="purchaserLinkmen"></td>
+				<td class="th_bg" width="20%" >联系电话</td>
+				<td   id="purchaserTel"></td>
+			</tr>
+			<tr class="update">
+				<td class="th_bg" style=" width: 200px;"><span style="color: red;" class="isWatch">*</span>公示开始时间</td>
+				<td ><input type="text" id="bidNoticeStartDate" name="bidNoticeStartDate" class="form-control Wdate" /></td>
+				<td class="th_bg" width="20%" ><span style="color: red;" class="isWatch">*</span>公示截止时间</td>
+				<td  ><input type="text" id="bidNoticeEndDate" name="bidNoticeEndDate" class="form-control Wdate" /></td>
+			</tr>
+			<tr class="view" style="display: none;">
+				<td class="th_bg" style=" width: 200px;">公示开始时间</td>
+				<td ><span id="bidNoticeStartDate1"> </span></td>
+				<td class="th_bg" width="20%" >公示截止时间</td>
+				<td ><span  id="bidNoticeEndDate1"> </span></td>
+			</tr>
+			<tr class="noneddd">
+				<th colspan="4" class="active" style="text-align: left;border: none;"><span id="examTypeName">询比采购结果公示</span></th>
+				<!--<td colspan="2" class="active" id="btns" style="text-align: right;border: none;"><button type="button" class="btn btn-primary btn-sm" id="addColumn">添加</button><button type="button" class="btn btn-primary btn-sm" style="margin-left: 10px;" id="delColumn">删除</button></td>-->
+			</tr>
+			<tr class="NewsContent" style="display: none">
+				<td class="th_bg">选择发布媒体</td>
+				<td colspan="3" style="text-align: left;">
+					<!-- optionName="project.optionName" optionId="project.optionId" optionValue="project.optionValue" -->
+					<MediaSelect></MediaSelect>
+				</td>
+			</tr>
+			<tr>
+				<td colspan="4">
+					<table class="table table-bordered" id="ueditorContent"></table>
+				</td>
+			</tr>
+			<!-- <tr class="NewsContent" style="display: none">
+				<td class="th_bg">选择结果公示模板</td>
+				<td colspan="3">
+					<select class="form-control" id="noticeTemplate" style="width: 260px;display: inline-block;">
+						
+					</select>
+					<button type="button" class="btn btn-primary" id="btnModel" style="vertical-align:top;"><span class="glyphicon glyphicon-refresh" style="vertical-align:-2px;"></span>生成结果公示内容</button>
+				</td>
+			</tr>
+			<tr class="NewsContent resultContent" style="display: none">
+		 		<td  colspan="4">
+		 			<script id="editor" type="text/plain" style="width:100%;height:400px;"></script>					 			
+		 		</td>
+		 	</tr>
+		 	<tr class="NewsContents resultContent" style="display: none">
+		 		<td  colspan="4">
+		 			<div id="NewsContent" style="width: 95%;margin: auto;"></div>		 					 			
+		 		</td>
+		 	</tr> -->
+			<tr class="employee">
+				<td class="th_bg" class="text-right">添加审核人</td>
+				<td colspan="3" >
+					<select id="employeeId" class="form-control" style="width: 180px;" name="checkerId"></select>
+				</td>
+			</tr>
+			<tr class="workflowList">
+			   <td class="active" style="font-weight: bold;text-align: left;"  colspan="4"><strong>审核记录</strong></td>
+			</tr>
+			<tr>
+			<td class="workflowList" colspan="4">
+				<table class="table  table-bordered"  id="workflowListDetail">
+					<tr>
+						<td colspan="5" style="text-align: center;">
+							当前没有审核记录
+						</td>	
+					</tr>
+				</table>
+			</td>
+		</table>
+		<div class="form-group rowLine" style="width: 100%;height: 50px;text-align:center;position: fixed;bottom: 0;background-color: #FFFFFF;margin-bottom:0px !important;padding-top: 10px;z-index: 1000001;">
+			<button type="button" style="width: 80px;" class="btn btn-primary" data-dismiss="modal" id="btn_submit">确定</button>
+			<button type="button" style="width: 80px;" class="btn btn-default" data-dismiss="modal" id="btn_close">关闭</button>
+		</div>
+	</body>
+	<script type="text/javascript" src="../../../../../media/js/jquery/jquery.js"></script>
+	<script type="text/javascript" src="../../../../../media/js/base/common.js"></script>
+	<script type="text/javascript" src="../../../../../media/js/jquery/jquery.extend.js"></script>
+	<script type="text/javascript" src="../../../../../media/js/bootstrap/js/bootstrap.js"></script>
+	<script type="text/javascript" src="../../../../../media/js/bootstrap/js/bootstrap-table.min.js"></script>
+    <script type="text/javascript" src="../../../../../media/js/bootstrap/js/bootstrap-table-zh-CN.min.js"></script>
+	<script type="text/javascript" src="../../../../../media/js/bootstrap/js/bootstrap-select.min.js" ></script>
+	<script type="text/javascript" src="../../../../../media/js/layer/layer.js"></script>
+	<script type="text/javascript" src="../../../../../media/js/layer/laydate.js"></script>
+	<script type="text/javascript" src="../../../../../media/js/My97DatePicker/WdatePicker.js"></script>
+	<!-- <script type="text/javascript" src="../../../../../media/js/datetimepicker/js/jquery.datetimepicker.js" ></script>	 -->
+	<script type="text/javascript" src="../../../../../media/js/base/UEditorFun.js" ></script>
+	<script type="text/javascript" src="../js/newBidNoticeInfo.js"></script>
+	<script type="text/javascript" src="../../../../Public/js/PublishingMedia.js" ></script>
+	<!-- 公告模板 -->
+	<script type="text/javascript" src="../../../../TempManager/tempPublic.js"></script>
+	<!-- end -->
+	<script type="text/javascript" src="../../../../../media/js/base/auditRecords.js"></script>
+    <script>
+	 	//实例化编辑器
+	    //建议使用工厂方法getEditor创建和引用编辑器实例，如果在某个闭包下引用该编辑器，直接调用UE.getEditor('editor')就能拿到相关的实例
+		// if (document.documentMode) {//如果是ie内核浏览器 ，隐藏滚动条，编辑器自动增高
+		// 	var ue = UE.getEditor('editor',{autoHeightEnabled: true});
+		// 		}else{
+	    // var ue = UE.getEditor('editor');
+		// 	}
+	 </script>
+</html>

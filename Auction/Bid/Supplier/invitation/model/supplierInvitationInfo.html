@@ -1,0 +1,221 @@
+<head>
+	<meta http-equiv="Cache-Control" content="no-cache, must-revalidate">
+	<!-- 解决部分兼容性问题，如果安装了GCF，则使用GCF来渲染页面，如果未安装GCF，则使用最高版本的IE内核进行渲染。 -->
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">  
+	<!-- 页面按原比例显示 -->
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="pragma" content="no-cache">
+	<!-- 禁止浏览器从本地机的缓存中调阅页面内容 -->
+	<meta http-equiv="cache-control" content="no-cache, must-revalidate">
+	<meta http-equiv="expires" content="0">
+	<!--[if lt IE 9]>
+	   <script src="../../../../media/js/html5shiv.min.js"></script>
+	   <script src="../../../../media/js/respond.js"></script>
+	<![endif]-->
+	<link rel="stylesheet" href="../../../../../media/js/layer/mobile/need/layer.css" type="text/css"/>
+	<link rel="stylesheet" href="../../../../../media/js/bootstrap/css/bootstrap.css" />
+	<link rel="stylesheet" href="../../../../../media/js/bootstrap/css/bootstrap-table.min.css" type="text/css"/>
+</head>
+<!--<link rel="stylesheet" href="../css/style.css" type="text/css"/>-->
+<form id="formb" name="projectPackages" style="width: 99%;padding-left: 10px;padding-top: 10px;margin-bottom: 60px;">  
+<div class="container-fluid">
+	<table class="table table-bordered" style="margin-bottom: 0px;">
+		<tr>
+            <td colspan="4" style="font-weight: bold;" class="active">项目信息</td>
+        </tr>
+        <tr >
+            <td class="th_bg" >采购项目名称</td>
+            <td  style="width: 290px;">
+            	<div id="projectName"></div>           	
+            </td>
+            <td class="th_bg" >采购项目编号</td>
+            <td  style="width: 290px;">
+            	<div id="projectCode"></div>           	
+            </td>  
+        </tr>
+         <tr>
+         	<td class="th_bg" >资金来源</td>
+            <td  >
+            	<div id="sourceFunds"></div>            	
+            </td> 
+         	<td class="th_bg">项目类型</td>
+            <td  >
+            	<div id="projectTypeText"></div>            	
+            </td>
+         </tr>
+         <tr class="engineering">
+            <td class="th_bg" >项目名称</td>
+            <td colspan="3" >
+            	<div id="programmeName"></div>
+            	
+            </td>         
+           
+         </tr>
+         <tr class="engineering">
+         	<td class="th_bg" >项目编号</td>
+            <td colspan="3" >
+            	<div id="programmeCode"></div>           	
+            </td>
+         </tr>
+         <tr class="engineering">
+            <td class="th_bg">项目地址</td>
+            <td colspan="3" >
+            	<div id="programmeAddress"></div>            	
+            </td>
+         </tr>
+         <input type="hidden" name="project.isAgent" value="1"/>      
+		 <tr class="isAgent1">
+		    <td colspan="4" style="font-weight: bold;" class="active">代理机构信息</td>            
+		 </tr>
+		 <tr class="isAgent1">
+		    <td class="th_bg">代理机构名称</td>
+		    <td colspan="3" >
+		    	<div id="agencyName"></div>
+		    </td>
+		 </tr>
+		 <tr class="isAgent1">
+		    <td class="th_bg">代理机构地址</td>
+		    <td colspan="3" >
+		    	<div id="agencyAddress"></div>
+		    </td>
+		 </tr>
+		 <tr class="isAgent1">
+		    <td class="th_bg">代理机构联系人</td>
+		    <td >
+		    	<div id="agencyLinkmen"></div>
+		    </td>
+		    <td class="th_bg">代理机构联系电话</td>
+		    <td >
+		    	<div id="agencyTel"></div>
+		    </td>
+		 </tr>
+		 
+		 <tr>
+		    <td colspan="3" style="font-weight: bold;border: none;" class="active">采购人信息</td>
+		    <td style="text-align: right;border: none;" class="active"><button type="button" style="width: 100px;" class="btn btn-sm btn-primary" id="chosePucharse" data-dismiss="modal" onclick="chosePucharse()">选择采购人</button></td>
+		 </tr>
+		 <tr>
+		    <td class="th_bg"  >采购人名称</td>
+		    <td colspan="3" >
+		    	<div id = "purchaserName"></div>		    
+		    </td>
+		 </tr>
+		 <tr >
+		    <td class="th_bg">采购人地址</td>
+		    <td colspan="3" >
+				<div id = "purchaserAddress" ></div>				
+		    </td>
+		 </tr>
+		 <tr class="purchaserShow" style="display: none;">
+		    <td class="th_bg" >联系人</td>
+		    <td >
+		    	<div id="purchaserLinkmen" ></div>		    	
+		    </td>
+		    <td class="th_bg"  >联系人电话</td>
+		    <td >
+		    	<div id="purchaserTel"></div>
+		    </td>
+		 </tr>
+		 <tbody id="montage"></tbody>
+		 <tr class="tenderTypeW">
+			<td colspan="4">
+				<div id="offerForm"></div>	        
+			</td>
+		</tr>
+		<tbody class="tenderTypeW" id="fileHtml"></tbody>
+		<tr>
+            <td colspan="4" style="font-weight: bold;" class="active">时间安排</td>
+      </tr>
+     	<tbody style="border:none ;" id="nowOrOld"></tbody>
+		<tr>
+			<td colspan="4" class="active"><strong>综合评审</strong></td>			
+		</tr>
+		<tr>
+			<td colspan="4"  style="padding: 0;">
+				<ul id="checkList1" class="nav nav-tabs" style="border-bottom: none;">
+					
+				</ul>
+			</td>
+		</tr>
+		<tr>
+			<td colspan="4">
+				<div id="packageDetail" class="tab-content" >
+					
+				</div>				
+			</td>			
+		</tr>
+		<tr class="isShowPriceSet">
+			<td class="active"  colspan="4"><strong>价格评审</strong></td>
+		</tr>
+		<tbody class="table  table-bordered isShowPriceSet"  id="Assessment"></tbody>
+    	<tr>
+			<td class="active"  colspan="4" style="border: none;"><strong>邀请函信息</strong></td>
+			<!-- <td class="active" style="text-align: right;border: none;">
+     			<input type="button" class="btn btn-primary" value="全屏预览" onclick="previewYl(1)"/>     			
+     		</td> -->  
+		</tr>
+       	<tr>
+    		
+    		<td colspan="4" >
+					<table class="table table-bordered" id="ueditorContent"></table>
+    			<!-- <div style="height: 400px;overflow-y: auto;">
+					<div id="remark" style="width: 820px;margin: auto;">
+					 
+					</div>
+				 </div> -->
+    		</td>
+       	</tr>
+        </table>	
+</div>
+	
+	<div id="hiddenSupplier"></div>
+</form>
+<div style="width: 100%;height: 50px;text-align:center;position: fixed;bottom: 0;background-color: #FFFFFF;z-index: 100001;">
+	<button type="button" id="btn_bao" class="btn btn-sm btn-primary" style="width: 100px;">接受邀请</button>
+	<button type="button" id="btn_submit" class="btn btn-sm btn-danger" style="width: 100px;">拒绝邀请</button>
+	<button type="button" id="btn_close" class="btn btn-sm btn-default" style="width: 100px;">关闭</button>
+</div>
+<style>
+        .fileinput-button {
+            position: relative;
+            display: inline-block;
+            overflow: hidden;
+        }
+
+        .fileinput-button input{
+            position:absolute;
+            right: 0px;
+            top: 0px;
+            opacity: 0;
+            -ms-filter: 'alpha(opacity=0)';
+            font-size: 200px;
+        }
+        .nav-tabs > li.active > a, .nav-tabs > li.active > a:hover, .nav-tabs > li.active > a:focus {
+		    color: #555;
+		    cursor: default;
+		    background-color: #f1f1f1;
+		    border: 1px solid #ddd;
+		    border-bottom-color: transparent;
+		}
+    </style>
+ <script type="text/javascript" src="../../../../../media/js/jquery/jquery.js" ></script>
+ <script type="text/javascript" src="../../../../../media/js/base/common.js" ></script>
+ <script type="text/javascript" src="../../../../../media/js/jquery/jquery.extend.js" ></script>
+ <script type="text/javascript" src="../../../../../media/js/jquery/jquery.params.js" ></script>
+ <script type="text/javascript" src="../../../../../media/js/bootstrap/js/bootstrap.js" ></script>
+ <script type="text/javascript" src="../../../../../media/js/bootstrap/js/bootstrap-table.min.js"></script>
+ <script type="text/javascript" src="../../../../../media/js/bootstrap/js/bootstrap-table-zh-CN.min.js"></script>
+ <script type="text/javascript" src="../../../../../media/js/base/util.js"></script>
+ <script type="text/javascript" src="../../../../../media/js/base/digital.js" ></script>
+ <script type="text/javascript" src="../../../../../media/js/base/UEditorFun.js" ></script>
+ <script type="text/javascript" src="../../../../currencyControl/js/offerForm.js" ></script>
+<script type="text/javascript" src="../../../../currencyControl/js/subitemFile.js" ></script>
+ <script type="text/javascript" src="../../../Agent/Purchase/js/businessPriceSet.js"></script>
+ <script type="text/javascript" src="../js/supplierInvitationInfo.js" ></script>
+ <script type="text/javascript" src="../js/invitationCheck.js" ></script>
+ <script type="text/javascript" src="../js/packageView.js" ></script>
+ <script type="text/javascript" src="../../../Agent/packageCheck/js/packageCheckLook.js"></script>
+ <script type="text/javascript" src="../../../Agent/Purchase/js/suppliment.js"></script>
+ <script type="text/javascript" src="../../../Agent/Purchase/js/price.js"></script>
+ <script type="text/javascript" src="../../../../../media/js/preview.js" ></script>
+

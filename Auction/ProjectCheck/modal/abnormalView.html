@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta http-equiv="pragma" content="no-cache"><!-- 禁止浏览器从本地计算机的缓存中访问页面内容 --> 
+	<meta http-equiv="cache-control" content="no-cache"><!-- 用于指定请求和响应遵循的缓存机制 --> 
+	<meta http-equiv="expires" content="0"><!-- 用于设定网页的到期时间，一旦网页过期，必须到服务器上重新传输； -->
+    <title>招标异常</title>
+    <link rel="stylesheet" href="../../../media/js/layer/mobile/need/layer.css" />
+    <link rel="stylesheet" href="../../../media/js/bootstrap/css/bootstrap.css" />
+	<link rel="stylesheet" href="../../../media/js/bootstrap/css/bootstrap-table.css">
+	<style>
+		html,body { height: 100%; width: 100%;}
+		.readonly {
+			border: none;
+			background: none !important;
+			outline: none !important;
+			box-shadow: none !important;
+		}
+		table td{
+			white-space: normal;
+		}
+	</style>
+</head>
+
+<body>
+    <form class="pageModel" id="formName" name="formName">
+    	<div class="panel-group" id="accordion">
+    		<div class="panel panel-accordion panel-default">
+	    		<div class="panel-heading active"  role="tab" id="headingOne">  
+			 		<h4 class="panel-title">
+		            	<a  role="button" data-toggle="collapse" href="#collapseOne" aria-controls="collapseOne"  aria-expanded="true"  >
+		            		包件信息
+		            	</a>
+			 		</h4>  
+			   	</div>  
+			  	<div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">  
+			       	<div class="panel-body">
+			       		<table  class="table table-bordered ">
+			       			<tr>
+					        	<td class="th_bg">包件编号</td>
+					        	<td colspan="3"><span id="packageNum"></span></td>
+					        </tr>
+					        <tr>
+					        	<td class="th_bg">包件名称</td>
+					        	<td colspan="3"><span id="packageName"></span></td>
+					        </tr>
+					        <tr>
+					        	<td class="th_bg">项目异常提出单位</td>
+					        	<td colspan="3"><span id="enterpriseName"></span></td>
+					        </tr>
+					        <tr>
+					        	<td class="th_bg">项目异常名称</td>
+					        	<td><span id="exceptionName"></span></td>
+					        	<td class="th_bg">项目异常类型</td>
+					        	<td><span id="exceptionTypes"></span></td>
+					        </tr>
+					        <tr>
+					        	<td class="th_bg">异常原因</td>
+					        	<td><span id="abnormalReason"></span></td>
+					        	<td class="th_bg">对外公示</td>
+					        	<td>
+					        		<span id="foreign"></span>
+					        	</td>
+					        </tr>
+							<tr class="isShow">
+								<td class="th_bg"><span >公示期（天）</span></td>
+								<td colspan="3">
+									<span id="noticePeriod"></span>
+								</td>
+							</tr>
+					        <tr class="isShow">
+						        <td class="th_bg"><span>公示开始时间</span></td>
+					        	<td>
+					        		<div id="exceptionStartTime" style="position: relative;width: 200px;display: inline-block;"></div>
+					        	</td>
+						        <td class="th_bg"><span>公示结束时间</span></td>
+					        	<td>
+					        		<div id="exceptionEndTime" style="position: relative;width: 200px;display: inline-block;"></div>
+					        	</td>
+				        	</tr>
+					        <tr>
+					        	<td class="th_bg">异常情况描述</td>
+					        	<td colspan="3">
+					        		<span id="exceptionInfor"></span>
+					        	</td>
+					        </tr>
+					        <tr>
+					        	<td class="th_bg">项目经理</td>
+					        	<td><span id="enterprisePerson"></span></td>
+					        	<td class="th_bg">联系电话</td>
+					        	<td><span id="enterprisePersonTel"></span></td>
+					        </tr>
+			       		</table>
+		       		</div>
+	       		</div>
+       		</div>
+       		<div class="panel panel-accordion panel-default isShow">
+	    		<div class="panel-heading active"  role="tab" id="headingTwo">  
+			 		<h4 class="panel-title">
+		            	<a class="collapsed" role="button" data-toggle="collapse" href="#collapseTwo" aria-controls="collapseTwo"  aria-expanded="false">
+		            		公示发布媒体
+		            	</a>
+			 		</h4>  
+			   	</div>  
+			  	<div  id="collapseTwo" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingTwo">  
+			       	<div class="panel-body">
+			       		<table class="table table-bordered">
+			       			<tr class="NewsContent isShow" style="display: none">
+			       				<td class="th_bg">发布媒体</td>
+			       				<td style="text-align: left;" colspan="3">
+			       					<MediaSelect></MediaSelect>
+			       				</td>
+			       			</tr>
+			       		</table>
+		       		</div>
+		       	</div>
+	    	</div>
+	    	<div class="panel panel-accordion panel-default isShow">
+	    		<div class="panel-heading active"  role="tab" id="headingThree">  
+			 		<h4 class="panel-title">
+		            	<a class="collapsed" role="button" data-toggle="collapse" href="#collapseThree" aria-controls="collapseThree"  aria-expanded="false">
+		            		公示基本信息
+		            	</a>
+			 		</h4>  
+			   	</div>  
+			  	<div  id="collapseThree" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingThree">  
+			       	<div class="panel-body">
+						<table id="ueditorContent" class="table table-bordered"></table>
+			       		<!-- <table class="table table-bordered">
+					      	<tr>
+					    		<td colspan="4">
+										
+									<div style="overflow:auto;padding: 10px;">
+										<div id="exceptionContent"
+											style="margin: auto;width: 210mm;padding: 10mm;box-shadow: 0 0 5px #333333;">
+										</div>
+									</div> 
+					    			<div id="exceptionContent" style="height: 400px;overflow:auto"></div> 
+					    		</td>
+					    	</tr>
+				        </table>    -->
+		       		</div>
+		       	</div>
+	    	</div>
+	    	<div class="panel panel-accordion panel-default">
+	    		<div class="panel-heading active"  role="tab" id="headingFour">  
+			 		<h4 class="panel-title">
+		            	<a class="collapsed" role="button" data-toggle="collapse" href="#collapseFour" aria-controls="collapseFour"  aria-expanded="false">
+		            		异常报告附件
+		            	</a>
+			 		</h4>  
+			   	</div>  
+			  	<div  id="collapseFour" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingFour">  
+			       	<div class="panel-body">
+			       		<table class="table" id="fileTables"></table>
+		       		</div>
+		       	</div>
+	    	</div>
+			<div class="panel panel-accordion panel-default record">
+					<div class="panel-heading active"  role="tab" id="headingFive">  
+				 		<h4 class="panel-title">
+				        	<a class="collapsed" role="button" data-toggle="collapse"  href="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
+				        		审核
+				        	</a>
+				 		</h4>  
+				   	</div>  
+				  	<div  id="collapseFive" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingFive">  
+				       	<div class="panel-body">
+				       		<table class="table table-bordered" id="tableWorkflow">
+				       			<tr id="auditrow1">
+				       				<td class="th_bg"  width="20%">审核状态：</td>
+				       				<td style="text-align: left;">
+				       					<input type="radio" name="auditState" value="0" />通过
+				       					<input type="radio" name="auditState" value="1" />不通过
+				       			
+				       				</td>
+				       			</tr>
+				       			<tr id="auditrow2">
+				       				<td class="th_bg"  width="20%">选择审核人：</td>
+				       				<td>
+				       					<select name="" id="employeeId" class="form-control" style="width: 180px;">
+				       			
+				       					</select>
+				       				</td>
+				       			</tr>
+				       			<tr class="searched" id="auditrow3">
+				       				<td class="th_bg" width="20%">审核说明：</td>
+				       				<td><textarea rows="5" class="form-control" style="width: 90%;height: 80px;" name="content"></textarea></td>
+				       			</tr>
+				       		</table>
+				   		</div>
+				   	</div>
+				</div>
+				<div class="panel panel-accordion panel-default record">
+					<div class="panel-heading active"  role="tab" id="headingTen">  
+				 		<h4 class="panel-title">
+				        	<a class="collapsed" role="button" data-toggle="collapse"  href="#collapseTen" aria-expanded="false" aria-controls="collapseTen">
+				        		流程审核记录
+				        	</a>
+				 		</h4>  
+				   	</div>  
+				  	<div  id="collapseTen" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingTen">  
+				       	<div class="panel-body">
+				       		<table class="table table-bordered" id="workflowListDetail">
+				       			
+				       		</table>
+				   		</div>
+				   	</div>
+				</div>
+			</div>
+        <div class="bottom-btn">
+           <button type="button" id="btn_submit" class="btn btn-primary"><span class="glyphicon glyphicon-saved"></span>确定</button>
+           <button type="button" id="btn_close" class="btn btn-default"><span class="glyphicon glyphicon-remove"></span>关闭</button>
+        </div>
+    </form>
+    <script type="text/javascript" src="../../../media/js/jquery/jquery.js"></script>
+    <script type="text/javascript" src="../../../media/js/jquery/jquery.extend.js"></script>
+    <script type="text/javascript" src="../../../media/js/base/common.js"></script>
+    <script type="text/javascript" src="../../../media/js/bootstrap/js/bootstrap.js"></script>
+	<script type="text/javascript" src="../../../media/js/bootstrap/js/bootstrap-table.js"></script>
+	<script type="text/javascript" src="../../../media/js/bootstrap/js/bootstrap-table-zh-CN.min.js"></script>
+	<script type="text/javascript" src="../../../media/js/base/auditRecords.js"></script>
+	<script type="text/javascript" src="../../../media/js/base/WorkflowInfo.js"></script>
+	<script type="text/javascript" src="../../../media/js/Model/public.js"></script>
+	<script type="text/javascript" src="../../../media/js/base/UEditorFun.js" ></script>
+	<script type="text/javascript" src="../../Public/js/PublishingMedia.js"></script>
+    <script type="text/javascript" src="../js/abnormalView.js"></script>
+</body>
+
+</html>

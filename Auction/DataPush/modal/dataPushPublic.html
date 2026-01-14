@@ -1,0 +1,144 @@
+<!--
+ * @Author: your name
+ * @Date: 2020-10-13 13:48:24
+
+ * @LastEditTime: 2020-11-28 19:15:17
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: \FrameWork\bidPrice\DataPush\modal\dataPushInfo.html
+-->
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="pragma" content="no-cache">
+		<!-- 禁止浏览器从本地机的缓存中调阅页面内容 -->
+		<meta http-equiv="cache-control" content="no-cache, must-revalidate">
+		<meta http-equiv="expires" content="0">
+		<title>数据推送</title>
+		<link rel="stylesheet" href="../../../media/js/bootstrap/css/bootstrap.css">
+		<link rel="stylesheet" href="../../../media/js/bootstrap/css/bootstrap-table.min.css" />
+		<link rel="stylesheet" href="../../../media/js/bootstrap-fileinput-master/css/fileinput.min.css" type="text/css" />
+		<style type="text/css">
+			.table th,
+			.table td {
+				vertical-align: middle !important;
+			}
+			
+			.ov {
+				overflow: hidden;
+				text-overflow: ellipsis;
+				white-space: nowrap;
+				width: 200px;
+				float: left;
+				line-height: 34px;
+				margin-right: 5px;
+			}
+			
+			.seeExp {
+				display: block;
+				color: #ca4848;
+				margin-top: 5px;
+				cursor: pointer;
+				font-size: 12px;
+				font-weight: 100;
+			}
+		</style>
+	</head>
+
+	<body style="width: 99%;padding-left: 10px;padding-top: 10px;margin-bottom: 0;">
+		<form id="DataPush">
+			<table class="table table-bordered" style="margin-bottom: 50px;" align="center">
+				<tr>
+					<td colspan="4" style="font-weight: bold;" class="active">项目信息</td>
+				</tr>
+				<tr>
+					<td class="th_bg" width="20%">项目名称</td>
+					<td colspan="3">
+						<div id="projectName"></div>
+					</td>
+				</tr>
+				<tr>
+					<td class="th_bg">项目编号</td>
+					<td colspan="3">
+						<div id="projectCode"></div>
+					</td>
+				</tr>
+				<tr>
+					<td class="th_bg">答复截止时间</td>
+					<td colspan="3">
+						<div id="ansEndDate"></div>
+					</td>
+				</tr>
+				<tr>
+					<td class="th_bg">公告发布时间</td>
+					<td colspan="3">
+						<div id="ansSendDate"></div>
+					</td>
+				</tr>
+				<tr>
+					<td class="th_bg">评审时间</td>
+					<td>
+						<div id="techReviewDate"></div>
+					</td>
+					<td class="th_bg">评审报告生成时间</td>
+					<td>
+						<div id="reportDatea"></div>
+					</td>
+				</tr>
+				<tr>
+					<td class="th_bg">推送状态</td>
+					<td>
+						<div id="dataType"></div>
+					</td>
+					<td class="th_bg">推送时间</td>
+					<td>
+						<div id="subDate"></div>
+					</td>
+				</tr>
+
+				<tr>
+					<td colspan="4" style="font-weight: bold;" class="active">候选供应商</td>
+				</tr>
+				<tr>
+					<td colspan="4">
+						<table class="table table-hover table-bordered" id="listhistory"></table>
+					</td>
+				</tr>
+				<tr class="tender">
+					<td colspan="4" style="font-weight: bold;" class="active">评审报告<font class="red">*</font></td>
+				</tr>
+				<tr class="fileList">
+					<td  colspan="4">
+						<input type="file" class="fileloading FileUpLoad" multiple name="files" id="FileName" />
+					</td>
+				</tr>
+                 <tr id="divShow" >
+					<td  colspan="4" class="fileBoxlist">
+						
+					</td>
+				</tr>
+			</table>
+		
+
+		<div class="form-group rowLine" style="width: 100%;height: 50px;text-align:center;position: fixed;bottom: 0;background-color: #FFFFFF;margin-bottom:0px !important;padding-top: 10px;z-index: 1000001;">
+			<button type="button" class="btn btn-primary isEdit" data-dismiss="modal" id="btn_submit"><span class="glyphicon glyphicon-saved"></span>推送</button>
+			<button type="button" class="btn btn-default" data-dismiss="modal" id="btn_close"><span class="glyphicon glyphicon-remove"></span>关闭</button>
+		</div>
+		</form>
+		<!--<input type="file" class="fileloading" multiple name="files" style="display: none" />-->
+	</body>
+	<script type="text/javascript" src="../../../media/js/jquery/jquery.js"></script>
+	<script type="text/javascript" src="../../../media/js/jquery/jquery.extend.js"></script>
+	<script type="text/javascript" src="../../../media/js/bootstrap/js/bootstrap.js"></script>
+	<script type="text/javascript" src="../../../media/js/bootstrap/js/bootstrap-table.min.js"></script>
+	<script type="text/javascript" src="../../../media/js/bootstrap/js/bootstrap-table-zh-CN.min.js"></script>
+	<script type="text/javascript" src="../../../media/js/bootstrap-fileinput-master/js/fileinput.js"></script>
+	<script type="text/javascript" src="../../../media/js/bootstrap-fileinput-master/js/locales/zh.js"></script>
+	<script type="text/javascript" src="../../../media/js/My97DatePicker/WdatePicker.js"></script>
+	<script type="text/javascript" src="../../../media/js/layer/layer.js"></script>	
+	<script type="text/javascript" src="../../../media/js/preview.js"></script>
+	<script type="text/javascript" src="../js/dataPushPublic.js"></script>
+
+</html>

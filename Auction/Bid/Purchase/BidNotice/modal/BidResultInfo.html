@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="pragma" content="no-cache">
+		<!-- 禁止浏览器从本地机的缓存中调阅页面内容 -->
+		<meta http-equiv="cache-control" content="no-cache, must-revalidate">
+		<meta http-equiv="expires" content="0">
+		<title>询比采购结果通知详情</title>
+	</head>
+	<link rel="stylesheet" href="../../../../../media/js/bootstrap/css/bootstrap.css">
+	<link rel="stylesheet" href="../../../../../media/js/bootstrap/css/bootstrap-table.min.css" />
+	<link rel="stylesheet" href="../../../../../media/js/bootstrap/css/bootstrap-select.min.css" />
+
+	<style type="text/css">
+		.table th,
+		.table td {
+			vertical-align: middle !important;
+		}
+		#edui1_iframeholder {
+			min-height: 550px !important;
+			text-align: center;
+		}
+		#edui1_iframeholder iframe{
+			width: 210mm;
+			padding: 10mm;
+			box-shadow: 0 0 5px #333333;
+		}
+		#edui1_iframeholder {
+			min-height: 550px !important;
+			text-align: center;
+		}
+		#edui1_iframeholder iframe{
+			width: 210mm;
+			padding: 10mm;
+			box-shadow: 0 0 5px #333333;
+		}
+	</style>
+	<body style="width: 99%;padding-left: 10px;padding-top: 10px;margin-bottom: 0;">
+		<table class="table table-bordered" style="margin-bottom: 50px;" align="center">
+			<th colspan="4" class="active">项目信息
+			</th>
+			<tr style="display: none;">
+				<td class="th_bg">通知类型</td>
+				<td colspan="3" ><input type="radio" name="resultType" value="0" checked>中选通知<input type="radio" name="resultType" value="1">未中选通知</td>
+			</tr>
+			<tr>
+				<td class="th_bg" width="20%" >采购项目名称</td>
+				<td colspan="3"  id="projectName"></td>
+			</tr>
+			<tr>
+				<td class="th_bg" >采购项目编号</td>
+				<td colspan="3"  id="projectCode"></td>
+			</tr>
+			<tr>
+				<td class="th_bg" >包件名称</td>
+				<td colspan="3"  id="packageName"></td>
+			</tr>
+			<tr>
+				<td class="th_bg" >包件编号</td>
+				<td colspan="3"  id="packageNum"></td>
+			</tr>
+			<tr>
+				<td class="th_bg" >采购人名称</td>
+				<td colspan="3"  id="purchaserName"></td>
+			</tr>
+			<tr>
+				<td class="th_bg" >采购人地址</td>
+				<td colspan="3"  id="purchaserAddress"></td>
+			</tr>
+			<tr>
+				<td class="th_bg" >联系人</td>
+				<td width="30%"  id="purchaserLinkmen"></td>
+				<td class="th_bg" width="20%" >联系电话</td>
+				<td width="30%"  id="purchaserTel"></td>
+			</tr>
+			<tr class="unitShow">
+	        	<td class="th_bg">报价单位</td>
+				<td><span id="quotePriceUnit"></span></td>
+				<td class="th_bg"><span style="color: red;">*</span>有无中选人</td>
+				<td>
+					<label style="padding-right:20px;margin-bottom: 0;">
+						<input type="radio" name="isWinner" id="" value="0" style="vertical-align: -2px;margin-right: 5px;" />
+						无
+					</label>
+					<label style="padding-right:20px;margin-bottom: 0;">
+						<input type="radio" name="isWinner" id="" value="1" style="vertical-align: -2px;margin-right: 5px;" />
+						有
+					</label>
+				</td>
+			</tr>
+			<tr class="readyWatch">
+				<td class="th_bg" ><span style="color: red;" class='isWatch'>*</span>是否加盖企业公章</td>
+				<td colspan="3" ><input type="radio" name="isShow" value="0">是<input type="radio" name="isShow" value="1">否</td>
+			</tr>
+			<th colspan="4" class="active">询比采购结果通知</th>
+			<tr>
+				<td colspan="4" style="padding:inherit;">
+					<form id="bidResult">
+						<table class="table table-bordered">
+							<tbody id="bidResultInfo" align="center">
+
+							</tbody>
+							
+							<tr id='whyFailureTr' style="display: none;">
+								<td class="th_bg" style="width: 20%;">失败原因</td>
+								<td colspan="4"  id="whyFailure"></td>
+							</tr>
+						</table>
+					</form>
+				</td>
+			</tr>
+			<th colspan="4" class="active readyWatch">公告信息</th>
+			<tr class="readyWatch">
+				<td class="th_bg" rowspan="2">是否公开</td>
+				<td ><input type="radio" id="isPublic" name="isPublic" value="0">公开<input type="radio" id="isPublic" name="isPublic" value="1">不公开</td>
+				<td class="th_bg" ><i class="red isPublic">*</i>公告时间</td>
+				<td>
+					<div class="edit" style="display: none;">
+						<input type="text" class="form-control " style="display: inline-block;width: 100px;margin-right: 5px;" name="days" />天
+					</div>
+					<div class="view" style="display: none;">
+						<span id="days" style="margin-right: 5px;"></span>天
+					</div>
+				</td>
+			</tr>
+			<tr class="readyWatch">
+				<td colspan="3" ><span style="color: red;">温馨提示【选择“公开”则对外发布采购结果公告；选择“不公开”则不对外发布采购结果公告】</span></td>
+			</tr>
+			<tr class="readyWatch">
+				<td class="th_bg" >公告发布媒体</td>
+				<td colspan="3">
+					<!-- optionName="project.optionName" optionId="project.optionId" optionValue="project.optionValue" -->
+					<MediaSelect></MediaSelect>
+					<input type="checkbox" class="pushPlatform" checked="checked" disabled="disabled" name="pushPlatform" value="2" style="margin-right: 5px;display: none;">
+				</td>
+			</tr>
+			<tr class="readyWatch">
+				<td class="th_bg" ><i class="red isPublic">*</i>采购结果公告标题</td>
+				<td colspan="3">
+					<input type="text" class="form-control edit" name="title"  style="display: none;"/>
+					<span id="title" class="view" style="display: none;"></span>
+				</td>
+			</tr>
+			<tr class="readyWatch">
+				<td colspan="4">
+					<table class="table table-bordered" id="ueditorContent"></table>
+				</td>
+			</tr>
+			<!-- <tr class="readyWatch">
+				<td class="th_bg">公告模板</td>
+				<td colspan="3">
+					<select class="form-control edit" id="noticeTemplate" name="templateId" style="width: 200px;display: inline-block;"></select>
+					<button type="button" class="btn btn-primary edit" id="btnModel" style="vertical-align:top;"><span class="glyphicon glyphicon-refresh" style="vertical-align:-2px;"></span>生成公告</button>
+					<button onclick="fullScree()" type="button" class="btn btn-primary edit"
+						style="float: right;margin-right: 20px;display: none;">
+						<span class="glyphicon glyphicon-fullscreen"></span>全屏编辑
+					</button>
+					<button type="button" class="btn btn-primary fullScreen view"
+						style="float: right;margin-right: 20px;display: none;">
+						<span class="glyphicon glyphicon-fullscreen"></span>全屏预览
+					</button>
+				</td>
+			</tr>
+			<tr class="readyWatch">
+				<td colspan="4">
+					<div class="edit" id="container" name="content" style="min-height: 600px; display: none;"></div>
+					<input type="hidden" name="noticeContent" id="remark" value="" />
+					<div class="view" style="overflow:auto;max-height: 500px;padding: 10px;display: none;">
+						<div id="noticeContent" style="margin: auto;width: 210mm;padding: 10mm;box-shadow: 0 0 5px #333333;"></div>
+					</div>
+				</td>
+			</tr> -->
+			<tr class="employee">
+				<td class="text-right">添加审核人</td>
+				<td colspan="3" >
+					<select id="employeeId" class="form-control" style="width: 180px;" name="checkerId"></select>
+				</td>
+			</tr>
+			
+			<tr class="active">
+				<th colspan="4" class="active">审核记录</th>
+			</tr>
+			<tr>
+				<td colspan="4">
+					<table class="table table-bordered" id="workflowListDetail">
+						<tr>
+							<td colspan="5" style="text-align: center;">
+								当前没有审核记录
+							</td>	
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr class="active">
+				<th colspan="4" class="active">发布历史</th>
+			</tr>
+			<tr>
+				<td colspan="4">
+					<table class="table table-bordered" id="resultNoticeHistoryList">
+					</table>
+				</td>
+			</tr>
+		</table>
+		<div class="form-group rowLine" style="width: 100%;height: 50px;text-align:center;position: fixed;bottom: 0;background-color: #FFFFFF;margin-bottom:0px !important;padding-top: 10px;">
+			<button type="button" style="width: 80px;display: none;" class="btn btn-primary" data-dismiss="modal" id="btn_save">保存</button>
+			<button type="button" style="width: 80px;" class="btn btn-primary" data-dismiss="modal" id="btn_submit">提交审核</button>
+			<button type="button" style="width: 80px;" class="btn btn-default" data-dismiss="modal" id="btn_close">关闭</button>
+		</div>
+	</body>
+	<script type="text/javascript" src="../../../../../media/js/jquery/jquery.js"></script>
+	<script type="text/javascript" src="../../../../../media/js/jquery/jquery.params.js"></script>
+	<script type="text/javascript" src="../../../../../media/js/jquery/jquery.extend.js"></script>
+	<script type="text/javascript" src="../../../../../media/js/base/common.js"></script>
+	<script type="text/javascript" src="../../../../../media/js/bootstrap/js/bootstrap.js"></script>
+	<script type="text/javascript" src="../../../../../media/js/bootstrap/js/bootstrap-table.min.js"></script>
+    <script type="text/javascript" src="../../../../../media/js/bootstrap/js/bootstrap-table-zh-CN.min.js"></script>
+	<script type="text/javascript" src="../../../../../media/js/bootstrap/js/bootstrap-select.min.js" ></script>
+
+	<script type="text/javascript" src="../../../../../media/js/layer/layer.js"></script>
+	<script type="text/javascript" src="../../../../../media/js/layer/laydate.js"></script>
+	<!-- 编辑器源码文件 -->
+	<script type="text/javascript" src="../../../../../media/js/ueditor/ueditor.config.js"></script>
+	<script type="text/javascript" src="../../../../../media/js/ueditor/ueditor.all.js"></script>
+	<script type="text/javascript" src="../../../../../media/js/base/UEditorFun.js" ></script>
+	<script type="text/javascript" src="../../../../../media/js/fullScreen.js"></script>
+	<script type="text/javascript" src="../../../../../media/js/base/util.js"></script>
+	<script type="text/javascript" src="../../../../../media/js/Model/public.js"></script>
+	<script type="text/javascript" src="../../../../TempManager/tempPublic.js"></script>
+	<script type="text/javascript" src="../../../../../media/js/base/auditRecords.js"></script>
+	<script type="text/javascript" src="../js/BidResultInfo.js"></script>
+	<script type="text/javascript" src="../../../../Public/js/PublishingMedia.js" ></script>
+
+</html>

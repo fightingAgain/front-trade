@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8">
+		<meta http-equiv="pragma" content="no-cache"><!-- 禁止浏览器从本地计算机的缓存中访问页面内容 --> 
+		<meta http-equiv="cache-control" content="no-cache"><!-- 用于指定请求和响应遵循的缓存机制 --> 
+		<meta http-equiv="expires" content="0"><!-- 用于设定网页的到期时间，一旦网页过期，必须到服务器上重新传输； -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>项目派项</title>
+    <link rel="stylesheet" href="../../../../media/js/layer/mobile/need/layer.css" />
+    <link rel="stylesheet" href="../../../../media/js/bootstrap/css/bootstrap.css" />
+	<style>
+		html,body { height: 100%;}
+		.readonly{
+			border: none;
+		    background: none !important;
+		    outline: none !important;
+		    box-shadow: none !important;
+		}
+	</style>
+</head>
+
+<body>
+    	<div class="pageModel">
+        <table class="table table-bordered" style="margin: 0;">
+        	<tr>
+	            <td colspan="4" style="font-weight: bold;" class="active">项目信息</td>
+	        </tr>
+	        <tr>
+            	<td class="th_bg">项目名称</td>
+                <td colspan="3">
+                	<span id="projectName"></span>
+                </td>
+            </tr>
+            <tr>
+                <td class="th_bg">项目编号</td>
+                <td >
+                    <span id="projectCode"></span>
+                </td>
+                <td class="th_bg">项目所在行政区域</td>
+                <td >
+                    <span id="regionCode" optionName = "regionCode"></span>
+                </td>
+            </tr>
+            <tr>
+            	 <td class="th_bg">代理机构</td>
+                <td >
+                    <span id="agencyEnterprisName"></span>
+                </td>
+                <td class="th_bg">联系人</td>
+                <td >
+                    <span id="contactor"></span>
+                </td>
+            </tr>
+            <tr>
+            	 <td class="th_bg">联系方式</td>
+                <td >
+                    <span id="contactInformation"></span>
+                </td>
+                <td class="th_bg">资金来源</td>
+                <td >
+                    <span id="fundSource" optionName = "fundSource"></span>
+                </td>
+            </tr>
+            <tr>
+            	 <td class="th_bg">项目行业分类</td>
+                <td colspan="3">
+                    <span id="industriesType" optionName="industriesType"></span>
+                </td>
+            </tr>
+            <tr>
+            	 <td class="th_bg">项目地址</td>
+                <td colspan="3">
+                    <span id="address"></span>
+                </td>
+            </tr>
+            <tr>
+            	 <td class="th_bg">项目规模</td>
+                <td colspan="3">
+                    <span id="projectScale"></span>
+                </td>
+            </tr>
+            <tr>
+            	 <td class="th_bg">出资比例</td>
+                <td colspan="3">
+                    <span id="contributionScale"></span>
+                </td>
+            </tr>
+            <!--<tr>
+            	<td class="th_bg">项目交易分类</td>
+                <td>
+                	<span id=""></span>
+                </td>
+                <td class="th_bg">项目行业分类</td>
+                <td>
+                    <span id=""></span>
+                </td>
+            </tr>
+            
+            <tr>
+            	<td class="th_bg">项目所在行政区域</td>
+            	<td>
+            		<span id="regionCodeTxt"></span>
+				</td>
+                <td class="th_bg">项目地址</td>
+                <td>
+                	<span id="address"></span>
+                </td>
+            </tr>-->
+            
+            <!--<tr>
+                <td class="th_bg">联系人</td>
+                <td>
+                	<span id="contactor"></span>
+                </td>
+                <td class="th_bg">联系电话</td>
+                <td>
+                	<span id="contactInformation"></span>
+                </td>
+            </tr>
+            <tr>
+                <td class="th_bg">所属企业</td>
+                <td>
+                	<span id="enterpriseIdTxt"></span>
+                </td>
+                <td class="th_bg">创建人</td>
+                <td>
+                	<span id="employeeIdTxt"></span>
+                </td>
+            </tr>
+            <tr>
+                <td class="th_bg">项目创建时间</td>
+                <td>
+                	<span id="createTime"></span>
+                </td>
+                <td class="th_bg">项目状态</td>
+                <td>
+                	<span id="projectStateTxt"></span>
+                </td>
+            </tr>
+            <tr>
+             	<td class="th_bg">行政监督部门</td>
+                <td>
+                	<span id=""></span>
+                </td>
+                <td class="th_bg">项目法人</td>
+                <td>
+                    <span id="legalPerson"></span>
+                </td>
+            </tr>
+            <tr>
+                <td class="th_bg">项目规模</td>
+                <td colspan="3">
+                	<span id="projectScale"></span>
+                </td>
+            </tr>-->
+            <tr>
+	            <td colspan="4" style="font-weight: bold;" class="active">招标人信息</td>
+	        </tr>
+            <tr>
+	        	<td class="th_bg">项目业主</td>
+                <td colspan="3">
+                	<span id=""></span>
+                </td>
+            </tr>
+            <tr>
+	        	<td class="th_bg">招标人</td>
+                <td colspan="3">
+                	<span id="tendererName"></span>
+                </td>  
+	        </tr>
+	        <tr>
+                <td class="th_bg">联系人</td>
+                <td>
+                	<span id="agentName"></span>
+                </td>
+                <td class="th_bg">联系电话</td>
+                <td>
+                    <span id="agentTel"></span>
+                </td>
+			</tr>
+			<tr>
+				<td class="th_bg">法人代表</td>
+                <td><span id="legalPerson"></span></td>
+				<td class="th_bg">组织机构/信用代码</td>
+                <td><span id="tendererCode"></span></td>
+			</tr>
+			<tr>
+				<td class="th_bg">单位类型</td>
+                <td colspan="3"><span id="tendererCodeType"></span></td>
+				<!--<td class="th_bg">邮政编码</td>
+                <td><span id=""></span></td>-->
+			</tr>
+	        <tr>
+	        	
+                <td class="th_bg">招标人地址</td>
+                <td colspan="3">
+                	<span id="enterpriseAddress"></span>
+                </td>
+			</tr>
+			<tr>
+	        	<td class="th_bg">其他招标人</td>
+                <td colspan="3">
+                    <div id="enterpriseBlock"></div>
+                </td>
+        	</tr>
+        	<tr>
+	            <td colspan="4" style="font-weight: bold;" class="active">项目审批（核准/备案）文件</td>
+	        </tr>
+			<tr>
+                <td class="th_bg">项目审批文件名</td>
+                <td>
+                	<span id="approvalName"></span>
+                </td>
+                <td class="th_bg">项目审批文号</td>
+                <td>
+                    <span id="approvalNumber"></span>
+                </td>
+			</tr>
+			<tr>
+                <td class="th_bg">项目审批单位</td>
+                <td colspan="3">
+                    <span id="approvalAuthority"></span>
+                </td>
+               <!-- <td class="th_bg">核准/备案部门</td>
+                <td>
+                    <span id=""></span>
+                </td>-->
+			</tr>
+			<!--<tr>
+				<td class="th_bg">备注</td>
+                <td colspan="3">
+                    <span id=""></span>
+                </td>
+			</tr>
+			<tr>
+	            <td colspan="4" style="font-weight: bold;" class="active">项目投资组成</td>
+	        </tr>
+			<tr>
+                <td class="th_bg">资金来源</td>
+                <td>
+                	<span id="fundSourceTxt"></span>
+                </td>
+                <td class="th_bg">项目投资总额</td>
+                <td>
+                	<span id="contributionScale"></span>
+                </td>
+            </tr>
+            <tr>
+            	<td class="th_bg">投资组成</td>
+            	<td><span id=""></span></td>
+            </tr>-->
+            <tr>
+	            <td colspan="4" style="font-weight: bold;" class="active">委托合同/相关附件</td>
+	        </tr>
+	        <tr>
+	        	<td colspan="4">
+	        		<table class="table table-bordered" id="fileList">
+	        			<thead>
+	        				<tr>
+		        				<th style="width: 80%;">文件名</th>
+		        				<th>操作</th>
+		        			</tr>
+	        			</thead>
+	        			<tbody>
+	        				
+	        			</tbody>
+	        		</table>
+	        	</td>
+	        </tr>
+        </table>
+        <table class="table  table-bordered " id="workflowListDetail" style="margin-bottom: 0;">
+			<tr class="active">
+				<td colspan="4" style="font-weight: bold;" class="active">项目派项</td>
+			</tr>
+			<tr>
+				<td class="th_bg">项目经理</td>
+                <td colspan="3">
+                	<input type="text" name="userName" id="userName" readonly="readonly" class="form-control readonly"  datatype="*" errormsg="请选择项目经理" style="display: inline-block;width: 80%;" />
+                	<input type="hidden" name="id" id="id"/>
+                    <button type="button" class="btn btn-primary" id="btnManager">选择</button>
+                </td>
+			</tr>
+		</table>
+    </div>
+    <div class="bottom-btn">
+    	<button type="button" class="btn btn-primary" id="btnSure"><span class="glyphicon glyphicon-ok"></span>确定</button>
+        <button type="button" class="btn btn-default" id="btnClose"><span class="glyphicon glyphicon-remove"></span>关闭</button>
+    </div>
+    <script type="text/javascript" src="../../../../media/js/jquery/jquery.js"></script>
+    <script type="text/javascript" src="../../../../media/js/jquery/jquery.extend.js"></script>
+    <script type="text/javascript" src="../../../../media/js/base/common.js"></script>
+    <script type="text/javascript" src="../../../../media/js/bootstrap/js/bootstrap.js"></script>
+    <script type="text/javascript" src="../../../Model/js/dataLinkage.js"></script>
+    <script src="../../../../Bidding/Model/js/public.js"></script>
+    <script type="text/javascript" src="../js/sendProjectTo.js"></script>
+</body>
+
+</html>

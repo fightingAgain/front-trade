@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="pragma" content="no-cache">
+		<!-- 禁止浏览器从本地机的缓存中调阅页面内容 -->
+		<meta http-equiv="cache-control" content="no-cache, must-revalidate">
+		<meta http-equiv="expires" content="0">
+		<title>竞价报价</title>
+	</head>
+		
+	<body>
+		<div class="container-fluid">
+			<form class="form-inline margin-bottom-10">
+				<div class="input-group">
+					<div class="btn-group">
+						<a class="btn btn-primary search-type" href="javascript:;" name="projectName">项目名称</a>
+						<a class="btn btn-primary dropdown-toggle" data-toggle="dropdown"><span class="caret"></span></a>
+						<ul class="dropdown-menu search-type">
+							<li class="active"><a href="javascript:;" name="projectName">项目名称</a></li>
+							<li><a href="javascript:;" name="packageNum">包件编号</a></li>
+							<li><a href="javascript:;" name="packageName">包件名称</a></li>
+						</ul>
+					</div>
+				</div>
+				
+				<div class="input-group">
+					<input type="text" class="form-control" name="search-query">
+				</div>
+				<div class="input-group">
+					<div class="input-group-addon">竞价情况</div>
+					<select id="auctionStatus"  class="form-control" style="width: 180px;">
+						<option value="0">未报价</option>
+	    			    <option value="1">已报价</option>
+	    			    <option value="2">已过期</option>
+					</select>					
+				</div>
+				<div class="input-group">
+					<div class="input-group-addon">时间</div>
+					<input type="text" class="form-control" id="startDate" style="position:inherit;width:180px;float: none;">
+					<div class="input-group-addon">至</div>
+					<input type="text" class="form-control" id="endDate" style="position:inherit;width:180px;float: none;">
+				</div>
+				<button type="button" class="btn btn-primary search-btn">
+					<span class="glyphicon glyphicon-search" aria-hidden="true"></span>查询
+				</button>
+			</form>
+			<table id="projectPackage"></table>
+		</div>
+	</body>
+	<script type="text/javascript" src="Order/Pay/js/payment.js"></script>
+	<script type="text/javascript" src="media/js/base/newPay.js"></script>
+    <script type="text/javascript" src="media/js/newAuctionValidate.js?version=3.4.25"></script>
+	<script type="text/javascript" src="media/js/layer/laydate.js" ></script>
+	<script src="Auction/Auction/Supplier/AuctionProjectPackage/js/AuctionProjectPackage.js"></script>
+</html>

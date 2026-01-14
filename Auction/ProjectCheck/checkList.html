@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<title>项目公告审核分页</title>
+		<meta http-equiv="pragma" content="no-cache">
+		<!-- 禁止浏览器从本地机的缓存中调阅页面内容 -->
+		<meta http-equiv="cache-control" content="no-cache, must-revalidate">
+		<meta http-equiv="expires" content="0">
+	</head>
+	<style>
+		.input-group {
+			float: left;
+			width: 120px;
+		}
+	</style>
+
+	<body>
+		<div class="container-fluid ">
+			<div style="padding-bottom: 10px;">
+				<div class="input-group" style="padding-right:15px;">
+					<span class="input-group-addon">审核状态</span>
+					<select class="form-control" style="width: 120px;" id="packageState">
+						<option value="0">全部</option>
+						<option value="1">未审核</option>
+						<option value="2">审核通过</option>
+						<option value="3">审核未通过</option>
+						
+					</select>
+				</div>
+				<div class="input-group" style="padding-right:15px;">
+					<span class="input-group-addon">项目类型</span>
+                    <select class="form-control" style="width: 140px;" id="tenderType">
+                        <option value="">全部</option>
+						<option value="0">询比采购</option>
+						<option value="1">竞价采购</option>
+						<option value="2">竞卖</option>
+						<!--<option value="3">询比报价</option>
+						<option value="4">招标采购</option>
+						<option value="5">谈判采购</option>-->
+						<option value="6">单一来源采购</option>
+						<!--<option value="7">框架协议采购</option>
+						<option value="8">战略协议采购</option>-->
+					</select>
+                </div>
+                <div class="input-group" style="padding-right:15px;">
+					<span class="input-group-addon">审核类型</span>
+					<select class="form-control" style="width: 140px;" id="workflowType">
+						<option value="">全部</option>
+						<option value="xmgg">公告/邀请函</option>
+                        <option value="xmby">公告/邀请函变更</option>
+                        <option value="zgyswj">资格预审文件</option>
+						<option value="xjcgwj">询比采购文件</option>
+						<option value="psbg">评审报告</option>
+						<option value="jjqk">竞价/竞卖情况</option>
+						<option value="jjhq">竞价会签</option>
+						<option value="jggs">结果公示</option>
+						<option value="jgtzs">结果通知书</option>	
+						<option value="fjwz_xsd">废旧物资竞卖销售单</option>	
+						<option value="psxbg">询比评审项变更</option>
+						<option value="kzjsp">控制价</option>
+						<option value="xmyc">项目异常</option>
+						<option value="zlgd">资料归档</option>
+						<option value="fzbcnsqdsz">非招标承诺书签订设置</option>
+						<option value="fzbpsbgqdsz">非招标评审报告签订设置</option>
+					</select>
+				</div>
+				<div class="input-group" style="width:150px;float: left;padding-right: 15px;">
+					<span class="input-group-addon">项目名称</span>
+					<input type="text" class="form-control" name="projectName" id="projectName" style="width:140px">
+				</div>
+
+				<div class="input-group" style="width:150px;float: left;padding-right: 15px;">
+					<span class="input-group-addon">项目编号</span>
+					<input type="text" class="form-control" name="projectCode" id="projectCode" style="width:140px">
+				</div>
+
+				<div class="btn-group">
+					<button type="button" id="btnQuery" class="btn btn-primary">
+            		<span class="glyphicon glyphicon-search" aria-hidden="true"></span>查询
+          		</button>
+				</div>
+			</div>
+			<table id="ProjectAuditTable"></table>
+		</div>
+	</body>
+	<script type="text/javascript" src="Auction/ProjectCheck/js/checkList.js"></script>
+
+</html>

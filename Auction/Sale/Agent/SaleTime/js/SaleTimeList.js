@@ -1,0 +1,128 @@
+var urlAuctionFileCheckList = top.config.AuctionHost + "/AuctionWasteController/findAuctionDatePageList.do"; //竞卖文件信息详情
+
+//查询按钮
+$(function() {
+	//查询按钮
+	$("#btnSearch").on('click', function() {
+		$('#SaleTimeList').bootstrapTable('refresh');
+		initTabel();
+	});
+	initTabel();
+
+});
+
+//设置查询条件
+function getQueryParams(params) {
+	var AuctionFile = {
+		'pageSize': params.limit, //每页显示的数据条数
+		'pageNumber': (params.offset / params.limit) + 1, //页码
+		'projectName': $("#projectName").val(), //采购项目名称
+		'projectCode': $("#projectCode").val(), //采购醒目编号
+		'tenderType': "2" //竞卖
+	};
+	return AuctionFile;
+}
+function initTabel(){
+$("#SaleTimeList").bootstrapTable({
+	url: urlAuctionFileCheckList,
+	dataType: 'json',
+	method: 'get',
+	locale: "zh-CN",
+	pagination: true, // 是否启用分页
+	showPaginationSwitch: false, // 是否显示 数据条数选择框
+	pageSize: 15, // 每页的记录行数（*）
+	pageNumber: 1, // table初始化时显示的页数
+	pageList:[10,15,20,25],
+	height:top.tableHeight,
+	toolbar: '#toolbar', // 工具栏ID
+	clickToSelect: true, //是否启用点击选中行
+	search: false, // 不显示 搜索框
+	sidePagination: 'server', // 服务端分页
+	classes: 'table table-bordered', // Class样式
+	//showRefresh : true, // 显示刷新按钮
+	silent: true, // 必须设置刷新事件
+	queryParams: getQueryParams, //查询条件参数
+	striped: true,
+	uniqueId: "projectId",
+	columns: [{
+			
+			field: 'xh',
+			title: '序号',
+			width: "50px",
+			align: 'center',
+			formatter: function(value, row, index) {
+				var pageSize = $('#SaleTimeList').bootstrapTable('getOptions').pageSize || 15; //通过表的#id 可以得到每页多少条  
+				var pageNumber = $('#SaleTimeList').bootstrapTable('getOptions').pageNumber || 1; //通过表的#id 可以得到当前第几页  
+				return pageSize * (pageNumber - 1) + index + 1; //返回每条的序号： 每页条数 * （当前页 - 1 ）+ 序号 
+			}
+		},
+		{
+			field: 'projectCode',
+			title: '竞卖项目编号',
+			align: 'left',
+			width: '180'
+		},
+		{
+			field: 'projectName',
+			title: '竞卖项目名称', 
+			align: 'left',
+			formatter: function(value, row, index) {
+				if(row.projectSource == 1) {
+					return projectName = '<div style="text-overflow: ellipsis;white-space:nowrap;overflow:hidden;">' + value + '<span class="text-danger" style="font-weight:bold">(重新竞卖)(第'+row.saleCount+'次竞卖)</span></div>';
+				} else {
+					return projectName = '<div style="text-overflow: ellipsis;white-space:nowrap;overflow:hidden;">' + value + '<span class="text-danger" style="font-weight:bold">(第'+row.saleCount+'次竞卖)</span></div>';
+				}
+			}
+		},
+		{
+			field: 'auctionStartDate',
+			title: '竞卖开始时间',
+			align: 'center',
+			width: '180'
+		},
+		{
+			field: 'auctionDateEnd',
+			title: '竞卖结束时间',
+			align: 'center',
+			width: '180'
+		},
+		{
+			field: 'action',
+			title: '操作',
+			align: 'center',
+			width: '120',
+			formatter: function(value, row, index) {
+//				var str='<button type="button" onclick=viewbao(\''+index+'\') data-index="' + index + '" class="btn btn-primary btn-xs"><span class="glyphicon glyphicon-eye-open"></span>查看</button>'
+			    var strEdit='<button type="button" onclick=editview(\''+index+'\') data-index="' + index + '" class="btn btn-primary btn-xs"><span class="glyphicon glyphicon-eye-open"></span>编辑</button>'
+			    if((row.auctionStartDate==""||row.auctionStartDate==null)&&(row.auctionDateEnd==""||row.auctionDateEnd==null)){
+                	 return strEdit
+               }else{}
+			}
+		}]
+});
+}
+//编辑时间
+function editview(index) {
+	//存储竞卖文件id	
+	var rowData = $("#SaleTimeList").bootstrapTable('getData');
+	sessionStorage.setItem("AuctionFileCheckDate", JSON.stringify(rowData));
+	layer.open({
+		type: 2,
+		title: '竞卖时间编辑',
+		area: ['1100px', '600px'],
+		resize: false,
+		content: 'Auction/Sale/Agent/SaleTime/model/SaleTimeEdit.html?id='+rowData[index].id+'&packageId='+rowData[index].packageId+'&projectId='+rowData[index].projectId,
+	});
+}
+//查看
+function viewbao(data,$index) {
+	//存储竞卖文件id	
+	var rowData = $("#SaleTimeList").bootstrapTable('getData');
+	layer.open({
+		type: 2,
+		title: '竞卖时间查看',
+		area: ['1100px', '600px'],
+		resize: false,
+		content: 'Auction/Sale/Agent/SaleTime/model/SaleTimeList.html?id='+rowData[$index].id,
+	});
+}

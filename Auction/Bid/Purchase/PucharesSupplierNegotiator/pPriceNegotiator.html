@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="pragma" content="no-cache">
+		<!-- 禁止浏览器从本地机的缓存中调阅页面内容 -->
+		<meta http-equiv="cache-control" content="no-cache, must-revalidate">
+		<meta http-equiv="expires" content="0">
+		<title>采购人价格谈判(记录明细)</title>
+		<link rel="stylesheet" href="../../../../media/js/bootstrap/css/bootstrap.css">
+		<link rel="stylesheet" href="../../../../media/js/bootstrap/css/bootstrap-table.css">
+		<style type="text/css">
+			label {
+				font-weight: normal;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="form-group" >
+		     <table id = "priceNegotiator" class="table table-bordered" style="width: 98%;margin-left: 7px;margin-top: 5px;">
+		     		<!--<tr id="trAddBtn">
+						<td colspan="4"><button id='btnAdd' type='button' class='btn btn-primary' >添加谈判</button></td>
+					</tr>-->
+					<tr class="active">
+						<td colspan="4">项目信息</td>
+					</tr>
+					<tr>
+						<td class="th_bg" style="width: 20%;">项目编号</td>
+						<td style="width: 30%;"><label id="projectCode"></label></td>
+						<td class="th_bg" style="width: 20%;">项目名称</td>
+						<td style="width: 30%;"><label id="projectName"></label><span id="ppName" class="text-danger"  style="font-weight:bold"></span></td>
+					</tr>
+					<tr>
+						<td class="th_bg" >包件编号</td>
+						<td><label id="packageNumber"></label></td>
+						<td class="th_bg" >包件名称</td>
+						<td><label id="packageName"></label></td>
+					</tr>
+					<tr>
+						<td class="th_bg" >谈判方式</td>
+						<td><label id="negotiationType"></label></td>
+						<td class="th_bg">报价单位</td>
+						<td><span id="quotePriceUnit" ></span></td>
+					</tr>
+					<tr>
+						<td class="th_bg" >谈判最终报价</td>
+						<td colspan="3"><label id="lastPrice" ></label></td>
+					</tr>
+					
+					
+			</table>
+			
+			<table id="NegotiatorTable" style="display: none;width: 98%;margin-left: 7px;" class="table table-bordered"> 
+				<tr class="active">
+					<td colspan="6">谈判信息</td>
+				</tr>
+				<tr>
+					<td>谈判对象</td>
+					<td style="text-align: center;width: 150px;">采购人设置谈判价格<!--(<span class="prieUnit"></span>)--></td>
+					<td style="text-align: center;width: 150px;">供应商回复价格<!--(<span class="prieUnit"></span>)--></td>
+					<td style="width: 100px;">是否接受价格</td>
+					<td style="width: 100px;">确认时间</td>
+					<td style="text-align:center;">操作</td>
+				</tr>
+				
+				<tbody id = "negotiationItems">
+					
+					
+				</tbody>
+			</table>
+		</div>
+
+		<div id="trAddBtn" style="width: 100%;height: 50px;text-align:center;position: fixed;bottom: 0;left:0;background-color: #FFFFFF;">
+			<button id='btnAdd' type='button' class='btn btn-primary' >添加谈判</button>
+		</div>
+	</body>
+	<script type="text/javascript" src="../../../../media/js/jquery/jquery.js" ></script>
+	 <script type="text/javascript" src="../../../../media/js/jquery/jquery.extend.js"></script>
+	 <script type="text/javascript" src="../../../../media/js/bootstrap/js/bootstrap.js" ></script>
+	 <script type="text/javascript" src="../../../../media/js/bootstrap/js/bootstrap-table.min.js" ></script>
+	 <script type="text/javascript" src="../../../../media/js/bootstrap/js/bootstrap-table-zh-CN.min.js" ></script>
+	 <script type="text/javascript" src="../../../../media/js/layer/layer.js" ></script>
+	 <script type="text/javascript" src="../../../../media/js/Model/public.js"></script>
+	<script src="js/priceNegotiator.js"></script>
+</html>

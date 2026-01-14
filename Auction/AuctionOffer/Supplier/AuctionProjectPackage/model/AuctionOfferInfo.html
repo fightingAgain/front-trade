@@ -1,0 +1,87 @@
+<!--
+ * @Author: your name
+ * @Date: 2020-05-04 17:31:24
+ * @LastEditTime: 2020-06-24 14:48:20
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: \FrameWork_bf\bidPrice\AuctionOffer\Supplier\AuctionProjectPackage\model\AuctionOfferInfo.html
+--> 
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="pragma" content="no-cache">
+	<!-- 禁止浏览器从本地机的缓存中调阅页面内容 -->
+	<meta http-equiv="cache-control" content="no-cache, must-revalidate">
+	<meta http-equiv="expires" content="0">
+	<title></title>
+	<link rel="stylesheet" href="../../../../../media/js/bootstrap/css/bootstrap.css" />
+	<link rel="stylesheet" href="../../../../../media/js/bootstrap/css/bootstrap-table.min.css">
+	<style>
+		.container div {
+			text-align: center;
+		}
+
+		table th,
+		table td {			
+			vertical-align: middle;
+			/*text-align: center;*/
+		}
+
+		.table>tbody>tr>td {
+			vertical-align: middle;
+		}
+
+		span {
+			color: red;
+		}
+
+		.timeInval,
+		.minPrice {
+			font-size: 24px !important;
+			font-weight: bold;
+		}
+	</style>
+</head>
+
+<body style="width: 99%;padding: 10px;">
+	<div class="container-fluid">
+		<table class="table table-bordered" id="offerInfo">
+			<tr>
+				<td rowspan="3" width="15%">
+					<h1></h1>
+				</td>
+				<th width="15%" class="th_bg">包件编号</th>
+				<td width="22.5%" data-field="packageCode"></td>
+				<th width="15%" class="th_bg">包件名称</th>
+				<td width="22.5%" data-field="packageName"></td>
+			</tr>
+			<tr>
+				<th class="th_bg">竞买人</th>
+				<td data-field="curUser" id="curUser"></td>
+				<th class="th_bg">竞买号</th>
+				<td></td>
+			</tr>
+			<tr>
+				<th class="th_bg">竞价类型</th>
+				<td style="border: none;"></td>
+				<td style="border: none;"></td>
+				<td style="border: none;"></td>
+			</tr>
+		</table>
+		<div id="offerDetail" style="width: 100%; text-align: center;"></div>
+		<table id="offerLogsTable"></table>
+	</div>
+</body>
+<script type="text/javascript" src="../../../../../media/js/jquery/jquery.js"></script>
+<script type="text/javascript" src="../../../../../media/js/jquery/jquery.extend.js"></script>
+<script type="text/javascript" src="../../../../../media/js/bootstrap/js/bootstrap.js"></script>
+<script type="text/javascript" src="../../../../../media/js/bootstrap/js/bootstrap-table.min.js"></script>
+<script type="text/javascript" src="../../../../../media/js/layer/layer.js"></script>
+<script type="text/javascript" src="../../../../../media/js/Model/public.js"></script>
+<script type="text/javascript" src="../../../../../media/js/base/util.js"></script>
+<script src="../js/AuctionOfferInfo.js"></script>
+
+
+</html>

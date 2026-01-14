@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+
+	<body>
+		<div class="container-fluid">
+			<form class="form-inline margin-bottom-10">
+				<div class="input-group">
+					<div class="input-group-addon">项目名称</div>
+					<input type="text" class="form-control" name="search-query">
+				</div>
+				<div class="input-group">
+					<div class="input-group-addon">竞卖起止时间</div>
+					<input type="text" class="form-control" placeholder="竞卖起止时间" id="startDate" readonly style="width: 300px;">
+				</div>
+				<button type="button" class="btn btn-primary search-btn">
+					<span class="glyphicon glyphicon-search" aria-hidden="true"></span>查询
+				</button>
+			</form>
+			<table id="projectPackage"></table>
+		</div>
+	</body>
+	<script src="0502/Sale/SaleOfferProject/js/SaleOfferProject.js"></script>
+</html>

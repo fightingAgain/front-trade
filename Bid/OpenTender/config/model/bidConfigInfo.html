@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8">
+		<meta http-equiv="pragma" content="no-cache"><!-- 禁止浏览器从本地计算机的缓存中访问页面内容 --> 
+		<meta http-equiv="cache-control" content="no-cache"><!-- 用于指定请求和响应遵循的缓存机制 --> 
+		<meta http-equiv="expires" content="0"><!-- 用于设定网页的到期时间，一旦网页过期，必须到服务器上重新传输； -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>开标设置</title>
+ 	<link rel="stylesheet" href="../../../media/js/layer/mobile/need/layer.css" />
+    <link rel="stylesheet" href="../../../media/js/bootstrap/css/bootstrap.css" />
+    <link rel="stylesheet" href="../../../media/js/stream/css/stream-v1.css" />
+	<style>
+		html,body { height: 100%;width: 100%;}
+	</style>
+</head>
+
+<body>
+    <form class="pageModel" id="formBidConfig" name="formBidConfig">
+    	<div class="panel-group" id="accordion">
+    		<div class="panel panel-accordion panel-default">
+	    		<div class="panel-heading active"  role="tab" id="headingOne">  
+			 		<h4 class="panel-title">
+		            	<a data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne" >开标设置</a>
+			 		</h4>  
+			   	</div>  
+			  	<div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">  
+			       	<div class="panel-body">
+			       		<input type="hidden" name="id" id="id" />
+			       		<input type="hidden" name="enterpriseId" id="enterpriseId"/>
+			       		<table  class="table table-bordered ">
+			       			<tr>
+				                <td class="th_bg">解密总时长（分）<i class="red">*</i></td>
+				                <td colspan="3">
+				                    <input type="text" name="decryptTotalTime" id="decryptTotalTime" class="form-control" datatype="num" errormsg="请输入解密总时长（分）" style="width: 300px;" />
+				                </td>
+				            </tr>
+				            <tr>
+				            	<td class="th_bg">签名总时长（分）<i class="red">*</i></td>
+				                <td colspan="3">
+				                    <input type="text" name="signTime" id="signTime" class="form-control" datatype="num" errormsg="请输入签名总时长（分）" style="width: 300px;" />
+				                </td>
+				            </tr>
+				            <tr>
+				                <td class="th_bg">开标执行方式<i class="red">*</i></td>
+				                <td colspan="3">
+				                	<select  name="openExecuteType" id="openExecuteType" class="form-control" id="drawingType" style="width: 300px;" >
+					            		<option value="1">自动下达开标指令</option>
+					            		<option value="2">手动下达开标指令</option>
+					            	</select>
+				                </td>
+				            </tr>
+			       		</table>
+			       	</div>  
+			    </div>  
+	    	</div>
+    	</div>
+    </form>
+    <div class="bottom-btn">
+        <button type="button" class="btn btn-primary" id="btnSave"><span class="glyphicon glyphicon-ok"></span>保存</button>
+        <button type="button" class="btn btn-default" id="btnClose"><span class="glyphicon glyphicon-remove"></span>关闭</button>
+    </div>
+    
+    <script type="text/javascript" src="../../../media/js/jquery/jquery.js"></script>
+    <script type="text/javascript" src="../../../media/js/jquery/jquery.extend.js"></script>
+    <script type="text/javascript" src="../../../media/js/base/util.js"></script>
+    <script type="text/javascript" src="../../../media/js/base/common.js"></script>
+    <script type="text/javascript" src="../../../media/js/stream/js/stream-v1.js"></script>
+    <script type="text/javascript" src="../../../media/js/bootstrap/js/bootstrap-table.js"></script>
+    <script type="text/javascript" src="../../../media/js/bootstrap/js/bootstrap-table-zh-CN.min.js"></script>
+    <script type="text/javascript" src="../../../media/js/layer/layer.js"></script>
+    <script type="text/javascript" src="../js/bidConfigInfo.js"></script>
+</body>
+
+</html>

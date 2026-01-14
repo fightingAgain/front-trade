@@ -1,0 +1,180 @@
+
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8">
+		<meta http-equiv="pragma" content="no-cache"><!-- 禁止浏览器从本地计算机的缓存中访问页面内容 --> 
+		<meta http-equiv="cache-control" content="no-cache"><!-- 用于指定请求和响应遵循的缓存机制 --> 
+		<meta http-equiv="expires" content="0"><!-- 用于设定网页的到期时间，一旦网页过期，必须到服务器上重新传输； -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>踏勘现场通知查看</title>
+    <link rel="stylesheet" href="../../../../media/js/layer/mobile/need/layer.css" />
+    <link rel="stylesheet" href="../../../../media/js/bootstrap/css/bootstrap.css" />
+    <link rel="stylesheet" href="../../../../media/js/bootstrap/css/bootstrap-table.css">
+    
+	<style>
+		html,body { height: 100%;width: 100%;}
+		.readonly{
+		    border: none;
+		    background: none !important;
+		    outline: none !important;
+		    box-shadow: none !important;
+		}
+		.set_height{
+			display: inline-block;
+			padding: 6px 12px;
+		}
+		
+	</style>
+</head>
+
+<body>
+    <form class="pageModel" id="formEle" name="formName">
+    	<div class="panel-group" id="accordion">
+    		<div class="panel panel-accordion panel-default">
+	    		<div class="panel-heading active"  role="tab" id="headingOne">  
+			 		<h4 class="panel-title">
+		            	<a  role="button" data-toggle="collapse" href="#collapseOne" aria-controls="collapseOne"  aria-expanded="true"  >
+		            		基本信息
+		            	</a>
+			 		</h4>  
+			   	</div>  
+			  	<div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">  
+			       	<div class="panel-body">
+			       		<table  class="table table-bordered ">
+			       			<tr>
+					        	<td class="th_bg">标段编号</td>
+				                <td colspan="3">
+				                	<span id="interiorBidSectionCode" class="set_height"></span>
+				                    <input type="hidden"  name="bidSectionId" id="bidSectionId" />
+				                </td>
+				               
+					        </tr>
+					        <tr>
+					        	<td class="th_bg">标段名称</td>
+				                <td colspan="3">
+				                	<span id="bidSectionName" class="set_height"></span>
+				                </td>
+					        </tr>
+					        <tr>
+					        	<td class="th_bg">招标项目名称</td>
+				                <td colspan="3">
+				                	<span id="tenderProjectName" class="set_height"></span>
+				                </td>
+				                
+					        </tr>
+					        <tr>
+					        	<td class="th_bg">踏勘通知名称</td>
+				                <td colspan="3">
+				                	<span id="noticeName" class="set_height"></span>
+				                </td>
+					        </tr>
+					        <tr>
+					        	<td class="th_bg">联系人</td>
+				                <td >
+				                	<span id="linkMen" class="set_height"></span>
+				                </td>
+				                <td class="th_bg">联系电话</td>
+				                <td >
+				                	<span id="linkTel" class="set_height"></span>
+				                </td>
+					        </tr>
+					        <tr>
+					        	<td class="th_bg">踏勘开始时间</td>
+				                <td>
+				                	<span id="noticeStartTime" class="set_height" style="width: 260px;"></span>
+				                </td>
+				                <td class="th_bg">踏勘结束时间</td>
+				                <td>
+				                	<span id="noticeEndTime" class="set_height" style="width: 260px;"></span>
+				                </td>
+					        </tr>
+					        <tr>
+					        	<td class="th_bg">踏勘方式</td>
+				                <td colspan="3">
+				                	<span id="explorationMethod" class="set_height"></span>
+				                </td>
+					        	
+					        </tr>
+					        <tr>
+					        	<td class="th_bg">踏勘地点</td>
+				                <td colspan="3">
+				                	<span id="address" class="set_height"></span>
+				                </td>
+					        </tr>
+					        
+					        <tr>
+				            	<td colspan="4">
+				            		<div style="text-align: right;">
+				            			<button type="button" class="btn btn-primary fullScreen"   style="margin-right: 20px;margin-bottom: 10px;">
+						            		<span class="glyphicon glyphicon-fullscreen"></span>全屏
+						            	</button>
+				            		</div>
+				            		<div style="overflow:auto;padding: 10px;">
+				            			<div id="noticeContent"
+				            				style="margin: auto;width: 210mm;padding: 10mm;box-shadow: 0 0 5px #333333;">
+				            			</div>
+				            		</div>
+					            	<!-- <div id="noticeContent" style="max-height: 400px;border: 1px solid #ccc;padding: 10px;overflow: auto;"></div> -->
+				            	</td>
+				            </tr>
+			       		</table>
+		       		</div>
+	       		</div>
+       		</div>
+       		<div class="panel panel-accordion panel-default">
+	    		<div class="panel-heading active"  role="tab" id="headingTwo">  
+			 		<h4 class="panel-title">
+		            	<a class="collapsed" role="button" data-toggle="collapse"  href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+		            		投标人回复信息
+		            	</a>
+			 		</h4>  
+			   	</div>  
+			  	<div  id="collapseTwo" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingTwo">  
+			       	<div class="panel-body">
+			       		<div id="toolbarTop" class="clearfix">
+				       		<div class="input-group" style="width: 300px;">
+				                <span class="input-group-addon">投标人名称</span>
+				                <input type="text" class="form-control" name="bidderName" id="bidderName">
+				            </div>
+				            <div class="input-group" style="width: 180px;">
+				                <span class="input-group-addon">回复情况</span>
+				                <select name="answerState" id="answerState" class="form-control">
+				                	<option value="">全部</option>
+				                	<option value="0">未确认</option>
+				                	<option value="1">已放弃</option>
+				                	<option value="2">已同意</option>
+				                </select>
+				                <!--<input type="text" class="form-control" name="answerState" id="answerState">-->
+				            </div>
+				            <div class="btn-group" style="display: inline-block;width: 180px;">
+				                <button type="button" id="btnSearch" class="btn btn-primary">
+				                    <span class="glyphicon glyphicon-search"></span>查询
+				                </button>
+				            </div>
+			            </div>
+			       		<table id="bidderList">
+        		
+        				</table>
+		       		</div>
+		       	</div>
+	    	</div>
+		</div>
+        <div class="bottom-btn" style="z-index: 11000;">
+            <button type="button" class="btn btn-default" id="btnClose"><span class="glyphicon glyphicon-remove"></span>关闭</button>
+        </div>
+    </form>
+    <script type="text/javascript" src="../../../../media/js/jquery/jquery.js"></script>
+    <script type="text/javascript" src="../../../../media/js/jquery/jquery.extend.js"></script>
+    <!--<script type="text/javascript" src="../../../../media/js/base/util.js"></script>-->
+    <script type="text/javascript" src="../../../../media/js/base/common.js"></script>
+    <script type="text/javascript" src="../../../../media/js/bootstrap/js/bootstrap.js"></script>
+    <script type="text/javascript" src="../../../../media/js/bootstrap/js/bootstrap-table.js"></script>
+	<script type="text/javascript" src="../../../../media/js/bootstrap/js/bootstrap-table-zh-CN.min.js"></script>
+    <script type="text/javascript" src="../../../Model/js/public.js"></script>
+    <script type="text/javascript" src="../js/noticeView.js"></script>
+</body>
+
+</html>

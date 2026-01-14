@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>评审答复分页</title>
+	</head>
+	<body>
+		<div class="container-fluid">
+			
+			
+			<div id="toolbar">
+	        	<div class="input-group" style="width:200px;float: left;">
+		        	<span class="input-group-addon">答复状态</span>
+		        	<select class="form-control" name="answerState" id="answerState">
+		        		<option value="0">未答复</option>
+		        		<option value="1">已答复</option>
+		        	</select>
+	        	</div>
+	        	
+	        	<!--<div class="input-group" style="width:200px;float: left; padding-left: 10px;">
+		        	<span class="input-group-addon">评审状态</span>
+		        	<select class="form-control" name="checkState" id="checkState">
+		        		<option value="0" >评审中</option>
+		        		<option value="1" >评审结束</option>
+		 
+		        	</select>
+	        	</div>-->
+	        			        	
+	        	
+	        	<div class="input-group" style="width:150px;float: left;padding-left: 10px;">
+	        		<span class="input-group-addon">包件名称</span>
+		        	<input type="text" class="form-control" name="packageName" id="packageName" style="width:180px">
+	        	</div>	
+	        	
+	        	<div class="input-group" style="width:150px;float: left;padding-left: 10px;">
+	        		<span class="input-group-addon">包件编号</span>
+		        	<input type="text" class="form-control" name="packageNum" id="packageNum" style="width:180px">
+	        	</div>
+	        	
+	        	<div class="btn-group" style="padding-left:10px ;">
+	        		
+	        		<button type="button" id="btnSearch" class="btn btn-primary">
+		                <span class="glyphicon glyphicon-search" aria-hidden="true"></span> 查 询
+		            </button>
+		            		            	
+	        	</div>
+			</div>
+
+	        <table id="RaterAskList" class="" data-toolbar="#toolbar"></table>
+	
+		</div>		
+		
+		<script src="0502/Bid/RaterAsk/js/RaterAskList.js"></script>	
+		
+	</body>
+</html>

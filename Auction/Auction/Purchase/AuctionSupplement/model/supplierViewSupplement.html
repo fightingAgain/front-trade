@@ -1,0 +1,226 @@
+
+<head>
+	<meta http-equiv="pragma" content="no-cache">
+	<!-- 禁止浏览器从本地机的缓存中调阅页面内容 -->
+	<meta http-equiv="cache-control" content="no-cache, must-revalidate">
+	<meta http-equiv="expires" content="0">
+</head>
+<link rel="stylesheet" href="../../../../media/js/bootstrap/css/bootstrap.css" />
+<!--<link rel="stylesheet" href="../css/style.css" />-->
+<style>
+	/*div {
+		text-align: left;
+	}
+	
+	tbody {
+		border: 0px solid !important;
+		align-content: center;
+	}
+	
+	th {
+		text-align: center;
+	}
+	
+	td {
+		text-align: center;
+	}*/
+</style>
+
+<body style="width: 99%;padding-left: 10px;padding-top: 10px;">
+	<table class="table table-bordered ">
+		<th class="active" colspan="4">
+			补遗信息
+		</th>
+		<tr class="add_tr">
+			<td  class="th_bg" width="25%" >标题</td>
+			<td colspan="3">
+				<div id="title"></div>
+			</td>
+		</tr>
+		<tr class="add_tr ">
+			<td  class="th_bg" >是否变更时间</td>
+			<td colspan="3">
+				<div id="isChangeDate"></div>
+			</td>
+		</tr>
+		<tbody id='supplementTime'>
+			<tr class="file_tr " id="auctionStartDatetr">
+				<td  class="th_bg"  width="25%">竞价开始时间</td>
+				<td width="25%">
+					<div id="auctionStartDate"></div>
+				</td>
+				<td  class="th_bg" width="25%" >原始竞价开始时间</td>
+				<td width="25%">
+					<div id="oldauctionStartDate"></div>
+				</td>
+			</tr>
+			<tr class="add_tr" id="noticeDiv">
+				<td  class="th_bg" >公告截止时间</td>
+				<td>
+					<div id="noticeEndDate"></div>
+				</td>
+				<td  class="th_bg" >原始公告截止时间</td>
+				<td>
+					<div id="oldNoticeEndDate"></div>
+				</td>
+			</tr>
+			<tr class="pub_tr ">
+				<td  class="th_bg" ><span class="yqh">提出澄清截止时间</td>
+				<td>
+					<div id="askEndDate"></div>
+				</td>
+				<td  class="th_bg" >原始<span class="yqh">提出澄清截止时间</td>
+				<td>
+					<div id="oldAskEndDate"></div>
+				</td>
+			</tr>
+			<tr class="exam_tr ">
+				<td  class="th_bg" >预审提出澄清截止时间</td>
+				<td>
+					<div id="examAskEndDate"></div>
+				</td>
+				<td  class="th_bg" >原始预审提出澄清截止时间</td>
+				<td>
+					<div id="oldExamAskEndDate"></div>
+				</td>
+			</tr>
+			<tr class="pub_tr ">
+				<td  class="th_bg" ><span class="yqh">答复截止时间</td>
+				<td>
+					<div id="answersEndDate"></div>
+				</td>
+				<td  class="th_bg" >原始<span class="yqh">答复截止时间</td>
+				<td>
+					<div id="oldAnswersEndDate"></div>
+				</td>
+			</tr>
+			<tr class="exam_tr ">
+				<td  class="th_bg" >预审答复截止时间</td>
+				<td>
+					<div id="examAnswersEndDate"></div>
+				</td>
+				<td  class="th_bg" >原始预审答复截止时间</td>
+				<td>
+					<div id="oldExamAnswersEndDate"></div>
+				</td>
+			</tr>
+			<tr id="signEndDatetr">
+				<td  class="th_bg" >报名截止时间</td>
+				<td>
+					<div id="signEndDate"></div>
+				</td>
+				<td  class="th_bg" >原始报名截止时间</td>
+				<td>
+					<div id="oldSignEndDate"></div>
+				</td>
+			</tr>
+			<tr class="acceptEndDateDiv" >
+				<td  class="th_bg" >接受邀请时间</td>
+				<td>
+					<div id="acceptEndDate"></div>
+				</td>
+				<td  class="th_bg" >原接受邀请时间</td>
+				<td>
+					<div id="oldAcceptEndDate"></div>
+				</td>
+			</tr>
+			<tr class="pub_tr" id="offerEndDatetr">
+				<td  class="th_bg" >报价截止时间</td>
+				<td>
+					<div id="offerEndDate"></div>
+				</td>
+				<td  class="th_bg" >原始报价截止时间</td>
+				<td>
+					<div id="oldOfferEndDate"></div>
+				</td>
+			</tr>
+			<tr class="pub_tr " id="checkEndDatetr">
+				<td  class="th_bg" >询价评审时间</td>
+				<td>
+					<div id="checkEndDate"></div>
+				</td>
+				<td  class="th_bg" >原始询价评审时间</td>
+				<td>
+					<div id="oldCheckEndDate"></div>
+				</td>
+			</tr>
+			<tr class="exam_tr ">
+				<td  class="th_bg" >预审评审截止时间</td>
+				<td>
+					<div id="examCheckEndDate"></div>
+				</td>
+				<td  class="th_bg" >原始预审评审截止时间</td>
+				<td>
+					<div id="oldExamCheckEndDate"></div>
+				</td>
+			</tr>
+			<tr class="file_tr " id="fileEndDatetr">
+				<td  class="th_bg" >竞价文件递交截止时间</td>
+				<td>
+					<div id="fileEndDate"></div>
+				</td>
+				<td  class="th_bg" >原始竞价文件递交截止时间</td>
+				<td>
+					<div id="oldfileEndDate"></div>
+				</td>
+			</tr>
+			<tr class="file_tr " id="fileCheckEndDatetr">
+				<td  class="th_bg" >竞价文件审核截止时间</td>
+				<td>
+					<div id="fileCheckEndDate"></div>
+				</td>
+				<td  class="th_bg" >原始竞价文件审核截止时间</td>
+				<td>
+					<div id="oldfileCheckEndDate"></div>
+				</td>
+			</tr>
+		</tbody>
+		<tr class="add_tr ">
+			<td  class="th_bg" >说明</td>
+			<td colspan="3">
+				<div id="supplement"></div>
+			</td>
+		</tr>
+		<th colspan="4" class="active">补遗附件</th>
+
+		<tr>
+			<td colspan="4" style="padding: 0px;">
+				<table class="table table-bordered" style="margin-bottom: 0px;">
+					<thead>
+						<tr>
+							<th colspan="2">
+								标题
+							</th>
+							<th width="160px" class="text-center">
+								操作
+							</th>
+							<!--<th width="80px" class="text-center">
+								预览
+							</th>-->
+						</tr>
+					</thead>
+					<tbody id='supplementfile' align="center">
+					</tbody>
+				</table>
+			</td>
+
+		</tr>
+	</table>
+</body>
+<style>
+	.table>thead>tr>th,
+	.table>tbody>tr>th,
+	.table>tfoot>tr>th,
+	.table>thead>tr>td,
+	.table>tbody>tr>td,
+	.table>tfoot>tr>td {
+		vertical-align: middle;
+	}
+</style>
+<script type="text/javascript" src="../../../../media/js/jquery/jquery.js"></script>
+<script type="text/javascript" src="../../../../media/js/jquery/jquery.extend.js"></script>
+<script type="text/javascript" src="../../../../media/js/jquery/jquery.params.js"></script>
+<script type="text/javascript" src="../../../../media/js/base/common.js"></script>
+<script type="text/javascript" src="../../../../media/js/base/util.js"></script>
+<script type="text/javascript" src="../../../../media/js/bootstrap/js/bootstrap.js"></script>
+<script type="text/javascript" src="../js/view_supplement.js"></script>

@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="pragma" content="no-cache"><!-- 禁止浏览器从本地计算机的缓存中访问页面内容 --> 
+		<meta http-equiv="cache-control" content="no-cache"><!-- 用于指定请求和响应遵循的缓存机制 --> 
+		<meta http-equiv="expires" content="0"><!-- 用于设定网页的到期时间，一旦网页过期，必须到服务器上重新传输； -->
+		<title>开标阶段设置的评审参数</title>
+		<link rel="stylesheet" href="../../../media/js/bootstrap/css/bootstrap.css" />
+		<link rel="stylesheet" href="../../../media/js/bootstrap/css/bootstrap-table.min.css" type="text/css"/>
+		<link rel="stylesheet" href="../../../media/js/stream/css/stream-v1.css" />
+		<style>
+			label {
+				font-weight: normal;
+			}
+			
+			body {
+				height: 100%;
+				width: 100%;
+			}
+			.calendar_icon{
+				color: #3995C8;
+			}
+			.padding_button{
+			padding: 5px 8px !important;
+			line-height: 30px !important;
+		}
+		.set_box{
+			margin: 10px;
+			padding: 10px 20px;
+			border: 2px solid #dddddd;
+			box-shadow: 0px 3px 5px #B6BCBF;
+		}
+		h3{
+			margin-bottom: 20px;
+		}
+		.set_value{
+			text-align: center;
+			margin-bottom: 20px;
+		}
+		.data_value{
+			display: inline-block;
+			width: 100px;
+			height: 100px;
+			border-radius: 50%;
+			text-align: center;
+			line-height: 100px;
+			font-size: 20px;
+			margin: 10px;
+			cursor: pointer;
+		}
+		.choose_value{
+			border: 1px solid #3995C8;
+			background: #3995C8;
+			color: #ffffff;
+			box-shadow: 3px 3px 5px #2e6da4;
+		}
+		.no_choose_value{
+			border: 1px solid #dddddd;
+			box-shadow: 3px 3px 5px #C0C0C0;
+		}
+		.set_test{
+			text-align: center;
+		}
+		</style>
+	</head>
+	<body>
+		<form  id="formName" style="width: 99%;padding-left: 10px;padding-top: 10px;margin-bottom: 60px;">
+			<div class="panel-group" id="accordion">
+	    		<div class="panel panel-accordion panel-default">
+		    		<div class="panel-heading active"  role="tab" id="headingOne">  
+				 		<h4 class="panel-title">
+			            	<a  role="button" data-toggle="collapse" href="#collapseOne" aria-controls="collapseOne" data-parent="#accordion" aria-expanded="true"  >
+			            		设置
+			            	</a>
+				 		</h4>  
+				   	</div>  
+				  	<div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">  
+				       	<div class="panel-body" id="set_list">
+				       		<!--<div class="set_box">
+				       			<h3>请选择抽取的N值并进行CA确认</h3>
+				       			<div class="set_value">
+				       				<span class="data_value no_choose_value"></span>
+				       			</div>
+				       			<div class="set_test CA_test">
+				       				<button type="button" class="btn btn-primary" id="btnSave">CA确认</button>
+				       			</div>
+				       		</div>-->
+			       		</div>
+		       		</div>
+	       		</div>
+	   		</div>
+		</form>
+	    <div style="width: 100%;height: 50px;text-align:center;position: fixed;bottom: 0;background-color: #FFFFFF;">
+			<button type="button" class="btn btn-primary" id="btnSave">CA确认</button>
+			<button type="button" class="btn btn-default" id="btnClose"><span class="glyphicon glyphicon-remove"></span>关闭</button>
+		</div>
+	     <script type="text/javascript" src="../../../media/js/jquery/jquery.js" ></script>
+		 <script type="text/javascript" src="../../../media/js/jquery/jquery.extend.js"></script>
+		 <script type="text/javascript" src="../../../media/js/base/common.js" ></script>
+		 <script type="text/javascript" src="../../../media/js/base/util.js" ></script>
+		 <script type="text/javascript" src="../../../media/js/bootstrap/js/bootstrap.js" ></script>
+		 <script type="text/javascript" src="../../../media/js/bootstrap/js/bootstrap-table.min.js"></script>
+		 <script type="text/javascript" src="../../../media/js/bootstrap/js/bootstrap-table-zh-CN.min.js"></script>
+		 <script type="text/javascript" src="../../../media/js/layer/layer.js"></script>
+		 <script type="text/javascript" src="../../../media/js/base/md5.js"></script>
+		 <script type="text/javascript" src="../../../media/js/ca.js"></script>
+		 <script type="text/javascript" src="../js/public.js" ></script>
+		 <script type="text/javascript" src="../js/setReview.js" ></script>
+	</body>
+</html>

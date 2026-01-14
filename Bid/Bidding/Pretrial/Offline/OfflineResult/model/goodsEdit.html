@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta http-equiv="pragma" content="no-cache"><!-- 禁止浏览器从本地计算机的缓存中访问页面内容 --> 
+	<meta http-equiv="cache-control" content="no-cache"><!-- 用于指定请求和响应遵循的缓存机制 --> 
+	<meta http-equiv="expires" content="0"><!-- 用于设定网页的到期时间，一旦网页过期，必须到服务器上重新传输； -->
+    <title>货物</title>
+    <link rel="stylesheet" href="../../../../../media/js/layer/mobile/need/layer.css" />
+    <link rel="stylesheet" href="../../../../../media/js/bootstrap/css/bootstrap.css" />
+    <link rel="stylesheet" href="../../../../../media/js/stream/css/stream-v1.css" />
+	<style>
+		html,body { height: 100%;width: 100%;}
+	</style>
+</head>
+
+<body>
+    <form class="pageModel" id="formName" name="formName">
+    	<table class="table table-bordered" id="formTable">
+    		<tr>
+	            <td colspan="4" style="font-weight: bold;" class="active">投标人信息</td>
+	        </tr>
+    		<tr>
+            	<td class="th_bg">投标人名称</td>
+                <td colspan="3">
+                    <input type="text" name="bidderName" class="form-control readonly" readonly="readonly">
+                </td>
+				<!-- <td class="th_bg">投标报价（万元）<i class="red">*</i></td> -->
+				<!-- <td> -->
+					<!-- <input type="hidden" name="bidPrice" class="form-control" oninput="priceInput(this,6)" datatype="positiveNum" errormsg="请正确输入投标报价" > -->
+					<input type="hidden" name="bidPrice" value="">
+					<input type="hidden" name="priceUnit" value="1" />
+					<input type="hidden" name="priceCurrency" value="156" />
+				<!-- </td> -->
+           	</tr>
+			<td class="th_bg">设备名称</td>
+				<td>
+					<input type="text" name="equipmentName" data-name="equipmentName" class="form-control">
+				</td>
+				<td class="th_bg">付款条件</td>
+				<td>
+					<input type="text" name="paymentGoods" data-name="paymentGoods" class="form-control">
+				</td>
+			<tr>
+				<td class="th_bg">交货日期</td>
+				<td>
+					<input type="text" name="deliveryDate" data-name="deliveryDate" class="form-control Wdate">
+				</td>
+				<td class="th_bg">质保日期</td>
+				<td>
+					<input type="text" name="warrantyDate" data-name="warrantyDate" class="form-control Wdate">
+				</td>
+			</tr>
+			<tr>
+				<td class="th_bg">投标保证金（元）</td>
+				<td>
+					<input type="text" name="bidBond" data-name="bidBond" oninput="priceInput(this,2)" class="form-control">
+				</td>
+				<td class="th_bg">备品备件</td>
+				<td>
+					<input type="text" name="spareParts" data-name="spareParts" class="form-control">
+				</td>
+			</tr>
+			<tr>
+				<td class="th_bg">包装运输保险费</td>
+				<td>
+					<input type="text" name="packTransportCost" data-name="packTransportCost" class="form-control">
+				</td>
+				<td class="th_bg">安装验收培训费</td>
+				<td>
+					<input type="text" name="trainCost" data-name="trainCost" class="form-control">
+				</td>
+			</tr>
+			<tr>
+				<td class="th_bg">投标声明</td>
+				<td colspan="3">
+					<textarea rows="3" type="text" name="statementGoods" data-name="statementGoods" class="form-control" style="resize: none;"></textarea>
+				</td>
+			</tr>
+			<tr>
+				<td class="th_bg">技术资料</td>
+				<td colspan="3">
+					<textarea rows="3" type="text" name="techData" data-name="techData" class="form-control" style="resize: none;"></textarea>
+				</td>
+			</tr>
+			<tr>
+				<td class="th_bg">备注</td>
+				<td colspan="3">
+					<textarea rows="3" type="text" name="mark" data-name="mark" class="form-control" style="resize: none;"></textarea>
+				</td>
+			</tr>
+			<tr>
+				<td colspan="4" style="font-weight: bold;" class="active padding_button">投标文件
+				<button type="button" style="float: right;" class="btn btn-sm btn-primary" id="btnFile"><span class="glyphicon glyphicon-upload"></span>上传</button></td>
+				<button type="button"  id="btnBid" style="display: none;"></button>
+			</tr>
+			<tr>
+				<td colspan="4" id="fileContent"></td>
+			</tr>
+			<tr>
+	            <td colspan="4" style="font-weight: bold;" class="active">自定义列</td>
+	        </tr>
+	        
+    	</table>
+    	
+        <div class="bottom-btn">
+            <button type="button" class="btn btn-primary" id="btnSave"><span class="glyphicon glyphicon-ok"></span>保存</button>
+        <button type="button" class="btn btn-default" id="btnClose"><span class="glyphicon glyphicon-remove"></span>关闭</button>
+        </div>
+    </form>
+    <script type="text/javascript" src="../../../../../media/js/jquery/jquery.js"></script>
+    <script type="text/javascript" src="../../../../../media/js/jquery/jquery.extend.js"></script>
+    <script type="text/javascript" src="../../../../../media/js/base/util.js"></script>
+    <script type="text/javascript" src="../../../../../media/js/base/common.js"></script>
+    <script type="text/javascript" src="../../../../../media/js/bootstrap/js/bootstrap.js"></script>
+    <script type="text/javascript" src="../../../../../media/js/My97DatePicker/WdatePicker.js"></script>
+    <script type="text/javascript" src="../../../../../media/js/stream/js/stream-v1.js"></script>
+	<script type="text/javascript" src="../../../../../media/js/base/StreamUpload.js"></script>
+    <script type="text/javascript" src="../../../../Model/js/public.js"></script>
+    <script type="text/javascript" src="../js/projectEdit.js"></script>
+</body>
+
+</html>

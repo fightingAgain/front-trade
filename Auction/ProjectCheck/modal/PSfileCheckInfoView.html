@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="pragma" content="no-cache">
+	<!-- 禁止浏览器从本地机的缓存中调阅页面内容 -->
+	<meta http-equiv="cache-control" content="no-cache, must-revalidate">
+	<meta http-equiv="expires" content="0">
+	<title></title>
+	<link rel="stylesheet" href="../../../media/js/bootstrap/css/bootstrap.css" />
+	<link rel="stylesheet" href="../../../media/js/bootstrap/css/bootstrap-table.min.css" type="text/css" />
+</head>
+
+<body>
+	<div name="purchase" style="width: 99%;padding-left: 10px;padding-top: 10px;margin-bottom: 60px;">
+		<table class="table table-bordered " style="margin-bottom: 0px;">
+			<tr>
+				<td colspan="4" style="font-weight: bold;" class="active">包件基本信息</td>
+			</tr>
+			<tr>
+				<td style="width:250px;" class="th_bg">包件名称</td>
+				<td style="text-align: left;">
+					<div id="projectName"></div>
+				</td>
+				<td style="width:250px;" class="th_bg">包件编号</td>
+				<td style="text-align: left;">
+					<div id="projectCode"></div>
+				</td>
+			</tr>
+			<tr>
+				<td style="width:250px;" class="th_bg">评审方法</td>
+				<td style="text-align: left;" class="DeviateNumcol">
+					<div id="checkPlan"></div>
+				</td>
+				<td class="th_bg DeviateNum" style="width:200px;">允许最大偏离项数</td>
+				<td style="text-align: left;" class="DeviateNum">
+					<div id="deviate"></div>
+				</td>
+			</tr>
+			<tr class="tenderTypeW" style="display: none">
+				<td class="th_bg">双信封</td>
+				<td style="text-align: left;" colspan="3">
+					<!--<input type="checkbox"  name="doubleEnvelope" value="1" disabled="disabled"/>启用双信封-->
+					<div id="doubleEnvelope"></div>
+					<div style="display: none;" id="isReadSecondLetter"></div>
+				</td>
+			</tr>
+			<tr class="tenderTypeW" style="display: none">
+				<td class="th_bg">暗标</td>
+				<td style="text-align: left;" colspan="3">
+					<!--<input type="checkbox" name="isOpenDarkDoc" id=" isOpenDarkDoc"  value="1" disabled="disabled"/>启用暗标-->
+					<div id="isOpenDarkDoc"></div>
+					<div id="darkSupCode"></div>
+				</td>
+			</tr>
+			<!--<tr>
+					<td colspan="4" style="font-weight: bold;" class="active">文件列表</td>
+				</tr>
+				<tr>
+					<td colspan="4">
+						<table class="table" id="fileTables"></table>
+					</td>
+				</tr>-->
+			<tr class="isCheck" style="display: none">
+				<td colspan="4" class="active" style="border: none;"><strong>综合评审</strong></td>
+			</tr>
+			<tr class="isCheck" style="display: none">
+				<td colspan="4" style="border: none;padding: 0;">
+					<ul id="checkList1" class="nav nav-tabs" style="border-bottom: none;">
+
+					</ul>
+				</td>
+			</tr>
+			<tr class="isCheck" style="display: none">
+				<td colspan="4">
+					<div id="packageDetail" class="tab-content" style="text-align: left;">
+
+					</div>
+				</td>
+			</tr>
+			<tr class="tenderTypeW">
+				<td colspan="4">
+					<div id="offerFileList"></div>
+				</td>
+			</tr>
+			<tr class="isBusiness">
+				<td class="active" colspan="5"><strong>价格评审</strong></td>
+			</tr>
+			<tbody class="table  table-bordered isBusiness" id="Assessment"></tbody>
+			<tr class="" style="display: none">
+				<td class="active" colspan="4" style="border: none;"><strong>明细信息</strong></td>
+			</tr>
+			<tr class="" style="display: none">
+				<td colspan="4">
+					<table class="table  table-bordered" style="margin-bottom:5px ;" id="tbodym">
+					</table>
+				</td>
+			</tr>
+		</table>
+		<!--<table class="table  table-bordered " id="tableWorkflow">
+				<tr class="active">
+					<th colspan="2">审核</th>
+				</tr>
+				<tr id="auditrow1">
+					<td class="th_bg" width="20%">审核状态</td>
+					<td style="text-align: left;">
+						<input type="radio" name="auditState" value="0" />通过
+						<input type="radio" name="auditState" value="1" />不通过
+
+					</td>
+				</tr>
+				<tr id="auditrow2">
+					<td class="th_bg" width="20%">选择审核人</td>
+					<td>
+						<select name="" id="employeeId" class="form-control" style="width: 180px;">
+
+						</select>
+					</td>
+				</tr>
+				<tr class="searched" id="auditrow3">
+					<td class="th_bg" width="20%">审核说明</td>
+					<td><textarea rows="5" class="form-control" style="width: 90%;height: 80px;" name="content"></textarea></td>
+				</tr>
+				<tr>
+			</table>-->
+		<table class="table table-bordered" id="workflowList">
+			<tr class="active">
+				<th>审核流程</th>
+			</tr>
+			<tr>
+				<td>
+					<table class="table table-bordered" id="workflowListDetail"></table>
+				</td>
+			</tr>
+		</table>
+		<!--变更记录-->
+		<!--<table class="table table-bordered " style="margin-bottom: 0px;">
+				<tr>
+					<td colspan="4" style="font-weight: bold;" class="active">变更记录</td>
+				</tr>
+				<tr>
+					<td colspan="5">
+						<table class="table  table-bordered" id="workflowListDetailChange">
+							<tbody>
+								<tr>
+									<td colspan="5">
+										当前没有变更记录
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</td>
+				</tr>
+
+			</table>-->
+	</div>
+	<div style="width: 100%;height: 50px;text-align:center;position: fixed;bottom: 0;background-color: #FFFFFF;">
+		<!--<button type="button" id="btn_submit" class="btn btn-primary" style="width: 100px;">确定</button>-->
+		<button type="button" id="btn_close" class="btn btn-default" style="width: 100px;">关闭</button>
+	</div>
+	<script type="text/javascript" src="../../../media/js/jquery/jquery.js"></script>
+	<script type="text/javascript" src="../../../media/js/jquery/jquery.extend.js"></script>
+	<script type="text/javascript" src="../../../media/js/base/common.js"></script>
+	<script type="text/javascript" src="../../../media/js/base/util.js"></script>
+	<script type="text/javascript" src="../../../media/js/bootstrap/js/bootstrap.js"></script>
+	<script type="text/javascript" src="../../../media/js/bootstrap/js/bootstrap-table.min.js"></script>
+	<script type="text/javascript" src="../../../media/js/bootstrap/js/bootstrap-table-zh-CN.min.js"></script>
+	<script type="text/javascript" src="../../../media/js/base/WorkflowInfo.js"></script>
+	<script type="text/javascript" src="../../../media/js/base/digital.js"></script>
+	<script type="text/javascript" src="../js/businessPriceSetPS.js"></script>
+	<script type="text/javascript" src="../js/PSfileCheckInfoView.js"></script>
+	<script type="text/javascript" src="../../currencyControl/js/offerFileList.js"></script>
+</body>
+
+</html>

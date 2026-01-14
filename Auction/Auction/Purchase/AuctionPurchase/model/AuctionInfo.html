@@ -1,0 +1,355 @@
+<head>
+	<meta http-equiv="pragma" content="no-cache">
+	<!-- 禁止浏览器从本地机的缓存中调阅页面内容 -->
+	<meta http-equiv="cache-control" content="no-cache, must-revalidate">
+	<meta http-equiv="expires" content="0">
+</head>
+<link rel="stylesheet" href="../../../../../media/js/layer/theme/default/layer.css">
+<link rel="stylesheet" href="../../../../../media/js/layer/theme/default/laydate.css">
+<link rel="stylesheet" href="../../../../../media/js/bootstrap/css/bootstrap.css" />
+<link rel="stylesheet" href="../../../../../media/js/bootstrap/css/bootstrap-select.min.css" />
+<link rel="stylesheet" href="../../../../../media/js/bootstrap/css/bootstrap-table.min.css" type="text/css" />
+<link rel="stylesheet" href="../../../../../media/js/datetimepicker/css/jquery.datetimepicker.css" />
+<form id="form" name="purchase" style="width: 99%;padding-left: 10px;padding-top: 10px;margin-bottom: 60px;">
+	<table class="table table-bordered " style="margin-bottom: 0px;">
+		<tr>
+			<td colspan="3" style="font-weight: bold;" class="active">项目基本信息</td>
+			<td style="text-align: right;border: none;box-shadow: none;" class="active">
+				<button type="button" id="btn_view_assign_project" class="btn btn-sm btn-primary isAssignProject" style="display: none;"><span class="glyphicon glyphicon-eye-open"></span>查看派项信息</button>
+			</td>
+		</tr>
+		<tr>
+			<td class="th_bg">采购项目编号</td>
+			<td style="text-align: left;width: 320px;">
+				<div id="projectCode"></div>
+			</td>
+			<td class="th_bg">采购项目名称</td>
+			<td style="text-align: left;width: 320px;">
+				<div id="projectName"></div>
+			</td>
+		</tr>
+		<tr>
+			<td class="th_bg">项目类型</td>
+			<td style="text-align: left;">
+				<div id="projectType"></div>
+			</td>
+			<td class="th_bg">
+				所选地区
+			</td>
+			<td style="text-align: left;">
+				<span id="provinceName"></span>-
+				<span id="cityName"></span>
+			</td>
+		</tr>
+		<tr>
+			<td class="th_bg">采购项目分类</td>
+			<td colspan="3">
+				<div id="tenderProjectClassify"></div>
+			</td>
+		</tr>
+		<tr>
+			<td class="th_bg">项目行业分类</td>
+			<td colspan="3">
+				<div id="industriesType"></div>
+			</td>
+		</tr>
+		<tr class="engineering" style="display: none">
+			<td class="th_bg">项目名称</td>
+			<td colspan="3" style="text-align: left;">
+				<div id="programmeName"></div>
+			</td>
+		</tr>
+		<tr class="engineering" style="display: none">
+			<td class="th_bg">项目编号</td>
+			<td colspan="3" style="text-align: left;">
+				<div id="programmeCode"></div>
+			</td>
+		</tr>
+		<tr class="engineering" style="display: none">
+			<td class="th_bg">项目地址</td>
+			<td colspan="3" style="text-align: left;">
+				<div id="programmeAddress"></div>
+			</td>
+		</tr>
+		<tr>
+			<td colspan="4" style="font-weight: bold;" class="active">采购人信息</td>
+		</tr>
+		<tr>
+			<td class="th_bg">采购人名称</td>
+			<td colspan="3" style="text-align: left;">
+				<div id="purchaserName"></div>
+			</td>
+		</tr>
+		<tr>
+			<td class="th_bg">采购人地址</td>
+			<td colspan="3" style="text-align: left;">
+				<div id="purchaserAddress"></div>
+			</td>
+		</tr>
+		<tr>
+			<td class="th_bg">联系人</td>
+			<td style="text-align: left;">
+				<div id="purchaserLinkmen"></div>
+			</td>
+			<td class="th_bg">联系人电话</td>
+			<td style="text-align: left;">
+				<div id="purchaserTel"></div>
+			</td>
+		</tr>
+		<tr>
+			<td colspan="4" style="font-weight: bold;" class="active">项目信息</td>
+		</tr>
+		<tr>
+			<td class="th_bg" style="width:250px;">采购人所属部门<i class="red">*</i></td>
+			<td style="text-align: left;position: relative;" colspan="3">
+				<input type="text" style="cursor: pointer;" class="form-control Department" data-title="purchaser" id="purchaserDepartment" name="purchaserDepartmentName" readonly placeholder="请选择所属部门" />
+				<input type="hidden" class="form-control" id="purchaserDepartmentId" name="purchaserDepartmentId" />
+			</td>
+		</tr>
+		<tr>
+			<td class="isRowspan th_bg">公开范围<i class="red">*</i></td>
+			<td style="text-align: left;">
+				<input type="radio" name="isPublics" value="0" checked="checked" />公开
+				<input type="radio" name="isPublics" value="1" />邀请
+			</td>
+			<td style="text-align: left; display: none" colspan="2" class=" isPublics0">
+				<input type="radio" name="isPublic" value="0" />所有供应商
+				<input type="radio" name="isPublic" value="1" />所有本公司认证供应商
+			</td>
+			<td style="text-align: left;display: none" colspan="2" class="isPublics1">
+				<input type="radio" name="isPublic" value="2" />仅限邀请供应商
+				<input type="radio" name="isPublic" value="3" />仅邀请本公司认证供应商
+			</td>
+		</tr>
+		<tr class="isPublics3" style="display: none">
+			<td class="th_bg ">
+				供应商分类
+			</td>
+			<td style="text-align: left;" colspan="3">
+				<input id="CODENAME" name="supplierClassifyName" class="form-control" placeholder="请选择供应商分类" readonly style="width: 300px" />
+				<input name="supplierClassifyCode" type="hidden" id="supplierClassifyCode" />
+			</td>
+		</tr>
+		<tr class="yao_btn" style="display: none">
+			<td style="font-weight: bold;border: none;" class="active">邀请供应商</td>
+			<td colspan="4" style="text-align: right;border: none;" class="active">
+				<input type="button" value="添加邀请供应商" class="btn btn-primary" onclick="add_supplier()" />
+			</td>
+		</tr>
+		<tr class="yao_btn " style="display: none">
+			<td colspan="4">
+				<table class="table  table-bordered " style="margin-bottom: 0px;" id="yao_table">
+
+				</table>
+				<div id="projectSuppliers"></div>
+			</td>
+		</tr>
+		<tr>
+			<td colspan="3" style="font-weight: bold;border: none;" class="active">包件信息</td>
+			<td class="active" style="text-align: right;border: none;">
+				<input style="padding: 5px 15px ;display: none;" type="button" id="addBao" value="添加" class="btn btn-primary" onclick="add_bao()" />
+			</td>
+		</tr>
+		<tr>
+			<td colspan="4">
+				<table class="table  table-bordered" style="margin-bottom: 0px;" id="tablebjb">
+				</table>
+			</td>
+		</tr>
+		<tr>
+			<td colspan="4" style="font-weight: bold;" class="active">项目时间安排</td>
+		</tr>
+		<tr>
+			<td class="th_bg">公告发布设置<i class="red">*</i></td>
+			<td style="text-align: left;">
+				<input type="radio" name="settingNotice" checked="checked" value="0" />自动发布
+				<input type="radio" name="settingNotice" value="1" />手动发布
+			</td>
+			<td style="text-align: left;" colspan="2" class="red">自动发布是指到公告开始时间时自动发布公告。手动发布是指由项目经理选择发布</td>
+		</tr>
+		<tr>
+			<td class="th_bg">公告开始时间<i class="red">*</i></td>
+			<td style="text-align: left;">
+				<input type="text" autocomplete="off" data-min="today" data-datename="公告开始时间" class="form-control Wdate" id="noticeStartDate" name="noticeStartDate" style="width: 200px;">
+			</td>
+			<td class="th_bg">公告截止时间<i class="red">*</i></td>
+			<td style="text-align: left;">
+				<input type="text" autocomplete="off" data-min="noticeStartDate" data-datename="公告截止时间" class="form-control Wdate" id="noticeEndDate" name="noticeEndDate" style="width: 200px;">
+			</td>
+		</tr>
+		<tr>
+			<td class="th_bg">提出澄清截止时间<i class="red">*</i></td>
+			<td style="text-align: left;">
+				<input type="text" autocomplete="off" data-min="noticeEndDate" data-max="answersEndDate" data-datename="提出澄清截止时间" class="form-control Wdate" id="askEndDate" name="askEndDate" style="width: 200px;">
+			</td>
+			<td style="text-align: left;" colspan="3" class="red">提出澄清截止时间不得晚于答复截止时间</td>
+		</tr>
+		<tr>
+			<td class="th_bg">答复截止时间<i class="red">*</i></td>
+			<td style="text-align: left;">
+				<input type="text" autocomplete="off" data-min="askEndDate" data-datename="答复截止时间" class="form-control Wdate" id="answersEndDate" name="answersEndDate" style="width: 200px;">
+			</td>
+			<td style="text-align: left;" class="red" colspan="3">默认和公告截止时间相同</td>
+		</tr>
+		<tr>
+			<td class="th_bg">竞价开始时间<i class="red">*</i></td>
+			<td style="text-align: left;">
+				<input type="text" autocomplete="off" data-min="noticeEndDate" data-max="auctionEndDate" data-datename="竞价开始时间" class="form-control Wdate" name="auctionStartDate" id="auctionStartDate" style="width: 200px;">
+			</td>
+			<td colspan="3" style="text-align: left;" class="red">不能早于公告截止时间</td>
+		</tr>
+		<tr id="EndDate">
+			<td class="th_bg">竞价截止时间<i class="red">*</i></td>
+			<td style="text-align: left;">
+				<input type="text" autocomplete="off" data-min="auctionStartDate" data-datename="竞价截止时间" class="form-control Wdate" name="auctionEndDate" id="auctionEndDate" style="width: 200px;">
+			</td>
+			<td colspan="3" style="text-align: left;" class="red">不能早于竞价开始时间</td>
+		</tr>
+		<tr>
+			<td class="th_bg">是否递交竞价文件<i class="red">*</i></td>
+			<td style="text-align: left;" class="colss">
+				<input type="radio" name="isFile" value="0" checked="checked" />是
+				<input type="radio" name="isFile" value="1" />否
+			</td>
+			<td class="th_bg supplierData">最少供应商数量</td>
+			<td style="text-align: left;" class="supplierData">
+				<div class="btn-group packNone">
+					<button type="button" class="btn btn-default" id="reduceNum" style="width: 40px;height: 34px;"><span class="glyphicon glyphicon-minus" aria-hidden="true"></span></button>
+					<input type="text" class="btn btn-default" value="3" name="supplierCount" id="supplierCount" style="width: 60px;">
+					<button type="button" class="btn btn-default" id="addNum" style="width: 40px;height: 34px;"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button>
+				</div>
+				<input type="hidden" id="manual" name="manual"/>
+			</td>
+		</tr>
+		<tr id="isFileN">
+			<td class="th_bg">竞价文件递交截止时间<i class="red">*</i></td>
+			<td style="text-align: left;">
+				<input type="text" autocomplete="off" data-min="noticeStartDate" data-max="fileCheckEndDate" data-datename="竞价文件递交截止时间" class="form-control Wdate" name="fileEndDate" id="fileEndDate" style="width: 200px;">
+				<div class="red" style="padding: 5px 0px;">（即竞价文件审核开始时间）</div>
+			</td>
+			<td class="th_bg">竞价文件审核截止时间<i class="red">*</i></td>
+			<td style="text-align: left;">
+				<input type="text" autocomplete="off" data-min="fileEndDate" data-max="auctionStartDate" data-datename="竞价文件审核截止时间" class="form-control Wdate" name="fileCheckEndDate" id="fileCheckEndDate" style="width: 200px;">
+				<div class="red" style="padding: 5px 0px;">（竞价文件递交截止时间后才能开始审核，请预留足够的审核时间）</div>
+			</td>
+		</tr>
+		<tr>
+			<td colspan="4" style="text-align: left;">
+				<div class="red">请所有竞买人于<span id="StartDate">1990-01-01 00:00:00</span>至<span id="endDate">2100-12-31
+						00:00:00</span>登录<span id="webTitle">长安汽车询价竞价电子交易平台</span>，网址
+					<a href="jacascript::void(0)" id="browserUrl" target="_blank"></a>参与网上报名。 </div>
+				<div class="red">
+					竞买人于竞买文件递交截止时间前完成竞买文件的递交，审核通过后，在项目的公告开始时间至公告截止时间内完成平台服务费、代理费、保证金的缴纳，否则将无法参与后续竞价报价。请合理安排竞买文件递交时间、缴费时间，以免影响您参与报价。
+				</div>
+			</td>
+		</tr>
+		<div id="checkerV"></div>
+		<tr class="employee">
+			<td class="th_bg">添加审核人</td>
+			<td colspan="4" style="text-align: left;">
+				<select id="employeeId" class="form-control" style="width: 180px;" name="checkerId"></select>
+			</td>
+		</tr>
+		<tr>
+			<td colspan="4" style="font-weight: bold;border: none;" class="active">竞价公告信息</td>
+		</tr>
+		<tr>
+			<td class="th_bg">选择发布媒体</td>
+			<td colspan="3" style="text-align: left;">
+				<MediaSelect optionName="project.optionName" optionId="project.optionId" optionValue="project.optionValue"></MediaSelect>
+			</td>
+		</tr>
+		<tr>
+			<td colspan="4">
+				<table class="table table-bordered" id="ueditorContent"></table>
+			</td>
+		</tr>
+		<!-- <tr>
+			<td class="th_bg">选择竞价公告模板</td>
+			<td colspan="3">
+				<select class="form-control" id="noticeTemplate" style="width: 260px;display: inline-block;">
+
+				</select>
+				<button type="button" class="btn btn-primary" id="btnModel" style="vertical-align:top;"><span
+						class="glyphicon glyphicon-refresh" style="vertical-align:-2px;"></span>生成竞价公告内容</button>
+			</td>
+		</tr>
+		<tr id="projectMember">
+			<td colspan="5">
+				<script id="editor" type="text/plain" style="width:100%;height:400px;"></script>
+			</td>
+			<input type="hidden" name="content" id="content" />
+		</tr> -->
+		<tr class="record" style="display: none;">
+			<td class="active" colspan="4"><strong>审核记录</strong></td>
+		</tr>
+		<tr class="record" style="display: none;">
+			<td colspan="4">
+				<table class="table  table-bordered" id="workflowListDetail">
+					<tr>
+						<td colspan="4">
+							当前没有审核记录
+						</td>
+					</tr>
+				</table>
+			</td>
+		</tr>
+	</table>
+	<input type="hidden" name="id" id="purchaseId" />
+	<input type="hidden" name="project.id" id="projectId" />
+	<input type="hidden" name="isPublic" id="isPublics" />
+	<input type="hidden" name="project.tenderType" id="tenderType" value="1" />
+	<input type="hidden" name="project.projectState" id="projectState" value="0" />
+</form>
+<div class="bottom-btn" style="z-index: 11000;">	
+	<button type="button" class="btn btn-primary" id="btn_prev" style="display: none;"><span class="glyphicon glyphicon-arrow-left"></span>上一步</button>
+	<button type="button" class="btn btn-default" id="btn_bao"><span class="glyphicon glyphicon-ok"></span>保存</button>
+	<button type="button" class="btn btn-primary" id="btn_submit"><span
+			class="glyphicon glyphicon-ok"></span>提交</button>
+	<button type="button" class="btn btn-default" id="btn_close"><span
+			class="glyphicon glyphicon-remove"></span>关闭</button>
+</div>
+<style>
+	.table>thead>tr>th,
+	.table>tbody>tr>th,
+	.table>tfoot>tr>th,
+	.table>thead>tr>td,
+	.table>tbody>tr>td,
+	.table>tfoot>tr>td {
+		vertical-align: middle;
+	}
+</style>
+<script type="text/javascript" src="../../../../../media/js/jquery/jquery.js"></script>
+<script type="text/javascript" src="../../../../../media/js/jquery/jquery.extend.js"></script>
+<script type="text/javascript" src="../../../../../media/js/base/common.js"></script>
+<script type="text/javascript" src="../../../../../media/js/bootstrap/js/bootstrap.js"></script>
+<script type="text/javascript" src="../../../../../media/js/bootstrap/js/bootstrap-select.min.js"></script>
+<script type="text/javascript" src="../../../../../media/js/bootstrap/js/defaults-zh_CN.min.js"></script>
+<script type="text/javascript" src="../../../../../media/js/bootstrap/js/bootstrap-table.min.js"></script>
+<script type="text/javascript" src="../../../../../media/js/bootstrap/js/bootstrap-table-zh-CN.min.js"></script>
+<script type="text/javascript" src="../../../../../media/js/ueditor/ueditor.config.js" charset="utf-8"></script>
+<script type="text/javascript" src="../../../../../media/js/ueditor/ueditor.all.js" charset="utf-8">
+</script>
+<script type="text/javascript" src="../../../../../media/js/base/UEditorFun.js" ></script>
+<!-- 公告模板 -->
+<script type="text/javascript" src="../../../../TempManager/tempPublic.js"></script>
+<!-- end -->
+<!--建议手动加在语言，避免在ie下有时因为加载语言失败导致编辑器加载失败-->
+<!--这里加载的语言文件会覆盖你在配置项目里添加的语言类型，比如你在配置项目里配置的是英文，这里加载的中文，那最后就是中文-->
+<script type="text/javascript" src="../../../../../media/js/ueditor/lang/zh-cn/zh-cn.js" charset="utf-8"></script>
+<script type="text/javascript" src="../../../../../media/js/My97DatePicker/WdatePicker.js"></script>
+<!-- <script type="text/javascript" src="../../../../../media/js/datetimepicker/js/jquery.datetimepicker.js"></script> -->
+<script type="text/javascript" src="../../../../../media/js/datetimepicker/js/timePicker.js"></script>
+<script type="text/javascript" src="../../../../../media/js/layer/laydate.js"></script>
+<script type="text/javascript" src="../../../../../media/js/layer/layer.js"></script>
+<script type="text/javascript" src="../../../../../media/js/Model/public.js" ></script>
+<script type="text/javascript" src="../../../../../media/js/Model/projectMembers.js" ></script>
+<script type="text/javascript" src="../../../../../media/js/Model/js/dataLinkage.js" ></script>
+<script type="text/javascript" src="../../../../../media/js/Model/public.js"></script>
+<script type="text/javascript" src="../js/AuctionInfo.js"></script>
+<script type="text/javascript" src="../../../../Public/js/PublishingMedia.js" ></script>
+
+<script type="text/javascript" src="../js/supplierInfo.js"></script>
+<script type="text/javascript" src="../js/timeDate.js"></script>
+<script type="text/javascript" src="../js/auctionTest.js"></script>
+<script type="text/javascript" src="../../../../../media/js/base/auditRecords.js"></script>

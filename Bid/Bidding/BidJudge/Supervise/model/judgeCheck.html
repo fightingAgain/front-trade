@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="zh">
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="pragma" content="no-cache"><!-- 禁止浏览器从本地计算机的缓存中访问页面内容 --> 
+		<meta http-equiv="cache-control" content="no-cache"><!-- 用于指定请求和响应遵循的缓存机制 --> 
+		<meta http-equiv="expires" content="0"><!-- 用于设定网页的到期时间，一旦网页过期，必须到服务器上重新传输； -->
+    	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+		<title></title>
+
+	    <link rel="stylesheet" href="../../../../media/js/layer/mobile/need/layer.css" />
+	    <link rel="stylesheet" href="../../../../media/js/bootstrap/css/bootstrap.css" />
+	    <link rel="stylesheet" href="../../../../media/js/bootstrap/css/bootstrap-table.css">
+	    <style>
+	    	body { float: none;}
+	    	.myTab { border: 0;}
+	    	.myTab a { color: #fff;}
+	    	#companyTabs li {display: inline-block; float: none; margin-bottom: 10px;}
+	    	#companyTabs::-webkit-scrollbar {
+			    height: 8px;
+			    background-color: #eee;
+			}
+			
+			#companyTabs::-webkit-scrollbar-track {
+			    background-color: #eee;
+			}
+			
+			#companyTabs::-webkit-scrollbar-thumb {
+			    background: #b9dfff;
+			}
+			
+			#companyTabs {
+				scrollbar-face-color: #b9dfff; /*立体滚动条的颜色（包括箭头部分的背景色）*/
+				scrollbar-3dlight-color: #b9dfff; /*立体滚动条亮边的颜色*/
+				scrollbar-highlight-color: #b9dfff; /*滚动条的高亮颜色（左阴影？）*/
+				scrollbar-shadow-color: #b9dfff; /*立体滚动条阴影的颜色*/
+				scrollbar-darkshadow-color: #b9dfff; /*立体滚动条外阴影的颜色*/
+				scrollbar-track-color: #eee; /*立体滚动条背景颜色*/
+				scrollbar-base-color:#eee; /*滚动条的基色*/
+				scrollbar-arrow-color: #eee; /**//*三角箭头的颜色*/ 
+			}
+	    .glyphicon{
+				margin-right: 2px;
+				vertical-align: -1px;
+			}
+			
+	    </style>
+	</head>
+	<body>
+		<form class="pageModel" id="formName" name="formName">
+        	<table class="table table-bordered mainTable">
+	        	<tr>
+		            <td colspan="4" style="font-weight: bold;" class="active">项目信息
+			            <button type="button" class="btn btn-primary" id="btnProject"  style="float: right;margin-right: 50px;">
+		            		<span class="glyphicon glyphicon-eye-open"></span>查看项目详情
+		            	</button>
+	            	</td>
+		        </tr>
+	            <tr>
+	            	<td class="th_bg">项目名称</td>
+	                <td id="projectName"></td>
+	            	<td class="th_bg">项目编号</td>
+	                <td id="projectCode"></td>
+	            </tr>
+	            <tr>
+	            	<td class="th_bg">标段名称</td>
+	                <td id="packageName"></td>
+	            	<td class="th_bg">标段编号</td>
+	                <td id="packageCode"></td>
+	            </tr>
+	            <tr style="background-color: #3995C8;">
+	            	<td colspan="4">
+	            		<ul class="nav nav-tabs myTab" id="reviewTabs">
+	            			<!--<li class="active"><a href="#primaryReview" id="primaryReview-tab">初步评审</a></li>
+							<li><a href="#techKey" id="techKey-tab">技术关键条款评审</a></li>-->
+	            		</ul>
+	            	</td>
+	            </tr>
+	            <tr>
+	            	<td class="th_bg">评委</td>
+	            	<td colspan="3">
+	            		<ul class="nav nav-pills" id="judgesTabs">
+	            			
+	            		</ul>
+	            	</td>
+	            </tr>
+	            <tr>
+	            	<td colspan="4">
+	            		<div class="companyDiv" style="overflow: hidden;">
+		            		<ul class="nav nav-pills" id="companyTabs" style="overflow: auto;">
+		            		<!--<ul class="nav nav-pills"  style="">-->
+		            			
+		            		</ul>
+
+	            		</div>
+	            	</td>
+	            </tr>
+	            <tr>
+	            	<td colspan="4" style="padding: 0;">
+	            		<div id="myTabContent" class="tab-content">
+	            			<!--评审进度-->
+							<div class="tab-pane" id="schedule">
+						    	
+						    	<table class="table table-bordered" style="margin: 0;text-align:center;">
+						    		<tr><td style="font-weight: bold;" class="active">评审记录</td></tr>
+						    		<tr>
+						    			<td>
+							    			<table class="table table-bordered">
+							    				<tr>
+									    			<th style="width: 50px;text-align:center;">序号</th>
+									    			<th style="text-align:center;">评委</th>
+									    			<th style="text-align:center;">初步评审</th>
+									    			<th style="text-align:center;">详细评审</th>
+									    			<th style="text-align:center;">评审报告</th>
+									    			<th style="text-align:center;">审核</th>
+									    		</tr>
+									    		<tr>
+									    			<td>1</td>
+									    			<td>某某</td>
+									    			<td><span style="color:green;">已完成</span></td>
+									    			<td><span style="color:green;">已完成</span></td>
+									    			<td><span style="color:red;">未完成</span></td>
+									    			<td><span style="color:red;">未完成</td>
+									    		</tr>
+									    		<tr>
+									    			<td>2</td>
+									    			<td>某某</td>
+									    			<td><span style="color:green;">已完成</span></td>
+									    			<td><span style="color:green;">已完成</span></td>
+									    			<td><span style="color:red;">未完成</span></td>
+									    			<td><span style="color:red;">未完成</td>
+									    		</tr>
+									    		<tr>
+									    			<td colspan="2"></td>
+									    			<td><button type="button" class="btn btn-primary btn-sm">退回到此阶段</button></td>
+									    			<td><button type="button" class="btn btn-primary btn-sm">退回到此阶段</button></td>
+									    			<td><button type="button" class="btn btn-primary btn-sm">退回到此阶段</button></td>
+									    			<td><button type="button" class="btn btn-primary btn-sm">退回到此阶段</button></td>
+									    		</tr>
+							    			</table>
+						    			</td>
+						    		</tr>
+						    		<tr><td colspan="6" style="font-weight: bold;" class="active">评审恢复记录</td></tr>
+						    		<tr>
+						    			<td>
+							    			<table class="table table-bordered">
+							    				<tr>
+									    			<th style="width: 50px;text-align:center;">序号</th>
+									    			<th style="text-align:center;">恢复评审项</th>
+									    			<th style="text-align:center;">操作备注</th>
+									    			<th style="text-align:center;">操作人</th>
+									    			<th style="text-align:center;">操作时间</th>
+									    		</tr>
+									    		<tr>
+									    			<td>1</td>
+									    			<td>初步评审</td>
+									    			<td>备注</td>
+									    			<td>某某</td>
+									    			<td>2019-04-02</td>
+									    		</tr>
+							    			</table>
+						    			</td>
+						    		</tr>
+						    	</table>
+							</div>
+	            			<!--形式评审-->
+						    <!--<div class="tab-pane active" id="formReview">
+						    	<div style="color: red; padding: 10px;">评审方法：合格制 <br/>
+									汇总方式： 评委全体成员按照少数服从多数（2分之1）的原则判定评价标准是否合格。<br/>
+									1、若评审项为关键要求，任何一项不合格都将淘汰。<br/>
+									2、若评审项为一般要求，任何一项或多项不合格不影响评审结果，不做淘汰处理。
+						    	</div>
+						    	<table class="table table-bordered">
+						    		<tr><td colspan="3" style="font-weight: bold;" class="active">评审文件</td></tr>
+						    		<tr>
+						    			<th style="width: 50px;">序号</th>
+						    			<th>文件名</th>
+						    			<th style="width: 100px;">操作</th>
+						    		</tr>
+						    	</table>
+						    	<table class="table table-bordered">
+						    		<tr>
+						    			<td colspan="7" style="text-align: right;">
+						    				<button type="button" class="btn btn-primary btnEliminate">淘汰申请</button>
+						    				<button type="button" class="btn btn-primary btnQualified">全部合格</button>
+						    				<button type="button" class="btn btn-primary btnNoQualified">全部不合格</button>
+						    				<button type="button" class="btn btn-primary btnSave">临时保存</button>
+						    				<button type="button" class="btn btn-primary btnSubmit">提交结果</button>
+						    			</td>
+						    		</tr>
+						    		<tr>
+						    			<th style="width: 50px;">序号</th>
+						    			<th>评价内容</th>
+						    			<th>评价标准</th>
+						    			<th style="width: 120px; text-align: center;">是否关键要求</th>
+						    			<th>备注</th>
+						    			<th style="width: 130px; text-align: center;">是否合格</th>
+						    			<th style="width: 200px;">不合格原因</th>
+						    		</tr>
+						    		<tr>
+						    			<td>1</td>
+						    			<td>投标文件</td>
+						    			<td>投标文件能正常打开</td>
+						    			<td style="text-align: center;">是</td>
+						    			<td>备注</td>
+						    			<td style="text-align: center;">
+						    				<select class="form-control isQualified" name="isKey">
+						    					<option value="0">合格</option>
+						    					<option value="1">不合格</option>
+						    				</select>
+						    			</td>
+						    			<td><input class="form-control" name="reason" /></td>
+						    		</tr>
+						    		
+						    	</table>
+							</div>-->
+						    
+						    <div  id="detailReview">
+						    	<div style="color: red; padding: 10px;">评审方法：评分制<br/>
+									汇总方式： 评委全体成员评分计算出平均得分，即为供应商评审因素最后得分。
+						    	</div>
+						    	<!--<table class="table table-bordered">
+						    		<tr><td colspan="3" style="font-weight: bold;" class="active">评审文件</td></tr>
+						    		<tr>
+						    			<th style="width: 50px;">序号</th>
+						    			<th>文件名</th>
+						    			<th style="width: 100px;">操作</th>
+						    		</tr>
+						    	</table>-->
+						    	<table class="table table-bordered">
+						    		<thead>
+						    			<tr>
+							    			<th style="width: 50px;text-align: center;">序号</th>
+							    			<th colspan="2">评价内容</th>
+							    			<th>评价标准</th>
+							    			<th style="width: 120px; text-align: center;">分值</th>
+							    			<th>备注</th>
+							    			<th style="width: 200px;">得分</th>
+							    		</tr>
+						    		</thead>
+						    		<tbody>
+						    			<tr>
+							    			<td rowspan="2" style="width: 50px;text-align: center;">1</td>
+							    			<td rowspan="2">供应商名称</td>
+							    			<td >供应商名称</td>
+							    			<td>与营业执照一致</td>
+							    			<td style="text-align: center;">12</td>
+							    			<td>备注</td>
+							    			<td><input class="form-control" name="score" /></td>
+							    		</tr>
+							    		<tr>
+							    			
+							    			<td>供应商名称</td>
+							    			<td>与营业执照一致</td>
+							    			<td style="text-align: center;">12</td>
+							    			<td>备注</td>
+							    			<td><input class="form-control" name="score" /></td>
+							    		</tr>
+							    		<tr>
+							    			<td style="width: 50px;text-align: center;">2</td>
+							    			<td >供应商名称</td>
+							    			<td >供应商名称</td>
+							    			<td>与营业执照一致</td>
+							    			<td style="text-align: center;">12</td>
+							    			<td>备注</td>
+							    			<td><input class="form-control" name="score" /></td>
+							    		</tr>
+							    		<tr>
+							    			<td style="width: 50px;text-align: center;">3</td>
+							    			<td colspan="2">供应商名称</td>
+							    			<td>与营业执照一致</td>
+							    			<td style="text-align: center;">12</td>
+							    			<td>备注</td>
+							    			<td><input class="form-control" name="score" /></td>
+							    		</tr>
+						    		</tbody>
+						    		
+						    	</table>
+							</div>
+							<!--评审澄清-->
+							<div class="tab-pane" id="clarify">
+						    	<div style="padding: 10px;">
+									供应商互动提问 <span style="color: red;">温馨提示：评审委员会可以要求供应商进行澄清说明，所有澄清问题的提出与答复均在本页面在线完成。</span>
+						    	</div>
+						    	
+						    	<table class="table table-bordered" style="margin: 0;">
+						    		<tr>
+						    			<td><div id="clarifyList" style="height: 300px;"></div></td>
+						    		</tr>
+						    		<tr>
+						    			<td style="padding: 0;"><textarea class="form-control" id="askContent" style="resize: none;border: 0;" rows="3" placeholder="请输入质疑问题"></textarea></td>
+						    		</tr>
+						    		<tr>
+						    			<td>
+						    				<button type="button" class="btn btn-primary btn-sm" id="btnSend">发送</button>
+						    				<button type="button" class="btn btn-primary btn-sm" id="btnRefurbish">刷新</button>
+						    				<button type="button" class="btn btn-primary btn-sm" id="btnAutoRefresh" data-state="1">自动刷新</button>
+						    			</td>
+						    		</tr>
+						    	</table>
+							</div>
+							
+						</div>
+	            	</td>
+	            </tr>
+        	</table>
+        	<div class="bottom-btn">
+		        <button type="button" class="btn btn-primary" id="btnRefresh"><span class="glyphicon glyphicon-refresh"></span>刷新</button>
+		        <button type="button" class="btn btn-default" id="btnClose"><span class="glyphicon glyphicon-remove"></span>关闭</button>
+		    </div>
+        </form>
+		<script type="text/javascript" src="../../../../media/js/jquery/jquery.js" ></script>
+		<script type="text/javascript" src="../../../../media/js/jquery/jquery.extend.js"></script>
+		<script type="text/javascript" src="../../../../media/js/base/common.js" ></script>
+		<script type="text/javascript" src="../../../../media/js/base/util.js" ></script>
+		<script type="text/javascript" src="../../../../media/js/bootstrap/js/bootstrap.js" ></script>
+		<script type="text/javascript" src="../../../../media/js/layer/layer.js"></script>
+		<script type="text/javascript" src="../../../Model/js/public.js"></script>
+		<script type="text/javascript" src="../js/judgeCheck.js" ></script>
+	</body>
+</html>

@@ -1,0 +1,128 @@
+
+<head>
+	<meta http-equiv="pragma" content="no-cache">
+	<!-- 禁止浏览器从本地机的缓存中调阅页面内容 -->
+	<meta http-equiv="cache-control" content="no-cache, must-revalidate">
+	<meta http-equiv="expires" content="0">
+	<link rel="stylesheet" href="../../../../../media/js/layer/mobile/need/layer.css" />
+	<link rel="stylesheet" href="../../../../../media/js/bootstrap/css/bootstrap.css" />
+	<link rel="stylesheet" href="../../../../../media/js/bootstrap/css/bootstrap-table.min.css" />
+	
+	<link rel="stylesheet" href="../../../../../media/js/bootstrap-fileinput-master/css/fileinput.min.css" type="text/css"/>
+</head>
+<form id="formb" name="projectPackages" style="width: 99%;padding-left: 10px;padding-top: 10px;margin-bottom:60px;">  
+<div class="container-fluid">
+	<table class="table table-bordered" style="margin-bottom: 0px;">
+		<tr>
+			<td colspan="4" class="active" style="border: none;"><strong>包件基本信息</strong></td>			
+		</tr>
+		<tr>
+			<td style="width:200px;" class=" th_bg">包件名称</td>
+			<td  style="text-align: left;">
+				<div id="packageName"></div>
+			</td>
+			<td class="th_bg" style="width:200px;">包件编号</td>
+			<td  style="text-align: left;"><div id="packageNum"></div></td>
+		</tr>
+		<tr>
+			<td class="th_bg" style="width:200px;">评审方法</td>
+			<td  style="text-align: left;" class="DeviateNumcol">
+				<div id="checkPlan"></div>								
+			</td>
+			<td class="th_bg DeviateNum" style="width:200px;">允许最大偏离项数</td>
+			<td  style="text-align: left;" class="DeviateNum">
+				<div id="deviate"></div>								
+			</td>
+		</tr>
+		<tr class="tenderTypeW" style="display: none">
+			<td class="th_bg">双信封</td>
+			<td style="text-align: left;" colspan="3">
+				<!--<input type="checkbox"  name="doubleEnvelope" value="1" disabled="disabled"/>启用双信封-->				
+				<div id="doubleEnvelope"></div>
+				<div id="isReadSecondLetter"></div>
+			</td>					
+		</tr>
+		<tr class="tenderTypeW" style="display: none">
+			<td class="th_bg">暗标</td>
+			<td style="text-align: left;" colspan="3">
+				<!--<input type="checkbox" name="isOpenDarkDoc" id=" isOpenDarkDoc"  value="1" disabled="disabled"/>启用暗标-->			
+				<div id="isOpenDarkDoc"></div>
+				<div id="darkSupCode"></div>
+			</td>					
+		</tr>
+		<tr>
+			<td colspan="2" class="active" style="border: none;"><strong>综合评审</strong></td>
+			<td colspan="2" class="active" style="text-align: right;border: none;" colspan="4" class="searched">
+			
+			</td>
+		</tr>
+		<tr>
+			<td colspan="4"  style="padding: 0;">
+				<ul id="checkList1" class="nav nav-tabs" style="border-bottom: none;">
+					
+				</ul>
+			</td>
+		</tr>
+		<tr>
+			<td colspan="4">
+				<div id="packageDetail" class="tab-content" style="text-align: left;">
+					
+				</div>				
+			</td>			
+		</tr>
+		<tr>
+			<td colspan="4"><div id="clearBiddingWrap"></div></td>
+		</tr>
+		<tr class="tenderTypeW">
+			<td colspan="4"><div id="offerFileList"></div></td>
+		</tr>
+		<tr class="tenderTypeW">
+			<td class="active"  colspan="4"><strong>价格评审</strong></td>
+		</tr>
+
+		<tbody class="table  table-bordered tenderTypeW"  id="Assessment"></tbody>
+</table>
+</div>
+</form>
+<div class="bottom-btn" style="z-index: 100001">
+	<button type="button" class="btn btn-default" id="btnClose"><span class="glyphicon glyphicon-remove"></span>关闭</button>
+</div>
+<style>
+        .fileinput-button {
+            position: relative;
+            display: inline-block;
+            overflow: hidden;
+        }
+
+        .fileinput-button input{
+            position:absolute;
+            right: 0px;
+            top: 0px;
+            opacity: 0;
+            -ms-filter: 'alpha(opacity=0)';
+            font-size: 200px;
+        }
+        .nav-tabs > li.active > a, .nav-tabs > li.active > a:hover, .nav-tabs > li.active > a:focus {
+		    color: #555;
+		    cursor: default;
+		    background-color: #f1f1f1;
+		    border: 1px solid #ddd;
+		    border-bottom-color: transparent;
+		}
+    </style>
+ <script type="text/javascript" src="../../../../../media/js/jquery/jquery.js" ></script>
+ <script type="text/javascript" src="../../../../../media/js/jquery/jquery.extend.js" ></script>
+ <script type="text/javascript" src="../../../../../media/js/jquery/jquery.params.js" ></script>
+ <script type="text/javascript" src="../../../../../media/js/bootstrap/js/bootstrap.js" ></script>
+  <script type="text/javascript" src="../../../../../media/js/bootstrap/js/bootstrap-table.min.js"></script>
+ <script type="text/javascript" src="../../../../../media/js/bootstrap/js/bootstrap-table-zh-CN.min.js"></script>
+ 
+ <script type="text/javascript" src="../../../../../media/js/bootstrap-fileinput-master/js/fileinput.js"></script>
+<script type="text/javascript" src="../../../../../media/js/bootstrap-fileinput-master/js/locales/zh.js"></script>
+ <script type="text/javascript" src="../../../../../media/js/base/common.js" ></script>
+ <script type="text/javascript" src="../../../../../media/js/layer/layer.js" ></script>
+ <script type="text/javascript" src="../../../../../media/js/base/digital.js" ></script>
+ <script type="text/javascript" src="../../../../../media/js/base/clearBiddingSet.js" ></script>
+ <script type="text/javascript" src="../js/packageCheckLook.js" ></script>
+  <script type="text/javascript" src="../../Purchase/js/businessPriceSet.js"></script>
+  <script type="text/javascript" src="../../../../currencyControl/js/offerFileList.js" ></script>

@@ -1,0 +1,99 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<link rel="stylesheet" type="text/css" href="../../js/bootstrap/css/bootstrap.css">
+	<link rel="stylesheet" href="../../js/bootstrap/css/bootstrap-table.css" />
+	<link rel="stylesheet" type="text/css" href="../../js/layui/css/modules/layer/default/layer.css">
+	<link rel="stylesheet" type="text/css" href="../../js/layui/css/layui.css">
+	<link rel="stylesheet" type="text/css" href="../../css/style.css">
+</head>
+<body>
+    <!--查询窗体-->
+    <div class="container">
+	<div class="widget-content">
+		<div class="fixed-table-toolbar" style="overflow: hidden;">
+	        <div class="pull-left searched">	        	
+	        	<div class="layui-input-inline">
+		            <select id="search_1">
+                    	<option value="all">全部</option>
+                    	<option value="released">已发布</option>
+                    	<option value="notrelease">未发布</option>
+                    </select>  
+		        </div>	                         
+	        </div>
+	        <div class="pull-left searched">	        	
+	        	<div class="layui-input-inline">
+		            <select id="search_1">
+                    	<option value="all">未审核</option>
+                    	<option value="released">已发布</option>
+                    	<option value="notrelease">未发布</option>
+                    </select>  
+		        </div>	                         
+	        </div>
+	        <div class="pull-left searched">	        	
+	        	<div class="layui-input-inline">
+		            <select id="search_1">
+                    	<option value="all">企业名称</option>
+                    	<option value="released">已发布</option>
+                    	<option value="notrelease">未发布</option>
+                    </select>  
+		        </div>	                         
+	        </div>
+	         <div class="pull-left searched">	            
+		        <div class="layui-input-inline">
+		             <input type="text">
+		        </div>	                        
+	        </div>
+	        <div class="pull-right bars">
+	             <button class="btn btn-danger" onclick="search_btn()">查询</button>           
+	        </div>
+	       
+	    </div>
+	    <div style="margin-top: 15px;">
+	    	 <div class="pull-left searched">
+	        	<label class="layui-form-label" style="width: 100px;">金额范围：</label>
+	        	<div class="layui-input-inline">
+		            <input   type="text">
+		        </div>
+	                            
+	        </div>
+	        <div class="pull-left searched">
+	        	<label class="layui-form-label" style="width: 20px;padding: 9px 0;margin-right: 4px;text-align: center;">—</label>
+	        	<div class="layui-input-inline">
+		            <input   type="text" >
+		        </div>
+	                            
+	        </div>
+	    	 <div class="pull-left searched">
+	            <label class="layui-form-label" style="width: 100px;"> 提交时间：</label>
+		        <div class="layui-input-inline">
+		             <input type="text" class="layui-input" id="starttime" placeholder="dd/MM/yyyy" >
+		        </div>	                        
+	        </div>
+	        <div class="pull-left searched">
+	            <label class="layui-form-label" style="width: 40px;">至</label>
+		        <div class="layui-input-inline">
+                     <input type="text" class="layui-input" id="endtime" placeholder="dd/MM/yyyy" >
+		        </div>	                        
+	        </div>
+	    </div>
+	</div> 
+	<div class="widget-content">
+		<!--工具条-->
+		<!--<div id="toolbar">
+			<button class="btn btn-success btn-xs" data-toggle="modal" data-target="#add">添加事件</button>
+		</div>-->
+		<table id="eventTable"></table>
+	</div>
+	</div>
+<script type="text/javascript" src="../../js/jquery/jquery.js"></script>
+<script type="text/javascript" src="../../js/bootstrap/js/bootstrap.js"></script>
+<script type="text/javascript" src="../../js/bootstrap/js/bootstrap-table.min.js" ></script>
+<script type="text/javascript" src="../../js/ZCH.js" ></script>
+<script type="text/javascript" src="../../js/layui/layui.js" ></script>
+<script type="text/javascript" src="../../js/layui/lay/modules/layer.js"></script>
+<script type="text/javascript" src="js/DepositAudit.js"></script>
+
+</body>
+</html>

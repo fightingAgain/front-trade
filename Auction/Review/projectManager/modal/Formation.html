@@ -1,0 +1,130 @@
+<!--
+ * @Author: your name
+ * @Date: 2020-09-09 13:49:34
+ * @LastEditTime: 2020-12-14 16:13:01
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: \FrameWork_bf\bidPrice\Review\projectManager\modal\Formation.html
+--> 
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="pragma" content="no-cache">
+		<!-- 禁止浏览器从本地机的缓存中调阅页面内容 -->
+		<meta http-equiv="cache-control" content="no-cache, must-revalidate">
+		<meta http-equiv="expires" content="0">
+		<title>组建评委</title>
+	</head>
+	<style type="text/css">
+		 a.disabled {
+            pointer-events: none;
+            filter: alpha(opacity=50); /*IE滤镜，透明度50%*/
+            -moz-opacity: 0.5; /*Firefox私有，透明度50%*/
+            opacity: 0.5; /*其他，透明度50%*/
+        }
+        
+        .selects{
+        	height:31px;
+        	width:220px;
+        }
+        
+	</style>
+	<body>
+		<table class="table table-bordered">
+			<tr class="active">
+				<td colspan="3" style="border: none;"><font size="3" >评委信息</font></td>
+				<td class="active" style="text-align: right;border: none;">
+					<div style="float: left;line-height: 32px;display: none;" id="chooseMode" class="isCreateType isAgent">
+						<span class="red">请选择是否需要抽取评审专家库评委：</span>
+						<label style="padding-right: 20px;margin-bottom: 0;color: #BB2413;">
+							<input type="radio" name="isChooseJudges" class="" id="" value="1" style="vertical-align: -2px;margin-right: 5px;" />是
+						</label>
+						<label style="padding-right: 20px;margin-bottom: 0;color: #BB2413;">
+							<input type="radio" name="isChooseJudges" class="" id="" value="0" style="vertical-align: -2px;margin-right: 5px;" />否
+						</label>
+						<button class="btn btn-primary isStopCheck" id="btnSure" style="display: none;background: #03BF16;border-color: #03BF16;">确认</button>
+						<button class="btn btn-primary isStopCheck" id="btnChangeMode" style="display: none;">切换模式</button>
+					</div>
+					<font size="4" class="buttonNone isCreateType isStopCheck chooseBidPrice" style="display: none">关联包件：</font>
+					<div style="width: 230px;float: right;display: none" class="isCreateType isStopCheck chooseBidPrice ">
+					<select class="form-control selects"  name="optionName" id="optionName" onchange=onLinkPackage(2)>
+        			
+        			</select>
+        			</div>
+	        		
+	        	</td>
+			</tr>
+			<tr style="display: none" class="isCreateType chooseBidPrice">
+				<td colspan="4">
+					<div style="width: 100%;height: 40px;" id="reviewAddressBox">
+						<div class="input-group" style="width:150px;float: left;margin-right: 10px;">
+							<span class="input-group-addon">评审地点<i class="red">*</i></span>
+							<input type="text" class="form-control" id="address" autocomplete="off" style="width:400px" maxlength="200">
+						</div>
+						<button type="button" id="btnEditAddress" class="btn btn-primary" style="display: none;">编辑</button>
+						<button type="button" id="btnSaveAddress" class="btn btn-primary" style="display: none;">保存</button>
+					</div>
+					<div class="isStopCheck" style="float: left;margin-right:5px;" class="buttonNone">评委数量：
+						<select style="height:30px;width:150px;display: initial;" id="expertsNumber">
+							<option value="1">1个评委</option>
+							<option value="3">3个评委</option>
+							<option value="5">5个评委</option>
+							<option value="7">7个评委</option>
+							<option value="9">9个评委</option>
+							<option value="11">11个评委</option>
+							<option value="13">13个评委</option>
+							<option value="15">15个评委</option>
+							<option value="17">17个评委</option>
+						</select>
+					</div>
+					<div style="float: left;" class="isStopCheck">
+						<button class="btn btn-primary btn-sm" id="bntShowJudge"><span class="glyphicon glyphicon-random"></span>抽取评委</button>
+						<button class="btn btn-primary btn-sm" id="bntAppointJudge"><span class="glyphicon glyphicon-ok"></span>业主评委</button>
+						<button class="btn btn-primary btn-sm" id="bntAppointJudgeIsAgent" style="display: none;"><span class="glyphicon glyphicon-ok"></span>指定评委</button>
+						<button class="btn btn-primary btn-sm" id="bntAddJudge"><span class="glyphicon glyphicon-plus"></span>添加评委</button>
+						<!--<button class="btn btn-default">保存</button>-->
+						<button class="btn btn-primary btn-sm" id="btnSendSMS"><span class="glyphicon glyphicon-envelope"></span>发送短信</button>
+						<button class="btn btn-primary btn-sm" id="ExtractRecord"><span class="glyphicon glyphicon-eye-open"></span>抽取历史</button>
+						<button class="btn btn-primary btn-sm" id="btnNewCheck" style="display: none;"><span class="glyphicon glyphicon-retweet"></span>重组评委</button>
+						
+						
+					</div>
+					<div style="float: left;margin-left: 5px;" class="isStopCheck">
+						<div style="color: red;" id="SMSMsg">提示一：在抽取评委完成后，请点击发送短信进行确认</div>
+						<div style="color: red;" id="SMSMsg2">提示二：在评委进行评审后，如需调整评审委员会，请退回到评审开始阶段，再重组评委。</div>
+					</div>
+				</td>
+			</tr>
+			<tr style="display: none" class="isCreateType chooseBidding">
+				<td colspan="4">
+					<button class="btn btn-primary btn-sm isStopCheck" id="btnConfirm"><span class="glyphicon glyphicon-ok"></span>确认组建</button>
+					<button class="btn btn-primary btn-sm isStopCheck" id="btnDeleteConfirm" style="display: none;" ><span class="glyphicon glyphicon-ok"></span>取消组建</button>
+					<button class="btn btn-primary btn-sm" id="btnHistory"><span class="glyphicon glyphicon-eye-open"></span>抽取历史</button>
+				</td>
+			</tr>
+			<tr style="display: none;" class="chooseBidding">
+			    <td colspan="3" style="font-weight: bold;border: none;" class="active">业主评委</td>
+				<td class="active" style="text-align: right;">
+					<button class="btn btn-primary btn-sm isStopCheck" id="bntAddExpert"><span class="glyphicon glyphicon-plus"></span>添加评委</button>
+					<button class="btn btn-primary btn-sm isStopCheck" id="bntOwnerJudge"><span class="glyphicon glyphicon-plus"></span>业主评委</button>
+				</td>
+			</tr>
+			<tr class="ExpertsTableWrap">
+				<td colspan="4" style="padding:inherit;border: 0px solid;">
+					<table id="ExpertsTable" style="border: 0px solid;"></table>
+				</td>
+			</tr>
+			<tr style="display: none;" class="chooseBidding notCreateType">
+			    <td colspan="4" style="font-weight: bold;border: none;" class="active">评委列表</td>
+			</tr>
+			<tr style="display: none;" class="chooseBidding notCreateType">
+				<td colspan="4" style="padding:inherit;border: 0px solid;">
+					<table id="biddingExpertsTable" style="border: 0px solid;"></table>
+				</td>
+			</tr>
+		</table>
+	</body>
+	<script type="text/javascript" src="../js/Formation.js?version=3.4.25"></script>
+</html>

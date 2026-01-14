@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+	<link rel="stylesheet" type="text/css" href="../../../../media/js/layer/mobile/need/layer.css" />
+	<link rel="stylesheet" type="text/css" href="../../../../media/js/layer/css/layui.css" />
+	<link rel="stylesheet" type="text/css" href="../../../../media/js/bootstrap/css/bootstrap.css" />
+	<!-- <link rel="stylesheet" type="text/css" href="../../../media/js/bootstrap/css/bootstrap-table.css"> -->
+	<style>
+		.layui-table th{
+			font-weight: 600;
+		}
+		table{
+			margin-bottom: 0px !important;
+		}
+	</style>
+</head>
+
+<body>
+	<div style="margin-bottom: 60px;padding: 5px;">
+		<table class="table table-bordered" id="mainTable"></table>
+	</div>
+
+	<div class="bottom-btn">
+		<div class="row">
+			<div class="col-md-4" style="text-align: left;">
+				<div id="color_tips" style="display: none;">系统会对客观分进行判断，<span style="background:#e43636;color:white;padding: 5px;">红色</span>代表不一致，<span style="background:green;color:white;padding: 5px;">绿色</span>代表一致。</div>
+			</div>
+			<div class="col-md-3">
+				<button type="button" class="btn btn-primary" id="btnBack">回退修改</button>
+				<button type="button" class="btn btn-primary" id="btnGoOn" style="display: none;">继续评审</button>
+				<button type="button" class="btn btn-primary" id="btnReason" style="display: none;">补充原因</button>
+			</div>
+			<div class="col-md-5" style="text-align: left;">
+				<div>回退修改：所有评委统一回退修改打分及填写原因</div>
+				<div>补充说明：所有评委只针对客观分不一致打分项填写原因，不可修改打分</div>
+			</div>
+		</div>
+	</div>
+</body>
+<script type="text/javascript" src="../../../../media/js/jquery/jquery.js"></script>
+<script type="text/javascript" src="../../../../media/js/jquery/jquery.ajax.js"></script>
+<script type="text/javascript" src="../../../../media/js/base/common.js"></script>
+<script type="text/javascript" src="../../../../media/js/layer/layer.js"></script>
+<script type="text/javascript" src="../../../../media/js/layer/layui.js"></script>
+<script type="text/javascript" src="../../../../media/js/base/util.js"></script>
+<script type="text/javascript" src="../../../../media/js/bootstrap/js/bootstrap.js"></script>
+<script type="text/javascript" src="../../../../media/js/bootstrap/js/bootstrap-table.min.js"></script>
+<script type="text/javascript" src="../../../../media/js/bootstrap/js/bootstrap-table-zh-CN.min.js"></script>
+<script>
+	var expertId = getUrlParam("expertIds");//标段Id
+	var packageCheckListId = getUrlParam("packageCheckListId");//评标id
+	var examType = getUrlParam("examType");
+	var projectId = getUrlParam("projectId");
+	var checkUrl = top.config.AuctionHost + '/CheckConfirmController/getCheckConfirmData.do';//评委组长获取 评审确认页面数据
+	var backUrl = top.config.AuctionHost + '/ProjectCheckBackController/insertItemProjectCheckBack.do';//回退
+	var goOnUrl = top.config.AuctionHost + '/CheckConfirmController/confirm.do';//确认
+	var reasonUrl = top.config.AuctionHost + '/CheckConfirmController/chooseUpdateReason.do';//原因
+	var checkType = '';//0合格制  1偏离制 2响应制 3打分制
+	var checkData = [], colsData = [], packageId, checkName, bidCheckItems;
+	var height = document.documentElement.clientHeight - 95;
+	console.log(height)
+	//关闭
+	$("#btnClose").off('click').click(function () {
+		var index = top.layer.getFrameIndex(window.name);
+		top.layer.close(index);
+	});
+	$.ajax({
+		type: "post",
+		url: checkUrl,
+		async: false,
+		data: {
+			'expertId': expertId,//评委id
+			'packageCheckListId': packageCheckListId,//评审项id
+			'examType': examType,//资格审查方式 0预审 1后审
+		},
+		success: function (res) {
+			var colsData1 = [
+				{title: '序号', type:'numbers', fixed: 'left', rowspan: '3'},
+				{field:'checkTitle',  title: '评价内容', fixed: 'left',width:'300', rowspan: '3'},
+				{field:'checkStandard',  title: '评审标准', fixed: 'left',width:'300', rowspan: '3'}
+			], colsData2 = [],  colsData3 = [];//三维数组
+			var colspan = '1';//投标人合并列数（评委数量）
+			if (res.success) {
+				if(res.data){
+					
+					packageId = res.data.packageId;
+					if(res.data.confirmButnStatus && res.data.confirmButnStatus == 1){
+						$('#btnGoOn, #btnBack').show();
+					}
+					if(res.data.updateReasonButnStatus && res.data.updateReasonButnStatus == 1){
+						$('#btnReason').show();
+					}
+					if(res.data.packageCheckList){
+						checkName = res.data.packageCheckList.checkName;
+						checkType = res.data.packageCheckList.checkType;
+						if(checkType == 3 || checkType == 1){
+							$('#color_tips').show();
+							var scoreType = {field:'itemScoreType',  title: '打分类型', fixed: 'left',width:'100', rowspan: '3', templet: function(val){
+									if(val.itemScoreType == 1){
+										return '主观分';
+									}else if(val.itemScoreType == 2){
+										return '客观分';
+									}else{
+										return '';
+									}
+								}}
+							colsData1.push(scoreType);
+						}
+					}
+					if(res.data.experts){
+						colspan = res.data.experts.length*2;
+					}
+					if(res.data.offers){
+						var suppliers = res.data.offers;//投标人
+						var experts = res.data.experts;//评委
+						var scoreList = res.data.checkItemInfos;//打分
+						bidCheckItems = res.data.packageCheckItems;//评审内容
+						//循环供应商
+						for(var i = 0;i<suppliers.length;i++){
+							//处理一维数组
+							var obj = {title: suppliers[i].enterpriseName ,align:'center', colspan: colspan};
+							colsData1.push(obj);
+							//循环评委
+							for(var e=0;e<experts.length;e++){
+								let fId = suppliers[i].supplierId + '_' + experts[e].id;
+								let reason = fId + '_' + 'reason';
+								//处理二维数组
+								let objExperts = {title: experts[e].expertName,width:'100',align:'center', colspan: '2'}
+								//处理三维数组
+								let objScore = {field: '', title: '结果',width:'100',align:'center', templet: function(val){
+									if(val[fId].scoreTypeFlag == 1){
+										return '<div style="background:#e43636;color:white">'+val[fId].result+'</div>'
+									}else if(val[fId].scoreTypeFlag == 2){
+										return '<div style="background:green;color:white">'+val[fId].result+'</div>'
+									}else{
+										return '<div>'+val[fId].result+'</div>'
+									}
+								}};
+								let objReason = {field: reason, title: '原因',width:'100',align:'center'};
+								colsData2.push(objExperts);
+								colsData3.push(objScore);
+								colsData3.push(objReason);
+							}
+						}
+								
+						// 循环评审内容
+						for(var b=0;b<bidCheckItems.length;b++){
+							//处理打分
+							for(var s=0;s<scoreList.length;s++){
+								if(bidCheckItems[b].id == scoreList[s].id){
+									var fId = scoreList[s].supplierId + '_' + scoreList[s].checkerEmployeeId;
+									var reason = fId + '_' + 'reason';
+									var keys = '';
+									//checkType 0合格制 1评分制 2偏离制 3评分合格制
+									if (checkType == 0) {
+										keys = scoreList[s].itemKey == 0?'合格':scoreList[s].itemKey == 1?'不合格':'';
+									};
+									if (checkType == 2) {
+										keys = scoreList[s].itemKey == 0?'不偏离':scoreList[s].itemKey == 1?'偏离':'';
+									};
+									//scoreTypeFlag 标记  0为正常 1为标红  2为标绿
+									// bidCheckItems[b][fId] = (checkType == 3 || checkType == 1)?scoreList[s].itemScore:keys;
+									bidCheckItems[b][reason] = (checkType == 3 || checkType == 1)?(scoreList[s].scoreReason?scoreList[s].scoreReason:''):(scoreList[s].reason?scoreList[s].reason:'');
+									bidCheckItems[b][fId] = {
+										'result': (checkType == 3 || checkType == 1)?scoreList[s].itemScore:keys,
+										'scoreTypeFlag': scoreList[s].scoreTypeFlag,
+									}
+									
+								}
+							}
+						}
+			
+					}
+					colsData = [colsData1, colsData2, colsData3];
+					tableHtml(colsData, bidCheckItems);
+				}
+				
+				
+			} else {
+				top.layer.alert(res.message);
+			}
+		}
+	});
+	var checkData = [
+		{'bidderName': '111', 'fileSubmitTime':'qq', 'signDate': 'ooo', 'signInDate': 'ppp','sign':'000', 'signIn':'ppp'},
+		{'bidderName': '222', 'fileSubmitTime':'aa', 'signDate': 'ddd', 'signInDate': 'fff','sign':'ggg', 'signIn':'hhh'},
+	];
+	function tableHtml(cols, data){
+		layui.use('table', function(){
+			var table = layui.table;
+			  
+			var tableIns =  table.render({
+				elem: '#mainTable'
+				,limit: Number.MAX_VALUE // 数据表格默认全部显示
+		//		    ,url:'/demo/table/user/'
+		//		    ,width: 892
+			,height: height
+			,cols: cols
+				// ,cols: [[
+				// 	{title: '序号', type:'numbers', fixed: 'left', rowspan: '2'}
+				// 	,{field:'bidderName',  title: '投标单位名', fixed: 'left',width:'300', rowspan: '2'}
+				// 	,{title: '供应商1',align:'center', colspan:'2'}
+				// 	,{title: '供应商2',align:'center', colspan:'2'}
+				// 	,{field:'fileSubmitTime',  title: '投标',width:'300', rowspan: '2'}
+				// ],[
+				// 	{field:'signDate', title: '评委1',width:'200',align:'center'},
+				// 	{field:'signInDate', title: '评委2',width:'200',align:'center'},
+				// 	{field:'sign', title: '评委1',width:'200',align:'center'},
+				// 	{field:'signIn', title: '评委2',width:'200',align:'center'}
+				// ]]
+			,data:data
+			});
+		  
+		});
+	};
+	function passMessage(callback){
+		var data = {
+			'expertId': expertId,//评委id
+			'packageCheckListId': packageCheckListId,//评审项id
+			'examType': examType,//资格审查方式 0预审 1后审
+		};
+		$('#btnBack').off('click').click(function(){
+			top.layer.prompt({title: '请输入回退原因', formType: 2}, function(text, index){
+				top.layer.close(index);
+				data = {
+					'projectId': projectId,
+					'packageId': packageId,
+					'backName': checkName,//评审项名称
+					'backId': packageCheckListId,//评审项id
+					'remark': text, //回退原因
+					'examType': examType
+				}
+				selectResults('1', data, callback)
+			});
+		});
+		$('#btnGoOn').off('click').click(function(){
+			selectResults('0', data, callback)
+		});
+		$('#btnReason').off('click').click(function(){
+			selectResults('2', data, callback)
+		});
+	};
+	function selectResults(sType, data, callback){
+		//sType 0确认 1回退 2客观分确认
+		var postUrl = '';
+		if(sType == '0'){
+			postUrl = goOnUrl;
+		}else if(sType == '1'){
+			postUrl = backUrl;
+		}else if(sType == '2'){
+			postUrl = reasonUrl;
+		}
+		$.ajax({
+			type: "post",
+			url: postUrl,
+			async: false,
+			data: data,
+			success: function (res) {
+				if (res.success) {
+					if(callback){
+						callback();
+					};
+					var index = top.layer.getFrameIndex(window.name);
+					top.layer.close(index);
+				}else{
+					top.layer.alert(res.message)
+				}
+			}
+		});
+	}
+	
+</script>
+
+</html>

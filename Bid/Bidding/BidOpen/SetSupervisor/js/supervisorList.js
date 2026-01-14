@@ -1,0 +1,132 @@
+var userUrl = config.Syshost + '/WorkflowController/pageView.do'; //获取招标人代表
+var checkboxed;
+var tendererName = "";
+var enterprisId = "";
+var options = "";
+var callback;
+$(function(){
+	
+	if($.getUrlParam("enterprisid") && $.getUrlParam("enterprisid") != "undefined"){
+		enterprisId =$.getUrlParam("enterprisid");
+	}
+	
+	$("#eventquery").click(function () {
+		$('#tableList').bootstrapTable(('refresh')); 				
+	});
+	
+	//确定
+	$("#btnSave").click(function(){
+		var iframeWin = options.iframeWin?options.iframeWin:"";
+//			iframeWin.enterpriseCallback($("#tableList").bootstrapTable("getSelections"));
+		options.callback($("#tableList").bootstrapTable("getSelections"))
+		var index = parent.layer.getFrameIndex(window.name); 
+		parent.layer.close(index); 
+	});
+	$("#btnClose").click(function(){
+		var index = parent.layer.getFrameIndex(window.name); 
+		parent.layer.close(index); 
+	});
+});
+
+/*
+ * 页面传参方法
+ * data:{isMulti:false}
+ */
+function passMessage(data){
+	var selectColumn = "";
+	var defaults = {
+		idList:[],  //已被选中列表的id集合
+		isMulti:false,   //是否多选，true为是，false为单选
+		enterpriseType: 0,   //enterpriseType
+		callback:""
+	}
+	options = $.extend(defaults, data);
+	if(options.isMulti){
+		selectColumn = {
+            checkbox: true,
+            formatter: function(value, row, index) {
+				for(i = 0; i < options.idList.length; i++) {
+					if(row.id == options.idList[i]) {
+						return {
+							checked: true //设置选中
+						};
+					}
+				}
+			}
+        }
+	} else {
+		selectColumn = {
+			radio: true,
+	    }
+	}
+	getTendereeList(selectColumn);
+}
+
+function getTendereeList(selectColumn){
+	$('#tableList').bootstrapTable({
+        method: 'post', // 向服务器请求方式
+        contentType: "application/x-www-form-urlencoded", // 如果是post必须定义
+        url: userUrl, // 请求url		
+        cache: false, // 是否使用缓存，默认为true，所以一般情况下需要设置一下这个属性（*）
+        striped: true, // 隔行变色
+        dataType: "json", // 数据类型
+        pagination: true, // 是否启用分页
+        showPaginationSwitch: false, // 是否显示 数据条数选择框
+        pageSize: 10, // 每页的记录行数（*）
+        pageNumber: 1, // table初始化时显示的页数
+        pageList: [5, 10, 25, 50],
+        search: false, // 不显示 搜索框
+        sidePagination: 'server', // 服务端分页
+        classes: 'table table-bordered', // Class样式
+        silent: true, // 必须设置刷新事件
+        toolbar: '#toolbar', // 工具栏ID
+        toolbarAlign: 'left', // 工具栏对齐方式
+        sortStable: true,
+        queryParams: queryParams, // 请求参数，这个关系到后续用到的异步刷新
+        queryParamsType: "limit",
+        onLoadError:function(){
+        	parent.layer.closeAll("loading");
+        	parent.layer.alert("请求失败");
+        },
+        onLoadSuccess:function(data){ 
+        	parent.layer.closeAll("loading");
+        	if(!data.success){
+        		
+        		parent.layer.aler(data.message);
+        	}
+        },
+        onCheck: function (row) {
+            checkboxed = row
+        },
+        columns: [selectColumn, {
+            field: 'userName',
+            title: '姓名',
+            align: 'left'
+        },{
+            field: 'logCode',
+            title: '登录帐号',
+            align: 'left'
+        },{
+            field: 'tel',
+            title: '手机号',
+            align: 'left'
+        },{
+            field: 'email',
+            title: '电子邮箱',
+            align: 'left'
+        }]
+    });
+}
+// 分页查询参数，
+function queryParams(params) {
+    return {
+        'pageNumber': params.offset / params.limit + 1, //当前页数
+        'pageSize': params.limit, // 每页显示数量
+        'offset': params.offset, // SQL语句偏移量	
+        'enterpriseName': "",
+        "userInformation.userName": $("#userName").val(),
+		"logCode": $("#logCode").val(),
+		"employeeState": 0,
+		"enterprisId":enterprisId
+    }
+}

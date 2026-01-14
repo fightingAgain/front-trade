@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="pragma" content="no-cache">
+		<!-- 禁止浏览器从本地机的缓存中调阅页面内容 -->
+		<meta http-equiv="cache-control" content="no-cache, must-revalidate">
+		<meta http-equiv="expires" content="0">
+		<title>竞价采购历史详情</title>
+		<link rel="stylesheet" href="../../../media/js/layer/mobile/need/layer.css" />
+		<link rel="stylesheet" href="../../../media/js/layer/theme/default/laydate.css" />
+		<link rel="stylesheet" type="text/css" href="../../../media/js/bootstrap-fileinput-master/css/fileinput.min.css" />
+		<link rel="stylesheet" href="../../../media/js/bootstrap/css/bootstrap-select.min.css" />
+		<link rel="stylesheet" href="../../../media/js/bootstrap/css/bootstrap.css" />
+		<link rel="stylesheet" href="../../../media/js/bootstrap/css/bootstrap.min.css">
+		<link rel="stylesheet" href="../../../media/js/bootstrap/css/bootstrap-table.css" />
+		<style type="text/css">
+			.table td,
+			.table tr {
+				vertical-align: middle !important;
+			}
+		</style>
+	</head>
+
+	<body style="width: 99%;padding-left: 10px;padding-top: 10px;margin-bottom: 60px;">
+		<div class="form-group">
+			<table class="table table-bordered">
+				<tr>
+					<td colspan="4" style="font-weight: bold;" class="active">基本信息</td>
+				</tr>
+				<tr class="basic">
+					<td class="text-right">供应商名称：</td>
+					<td>
+						<div id="legalName"></div>
+					</td>
+					<td class="text-right">法人名称：</td>
+					<td>
+						<div id="legalRepresent"></div>
+					</td>
+				</tr>
+				<tr class="basic">
+					<td class="text-right">联系人：</td>
+					<td>
+						<div id="legalContact"></div>
+					</td>
+					<td class="text-right">联系人电话：</td>
+					<td>
+						<div id="legalContactPhone"></div>
+					</td>
+				</tr>
+				<tr class="basic">
+					<td class="text-right">联系人地址：</td>
+					<td>
+						<div id="legalContactAddress"></div>
+					</td>
+					<td class="text-right">开户行帐号：</td>
+					<td>
+						<div id="basicAccountNo"></div>
+					</td>
+				</tr>
+				<tr class="basic">
+					<td class="text-right">投标人代表：</td>
+					<td>
+						<div class="bidderProxy" id="bidderProxy"></div>
+					</td>
+					<td class="text-right">
+						投标人代表证件号码：
+					</td>
+					<td>
+						<span class="bidderProxyCard" id="bidderProxyCard"></span>
+						<span class="bidderProxyCardType" id="bidderProxyCardType"></span>
+					</td>
+				</tr>
+				<tr class="basic">
+					<td class="text-right">项目负责人：</td>
+					<td>
+						<div id="projectLeader" class="projectLeader"></div>
+					</td>
+					<td class="text-right">项目负责人证件号码：</td>
+					<td>
+						<span class="projectLeaderCard" id="projectLeaderCard"></span>
+						<span class="projectLeaderCardType" id="projectLeaderCardType"></span>
+					</td>
+				</tr>
+
+				<th class="active uploadFile" colspan="4">竞卖文件</th>
+				<tr class="uploadFile">
+					<td colspan="4">
+						<!--文件列表-->
+						<!-- <table class="table" id="uploadedfiles"></table> -->
+						<table class="table table-bordered " style="margin-bottom: 0;">
+							<tr>
+								<td class="text-right th_bg">营业执照</td>
+								<td class="fileBox fileBox1" data-index="1"></td>
+							</tr>
+							<tr>
+								<td class="text-right th_bg">法人身份证复印件</td>
+								<td class="fileBox fileBox2" data-index="2"></td>
+							</tr>
+							<!--<tr>
+								<td class="text-right th_bg">授权委托书</td>
+								<td class="fileBox fileBox3" data-index="3"></td>
+							</tr>-->
+							<tr>
+								<td class="text-right th_bg">授权人身份复印件</td>
+								<td class="fileBox fileBox4" data-index="4"></td>
+							</tr>
+							<tr>
+								<td class="text-right th_bg">危废类资质</td>
+								<td class="fileBox fileBox5" data-index="5"></td>
+							</tr>
+							<tr>
+								<td class="text-right th_bg">保证金</td>
+								<td class="fileBox fileBox6" data-index="6">
+
+									<input type="radio" name="bondType" value="0"/>已交押金（无需上传凭证）
+									<input type="radio" name="bondType" value="1"/>无押金（上传凭证）
+
+								</td>
+							</tr>
+							<tr>
+								<td class="text-right th_bg">是否法人参加竞卖</td>
+								<td class="fileBox fileBox7" data-index="7">
+									<input type="radio" name="entrustType" value="0"/>是（无需上传授权书）
+									<input type="radio" name="entrustType" value="1"/>否（上传授权书）
+								</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<!--<tr id="checkMes" style="display: none;">
+					<td colspan="4" class="active">审核记录</td>
+				</tr>
+				<tr id="checkPerson" style="display: none;">
+					<td colspan="4">
+						<table id="checkList" class="table table-bordered"></table>
+					</td>
+				</tr>-->
+				<tr id="resultAuditMsg">
+					<th colspan="4" class="active">审核记录</th>
+				</tr>
+				<tr id="resultAuditTable">
+					<td colspan="4" align="left">
+						<table class="table table-bordered table-striped" id="biddingApprovalRecord">
+
+						</table>
+					</td>
+				</tr>
+
+				<!--<tr>
+
+					<table class="table table-bordered table-striped" id="biddingApproval">
+						<tr class="active">
+							<th colspan="4">采购审核</th>
+						</tr>
+						<tr id="auditrow1">
+
+							<td colspan="4" style="text-align:left ;">
+								<table id="biddingApprovalList" class="table table-bordered"></table>
+							</td>
+						</tr>
+
+					</table>
+
+				</tr>-->
+
+			</table>
+
+			<div style="width: 100%;height:50px;">
+			</div>
+			<div style="width: 100%;height: 50px;text-align:center;position: fixed;bottom: 0;background-color: #FFFFFF;">
+				<button type="button" id="btn_close" class="btn btn-default" style="width: 100px;">关闭</button>
+			</div>
+		</div>
+	</body>
+	<script type="text/javascript" src="../../../media/js/jquery/jquery.min.js"></script>
+	<script type="text/javascript" src="../../../media/js/jquery/jquery.extend.js"></script>
+	<script type="text/javascript" src="../../../media/js/base/common.js"></script>
+	<script type="text/javascript" src="../../../media/js/base/util.js"></script>
+	<script type="text/javascript" src="../../../media/js/base/ProvinceCityData.js"></script>
+	<script type="text/javascript" src="../../../media/js/bootstrap/js/bootstrap-table.min.js"></script>
+	<script type="text/javascript" src="../../../media/js/bootstrap/js/bootstrap-table-zh-CN.min.js"></script>
+	<script type="text/javascript" src="../../../media/js/bootstrap-fileinput-master/js/fileinput.js"></script>
+	<script type="text/javascript" src="../../../media/js/bootstrap-fileinput-master/js/locales/zh.js"></script>
+	<script type="text/javascript" src="../../../media/js/bootstrap/js/bootstrap-select.min.js"></script>
+	<script type="text/javascript" src="../../../media/js/bootstrap/js/defaults-zh_CN.min.js"></script>
+
+	<script type="text/javascript" src="../../../media/js/layer/laydate.js"></script>
+	<script type="text/javascript" src="../../../media/js/layer/layer.js"></script>
+<!--	<script type="text/javascript" src="../../SaleWaste/waste/base/fileView.js"></script>-->
+	<script type="text/javascript" src="../js/JMlookBidStateApproval.js"></script>
+
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>代理机构专区-询比采购公告列表</title>
+	</head>
+	<style>
+	 .table > thead > tr > th, 
+	 .table > tbody > tr > th, 
+	 .table > tfoot > tr > th, 
+	 .table > thead > tr > td, 
+	 .table > tbody > tr > td, 
+	 .table > tfoot > tr > td{
+	 	vertical-align: middle;
+	 }
+  </style>
+	<body>
+		<div class="container-fluid">
+			<div id="toolbar">
+	        	<div class="input-group" style="width:180px;float: left;">
+	    			<span class="input-group-addon">包件名称</span>
+	        		<input type="text" class="form-control" name="packageName" id="packageName" style="width:180px">	
+	        	</div>
+	        	<div class="input-group" style="width:180px;float: left;padding-left: 10px;">
+	    			<span class="input-group-addon">包件编号</span>
+	        		<input type="text" class="form-control" name="packageNum" id="packageNum" style="width:180px">	
+	        	</div>	        	
+	        	<div class="btn-group" style="padding-left:10px;">
+		    		<button type="button" id="btnSearch" class="btn btn-primary">
+		                <span class="glyphicon glyphicon-search" aria-hidden="true"></span> 查 询
+		            </button>
+		            <button id="btn_add" type="button" class="btn btn-primary" onclick="add_bao()">
+			          <span class="glyphicon glyphicon-plus" aria-hidden="true">补充通知
+			        </button>
+	    		</div>
+	    	</div>
+    	
+		<table class="table table-hover table-bordered" id="table">	</table>
+	</div>		
+		<script type="text/javascript" src="Auction/common/Agent/supplementNotice/js/supplementaryNoticeList.js"></script>
+	</body>
+</html>

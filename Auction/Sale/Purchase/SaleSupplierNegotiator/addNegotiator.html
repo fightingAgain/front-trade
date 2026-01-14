@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="pragma" content="no-cache">
+		<!-- 禁止浏览器从本地机的缓存中调阅页面内容 -->
+		<meta http-equiv="cache-control" content="no-cache, must-revalidate">
+		<meta http-equiv="expires" content="0">
+		<title>添加谈判明细</title>
+		<link rel="stylesheet" href="../../../../media/js/bootstrap/css/bootstrap.css">
+		<link rel="stylesheet" href="../../../../media/js/datetimepicker/css/jquery.datetimepicker.css"/>
+	</head>
+	<body>
+	
+		<form id="negotiatorContent" style="width: 99%; padding-left: 5px;padding-top: 5px;">
+			<table class="table table-bordered " style="margin-bottom: 0px;">
+		     	<tr>
+		            <td style="width: 210px;" class="th_bg">谈判对象</td>
+		            <td colspan="3">            	
+		            	<label style="display: none;" id="supplierName" name = "supplierName"></label>
+		            	<button id='btnChoose' type='button' class='btn btn-primary' style="text-align: right;">选择供应商</button>
+		            </td>
+		        </tr>
+		        <tr>
+		            <td class="th_bg">设定谈判价格(元)</td>
+		            <td><input type="text" name="negotiationPrice" id="negotiationPrice" class="form-control" style="width: 90%;"></td>
+		             <td class="th_bg">价格确认截止时间</td>
+		            <td><input type="text" class="form-control layui-input" id="endDate" name="endDate"></td>
+		        </tr>
+		         <tr>
+		            <td class="th_bg">采购人发出谈判内容</td>
+		            <td colspan="3">
+		            	<textarea name="content" rows="5" cols="" id="content" class="form-control" style="width: 90%;"></textarea>
+		            </td>
+		        </tr>
+		        
+		        
+		         <tr>
+		            <td colspan="4">
+		            	<label style="color: red;">提示：</label>
+		            	<label style="color: red;">
+		            		添加谈判后,若供应商确认接受评委会发起的谈判价格,则将确定为该供应商成交,
+		            		不可再次发起谈判.若供应商拒绝评委会发起的谈判价格,则采购人可以再次添
+		            		加谈判,发起新的谈判.也可以在供应商拒绝后结束谈判进行下一轮评审。
+		            	</label>
+		            </td>
+		        </tr>
+		     </table>
+		</form>
+		<div colspan="4" style="text-align: center;position:fixed;bottom: 10px;width: 100%;text-align: center;">
+			<button id='btnSend' type='button' class='btn btn-primary'  >发送</button>
+	    </div>
+	</body>
+	 <script type="text/javascript" src="../../../../media/js/jquery/jquery.js" ></script>
+	 <script type="text/javascript" src="../../../../media/js/jquery/jquery.extend.js"></script>
+	 <script type="text/javascript" src="../../../../media/js/bootstrap/js/bootstrap-table.min.js"></script>
+	 <script src="../../../../media/js/bootstrap/js/bootstrap-table-zh-CN.min.js"></script>
+	 <script type="text/javascript" src="../../../../media/js/bootstrap/js/bootstrap.js"></script>
+	 <script type="text/javascript" src="../../../../media/js/layer/layer.js" ></script>
+	 <script type="text/javascript" src="../../../../media/js/datetimepicker/js/jquery.datetimepicker.js" ></script>
+	 <script type="text/javascript" src="../../../../media/js/base/util.js" ></script>
+	 <script>
+	 	var saveNegotiatorItem = parent.config.AuctionHost+ "/NegotiationController/saveNegotiationItem" ; //添加谈判,明细
+	 	var updateNegotiatorUrl = parent.config.AuctionHost+"/NegotiationController/updateNegotiation.do"; //修改谈判记录
+	 	var findNegotiatorUrl = parent.config.AuctionHost+ "/NegotiationController/pageNegotiationForPurchaser" ; //采购人查询谈判记录
+	 	var tenderTypeCode= 2;//竞卖
+	 	var projectId = getUrlParam("projectId");
+		var packageId = getUrlParam("id");
+	 	var supplierId;
+	 	var negotiationType = 0;//线上谈判
+	 	
+	 	var reloadTab = 0,pointNum = 2;
+	 	$(".prieUnit").html(top.prieUnit||"元");
+	 	
+	 	//谈判确认截止开始时间
+		var nowDate=top.$("#systemTime").html()+" "+top.$("#sysTime").html();
+	 	//谈判确认截止开始时间
+	 	$('#endDate').datetimepicker({
+			step:5,
+			lang:'ch',			
+			format: 'Y-m-d H:i:s',
+			onShow:function(e){
+				var nowSysDate=top.$("#systemTime").html()+" "+top.$("#sysTime").html();			
+				$('#endDate').datetimepicker({						
+					minDate:NewDateT(nowSysDate)
+				})
+			},			
+		});
+		function NewDateT(str){  
+			if(!str){  
+				return 0;  
+			}  
+			arr=str.split(" ");  
+			d=arr[0].split("-");  
+			t=arr[1].split(":");
+			var date = new Date(); 
+			
+			date.setUTCFullYear(d[0], d[1] - 1, d[2]);   
+			date.setUTCHours(t[0]-8, t[1], t[2], 0);
+			return date;  
+		}
+		function NewDate(str){
+			if(!str){  
+				return 0;  
+			}  
+			arr=str.split(" ");  
+			d=arr[0].split("-");  
+			t=arr[1].split(":");
+			var date = new Date();   
+			date.setUTCFullYear(d[0], d[1] - 1, d[2]);   
+			date.setUTCHours(t[0]-8, t[1]);
+			return date.getTime();  
+		}
+	 	function getUrlParam(name) {
+			var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); // 构造一个含有目标参数的正则表达式对象  
+			var r = window.location.search.substr(1).match(reg); // 匹配目标参数  
+			if(r != null) return unescape(r[2]);
+			return null; // 返回参数值  
+		}
+	 	
+	 	//选择供应商
+	 	$("#btnChoose").click(function(){
+	 		parent.layer.open({
+				type: 2 //此处以iframe举例
+		        ,title: '供应商选择'
+		        ,area: ['500px', '500px']
+		        ,content:'Auction/Sale/Purchase/SaleSupplierNegotiator/choseSupplier.html'
+		        //,btn: ['提交','取消'] 
+		        ,success:function(layero, index){
+		        	var body = parent.layer.getChildFrame('body', index);    
+		            var iframeWin=layero.find('iframe')[0].contentWindow;
+		            var data = {
+		            	projectId : projectId,
+		            	packageId : packageId,
+		            }
+		           iframeWin.getData(data);
+				} 
+			});
+	 	});
+	 	
+	 	function getSupplier(obj){
+	 		//获取供应商信息
+	 		supplierId = obj.supplierId;
+	 		
+	 	};
+	 	$("#negotiationPrice").bind("input propertychange", function(){
+	 		verifyMoney(this, pointNum);
+	 	});
+		/* $("#negotiationPrice").on(function(){
+			if($(this).val()!=""){
+				if(!(/^(([1-9][0-9]*)|(([0]\.\d{1,2}|[1-9][0-9]*\.\d{1,2})))$/.test($(this).val()))){ 
+					parent.layer.alert("谈判价格必须大于零且最多两位小数"); 
+					$(this).val("")					
+					return
+				};
+			}
+		}) */
+		
+	 	var endDate ;//截止时间
+	 	var negotiationPrice;//谈判价格
+	 	var content; //谈判内容
+	 	//发送按钮
+		$("#btnSend").click(function(){
+	 		//表单验证
+	 		if($("#supplierName").text() == ""){
+	 			parent.layer.alert("请选择谈判对象");
+	 			return;
+	 		}
+	 		negotiationPrice = $("#negotiationPrice").val();
+	 		if( negotiationPrice == ""){
+	 			parent.layer.alert("请设定谈判价格");
+	 			return;
+	 		};
+			if(negotiationPrice == '0'){
+				parent.layer.alert("设定谈判价格必须大于零");  
+				return
+			}
+			if(!verifySaveMoney(negotiationPrice, pointNum, '设定谈判价格')){ 
+				return
+			};
+	 		/* if(!(/^(([1-9][0-9]*)|(([0]\.\d{1,2}|[1-9][0-9]*\.\d{1,2})))$/.test(negotiationPrice))){ 
+				parent.layer.alert("谈判价格必须大于零且最多两位小数"); 	
+				return
+			}; */
+	 		negotiationPrice = parseFloat(negotiationPrice).toFixed(2)
+	 		/* if( negotiationPrice.split('.')[0].length>20 ){
+	 			parent.layer.alert("谈判价格不能超过20位");
+	 			return;
+	 		} */
+	 		endDate = $("#endDate").val();
+	 		if( endDate == ""){
+	 			parent.layer.alert("请选择确认截止时间");
+	 			return;
+	 		}
+	 		var nowSysDate=top.$("#systemTime").html()+" "+top.$("#sysTime").html();
+			if(NewDate($("#endDate").val()) < NewDate(nowSysDate)){
+				top.layer.alert("确认截止时间已早于当前时间，请重新设置");
+				return;
+			};
+	 		content = $("#content").val();
+	 		if(  content == ""){
+	 			parent.layer.alert("请输入谈判内容");
+	 			return;
+	 		}
+	 		
+	 		if(  content.length>1000){
+	 			parent.layer.alert("谈判内容不能超过1000字");
+	 			return;
+	 		}
+	 		
+	 
+	 		//保存信息
+	 		addNegotiatorItem();
+				
+	 	});
+	 	
+	 	
+	 	function addNegotiatorItem(){
+	 		
+	 		$.ajax({ //添加谈判明细
+			   	url:saveNegotiatorItem,
+			   	type:'post',
+			   	dataType:'json',
+			    data:{
+			    	'negotiationType':negotiationType,
+			    	'projectId':projectId,
+			    	'packageId':packageId,
+			    	'supplierId':supplierId,
+			    	'endDate':endDate,
+					'content':content,
+					'negotiationPrice' : negotiationPrice,
+					'tenderType':tenderTypeCode
+			    },
+			   	success:function(data){
+			   	    if(data.success){
+			   	    	if(reloadTab == 1){
+			   	    		preCallBack();//刷新
+			   	    	}
+			   	    	parent.layer.close(parent.layer.getFrameIndex(window.name));
+			   	    	parent.layer.alert("添加成功!");
+			   	    	parent.$('#PucharesNegotiator').bootstrapTable('refresh',{url:findNegotiatorUrl});
+			   	    }else{
+						top.layer.alert(data.message);
+			   	    	// parent.layer.alert("添加失败!");
+			   	    }
+			   	}	
+			});
+	 		
+	 	}
+	 	
+	 	//刷新父页面
+	 	function reloadConsole(callback){
+	 		reloadTab = 1;
+	 		preCallBack = callback;
+	 	}
+
+	 </script>
+
+</html>

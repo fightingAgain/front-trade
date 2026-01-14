@@ -1,0 +1,76 @@
+ul{
+	text-decoration: none;
+}
+li{
+	list-style: none;
+}
+.table>tbody>tr>td, .table>tbody>tr>th, .table>tfoot>tr>td, .table>tfoot>tr>th, .table>thead>tr>td, .table>thead>tr>th {
+    padding: 8px;
+    line-height: 1.42857143;
+    vertical-align: middle;
+    border-top: 1px solid #ddd;  
+    text-align: center;     
+}
+.table > tbody > tr > td.active{
+	font-size: 16px;
+	text-align: left;
+	background: #3995C8;
+	color: #fff;
+}
+.pagination {
+    display: inline-block;
+    padding-left: 0;
+     margin:  0; 
+    border-radius: 4px;
+    float: right;
+}
+.searched{
+	padding-right: 5px;
+	
+}
+.searched input{
+	height: 34px;
+	border-radius: 5px;
+	border:1px solid #ddd;
+	text-align: left;
+}
+.searched select{
+	height: 34px;
+	width: 80px;
+	border-radius: 5px;
+	border:1px solid #ddd;
+}
+.none{
+	display: none;
+}
+.block{
+	display: block;
+}
+.add_tr{
+	height: 40px;
+}
+.relative{
+	position: relative;
+}
+.absolute{
+	position: absolute;
+}
+.red{
+	color: #C9302C;
+	
+}
+.left{
+	text-align: left;
+}
+.right{
+	text-align: right;
+}
+.fl{
+	float: left;
+}
+.fr{
+	float: right;
+}
+.f88{
+	background: #f5f5f5;
+}

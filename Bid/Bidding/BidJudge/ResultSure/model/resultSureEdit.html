@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8">
+		<meta http-equiv="pragma" content="no-cache"><!-- 禁止浏览器从本地计算机的缓存中访问页面内容 --> 
+		<meta http-equiv="cache-control" content="no-cache"><!-- 用于指定请求和响应遵循的缓存机制 --> 
+		<meta http-equiv="expires" content="0"><!-- 用于设定网页的到期时间，一旦网页过期，必须到服务器上重新传输； -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>招标公告</title>
+    <link rel="stylesheet" href="../../../../media/js/layer/mobile/need/layer.css" />
+    <link rel="stylesheet" href="../../../../media/js/bootstrap/css/bootstrap.css" />
+    <link rel="stylesheet" href="../../../../media/js/stream/css/stream-v1.css" />
+	<style>
+		html,body { height: 100%;width: 100%;}
+		.readonly{
+		    border: none;
+		    background: none !important;
+		    outline: none !important;
+		    box-shadow: none !important;
+		}
+		.pretrial,.revise{
+			display: none;
+		}
+		.enterFull{
+			position: absolute;
+			top: 0;
+			left: 0;
+			background: #ffffff;
+			visibility: visible;
+			filter: Alpha(opacity=90);
+		}
+		.display_none{
+			display: none;
+		}
+		.file-input .kv-upload-progress{
+			display: none !important;
+		}
+		tr .file-input{
+			display: inline-block;
+			float: right;
+			margin-right: 50px;
+		}
+		a,a:link,a:visited,a:hover,a:active{
+			color: #333333;
+			text-decoration: none;
+		}
+		.calendar_icon{
+			color: #3995C8;
+		}
+		input[type=number] {  
+		    -moz-appearance:textfield;  
+		}  
+		input[type=number]::-webkit-inner-spin-button,  
+		input[type=number]::-webkit-outer-spin-button {  
+		    -webkit-appearance: none;  
+		    margin: 0;  
+		}  
+		.set_height{
+			display: inline-block;
+			padding: 6px 12px;
+		}
+	</style>
+</head>
+
+<body>
+    <form class="pageModel" id="addNotice" name="formName">
+    	<div class="panel-group" id="accordion">
+    		<div class="panel panel-accordion panel-default">
+	    		<div class="panel-heading active"  role="tab" id="headingOne">  
+			 		<h4 class="panel-title">
+		            	<a  role="button" data-toggle="collapse" href="#collapseOne" aria-controls="collapseOne"  aria-expanded="true"  >
+		            		基本信息
+		            	</a>
+			 		</h4>  
+			   	</div>  
+			  	<div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">  
+			       	<div class="panel-body">
+			       		<table  class="table table-bordered ">
+			       			<tr>
+					        	<td class="th_bg">标段编号</td>
+				                <td colspan="3">
+				                	<span class="set_height" id="interiorBidSectionCode"></span>
+				                    <input type="hidden"  name="bidSectionId" id="bidSectionId" />
+				                    <input type="hidden"  name="id" id="dataId" />
+				                    <input type="hidden"  name="examType" id="examType" />
+				                </td>
+				               
+					        </tr>
+					        <tr>
+					        	<td class="th_bg">标段名称</td>
+				                <td colspan="3">
+				                	<span class="set_height" id="bidSectionName"></span>
+				                </td>
+					        </tr>
+					        <tr>
+					        	<td class="th_bg">招标项目名称</td>
+				                <td colspan="3">
+				                	<span class="set_height" id="tenderProjectName"></span>
+				                </td>
+					        </tr>
+					        <tr>
+					        	<td class="th_bg">项目经理</td>
+				                <td>
+				                	<span class="set_height" id="tenderAgencyLinkmen"></span>
+				                </td>
+				                <td class="th_bg">联系电话</td>
+				                <td>
+				                	<span class="set_height" id="tenderAgencyLinktel"></span>
+				                </td>
+					        </tr>
+			       		</table>
+		       		</div>
+	       		</div>
+       		</div>
+       		<div class="panel panel-accordion panel-default">
+	    		<div class="panel-heading active"  role="tab" id="headingTwo">  
+			 		<h4 class="panel-title">
+		            	<a class="collapsed" role="button" data-toggle="collapse" href="#collapseTwo" aria-controls="collapseTwo"  aria-expanded="false">
+		            		确定中标人
+		            	</a>
+			 		</h4>  
+			   	</div>  
+			  	<div  id="collapseTwo" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingTwo">  
+			       	<div class="panel-body">
+						<div class="table-responsive"><table class="table table-bordered" id="winnerList"></table></div>
+		       		</div>
+		       	</div>
+	    	</div>
+	    	<div class="panel panel-accordion panel-default">
+	    		<div class="panel-heading active"  role="tab" id="headingThree">  
+			 		<h4 class="panel-title">
+		            	<a class="collapsed" role="button" data-toggle="collapse" href="#collapseThree" aria-controls="collapseThree"  aria-expanded="false">
+		            		相关附件
+	            			<span class="red" style="font-size: 14px;font-weight: normal;">（请上传200M以内的文件）</span>
+		            	</a>
+			 		</h4>  
+			   	</div>  
+			  	<div  id="collapseThree" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingThree">  
+			       	<div class="panel-body">
+			       		<button type="button" class="btn btn-sm btn-primary" id="fileUp"   style="float: right;margin-right: 50px;margin-bottom: 10px;">
+		            		<span class="glyphicon glyphicon-folder-open"></span>选择文件
+		            	</button>
+		            	<button type="button"  id="fileLoad" style="display: none;"></button>
+			       		<div id="fileContent">
+			       			
+			       		</div>   
+		       		</div>
+		       	</div>
+	    	</div>
+	    	<div id="approval">
+	    		
+	    	</div>
+   		</div>
+    	
+    	
+    	
+    	
+    	
+        <!--<table class="table table-bordered ">
+        	<tr>
+	            <td colspan="4" style="font-weight: bold;" class="active">基本信息
+	            </td>
+	        </tr>
+	        
+	       	<tr>
+	            <td colspan="4" style="font-weight: bold;" class="active">确定中标人</td>
+	        </tr>
+	        
+	        <tr>
+	            <td colspan="4" style="font-weight: bold;" class="active padding_button">
+	            	相关附件
+	            	<button type="button" class="btn btn-sm btn-primary" id="fileUp"   style="float: right;margin-right: 50px;">
+	            		<span class="glyphicon glyphicon-folder-open"></span>选择文件
+	            	</button>
+	            	<button type="button"  id="fileLoad" style="display: none;"></button>
+	            </td>
+	        </tr>
+	        <tr>
+	        	<td colspan="4" id="fileContent">
+	        		
+	        	</td>
+	        </tr>
+	    </table>-->
+        <div class="bottom-btn" style="z-index: 11000;">
+            <button type="button" class="btn btn-primary" id="btnSave"><span class="glyphicon glyphicon-ok"></span>保存</button>
+            <button type="button" class="btn btn-primary" id="btnSubmit"><span class="glyphicon glyphicon-saved"></span>确认</button>
+            <button type="button" class="btn btn-default" id="btnClose"><span class="glyphicon glyphicon-remove"></span>取消</button>
+        </div>
+    </form>
+    <script type="text/javascript" src="../../../../media/js/jquery/jquery.js"></script>
+    <script type="text/javascript" src="../../../../media/js/jquery/jquery.extend.js"></script>
+    <script type="text/javascript" src="../../../../media/js/base/util.js"></script>
+    <script type="text/javascript" src="../../../../media/js/base/common.js"></script>
+    <script type="text/javascript" src="../../../../media/js/bootstrap/js/bootstrap.js"></script>
+    <script type="text/javascript" src="../../../../media/js/stream/js/stream-v1.js"></script>
+    <script type="text/javascript" src="../../../../media/js/base/StreamUpload.js"></script>
+	<script type="text/javascript" src="../../../../media/js/base/md5.js"></script>
+	<script type="text/javascript" src="../../../../media/js/ca.js"></script>
+    <script src="../../../Model/js/public.js"></script>
+    <script src="../../../../media/js/base/WorkflowInfoNew.js"></script>
+    <script type="text/javascript" src="../js/resultSureEdit.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="zh">
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="pragma" content="no-cache"><!-- 禁止浏览器从本地计算机的缓存中访问页面内容 --> 
+		<meta http-equiv="cache-control" content="no-cache"><!-- 用于指定请求和响应遵循的缓存机制 --> 
+		<meta http-equiv="expires" content="0"><!-- 用于设定网页的到期时间，一旦网页过期，必须到服务器上重新传输； -->
+    	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+		<title>项目详情</title>
+
+	    <link rel="stylesheet" href="../../../../media/js/layer/mobile/need/layer.css" />
+	    <link rel="stylesheet" href="../../../../media/js/bootstrap/css/bootstrap.css" />
+	    <link rel="stylesheet" href="../../../../media/js/bootstrap/css/bootstrap-table.css">
+	</head>
+	<body>
+		<form class="pageModel" id="formName" name="formName">
+        	<table class="table table-bordered">
+	        	<tr>
+		            <td colspan="4" style="font-weight: bold;" class="active">项目信息</td>
+		        </tr>
+	            <tr>
+	            	<td class="th_bg">项目名称</td>
+	                <td id="projectName" colspan="3"></td>
+	            </tr>
+	            <tr>
+	            	<td class="th_bg">项目编号</td>
+	                <td id="interiorProjectCode"></td>
+	            	<td class="th_bg">项目行业分类</td>
+	                <td id="proIndustriesType"></td>
+	            </tr>
+	            <tr>
+		            <td colspan="4" style="font-weight: bold;" class="active">招标项目信息</td>
+		        </tr>
+	            <tr>
+	            	<td class="th_bg">招标项目名称</td>
+	                <td id="tenderAgencyName" colspan="3"></td>
+	            </tr>
+	            <tr>
+	            	<td class="th_bg">招标项目编号</td>
+	                <td id="tenderAgencyCodeType"></td>
+	            	<td class="th_bg">招标项目类型</td>
+	                <td id="tenderAgencyCode"></td>
+	            </tr>
+	            <tr>
+		            <td colspan="4" style="font-weight: bold;" class="active">代理机构信息</td>
+		        </tr>
+	            <tr>
+	            	<td class="th_bg">代理机构名称</td>
+	                <td id="tenderAgencyName" colspan="3"></td>
+	            </tr>
+	            <tr>
+	            	<td class="th_bg">招标代理机构类别</td>
+	                <td id="tenderAgencyCodeType"></td>
+	            	<td class="th_bg">招标代理机构代码</td>
+	                <td id="tenderAgencyCode"></td>
+	            </tr>
+	            <tr>
+		            <td colspan="4" style="font-weight: bold;" class="active">招标人信息</td>
+		        </tr>
+		        <tr>
+		        	<td class="th_bg">项目业主</td>
+	                <td colspan="3"><span id="projectOwner"></span></td>
+	            </tr>
+	            <tr>
+		        	<td class="th_bg">招标人</td>
+	                <td colspan="3"><span id="tendererName"></span></td>  
+		        </tr>
+	            <tr>
+		        	<td class="th_bg">招标人类别</td>
+	                <td><span id="tendererCodeType" optionName="tendererCodeType"></span></td> 
+		        	<td class="th_bg">招标人代码</td>
+	                <td><span id="tendererCode"></span></td>  
+		        </tr>
+		        <tr>
+		            <td colspan="4" style="font-weight: bold;" class="active">标段信息</td>
+		        </tr>
+		        <tr>
+		        	<td class="th_bg">标段名称</td>
+	                <td colspan="3"><span id="bidSectionName"></span></td>  
+		        </tr>
+	            <tr>
+		        	<td class="th_bg">标段编号</td>
+	                <td><span id="interiorBidSectionCode"></span></td> 
+		        	<td class="th_bg">资格审查方式</td>
+	                <td><span id="examType"></span></td>  
+		        </tr>
+	            <tr>
+		        	<td class="th_bg">标段分类</td>
+	                <td><span id="tendererCodeType" optionName="tendererCodeType"></span></td> 
+		        	<td class="th_bg">计划工期</td>
+	                <td><span id="projectDuration"></span></td>  
+		        </tr>
+        	</table>
+        </form>
+		<script type="text/javascript" src="../../../../media/js/jquery/jquery.js" ></script>
+		<script type="text/javascript" src="../../../../media/js/jquery/jquery.extend.js"></script>
+		<script type="text/javascript" src="../../../../media/js/base/common.js" ></script>
+		<script type="text/javascript" src="../../../../media/js/base/util.js" ></script>
+		<script type="text/javascript" src="../../../../media/js/bootstrap/js/bootstrap.js" ></script>
+		<script type="text/javascript" src="../../../../media/js/layer/layer.js"></script>
+		<script type="text/javascript" src="../../../Model/js/public.js"></script>
+		<script type="text/javascript" src="../js/projectView.js" ></script>
+	</body>
+</html>

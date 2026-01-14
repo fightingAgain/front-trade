@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="pragma" content="no-cache">
+		<!-- 禁止浏览器从本地机的缓存中调阅页面内容 -->
+		<meta http-equiv="cache-control" content="no-cache, must-revalidate">
+		<meta http-equiv="expires" content="0">
+		<title>竞价审核详情</title>
+		<link rel="stylesheet" href="../../../../media/js/bootstrap/css/bootstrap.css">
+		<link rel="stylesheet" href="../../../../media/js/bootstrap/css/bootstrap-table.min.css" />
+	</head>
+
+	<body style="width: 99%;padding-left: 10px;padding-top: 10px;">
+		<table class="table table-bordered " style="margin-bottom: 0px;">
+			<th colspan="4" class="active">项目信息</th>
+			<tr>
+				<td class="th_bg">项目名称</td>
+				<td>
+					<div id="projectName"></div>
+				</td>
+				<td class="th_bg">项目编号</td>
+				<td>
+					<div id="projectCode"></div>
+				</td>
+			</tr>
+			<tr>
+				<td class="th_bg">项目包件名称</td>
+				<td>
+					<div id="packageName"></div>
+				</td>
+				<td class="th_bg">项目包件编号</td>
+				<td>
+					<div id="packageNum"></div>
+				</td>
+			</tr>
+
+			<tr>
+				<td class="th_bg">报名文件提交截止时间</td>
+				<td>
+					<div id="signEndDate"></div>
+				</td>
+				<td class="th_bg">报名文件审核截止时间</td>
+				<td>
+					<div id="offerEndDate"></div>
+				</td>
+			</tr>
+			<tr>
+				<td colspan="4">
+					<table class="table table-bordered" id="FileCheck">
+
+					</table>
+				</td>
+			</tr>
+			<th colspan="4" class="active ">审核记录</th>
+			<tr>
+				<td colspan="4">
+					<table class="table table-bordered" id="FileCheckRecord">
+
+					</table>
+				</td>
+			</tr>
+
+		</table>
+		
+		<style>
+			.table>thead>tr>th,
+			.table>tbody>tr>th,
+			.table>tfoot>tr>th,
+			.table>thead>tr>td,
+			.table>tbody>tr>td,
+			.table>tfoot>tr>td {
+				vertical-align: middle !important;
+			}
+		</style>
+		<script type="text/javascript" src="../../../../media/js/jquery/jquery.min.js"></script>
+		<script type="text/javascript" src="../../../../media/js/bootstrap/js/bootstrap.js"></script>
+		<script type="text/javascript" src="../../../../media/js/bootstrap/js/bootstrap-table.min.js"></script>
+		<script type="text/javascript" src="../../../../media/js/bootstrap/js/bootstrap-table-zh-CN.min.js"></script>
+		<script type="text/javascript" src="../../../../media/js/jquery/jquery.extend.js"></script>
+		<script type="text/javascript" src="../../../../media/js/base/common.js"></script>
+		<script type="text/javascript" src="../../../../media/js/base/util.js"></script>
+		<script src="../js/signFileCheckInfo.js" type="text/javascript" charset="utf-8"></script>
+
+	</body>
+
+</html>

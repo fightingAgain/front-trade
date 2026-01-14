@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="pragma" content="no-cache">
+		<!-- 禁止浏览器从本地机的缓存中调阅页面内容 -->
+		<meta http-equiv="cache-control" content="no-cache, must-revalidate">
+		<meta http-equiv="expires" content="0">
+		<title>预审评审管理详情</title>
+		<link rel="stylesheet" type="text/css" href="../../../../media/js/bootstrap/css/bootstrap.css">
+		<link rel="stylesheet" type="text/css" href="../../../../media/css/default.css">
+		<link rel="stylesheet" type="text/css" href="../../../../media/js/bootstrap/css/bootstrap-table.css">
+	</head>
+	<style type="text/css">
+		 a.disabled {
+            pointer-events: none;
+            filter: alpha(opacity=50); /*IE滤镜，透明度50%*/
+            -moz-opacity: 0.5; /*Firefox私有，透明度50%*/
+            opacity: 0.5; /*其他，透明度50%*/
+        }
+        .selects{
+        	height:31px;
+        	width:220px;
+        }
+	</style>
+	<body style="overflow:auto;">
+		<!--<div class="clo-sm-6" style="width: 98%;margin:15px 0px 0px 15px;">
+			<span style="color: red;">温馨提示：询价采购小组成员由单数组成</span></span>
+		</div>-->
+		<table class="table table-bordered" style="width: 98%;margin: 15px;">
+			<tr class="active">
+				<td colspan="4"><font size="3" >包件信息</font></td>
+			</tr>
+			<tr>
+				<td class="th_bg" width="240px" >采购项目编号</td>
+				<td id="projectCode"></td>
+				<td class="th_bg" width="240px" >采购项目名称</td>
+				<td id="projectName"></td>
+			</tr>
+			<tr>
+				<td class="th_bg" >包件编号</td>
+				<td id="packageNum"></td>
+				<td class="th_bg" >包件名称</td>
+				<td id="packageName"></td>
+			</tr>
+			<tr>
+				<td class="th_bg" >采购方式</td>
+				<td id="tenderType"></td>
+				<td class="th_bg" >询价预审时间</td>
+				<td id="examCheckEndDate"></td>
+			</tr>
+		
+			<!--<tr class = 'ready'>
+				<td  class="th_bg" >是否在评委评审页面显示预审公告</td>
+				<td colspan="3" id="">
+					<input type="radio" name="isShowProject" value="1" />否&nbsp;
+					<input type="radio" name="isShowProject" value="0"/>是&nbsp;
+				</td>
+			</tr>
+			<tr class = 'ready'>
+				<td  class="th_bg" >是否在评委评审页面显示预审报告</td>
+				<td colspan="3" id="">
+					<input type="radio" name="isShowReport" value="1" />否&nbsp;
+					<input type="radio" name="isShowReport" value="0" />是&nbsp;
+				</td>
+			</tr>
+			<tr class = 'ready'>
+				<td  class="th_bg" style="vertical-align:middle;">是否设置监标人</td>
+				<td colspan="3" id="">
+					<input type="radio" name="isSetChecker" value="1" />否&nbsp;
+					<input type="radio" name="isSetChecker" value="0" />是&nbsp;&nbsp;&nbsp;
+					<button class="btn btn-primary btn-sm" id="addReviewer">选择监标人</button>
+				</td>
+			</tr>
+			<tr class = 'ready isJoinCheck'>
+				<td  class="th_bg" >监标人是否参与预审报告审核</td>
+				<td colspan="3" id="">
+					<input type="radio" name="isJoinCheck" value="1" />否&nbsp;
+					<input type="radio" name="isJoinCheck" value="0" />是&nbsp;
+				</td>
+			</tr>
+			<tr class = 'ready'>
+				<td colspan="4" style="padding:inherit;border: 0px solid;">
+					<table id="NowReviewerTalbe" style="border:0px solid;"></table>
+				</td>
+			</tr>-->
+			<tr class="active">
+				<td colspan="3" style="font-weight: bold;border: none;"><font size="3" >评委信息</font></td>
+				<td class="active" style="text-align: right;border: none;">
+					<font size="4"  class="buttonNone">关联包件：</font>
+					<div style="width: 230px;float: right;">
+					<select class="form-control selects"  name="optionName" id="optionName" onchange=onLinkPackage(1)>
+        			
+        			</select>
+        			</div>
+	        		
+	        	</td>
+			</tr>
+			<tr>
+				<td colspan="4">
+					<div style="width: 25%;float: left;margin-right:5px;text-align: center;" class="buttonNone">评委数量：
+						<select style="height:30px;width:150px;display: initial;" id="expertsNumber">
+							<option value="1">1个评委</option>
+							<option value="3">3个评委</option>
+							<option value="5">5个评委</option>
+							<option value="7">7个评委</option>
+							<option value="9">9个评委</option>
+							<option value="11">11个评委</option>
+							<option value="13">13个评委</option>
+							<option value="15">15个评委</option>
+							<option value="17">17个评委</option>
+						</select>
+					</div>
+					<div style="float: left;">
+						<button class="btn btn-primary btn-sm" id="bntShowJudge">抽取评委</button>
+						<button class="btn btn-primary btn-sm" id="bntAppointJudge">业主评委</button>
+						<button class="btn btn-primary btn-sm" id="bntAppointJudgeIsAgent">指定评委</button>
+						<button class="btn btn-primary btn-sm" id="bntAddJudge">添加业主评委</button>
+						<!--<button class="btn btn-default">保存</button>-->
+						<button class="btn btn-primary btn-sm" id="btnSendSMS">发送短信</button>
+						<button class="btn btn-primary btn-sm" id="ExtractRecord">抽取历史</button>
+						<button class="btn btn-primary btn-sm" id="btnNewCheck" style="display: none;">重组评委</button>
+						<!--<div style="color: red;" id="SMSMsg">提示一：在抽取评委完成后，请点击发送短信进行确认</div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						<div style="color: red;" id="SMSMsg">提示二：如评委已有评审记录，仍需调整评委，请退回到评审开始阶段，再作调整</div>-->
+					</div>
+					<div style="float: left;margin-left: 5px;">
+						<div style="color: red;" id="SMSMsg">提示一：在抽取评委完成后，请点击发送短信进行确认</div>
+						<div style="color: red;" id="SMSMsg2">提示二：在评委进行评审后，如需调整评审委员会，请退回到评审开始阶段，再重组评委。</div>
+					</div>
+					</td>
+			</tr>
+			<tr>
+				<td colspan="4" style="padding:inherit;border: 0px solid;">
+					<table id="ExpertsTable" style="border: 0px solid;"></table>
+				</td>
+			</tr>
+			<!--<th colspan="4" style="background-color: #F7F9FA;text-align: center;border: 0px solid;">包件信息</th>
+			<tr>
+				<td colspan="4" style="padding:inherit;border: 0px solid;">
+					<table id="packageTalbe" style="border: 0px solid;"></table>
+				</td>
+			</tr>-->
+			</tr>
+		</table>
+	</body>
+	<script type="text/javascript" src="../../../../media/js/jquery/jquery.min.js"></script>
+	<script type="text/javascript" src="../../../../media/js/jquery/jquery.extend.js"></script>
+	<script type="text/javascript" src="../../../../media/js/layer/layer.js"></script>
+	<script type="text/javascript" src="../../../../media/js/bootstrap/js/bootstrap-table.min.js"></script>
+	<script type="text/javascript" src="../../../../media/js/bootstrap/js/bootstrap-table-zh-CN.min.js"></script>
+	<script type="text/javascript" src="js/ReportCheckInfo.js"></script>
+
+</html>

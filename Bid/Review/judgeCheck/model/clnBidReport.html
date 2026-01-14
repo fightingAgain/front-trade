@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>东风交易中心（襄阳专区）</title>
+		<!-- 禁止浏览器从本地机的缓存中调阅页面内容 -->
+	    <meta http-equiv="Pragma" content="no-cache">
+	    <!-- 用来防止别人在框架里调用你的页面 -->
+	    <meta http-equiv="Window-target" content="_top">
+	    <!-- content的参数有all，none，index，noindex，follow，nofollow，默认是all -->
+	    <meta name="robots" content="none">
+	    <!-- 收藏图标 -->
+	    <link rel="Shortcut Icon" href="../../../media/image/logo.ico">
+	    <!-- 网页不会被缓存 -->
+	    <meta http-equiv="Cache-Control" content="no-cache, must-revalidate">
+	    <!-- 解决部分兼容性问题，如果安装了GCF，则使用GCF来渲染页面，如果未安装GCF，则使用最高版本的IE内核进行渲染。 -->
+	    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	   
+	    <!-- 页面按原比例显示 -->
+	    <meta name="viewport" content="width=device-width, initial-scale=1">	   
+	  	<link rel="stylesheet" type="text/css" href="../../../media/js/layer/mobile/need/layer.css" />
+	    <link rel="stylesheet" type="text/css" href="../../../media/js/bootstrap/css/bootstrap.css" />
+	    <link rel="stylesheet" type="text/css" href="../../../media/js/bootstrap/css/bootstrap-table.min.css">
+		<style>
+			*{margin:0 auto;padding:0;}
+
+			body {
+				font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+				font-size: 14px;
+				line-height: 1.42857143;
+				color: #333;
+				background-color: #fff;
+				width: 100%;
+				padding: 0;
+			}
+			li{
+				list-style:none;
+			}
+			a:hover{
+				text-decoration: none;
+			}
+			.list li{
+				width: 100%;
+				padding: 13px;
+				border: 1px solid #f1f1f1;
+				margin-bottom:10px ;
+				text-align: left;
+				cursor:pointer;
+			}
+			.list li.clnBidReportPart{
+				width:400px;
+				line-height: 1.2em;
+			}
+			.list li a{
+				display: block;
+				width: 100%;
+				height: 100%;
+
+			}
+			.list .no-click{
+				background: #ccc;
+				cursor:not-allowed;
+			}
+			.list .no-click a{
+				color: #999;
+			}
+			.open{
+				border: 1px solid #3995C8;
+				color: #fff;
+				background: #3995C8;
+			}
+			.open a{
+				color: #fff;
+			}
+			#contents{
+				width: 100%;
+				border: 1px solid #f1f1f1;
+				overflow-y: auto;
+				padding: 10px;
+
+			}
+			.actives{
+				color: #fff;
+				cursor: default;
+				background-color: #3995C8;
+				border-bottom-color: transparent;
+			}
+			.actives a{
+				color: #fff;
+			}
+			.btn-strong{
+				font-size: 18px;
+			}
+			.bottom-btn{
+				padding-bottom: 20px;
+				background: #f6f7f9;
+			}
+			.nav-tabs a[aria-expanded]{
+				background: none;
+				padding-right: 15px !important;
+			}
+			.reportPart{
+				padding: 5px 10px;
+				margin-bottom: 10px;
+				border-bottom: 1px dotted #CCCCCC;
+				cursor: pointer;
+			}
+			/*消除栅格布局产生的横向滚动条*/
+			.row{
+				margin: 0;
+				padding-bottom: 70px;
+			}
+		</style>
+	</head>
+	<body style="padding: 10px;">
+	<input type="hidden" id="Token" />
+	<div id="content">
+
+	</div>
+	</body>
+	<script type="text/javascript" src="../../../media/js/jquery/jquery.js" ></script>
+	<script type="text/javascript" src="../../../media/js/jquery/jquery.extend.js"></script>
+	<script type="text/javascript" src="../../../media/js/base/common.js" ></script>
+	<script type="text/javascript" src="../../../media/js/base/util.js" ></script>
+	<script type="text/javascript" src="../../../media/js/bootstrap/js/bootstrap.js" ></script>
+	<script type="text/javascript" src="../../../media/js/bootstrap/js/bootstrap-table.min.js"></script>
+	<script type="text/javascript" src="../../../media/js/bootstrap/js/bootstrap-table-zh-CN.min.js"></script>
+	<script type="text/javascript" src="../../../media/js/layer/layer.js"></script>
+	<script type="text/javascript" src="../js/cleanBidder.js"></script>
+	<script>
+        var bidSectionId=getUrlParam("bidSectionId");//标段Id
+        var examType=getUrlParam("examType");//评标会方式  1.资格预审  2.评标会
+        var reviewFlowNodeUrl=config.Reviewhost+"/ReviewControll/review.do";//评标流程环节路由
+        var clnBidReportContent="cleanBidder/content.html";
+        var currBidderId;          //当前投标人
+        var currNode = {};			//当前节点
+
+        /**
+         * 评标请求接口
+         * @param param
+         * @param callback
+         * @param async
+         * @returns {*}
+         */
+        function reviewFlowNode(param, callback, async){
+            param.bidSectionId = bidSectionId;
+            param.examType = examType;
+            async = async ? true : false;
+            //获取标段详情
+            $.ajax({
+                type:"post",
+                url:reviewFlowNodeUrl,
+                async:async,
+                data:param,
+                success:function(res){
+                    if(res.success){
+                        callback(res.data)
+                    }else{
+                        if(res.message != '404'){
+                            top.layer.alert(res.message);
+                        }else{
+                            top.layer.alert("接口不存在");
+                        }
+                    }
+                }
+            });
+        }
+
+        /**
+         * 加载内容
+         * @param htmlPath
+         */
+        function loadContent(htmlPath, callback){
+            $('#content').load(htmlPath,callback);
+        }
+
+        function passMessage(token){
+            $("#Token").val(token);
+            currNode = {
+                nodeType:"cleanBidder"
+			};
+            cleanBidder(currNode);
+		}
+	</script>
+</html>

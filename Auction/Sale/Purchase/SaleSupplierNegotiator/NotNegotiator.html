@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="pragma" content="no-cache">
+		<!-- 禁止浏览器从本地机的缓存中调阅页面内容 -->
+		<meta http-equiv="cache-control" content="no-cache, must-revalidate">
+		<meta http-equiv="expires" content="0">
+		<title>不谈判</title>
+		<link rel="stylesheet" href="../../../../media/js/bootstrap/css/bootstrap.css">
+		<link rel="stylesheet" href="../../../../media/js/bootstrap/css/bootstrap-table.css">
+		<style type="text/css">
+			label {
+				font-weight: normal;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="form-group" >
+		     <table id = "notNegotiator" class="table table-bordered" style="width: 98%;margin-left: 7px;margin-top: 5px;">
+					<tr>
+						<td class="th_bg" style="width: 120px;">竞卖项目编号</td>
+						<td><label id="projectCode"></label></td>
+						<td class="th_bg" style="width: 130px;">竞卖项目名称</td>
+						<td><label id="projectName"></label><span id="ppName" class="text-danger"  style="font-weight:bold"></span></td>
+					</tr>
+					<!--<tr>
+						<td>包件编号</td>
+						<td><label id="packageNumber"></label></td>
+						<td>包件名称</td>
+						<td><label id="packageName"></label></td>
+					</tr>-->
+					<tr>
+						<td class="th_bg">谈判方式</td>
+						<td><label id="negotiationType"></label></td>
+						<td class="th_bg">谈判最终报价(元)</td>
+						<td><label id="lastPrice" ></label></td>
+					</tr>		
+			</table>
+		</div>
+
+		
+	</body>
+	<script type="text/javascript" src="../../../../media/js/jquery/jquery.js" ></script>
+	 <script type="text/javascript" src="../../../../media/js/jquery/jquery.extend.js"></script>
+	 <script type="text/javascript" src="../../../../media/js/bootstrap/js/bootstrap.js" ></script>
+	 <script type="text/javascript" src="../../../../media/js/bootstrap/js/bootstrap-table.min.js" ></script>
+	 <script type="text/javascript" src="../../../../media/js/bootstrap/js/bootstrap-table-zh-CN.min.js" ></script>
+	 <script type="text/javascript" src="../../../../media/js/layer/layer.js" ></script>
+	<script>
+		
+		function tableShow(obj){
+	
+			$('label').each(function(){
+				
+				//判断谈判方式
+				$(this).text(obj[this.id]);
+			});
+			
+			if (obj.negotiationType=='2'){
+				$("#negotiationType").text("不谈判");
+			}
+			 
+			if(obj.projectSource == '1') {
+				$("#ppName").html("(重新竞卖)");
+			} else {
+				$("#ppName").html("");
+			} 
+			 
+		}
+	</script>
+</html>

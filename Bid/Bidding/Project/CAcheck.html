@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="zh">
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="pragma" content="no-cache"><!-- 禁止浏览器从本地计算机的缓存中访问页面内容 --> 
+		<meta http-equiv="cache-control" content="no-cache"><!-- 用于指定请求和响应遵循的缓存机制 --> 
+		<meta http-equiv="expires" content="0"><!-- 用于设定网页的到期时间，一旦网页过期，必须到服务器上重新传输； -->
+	    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+	    <title>东风CA在线校验</title>
+	    <style type="text/css">
+	    	.check_box{
+	    		width: 1000px;
+	    		padding: 20px;
+	    		margin: auto;
+	    		border: 1px solid #CCCCCC;
+	    	}
+	    	h3{
+	    		text-align: center;
+	    	}
+	    	li{
+	    		list-style: none;
+	    		padding: 5px 0;
+	    	}
+	    	.message_name{
+	    		display: inline-block;
+	    		width: 200px;
+	    		text-align: right;
+	    	}
+	    </style>
+	</head>
+	<body>
+		<div class="check_box">
+			<h3>东风CA在线校验工具</h3>
+			<div>
+				<span class="check_step">插入CA后请点击“在线CA校验”按钮进行校验</span>
+				<button type="button" id="btn_check">在线CA校验</button>
+			</div>
+			<div class="message_tip"></div>
+			<ul>
+				<li>
+					<span class="message_name">CA类型：</span>
+					<span class="message_content"></span>
+				</li>
+				<li>
+					<span class="message_name">企业名称：</span>
+					<span class="message_content"></span>
+				</li>
+				<li>
+					<span class="message_name">统一社会信用码：</span>
+					<span class="message_content"></span>
+				</li>
+				<li>
+					<span class="message_name">有效期：</span>
+					<span class="message_content"></span>
+				</li>
+				<li>
+					<span class="message_name">颁发单位：</span>
+					<span class="message_content"></span>
+				</li>
+			</ul>
+		</div>
+		<div id="message"></div>
+		<script type="text/javascript" src="../../media/js/jquery/jquery.js"></script>
+		<script type="text/javascript" src="../../media/js/base/common.js"></script>
+    	<script type="text/javascript" src="../../media/js/base/md5.js"></script>
+    	<script type="text/javascript" src="../../media/js/ca.js"></script>
+    	<script type="text/javascript">
+    		$(function(){
+    			$('#btn_check').click(function(){
+    				CFCAloading()
+    			})
+//  			
+    			/**
+			 *cfca初始化
+			 */
+				function CFCAloading(){
+					var certsCFCA;
+					//声明签名证书对象
+					try {
+						var eDiv = document.createElement("div");
+						if(navigator.appName.indexOf("Internet") >= 0 || navigator.appVersion.indexOf("Trident") >= 0) {
+							if(window.navigator.cpuClass == "x86") {
+								eDiv.innerHTML = "<object id='CryptoAgent' codebase='CryptoKit.DFMBidding.x86.cab' classid='clsid:F52C4CD7-67BC-4415-918A-6E6334E70337' style='display:none;'></object>";
+							} else {
+								eDiv.innerHTML = "<object id='CryptoAgent' codebase='CryptoKit.DFMBidding.x64.cab' classid='clsid:48ECD656-A3F6-4174-9D76-11EB598B6F9F' style='display:none;'></object>";
+							}
+						}
+						
+						document.body.appendChild(eDiv);
+						certsCFCA = document.getElementById("CryptoAgent");
+						var subjectDNFilter = "";
+						var issuerDNFilter = "CFCA";
+						var SerialNum = "";
+						var CertCSPName = "CFCA FOR UKEY CSP v1.1.0";
+						var SelCertResult = certsCFCA.SelectSignCert(subjectDNFilter, issuerDNFilter, SerialNum, CertCSPName);
+						
+						//获取证书//certsCFCA.SelectCertificateDialog();
+						var caOwner = CryptoAgent.GetSignCertInfo('SubjectCN');
+						
+				        ukArr.dn = CryptoAgent.GetSignCertInfo('SubjectCN');
+				        ukArr.cn = CryptoAgent.GetSignCertInfo('SerialNumber');
+				        
+				        ukArr.icardno= caOwner.split("@")[2].substring(1,caOwner.split("@")[2].length);
+//				        return caOwner
+				        console.log(caOwner)
+				        $('#message').html(caOwner)
+//				        if(userInfo.identityCardNum != ukArr.icardno){
+//							idCardSame = false;
+//						}else{
+//							idCardSame = true
+//						}
+					} catch(e) {
+						window.sessionStorage.setItem("CA", "");
+						if(!certsCFCA){
+							alert("CA签名异常");
+							return;
+						}
+						var errorDesc = certsCFCA.GetLastErrorDesc();
+						alert(errorDesc);
+					}
+				}
+    		})
+    	</script>
+	</body>
+</html>

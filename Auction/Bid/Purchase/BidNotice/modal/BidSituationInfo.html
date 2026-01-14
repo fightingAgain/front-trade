@@ -1,0 +1,100 @@
+<!--
+ * @Author: your name
+ * @Date: 2020-05-22 14:25:09
+ * @LastEditTime: 2020-06-28 14:53:14
+ * @LastEditors: your name
+ * @Description: In User Settings Edit
+ * @FilePath: \FrameWork_bf\bidPrice\Bid\Purchase\BidNotice\modal\BidSituationInfo.html
+--> 
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="pragma" content="no-cache">
+		<!-- 禁止浏览器从本地机的缓存中调阅页面内容 -->
+		<meta http-equiv="cache-control" content="no-cache, must-revalidate">
+		<meta http-equiv="expires" content="0">
+		<title>询比采购情况</title>
+		<link rel="stylesheet" href="../../../../../media/js/bootstrap/css/bootstrap.css" />
+		<link rel="stylesheet" href="../../../../../media/js/bootstrap/css/bootstrap-table.min.css" />
+	</head>
+
+	<body  style="width:98%; padding-left: 20px; padding-top: 10px;">
+		<table class="table table-bordered">
+			<tbody>
+				<th class="active" colspan="4">项目信息</th>
+				<tr>
+					<td class="th_bg"  >项目编号</td>
+					<td >
+						<div id="projectCode"></div>
+					</td>
+					<td class="th_bg" >项目名称</td>
+					<td >
+						<div id="projectName"></div>
+					</td>
+				</tr>
+				<tr>
+					<td class="th_bg"  >包件编号</td>
+					<td>
+						<div id="packageNum"></div>
+					</td>
+					<td class="th_bg">包件名称</td>
+					<td>
+						<div id="packageName"></div>
+					</td>
+				</tr>
+				<!--<tr>
+					<td  style="width: 15%;">报价轮数</td>
+					<td  style="width: 35%;" id="priceCount">
+					</td>
+					<td  style="width: 15%;">当前报价轮数</td>
+					<td  style="width: 35%;" id="priceCountState">
+					</td>
+				</tr>-->		
+				<tr class="active shopType0Show">
+					<th colspan="4"><span id="examTitles">资格申请文件递交情况</span></th>
+				</tr>
+				<tr class="shopType0Show">
+					<td colspan="4" >
+						<table class="table table-bordered" id="BidSituationDetail">
+
+						</table>
+					</td>
+				</tr>				
+				<tr class="active BidSituationRecord">
+					<th colspan="3"><span>文件递交历史记录</span></th>
+					<th style="text-align: right;border: none;"><button class="btn btn-primary" id="exportRecord">导出记录</button></th>
+				</tr>
+				<tr class="BidSituationRecord">
+					<td colspan="4" >
+						<table class="table table-bordered" id="BidSituationRecord">
+
+						</table>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+		  <style>
+			 .table > thead > tr > th, 
+			 .table > tbody > tr > th, 
+			 .table > tfoot > tr > th, 
+			 .table > thead > tr > td, 
+			 .table > tbody > tr > td, 
+			 .table > tfoot > tr > td{
+			 	vertical-align: middle;
+			 }
+		   </style>
+		<script type="text/javascript" src="../../../../../media/js/jquery/jquery.js"></script>
+		<script type="text/javascript" src="../../../../../media/js/jquery/jquery.extend.js"></script>
+		<script type="text/javascript" src="../../../../../media/js/jquery/jquery.params.js"></script>
+		<script type="text/javascript" src="../../../../../media/js/base/common.js"></script>
+		<script type="text/javascript" src="../../../../../media/js/layer/layer.js"></script>
+		<script type="text/javascript" src="../../../../../media/js/bootstrap/js/bootstrap.js"></script>
+		<script type="text/javascript" src="../../../../../media/js/bootstrap/js/bootstrap-table.min.js"></script>
+		<script type="text/javascript" src="../../../../../media/js/bootstrap/js/bootstrap-table-zh-CN.min.js"></script>
+		<script type="text/javascript" src="../../../../../media/js/Model/public.js"></script>
+		<script type="text/javascript" src="../js/BidSituationInfo.js"></script>
+	</body>
+
+</html>

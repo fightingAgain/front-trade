@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8">
+	<meta http-equiv="pragma" content="no-cache"><!-- 禁止浏览器从本地计算机的缓存中访问页面内容 --> 
+	<meta http-equiv="cache-control" content="no-cache"><!-- 用于指定请求和响应遵循的缓存机制 --> 
+	<meta http-equiv="expires" content="0"><!-- 用于设定网页的到期时间，一旦网页过期，必须到服务器上重新传输； -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>预审转后审</title>
+    <link rel="stylesheet" href="../../../media/js/layer/mobile/need/layer.css" />
+    <link rel="stylesheet" href="../../../media/js/bootstrap/css/bootstrap.css" />
+	<style>
+		html,body { height: 100%;}
+		.td_equal{
+			width: 275px;
+		}
+		.table-comm>tbody>tr>td { width: 35%;}
+		.table-comm>tbody>tr>td.th_bg, .table>tbody>tr>th.th_bg {
+			width: 15%;
+		}
+		.padding_button{
+			padding: 5px 8px !important;
+			line-height: 30px !important;
+		}
+	</style>
+</head>
+
+<body>
+    <form class="pageModel" id="formName" name="formName">
+    	<div class="panel-group" id="accordion">
+    		<div class="panel panel-accordion panel-default">
+	    		<div class="panel-heading active"  role="tab" id="headingOne">  
+			 		<h4 class="panel-title">
+		            	<a  role="button" data-toggle="collapse" href="#collapseOne" aria-controls="collapseOne"  aria-expanded="true"  >
+		            		资格预审阶段
+		            	</a>
+			 		</h4>  
+			   	</div>  
+			  	<div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">  
+			       	<div class="panel-body">
+			       		<table class="table table-bordered table-comm">
+					        <tr class="bidCode">
+					        	
+				            	<td class="th_bg">标段编号</td>
+				                <td colspan="3">
+				                	<span class="padding_button" id="interiorBidSectionCode"></span>
+				                </td>
+				                
+				            </tr>
+				            <tr>
+				            	<td class="th_bg">标段名称</td>
+				                <td colspan="3">
+				                	<span class="padding_button" id="bidSectionName"></span>
+				                </td>
+				            </tr>
+				            <tr>
+				            	<td class="th_bg">标段分类</td>
+				            	<td colspan="3">
+									<div id="tenderProjectClassifyCode" optionName="tenderProjectClassifyCode" style="padding-left: 10px;"></div>
+								</td>
+				            </tr>
+				            <tr>
+				            	<td class="th_bg">标段合同估算价</td>
+				            	<td colspan="3">
+				            		<span class="padding_button" id="contractReckonPrice"></span>
+				            		<span class="padding_button" id="priceUnit"></span>
+				            		<span class="padding_button" id="currencyCode"></span>
+				            	</td>
+				            </tr>
+				            <tr>
+				            	
+				            	<td class="th_bg">交易流程</td>
+				                <td colspan="3">
+				                	<label style="padding-right:20px;margin-bottom: 0;">
+				                		<input type="radio" checked="checked" name="processPre" disabled="disabled" id="" value="1" style="vertical-align: -2px;margin-right: 5px;" />
+				                		全流程线上
+				                	</label>
+				                    <label style="padding-right:20px;margin-bottom: 0;">
+				                    	<input type="radio" name="processPre" id="" value="2" disabled="disabled" style="vertical-align: -2px;margin-right: 5px;" />
+				                    	线上线下相结合
+				                    </label>
+				                </td>
+				            <tr class="isOnlinePre">
+				            	<td class="th_bg">资格预审文件获取方式</td>
+				                <td>
+				                	<label style="padding-right:20px;margin-bottom: 0;">
+				                		<input type="radio"name="pretrialGetFileType" disabled="disabled" value="1" style="vertical-align: -2px;margin-right: 5px;" />
+				                		线上获取
+				                	</label>
+				                    <!--<label style="padding-right:20px;margin-bottom: 0;">
+				                    	<input type="radio" name="pretrialGetFileType" value="2" disabled="disabled" style="vertical-align: -2px;margin-right: 5px;" />
+				                    	线下获取
+				                    </label>-->
+				                </td>
+				                <td class="th_bg">资格申请文件递交形式</td>
+				                <td>
+				                	<!--<span class="padding_button" id="pretrialDeliverFileType"></span>-->
+				                	<label style="padding-right:20px;margin-bottom: 0;">
+				                		<input type="radio" name="pretrialDeliverFileType" disabled="disabled" id="" value="1" style="vertical-align: -2px;margin-right: 5px;" />
+				                		线上递交
+				                	</label>
+				                    <label style="padding-right:20px;margin-bottom: 0;">
+				                    	<input type="radio" name="pretrialDeliverFileType" disabled="disabled" id="" value="2" style="vertical-align: -2px;margin-right: 5px;" />
+				                    	线下递交
+				                    </label>
+				                </td>
+				            </tr>
+				            <tr class="isOnlinePre">
+				            	
+				            	<td class="th_bg">资格申请文件开启形式</td>
+				                <td>
+				                	<label style="padding-right:20px;margin-bottom: 0;">
+				                		<input type="radio" name="pretrialOpenType" disabled="disabled" id="" value="1" style="vertical-align: -2px;margin-right: 5px;" />
+				                		线上开启
+				                	</label>
+				                    <label style="padding-right:20px;margin-bottom: 0;">
+				                    	<input type="radio" name="pretrialOpenType" disabled="disabled" id="" value="2" style="vertical-align: -2px;margin-right: 5px;" />
+				                    	线下开启
+				                    </label>
+				                </td>
+				                <td class="th_bg">资格审查形式</td>
+				                <td>
+				                	<!--<span class="padding_button" id="pretrialReviewType"></span>-->
+				                	<label style="padding-right:20px;margin-bottom: 0;">
+				                		<input type="radio" name="pretrialReviewType" disabled="disabled" id="" value="1" style="vertical-align: -2px;margin-right: 5px;" />
+				                		线上评审
+				                	</label>
+				                    <label style="padding-right:20px;margin-bottom: 0;">
+				                    	<input type="radio" name="pretrialReviewType" disabled="disabled" id="" value="2" style="vertical-align: -2px;margin-right: 5px;" />
+				                    	线下评审
+				                    </label>
+				                	
+				                </td>
+				            </tr>           
+				            
+				            <tr>
+					        	<td class="th_bg">报名</td>
+					        	<td>
+					        		<span class="padding_button" id="signUp"></span>
+					        	</td>
+					        	<td class="th_bg"><span class="signUpShow">报名是否需要确认</span></td>
+					        	<td>
+					        		<div class="signUpShow" id="enterSignUp">
+					        		
+				                    </div>
+					        	</td>
+					        	
+					        </tr>
+							<tr class="feeConfirmVersion">
+								<td class="th_bg">评审费是否含在代理服务费中</td>
+								<td colspan="3">
+									<span class="padding_button" id="feeUnderparty"></span>
+								</td>
+							</tr>
+					        <tr>
+				            	<td class="th_bg">预审评审办法</td>
+				            	<td>
+				            		<span class="padding_button" id="pretrialCheckType"></span>
+				            	</td>
+				            	<td class="th_bg"><span class="limitNum" style="display: none;">限制人数</span></td>
+				            	<td>
+				            		<span class="padding_button limitNum" style="display: none;" id="pretrialPassNumber"></span>
+				            	</td>
+				            </tr>
+				            
+				           <!-- <tr class="projectShow">
+				            	<td class="th_bg">清单文件</td>
+				                <td colspan="3">
+				                	<span class="padding_button" id="isHasDetailedListFile"></span>
+				                </td>
+				            </tr>-->
+					        <tr class="cost">
+				            	<td class="th_bg">资格预审文件是否出售</td>
+				                <td>
+				                	<input type="hidden" name="projectCosts[0].costName" value="资格预审文件费" disabled="disabled"/>
+				                	<input type="hidden" name="projectCosts[0].payModel" value="0" disabled="disabled"/>
+				                	<label style="padding:7px 20px 7px 0;margin-bottom: 0;">
+				                		<input type="radio" name="projectCosts[0].isPay" value="1" disabled="disabled" style="vertical-align: -2px;margin-right: 5px;"  class="pay">是
+				                	</label>
+				                    <label style="padding:7px 20px 7px 0;margin-bottom: 0;">
+				                    	<input type="radio" name="projectCosts[0].isPay" value="0" disabled="disabled" style="vertical-align: -2px;margin-right: 5px;"  class="pay">否
+				                    </label>
+				                </td>
+				            	<td class="th_bg"><span class="costShow">资格预审文件费（<span style="color: #BB2413;">元</span>）<i class="red">*</i></span></td>
+				                <td>
+				                	<input type="number" name="projectCosts[0].payMoney" readonly="readonly" disabled="disabled" class="form-control pay_input costShow"  value="" style="width: 260px;"/>
+				                </td>
+				            </tr>
+				            <tr>
+				            	<td class="th_bg">是否提前编制招标文件</td>
+				                <td colspan="3">
+				                	<span class="padding_button" id="isAdvanceBidFile"></span>
+				                </td>
+				            </tr>
+				            <!--<tr class="abvMakeFile">
+				            	<td class="th_bg">拟采用的评标办法</td>
+				            	<td>
+				            		<span class="padding_button" id="checkType"></span>
+				            	</td>
+				            	<td class="th_bg"><span class="aloneSetCheckShow">单独设置评审条款</span></td>
+					        	<td>
+					        		<div class="aloneSetCheckShow">
+					        			<span class="padding_button" id="aloneSetCheck"></span>
+				                    </div>
+					        	</td>
+				            </tr>
+				            <tr class="projectShow">
+				                <td class="th_bg">招标控制价</td>
+				                <td>
+				                	<span class="padding_button" id="isHasControlPrice"></span>
+				                </td>
+				                <td class="th_bg"><span class="controlShow">控制价发布</span></td>
+				                <td>
+				                	<span class="padding_button controlShow" id="isControlPrice"></span>
+				                </td>
+				            </tr>-->
+				            <tr>
+				            	<td class="th_bg">联合体投标</td>
+				                <td colspan="3">
+				                	<span class="padding_button" id="syndicatedFlag"></span>
+				                </td>
+				            </tr>
+				            <tr class="syndMain">
+				            	<td class="th_bg">联合体投标要求</td>
+				            	<td colspan="3">
+				            		<span class="padding_button" id="consortiumBidding"></span>
+				            	</td>
+				            </tr>
+					        <tr>
+				            	<td class="th_bg">标段内容（范围/规模）</td>
+				                <td colspan="3">
+				                	<span class="padding_button" id="bidSectionContent"></span>
+				                </td>
+				           </tr>
+				           <tr>
+				            	<td class="th_bg">投标人资格条件</td>
+				                <td colspan="3">
+				                	<span class="padding_button" id="bidQualification"></span>
+				                </td>
+				            </tr>
+				        </table>
+		       		</div>
+	       		</div>
+       		</div>
+       		<div class="panel panel-accordion panel-default">
+	    		<div class="panel-heading active"  role="tab" id="headingTwo">  
+			 		<h4 class="panel-title">
+		            	<a class="collapsed" role="button" data-toggle="collapse" href="#collapseTwo" aria-controls="collapseTwo"  aria-expanded="false">
+		            		招标阶段
+		            	</a>
+			 		</h4>  
+			   	</div>  
+			  	<div  id="collapseTwo" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingTwo">  
+			       	<div class="panel-body">
+			       		<table class="table table-bordered table-comm">
+					        <tr class="bidCode">
+					        	
+				            	<td class="th_bg">标段编号<i class="red">*</i></td>
+				                <td colspan="3">
+				                    <input type="text" name="interiorBidSectionCode" id="interiorBidSectionCode" readonly="readonly" class="form-control readonly" errormsg="请正确输入标段编号"/>
+				                </td>
+				                
+				            </tr>
+				            <tr>
+				            	<td class="th_bg">标段名称<i class="red">*</i></td>
+				                <td colspan="3">
+				                    <input type="text" name="bidSectionName" id="bidSectionName" maxlength="250" readonly="readonly" class="form-control" datatype="*" errormsg="请正确输入标段名称" />
+				                </td>
+				            </tr>
+				            <tr>
+				            	<td class="th_bg">标段合同估算价<i class="red">*</i></td>
+				            	<td colspan="3" class="allowEdit">
+				            		<input type="text" class="form-control" name="contractReckonPrice" style="width: 150px;display: inline-block;text-align: right;" onblur="OnInputs(this)" datatype="positiveNum" errormsg="请正确输入标段合同估算价" />
+				            		<select name="priceUnit" class="form-control" style="width: 80px;display: inline-block;">
+				                    	<option value="1">万元</option>
+				                    	<option value="0">元</option>
+				                    </select>
+				                    <select name="currencyCode" class="form-control" style="width: 100px;display: inline-block;">
+				                    	<option value="156">人民币</option>
+				                    </select>
+				            	</td>
+				            </tr>
+				            <tr>
+				            	
+				            	<td class="th_bg">交易流程</td>
+				                <td colspan="3">
+				                	<label style="padding-right:20px;margin-bottom: 0;">
+				                		<input type="radio" checked="checked" name="process" id="" value="1" style="vertical-align: -2px;margin-right: 5px;" />
+				                		全流程线上
+				                	</label>
+				                    <label style="padding-right:20px;margin-bottom: 0;">
+				                    	<input type="radio" name="process" id="" value="2" style="vertical-align: -2px;margin-right: 5px;" />
+				                    	线上线下相结合
+				                    </label>
+				                </td>
+				            <tr class="isOnline">
+				            	<td class="th_bg">招标文件获取方式</td>
+				                <td>
+				                	<label style="padding-right:20px;margin-bottom: 0;">
+				                		<input type="radio" checked="checked" name="signUpType" id="" value="1" style="vertical-align: -2px;margin-right: 5px;" />
+				                		线上获取
+				                	</label>
+				                   <!-- <label style="padding-right:20px;margin-bottom: 0;">
+				                    	<input type="radio" name="signUpType" id="" value="2" style="vertical-align: -2px;margin-right: 5px;" />
+				                    	线下获取
+				                    </label>-->
+				                </td>
+				                <td class="th_bg">投标文件递交方式</td>
+				                <td>
+				                	<label style="padding-right:20px;margin-bottom: 0;">
+				                		<input type="radio" checked="checked" name="deliverFileType" id="" value="1" style="vertical-align: -2px;margin-right: 5px;" />
+				                		线上递交
+				                	</label>
+				                    <label style="padding-right:20px;margin-bottom: 0;">
+				                    	<input type="radio" name="deliverFileType" id="" value="2" style="vertical-align: -2px;margin-right: 5px;" />
+				                    	线下递交
+				                    </label>
+				                </td>
+				            </tr>
+				            <tr class="isOnline">
+				            	
+				            	<td class="th_bg">开标方式</td>
+				                <td>
+				                	<label style="padding-right:20px;margin-bottom: 0;">
+				                		<input type="radio" checked="checked" name="bidOpenType" id="" value="1" style="vertical-align: -2px;margin-right: 5px;" />
+				                		线上开标
+				                	</label>
+				                    <label style="padding-right:20px;margin-bottom: 0;">
+				                    	<input type="radio" name="bidOpenType" id="" value="2" style="vertical-align: -2px;margin-right: 5px;" />
+				                    	线下开标
+				                    </label>
+				                </td>
+				                <td class="th_bg">评审方式</td>
+				                <td>
+				                	<label style="padding-right:20px;margin-bottom: 0;">
+				                		<input type="radio" checked="checked" name="bidCheckType" id="" value="1" style="vertical-align: -2px;margin-right: 5px;" />
+				                		线上评审
+				                	</label>
+				                    <label style="padding-right:20px;margin-bottom: 0;">
+				                    	<input type="radio" name="bidCheckType" id="" value="2" style="vertical-align: -2px;margin-right: 5px;" />
+				                    	线下评审
+				                    </label>
+				                	
+				                </td>
+				            </tr>           
+				            
+				           <!-- <tr class="isSignUpShow">
+					        	<td class="th_bg">报名</td>
+					        	<td>
+					        		<label style="padding-right:20px;margin-bottom: 0;">
+				                		<input type="radio" checked="checked" name="signUp" value="1" style="vertical-align: -2px;margin-right: 5px;" />
+				                		是
+				                	</label>
+				                    <label style="padding-right:20px;margin-bottom: 0;">
+				                    	<input type="radio" name="signUp" value="0" style="vertical-align: -2px;margin-right: 5px;" />
+				                    	否
+				                    </label>
+					        	</td>
+					        	<td class="th_bg"><span class="signUpShow">报名是否需要确认</span></td>
+					        	<td>
+					        		<div class="signUpShow">
+					        		<label style="padding-right:20px;margin-bottom: 0;">
+				                		<input type="radio" checked="checked" name="enterSignUp" value="1" style="vertical-align: -2px;margin-right: 5px;" />
+				                		是
+				                	</label>
+				                    <label style="padding-right:20px;margin-bottom: 0;">
+				                    	<input type="radio" name="enterSignUp" value="0" style="vertical-align: -2px;margin-right: 5px;" />
+				                    	否
+				                    </label>
+				                    </div>
+					        	</td>
+					        	
+					        </tr>-->
+					        <tr>
+				            	<td class="th_bg">拟采用的评标办法<i class="red">*</i></td>
+				            	<td colspan="3">
+				            		<select name="checkType" class="form-control checkType"  style="width:260px;display: inline-block;">
+				                    	
+				                    </select>
+				            	</td>
+				            	<!--<td class="th_bg"><span class="aloneSetCheckShow">单独设置评审条款</span></td>
+					        	<td>
+					        		<div class="aloneSetCheckShow">
+					        		<label style="padding-right:20px;margin-bottom: 0;">
+				                		<input type="radio" name="aloneSetCheck" value="1" style="vertical-align: -2px;margin-right: 5px;" />
+				                		是
+				                	</label>
+				                    <label style="padding-right:20px;margin-bottom: 0;">
+				                    	<input type="radio" checked="checked" name="aloneSetCheck" value="0" style="vertical-align: -2px;margin-right: 5px;" />
+				                    	否
+				                    </label>
+				                    </div>
+					        	</td>-->
+				            </tr>
+				            <tr class="cost">
+				            	<td class="th_bg">中标服务费收取方式<i class="red">*</i></td>
+				            	<td>
+				            		<input type="hidden" name="projectCosts[2].costName" value="中标服务费" />
+				            		<input type="hidden" name="projectCosts[2].payModel" value="2" />
+				            		<input type="hidden" name="projectCosts[2].isPay" value="1" />
+				            		<select name="projectCosts[2].payType" class="form-control" style="width:auto;display: inline-block;">
+				                    	<option value="3">标准累进制</option>
+				                    	<option value="1">固定金额</option>
+				                    	<option value="2">固定比例</option>
+				                   </select>
+				            	</td>
+				            	<td class="th_bg payTypeTit">优惠系数（如8折输0.8）<i class="red">*</i></td>
+				            	<td class="payTypeMain">
+				            		<div class="zjDiscount"><input type="number" class="form-control" name="projectCosts[2].discount" oninput="priceInput(this,6)" datatype="positiveNum" errormsg="请正确输入优惠系数" style="display: inline-block;width: 150px;" value="1" /></div>
+				            		<div class="zjPayRatio" style="display: none;"><input type="text" class="form-control" name="projectCosts[2].payRatio" oninput="priceInput(this,6)" errormsg="请正确输入中标服务费收费比例" style="display: inline-block;width: 150px;" /></div>
+				            		<div class="zjPayMoney" style="display: none;"><input type="text" class="form-control" name="projectCosts[2].payMoney" oninput="priceInput(this,2)" errormsg="请正确输入中标服务费收费金额" style="display: inline-block;width: 150px;" /></div>
+				            	</td>
+				            </tr>
+				            <tr  class="isBidPriceShow" style="display: none;">
+				            	<td class="th_bg">是否暗标</td>
+				                <td>
+				                	<label style="padding-right: 20px;margin-bottom: 0;">
+				                		<input type="radio" name="bidType" value="1" style="vertical-align: -2px;margin-right: 5px;" >是
+				                	</label>
+				                    <label style="padding-right: 20px;margin-bottom: 0;">
+				                    	<input type="radio" name="bidType" value="0" checked="checked" style="vertical-align: -2px;margin-right: 5px;" >否
+				                    </label>
+				                </td>
+								<td class="th_bg"><span>投标报价方式</span></td>
+								<td>
+									<div >
+									<label style="padding-right:20px;margin-bottom: 0;">
+										<input type="radio" name="bidderPriceType"checked="checked" value="1" style="vertical-align: -2px;margin-right: 5px;" />
+										金额（元/万元）
+									</label>
+								    <label style="padding-right:20px;margin-bottom: 0;">
+								    	<input type="radio"  name="bidderPriceType" value="9" style="vertical-align: -2px;margin-right: 5px;" />
+								    	费率
+								    </label>
+								    </div>
+								</td>
+							</tr>
+							<tr class="projectShow">	
+				                <td class="th_bg">清单文件</td>
+				                <td colspan="3">
+									<!--是否暗标，默认否-->
+							<!--	<input type="hidden" name="bidType" value="0"/>-->
+									<!--清单文件 默认：是-->
+				                    <label style="padding-right: 20px;margin-bottom: 0;">
+				                		<input type="radio" name="isHasDetailedListFile" id="" value="1" style="vertical-align: -2px;margin-right: 5px;" />
+				                		有
+				                	</label>
+				                    <label style="padding-right: 20px;margin-bottom: 0;">
+				                		<input type="radio" checked="checked" name="isHasDetailedListFile" id="" value="0" style="vertical-align: -2px;margin-right: 5px;" />
+				                		无
+				                	</label>
+				                </td>
+				            </tr>
+				            
+					        <tr class="cost">
+				            	<td class="th_bg">出售招标文件</td>
+				                <td>
+				                	<input type="hidden" name="projectCosts[1].costName" value="招标文件费" />
+				                	<input type="hidden" name="projectCosts[1].payModel" value="1" />
+				                	<label style="padding:7px 20px 7px 0;margin-bottom: 0;">
+				                		<input type="radio" name="projectCosts[1].isPay" value="1" checked="checked" style="vertical-align: -2px;margin-right: 5px;"  class="pay">是
+				                	</label>
+				                    <label style="padding:7px 20px 7px 0;margin-bottom: 0;">
+				                    	<input type="radio" name="projectCosts[1].isPay" value="0" style="vertical-align: -2px;margin-right: 5px;"  class="pay">否
+				                    </label>
+				                </td>
+				            	<td class="th_bg"><span class="costShow">招标文件标书费（<span style="color: #BB2413;">元</span>）<i class="red">*</i></span></td>
+				                <td>
+				                	<input type="number" name="projectCosts[1].payMoney" oninput="priceInput(this,2)" class="form-control pay_input costShow"  value="" style="width: 260px;" errormsg="请正确输入招标文件费金额"/>
+				                </td>  
+				            </tr>
+				            <tr class="projectShow">
+				                <td class="th_bg">招标控制价</td>
+				                <td colspan="3">
+				                    <label style="padding-right: 20px;margin-bottom: 0;">
+				                		<input type="radio" name="isHasControlPrice" value="1" style="vertical-align: -2px;margin-right: 5px;" />
+				                		有
+				                	</label>
+				                    <label style="padding-right: 20px;margin-bottom: 0;">
+				                		<input type="radio" checked="checked" name="isHasControlPrice" value="0" style="vertical-align: -2px;margin-right: 5px;" />
+				                		无
+				                	</label>
+				                </td>
+				                <!-- <td class="th_bg"><span class="controlShow">控制价发布</span></td>
+				                <td>
+				                    <label style="padding-right: 20px;margin-bottom: 0;" class="controlShow">
+				                		<input type="radio" name="isControlPrice" value="1" style="vertical-align: -2px;margin-right: 5px;" />
+				                		是
+				                	</label>
+				                    <label style="padding-right: 20px;margin-bottom: 0;" class="controlShow">
+				                		<input type="radio" checked="checked" name="isControlPrice" value="0" style="vertical-align: -2px;margin-right: 5px;" />
+				                		否
+				                	</label>
+				                </td> -->
+				            </tr>
+							<tr>
+								<td class="th_bg">是否收取投标保证金</td>
+							    <td colspan="3">
+							        <label style="padding-right: 20px;margin-bottom: 0;">
+							    		<input type="radio" checked="checked" name="isCollectDeposit" value="1" style="vertical-align: -2px;margin-right: 5px;" />
+							    		是
+							    	</label>
+							        <label style="padding-right: 20px;margin-bottom: 0;">
+							    		<input type="radio" name="isCollectDeposit" value="0" style="vertical-align: -2px;margin-right: 5px;" />
+							    		否
+							    	</label>
+							    </td>
+							</tr>
+				            <tr class="isCollectDeposit">
+				            	<td class="th_bg">保证金计算方式</td>
+				                <td>
+				                    <label style="padding-right: 20px;margin-bottom: 0;">
+				                		<input type="radio" checked="checked" name="depositType" value="1" style="vertical-align: -2px;margin-right: 5px;" />
+				                		固定金额
+				                	</label>
+				                    <label style="padding-right: 20px;margin-bottom: 0;">
+				                    	<input type="radio" name="depositType" value="2" style="vertical-align: -2px;margin-right: 5px;" />
+				                    	固定比例
+				                    </label>
+				                </td>
+				                <td class="th_bg depositTit">保证金金额（<span style="color: #BB2413;">元</span>）<i class="red">*</i></td>
+				                <td class="depositMain">
+				                	<div class="depositMoney" style="width: 260px;"><input type="number" name="depositMoney" datatype="positiveNum" oninput="priceInput(this,2)" errormsg="请正确输入保证金金额" class="form-control" style="width: 200px;"/></div>
+				                	<div class="depositRatio" style="display: none;width: 260px;"><input type="number" name="depositRatio" oninput="priceInput(this,2)" errormsg="请正确输入保证金比例" class="form-control" style="width: 100px;display: inline-block;"/></div>
+				                </td>
+				            </tr>
+				            <tr  class="isCollectDeposit">
+				            	
+				            	<td class="th_bg">保证金收取人<i class="red">*</i></td>
+				                <td>
+				                    <select name="depositCollect" class="form-control select" selectname="depositCollect" style="width: auto;display: inline-block;">
+				                    </select>
+				                </td>
+				            	<td class="th_bg">保证金递交方式</td>
+				                <td>
+				                    <label style="padding-right: 20px;margin-bottom: 0;">
+				                		<input type="radio" checked="checked" name="depositChannelType" value="1" style="vertical-align: -2px;margin-right: 5px;" />
+				                		线上
+				                	</label>
+				                    <label style="padding-right: 20px;margin-bottom: 0;">
+				                		<input type="radio" name="depositChannelType" value="2" style="vertical-align: -2px;margin-right: 5px;" />
+				                		线下
+				                	</label>
+				                </td>
+				                
+				            </tr>
+				            <tr  class="isCollectDeposit virtualBondRules">
+								<td  class="th_bg">投标保证金缴纳方式<i class="red">*</i></td>
+								<td colspan="3" style="text-align: left;">
+									<label style="padding-right: 20px;margin-bottom: 0;" class="type_online">
+										<input style="vertical-align: -2px;margin-right: 5px;margin-left: 5px;" type="checkbox" checked="checked" name="depositChannel" value="1"/>资金现金
+									</label>
+									<label style="padding-right: 20px;margin-bottom: 0;" class="type_online">
+										<input style="vertical-align: -2px;margin-right: 5px;margin-left: 5px;" type="checkbox" name="depositChannel" value="2"/>银行保函
+									</label>
+									<label style="padding-right: 20px;margin-bottom: 0;" class="type_online">
+										<input style="vertical-align: -2px;margin-right: 5px;margin-left: 5px;" type="checkbox" name="depositChannel" value="3"/>担保
+									</label>
+									<label style="padding-right: 20px;margin-bottom: 0;" class="type_online">
+										<input style="vertical-align: -2px;margin-right: 5px;margin-left: 5px;" type="checkbox" name="depositChannel" value="4"/>电汇
+									</label>
+									<label style="padding-right: 20px;margin-bottom: 0;" class="type_online">
+										<input style="vertical-align: -2px;margin-right: 5px;margin-left: 5px;" type="checkbox" name="depositChannel" value="5"/>汇票
+									</label>
+									<label style="padding-right: 20px;margin-bottom: 0;" class="type_online">
+										<input style="vertical-align: -2px;margin-right: 5px;margin-left: 5px;" type="checkbox" name="depositChannel" value="6"/>支票
+									</label>
+									<label style="padding-right: 20px;margin-bottom: 0;" class="type_offline">
+										<input style="vertical-align: -2px;margin-right: 5px;margin-left: 5px;" type="checkbox" name="depositChannel" value="7"/>虚拟子账户
+									</label>
+									<label style="padding-right: 20px;margin-bottom: 0;" class="type_online">
+										<input style="vertical-align: -2px;margin-right: 5px;margin-left: 5px;" type="checkbox" name="depositChannel" value="9"/>其他
+									</label>
+								</td>
+							</tr>
+				            <tr class="projectShow cost">
+				            	<td class="th_bg">图纸文件</td>
+				                <td class="isFile">
+				                	<input type="hidden" name="projectCosts[3].costName" value="图纸文件押金费" />
+				                	<input type="hidden" name="projectCosts[3].payModel" value="1" />
+				                    <label style="padding:7px 20px 7px 0;margin-bottom: 0;">
+				                		<input type="radio" name="projectCosts[3].isPay" value="1" style="vertical-align: -2px;margin-right: 5px;" class="pay" />
+				                		有
+				                	</label>
+				                    <label style="padding:7px 20px 7px 0;margin-bottom: 0;">
+				                    	<input type="radio" checked="checked" name="projectCosts[3].isPay" value="0" style="vertical-align: -2px;margin-right: 5px;" class="pay" />
+				                    	无
+				                    </label>
+				                </td>
+				                <td class="th_bg"><span class="costShow">押金金额（<span style="color: #BB2413;">元</span>）<i class="red">*</i></span></td>
+				                <td><input type="text" name="projectCosts[3].payMoney" oninput="priceInput(this,2)" class="form-control fileMoney pay_input costShow" errormsg="请正确输入押金金额" style="width: 260px;"/></td>
+				            </tr>
+				            
+				            <tr class="projectShow">
+				            	<td class="th_bg">工期（日历天）</td>
+				                <td>
+				                	<input type="number" name="projectDuration" class="form-control" ignore="ignore" oninput="priceInput(this,0)" datatype="positiveNum" errormsg="请正确输入工期" style="width: 200px;" value=""/>
+				                </td>  
+				            	<td class="th_bg">建设地点</td>
+				                <td>
+				                	<input type="text" name="buildAddress" class="form-control"  value="" style="width: 260px;"/>
+				                </td>  
+				            </tr>
+				        </table>  
+		       		</div>
+		       	</div>
+	    	</div>
+   		</div>
+        
+    </form>
+    <div class="bottom-btn">
+    	<button type="button" class="btn btn-primary" id="btnSave"><span class="glyphicon glyphicon-ok"></span>保存</button>
+    	<button type="button" class="btn btn-primary" id="btnSubmit"><span class="glyphicon glyphicon-ok"></span>提交</button>
+        <button type="button" class="btn btn-default" id="btnClose"><span class="glyphicon glyphicon-remove"></span>关闭</button>
+    </div>
+    
+    <script type="text/javascript" src="../../../media/js/jquery/jquery.js"></script>
+    <script type="text/javascript" src="../../../media/js/jquery/jquery.extend.js"></script>
+    <script type="text/javascript" src="../../../media/js/base/common.js"></script>
+    <script type="text/javascript" src="../../../media/js/base/util.js"></script>
+    <script type="text/javascript" src="../../Model/js/public.js"></script>
+    
+    <script type="text/javascript" src="../../../media/js/bootstrap/js/bootstrap.js"></script>
+    <script type="text/javascript" src="../../Model/js/dataLinkage.js"></script>
+    <script type="text/javascript" src="../js/turnBidEdit.js"></script>
+    
+</body>
+
+</html>

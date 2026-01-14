@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="pragma" content="no-cache"><!-- 禁止浏览器从本地计算机的缓存中访问页面内容 --> 
+		<meta http-equiv="cache-control" content="no-cache"><!-- 用于指定请求和响应遵循的缓存机制 --> 
+		<meta http-equiv="expires" content="0"><!-- 用于设定网页的到期时间，一旦网页过期，必须到服务器上重新传输； -->
+		<title>招标文件编辑页面</title>
+		<link rel="stylesheet" href="../../../../media/js/bootstrap/css/bootstrap.css" />
+		<link rel="stylesheet" href="../../../../media/js/bootstrap/css/bootstrap-table.min.css" type="text/css"/>
+		<link rel="stylesheet" href="../../../../media/js/stream/css/stream-v1.css" />
+		<style>
+			label {
+				font-weight: normal;
+			}
+			
+			body {
+				height: 100%;
+				width: 100%;
+			}
+			.calendar_icon{
+				color: #3995C8;
+			}
+			.padding_button{
+				padding: 5px 8px !important;
+				line-height: 30px !important;
+			}
+			.readonly{
+				border: none;
+			    background: none !important;
+			    outline: none !important;
+			    box-shadow: none !important;
+			}
+		</style>
+	</head>
+	<body>
+		<form  id="formName" style="width: 99%;padding-left: 10px;padding-top: 10px;margin-bottom: 60px;">
+			<div class="panel-group" id="accordion">
+	    		<div class="panel panel-accordion panel-default">
+		    		<div class="panel-heading active"  role="tab" id="headingOne">  
+				 		<h4 class="panel-title">
+			            	<a  role="button" data-toggle="collapse" href="#collapseOne" aria-controls="collapseOne"  aria-expanded="true"  >
+			            		基本信息
+			            	</a>
+				 		</h4>  
+				   	</div>  
+				  	<div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">  
+				       	<div class="panel-body">
+				       		<table  class="table table-bordered ">
+				       			<tr>
+									<td  class="th_bg">标段编号</td>
+									<td colspan="3" style="text-align: left;">
+										<div id="interiorBidSectionCode"></div>
+									</td>
+								</tr>
+								<tr>
+									<td  class="th_bg">标段名称</td>
+									<td colspan="3" style="text-align: left;">
+										<div id="bidSectionName"></div>
+									</td>
+								</tr>
+								<tr>
+									<td  class="th_bg">招标文件费（元）</td>
+									<td>
+										<div id="fileCost"></div>
+									</td>
+									<td  class="th_bg">图纸文件费（元）</td>
+									<td>
+										<div id="drawCost"></div>
+									</td>
+								</tr>
+								<tr>
+									<td  class="th_bg">金额合计</td>
+									<td>
+										<input name="totalMoney" readonly="readonly" type="text" class="form-control readonly" style="padding: 0;" />
+									</td>
+									<td  class="th_bg">其中包括邮寄费</td>
+									<td>
+										<label style="padding-right: 20px;margin-bottom: 0;">
+					                		<input type="radio" name="hasPostage" value="1" style="vertical-align: -2px;margin-right: 5px;" />是
+					                	</label>
+											<label style="padding-right: 20px;margin-bottom: 0;">
+					                    	<input type="radio" checked="checked" name="hasPostage" value="0" style="vertical-align: -2px;margin-right: 5px;" />否
+					                    </label>
+									</td>
+								</tr>
+								<tr>
+									<td  class="th_bg">付款方式</td>
+									<td colspan="3">
+										<select name="payType" class="form-control" style="width: 150px;">
+											<!--<option value="">请选择</option>-->
+											<option value="1">电汇</option>
+											<option value="2">现金</option>
+										</select>
+									</td>
+								</tr>
+				       		</table>
+			       		</div>
+		       		</div>
+	       		</div>
+	       		
+		    	<div class="panel panel-accordion panel-default">
+		    		<div class="panel-heading active"  role="tab" id="headingThree">  
+				 		<h4 class="panel-title">
+			            	<a class="collapsed" role="button" data-toggle="collapse" href="#collapseThree" aria-controls="collapseThree"  aria-expanded="false">
+			            		购标单位信息
+			            	</a>
+				 		</h4>  
+				   	</div>  
+				  	<div  id="collapseThree" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingThree">  
+				       	<div class="panel-body">
+				       		<button type="button" style="float: right;margin-bottom: 10px;" class="btn btn-sm btn-primary" id="btnChoose">
+				       			<span class="glyphicon glyphicon-search"></span>选择
+				       		</button>
+				       		<table class="table table-bordered">
+						      	<tr>
+									<td  class="th_bg">单位名称</td>
+									<td colspan="3" style="text-align: left;">
+										<!--<div id="supplierName"></div>-->
+										<input type="text" class="form-control readonly" name="supplierName" readonly="readonly" />
+									</td>
+								</tr>
+								<tr>
+									<td  class="th_bg">发票抬头</td>
+									<td>
+										<input type="text" class="form-control" name="invoice" />
+									</td>
+									<td  class="th_bg">下单日期</td>
+									<td>
+										<span id="createTime"></span>
+									</td>
+								</tr>
+								<tr>
+									<td  class="th_bg">开户行</td>
+									<td>
+										<input type="text" class="form-control" name="bank" />
+									</td>
+									<td  class="th_bg">银行帐号</td>
+									<td>
+										<input type="text" class="form-control" name="bankAccount" />
+									</td>
+								</tr>
+								<tr>
+									<td  class="th_bg">通讯地址</td>
+									<td>
+										<input type="text" class="form-control" name="address" />
+									</td>
+									<td  class="th_bg">邮政编码</td>
+									<td>
+										<input type="text" class="form-control" name="postalCode" />
+									</td>
+								</tr>
+								<tr>
+									<td  class="th_bg">联系人姓名<i class="red">*</i></td>
+									<td>
+										<input type="text" class="form-control" name="linkMen" datatype="*" errormsg="请输入联系人姓名" />
+									</td>
+									<td  class="th_bg">电话</td>
+									<td>
+										<input type="text" class="form-control" name="linkTel" />
+									</td>
+								</tr>
+								<tr>
+									<td  class="th_bg">手机<i class="red">*</i></td>
+									<td>
+										<input type="text" class="form-control" maxlength="11" name="linkPhone" datatype="mobile" errormsg="请正确输入手机号" />
+									</td>
+									<td  class="th_bg">传真</td>
+									<td>
+										<input type="text" class="form-control" name="linkFax" />
+									</td>
+								</tr>
+								<tr>
+									<td  class="th_bg">E-mail</td>
+									<td>
+										<input type="text" class="form-control" name="linkEmail" />
+									</td>
+									<td  class="th_bg"></td>
+									<td>
+										
+									</td>
+								</tr>
+								
+					        </table>   
+			       		</div>
+			       	</div>
+		    	</div>
+		    	<div class="panel panel-accordion panel-default">
+		    		<div class="panel-heading active"  role="tab" id="headingTwo">  
+				 		<h4 class="panel-title">
+			            	<a class="collapsed" role="button" data-toggle="collapse" href="#collapseTwo" aria-controls="collapseTwo"  aria-expanded="false">
+			            		支付底单
+			            		<span class="red" style="font-size: 14px;font-weight: normal;"><i class="red">*</i>（请上传200M以内的文件）</span>
+			            	</a>
+				 		</h4>  
+				   	</div>  
+				  	<div  id="collapseTwo" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingTwo">  
+				       	<div class="panel-body">
+				       		<button type="button" style="float: right;margin-bottom: 10px;" class="btn btn-sm btn-primary" id="fileUp"><span class="glyphicon glyphicon-upload"></span>上传</button>
+							<button type="button"  id="btnFile" style="display: none;"></button>
+				       		<div id="fileContent">
+				       			
+				       		</div>   
+			       		</div>
+			       	</div>
+		    	</div>
+		    	<div class="panel panel-accordion panel-default">
+		    		<div class="panel-heading active"  role="tab" id="headingFour">  
+				 		<h4 class="panel-title">
+			            	<a class="collapsed" role="button" data-toggle="collapse" href="#collapseFour" aria-controls="collapseFour"  aria-expanded="false">
+			            		备注信息
+			            	</a>
+				 		</h4>  
+				   	</div>  
+				  	<div  id="collapseFour" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingFour">  
+				       	<div class="panel-body">
+				       		<table class="table table-bordered">
+						      	<tr>
+									<td  class="th_bg">备注</td>
+									<td colspan="3">
+										<textarea class="form-control" name="remarks" style="resize: none;"></textarea>
+									</td>
+									
+								</tr>
+					        </table>   
+			       		</div>
+			       	</div>
+		    	</div>
+	   		</div>
+		</form>
+	     
+	    <div style="width: 100%;height: 50px;text-align:center;position: fixed;bottom: 0;background-color: #FFFFFF;">
+			<button type="button" class="btn btn-primary" id="btnSave"><span class="glyphicon glyphicon-ok"></span>保存</button>
+			<button type="button" class="btn btn-primary" id="btnSubmit"><span class="glyphicon glyphicon-saved"></span>提交审核</button>
+			<button type="button" class="btn btn-default" id="btnClose"><span class="glyphicon glyphicon-remove"></span>关闭</button>
+		</div>
+	     <script type="text/javascript" src="../../../../media/js/jquery/jquery.js" ></script>
+		 <script type="text/javascript" src="../../../../media/js/jquery/jquery.extend.js"></script>
+		 <script type="text/javascript" src="../../../../media/js/base/common.js" ></script>
+		 <script type="text/javascript" src="../../../../media/js/base/util.js" ></script>
+		 <script type="text/javascript" src="../../../../media/js/bootstrap/js/bootstrap.js" ></script>
+		 <script type="text/javascript" src="../../../../media/js/bootstrap/js/bootstrap-table.min.js"></script>
+		 <script type="text/javascript" src="../../../../media/js/bootstrap/js/bootstrap-table-zh-CN.min.js"></script>
+		 <script type="text/javascript" src="../../../../media/js/layer/layer.js"></script>
+		 <script type="text/javascript" src="../../../../media/js/base/WorkflowInfoNew.js"></script>
+		 <script type="text/javascript" src="../../../Model/js/public.js"></script>
+		 <script type="text/javascript" src="../../../../media/js/stream/js/stream-v1.js"></script>
+		 <script type="text/javascript" src="../../../../media/js/base/StreamUpload.js"></script>
+		 <script type="text/javascript" src="../js/supplierEdit.js" ></script>
+	</body>
+</html>

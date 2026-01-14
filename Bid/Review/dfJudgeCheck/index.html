@@ -1,0 +1,495 @@
+<!DOCTYPE>
+<html lang="zh">
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="pragma" content="no-cache"><!-- 禁止浏览器从本地计算机的缓存中访问页面内容 --> 
+		<meta http-equiv="cache-control" content="no-cache"><!-- 用于指定请求和响应遵循的缓存机制 --> 
+		<meta http-equiv="expires" content="0"><!-- 用于设定网页的到期时间，一旦网页过期，必须到服务器上重新传输； -->
+    	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+		<title></title>
+
+	    <link rel="stylesheet" type="text/css" href="../../media/js/layer/mobile/need/layer.css" />
+	    <link rel="stylesheet" type="text/css" href="../../media/js/bootstrap/css/bootstrap.css" />
+	    <link rel="stylesheet" type="text/css" href="../../media/js/bootstrap/css/bootstrap-table.min.css">
+	    <link rel="stylesheet" type="text/css" href="../../media/js/datetimepicker/css/jquery.datetimepicker.css" type="text/css"/>
+	    <link rel="stylesheet" type="text/css" href="../../media/js/stream/css/stream-v1.css" />
+	    <link rel="stylesheet" type="text/css" href="../../media/js/bootstrap/css/bootstrap-treeview.css" />
+	    <link rel="stylesheet" type="text/css" href="../../media/js/layer/layui.css" />
+	    <!--<link rel="stylesheet" type="text/css" href="../../media/js/layer/layui.css" />-->
+	    <style>
+			*{margin:0 auto;padding:0;}
+			html {
+			  height: 100%;
+			}
+			body {
+				font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+				font-size: 14px;
+				line-height: 1.42857143;
+				color: #333;
+				background-color: #fff;
+				width: 100%;
+				padding: 0;
+				height: 100%;
+			}
+			li{
+				list-style:none;
+			}
+			a:hover{
+				text-decoration: none;
+			}
+			.list li{
+				width: 100%;
+				padding: 13px;
+				border: 1px solid #f1f1f1;
+				margin-bottom:10px ;
+				text-align: left;
+				cursor:pointer;
+			}
+			.list li.clnBidReportPart{
+				width:400px;
+				line-height: 1.2em;
+			}
+			.list li a{
+				display: block;
+				width: 100%;
+				height: 100%;
+
+			}
+			.list .no-click{
+				background: #ccc;
+				cursor:not-allowed;
+			}
+			.list .no-click a{
+				color: #999;
+			}
+			.open{
+				border: 1px solid #3995C8;
+				color: #fff;
+				background: #3995C8;
+			}
+			.open a{
+				color: #fff;
+			}
+			
+			#contents{
+				width: 100%;
+				border: 1px solid #f1f1f1;
+				overflow-y: auto;
+
+			}
+			#myTab {
+				width: 100%;
+				height: 43px;
+				overflow: auto;
+				border-bottom: 1px solid #ddd;
+				padding-left: 0;
+				margin-bottom: 0;
+				list-style: none;
+
+			}
+			#myTab li{
+				float: left;
+				margin-bottom: -1px;
+				position: relative;
+				display: block;
+			}
+			#myTab li>a{
+				margin-right: 2px;
+				line-height: 1.42857143;
+				border: 1px solid transparent;
+				border-radius: 4px 4px 0 0;
+				position: relative;
+				display: block;
+				padding: 10px 15px;
+				text-decoration: none;
+			}
+			#myTab li>a:hover{
+				background-color: #3995C8;
+				border: 1px solid #3995C8;
+				color: #fff;
+			}
+			.actives{
+				color: #fff;
+				cursor: default;
+				background-color: #3995C8;
+				border-bottom-color: transparent;
+			}
+			/* .actives a{
+				color: #fff;
+			} */
+			pre{
+				display: block;
+				padding: 0px;
+				margin: 0px;
+				font-size: 14px;
+				line-height: 1.42857143;
+				color: #333;
+				/*white-space:pre-wrap !important;*/
+				word-break: normal;
+				background:none;
+				border: none;
+				border-radius: 0px;
+				white-space: pre-line !important;
+			}
+			.btn-strong{
+				font-size: 18px;
+			}
+			.bottom-btn{
+				padding-bottom: 10px;
+				background: #f6f7f9;
+			}
+			#bidderList li{
+				margin-right: 2px;
+			}
+			#bidderList a{
+				color: #ffffff;
+			}
+			#bidderList .active a{
+				color: #333;
+			}
+			#bidderList .active{
+				background: #ffffff;
+			}
+			#bidderList li:hover{
+				background: #ffffff;
+			}
+			/*已评审*/
+			.isReviewed{
+				background: #4cae4c;
+			}
+			/*未评审*/
+			.notReviewed{
+				background: #a2a2a2;
+			}
+			/*保存*/
+			.saveReviewed{
+				background: #a2a2a2;
+			}
+			#btn-box .btn{
+				margin-left:5px;
+			}
+			.keyButton{
+				background-color:#e43636 ;
+				border-color: #e43636;
+			}
+			.nav-tabs a[aria-expanded]{
+				background: none;
+				padding-right: 15px !important;
+			}
+			#reviewReportWarp{
+				padding-top: 20px;
+			}
+			#reviewReportWarp .row{
+				margin-right: 0;
+			}
+			#reviewReportWarp .actived{
+				background: #CCCCCC;
+			}
+			#reviewReportWarp ul{
+				box-shadow: 0px 0px 5px #CCCCCC;
+				padding: 5px;
+			}
+			.reportPart{
+				padding: 5px 10px;
+				margin-bottom: 10px;
+				border-bottom: 1px dotted #CCCCCC;
+				cursor: pointer;
+			}
+			.checkItemList > thead > tr > th,
+			.checkItemList > tbody > tr > th,
+			.checkItemList > tfoot > tr > th,
+			.checkItemList > thead > tr > td,
+			.checkItemList > tbody > tr > td,
+			.checkItemList > tfoot > tr > td{
+				white-space:pre-wrap !important;
+			}
+			/*消除栅格布局产生的横向滚动条*/
+			.row{
+				margin: 0;
+				padding: 5px 0px;
+				border-bottom: 1px dashed #ddd;
+				/*padding-bottom: 70px;*/
+			}
+			/*评标环节样式*/
+			.review_right{
+				padding-left: 5px;
+				padding-right: 0px;
+				/*box-shadow:  0px 0px 5px #666666;*/
+			}
+			.review_left{
+				padding-left: 0px;
+				padding-right: 5px;
+				/*box-shadow:  0px 0px 5px #666666;*/
+			}
+			.review_middle{
+				padding-left: 5px;
+				padding-right: 5px;
+				box-shadow:  0px 0px 5px #666666;
+			}
+			.checkItemTreeTitle{
+				font-weight: 600;
+				height: 35px;
+				padding: 0 20px;
+				line-height: 35px;
+				background: #d3e5fc;
+				box-shadow: 0px 3px 5px #666666;
+				margin-bottom: 10px;
+			}
+			#checkItemTree{
+				overflow-x: auto;
+				padding-bottom: 10px;
+			}
+			.tree_li{
+				width: auto;
+				padding: 5px;
+				white-space: nowrap;
+				cursor: pointer;
+				border-bottom: 1px dotted #999;
+			}
+			.tree_ul .choose{
+				/*background: #229bde;
+				color: #ffffff;*/
+				background: #fafbfd;
+				box-shadow: -3px 3px 5px #999999;
+				padding-left: 10px;
+			}
+			.tree_ul{
+				padding-left: 10px;
+			}
+			.review_standard_tit{
+				font-weight: 600;
+				margin-bottom: 5px;
+			}
+			.review_standard_box{
+				padding: 10px;
+				box-shadow: 0px 0px 5px #CCCCCC;
+				margin: 10px 5px 20px 0;
+				overflow: auto;
+				display: none;
+			}
+			.review_key,.review_handle_box{
+				padding-left: 10px;
+				margin-bottom: 20px;
+			}
+			.review_reason{
+				padding-left: 10px;
+				height: 215px;
+				overflow: auto;
+			}
+			.review_key_title,.review_handle_title,.review_reason_title, .review_standard_name{
+				font-weight: 600;
+			}
+			.review_reason_title{
+				margin-bottom: 10px;
+			}
+			#review_show_cont{
+				padding: 20px;
+				overflow: auto;
+				box-shadow: 0px 0px 5px #cccccc;
+			}
+			#file_tab_title li a{
+				font-weight: 600;
+			}
+			.review_reason_cont{
+				padding: 5px;
+			}
+			
+			.tree_has_son+ul li::before{
+				content: '---  ';
+			}
+			/*.review_handle_box .supplierIskey{
+				display: inline-block;
+				width: 100px;
+			}*/
+			/*评委评审时投标人显示换行问题*/
+			.bidder_list_box{
+				height: 48px;
+				overflow: hidden;
+				position: relative;
+			}
+			#bidderList>li {
+				/*float: left;*/
+				display: inline-block;
+				/*height: 60px;*/
+			}
+			
+			#bidderList>li>a {
+				/*position: relative;*/
+				display: inline-block;
+				padding: 10px 15px;
+				text-decoration: none;
+			}
+			
+			#bidderList {
+				border-bottom: 1px solid #C9C9C9;
+				list-style:none; 
+				overflow-x: auto; 
+				overflow-y: hidden; 
+				line-height: 1.428571429;
+				white-space: nowrap;
+				/*height: 62px;*/
+				width: 100%; 
+			}
+			#bidderList a[aria-expanded]{
+				background: none;
+				padding-right: 15px !important;
+			}
+			.go_left,.go_right{
+				position: absolute;
+				top: 10px;
+				font-size: 30px;
+				color: #c5dbf7;
+				/*opacity: 0.8;*/
+				cursor: pointer;
+			}
+			.go_left{
+				left: 0;
+			}
+			.go_right{
+				right: 0;
+			}
+            #bidPriceChecksList td textarea,#bidPriceChecksList td .reason_html{
+                white-space: normal;
+            }
+			/*.ele_seize{
+				width: 50px;
+				display: inline-block;
+			}*/
+			/*#bidderList>li {
+				margin-bottom: -1px;
+				margin-top: 10px;
+			
+			}*/
+			.saveReviewed:hover,.isReviewed:hover{
+				background: #3995C8 !important;
+				color: #fff;
+			}
+			.fixed-table-header{
+				margin-right: 17px !important;
+			}
+			#bidPriceChecksList td{
+				white-space: normal !important;
+			}
+			#promiss_wap  .fixed-table-body{
+				height: auto !important;
+			}
+			.isShowTr{
+				display: none;
+			}
+			.setTitle{
+				display: inline-block;
+				width: 113px;
+				text-align: right;
+			}
+			.isHasDetailedListFile{
+				display: none;
+			}
+	    </style>
+	</head>
+	<body>
+		<div class="container-fluid">
+			<table style="border-collapse: collapse; border:0px; width:100%; font-size: 14px;">
+				<tr>
+					<td class="th_bg" style="width: 220px; min-width:220px; border:0px; padding-right: 10px; vertical-align: top;">
+						<ul class="list flowNodeList" style="overflow-y: auto;" >
+
+						</ul>
+					</td>
+					<td class="th_bg" style="border:0px; vertical-align: top;">
+						<div id="contents" >
+							<table class="table table-bordered mainTable" style="margin-bottom: 0;">
+								<tr>
+									
+									<td class="th_bg">标段编号</td>
+									<td  colspan="3">
+										<div id="bidSectionCode"></div>
+									</td>
+								</tr>
+								<tr>
+									<td class="th_bg">标段名称</td>
+									<td colspan="3">
+										<Div id="bidSectionName"></Div>
+									</td>
+									
+								</tr>
+								<tr class="isShowTr">
+									<td class="th_bg">标段分类</td>
+									<td>
+										<div id="tenderProjectClassifyCode"></div>
+									</td>
+									<td class="th_bg">招标控制价</td>
+									<td>
+										<span id="controlPrice"></span>
+										<span id="controlPriceUnit" style="display: none;">元</span>
+										<span id="controlPriceUpper" style="margin-left: 200px;"></span>
+									</td>
+								</tr>
+								<tr>
+									<td colspan="4" style="padding: 0;">
+
+									</td>
+								</tr>
+							</table>
+							<!-- <div style="color: #ee0a0ae0;font-weight: bold;font-size: 16px;">
+								温馨提示：评审费发放的基础标准为“评审时间不超过6小时，评审费为500元；评审时间超过6小时，每增加1小时评审费增加100元，不足1小时的按1小时计算。”复评、评审时长超出一天等特殊情况请咨询现场工作人员。
+							</div> -->
+							<div id="content">
+
+							</div>
+						</div>
+					</td>
+				</tr>
+			</table>
+		</div>
+		<div class="bottom-btn">
+			<div style="display: inline-block;" id="btn-box" class="btn-box">
+
+			</div>
+			<button type="button" class="btn btn-primary" id="btnRefresh"><span class="glyphicon glyphicon-refresh"></span>刷新</button>
+			<button type="button" class="btn btn-default" id="btnClose"><span class="glyphicon glyphicon-remove"></span>关闭</button>
+		</div>
+		<script type="text/javascript" src="../../media/js/jquery/jquery.js" ></script>
+		<script type="text/javascript" src="../../media/js/jquery/jquery.extend.js"></script>
+		<script type="text/javascript" src="../../media/js/base/common.js" ></script>
+		<script type="text/javascript" src="../../media/js/base/util.js" ></script>
+		<script type="text/javascript" src="../../media/js/bootstrap/js/bootstrap.js" ></script>
+		<script type="text/javascript" src="../../media/js/bootstrap/js/bootstrap-table.min.js"></script>
+		<script type="text/javascript" src="../../media/js/bootstrap/js/bootstrap-table-zh-CN.min.js"></script>
+		
+		<script type="text/javascript" src="../../media/js/stream/js/stream-v1.js"></script>
+		<script type="text/javascript" src="../../media/js/base/StreamUpload.js"></script>
+		<!--<script type="text/javascript" src="../../media/js/layer/layui.js"></script>-->
+		<script type="text/javascript" src="../../media/js/layer/layer.js"></script>
+		<script type="text/javascript" src="../../media/js/base/md5.js"></script>
+		<script type="text/javascript" src="../../media/js/ca.js"></script>
+		<!--pdf预览-->
+		<!--<script type="text/javascript" src="../pdfjs/build/pdf.js"></script>-->
+		<!-- 编辑器源码文件 -->
+    	<script type="text/javascript" src="../../media/js/ueditor/ueditor.config.js"></script>
+    	<script type="text/javascript" src="../report/ueditor.report.config.js"></script>
+		<script type="text/javascript" src="../../media/js/ueditor/ueditor.all.js"></script>
+		<script type="text/javascript" src="../report/ueditor.report.plugins.js"></script>
+		<script type="text/javascript" src="../../media/js/base/digital.js"></script>
+		
+		
+		<script type="text/javascript" src="../../media/js/bootstrap/js/bootstrap-treeview.min.js"></script>
+		<script type="text/javascript" src="../public.js"></script>
+		<script type="text/javascript" src="../MathTools.js"></script>
+
+		<script type="text/javascript" src="./js/judgeCheck.js" ></script>
+		<script type="text/javascript" src="./js/signPromise.js"></script>
+		<script type="text/javascript" src="./js/recommendLeader.js"></script>
+		<script type="text/javascript" src="./js/progress.js"></script>
+		<!-- <script type="text/javascript" src="./js/cleanBidder.js"></script> -->
+		<script type="text/javascript" src="./js/review.js"></script>
+		<script type="text/javascript" src="./js/revisePrice.js"></script>
+		<script type="text/javascript" src="./js/reviewSummary.js"></script>
+		<script type="text/javascript" src="./js/reviewReport.js" ></script>
+		<script type="text/javascript" src="./js/clarify.js"></script>
+		<script type="text/javascript" src="./js/dishonestList.js"></script>
+		<script type="text/javascript" src="./js/base64.js"></script>
+		<script type="text/javascript" src="./js/clearBidding.js?version=3.4.28"></script>
+		<script type="text/javascript" src="./js/queryRep.js?version=3.4.27"></script>
+	</body>
+</html>

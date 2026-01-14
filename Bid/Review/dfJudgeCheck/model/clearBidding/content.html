@@ -1,0 +1,189 @@
+<div id="clnBidReportWarp" style="width:98%;margin:10px 10px 0px 10px">
+    <ul id='clnBidderList' class="nav nav-tabs" style="margin:5px auto">
+		<li role="presentation" class="active clearStartTab clearTab"><a href="#clearStart" aria-controls="clearStart" role="tab" data-toggle="tab">清标</a></li>
+		<li role="presentation" class="clearResultTab clearTab"><a href="#clearResult" aria-controls="clearResult" role="tab" data-toggle="tab">清标结果</a></li>
+	</ul>
+    <div class="tab-content">
+        <div role="tabpanel" class="tab-pane active" id="clearStart">
+			<div>
+				<span>清标接口标准:</span>
+				<select name="interfaceCode" class="form-control select" selectname="interfaceCode" disabled="disabled" style="width: auto;display: inline-block;"></select>
+				<button type="button" class="btn btn-primary" id="brightMoon" style="display: none;">启动清标</button>
+				<a class="btn btn-primary" id="btnPack">清标文件一键下载</a>
+				
+			</div>
+			<table class='table table-bordered' style="margin-top: 10px;">
+				<tr class="isHasDetailedListFile" style="display: none;">
+					<td class="active" colspan="4">不平衡报价参数设置</td>
+				</tr>
+				<tr class="isHasDetailedListFile" style="display: none;">
+					<td colspan="4">
+						<div style="padding: 20px;box-shadow: 0px 5px 5px #999;margin: 10px;">
+							<div style="font-weight: 600;margin: 10px 0px;">比较价格</div>
+							<!--  控制价 PreTender；平均值 Average；最低值 Minimum；次低值 SecondMinimum；指定值 Designated -->
+							<label style="padding-right: 20px;margin-bottom: 0;" class="PreTenderWrap">
+								<input type="radio" name="compareType" value="PreTender" disabled="disabled" style="vertical-align: -2px;margin-right: 5px;" />控制价
+							</label>
+							<label style="padding-right: 20px;margin-bottom: 0;">
+								<input type="radio" name="compareType" value="Average" disabled="disabled" checked="checked" style="vertical-align: -2px;margin-right: 5px;" />平均值
+							</label>
+							<label style="padding-right: 20px;margin-bottom: 0;">
+								<input type="radio" name="compareType" value="Minimum" disabled="disabled" style="vertical-align: -2px;margin-right: 5px;" />最低值
+							</label>
+							<label style="padding-right: 20px;margin-bottom: 0;">
+								<input type="radio" name="compareType" value="SecondMinimum" disabled="disabled" style="vertical-align: -2px;margin-right: 5px;" />次低值
+							</label>
+							<label style="padding-right: 20px;margin-bottom: 0;">
+								<input type="radio" name="compareType" value="Designated" disabled="disabled" style="vertical-align: -2px;margin-right: 5px;" />指定值
+							</label>
+							<div style="font-weight: 600;margin: 10px 0px;">计算规则</div>
+							<div style="margin-bottom: 10px;"  class="JionCount">
+								<span class="setTitle">参与计算的文件：</span>
+								<label style="padding-right: 20px;margin-bottom: 0;">
+									<input type="checkbox" name="manualSelectTenderAll" disabled="disabled" checked="checked" style="vertical-align: -2px;margin-right: 5px;" />全部
+								</label>
+								<div id="manualSelectTenderWrap" style="margin-top: 10px;"></div>
+							</div>
+							<div style="margin-bottom: 10px;"  class="FinalScope">
+								<span class="setTitle">当最终范围大于：</span>
+								<input type="number" name="excludeLowestTenderN" disabled="disabled" value="7" class="form-control" style="width:100px;display: inline-block;border-right: 0;border-radius: 0;" /><span style="padding: 7.5px 8px 8.5px 8px;border: 1px solid #ccc;">家</span>
+								去掉最高：
+								<input type="number" name="excludeMaximumN" disabled="disabled" value="0" class="form-control" style="width:100px;display: inline-block;border-right: 0;border-radius: 0;" /><span style="padding: 7.5px 8px 8.5px 8px;border: 1px solid #ccc;">家</span>
+								去掉最低：
+								<input type="number" name="excludeMinimumN" disabled="disabled" value="0" class="form-control" style="width:100px;display: inline-block;border-right: 0;border-radius: 0;" /><span style="padding: 7.5px 8px 8.5px 8px;border: 1px solid #ccc;">家</span>
+								浮动比例：
+								<input type="number" name="averageFloatRateN" disabled="disabled" value="0.00" class="form-control" style="width:100px;display: inline-block;border-right: 0;border-radius: 0;" /><span style="padding: 7.5px 8px 8.5px 8px;border: 1px solid #ccc;">%</span>正值为上浮，负值为下浮
+							</div>
+							<div style="margin-bottom: 10px;" class="PreTenderHide">
+								控制价参与计算：
+								<select name="includePreTender" class="form-control" disabled="disabled" style="width: 150px;display: inline-block;">
+									<option value="0">否</option>
+									<option value="1">是</option>
+								</select>
+							</div>
+							<div class="PreTenderShow" style="margin-bottom: 10px;display: none;">
+								<span class="setTitle">控制价浮动比率：</span>
+								<input type="number" name="floatRateN" disabled="disabled" class="form-control" style="width:100px;display: inline-block;border-right: 0;border-radius: 0;" /><span style="padding: 7.5px 8px 8.5px 8px;border: 1px solid #ccc;">%</span>正值为上浮，负值为下浮
+							</div>
+							<div style="font-weight: 600;margin: 10px 0px;">筛选设置</div>
+							<div style="margin-bottom: 10px;">
+								<span class="setTitle">筛选范围：</span>
+								<select name="filterType" disabled="disabled" class="form-control" style="width: 150px;display: inline-block;">
+									<option value="DifferenceRate">按差额率（%）</option>
+									<option value="Difference">按差额（元）</option>
+								</select>
+								过低为：
+								<select name="lowerCompareType" disabled="disabled" class="form-control" style="width: 150px;display: inline-block;">
+									<option value="≤">小于等于</option>
+									<option value="<">小于</option>
+								</select>
+								<input type="number" name="lowerLimit" disabled="disabled" value="-10" class="form-control" style="width:100px;display: inline-block;border-right: 0;border-radius: 0;" /><span class="filterTypeUnit" style="padding: 7.5px 8px 8.5px 8px;border: 1px solid #ccc;">%</span>
+								过高为：
+								<select name="upperCompareType" disabled="disabled" class="form-control" style="width: 150px;display: inline-block;">
+									<option value="≥">大于等于</option>
+									<option value=">">大于</option>
+								</select>
+								<input type="number" name="upperLimit" disabled="disabled" value="10" class="form-control" style="width:100px;display: inline-block;border-right: 0;border-radius: 0;" /><span class="filterTypeUnit" style="padding: 7.5px 8px 8.5px 8px;border: 1px solid #ccc;">%</span>
+							</div>
+							<div style="margin-bottom: 10px;">
+								<span class="setTitle">筛选的数据类型：</span>
+								<select name="filterDataType" disabled="disabled" class="form-control" style="width: 200px;display: inline-block;">
+									<!-- 过高过低项不合理项、过高项、过低项、不合理项、所有项 -->
+									<option value="过高过低项不合理项">过高过低项不合理项</option>
+									<option value="过高项">过高项</option>
+									<option value="过低项">过低项</option>
+									<option value="不合理项">不合理项</option>
+									<option value="所有项">所有项</option>
+								</select>
+							</div>
+							<div>
+								<span class="setTitle">排序：</span>
+								<select name="filterSort" disabled="disabled" class="form-control" style="width: 150px;display: inline-block;">
+									<!-- 按招标顺序\按差额率降序\按差额率绝对值降序 -->
+									<option value="按招标顺序">按招标顺序</option>
+									<option value="按差额率降序">按差额率降序</option>
+									<option value="按差额率绝对值降序">按差额率绝对值降序</option>
+								</select>
+							</div>
+						</div>
+						
+					</td>
+				</tr>
+				<tr style="display: none;">
+					<td class="active" colspan="4">错误一致性规则</td>
+				</tr>
+				<tr style="display: none;">
+					<td colspan="4">
+						<div style="padding: 20px;box-shadow: 0px 5px 5px #999;margin: 10px;">
+							<div style="margin-bottom: 10px;">分析异常类型：</div>
+							<div style="margin-bottom: 10px;">
+								<label style="padding-right: 20px;margin-bottom: 0;">
+									<input type="checkbox" name="matchError"checked="checked" style="vertical-align: -2px;margin-right: 5px;" />符合性错误
+								</label>
+								<label style="padding-right: 20px;margin-bottom: 0;">
+									<input type="checkbox" name="calcError" style="vertical-align: -2px;margin-right: 5px;" />计算性错误
+								</label>
+							</div>
+							<div style="margin-bottom: 10px;">是否忽略所有单位都异常且异常一致的项：</div>
+							<div>
+								<label style="padding-right: 20px;margin-bottom: 0;">
+									<input type="radio" name="homologyType" value="Ignore"  checked="checked" style="vertical-align: -2px;margin-right: 5px;" />忽略
+								</label>
+								<label style="padding-right: 20px;margin-bottom: 0;">
+									<input type="radio" name="homologyType" value="NoIgnore" style="vertical-align: -2px;margin-right: 5px;" />不忽略
+								</label>
+							</div>
+						</div>
+					</td>
+				</tr>
+				<tr class="isHasDetailedListFile">
+					<td class="active" colspan="4">控制价文件</td>
+				</tr>
+				<tr class="isHasDetailedListFile">
+					<td colspan="4">
+						<span class="checkPrice" style="display: none;margin-right: 100px;">控制价文件</span>
+						<a class="checkPrice clearFileDownload" id="checkPriceDownload" href="#" style="display: none;color: #337ab7;">下载</a>
+					</td>
+				</tr>
+				<tr class="isHasDetailedListFile">
+					<td class="active" colspan="4">招标清单文件</td>
+				</tr>
+				<tr class="isHasDetailedListFile">
+					<td colspan="4">
+						<table class="table table-bordered table-comm" id="bidClearList">
+							<thead>
+								<tr><th style="width: 50px; text-align: center;">序号</th><th>清标文件</th><th style="width: 100px; text-align: center;">操作</th></tr>
+							</thead>
+							<tbody>
+								
+							</tbody>
+						</table>
+					</td>
+				</tr>
+				<tr class="isHasDetailedListFile">
+					<td class="active" colspan="4">投标清单文件</td>
+				</tr>
+				<tr class="isHasDetailedListFile">
+					<td colspan="4">
+						<table class="table table-bordered table-comm" id="bidderClearList">
+							<thead>
+								<tr><th style="width: 50px; text-align: center;">序号</th><th>投标人</th><th>清标文件</th><th style="width: 100px; text-align: center;">操作</th></tr>
+							</thead>
+							<tbody>
+								
+							</tbody>
+						</table>
+					</td>
+				</tr>
+			</table>
+		</div>
+        <div role="tabpanel" class="tab-pane" id="clearResult">
+			<button type="button" class="btn btn-primary" id="btnResult" style="display: none;">获取清标结果</button>
+			<a class="btn btn-primary" id="btnResultPack" style="display: none;">一键下载清标结果</a>
+			<table class='table table-bordered' style="margin-top: 10px;" id="clearResultTable">
+				
+			</table>
+		</div>
+      </div>
+</div>
+

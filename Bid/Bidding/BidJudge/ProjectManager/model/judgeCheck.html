@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="zh">
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="pragma" content="no-cache"><!-- 禁止浏览器从本地计算机的缓存中访问页面内容 --> 
+		<meta http-equiv="cache-control" content="no-cache"><!-- 用于指定请求和响应遵循的缓存机制 --> 
+		<meta http-equiv="expires" content="0"><!-- 用于设定网页的到期时间，一旦网页过期，必须到服务器上重新传输； -->
+    	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+		<title></title>
+
+	    <link rel="stylesheet" href="../../../../media/js/layer/mobile/need/layer.css" />
+	    <link rel="stylesheet" href="../../../../media/js/bootstrap/css/bootstrap.css" />
+	    <link rel="stylesheet" href="../../../../media/js/bootstrap/css/bootstrap-table.css">
+	    <style>
+	    	body { float: none;}
+	    	ul{
+	    		padding: 0;
+	    	}
+	    	li{
+    			list-style: none;
+    			cursor: pointer;
+    		}
+	    	.myTab { border: 0;}
+	    	.myTab a { color: #fff;}
+	    	#supplierAll {white-space:nowrap; height: 50px;}
+	    	#supplierAll li {display: inline-block; float: none;}
+	    	#companyTabs {white-space:nowrap; height: 50px;}
+	    	#companyTabs li {display: inline-block; float: none;}
+	    	#companyTabs::-webkit-scrollbar, #supplierAll::-webkit-scrollbar {
+			    height: 8px;
+			    background-color: #eee;
+			}
+			
+			#companyTabs::-webkit-scrollbar-track, #supplierAll::-webkit-scrollbar-track {
+			    background-color: #eee;
+			}
+			
+			#companyTabs::-webkit-scrollbar-thumb, #supplierAll::-webkit-scrollbar-thumb {
+			    background: #b9dfff;
+			}
+			
+			#companyTabs, #supplierAll {
+				scrollbar-face-color: #b9dfff; /*立体滚动条的颜色（包括箭头部分的背景色）*/
+				scrollbar-3dlight-color: #b9dfff; /*立体滚动条亮边的颜色*/
+				scrollbar-highlight-color: #b9dfff; /*滚动条的高亮颜色（左阴影？）*/
+				scrollbar-shadow-color: #b9dfff; /*立体滚动条阴影的颜色*/
+				scrollbar-darkshadow-color: #b9dfff; /*立体滚动条外阴影的颜色*/
+				scrollbar-track-color: #eee; /*立体滚动条背景颜色*/
+				scrollbar-base-color:#eee; /*滚动条的基色*/
+				scrollbar-arrow-color: #eee; /**//*三角箭头的颜色*/ 
+			}
+			
+    		
+    		#reviewList  a.gray{
+    			/*background: #3995C8 ;*/
+    			color: #999;
+    			text-decoration: none;
+    		}
+    		#reviewList  a.review_active{
+    			/*background: #3995C8 ;*/
+    			color: #337ab7;
+    			text-decoration: none;
+    			font-weight: bold;
+    		}
+    		.review_demand{
+    			/*height: 36px;
+    			line-height: 36px;*/
+    		}
+    		input::-webkit-outer-spin-button,
+		    input::-webkit-inner-spin-button {
+		        -webkit-appearance: none;
+		    }
+		    input[type="number"]{
+		        -moz-appearance: textfield;
+		    }
+		     #reviewList ul { display: none;}
+		    #reviewList li {
+		    	line-height: 2;
+		    	
+		    }
+		    #reviewList li.open > ul {
+		    	display: block;
+		    }
+		    #reviewList .ltItem { 
+		    	display: block; 
+		    	width: 100%; 
+			    height: 100%; 
+			    overflow:hidden;
+			    text-overflow:ellipsis;
+			    white-space:nowrap;
+			    color: #333;
+			    text-decoration: none;
+			}
+			.reviewMain { position: relative; padding-top: 61px;}
+			.companyDiv { 
+				position: absolute;
+				bottom: 0;
+				left: 21.5%;
+				right: 0;
+				border-top: 1px solid #eee;
+				background-color: #fff;
+				padding: 5px;
+				height: 61px;
+			}
+			.reviewDiv { position: absolute; padding: 10px; height: 61px; border-bottom: 1px solid #eee; top: 0; left: 0; right: 0;}
+			.supplierDiv { padding: 10px 10px 0 10px; border-bottom: 1px solid #eee;}
+			.btnSubmit {
+				position: absolute;
+				right: 10px;
+				top: 10px;
+			}
+			.reviewRoute {
+				position: absolute;
+				left: 22%;
+				top: 61px;
+				width: 50%;
+				background-color: #fff;
+				height: 40px;
+				font-size: 16px;
+				font-weight: bold;
+				line-height: 40px;
+			}
+			.isShowReason { display: none;}
+			/*#clarifyList td {word-wrap:break-word ;}*/
+	    </style>
+	</head>
+	<body>
+		<form class="pageModel" id="formName" name="formName" style="height: 100%;">
+        	<table class="table table-bordered mainTable" style="margin-bottom: 0;">
+	        	<!--<tr>
+		            <td colspan="4" style="font-weight: bold;" class="active">项目信息
+			            <button type="button" class="btn btn-primary" id="btnProject"  style="float: right;margin-right: 50px;">
+		            		<span class="glyphicon glyphicon-eye-open"></span>查看项目详情
+		            	</button>
+	            	</td>
+		        </tr>
+	            <tr>
+	            	<td class="th_bg">项目名称</td>
+	                <td id="projectName"></td>
+	            	<td class="th_bg">项目编号</td>
+	                <td id="projectCode"></td>
+	            </tr>-->
+	            <tr>
+	            	<td class="th_bg">标段名称</td>
+	                <td id="packageName"></td>
+	            	<td class="th_bg">标段编号</td>
+	                <td id="packageCode"></td>
+	            </tr>
+	            <tr style="background-color: #3995C8;">
+	            	<td colspan="4" style="padding: 0;">
+	            		<ul class="nav nav-tabs myTab" id="reviewTabs">
+	            			
+	            		</ul>
+	            	</td>
+	            </tr>
+	            <!--<tr>
+	            	<td colspan="4">
+	            		<div class="reviewDiv" style="overflow: hidden;">
+		            		<ul class="nav nav-pills" id="reviewDetailTabs" style="overflow: auto;">
+		            			
+		            		</ul>
+							<button type="button" class="btn btn-primary btn-sm btnSubmit">全部提交</button>
+	            		</div>
+	            	</td>
+	            </tr>-->
+	            <tr>
+	            	<td class="th_bg">评委</td>
+	            	<td colspan="3" style="padding: 5px;">
+	            		<ul class="nav nav-pills" id="judgesTabs">
+	            			
+	            		</ul>
+	            	</td>
+	            </tr>
+	            <tr>
+	            	<td colspan="4" style="padding: 0;">
+	            		<div id="myTabContent" class="tab-content">
+	            			
+	            			<!--评审记录汇总-->
+						    <div class="tab-pane active" id="record" style="display: none;">
+						    	<table class="table table-bordered">
+						    		<tr>
+						    			<td class="th_bg" >评审地点</td>
+										<td>
+											<input type="text" class="form-control" style="width: 500px;" />
+										</td>
+						    		</tr>
+						    		<tr>
+						    			<td class="th_bg" >评审时间</td>
+										<td>
+											<input type="text" class="form-control" style="width: 500px;" />
+										</td>
+						    		</tr>
+						    		<tr>
+						    			<td class="th_bg" >说明</td>
+										<td>
+											<textarea type="text" id="askContent" name="askContent" class="form-control" rows="3" style="resize: none;"></textarea>
+										</td>
+						    		</tr>
+						    	</table>
+						    	<div style="text-align: right;padding:5px;">
+						    		<button type="button" class="btn btn-primary btnRecordSubmit">提交结果</button>
+						    	</div>
+						    	<table class="table table-bordered" id="reviewRecord">
+						    		
+			
+						    	</table>
+							</div>
+						    
+						    
+							<!--评审澄清-->
+							<div class="tab-pane" id="clarify">
+								<div class="supplierDiv" style="overflow: hidden;">
+				            		<ul class="nav nav-pills" id="supplierAll" style="overflow: auto;">
+				            			
+				            		</ul>
+			            		</div>
+						    	<div style="padding: 10px;">
+									投标人互动提问 <span style="color: red;">温馨提示：评审委员会可以要求投标人进行澄清说明，所有澄清问题的提出与答复均在本页面在线完成。</span>
+						    	</div>
+						    	
+						    	<table class="table table-bordered" style="margin: 0;">
+						    		<tr>
+						    			<td>
+						    				<!--<button type="button" class="btn btn-primary btn-sm" id="btnSend">添加质疑</button>-->
+						    				<button type="button" class="btn btn-primary btn-sm" id="btnRefurbish">刷新</button>
+						    				<button type="button" class="btn btn-primary btn-sm" id="btnAutoRefresh" data-state="1">自动刷新</button>
+						    			</td>
+						    		</tr>
+						    		<tr>
+						    			<td>
+						    				
+						    				<div id="clarifyList">
+						    				
+						    				
+						    				
+						    			</div></td>
+						    		</tr>
+						    		
+						    		
+						    	</table>
+							</div>
+							
+						</div>
+	            	</td>
+	            </tr>
+        	</table>
+        	<div class="reviewMain" style="border: 1px solid #ccc;">
+        		<div class="reviewDiv" style="overflow: hidden;">
+            		<ul class="nav nav-pills" id="reviewDetailTabs" style="overflow: auto;">
+            			
+            		</ul>
+					<!--<button type="button" class="btn btn-primary btn-sm btnSubmit">全部提交</button>-->
+        		</div>
+        		<div class="reviewRoute">
+            		<span id="reviewItem"></span>
+        		</div>
+				<div style="width: 20%;height: 100%; border-right: 1px solid #ddd;float: left;margin-right: 1%; overflow: auto;">
+					
+					<ul id="reviewList"></ul>
+				</div>
+	        	<div id="area_pdf" style="width: 56%;height: 100%; border-left: 1px solid #ddd; border-right: 1px solid #ddd;float: left;margin-right: 1%; box-sizing: border-box;padding-bottom: 60px; padding-top: 40px;">
+	        		<!--<embed width="800" height="600" src="../../../../media/js/base/1.pdf"> </embed>-->
+	        		<!--<iframe id="" name="" class="" src="/Bidding/BidJudge/JudgeScore/model/askEdit.html" style="width:100%;height:100%;border:0;"></iframe>-->
+	        		<iframe id="pdfIframe" name="pdfIframe" class="pdfView" src="" style="width:100%;height:100%;border:0;"></iframe>
+	        	</div>
+	        	<div id="area_score" style="width: 22%;height: 100%; border-left: 1px solid #ddd;float: left; box-sizing: border-box; overflow: auto;">
+	        		<div style="padding-bottom: 61px;">
+	        		<div id="review_method" style="color: red; border-bottom: 1px solid #ddd; padding: 10px 15px;">
+	        			评审方法：<span class="reviewType">合格制</span> <br/>
+	        			<span class="reviewTips">
+						汇总方式： 评委全体成员按照少数服从多数（2分之1）的原则判定评价标准是否合格。<br/>
+						1、若评审项为关键要求，任何一项不合格都将淘汰。<br/>
+						2、若评审项为一般要求，任何一项或多项不合格不影响评审结果，不做淘汰处理。</span>
+			    	</div>
+			    	<div class="review_demand" style="border-bottom: 1px solid #ddd; padding: 10px 15px;">
+	        			<span>是否关键项：</span>
+	        			<span id="isKey"></span>
+	        		</div>
+	        		<div id="review_standard" class="review_demand" style="border-bottom: 1px solid #ddd; padding: 10px 15px;">
+	        			<span style="margin-bottom: 15px;">评价标准：</span>
+	        			<div class="reviewStandard">
+	        				
+	        			</div>
+	        		</div>
+	        		
+	        		<div class="qualifiedModel isShow" style="display: none;">
+	        			<div class="review_demand" style="border-bottom: 1px solid #ddd; padding: 10px 15px;">
+		        			<span>是否合格：</span>
+		        			<span id="theKey"></span>
+		        			<!--<select class="form-control" name="theKey" id="theKey" style="display: inline-block;width: 100px;">
+			                	<option value="1">合格</option>
+			                	<option value="0">不合格</option>
+			                </select>-->
+		        		</div>
+		        		<div style="padding: 10px 15px;"  class="isShowReason">
+		        			<span>不合格原因：</span>
+		        			<div>
+		        				<!--<textarea class="form-control" rows="10" style="resize:none;margin-top: 10px;" placeholder="原因" name="reason" id="reason"></textarea>-->
+		        				<span id="reason"></span>
+		        			</div>
+		        		</div>
+		        		<!--<div style="padding: 10px 15px; text-align: center;" >
+		        			<button type="button" class="btn btn-primary btn-sm btnQualified">保存</button>
+		        		</div>-->
+	        		</div>
+	        		<div class="divergeModel isShow" style="display: none;">
+	        			<div class="review_demand" style="border-bottom: 1px solid #ddd; padding: 10px 15px;">
+		        			<span>是否偏离：</span>
+		        			<span id="isDiverge"></span>
+		        			<!--<select class="form-control" name="" id="isDiverge" style="display: inline-block;width: 100px;">
+			                	<option value="0">偏离</option>
+			                	<option value="1">未偏离</option>
+			                </select>-->
+		        		</div>
+		        		<div style="padding: 10px 15px;" class="isShowReason">
+		        			<span>偏离原因：</span>
+		        			<div>
+		        				<span id="divergeReason"></span>
+		        				<!--<textarea class="form-control" rows="10" style="resize:none;margin-top: 10px;" placeholder="原因" id="divergeReason"></textarea>-->
+		        			</div>
+		        			
+		        		</div>
+		        		<!--<div style="padding: 10px 15px; text-align: center;" >
+		        			<button type="button" class="btn btn-primary btn-sm btnDiverge">保存</button>
+		        		</div>-->
+	        		</div>
+	        		<div class="respondModel isShow" style="display: none;">
+	        			<div class="review_demand" style="border-bottom: 1px solid #ddd; padding: 10px 15px;">
+		        			<span>是否响应：</span>
+		        			<span id="isRespond"></span>
+		        			<!--<select class="form-control" name="" id="isRespond" style="display: inline-block;width: 100px;">
+			                	<option value="1">响应</option>
+			                	<option value="0">未响应</option>
+			                	
+			                </select>-->
+		        		</div>
+		        		<div style="padding: 10px 15px;" class="isShowReason">
+		        			<span>未响应原因：</span>
+		        			<div>
+		        				<span id="respondReason"></span>
+		        				<!--<textarea class="form-control" rows="10" style="resize:none;margin-top: 10px;" placeholder="原因" id="respondReason"></textarea>-->
+		        			</div>
+		        			
+		        		</div>
+		        		<!--<div style="padding: 10px 15px; text-align: center;" >
+		        			<button type="button" class="btn btn-primary btn-sm btnRespond">保存</button>
+		        		</div>-->
+	        		</div>
+	        		<div class="scoreModel isShow" style="display: none;">
+		        		<div class="review_demand" style="border-bottom: 1px solid #ddd; padding: 10px 15px;">
+		        			<span>分值：</span>
+		        			<span class="reviewScoreMax" id="score">12</span>
+		        		</div>
+		        		<div class="review_demand" style="border-bottom: 1px solid #ddd; padding: 10px 15px;">
+		        			<span>得分：</span>
+		        			<span id="mark"></span>
+		        			<!--<input type="number" class="form-control" name="mark" id="mark" style="display: inline-block;width: 100px;" onkeyup="validationNumber(this,2)" size="10"  />-->
+		        		</div>
+		        		<!--<div style="padding: 10px 15px; text-align: center;" >
+		        			<button type="button" class="btn btn-primary btn-sm btnScore">保存</button>
+		        		</div>-->
+	        		</div>
+	        		<!--<div style="padding: 10px 15px; text-align: center;" >
+	        			<button type="button" class="btn btn-primary btn-sm btnSave">保存</button>
+	        		</div>-->
+	        		</div>
+	        	</div>
+	        	<div class="companyDiv" style="overflow: hidden;">
+            		<ul class="nav nav-pills" id="companyTabs" style="overflow: auto;">
+            			
+            		</ul>
+
+        		</div>
+	        	<div class="clearfix"></div>
+			</div>
+        	<div class="bottom-btn">
+		        <button type="button" class="btn btn-primary" id="btnRefresh"><span class="glyphicon glyphicon-refresh"></span>刷新</button>
+		        <button type="button" class="btn btn-default" id="btnClose"><span class="glyphicon glyphicon-remove"></span>关闭</button>
+		    </div>
+        </form>
+		<script type="text/javascript" src="../../../../media/js/jquery/jquery.js" ></script>
+		<script type="text/javascript" src="../../../../media/js/jquery/jquery.extend.js"></script>
+		<script type="text/javascript" src="../../../../media/js/base/common.js" ></script>
+		<script type="text/javascript" src="../../../../media/js/base/util.js" ></script>
+		<script type="text/javascript" src="../../../../media/js/bootstrap/js/bootstrap.js" ></script>
+		<script type="text/javascript" src="../../../../media/js/layer/layer.js"></script>
+		<script type="text/javascript" src="../../../Model/js/public.js"></script>
+		<script type="text/javascript" src="../js/judgeCheck.js" ></script>
+
+	</body>
+</html>

@@ -1,0 +1,104 @@
+﻿<!--
+ * @Author: your name
+ * @Date: 2020-06-23 13:50:14
+ * @LastEditTime: 2020-06-26 11:25:49
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: \FrameWork_checkoffer\bidPrice\AuctionOffer\Agent\AuctionProjectPackage\model\OfferViewInfo.html
+--> 
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="pragma" content="no-cache">
+		<!-- 禁止浏览器从本地机的缓存中调阅页面内容 -->
+		<meta http-equiv="cache-control" content="no-cache, must-revalidate">
+		<meta http-equiv="expires" content="0">
+		<title>竞价采购情况竞价中查看</title>
+		<link rel="stylesheet" href="../../../../../media/js/bootstrap/css/bootstrap.css" />
+		<link rel="stylesheet" href="../../../../../media/js/bootstrap/css/bootstrap-table.css">
+		<link rel="stylesheet" href="../../../../../media/js/datetimepicker/css/jquery.datetimepicker.css"/>
+		<link rel="stylesheet" href="../../../../../media/css/style.css" />
+		<style>
+			.container div {
+				text-align: center;
+			}
+			table th,
+			table td {
+				vertical-align: middle !important;
+				cursor: pointer;
+				text-align: center;
+			}
+			#offerInfo table th,
+			#offerInfo table td {
+				text-align: left;
+			}
+			.table>tbody>tr>td {
+				vertical-align: middle !important;
+			}
+			#offerDetail span {
+				color: red;
+			}
+
+			.timeInval,
+			.countDown,.notEliminatedCount {
+				font-size: 24px !important;
+				font-weight: bold;
+			}
+			.timeInval > span{color:red;}
+			.timeInval > span:first-child{margin-left:20px;}
+			.minPrice{
+				font-size: 20px !important;
+				font-weight: bold;
+			}
+			.align-left {text-align: left;}
+			.align-right {text-align: right;}
+		</style>
+
+	<body style="width: 99%;padding: 10px;">
+		<table class="table table-bordered" id="offerInfo">
+			<tr>
+				<td rowspan="2">
+					<h1></h1>
+				</td>
+				<th  class="th_bg">包件编号</th>
+				<td>
+					<div id="packageCode"></div>
+				</td>
+				<th  class="th_bg">包件名称</th>
+				<td>
+					<div id="packageName"></div>
+				</td>
+			</tr>
+			<tr>
+				<th class="th_bg">变更当前阶段截止时间</th>
+				<td style="width: 250px">
+					<div class="form-group" style="margin-bottom: 0px;text-align: left;">
+						<input type="text" data-field="curStageEndTime"
+							style="width: 180px;margin-bottom: 0px;display: inline-block;" class="form-control" id="StageEndTime"/>
+						<button style="vertical-align: middle;margin-left: 5px;" id="isStageEndTime" data-event='changeEndTime' class="btn btn-primary btn-sm">确定</button>
+					</div>
+				</td>
+				<th  class="th_bg">当前竞价次数</th>
+				<td>
+					<span id="biddingTimes" style="color: red;"></span>
+				</td>
+			</tr>
+		</table>
+		<div class="countDown" style="text-align: center;"></div>
+		<div id="offerDetail" style="width: 100%;">
+			
+		</div>
+	</body>
+	<script type="text/javascript" src="../../../../../media/js/jquery/jquery.js"></script>
+	<script type="text/javascript" src="../../../../../media/js/jquery/jquery.extend.js"></script>
+	<script type="text/javascript" src="../../../../../media/js/bootstrap/js/bootstrap.js"></script>
+	<script type="text/javascript" src="../../../../../media/js/bootstrap/js/bootstrap-table.min.js"></script>
+	<script type="text/javascript" src="../../../../../media/js/layer/layer.js"></script>
+	<script type="text/javascript" src="../../../../../media/js/layer/laydate.js"></script>
+	<script type="text/javascript" src="../../../../../media/js/datetimepicker/js/jquery.datetimepicker.js" ></script>
+	<script type="text/javascript" src="../../../../../media/js/base/util.js"></script>
+	<script src="../js/OfferViewInfo.js"></script>
+
+</html>

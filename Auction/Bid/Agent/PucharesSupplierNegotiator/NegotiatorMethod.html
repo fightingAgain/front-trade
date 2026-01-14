@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="pragma" content="no-cache">
+		<!-- 禁止浏览器从本地机的缓存中调阅页面内容 -->
+		<meta http-equiv="cache-control" content="no-cache, must-revalidate">
+		<meta http-equiv="expires" content="0">
+		<title>谈判方式</title>
+		<link rel="stylesheet" href="../../../../media/js/bootstrap/css/bootstrap.css">
+		<link rel="stylesheet" href="../../../../media/js/bootstrap/css/bootstrap-table.css">
+	</head>
+
+	<body>
+		<table class="table table-bordered " style="margin-bottom: 60px">
+			<tr>
+				<td class="th_bg">选择谈判方式</td>
+				<td><label style="color: red;">温馨提示:线上谈判,线下谈判,不谈判只能选择其一</label></button>
+				</td>
+			</tr>
+			<tr>
+			    <td class="th_bg">谈判方式</td>
+				<td>
+					<input type="radio" name="negotiator" value="0" checked/>线上谈判
+					<input type="radio" name="negotiator" value="1" />线下谈判
+					<input type="radio" name="negotiator" value="2" />不谈判
+				</td>
+			</tr>
+
+		</table>
+		<div style="width: 100%;height: 50px;text-align:center;position: fixed;bottom: 0;background-color: #FFFFFF;z-index: 100001">
+			<button type="button" id="btn_submit" class="btn btn-primary" ><span class="glyphicon glyphicon-saved"></span>下一步</button>
+			<button type="button" id="btn_close" class="btn btn-default"><span class="glyphicon glyphicon-remove"></span>关闭</button>
+		 </div>
+	</body>
+	<script type="text/javascript" src="../../../../media/js/jquery/jquery.min.js"></script>
+	<script src="../../../../media/js/jquery/jquery.extend.js"></script>
+
+	<script type="text/javascript" src="../../../../media/js/bootstrap/js/bootstrap-table.min.js"></script>
+	<script src="../../../../media/js/bootstrap/js/bootstrap-table-zh-CN.min.js"></script>
+	<script type="text/javascript" src="../../../../media/js/bootstrap/js/bootstrap.js"></script>
+	<script type="text/javascript" src="../../../../media/js/layer/layer.js"></script>
+	<script type="text/javascript">
+		var saveNegotiatorItem = parent.config.bidhost+"/NegotiationController/saveNegotiationItem";
+		var findNegotiatorUrl = parent.config.bidhost + '/NegotiationController/pageNegotiationForPurchaser';
+		var projectId = getUrlParam('projectId');
+		var packageId = getUrlParam('id');
+		var tenderTypeCode = 0;//询比采购
+		var items; //项目包件信息
+		var negotiation;
+		var value;
+		
+		function getMessage(obj) {
+			items = obj;
+			
+			value = '0';
+			
+			source();
+		}
+		
+		$(function(){
+			//关闭按钮
+			$("#btn_close").click(function() {
+				parent.layer.close(parent.layer.getFrameIndex(window.name));
+			});
+			//下一步
+			$("#btn_submit").click(function() {
+				add()
+			});
+		})
+		function source() {
+			$('input[name="negotiator"]').change(function() {
+				value = $('input[name="negotiator"]:checked').val();
+				items.negotiationType = value;
+				negotiation = {
+					'negotiationType': value,
+					'projectId': projectId,
+					'packageId': packageId,
+					'tenderType': tenderTypeCode, //询比采购
+				}
+			});
+
+			negotiation = {
+				'negotiationType': value,
+				'projectId': projectId,
+				'packageId': packageId,
+				'tenderType':tenderTypeCode, //询比采购
+			}
+			
+			items.negotiationType = value;
+		}
+		
+		
+		//添加谈判
+		function add(){
+			
+				//谈判类型  0为线上谈判，1为线下谈判，2为不谈判
+	   	    	if(negotiation.negotiationType == '0'){		   	    		
+	   	    		parent.layer.open({
+						type: 2 //此处以iframe举例
+				        ,title: '添加线上谈判'
+				        ,area: ['1100px','600px']
+				        ,content:'Auction/common/Agent/PucharesSupplierNegotiator/addNegotiator.html?projectId='+projectId+'&id='+packageId
+				        //,btn: ['提交','取消'] 
+				        ,id:"addNegotiator"
+				        //确定按钮
+				       ,success:function(layero, index){  
+				            var iframeWin=layero.find('iframe')[0].contentWindow;
+							parent.layer.close(parent.layer.getFrameIndex(window.name));
+						} 
+					});
+	   	    	}
+		   	    	
+		   	   	
+		   	    if(negotiation.negotiationType == '1'){
+	   	    		//线下谈判 		   	    		
+	   	    		parent.layer.open({
+						type: 2 //此处以iframe举例
+				        ,title: '添加线下谈判'
+				        ,area: ['1100px','600px']
+				        ,id:"negotiators"
+				        ,content:'Auction/common/Agent/PucharesSupplierNegotiator/underline.html?projectId='+projectId+'&id='+packageId
+				        ,success:function(layero, index){   
+				            var iframeWin=layero.find('iframe')[0].contentWindow;				            
+							iframeWin.getShow(items);
+							parent.layer.close(parent.layer.getFrameIndex(window.name));
+						} 
+					});
+				
+		   	    }
+		   	    
+		   	    if(negotiation.negotiationType == '2'){
+		   	    		//不谈判 
+		   	    	$.ajax({
+					   	url:saveNegotiatorItem,
+					   	type:'post',
+					   	dataType:'json',
+					    data:negotiation,
+					   	success:function(data){
+					   		if(data.success){
+								parent.$('#PucharesNegotiator').bootstrapTable('refresh',{url:findNegotiatorUrl});
+								parent.layer.close(parent.layer.getFrameIndex(window.name));
+					   			parent.layer.alert("设置成功!");
+						   	
+					   		}else{
+								top.layer.alert(data.message);
+					   			parent.layer.close(parent.layer.getFrameIndex(window.name));
+		   	    				// parent.layer.alert("设置失败!");
+	   	    				}
+	   	    			}
+				   })
+		   	  	   parent.layer.close(parent.layer.getFrameIndex(window.name));
+		   		}
+		}
+		
+		function getUrlParam(name) {
+			var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); // 构造一个含有目标参数的正则表达式对象  
+			var r = window.location.search.substr(1).match(reg); // 匹配目标参数  
+			if(r != null) return unescape(r[2]);
+			return null; // 返回参数值  
+		}
+	</script>
+
+</html>

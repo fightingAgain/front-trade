@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="pragma" content="no-cache">
+		<!-- 禁止浏览器从本地机的缓存中调阅页面内容 -->
+		<meta http-equiv="cache-control" content="no-cache, must-revalidate">
+		<meta http-equiv="expires" content="0">
+		<title>预审文件下载</title>
+		<link rel="stylesheet" href="../../../../media/js/bootstrap/css/bootstrap.css">
+		<link rel="stylesheet" href="../../../../media/js/bootstrap/css/bootstrap-table.css">
+		<style type="text/css">
+			label {
+				font-weight: normal;
+			}
+			
+			.table th,
+			.table td {
+				vertical-align: middle !important;
+			}
+			
+			
+			.form-control{
+				height: 28px;
+			}
+		</style>
+
+	</head>
+	<body style="width: 99%;padding-left: 6px;">
+		<table id = "projrct" class="table table-bordered">
+			<tr class="active">
+				<td colspan="4"><font size="3" >项目信息</font></td>
+			</tr>
+			<tr>
+				<td class="th_bg" style="width: 20%;">项目编号</td>
+				<td style="width: 30%;"><label id="projectCode"></label></td>
+				<td class="th_bg" style="width: 20%;">项目名称</td>
+				<td style="width: 30%;"><label id="projectName"></label><span id="ppName" class="text-danger"  style="font-weight:bold"></span></td>
+			</tr>
+			<tr>
+				<td class="th_bg">包件编号</td>
+				<td><label id="packageNum"></label></td>
+				<td class="th_bg">包件名称</td>
+				<td><label id="packageName"></label></td>
+			</tr>					
+			<tr class="active">
+				<td colspan="4"><font size="3" id="textName">预审文件</font></td>
+			</tr>
+			
+			<tr>
+				<td colspan="4">
+					<div id="encipherStatus" style="margin-bottom: 10px;display: none;white-space:normal">
+						<p>提示：</p>
+						<p class="red" >1、参与本项目报价需办理企业数字证书（企业CA），使用CA对报价文件进行加密，为了不影响各用户正常参与项目，请未办理CA的用户在参与项目前及时办理CA，询比项目企业CA与招标项目企业CA通用，CA在有效期内的用户无需重复办理。</p>
+						<p class="red" >2、供应商须通过东咨智采平台下载投标客户端，并通过投标客户端导入采购文件和加密已签字盖章的响应文件，投标客户端下载<a  id="tenderClient" href="#" style="color: blue;">点击这里</a>，供应商操作手册下载<a target="_blank" href="https://www.dfmjyzx.com/portal/central/notice/kfzx/2111" style="color: blue;">点击这里</a></p>
+					</div>
+					
+					<table class="table table-bordered" id = "fileList"></table>
+					
+				</td>	
+			</tr>
+			<tr class="active">
+				<td colspan="4"><font size="3" id="textChangeName">预审文件变更记录</font></td>
+			</tr>
+			
+			<tr>
+				<td colspan="4">
+					<table class="table table-bordered" id = "fileChangeList"></table>
+				</td>	
+			</tr>
+			<tr class="active">
+				<td colspan="4"><font size="3" id="textLoadName">预审文件下载记录</font></td>
+			</tr>
+			
+			<tr>
+				<td colspan="4">
+					<table class="table table-bordered" id = "fileLoadList"></table>
+				</td>	
+			</tr>
+			
+		</table>
+	</body>
+	<script type="text/javascript" src="../../../../media/js/jquery/jquery.js"></script>
+	<script src="../../../../media/js/jquery/jquery.extend.js"></script>
+	<script type="text/javascript" src="../../../../media/js/base/common.js"></script>
+	<script type="text/javascript" src="../../../../media/js/base/digital.js" ></script>
+	<script type="text/javascript" src="../../../../media/js/bootstrap/js/bootstrap.js"></script>
+	<script type="text/javascript" src="../../../../media/js/bootstrap/js/bootstrap-table.min.js"></script>
+	<script src="../../../../media/js/bootstrap/js/bootstrap-table-zh-CN.min.js"></script>
+	<script type="text/javascript" src="../../../../media/js/layer/layer.js"></script>
+	<script type="text/javascript" src="../../../../Order/Pay/js/payment.js"></script>
+	<script type="text/javascript" src="../../../../media/js/base/newPay.js"></script>
+	<script type="text/javascript" src="js/fileDownLoad.js"></script>
+</html>
+

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="pragma" content="no-cache"><!-- 禁止浏览器从本地计算机的缓存中访问页面内容 --> 
+		<meta http-equiv="cache-control" content="no-cache"><!-- 用于指定请求和响应遵循的缓存机制 --> 
+		<meta http-equiv="expires" content="0"><!-- 用于设定网页的到期时间，一旦网页过期，必须到服务器上重新传输； -->
+		<title>代理机构专区-招标采购招标文件列表</title>
+	</head>
+	<body>
+		<div class="container-fluid">
+			<div id="toolbar">
+	        	<div class="input-group" style="width:180px;float: left;">
+	    			<span class="input-group-addon">标段编号</span>
+	        		<input type="text" class="form-control" name="interiorBidSectionCode" id="interiorBidSectionCode" style="width:200px">	
+	        	</div>
+	        	<div class="input-group" style="width:180px;float: left;padding-left: 10px;">
+	    			<span class="input-group-addon">标段名称</span>
+	        		<input type="text" class="form-control" name="BidSectionName" id="BidSectionName" style="width:180px">	
+	        	</div>	        	
+	        	<div class="btn-group" style="padding-left:10px ;">
+		    		<button type="button" id="btnSearch" class="btn btn-primary">
+		                <span class="glyphicon glyphicon-search" aria-hidden="true"></span> 查 询
+		           </button>
+	    		</div>
+	    	</div>
+    	
+		<table class="table table-hover table-bordered" id="table">	</table>
+	</div>
+	<script src="Bidding/Model/js/public.js"></script>
+	<script type="text/javascript" src="Bidding/Service/BidFile/js/fileChangeList.js"></script>
+	</body>
+</html>

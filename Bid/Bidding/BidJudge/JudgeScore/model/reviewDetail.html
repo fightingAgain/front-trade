@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="zh">
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="pragma" content="no-cache"><!-- 禁止浏览器从本地计算机的缓存中访问页面内容 --> 
+		<meta http-equiv="cache-control" content="no-cache"><!-- 用于指定请求和响应遵循的缓存机制 --> 
+		<meta http-equiv="expires" content="0"><!-- 用于设定网页的到期时间，一旦网页过期，必须到服务器上重新传输； -->
+    	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+		<title>评审</title>
+
+	    <link rel="stylesheet" href="../../../../media/js/layer/mobile/need/layer.css" />
+	    <link rel="stylesheet" href="../../../../media/js/bootstrap/css/bootstrap.css" />
+	    <link rel="stylesheet" href="../../../../media/js/bootstrap/css/bootstrap-table.css">
+	    <style type="text/css">
+	    	html,body{
+	    		height: 100%;
+	    	}
+	    	ul{
+	    		padding: 0;
+	    	}
+	    	li{
+    			list-style: none;
+    			cursor: pointer;
+    		}
+    		#reviewList  a.review_active{
+    			/*background: #3995C8 ;*/
+    			color: #337ab7;
+    			text-decoration: none;
+    			font-weight: bold;
+    		}
+    		.review_demand{
+    			/*height: 36px;
+    			line-height: 36px;*/
+    		}
+    		input::-webkit-outer-spin-button,
+		    input::-webkit-inner-spin-button {
+		        -webkit-appearance: none;
+		    }
+		    input[type="number"]{
+		        -moz-appearance: textfield;
+		    }
+		     #reviewList ul { display: none;}
+		    #reviewList li {
+		    	line-height: 2;
+		    	
+		    }
+		    #reviewList li.open > ul {
+		    	display: block;
+		    }
+		    #reviewList .ltItem { 
+		    	display: block; 
+		    	width: 100%; 
+			    height: 100%; 
+			    overflow:hidden;
+			    text-overflow:ellipsis;
+			    white-space:nowrap;
+			    color: #333;
+			    text-decoration: none;
+			}
+	    </style>
+	</head>
+	<body>
+		<form  id="formName" name="formName" style="height: 100%;">
+			<div style="width: 100%;height: 100%;">
+				<div style="width: 20%;height: 100%; border-right: 1px solid #ddd;float: left;margin-right: 1%;">
+					<!--<ul>
+						<li class="review_active">这些年产值</li>
+						<li>下次斑马线等等</li>
+						<li>的穆斯林的麻烦老师</li>
+						<li>适得府君书大V反面角色do</li>
+						<li>总参谋长三轮车名赠送</li>
+					</ul>-->
+					<ul id="reviewList"></ul>
+				</div>
+	        	<div id="area_pdf" style="width: 56%;height: 100%; border: 1px solid #ddd;float: left;margin-right: 1%;">
+	        		<!--<embed width="800" height="600" src="../../../../media/js/base/1.pdf"> </embed>-->
+	        		<iframe id="pdfIframe" name="pdfIframe" class="pdfView" src="../../../../1.pdf#page=2" style="width:100%;height:100%;border:0;"></iframe>
+	        	</div>
+	        	<!--<div id="area_score" style="width: 22%;height: 100%; border-left: 1px solid #ddd;float: left;">
+	        		<div id="review_method" style="color: red; border-bottom: 1px solid #ddd; padding: 10px 15px;">评审方法：合格制 <br/>
+						汇总方式： 评委全体成员按照少数服从多数（2分之1）的原则判定评价标准是否合格。<br/>
+						1、若评审项为关键要求，任何一项不合格都将淘汰。<br/>
+						2、若评审项为一般要求，任何一项或多项不合格不影响评审结果，不做淘汰处理。
+			    	</div>
+	        		<div id="review_standard" class="review_demand" style="border-bottom: 1px solid #ddd; padding: 10px 15px;">
+	        			<span style="margin-bottom: 15px;">评价标准：</span>
+	        			<div>
+	        				<div style="padding: 5px 0;">1.投标文件能正常打开</div>
+	        				<div>2.投标文件能正常打开</div>
+	        			</div>
+	        		</div>
+	        		<div id="review_iskey" class="review_demand" style="border-bottom: 1px solid #ddd; padding: 10px 15px;">
+	        			<span>是否关键项：</span>
+	        			<span>是</span>
+	        		</div>
+	        		<div id="review_mark" style="border-bottom: 1px solid #ddd; padding: 10px 15px;">
+	        			<span>备注：</span>
+	        			<span>备注</span>
+	        		</div>
+	        		<div id="review_mark" class="review_demand" style="border-bottom: 1px solid #ddd; padding: 10px 15px;">
+	        			<span>是否合格：</span>
+	        			<select class="form-control" name="projectState" style="display: inline-block;width: 100px;">
+		                	<option value="">合格</option>
+		                	<option value="">不合格</option>
+		                </select>
+	        		</div>
+	        		<div id="review_mark" style="padding: 10px 15px;" >
+	        			<span>不合格原因：</span>
+	        			<div>
+	        				<textarea rows="10" style="resize:none;padding: 5px;width: 100%;margin-top: 10px;" >原因</textarea>
+	        			</div>
+	        			
+	        		</div>
+	        	</div>-->
+	        	<div id="area_score" style="width: 22%;height: 100%; border-left: 1px solid #ddd;float: left;">
+	        		<div id="review_method" style="color: red; border-bottom: 1px solid #ddd; padding: 10px 15px;">
+	        			评审方法：<span class="reviewType">合格制</span> <br/>
+	        			<span class="reviewTips">
+						汇总方式： 评委全体成员按照少数服从多数（2分之1）的原则判定评价标准是否合格。<br/>
+						1、若评审项为关键要求，任何一项不合格都将淘汰。<br/>
+						2、若评审项为一般要求，任何一项或多项不合格不影响评审结果，不做淘汰处理。</span>
+			    	</div>
+			    	<div class="review_demand" style="border-bottom: 1px solid #ddd; padding: 10px 15px;">
+	        			<span>是否关键项：</span>
+	        			<span>是</span>
+	        		</div>
+	        		<div id="review_standard" class="review_demand" style="border-bottom: 1px solid #ddd; padding: 10px 15px;">
+	        			<span style="margin-bottom: 15px;">评价标准：</span>
+	        			<div class="reviewStandard">
+	        				
+	        			</div>
+	        		</div>
+	        		
+	        		<div class="qualifiedModel isShow" style="display: none;">
+	        			<div class="review_demand" style="border-bottom: 1px solid #ddd; padding: 10px 15px;">
+		        			<span>是否合格：</span>
+		        			<select class="form-control" name="projectState" style="display: inline-block;width: 100px;">
+			                	<option value="">合格</option>
+			                	<option value="">不合格</option>
+			                </select>
+		        		</div>
+		        		<div style="padding: 10px 15px;" >
+		        			<span>不合格原因：</span>
+		        			<div>
+		        				<textarea class="form-control" rows="10" style="resize:none;margin-top: 10px;" placeholder="原因"></textarea>
+		        			</div>
+		        			
+		        		</div>
+	        		</div>
+	        		<div class="divergeModel isShow" style="display: none;">
+	        			<div class="review_demand" style="border-bottom: 1px solid #ddd; padding: 10px 15px;">
+		        			<span>是否偏离：</span>
+		        			<select class="form-control" name="projectState" style="display: inline-block;width: 100px;">
+			                	<option value="">未选择</option>
+			                	<option value="">未偏离</option>
+			                	<option value="">偏离</option>
+			                </select>
+		        		</div>
+		        		<div style="padding: 10px 15px;">
+		        			<span>偏离原因：</span>
+		        			<div>
+		        				<textarea class="form-control" rows="10" style="resize:none;margin-top: 10px;" placeholder="原因"></textarea>
+		        			</div>
+		        			
+		        		</div>
+	        		</div>
+	        		<div class="respondModel isShow" style="display: none;">
+	        			<div class="review_demand" style="border-bottom: 1px solid #ddd; padding: 10px 15px;">
+		        			<span>是否响应：</span>
+		        			<select class="form-control" name="projectState" style="display: inline-block;width: 100px;">
+			                	<option value="">未选择</option>
+			                	<option value="">未响应</option>
+			                	<option value="">响应</option>
+			                </select>
+		        		</div>
+		        		<div style="padding: 10px 15px;">
+		        			<span>响应原因：</span>
+		        			<div>
+		        				<textarea class="form-control" rows="10" style="resize:none;margin-top: 10px;" placeholder="原因"></textarea>
+		        			</div>
+		        			
+		        		</div>
+	        		</div>
+	        		<div class="scoreModel isShow" style="display: none;">
+		        		<div class="review_demand" style="border-bottom: 1px solid #ddd; padding: 10px 15px;">
+		        			<span>分值：</span>
+		        			<span class="reviewScoreMax">12</span>
+		        		</div>
+		        		<div class="review_demand" style="border-bottom: 1px solid #ddd; padding: 10px 15px;">
+		        			<span>得分：</span>
+		        			<input type="number" class="form-control" name="" style="display: inline-block;width: 100px;" onkeyup="validationNumber(this,2)" size="10"  />
+		        		</div>
+	        		</div>
+	        	</div>
+	        	<div class="clearfix"></div>
+			</div>
+        </form>
+		<script type="text/javascript" src="../../../../media/js/jquery/jquery.js" ></script>
+		<script type="text/javascript" src="../../../../media/js/jquery/jquery.extend.js"></script>
+		<script type="text/javascript" src="../../../../media/js/base/common.js" ></script>
+		<script type="text/javascript" src="../../../../media/js/base/util.js" ></script>
+		<script type="text/javascript" src="../../../../media/js/bootstrap/js/bootstrap.js" ></script>
+		<script type="text/javascript" src="../../../../media/js/layer/layer.js"></script>
+		<script type="text/javascript" src="../../../Model/js/public.js"></script>
+		<script type="text/javascript" src="../js/reviewDetail.js" ></script>
+	</body>
+</html>

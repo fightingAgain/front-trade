@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+		<meta http-equiv="pragma" content="no-cache"><!-- 禁止浏览器从本地计算机的缓存中访问页面内容 --> 
+		<meta http-equiv="cache-control" content="no-cache"><!-- 用于指定请求和响应遵循的缓存机制 --> 
+		<meta http-equiv="expires" content="0"><!-- 用于设定网页的到期时间，一旦网页过期，必须到服务器上重新传输； -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>添加招标代表人</title>
+    <link rel="stylesheet" href="../../../media/js/layer/mobile/need/layer.css" />
+    <link rel="stylesheet" href="../../../media/js/bootstrap/css/bootstrap.css" />
+    <link rel="stylesheet" href="../../../media/js/bootstrap/css/bootstrap-table.css">
+	<!-- 跳转到 -->
+	<link rel="stylesheet" href="../../../media/js/bootstrap/css/bootstrap-table-pagejump.css?verson=3.4.24">
+    <style>
+        html,body { height: 100%;}
+    </style>
+</head>
+
+<body>
+    	<div class="pageModel">
+	        <div id="toolbarTop">
+	            <div class="input-group">
+	                <span class="input-group-addon">企业名称</span>
+	                <input type="text" class="form-control" name="enterpriseName" id="enterpriseName">
+	            </div>
+	            <div class="input-group">
+	                <span class="input-group-addon">企业编码</span>
+	                <input type="text" class="form-control" name="enterpriseCode" id="enterpriseCode">
+	            </div>
+	            <div class="btn-group">
+	                <button type="button" id="eventquery" class="btn btn-primary">
+	                    <span class="glyphicon glyphicon-search" aria-hidden="true"></span> 查 询
+	                </button>
+	            </div>
+	            <!--<button type="button" class="btn btn-primary btn-sm" id="btnSave" style="float: right;"><span class="glyphicon glyphicon-ok"></span>确定</button>-->
+	        </div>
+	        <table id="tableList"></table>
+        </div>
+        <div class="bottom-btn">
+            <button type="button" class="btn btn-primary" id="btnSave"><span class="glyphicon glyphicon-ok"></span>确定</button>
+            <button type="button" class="btn btn-default" id="btnClose"><span class="glyphicon glyphicon-remove"></span>关闭</button>
+        </div>
+    <script src="../../../media/js/jquery/jquery.js"></script>
+    <script src="../../../media/js/jquery/jquery.extend.js"></script>
+    <script src="../../../media/js/base/common.js"></script>
+    <script src="../../../media/js/bootstrap/js/bootstrap.js"></script>
+    <script src="../../../media/js/bootstrap/js/bootstrap-table.js"></script>
+    <script src="../../../media/js/bootstrap/js/bootstrap-table-zh-CN.min.js"></script>
+	<!-- 分页跳转 -->
+	<script type="text/javascript" src="../../../media/js/bootstrap/js/bootstrap-table-pagejump.js?verson=3.4.24" ></script>
+    <script src="../../Model/js/public.js"></script>
+    <script src="../js/preEnterpriseList.js"></script>
+</body>
+
+</html>

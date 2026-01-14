@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="pragma" content="no-cache">
+		<!-- 禁止浏览器从本地机的缓存中调阅页面内容 -->
+		<meta http-equiv="cache-control" content="no-cache, must-revalidate">
+		<meta http-equiv="expires" content="0">
+		<title>预审/评审管理</title>
+		<link rel="stylesheet" type="text/css" href="../../../media/js/bootstrap/css/bootstrap.css">
+		<link rel="stylesheet" type="text/css" href="../../../media/css/default.css">
+		<link rel="stylesheet" type="text/css" href="../../../media/js/bootstrap/css/bootstrap-table.css">
+	</head>
+	<style type="text/css">
+		 a.disabled {
+            pointer-events: none;
+            filter: alpha(opacity=50); /*IE滤镜，透明度50%*/
+            -moz-opacity: 0.5; /*Firefox私有，透明度50%*/
+            opacity: 0.5; /*其他，透明度50%*/
+        }
+	</style>
+	<body style="overflow:auto;">
+		<ul class="nav nav-tabs" style="margin-left: 12px;" id="myTab">
+	       	<li class="active" ><a href="#me"  data-toggle="tab" >项目预审</a></li>
+	      	<li><a href="#other" data-toggle="tab" >项目评审</a></li>
+		</ul>
+		<iframe id = 'ifRame' src="" width="100%" height="100%" frameborder="0">
+			
+			
+		</iframe>
+	</body>
+	<script type="text/javascript" src="../../../media/js/jquery/jquery.min.js"></script>
+	<script type="text/javascript" src="../../../media/js/jquery/jquery.extend.js"></script>
+	<script type="text/javascript" src="../../../media/js/layer/layer.js"></script>
+	<script type="text/javascript" src="../../../media/js/bootstrap/js/bootstrap-table.min.js"></script>
+	<script type="text/javascript" src="../../../media/js/bootstrap/js/bootstrap-table-zh-CN.min.js"></script>
+</html>
+
+<script>
+	var url = top.config.bidhost;
+	var projectId = getUrlParam('projectId');
+	var isSendMess = getUrlParam('isSendMess');
+	var packageId = getUrlParam('packageId');
+	var nowDate = new Date();
+	var examType = "";
+	var packageCount="";
+	var checkCount = "";
+	var examCheckEndDate ="";
+	var checkEndDate = "";
+	$(function(){
+		//查询项目信息
+		$.ajax({
+			url: url + "/CheckController/getPurchaseCheckState.do",
+			data: {
+				id: projectId,
+				packageId:packageId
+			},
+			async: false,
+			success: function(data) {
+	
+				if(data.success) {
+					examType = data.data.examType; //项目为预审还是评审
+					
+					if(data.data.examCheckEndDate){ //项目预审时间
+						examCheckEndDate = data.data.examCheckEndDate;
+					}
+					if(data.data.checkEndDate){//询价评审时间
+						checkEndDate = data.data.checkEndDate;
+					} 
+					
+					if(examType == 0){
+						//packageCount= data.data.packageCount; //包件个数
+					    checkCount =data.data.checkCount;	  //项目包件评审进度审核成功个数
+					}
+					
+					showTable();
+					
+				}
+			}
+		})
+		
+		
+		
+	})
+	
+	
+	var yuShenUrl = "../ReportCheckReady/PackageInfo.html?projectId="+projectId+"&isSendMess="+isSendMess+"&packageId="+packageId;
+	var pingShenUrl = "./PackageInfo.html?projectId="+projectId+"&isSendMess="+isSendMess+"&packageId="+packageId;
+	function showTable(){
+		//初始化显示预审的table还是评审的table
+		
+		if(examType == 0){
+			//预审
+			//判断当前时间是否到了预审时间
+			if(GetTime(examCheckEndDate) > GetTime(nowDate)){
+				parent.layer.alert("温馨提示：资格预审还未开始,请在"+examCheckEndDate+"之后进入");
+				return;
+			}
+			
+			//开始了预审 判断当前阶段是否是评审阶段
+			if(checkCount != "" && checkCount >= 1){
+				//此包件评审通过
+				//判断评审是否开始
+				if(!(checkEndDate == "" || GetTime(checkEndDate) > GetTime(nowDate))){
+					//打开评审	
+					$("#myTab li:last-child").addClass("active").siblings().removeClass("active");
+					
+					
+					toPackageInfo();
+					if(packageInfo == "通过"){
+						$("#ifRame").attr("src",pingShenUrl);
+					}
+					
+				}else{
+					//打开预审
+					toPackageInfo();
+					if(packageInfo == "通过"){
+						$("#ifRame").attr("src",yuShenUrl);
+					}
+				}
+				
+			}else{
+				//不相等 预审
+				toPackageInfo();
+				if(packageInfo == "通过"){
+					$("#ifRame").attr("src",yuShenUrl);
+				}
+			}
+			
+		}else{
+			//评审
+			$("#myTab li:last-child").addClass("active").siblings().removeClass("active");
+			if(GetTime(checkEndDate) > GetTime(nowDate)){
+				parent.layer.alert("温馨提示：项目评审还未开始,请在"+checkEndDate+"之后进入");
+				return;
+			}
+			
+			//打开评审
+			toPackageInfo();
+			if(packageInfo == "通过"){
+				$("#ifRame").attr("src",pingShenUrl);
+			}
+
+		}
+		
+	}
+	
+	$('#myTab li').click(function(){
+		$(this).addClass("active").siblings().removeClass("active");
+		//setProjectInfo(obj);
+		if($(this).text() == '项目预审'){
+			if(examType == 0){
+				//有预审
+				//判断当前时间是否到了预审时间
+				if(GetTime(examCheckEndDate) > GetTime(nowDate)){
+					parent.layer.alert("温馨提示：资格预审还开始,请在"+examCheckEndDate+"之后进入");
+					return;
+				}
+				
+				//跳转页面
+				toPackageInfo();
+				if(packageInfo == "通过"){
+					$("#ifRame").attr("src",yuShenUrl);
+				}
+			}else{
+				//无预审
+				$("#myTab li:last-child").addClass("active").siblings().removeClass("active");
+				parent.layer.alert("温馨提示：当前项目无预审信息");
+				return;
+			}
+			
+		}else{
+			
+			if(examType == 0){
+				//有预审  判断预审是否结束
+				if(checkCount != "" && checkCount >= 1){
+					//此包件预审结束
+					//判断评审是否开始
+					if(checkEndDate == "" || GetTime(checkEndDate) > GetTime(nowDate)){
+						//评审未开始
+						$("#myTab li:first-child").addClass("active").siblings().removeClass("active");
+						if(checkEndDate){
+							parent.layer.alert("温馨提示：项目评审还开始,请在"+checkEndDate+"之后进入");
+						}else{
+							parent.layer.alert("温馨提示：项目评审还未开始");	
+						}
+						
+						return;
+					}
+				}else{
+					$("#myTab li:first-child").addClass("active").siblings().removeClass("active");
+					parent.layer.alert("温馨提示：资格预审还未结束");
+					return;
+				}
+			}else{
+				//无预审,判断当前时间
+				if(GetTime(checkEndDate) > GetTime(nowDate)){
+					$("#myTab li:first-child").addClass("active").siblings().removeClass("active");
+					parent.layer.alert("温馨提示：项目评审还开始,请在"+checkEndDate+"之后进入");
+					return;
+				}
+			}
+			
+			//跳转页面
+			toPackageInfo();
+			if(packageInfo == "通过"){
+				$("#ifRame").attr("src",pingShenUrl);
+			}
+		}	
+	});	
+	
+	var packageInfo = "";
+	function toPackageInfo() {
+		packageInfo = "";
+		var types;
+		if($("#myTab li.active").text() == "项目预审"){
+			types = 1;
+		}
+		
+		$.ajax({
+			type: "post",
+			url: url + "/WaitCheckProjectController/verifyPackage.do",
+			data: {
+				projectId: projectId,
+				packageId: packageId,
+				checkType: types
+			},
+			async: false,
+			success: function(data) {
+				if(data.success) {
+					packageInfo = "通过";
+				} else {
+					top.layer.alert(data.message);
+				}
+			}
+		});
+	}
+	
+	
+	function getUrlParam(name) {
+		var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); // 构造一个含有目标参数的正则表达式对象  
+		var r = window.location.search.substr(1).match(reg); // 匹配目标参数  
+		if(r != null) return unescape(r[2]);
+		return null; // 返回参数值  
+	}
+	
+	function GetTime(time){
+		var date=new Date(time).getTime();
+		
+		return date;
+	};
+		
+</script>

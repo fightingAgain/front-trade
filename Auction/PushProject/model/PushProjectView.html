@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta http-equiv="X-UA-Compatible" content="ie=edge">
+		<title>推送信息查看</title>
+		<link rel="stylesheet" href="../../../media/js/layer/mobile/need/layer.css" />
+		<link rel="stylesheet" href="../../../media/js/bootstrap/css/bootstrap.css" />
+		<link rel="stylesheet" href="../../../media/js/datetimepicker/css/jquery.datetimepicker.css">
+		<style>
+			html,
+			body {
+				height: 100%;
+			}
+			
+			.calendar_icon {
+				color: #3995C8;
+			}
+			
+			.tables div {
+				width: 100%;
+				border: 0px solid #eee;
+				padding: 1px;
+			}
+		</style>
+	</head>
+
+	<body>
+		<form class="pageModel" id="formMdsItem" name="formProject">
+			<table class="table table-bordered ">
+				<tr>
+					<td colspan="6" class="active">基本信息</td>
+				</tr>
+				<tr>
+					<td class="th_bg">包件名称</td>
+					<td colspan="5">
+						<span id="projectName"></span>
+					</td>
+				</tr>
+				<tr>
+					<td class="th_bg">采购人企业</td>
+					<td colspan="5">
+						<span id="enterpriseName"></span>
+					</td>
+				</tr>
+				<tr>
+					<td class="th_bg">是否成交</td>
+					<td colspan="2">
+						<span id="isDeal"></span>
+					</td>
+					<td class="th_bg">中标价格（元）</td>
+					<td colspan="2">
+						<span id="winAmount"></span>
+					</td>
+				</tr>
+				<tr>
+					<td class="th_bg">发布日期</td>
+					<td colspan="2">
+						<span id="createTime"></span>
+					</td>
+					<td class="th_bg">推送日期</td>
+					<td colspan="2">
+						<span id="subDate"></span>
+					</td>
+				</tr>
+				<tr>
+					<td class="th_bg">项目类型</td>
+					<td colspan="2">
+						<span id="projectType"></span>
+					</td>
+					<td class="th_bg">推送状态</td>
+					<td colspan="2">
+						<span id="state"></span>
+					</td>
+				</tr>
+			</table>
+			<table class="table table-bordered" id="itemList">
+				<tr class="active">
+					<th>推送记录</th>
+				</tr>
+				<tr>
+					<td>
+						<table class="table table-bordered" id="listDetail"></table>
+					</td>
+				</tr>
+			</table>
+			<div class="bottom-btn">
+				<button type="button" class="btn btn-default" id="btnClose"><span class="glyphicon glyphicon-remove"></span>关闭</button>
+			</div>
+		</form>
+		<script type="text/javascript" src="../../../media/js/jquery/jquery.js"></script>
+		<script type="text/javascript" src="../../../media/js/jquery/jquery.extend.js"></script>
+		<script type="text/javascript" src="../../../media/js/base/common.js"></script>
+		<script type="text/javascript" src="../../../media/js/base/util.js"></script>
+		<script type="text/javascript" src="../../../media/js/bootstrap/js/bootstrap.js"></script>
+		<script type="text/javascript" src="../../../media/js/bootstrap/js/bootstrap-table.min.js"></script>
+		<script type="text/javascript" src="../../../media/js/bootstrap/js/bootstrap-table-zh-CN.min.js"></script>
+		<script type="text/javascript" src="../../../media/js/layer/layer.js"></script>
+		<script type="text/javascript" src="../js/PushProjectView.js"></script>
+	</body>
+
+</html>

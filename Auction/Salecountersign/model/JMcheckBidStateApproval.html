@@ -1,0 +1,207 @@
+<head>
+	<meta http-equiv="pragma" content="no-cache">
+	<!-- 禁止浏览器从本地机的缓存中调阅页面内容 -->
+	<meta http-equiv="cache-control" content="no-cache, must-revalidate">
+	<meta http-equiv="expires" content="0">
+</head>
+<link rel="stylesheet" href="../../../media/js/layer/mobile/need/layer.css" />
+<link rel="stylesheet" href="../../../media/js/layer/theme/default/laydate.css" />
+<link rel="stylesheet" type="text/css" href="../../../media/js/bootstrap-fileinput-master/css/fileinput.min.css" />
+<link rel="stylesheet" href="../../../media/js/bootstrap/css/bootstrap-select.min.css" />
+<link rel="stylesheet" href="../../../media/js/bootstrap/css/bootstrap.css" />
+<link rel="stylesheet" href="../../../media/js/bootstrap/css/bootstrap.min.css">
+<link rel="stylesheet" href="../../../media/js/bootstrap/css/bootstrap-table.css" />
+<form id="form" name="purchase" style="width: 99%;padding-left: 10px;padding-top: 10px;">
+	<table class="table table-bordered">
+		<tr>
+			<td colspan="4" style="font-weight: bold;" class="active">基本信息</td>
+		</tr>
+		<tr class="basic">
+			<td class="text-right">供应商名称：</td>
+			<td>
+				<div id="legalName"></div>
+			</td>
+			<td class="text-right">法人名称：</td>
+			<td>
+				<div id="legalRepresent"></div>
+			</td>
+		</tr>
+		<tr class="basic">
+			<td class="text-right">联系人：</td>
+			<td>
+				<div id="legalContact"></div>
+			</td>
+			<td class="text-right">联系人电话：</td>
+			<td>
+				<div id="legalContactPhone"></div>
+			</td>
+		</tr>
+		<tr class="basic">
+			<td class="text-right">联系人地址：</td>
+			<td>
+				<div id="legalContactAddress"></div>
+			</td>
+			<td class="text-right">开户行帐号：</td>
+			<td>
+				<div id="basicAccountNo"></div>
+			</td>
+		</tr>
+		<tr class="basic">
+			<td class="text-right">投标人代表：</td>
+			<td>
+				<div class="bidderProxy" id="bidderProxy"></div>
+			</td>
+			<td class="text-right">
+				投标人代表证件号码：
+			</td>
+			<td>
+				<span class="bidderProxyCard" id="bidderProxyCard"></span>
+				<span class="bidderProxyCardType" id="bidderProxyCardType"></span>
+			</td>
+		</tr>
+		<tr class="basic">
+			<td class="text-right">项目负责人：</td>
+			<td>
+				<div id="projectLeader" class="projectLeader"></div>
+			</td>
+			<td class="text-right">项目负责人证件号码：</td>
+			<td>
+				<span class="projectLeaderCard" id="projectLeaderCard"></span>
+				<span class="projectLeaderCardType" id="projectLeaderCardType"></span>
+			</td>
+		</tr>
+
+		<th class="active uploadFile" colspan="4">竞卖文件</th>
+		<tr class="uploadFile">
+			<td colspan="4">
+				<!--文件列表-->
+				<!-- <table class="table" id="uploadedfiles"></table> -->
+				<table class="table table-bordered " style="margin-bottom: 0;">
+					<tr>
+						<td class="text-right th_bg">营业执照</td>
+						<td class="fileBox fileBox1" data-index="1"></td>
+					</tr>
+					<tr>
+						<td class="text-right th_bg">法人身份证复印件</td>
+						<td class="fileBox fileBox2" data-index="2"></td>
+					</tr>
+					<!--<tr>
+						<td class="text-right th_bg">授权委托书</td>
+						<td class="fileBox fileBox3" data-index="3"></td>
+					</tr>-->
+					<tr>
+						<td class="text-right th_bg">授权人身份复印件</td>
+						<td class="fileBox fileBox4" data-index="4"></td>
+					</tr>
+					<tr>
+						<td class="text-right th_bg">危废类资质</td>
+						<td class="fileBox fileBox5" data-index="5"></td>
+					</tr>
+					<tr>
+						<td class="text-right th_bg">保证金</td>
+						<td class="fileBox fileBox6" data-index="6">
+
+							<input type="radio" name="bondType" value="0" />已交押金（无需上传凭证）
+							<input type="radio" name="bondType" value="1" />无押金（上传凭证）
+
+						</td>
+					</tr>
+					<tr>
+						<td class="text-right th_bg">是否法人参加竞卖</td>
+						<td class="fileBox fileBox7" data-index="7">
+							<input type="radio" name="entrustType" value="0" />是（无需上传授权书）
+							<input type="radio" name="entrustType" value="1" />否（上传授权书）
+						</td>
+					</tr>
+				</table>
+			</td>
+		</tr>
+		<!--会签-->
+		<tr>
+			<table class="table table-bordered table-striped" id="biddingApproval">
+				<tr class="active">
+					<th colspan="4">审核</th>
+				</tr>
+				<tr id="auditrow1">
+					<td class="th_bg">审核状态</td>
+					<td colspan="3" style="text-align:left ;">
+						<input type="radio" name="auditState" value="0" checked />通过
+						<input type="radio" name="auditState" value="1" />不通过
+
+					</td>
+				</tr>
+				<tr class="searched" id="auditrow3">
+					<td class="th_bg">审核说明</td>
+					<td colspan="3"><textarea rows="5" class="form-control" style="width: 90%;height: 80px;"
+							name="content" id="content"></textarea></td>
+				</tr>
+
+			</table>
+		</tr>
+		<tr>
+			<table class="table table-bordered table-striped" style="margin-bottom: 60px;">
+				<tr id="resultAuditMsg">
+					<th colspan="4" class="active">审核记录</th>
+				</tr>
+				<tr id="resultAuditTable">
+					<td colspan="4" align="left">
+						<table class="table table-bordered table-striped" id="biddingApprovalRecord">
+
+						</table>
+					</td>
+				</tr>
+			</table>
+		</tr>
+	</table>
+</form>
+
+<div style="width: 100%;height: 50px;text-align:center;position: fixed;bottom: 0;background-color: #FFFFFF;">
+	<a style="width: 100px;text-align: center;height: 33px;margin-top: -1px;" id="commitBtn" class="btn btn-primary "
+		onclick="commitMsg()">
+		<span class="glyphicon" aria-hidden="true">确认提交
+	</a>
+	<!--<a style="width: 120px;text-align: center;display: none" class="btn btn-primary chooseSuppler" id="detailItemSupplier">
+					<span class="glyphicon" aria-hidden="true">选择分项报价
+				</a>-->
+	<!--<a style="width: 100px;text-align: center;height: 33px;margin-top: -1px;" class="btn btn-primary " id="doCheck">
+					<span class="glyphicon" aria-hidden="true">提交审核
+				</a>
+				<a style="width: 100px;text-align: center;display: none" class="btn btn-primary " id="checkReload">
+					<span class="glyphicon" aria-hidden="true">审核撤回
+				</a>-->
+	<button type="button" id="btn_close" class="btn btn-default" style="width: 100px;">关闭</button>
+</div>
+<style>
+	.table>thead>tr>th,
+	.table>tbody>tr>th,
+	.table>tfoot>tr>th,
+	.table>thead>tr>td,
+	.table>tbody>tr>td,
+	.table>tfoot>tr>td {
+		vertical-align: middle;
+	}
+
+	.ov {
+		display: block;
+		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		float: left;
+		width: 150px;
+	}
+</style>
+<script type="text/javascript" src="../../../media/js/jquery/jquery.min.js"></script>
+<script type="text/javascript" src="../../../media/js/jquery/jquery.extend.js"></script>
+<script type="text/javascript" src="../../../media/js/base/common.js"></script>
+<script type="text/javascript" src="../../../media/js/base/util.js"></script>
+<script type="text/javascript" src="../../../media/js/base/ProvinceCityData.js"></script>
+<script type="text/javascript" src="../../../media/js/bootstrap/js/bootstrap-table.min.js"></script>
+<script type="text/javascript" src="../../../media/js/bootstrap/js/bootstrap-table-zh-CN.min.js"></script>
+<script type="text/javascript" src="../../../media/js/bootstrap-fileinput-master/js/fileinput.js"></script>
+<script type="text/javascript" src="../../../media/js/bootstrap-fileinput-master/js/locales/zh.js"></script>
+<script type="text/javascript" src="../../../media/js/bootstrap/js/bootstrap-select.min.js"></script>
+<script type="text/javascript" src="../../../media/js/bootstrap/js/defaults-zh_CN.min.js"></script>
+
+<script type="text/javascript" src="../../../media/js/layer/laydate.js"></script>
+<script type="text/javascript" src="../../../media/js/layer/layer.js"></script>
+<script type="text/javascript" src="../js/JMcheckBidStateApproval.js"></script>

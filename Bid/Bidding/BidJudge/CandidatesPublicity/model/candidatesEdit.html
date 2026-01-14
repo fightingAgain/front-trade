@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8">
+		<meta http-equiv="pragma" content="no-cache"><!-- 禁止浏览器从本地计算机的缓存中访问页面内容 --> 
+		<meta http-equiv="cache-control" content="no-cache"><!-- 用于指定请求和响应遵循的缓存机制 --> 
+		<meta http-equiv="expires" content="0"><!-- 用于设定网页的到期时间，一旦网页过期，必须到服务器上重新传输； -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>招标公示</title>
+    <link rel="stylesheet" href="../../../../media/js/layer/mobile/need/layer.css" />
+    <link rel="stylesheet" href="../../../../media/js/bootstrap/css/bootstrap.css" />
+    <!--<link rel="stylesheet"  href="../../../../media/js/bootstrap-fileinput-master/css/fileinput.css"/>-->
+    <link rel="stylesheet" href="../../../../media/js/stream/css/stream-v1.css" />
+    
+	<style>
+		html,body { width: 100%;}
+		.readonly{
+		    border: none;
+		    background: none !important;
+		    outline: none !important;
+		    box-shadow: none !important;
+		}
+		.pretrial,.revise{
+			display: none;
+		}
+		.enterFull{
+			position: absolute;
+			top: 0;
+			left: 0;
+			background: #ffffff;
+			visibility: visible;
+			filter: Alpha(opacity=90);
+		}
+		.display_none{
+			display: none;
+		}
+		.file-input .kv-upload-progress{
+			display: none !important;
+		}
+		tr .file-input{
+			display: inline-block;
+			float: right;
+			margin-right: 50px;
+		}
+		a,a:link,a:visited,a:hover,a:active{
+			color: #333333;
+			text-decoration: none;
+		}
+		.calendar_icon{
+			color: #3995C8;
+		}
+		.padding_button{
+			padding: 5px 8px !important;
+			line-height: 30px !important;
+		}
+		input[type=number] {  
+		    -moz-appearance:textfield;  
+		}  
+		input[type=number]::-webkit-inner-spin-button,  
+		input[type=number]::-webkit-outer-spin-button {  
+		    -webkit-appearance: none;  
+		    margin: 0;  
+		}
+		.set_height{
+			display: inline-block;
+			padding: 6px 12px;
+		}
+	</style>
+</head>
+
+<body>
+    <form class="pageModel" id="addNotice" name="formName">
+    	<div class="panel-group" id="accordion">
+    		<div class="panel panel-accordion panel-default">
+	    		<div class="panel-heading active"  role="tab" id="headingOne">  
+			 		<h4 class="panel-title">
+		            	<a  role="button" data-toggle="collapse" href="#collapseOne" aria-controls="collapseOne"  aria-expanded="true"  >
+		            		基本信息
+		            	</a>
+			 		</h4>  
+			   	</div>  
+			  	<div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">  
+			       	<div class="panel-body">
+			       		<table  class="table table-bordered ">
+			       			<tr>
+					        	<td class="th_bg"><span >标段编号</span></td>
+				                <td colspan="3">
+				                	<span class="set_height" id="interiorBidSectionCode"></span>
+				                    <input type="hidden"  name="bidSectionId" id="bidSectionId" />
+				                    <input type="hidden"  name="id" id="dataId" />
+				                    <input type="hidden"  name="examType" id="examType" />
+				                    <!--<input type="hidden"  name="id" id="publicId" />-->
+				                </td>
+				               
+					        </tr>
+					        <tr>
+					        	<td class="th_bg"><span >标段名称</span></td>
+				                <td colspan="3">
+				                	<span class="set_height" id="bidSectionName"></span>
+				                </td>
+					        </tr>
+					        <tr>
+					        	<td class="th_bg"><span >评标时间</span></td>
+				                <td colspan="3">
+				                	<span class="set_height" id="checkStartDate"></span>
+				                </td>
+					        	
+					        </tr>
+					        <tr>
+					        	<td class="th_bg"><span >公示发布方式</span><i class="red">*</i></td>
+				                <td>
+				                   	<label style="padding-left:20px;margin-bottom: 0;">
+				                		<input type="radio" checked="checked" name="isManual" id="" value="0" style="vertical-align: -2px;margin-right: 5px;" />
+				                		手动发布
+				                	</label>
+				                    <label style="padding-left:20px;margin-bottom: 0;">
+				                    	<input type="radio" name="isManual" id="" value="1" style="vertical-align: -2px;margin-right: 5px;" />
+				                    	自动发布
+				                    </label> 
+				                </td>
+					        	<td class="th_bg"><span >公示期（天）</span><i class="red">*</i></td>
+				                <td>
+				                    <input type="number" name="noticePeriod" id="noticePeriod" value="" datatype="*" errormsg="请正确输入公示期" class="form-control" style="width: 260px;"/>
+				                </td>
+					        </tr>
+					        <!--<tr>
+					        	<td class="th_bg"><span >是否社会公开</span><i class="red">*</i></td>
+				                <td colspan="3">
+				                    <label style="padding-left: 20px;margin-bottom: 0;">
+				                		<input type="radio" name="bidType" value="0" checked="checked" style="vertical-align: -2px;margin-right: 5px;" >是
+				                	</label>
+				                    <label style="padding-left: 20px;margin-bottom: 0;">
+				                    	<input type="radio" name="bidType" value="1"  style="vertical-align: -2px;margin-right: 5px;" >否
+				                    </label>
+				                </td>
+					        </tr>-->
+					        <!--<tr>
+					        	<td class="th_bg"><span >招标人名称</span></td>
+				                <td colspan="3">
+				                    <input type="text"  name="tenderName" id="tenderName" class="form-control readonly" readonly="readonly" style="width: 260px;" />
+				                </td>
+				                
+					        </tr>
+					        <tr>
+					        	<td class="th_bg"><span >招标人地址</span></td>
+				                <td colspan="3">
+				                    <input type="text"  name="tenderAddress" id="tenderAddress" class="form-control readonly" readonly="readonly" style="width: 260px;" />
+				                </td>
+					        </tr>
+					        <tr>
+					        	<td class="th_bg"><span >联系人</span></td>
+				                <td >
+				                    <input type="text"  name="agentName" id="agentName" class="form-control readonly" readonly="readonly" style="width: 260px;" />
+				                </td><td class="th_bg"><span >联系电话</span></td>
+				                <td >
+				                    <input type="text"  name="agentTel" id="agentTel" class="form-control readonly" readonly="readonly" style="width: 260px;" />
+				                </td>
+					        </tr>-->
+					        <tr class="publish_own" style="display: none;">
+					        	<td class="th_bg"><span >公示开始时间</span><i class="red">*</i></td>
+				                <td>
+				                	<div style="position: relative;width: 260px;">
+				                		<input type="text"  name="publicityStartTime" id="publicityStartTime" autocomplete="off" class="form-control Wdate" style="width: 260px;" errormsg="请选择公示开始时间"/>
+									</div>
+				                </td>
+				                <td class="th_bg"><span >公示截止时间</span><i class="red">*</i></td>
+				                <td>
+				                	<div style="position: relative;width: 260px;">
+				                		<input type="text"  name="publicityEndTime" id="publicityEndTime" readonly="readonly" autocomplete="off" class="form-control" style="width: 260px;" errormsg="请选择公示截止时间"/>
+									</div>
+				                    
+				                </td>
+					        </tr>
+					        <tr>
+					        	<td class="th_bg"><span >中标形式</span><i class="red">*</i></td>
+				                <td colspan="3">
+				                    <label style="padding-left: 20px;margin-bottom: 0;">
+				                		<input type="radio" name="bidForm" value="1" checked="checked" style="vertical-align: -2px;margin-right: 5px;" >中标价
+				                	</label>
+				                    <label style="padding-left: 20px;margin-bottom: 0;">
+				                    	<input type="radio" name="bidForm" value="2"  style="vertical-align: -2px;margin-right: 5px;" >下浮率
+				                    </label>
+				                </td>
+					        </tr>
+					        <tr>
+					        	<td class="th_bg">中标候选人公示名称<i class="red">*</i></td>
+				                <td colspan="3">
+				                    <input type="text"  name="publicityName" id="" class="form-control"  datatype="*" errormsg="请输入中标候选人公示名称" />
+									<div class="notice_title_tips">请勿包含下列特殊字符：空格 * & ￥ @  / \</div>
+								</td>
+					        </tr>
+					        <tr>
+					        	<td class="th_bg">备注</td>
+				                <td colspan="3">
+				                	<textarea name="remark" rows="3" cols="" class="form-control" style="resize: none;"></textarea>
+				                </td>
+					        </tr>
+			       		</table>
+		       		</div>
+	       		</div>
+       		</div>
+       		<div class="panel panel-accordion panel-default">
+	    		<div class="panel-heading active"  role="tab" id="headingTwo">  
+			 		<h4 class="panel-title">
+		            	<a class="collapsed" role="button" data-toggle="collapse" href="#collapseTwo" aria-controls="collapseTwo"  aria-expanded="false">
+		            		公示发布媒体
+		            	</a>
+			 		</h4>  
+			   	</div>  
+			  	<div  id="collapseTwo" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingTwo">  
+			       	<div class="panel-body">
+			       		<table class="table table-bordered">
+					      	<tr>
+					            <td colspan="4" class="media-box">
+					            	<!--<div><input type="checkbox" checked="checked" name="noticeMedia" value="001" style="margin-right: 5px;"/>东风综合网站</div>
+					            	<div><input type="checkbox" name="noticeMedia" value="002" style="margin-right: 5px;"/>湖北省公共服务平台</div>
+					            	<div><input type="checkbox" name="noticeMedia" value="000" style="margin-right: 5px;"/>国家公共服务平台</div>
+					            	<div><input type="checkbox" name="noticeMedia" value="003" style="margin-right: 5px;"/>襄阳市公共服务平台</div>
+					            	<div><input type="checkbox" name="noticeMedia" value="005" style="margin-right: 5px;"/>采招网</div>-->
+					            </td>
+					        </tr>
+				        </table>   
+		       		</div>
+		       	</div>
+	    	</div>
+	    	<div class="panel panel-accordion panel-default">
+	    		<div class="panel-heading active"  role="tab" id="headingThree">  
+			 		<h4 class="panel-title">
+		            	<a class="collapsed" role="button" data-toggle="collapse" href="#collapseThree" aria-controls="collapseThree"  aria-expanded="false">
+		            		候选人
+		            	</a>
+			 		</h4>  
+			   	</div>  
+			  	<div  id="collapseThree" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingThree">  
+			       	<div class="panel-body">
+			       		<div>
+			       			<button type="button" class="btn btn-primary btn-sm chooseTender"  style="float: right;margin-right: 50px;margin-bottom: 10px;">
+			            		<span class="glyphicon glyphicon-plus"></span>选择中标候选人
+			            	</button>
+			            	<div style="clear: both;"></div>
+			       		</div>
+			       		
+		            	<div class="table-responsive">
+		            		<table class="table table-bordered table-striped text-nowrap" id="candidates">
+			       			
+		            		</table> 
+		            	</div>
+			       		  
+		       		</div>
+		       	</div>
+	    	</div>
+	    	<div class="panel panel-accordion panel-default">
+	    		<div class="panel-heading active"  role="tab" id="headingFour">  
+			 		<h4 class="panel-title">
+		            	<a class="collapsed" role="button" data-toggle="collapse" href="#collapseFour" aria-controls="collapseFour"  aria-expanded="false">
+		            		公示基本信息
+	            	<!--<button type="button" class="btn btn-primary btn-sm fullScreen"   style="float: right;margin-right: 50px;">
+	            		<span class="glyphicon glyphicon-fullscreen"></span>全屏编辑
+	            	</button>-->
+		            	</a>
+			 		</h4>  
+			   	</div>  
+			  	<div  id="collapseFour" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingFour">  
+			       	<div class="panel-body">
+			       		<table id="ueditorContent" class="table table-bordered">
+					      	<!-- <tr>
+				                <td class="th_bg">公示模板</td>
+				                <td colspan="3">
+				                    <select class="form-control" name="noticeTemplate" id="noticeTemplate" style="width: 260px;display: inline-block;">
+					                	
+					                </select>
+					                <button type="button" class="btn btn-primary" id="btnModel" style="vertical-align:top;"><span class="glyphicon glyphicon-refresh" style="vertical-align:-2px;"></span>生成模板</button>
+					                <button type="button" class="btn btn-primary fullScreen"   style="float: right;margin-right: 20px;">
+					            		<span class="glyphicon glyphicon-fullscreen"></span>全屏
+					            	</button>
+					                
+				                </td>
+				            </tr>
+				            <tr>
+				            	<td colspan="4">
+				            		<div id="container" name="content" ></div>
+				            		<input type="hidden"  name="publicityContent" id="publicityContent" />
+				            	</td>
+				            </tr> -->
+				        </table>   
+		       		</div>
+		       	</div>
+	    	</div>
+	    	<div class="panel panel-accordion panel-default">
+	    		<div class="panel-heading active"  role="tab" id="headingFive">  
+			 		<h4 class="panel-title">
+		            	<a class="collapsed" role="button" data-toggle="collapse" href="#collapseFive" aria-controls="collapseFive"  aria-expanded="false">
+		            		相关附件
+	            			<span class="red" style="font-size: 14px;font-weight: normal;">（请上传200M以内的文件）</span>
+		            	</a>
+			 		</h4>  
+			   	</div>  
+			  	<div  id="collapseFive" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingFive">  
+			       	<div class="panel-body">
+		            	<button type="button" class="btn btn-sm btn-primary" id="fileUp"   style="float: right;margin-right: 50px;margin-bottom: 10px;">
+		            		<span class="glyphicon glyphicon-folder-open"></span>上传
+		            	</button>
+		            	<button type="button"  id="fileLoad" style="display: none;"></button>
+			       		<div id="fileContent">
+			       			
+			       		</div>
+		       		</div>
+		       	</div>
+	    	</div>
+	    	<div id="approval">
+	    		
+	    	</div>
+   		</div>
+        <div class="bottom-btn" style="z-index: 11000;">
+            <button type="button" class="btn btn-primary" id="btnSave"><span class="glyphicon glyphicon-ok"></span>保存</button>
+            <button type="button" class="btn btn-primary" id="btnSubmit"><span class="glyphicon glyphicon-saved"></span>提交</button>
+            <button type="button" class="btn btn-default" id="btnClose"><span class="glyphicon glyphicon-remove"></span>取消</button>
+        </div>
+    </form>
+    <script type="text/javascript" src="../../../../media/js/jquery/jquery.js"></script>
+    <script type="text/javascript" src="../../../../media/js/jquery/jquery.extend.js"></script>
+    <script type="text/javascript" src="../../../../media/js/base/util.js"></script>
+    <script type="text/javascript" src="../../../../media/js/base/common.js"></script>
+	<script type="text/javascript" src="../../../../media/js/base/UEditorFun.js"></script>
+
+	<!-- 编辑器源码文件 -->
+    <script type="text/javascript" src="../../../../media/js/ueditor/ueditor.config.js"></script>
+    <script type="text/javascript" src="../../../../media/js/ueditor/ueditor.all.js"></script>
+    <script type="text/javascript" src="../../../../media/js/bootstrap/js/bootstrap.js"></script>
+    <script type="text/javascript" src="../../../../media/js/My97DatePicker/WdatePicker.js"></script>
+    <script type="text/javascript" src="../../../../media/js/stream/js/stream-v1.js"></script>
+    <script type="text/javascript" src="../../../../media/js/base/StreamUpload.js"></script>
+	<script type="text/javascript" src="../../../../media/js/base/md5.js"></script>
+	<script type="text/javascript" src="../../../../media/js/ca.js"></script>
+    <script src="../../../Model/js/public.js"></script>
+    <script src="../../../../media/js/base/WorkflowInfoNew.js"></script>
+    <script type="text/javascript" src="../js/candidatesEdit.js"></script>
+</body>
+
+</html>

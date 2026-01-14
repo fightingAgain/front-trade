@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="pragma" content="no-cache">
+		<!-- 禁止浏览器从本地机的缓存中调阅页面内容 -->
+		<meta http-equiv="cache-control" content="no-cache, must-revalidate">
+		<meta http-equiv="expires" content="0">
+		<title>报名文件递交详情</title>
+		<link rel="stylesheet" href="../../../../media/js/bootstrap/css/bootstrap.css">
+		<link rel="stylesheet" type="text/css" href="../../../../media/js/bootstrap-fileinput-master/css/fileinput.css" />
+		<link rel="stylesheet" href="../../../../media/js/bootstrap/css/bootstrap-table.min.css" />
+	</head>
+
+	<body style="width: 99%;padding-left: 10px;padding-top: 10px;">
+		<table class="table table-bordered " style="margin-bottom: 15px;">
+			<th class="active" colspan="4">项目信息</th>
+			<tr class="add_tr">
+				<td class="th_bg">采购项目名称</td>
+				<td>
+					<div id="projectName"></div>
+				</td>
+				<td class="th_bg">采购项目编号</td>
+				<td>
+					<div id="projectCode"></div>
+				</td>
+			</tr>
+			<tr class="add_tr">
+				<td class="th_bg">项目包件名称</td>
+				<td>
+					<div id="packageName"></div>
+				</td>
+				<td class="th_bg">项目包件编号</td>
+				<td>
+					<div id="packageNum"></div>
+				</td>
+			</tr>
+			<tr>
+				<td class="th_bg">报名文件递交截止时间</td>
+				<td>
+					<div id="signEndDate"></div>
+				</td>
+				<td class="th_bg">报名文件审核截止时间</td>
+				<td>
+					<div id="offerEndDate"></div>
+				</td>
+			</tr>
+			<tr id='divEdit'>
+				<td class="th_bg">递交报名文件</td>
+				<td colspan="3">
+					<input type="file" class="fileloading" multiple name="files" id="FileName" />
+				</td>
+			</tr>
+			<tr>
+				<td class="active subfile" colspan="4">上传文件</td>
+			</tr>
+			
+			<tr class="subfile">
+				<td colspan="4">
+					<!--文件列表-->
+					<table class="table table-bordered" id="files"></table>
+				</td>
+			</tr>
+            <tr>
+            	<td class="active uploadFile" colspan="4">已上传文件</td>
+            </tr>
+			
+			<tr class="uploadFile">
+				<td colspan="4" style="padding: 0px;">
+					
+					<!--文件列表-->
+					<table class="table table-bordered"  style="margin-bottom: 0px;"  >
+						<!--<tr>
+				     		<td style="width:50px;">序号</td>
+				     		<td style="text-align:left">文件名称</td>
+				     		<td style="width:150px;text-align:left">上传IP地址</td>
+				     		<td style="width:70px;">地区</td>
+				     		<td style="width:50px;">上传人</td>
+				     		<td style="width:50px;">上传时间</td>
+				     		<td style="width:50px;">撤回人</td>
+				     		<td style="width:70px;">撤回时间</td>
+				     		<td style="width:100px;">文件状态</td>
+				     		<td style="width:130px;">操作</td>
+				     	</tr>-->
+				     	<tbody class="table table-bordered" id="uploadedfiles">
+				     		
+				     	</tbody>
+					</table>
+				</td>
+			</tr>
+			<th class="active record" colspan="4">审核记录</th>
+			<tr class="record">
+				<td colspan="4">
+					<!--审核记录列表-->
+					<table class="table table-bordered" id="signCheckRecord">
+
+					</table>
+				</td>
+			</tr>
+			<tr>
+	         	<td class="th_bg">回执</td>
+	            <td style="text-align: left;" colspan="3">
+		           <button id="btnShowFile" type="button"  class="btn btn-sm btn-primary receipt">
+		                 <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span> 预览
+		           </button>
+		            <button id="btnDownLoad" type="button" class="btn btn-sm btn-primary receipt">
+		                 <span class="glyphicon glyphicon-arrow-down" aria-hidden="true"></span> 下载
+		           </button>
+	            </td>
+	    	</tr>
+		</table>
+
+		<div style="width: 100%;height: 70px;">
+		</div>
+		<div style="width: 100%;height: 50px;text-align:center;position: fixed;bottom: 0;background-color: #FFFFFF;">
+			<button type="button" id="btn_submit" class="btn btn-primary" style="width: 100px;">递交</button>
+			<button type="button" id="btn_close" class="btn btn-default" style="width: 100px;">关闭</button>
+		</div>
+
+		<script type="text/javascript" src="../../../../media/js/jquery/jquery.min.js"></script>
+		<script type="text/javascript" src="../../../../media/js/bootstrap/js/bootstrap.js"></script>
+		<script type="text/javascript" src="../../../../media/js/bootstrap/js/bootstrap-table.min.js"></script>
+		<script type="text/javascript" src="../../../../media/js/bootstrap/js/bootstrap-table-zh-CN.min.js"></script>
+		<script src="../../../../media/js/bootstrap-fileinput-master/js/fileinput.js"></script>
+		<script src="../../../../media/js/bootstrap-fileinput-master/js/locales/zh.js"></script>
+		<script type="text/javascript" src="../../../../media/js/jquery/jquery.extend.js"></script>
+		<script type="text/javascript" src="../../../../media/js/base/common.js"></script>
+		<script type="text/javascript" src="../../../../media/js/base/util.js"></script>
+		<script src="../js/signFileInfo.js" type="text/javascript" charset="utf-8"></script>
+	</body>
+
+</html>

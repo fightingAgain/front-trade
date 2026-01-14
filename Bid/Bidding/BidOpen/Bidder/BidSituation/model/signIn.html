@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+		<meta http-equiv="pragma" content="no-cache"><!-- 禁止浏览器从本地计算机的缓存中访问页面内容 --> 
+		<meta http-equiv="cache-control" content="no-cache"><!-- 用于指定请求和响应遵循的缓存机制 --> 
+		<meta http-equiv="expires" content="0"><!-- 用于设定网页的到期时间，一旦网页过期，必须到服务器上重新传输； -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>开标室</title>
+    <link rel="stylesheet" href="../../../../../media/js/layer/mobile/need/layer.css" />
+    <link rel="stylesheet" href="../../../../../media/js/bootstrap/css/bootstrap.css" />
+    <link rel="stylesheet" href="../../../../../media/js/bootstrap/css/bootstrap-table.min.css">
+	<style>
+		html,body { height: 100%;}
+		*{
+			padding: 0;
+			margin: 0;
+		}
+	</style>
+</head>
+
+<body>
+    <form class="pageModel" id="formName" name="formName" >
+    	<div style="padding-left: 20px;">
+    		<div style="margin: 20px 0 ;">
+    			<label>用户名称：</label>
+    			<input type="text" class="form-control" name="employeeName" id="userName" style="display: inline-block;width: 260px;" datatype="*" errormsg="请输入用户名" />
+    		</div>
+    		<div>
+    			<label>手机号码：</label>
+    			<input type="text" class="form-control" name="signTel" id="tel" datatype="mobile" errormsg="请输入正确的手机号" style="display: inline-block;width: 260px;"/>
+    		</div>
+    	</div>
+    	
+        <div class="bottom-btn" style="z-index: 11000;">
+            <button type="button" class="btn btn-primary" id="btnSubmit"><span class="glyphicon glyphicon-saved"></span>签到</button>
+            <button type="button" class="btn btn-default" id="btnClose"><span class="glyphicon glyphicon-remove"></span>关闭</button>
+        </div>
+    </form>
+    <script type="text/javascript" src="../../../../../media/js/base/common.js"></script>
+    <script type="text/javascript" src="../../../../../media/js/jquery/jquery.js"></script>
+    <script type="text/javascript" src="../../../../../media/js/jquery/jquery.extend.js"></script>
+    <script type="text/javascript" src="../../../../../media/js/base/util.js"></script>
+    <script type="text/javascript" src="../../../../Model/js/public.js"></script>
+    <script type="text/javascript" src="../../../../../media/js/bootstrap/js/bootstrap.js"></script>
+    <script type="text/javascript" src="../js/signIn.js"></script>
+</body>
+
+</html>

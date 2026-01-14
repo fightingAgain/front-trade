@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8">
+		<meta http-equiv="pragma" content="no-cache"><!-- 禁止浏览器从本地计算机的缓存中访问页面内容 --> 
+		<meta http-equiv="cache-control" content="no-cache"><!-- 用于指定请求和响应遵循的缓存机制 --> 
+		<meta http-equiv="expires" content="0"><!-- 用于设定网页的到期时间，一旦网页过期，必须到服务器上重新传输； -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>查看公告审核</title>
+    <link rel="stylesheet" href="../../../../media/js/layer/mobile/need/layer.css" />
+    <link rel="stylesheet" href="../../../../media/js/bootstrap/css/bootstrap.css" />
+    <link rel="stylesheet" href="../../../../media/js/bootstrap/css/bootstrap-table.min.css" type="text/css"/>
+	<style>
+		html,body { }
+		.pretrial,.revise{
+			display: none;
+		}
+		.display_none{
+			display: none;
+		}
+		.set_height{
+		    display: inline-block;
+			padding: 6px 12px;
+		}
+	</style>
+</head>
+
+<body>
+	<div class="pageModel">
+		<tr>
+	            <td colspan="4" style="font-weight: bold;" class="active">招标概况</td>
+	        </tr>
+	        <tr>
+	        	<td class="th_bg">项目编号</td>
+                <td colspan="3">
+                	<span id="interiorProjectCode" class="set_height"></span>
+                </td>
+	        </tr>
+	        <tr>
+	        	<td class="th_bg">项目名称</td>
+                <td colspan="3">
+                	<span id="projectName" class="set_height"></span>
+                </td>
+	        </tr>
+	        <tr>
+	        	<td class="th_bg">招标项目编号</td>
+                <td colspan="3">
+                	<span id="interiorTenderProjectCode" class="set_height"></span>
+                </td>
+	        </tr>
+	        <tr>
+	        	<td class="th_bg">招标项目名称</td>
+                <td colspan="3">
+                	<span id="tenderProjectName" class="set_height"></span>
+                </td>
+	        </tr>
+	        <tr>
+	        	<td class="th_bg">招标项目类型</td>
+                <td>
+                	<span id="tenderProjectTypeTxt" class="set_height"></span>
+                </td>
+                <td class="th_bg">招标方式</td>
+                <td>
+                	<span id="tenderMode" class="set_height"></span>
+                </td>
+	        </tr>
+	        <tr>
+	        	<td class="th_bg">资格审查方式</td>
+                <td>
+                	<span id="examType" class="set_height"></span>
+                </td>
+                <td class="th_bg">招标文件标书费用金额（元）</td>
+                <td>
+                	<span id="projectCosts[0].payMoney" class="set_height price"></span>
+                	<!--<span id="payMoney"></span>-->
+                </td>
+	        </tr>
+        	<tr>
+	            <td colspan="4" style="font-weight: bold;" class="active">标段信息</td>
+	        </tr>
+	        <tr>
+	        	<td class="th_bg">标段编号</td>
+                <td>
+                	<span id="interiorBidSectionCode" class="set_height"></span>
+                </td>
+                <td class="th_bg">标段名称</td>
+                <td>
+                	<span id="bidSectionName" class="set_height"></span>
+                </td>
+	        </tr>
+	        <tr>
+	        	<td class="th_bg">合同估算价</td>
+                <td>
+                	<span id="contractReckonPrice" class="set_height"></span>
+                	<span id="priceUnit"></span>
+                </td>
+                <td class="th_bg">标书获取方式</td>
+                <td>
+                	<span id="signUpType" class="set_height"></span>
+                </td>
+	        </tr>
+	        <tr>
+	        	<td class="th_bg">开标方式</td>
+                <td>
+                	<span id="bidOpenType" class="set_height"></span>
+                </td>
+                <td class="th_bg">评标方式</td>
+                <td>
+                	<span id="bidCheckType" class="set_height"></span>
+                </td>
+	        </tr>
+	        <tr>
+	        	<td class="th_bg">是否允许联合体投标</td>
+                <td colspan="3">
+                	<span id="syndicatedFlag" class="set_height"></span>
+                </td>
+                
+	        </tr>
+	        <tr>
+	        	<td class="th_bg">联合体投标要求</td>
+                <td colspan="3">
+                	<span id="consortiumBidding" class="set_height"></span>
+                </td>
+	        </tr>
+	        <tr>
+	            <td colspan="4" style="font-weight: bold;" class="active">招标人与招标代理</td>
+	        </tr>
+	        <tr>
+	        	<td class="th_bg">招标人</td>
+                <td colspan="3">
+                	<span id="tendererName" class="set_height"></span>
+                </td>
+	        </tr>
+	        <tr>
+	        	<td class="th_bg">联系人</td>
+                <td>
+                	<span id="agentName" class="set_height"></span>
+                </td>
+                <td class="th_bg">联系人电话</td>
+                <td>
+                	<span id="agentTel" class="set_height"></span>
+                </td>
+	        </tr>
+	        <tr>
+	        	<td class="th_bg">项目负责人</td>
+                <td colspan="3">
+                	<span id="tenderAgencyLinkmen" class="set_height"></span>
+                </td>
+	        </tr>
+	        <tr>
+	        	<td class="th_bg">联系人</td>
+                <td>
+                	<span id="tenderAgencyName" class="set_height"></span>
+                </td>
+                <td class="th_bg">项目负责人电话</td>
+                <td>
+                	<span id="tenderAgencyLinktel" class="set_height"></span>
+                </td>
+	        </tr>
+	   		<tr>
+	            <td colspan="4" style="font-weight: bold;" class="active padding_button">开评标会议室预约</td>
+	        </tr>
+	        <tr>
+	        	<td colspan="4">
+	        		<table class="table table-bordered tenders" id="biddingRooms"></table>
+	        	</td>
+	        </tr>
+        	<tr>
+	            <td colspan="4" style="font-weight: bold;" class="active">公告基本信息</td>
+	        </tr>
+	        <tr>
+	        	<td class="th_bg">公告标题</td>
+	        	<td colspan="3">
+	        		<span id="noticeName" class="set_height"></span>
+	        	</td>
+	        </tr>
+	        <tr>
+	        	<td class="th_bg">公告发布时间</td>
+                <td>
+                	<span id="noticeSendTime" class="set_height"></span>
+                </td>
+                <td class="th_bg">公告发布截止时间</td>
+                <td>
+                	<span id="noticeEndTime" class="set_height"></span>
+                </td>
+	        </tr>
+	        <tr>
+	        	<td class="th_bg"><span class="tender">招标文件获取开始时间</span><span class="pretrial">资格预审文件获取开始时间</span></td>
+                <td>
+                	<span id="docGetStartTime" class="set_height"></span>
+                </td>
+                <td class="th_bg"><span class="tender">招标文件获取截止时间</span><span class="pretrial">资格预审文件获取截止时间</span></td>
+                <td>
+                	<span id="docGetEndTime" class="set_height"></span>
+                </td>
+	        </tr>
+	        <tr>
+				<td class="th_bg timeName">提出澄清截止时间</td>
+				<td style="text-align: left;">
+					<span id="clarifyTime" class="set_height"></span>
+				</td>
+				<td class="th_bg timeName">答复截止时间</td>
+				<td style="text-align: left;">
+					<span id="answersEndDate" class="set_height"></span>
+				</td>
+			</tr>
+	        <tr>
+                <td class="th_bg"><span class="tender">投标文件递交截止时间</span><span class="pretrial">资格预审申请文件递交截止时间</span></td>
+                <td colspan="3">
+                	<span id="bidDocReferEndTime" class="set_height"></span>
+                </td>
+	        </tr>
+	        <tr>
+	        	<td class="th_bg"><span class="tender">开标时间</span><span class="pretrial">开启时间</span></td>
+                <td colspan="3">
+                	<span id="bidOpenTime" class="set_height"></span>
+                </td>
+	        </tr>
+	       	<tr>
+	        	<td class="th_bg">公告发布责任人</td>
+                <td colspan="3">
+                	<span id="bulletinDuty" class="set_height"></span>
+                </td>
+	        </tr>
+	        <tr>
+	        	<td class="th_bg">开标地点</td>
+	        	<td colspan="3">
+	        		<span id="openAddress" class="set_height"></span>
+	        	</td>
+	        </tr>
+        	<tr>
+	            <td colspan="4" style="font-weight: bold;" class="active">公告发布媒体</td>
+	        </tr>
+	        <tr>
+	            <td colspan="4" >
+	            	<div><input type="checkbox" checked="checked" disabled="disabled" style="margin-right: 5px;"/>襄阳市人民政府门户网站</div>
+	            	<div><input type="checkbox" checked="checked" disabled="disabled" style="margin-right: 5px;"/>襄阳市公共资源交易网</div>
+	            	<div><input type="checkbox" checked="checked" disabled="disabled" style="margin-right: 5px;"/>湖北省公共资源交易电子服务平台</div>
+	            </td>
+	        </tr>
+	        
+	   		 <tr>
+	            <td colspan="4" style="font-weight: bold;" class="active">公告内容</td>
+	        </tr>
+	    	<tr>
+	    		<td colspan="4">
+					<table id="ueditorContent" class="table table-bordered"></table>
+	    		</td>
+	    	</tr>
+			<div class="panel panel-accordion panel-default" id="transformMoney" style="display: none;">
+				<div class="panel-heading active" role="tab" id="headingNine">
+					<h4 class="panel-title">
+						<a class="collapsed" role="button" data-toggle="collapse" href="#collapseNine" aria-expanded="false"
+							aria-controls="collapseNine">
+							原保证金转移到本项目
+						</a>
+					</h4>
+				</div>
+				<div id="collapseNine" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingNine">
+					<div class="panel-body">
+						<table class="table table-bordered" id="transformMoney-table">
+			
+						</table>
+					</div>
+				</div>
+			</div>
+        	<tr>
+	            <td colspan="4" style="font-weight: bold;" class="active">相关附件</td>
+	        </tr>
+	        <tr>
+                <td colspan="4" id="fileContent">
+                	
+                </td>
+            </tr>
+	    	<tr>
+		 		<td colspan="4" id="approval" style="padding: 0;"></td>
+		 	</tr>
+	    </table>
+	</div>
+	    
+	    <!--<table>
+	    	<tr>
+	            <td colspan="4" style="font-weight: bold;" class="active">审批记录</td>
+	        </tr>
+	        
+	    </table>
+	    <table id="auditList" class="table table-bordered table-striped" >
+	    	<thead>
+	    		<tr>
+	    			<th style="width: 50px; text-align: center;">序号</th>
+	    			<th style="width: 200px; text-align: center;">审核人</th>
+	    			<th style="width: 200px; text-align: center;">审核时间</th>
+	    			<th style="width: 100px; text-align: center;">审核状态</th>
+	    			<th style="width: 200px; text-align: center;">提交人</th>
+	    			<th style="width: 200px; text-align: center;">提交时间</th>
+	    			<th >备注</th>
+	    		</tr>
+	    	</thead>
+	    	<tbody></tbody>
+	    </table>-->
+	   
+	    
+        <div class="bottom-btn" style="z-index: 11000;">
+            <button type="button" class="btn btn-default" id="btnClose"><span class="glyphicon glyphicon-remove"></span>取消</button>
+        </div>
+	
+    
+    <script type="text/javascript" src="../../../../media/js/jquery/jquery.js"></script>
+    <script type="text/javascript" src="../../../../media/js/jquery/jquery.extend.js"></script>
+    <script type="text/javascript" src="../../../../media/js/base/util.js"></script>
+    <script type="text/javascript" src="../../../../media/js/base/common.js"></script>
+    <!--<script src="../../../../media/js/wangEditor-3.1.1/release/wangEditor.js"></script>-->
+    <!--<script src="../../../../media/js/wangEditor-3.1.1/publicEditor.js"></script>-->
+	<script type="text/javascript" src="../../../../media/js/base/UEditorFun.js"></script>
+    <script type="text/javascript" src="../../../../media/js/bootstrap/js/bootstrap.js"></script>
+	<script type="text/javascript" src="../../../../media/js/bootstrap/js/bootstrap-table.min.js"></script>
+	<script type="text/javascript" src="../../../../media/js/bootstrap/js/bootstrap-table-zh-CN.min.js"></script>
+    <script src="../../../../media//js//base/WorkflowInfoNew.js"></script>
+     <script type="text/javascript" src="../../../../media/js/base/StreamUpload.js"></script>
+     <script type="text/javascript" src="../../../Model/js/dataLinkage.js"></script>
+    <script type="text/javascript" src="../../../Model/js/public.js"></script>
+    <script type="text/javascript" src="../../../Model/js/orderRoom.js"></script>
+    <script type="text/javascript" src="../js/auditView.js"></script>
+</body>
+
+</html>

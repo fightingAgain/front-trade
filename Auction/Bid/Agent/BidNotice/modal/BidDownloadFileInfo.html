@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="pragma" content="no-cache">
+		<!-- 禁止浏览器从本地机的缓存中调阅页面内容 -->
+		<meta http-equiv="cache-control" content="no-cache, must-revalidate">
+		<meta http-equiv="expires" content="0">
+		<title>询比文件下载情况</title>
+		<link rel="stylesheet" href="../../../../../media/js/bootstrap/css/bootstrap.css?verson=1.01" />
+		<link rel="stylesheet" href="../../../../../media/js/bootstrap/css/bootstrap-table.min.css?verson=1.01" />
+		
+	</head>
+	<body  style="width:98%; padding-left: 20px; padding-top: 10px;">
+		<table class="table table-bordered">
+
+			<tr class="active ">
+				<th colspan="4"><span class="examTitles">文件下载详情</span></th>
+			</tr>
+			<tr>
+				<td colspan="4" >
+					<table class="table table-bordered table-striped" id="fileDownloadList">
+						
+					</table>
+				</td>
+			</tr>				
+			
+		</table>
+		  <style>
+			 .table > thead > tr > th, 
+			 .table > tbody > tr > th, 
+			 .table > tfoot > tr > th, 
+			 .table > thead > tr > td, 
+			 .table > tbody > tr > td, 
+			 .table > tfoot > tr > td{
+			 	vertical-align: middle;
+			 }
+		   </style>
+		<script type="text/javascript" src="../../../../../media/js/jquery/jquery.js?verson=1.01"></script>
+		<script type="text/javascript" src="../../../../../media/js/jquery/jquery.extend.js?verson=1.01"></script>
+		<script type="text/javascript" src="../../../../../media/js/jquery/jquery.params.js?verson=1.01"></script>
+		<script type="text/javascript" src="../../../../../media/js/base/common.js?verson=1.01"></script>
+		<script type="text/javascript" src="../../../../../media/js/layer/layer.js?verson=1.01"></script>
+		<script type="text/javascript" src="../../../../../media/js/bootstrap/js/bootstrap.js?verson=1.01"></script>
+		<script type="text/javascript" src="../../../../../media/js/bootstrap/js/bootstrap-table.min.js?verson=1.01"></script>
+		<script type="text/javascript" src="../../../../../media/js/bootstrap/js/bootstrap-table-zh-CN.min.js?verson=1.01"></script>
+		<script type="text/javascript" src="../../../../../media/js/Model/public.js"></script>
+	</body>
+	
+	
+	<script>
+		
+		var examType = getUrlParam('examType');//获取列表信息
+		var packageId = getUrlParam('packageId');
+		var enterpriseId = getUrlParam('enterpriseId');
+		var projectId=getUrlParam('projectId');
+		var tenderType=getUrlParam('tenderType')||'0';
+		var supplierLinkData = getHideSupplierLinkBidPriceCard(projectId,packageId,tenderType,examType);
+		var isShowCard=supplierLinkData.isShowCard||supplierLinkData.isShowCard==0?supplierLinkData.isShowCard:1;
+		var findDownloadFileUrl = config.bidhost + "/BidFileDownloadController/findBidFileDownload.do";
+		$(function(){
+			
+			//downLoadFileList();
+		})
+		
+		function getQueryParams(params) {
+			var para = {
+				'packageId':packageId,
+				'enterpriseId':enterpriseId,
+				'examType':examType
+			};
+			
+			return para;
+	    }
+
+		$("#fileDownloadList").bootstrapTable({
+			url: findDownloadFileUrl,
+			dataType: 'json',
+			method: 'get',
+			locale: "zh-CN",
+			pagination: false, // 是否启用分页
+			showPaginationSwitch: false, // 是否显示 数据条数选择框
+			clickToSelect: true, //是否启用点击选中行
+			search: false, // 不显示 搜索框
+			sidePagination: 'server', // 服务端分页
+			classes: 'table table-bordered', // Class样式
+			//showRefresh : true, // 显示刷新按钮
+			silent: true, // 必须设置刷新事件
+			queryParams: getQueryParams, //查询条件参数
+			striped: true,
+			uniqueId: "projectId",
+			columns: columns()
+		});
+		function columns(){
+			var data=[
+			{
+					title: "序号",
+					align: "center",
+					width: "50px",
+					formatter: function(value, row, index) {
+						return index + 1;
+					}
+				},
+				{
+					title: "企业名称",
+					align: "left",
+					field: "enterprise.enterpriseName"
+	
+				},
+				{
+					field: "purFile.fileName",
+					align: "left",
+					title: "文件名称",
+				}, {
+					field: "subDate",
+					align: "center",
+					title: "下载时间",
+					width: "150",
+				}, 
+				{
+					title: "联系人",
+					align: "center",
+					width: "80",
+					field: 'linkMan'
+				},
+				{
+					title: "手机号",
+					align: "center",
+					width: "150",
+					field: 'linkTel'
+				}, {
+					title: "邮箱",
+					align: "center",
+					width: "150",
+					field: 'linkEmail'
+				},
+				
+			]
+			if(isShowCard=='0'){
+				data.push({
+					field: 'linkCardType',
+					title: '联系人证件类型',
+					width: "80",
+					align: 'center',
+					formatter: function(value) {
+						if (value == '1') {
+							return '护照'
+						} else if (value == '0') {
+							return '身份证'
+						}
+					}
+				},
+				{
+					field: "linkCard",
+					title: "联系人证件号",
+					width: "150",
+					align: "left",
+				},)
+			}
+			return data
+		}
+		
+		function getUrlParam(name) {
+			var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); // 构造一个含有目标参数的正则表达式对象  
+			var r = window.location.search.substr(1).match(reg); // 匹配目标参数  
+			if(r != null) return unescape(r[2]);
+			return null; // 返回参数值  
+		}
+		
+	</script>
+</html>

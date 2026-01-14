@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>竞卖审核详情</title>
+		<link rel="stylesheet" href="../../../../../media/js/bootstrap/css/bootstrap.min.css">
+		<link rel="stylesheet" href="../../../../../media/js/bootstrap/css/bootstrap-table.min.css" />
+	</head>
+
+	<body style="width: 99%;padding-left: 10px;padding-top: 10px;">
+		<table class="table table-bordered " style="margin-bottom: 0px;">
+			<th colspan="4" class="active">项目信息</th>
+			<tr>
+				<td class="text-right">采购项目名称：</td>
+				<td>
+					<div id="projectName"></div>
+				</td>
+				<td class="text-right">采购项目编号：</td>
+				<td>
+					<div id="projectCode"></div>
+				</td>
+			</tr>
+
+			<tr>
+				<td class="text-right">竞卖文件提交截止时间：</td>
+				<td>
+					<div id="fileEndDate"></div>
+				</td>
+				<td class="text-right">竞卖文件审核截止时间：</td>
+				<td>
+					<div id="fileCheckEndDate"></div>
+				</td>
+			</tr>
+			<tr>
+				<td colspan="4">
+					<table class="table table-bordered" id="AuctionFileCheck">
+
+					</table>
+				</td>
+			</tr>
+			<th colspan="4" class="active">审核记录</th>
+			<tr>
+				<td colspan="4">
+					<table class="table table-bordered" id="AuctionFileCheckRecord">
+
+					</table>
+				</td>
+			</tr>
+
+		</table>
+        <div style="width: 100%;height: 50px;text-align:center;position: fixed;bottom: 0;background-color: #FFFFFF;">
+			<button type="button" id="btn_close" class="btn btn-default" style="width: 100px;">关闭</button>
+		</div>
+		<style>
+			.table>thead>tr>th,
+			.table>tbody>tr>th,
+			.table>tfoot>tr>th,
+			.table>thead>tr>td,
+			.table>tbody>tr>td,
+			.table>tfoot>tr>td {
+				vertical-align: middle !important;
+			}
+		</style>
+		<script type="text/javascript" src="../../../../../media/js/jquery/jquery.min.js"></script>
+		<script type="text/javascript" src="../../../../../media/js/bootstrap/js/bootstrap.js"></script>
+		<script type="text/javascript" src="../../../../../media/js/bootstrap/js/bootstrap-table.min.js"></script>
+		<script type="text/javascript" src="../../../../../media/js/bootstrap/js/bootstrap-table-zh-CN.min.js"></script>
+		<script type="text/javascript" src="../../../../../media/js/jquery/jquery.extend.js"></script>
+		<script type="text/javascript" src="../../../../../media/js/base/common.js"></script>
+		<script type="text/javascript" src="../../../../../media/js/Model/public.js"></script>
+		<script src="../js/JMSaleFileCheckInfo.js" type="text/javascript" charset="utf-8"></script>
+
+	</body>
+
+</html>

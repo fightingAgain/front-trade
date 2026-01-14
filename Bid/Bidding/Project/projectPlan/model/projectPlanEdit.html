@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8">
+		<meta http-equiv="pragma" content="no-cache"><!-- 禁止浏览器从本地计算机的缓存中访问页面内容 --> 
+		<meta http-equiv="cache-control" content="no-cache"><!-- 用于指定请求和响应遵循的缓存机制 --> 
+		<meta http-equiv="expires" content="0"><!-- 用于设定网页的到期时间，一旦网页过期，必须到服务器上重新传输； -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>编辑包件信息</title>
+    <link rel="stylesheet" href="../../../../media/js/layer/mobile/need/layer.css" />
+    <link rel="stylesheet" href="../../../../media/js/bootstrap/css/bootstrap.css" />
+    <link rel="stylesheet" href="../../../../media/js/datetimepicker/css/jquery.datetimepicker.css">
+	<style>
+		html,body { height: 100%;}
+		.readonly{
+			border: none;
+		    background: none !important;
+		    outline: none !important;
+		    box-shadow: none !important;
+		}
+		.calendar_icon{
+			color: #3995C8;
+		}
+		.padding_button{
+			padding: 5px 8px !important;
+			line-height: 30px !important;
+		}
+	</style>
+</head>
+
+<body>
+    <form class="pageModel" id="formName" name="formName">
+        <table class="table table-bordered ">
+        	<tr>
+	            <td colspan="4" style="font-weight: bold;" class="active">基本信息</td>
+	        </tr>
+	        <tr>
+	        	<td class="th_bg">招标项目编号</td>
+                <td colspan="3">
+                    <input type="text" name="" readonly="readonly" id="interiorTenderProjectCode" class="form-control readonly"/>
+                    <input type="hidden" name="tenderProjectId" id="tenderProjectId" />
+                </td>
+            	
+            </tr>
+            <tr>
+            	<td class="th_bg">招标项目名称</td>
+                <td colspan="3">
+                    <input type="text" name="" readonly="readonly" id="tenderProjectName" class="form-control readonly"  />
+                </td>
+            </tr>
+            <tr>
+            	<td class="th_bg">标段信息</td>
+                <td colspan="3">
+                    <table class="table table-bordered " id="bid_table">
+                    	<thead>
+                    		<tr>
+                    			<th style="width: 200px;text-align: center;">标段编号</th>
+                    			<th>标段名称</th>
+                    		</tr>
+                    	</thead>
+                    	<tbody>
+                    		<tr>
+                    			<td style="width: 200px;text-align: center;">131343646</td>
+                    			<td>标段名称标段名称标段名称</td>
+                    		</tr>
+                    	</tbody>
+                    </table>
+                </td>
+            </tr>
+            <tr>
+            	<td class="th_bg">工作任务计划</td>
+                <td colspan="3">
+                    <textarea name="workPlan"  rows="5" cols="" class="form-control" style="width: 100%;resize: none;"></textarea>
+                </td>
+            </tr>
+            <tr>
+            	<td class="th_bg">项目团队组成与职责分工</td>
+                <td colspan="3">
+                    <textarea name="teamDuty" rows="5" cols="" class="form-control" style="width: 100%;resize: none;"></textarea>
+                </td>
+            </tr>
+            <tr>
+            	<td class="th_bg">项目经理</td>
+                <td colspan="3">
+                    <input type="text" name="employeeName" id="employeeName" class="form-control"  />
+                </td>
+            </tr>
+            <tr>
+            	<td class="th_bg">代理机构</td>
+                <td colspan="3">
+                    <input type="text" name="" id="tenderAgencyName" class="form-control readonly" readonly="readonly" />
+                </td>
+            </tr>
+        	<!--<tr>
+	            <td colspan="4" style="font-weight: bold;" class="active">标段信息</td>
+	        </tr>
+	        <tr>
+            	<td class="th_bg">标段编号</td>
+                <td colspan="3">
+                    <input type="text" name="" readonly="readonly" id="interiorBidSectionCode" class="form-control readonly"/>
+                </td>
+            </tr>
+            <tr>
+            	<td class="th_bg">标段名称</td>
+                <td colspan="3">
+                    <input type="text" name="" readonly="readonly" id="bidSectionName" class="form-control readonly" />
+                </td>
+            </tr>-->
+            <tr>
+	            <td colspan="4" style="font-weight: bold;" class="active padding_button">标段信息
+	            	<!--<button type="button" class="btn btn-primary btn-sm" id="btnPlan" style="float: right;margin-right: 10px;">
+	            		<span class="glyphicon glyphicon-plus"></span>添加项目成员
+	            	</button>-->
+	            </td>
+	        </tr>
+	        <tr>
+	        	<td colspan="4">
+	        		<table class="table table-bordered " id="bid_Edit">
+	        			<thead>
+	        				<tr>
+		        				<th style="width: 50px;text-align: center;">序号</th>
+		        				<th style="width: 200px;text-align: center;">标段编号</th>
+		        				<th>标段名称</th>
+		        				<th style="width: 150px;text-align: center;">状态</th>
+		        				<th style="width: 200px;text-align: center;">操作</th>
+		        			</tr>
+	        			</thead>
+	        			<tbody>
+	        				<tr>
+		        				<td style="width: 50px;text-align: center;">1</td>
+		        				<td style="width: 200px;text-align: center;">56565654644458</td>
+		        				<td>标段名称标段名称标段名称</td>
+		        				<td style="width: 150px;text-align: center;">未编辑</td>
+		        				<td style="width: 200px;text-align: center;">
+		        					<button  type="button" class="btn btn-primary btn-sm btnEdit"><span class="glyphicon glyphicon-edit"></span>编辑</button>
+		        				</td>
+		        			</tr>	
+	        			</tbody>
+	        			
+	        		</table>
+	        	</td>
+	        </tr>
+	        <!--<tr>
+	        	<td colspan="4">
+	        		<table class="table table-bordered " id="projectPlan">
+	        			<thead>
+	        				<tr>
+		        				<th style="width: 50px;text-align: center;line-height: 30px;">序号</th>
+		        				<th style="line-height: 30px;">标题</th>
+		        				<th style="width: 150px;text-align: center;line-height: 30px;">计划开始时间</th>
+		        				<th style="width: 150px;text-align: center;line-height: 30px;">计划截止时间</th>
+		        				<th style="line-height: 30px;">备注</th>
+		        				<th style="width: 120px;text-align: center;line-height: 30px;">完成状态</th>
+		        				<th style="width: 100px;text-align: center;line-height: 30px;">
+		        					<button type="button" class="btn btn-primary btn-sm" id="btnPlan" style="">
+					            		<span class="glyphicon glyphicon-plus"></span>添加计划
+					            	</button>
+		        				</th>
+		        			</tr>
+	        			</thead>
+	        			<tbody>
+	        					
+	        			</tbody>
+	        			
+	        		</table>
+	        	</td>
+	        </tr>-->
+        </table>
+    </form>
+    <div class="bottom-btn">
+        <!--<button type="button" class="btn btn-primary" id="btnSave"><span class="glyphicon glyphicon-ok"></span>保存</button>-->
+        <button type="button" class="btn btn-primary" id="btnSave"><span class="glyphicon glyphicon-saved"></span>确认</button>
+        <button type="button" class="btn btn-default" id="btnClose"><span class="glyphicon glyphicon-remove"></span>取消</button>
+    </div>
+    
+    <script type="text/javascript" src="../../../../media/js/jquery/jquery.js"></script>
+    <script type="text/javascript" src="../../../../media/js/jquery/jquery.extend.js"></script>
+    <script type="text/javascript" src="../../../../media/js/base/util.js"></script>
+    <script type="text/javascript" src="../../../../media/js/base/common.js"></script>
+    <script type="text/javascript" src="../../../../media/js/bootstrap/js/bootstrap.js"></script>
+    <script type="text/javascript" src="../../../../media/js/layer/layer.js"></script>
+    <script type="text/javascript" src="../../../../media/js/datetimepicker/js/jquery.datetimepicker.js"></script>
+    <script type="text/javascript" src="../../../Model/js/public.js"></script>
+    <script type="text/javascript" src="../js/projectPlanEdit.js"></script>
+    <!--<script type="text/javascript" src="../../Model/js/dataLinkage.js"></script>-->
+    
+</body>
+
+</html>

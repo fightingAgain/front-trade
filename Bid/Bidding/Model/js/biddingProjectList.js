@@ -1,0 +1,178 @@
+var tenderUrl = config.tenderHost + '/TenderProjectController/pageList.do'; //获取招标项目列表
+var checkboxed;
+var tendererName = "";
+var enterpriceId = "";
+var options = "";
+var selectColumn = "";
+$(function(){
+	/*关闭*/
+	$('#btnClose').click(function(){
+		var index=parent.layer.getFrameIndex(window.name);
+        parent.layer.close(index);
+	});
+	$("#eventquery").click(function () {
+		$("#tableList").bootstrapTable('destroy');
+		getTendereeList(selectColumn);
+	});
+});
+
+/*
+ * 页面传参方法
+ * data:{isMulti:false}
+ */
+function passMessage(data,callback){
+	callback = callback ? callback :data;
+	
+	var defaults = {
+		idList:[],  //已被选中列表的id集合
+		isMulti:false,   //是否多选，true为是，false为单选
+		'tenderProjectState': 2  
+	}
+	options = $.extend(defaults, data);
+	if(options.isMulti){
+		selectColumn = {
+            checkbox: true,
+            formatter: function(value, row, index) {
+				for(i = 0; i < options.idList.length; i++) {
+					if(row.id == options.idList[i]) {
+						return {
+							checked: true, //设置选中
+							disabled: true //设置是否可用
+						};
+					}
+				}
+
+			}
+        }
+	} else {
+		selectColumn = {
+			radio: true,
+	   }
+	}
+	getTendereeList(selectColumn);
+	
+	//确定
+	$("#btnSure").click(function(){
+		var row = getChild();
+		if(row){
+			callback(row);
+			var index = parent.layer.getFrameIndex(window.name); 
+			parent.layer.close(index);
+		}
+	});
+	
+}
+function getChild(){
+	var row = $("#tableList").bootstrapTable("getSelections");
+	if(row.length>0){
+		var index=parent.layer.getFrameIndex(window.name);
+    	parent.layer.close(index);
+    	return row
+	}else{
+		parent.layer.alert("请选择招标项目")			
+	}
+}
+
+function getTendereeList(selectColumn){
+	$('#tableList').bootstrapTable({
+        method: 'post', // 向服务器请求方式
+        contentType: "application/x-www-form-urlencoded", // 如果是post必须定义
+        url: tenderUrl, // 请求url		
+        cache: false, // 是否使用缓存，默认为true，所以一般情况下需要设置一下这个属性（*）
+        striped: true, // 隔行变色
+        dataType: "json", // 数据类型
+        pagination: true, // 是否启用分页
+        showPaginationSwitch: false, // 是否显示 数据条数选择框
+        pageSize: 10, // 每页的记录行数（*）
+        pageNumber: 1, // table初始化时显示的页数
+        pageList: [5, 10, 25, 50],
+        search: false, // 不显示 搜索框
+        sidePagination: 'server', // 服务端分页
+        classes: 'table table-bordered', // Class样式
+        silent: true, // 必须设置刷新事件
+        toolbar: '#toolbar', // 工具栏ID
+        toolbarAlign: 'left', // 工具栏对齐方式
+        sortStable: true,
+        queryParams: queryParams, // 请求参数，这个关系到后续用到的异步刷新
+        queryParamsType: "limit",
+        onLoadError:function(){
+        	parent.layer.closeAll("loading");
+        	parent.layer.alert("请求失败");
+        },
+        onLoadSuccess:function(data){ 
+        	parent.layer.closeAll("loading");
+        	if(!data.success){
+        		
+        		parent.layer.alert(data.message);
+        	}
+        },
+        onCheck: function (row) {
+            checkboxed = row
+        },
+        columns: [selectColumn, 
+        {
+			field: 'tenderProjectCode',
+			title: '招标项目编号',
+			align: 'left',
+			cellStyle:{
+				css:widthCode
+			}
+		},
+		{
+			field: 'tenderProjectName',
+			title: '招标项目名称',
+			align: 'left',
+			cellStyle:{
+				css:widthName
+			}
+		},
+		{
+			field: 'tenderMode',
+			title: '招标方式',
+			align: 'center',
+			width: '100',
+			cellStyle:{
+				css:{"white-space":"nowrap"}
+			},
+			formatter:function(value, row, index){
+            	var str="";
+            	if(value==1){
+            		str="公开招标";
+            	} else if(value==2){
+            		str ="邀请招标";
+            	}
+            	return str;
+            }
+			
+		},
+		{
+			field: 'examType',
+			title: '资格审查方式 ',
+			align: 'center',
+			width: '100',
+			cellStyle:{
+				css:{"white-space":"nowrap"}
+			},
+			formatter:function(value, row, index){
+            	var str="";
+            	if(value==1){
+            		str="资格预审";
+            	} else if(value==2){
+            		str ="资格后审";
+            	}
+            	return str;
+            }
+		}]
+    });
+}
+// 分页查询参数，
+function queryParams(params) {
+    return {
+        'pageNumber': params.offset / params.limit + 1, //当前页数
+        'pageSize': params.limit, // 每页显示数量
+        'offset': params.offset, // SQL语句偏移量	
+        'tenderProjectCode': $('#tenderProjectCode').val(),
+		'tenderProjectName': $('#tenderProjectName').val(),
+        "tenderProjectState": 2
+    }
+}

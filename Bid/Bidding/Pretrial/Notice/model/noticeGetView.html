@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8">
+		<meta http-equiv="pragma" content="no-cache"><!-- 禁止浏览器从本地计算机的缓存中访问页面内容 --> 
+		<meta http-equiv="cache-control" content="no-cache"><!-- 用于指定请求和响应遵循的缓存机制 --> 
+		<meta http-equiv="expires" content="0"><!-- 用于设定网页的到期时间，一旦网页过期，必须到服务器上重新传输； -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>查看公告</title>
+    <link rel="stylesheet" href="../../../../media/js/layer/mobile/need/layer.css" />
+    <link rel="stylesheet" href="../../../../media/js/bootstrap/css/bootstrap.css" />
+	<style>
+		html,body { }
+		.pretrial,.revise{
+			display: none;
+		}
+		.display_none{
+			display: none;
+		}
+		.set_height{
+		    display: inline-block;
+			padding: 6px 12px;
+		}
+		/*.signState {
+			position: fixed;
+			right: 20px;
+			top: 50%;
+			background-color: #;
+		}*/
+	</style>
+</head>
+
+<body>
+	
+	<div class="pageModel">
+	    <table class="table table-bordered " style="width: 1000px;margin: auto;">
+	    	<tr>
+	    		<td colspan="4">
+					<table id="ueditorContent" class="table table-bordered "></table>
+	    		</td>
+	    	</tr>
+        	<tr>
+	            <td colspan="4" style="font-weight: bold;" class="active">相关附件</td>
+	        </tr>
+	        <tr>
+                <td colspan="4" id="fileContent">
+                	
+                </td>
+            </tr>
+	    	<tr>
+	            <td colspan="4" style="font-weight: bold;" class="active">历史公告</td>
+	    	</tr>
+		    <tr>
+		      	<td colspan="4">
+		      		<table id="tenderNoticeList" class="table table-bordered table-striped" >
+				    	<thead>
+				    		<tr>
+				    			<th style="width: 50px; text-align: center;">序号</th>
+				    			<th>标题</th>
+				    			<th style="width: 200px; text-align: center;">发布时间</th>
+				    			<th style="width: 100px; text-align: center;">操作</th>
+				    		</tr>
+				    	</thead>
+				    	<tbody></tbody>
+				    </table>
+		      	</td>
+		    </tr>
+	        
+	    </table>
+	    
+    </div>
+    <div class="bottom-btn" style="z-index: 11000;">
+    	<span class="signState" id="endDate" style="font-size: 16px;color: red;margin-right: 20px;"></span>
+		<button type="button" class="btn btn-primary signState" id="getFile"><span class="glyphicon glyphicon-log-in"></span>我要购标</button>
+        <button type="button" class="btn btn-default" id="btnClose"><span class="glyphicon glyphicon-remove"></span>关闭</button>
+    </div>
+    <script type="text/javascript" src="../../../../media/js/jquery/jquery.js"></script>
+    <script type="text/javascript" src="../../../../media/js/jquery/jquery.extend.js"></script>
+    <script type="text/javascript" src="../../../../media/js/base/util.js"></script>
+    <script type="text/javascript" src="../../../../media/js/base/common.js"></script>
+	<script type="text/javascript" src="../../../../media/js/base/UEditorFun.js"></script>
+    <script type="text/javascript" src="../../../../media/js/bootstrap/js/bootstrap.js"></script>
+    <script type="text/javascript" src="../../../../media/js/base/StreamUpload.js"></script>
+    <script type="text/javascript" src="../../../Model/js/dataLinkage.js"></script>
+	<script src="../../../../Order/Pay/js/payment.js"></script>
+	<script src="../../../Model/js/checkServiceCost.js"></script>
+    <script type="text/javascript" src="../../../Model/js/public.js"></script>
+    <script type="text/javascript" src="../js/noticeGetView.js"></script>
+   <!-- <script src="../../../../media/js/base/Pay.js"></script> -->
+</body>
+
+</html>

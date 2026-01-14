@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8">
+		<meta http-equiv="pragma" content="no-cache"><!-- 禁止浏览器从本地计算机的缓存中访问页面内容 --> 
+		<meta http-equiv="cache-control" content="no-cache"><!-- 用于指定请求和响应遵循的缓存机制 --> 
+		<meta http-equiv="expires" content="0"><!-- 用于设定网页的到期时间，一旦网页过期，必须到服务器上重新传输； -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>查看邀请函</title>
+    <link rel="stylesheet" href="../../../../media/js/layer/mobile/need/layer.css" />
+    <link rel="stylesheet" href="../../../../media/js/bootstrap/css/bootstrap.css" />
+	<style>
+		html,body { height: 100%;}
+		.pretrial,.revise{
+			display: none;
+		}
+		.display_none{
+			display: none;
+		}
+		.padding_button{
+			padding: 5px 8px !important;
+			line-height: 30px !important;
+		}
+	</style>
+</head>
+
+<body>
+	<form id="addNotice">
+		<div class="pageModel">
+			<table class="table table-bordered " style="width: 1000px;margin: auto;">
+	            <!--<tr>
+		            <td colspan="4" style="font-weight: bold;" class="active padding_button">标段信息</td>
+		        </tr>
+		        <tr>
+		        	<td class="th_bg">标段编号</td>
+		        	<td>
+		        		<span id="interiorBidSectionCode" class="set_height"></span>
+		        	</td>
+		        	<td class="th_bg">标段名称</td>
+	                <td>
+	                	<span id="bidSectionName" class="set_height"></span>
+	                </td>
+		        </tr>-->
+				<tr>
+		            <td colspan="4" style="font-weight: bold;" class="active padding_button">邀请函基本信息
+		            	
+		            </td>
+		        </tr>
+		    	<tr>
+		    		<td colspan="4">
+		    			<!--startprint1-->
+		    			<div style="overflow:auto;padding: 10px;">
+		    				<div id="bidInviteIssueContent" style="margin: auto;width: 210mm;padding: 10mm;box-shadow: 0 0 5px #DDDDDD;"></div>
+		    			</div>
+		    			<!--endprint1-->
+		    		</td>
+		    	</tr>
+		    	<tr>
+		            <td colspan="4" style="font-weight: bold;" class="active padding_button">附件</td>
+		        </tr>
+	            <tr>
+	                <td colspan="4" id="fileContent">
+	                	
+	                </td>
+	            </tr>
+		    </table>
+		    
+	        <div class="bottom-btn" style="z-index: 11000;">
+	        	<button type="button" class="btn btn-primary " id="btnPrint">
+            		<span class="glyphicon glyphicon-print"></span>打印
+            	</button>
+	            <button type="button" class="btn btn-default" id="btnClose"><span class="glyphicon glyphicon-remove"></span>关闭</button>
+	        </div>
+		</div>
+	</form>
+	
+	    
+	
+    <script type="text/javascript" src="../../../../media/js/jquery/jquery.js"></script>
+    <script type="text/javascript" src="../../../../media/js/jquery/jquery.extend.js"></script>
+    <script type="text/javascript" src="../../../../media/js/base/util.js"></script>
+    <script type="text/javascript" src="../../../../media/js/base/common.js"></script>
+    <script type="text/javascript" src="../../../../media/js/bootstrap/js/bootstrap.js"></script>
+    <script type="text/javascript" src="../../../Model/js/public.js"></script>
+    <script type="text/javascript" src="../../../../media/js/base/WorkflowInfoNew.js"></script>
+    <script type="text/javascript" src="../../../Model/js/dataLinkage.js"></script>
+    <script type="text/javascript" src="../../../../media/js/base/StreamUpload.js"></script>
+    <script type="text/javascript" src="../js/historyView.js"></script>
+</body>
+
+</html>

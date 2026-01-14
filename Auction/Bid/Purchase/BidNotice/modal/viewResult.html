@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="pragma" content="no-cache">
+		<!-- 禁止浏览器从本地机的缓存中调阅页面内容 -->
+		<meta http-equiv="cache-control" content="no-cache, must-revalidate">
+		<meta http-equiv="expires" content="0">
+		<title>查看结果通知书</title>
+		<link rel="stylesheet" href="../../../../media/js/bootstrap/css/bootstrap.min.css">
+		<style>
+			h3 {
+				font-weight: 700;
+				color: #1A8FFF;
+			}
+			
+			.resultContent {
+				width: 500px;
+				padding: 25px 25px;
+				
+				margin: auto;
+				background-image: url(../../../../media/image/images/watermarkOne.png);
+				overflow: auto;
+			}
+			.w-e-text-container { height: 250px !important;}
+			
+		</style>
+	</head>
+
+	<body style="width: 99%;padding-left: 10px;padding-top: 10px;">
+		
+		<div class='resultContent'>
+			<div>
+				<h3 class="text-center isBidText">中选通知书</h3>
+				<h3 class="text-center isnotBidText">未中选通知书</h3>
+			</div>		
+			<div class="temple" style="display: none;"></div>
+			<div class="seeResult" style="display: none;">				
+				<div class="isBid isTemplet">
+					<p><font size="3"><span id="enterpriseName"></span>：</font></p>
+					<p style="text-indent:32px;"><font size="3">在我公司组织的项目&nbsp;<span id="projectName"></span>(项目编号：<span id="projectCode"></span>)中，<span class="tenderType0">包件&nbsp;<span id="packageName"></span >(包件编号：<span id="packageNum"></span>)中<span class="tenderTypes"></span>，</span>确定贵公司为成交单位，成交金额<span id="bidPrice"></span><span id ='wan'></span>元。</font></p>
+					<p style="text-indent:32px;"><font size="3">请贵公司接此中选通知书后按规定与采购人签订合同。</font></p>
+					<p style="text-indent:32px;"><font size="3">特此通知。</font></p>		
+				</div>
+				<div class="isnotBid isNotTemplet">
+					<p><font size="3"><span id="enterpriseName"></span>：</font></p>
+					<p style="text-indent:32px;"><font size="3">在我公司组织的项目&nbsp;<span id="projectName"></span>(项目编号：<span id="projectCode"></span>)中，<span class="tenderType0">包件&nbsp;<span id="packageName"></span>(包件编号：<span id="packageNum"></span>)中<span class="tenderTypes"></span>，</span>贵公司未能成为中选单位。</font></p>
+					<p style="text-indent:32px;"><font size="3">感谢贵公司的参与。</font></p>
+					<p style="text-indent:32px;"><font size="3">特此通知。</font></p>
+				</div>
+			</div>
+			<div class="examType_show examType_Html">
+				<p><font size="3"><span id="enterpriseName"></span>：</font></p>
+				<p style="text-indent:32px;"><font size="3">在我公司组织的项目&nbsp;<span id="projectName"></span>(项目编号：<span id="projectCode"></span>)中，</span >包件&nbsp;<span id="packageName"></span>(包件编号：<span id="packageNum"></span>)中<span class="tenderTypes"></span>，贵公司<span id="isOut">通过</span>资格审查。</p>
+				<p style="text-indent:32px;"><font size="3"><span id="isOutp">请贵公司接此中选通知书后按规定参与接下来的项目流程。 </span></font></p>
+				<p style="text-indent:32px;"><font size="3">特此通知。</font></p>		
+			</div>
+			<div class="editResult" id="editResult" style="display: none;">
+				
+			</div>
+			
+			<div class = 'gongzhang' style="position:relative;right:25px;text-align: right;margin-top: 130px;">
+				<img id='gz' width='150px' hight='150px' style="position: absolute;right: 10px;top:-70px"  />
+				<p><span style="" >东风(武汉)工程咨询有限公司</span></p>
+				<span style="" id="nowtime"></span>
+			</div>
+			
+		</div>
+		<!--endprint1-->
+		<div style="width: 100%;height: 50px;text-align:center;position: fixed;bottom: 0;left:0;background-color: #FFFFFF;" class="btnSee">
+			<input type="button" name='button_export' title='打印' onclick=preview(1) value="打印" class="btn btn-primary btn-sm btnPreview" style="width: 80px;"><input type="button" name='' title='打印' onclick=saveEdit() value="保存" class="btn btn-primary btn-sm btnSave" style="width: 80px; display: none;">&nbsp;
+			<input type="button" id="btnClose" class="btn btn-primary btn-sm" style="width: 80px;" onclick=closeWin() value='关闭' >
+		</div>
+	</body>
+	<script type="text/javascript" src="../../../../media/js/jquery/jquery.js"></script>
+	<script type="text/javascript" src="../../../../media/js/jquery/jquery.params.js"></script>
+	<script type="text/javascript" src="../../../../media/js/jquery/jquery.extend.js"></script>
+	<script type="text/javascript" src="../../../../media/js/bootstrap/js/bootstrap.js"></script>
+	<script type="text/javascript" src="../../../../media/js/layer/layer.js"></script>
+	<script type="text/javascript" src="../../../../media/js/layer/laydate.js"></script>
+	<script type="text/javascript" src="../js/viewResult.js"></script>
+	<script type="text/javascript" src="../../../../media/js/wangEditor-3.1.1/release/wangEditor.js"></script>
+	
+</html>

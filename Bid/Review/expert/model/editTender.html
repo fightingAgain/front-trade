@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8">
+		<meta http-equiv="pragma" content="no-cache"><!-- 禁止浏览器从本地计算机的缓存中访问页面内容 --> 
+		<meta http-equiv="cache-control" content="no-cache"><!-- 用于指定请求和响应遵循的缓存机制 --> 
+		<meta http-equiv="expires" content="0"><!-- 用于设定网页的到期时间，一旦网页过期，必须到服务器上重新传输； -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>编辑招标人代表</title>
+    <link rel="stylesheet" href="../../../media/js/layer/mobile/need/layer.css" />
+    <link rel="stylesheet" href="../../../media/js/bootstrap/css/bootstrap.css" />
+    <link rel="stylesheet" href="../../../media/js/bootstrap/css/bootstrap-table.css">
+</head>
+
+<body>
+    <form class="pageModel" id="formName" name="formName">
+    	<table class="table table-bordered ">
+        	<tr >
+	            <td colspan="4" style="font-weight: bold;" class="active">招标人代表信息</td>
+	        </tr>
+	        <tr>
+            	<td class="th_bg">姓名<i class="red">*</i></td>
+                <td colspan="3">
+                	<input type="text" id="tendereeName" name="tendereeName"  class="form-control" datatype="*" errormsg="请输入姓名" />
+                	<!--<input type="hidden"  id = "id" name="id"/>-->
+                	<input type="hidden"  id = "tendereeRecordApplyId" name="tendereeRecordApplyId"/>
+                </td>
+            </tr>
+            <tr>
+            	<td class="th_bg">性别<i class="red">*</i></td>
+                <td >
+                	<label >
+                		<input type="radio" checked="checked" name="sex" id="" value="1" style="margin-right: 2px;" />
+                		男
+                	</label>
+                    <label style="padding:7px 20px;margin-bottom: 0;">
+                    	<input type="radio"  name="sex" id="" value="2" style="margin-right: 2px;" />
+                    	女
+                    </label>
+                </td>
+                <td class="th_bg">有无评标经历<i class="red">*</i></td>
+                <td >
+                	<label >
+                		<input type="radio" checked="checked" name="isHasBid" id="" value="1" style="margin-right: 2px;" />
+                		有
+                	</label>
+                    <label style="padding:7px 20px;margin-bottom: 0;">
+                    	<input type="radio"  name="isHasBid" id="" value="0" style="margin-right: 2px;" />
+                    	无
+                    </label>
+                </td>
+            </tr>
+            <tr>
+                <td class="th_bg">年龄<i class="red">*</i></td>
+                <td >
+                	<input type="number" id="age" name="age"  style="width: 150px;" class="form-control" datatype="*" errormsg="请输入年龄" />
+                </td>
+                <td class="th_bg">从事专业年限（<span style="color: #BB2413;">年</span>）<i class="red">*</i></td>
+                <td >
+                	<input type="number" id="workYears" name="workYears" style="width: 150px;" class="form-control" datatype="*" errormsg="请输入从事专业年限" />
+                </td>
+            </tr>
+             <tr>
+            	<td class="th_bg">身份证号码<i class="red">*</i></td>
+                <td >
+                	<input type="text" id="idCard" name="idCard"  class="form-control" datatype="*" errormsg="请输入身份证号码" />
+                </td>
+            	<td class="th_bg">手机号码<i class="red">*</i></td>
+                <td >
+                	<input type="text" id="telNumber" name="telNumber"  class="form-control" datatype="*" errormsg="请输入手机号码" />
+                </td>
+            </tr>
+            <tr>
+                <td class="th_bg">学历和专业<i class="red">*</i></td>
+                <td colspan="3">
+                	<input type="text" id="educationMajor" name="educationMajor"  class="form-control" datatype="*" errormsg="请输入学历和专业" />
+                </td>
+            </tr>
+            <tr>
+            	<td class="th_bg">技术职称<i class="red">*</i></td>
+                <td colspan="3">
+                	<input type="text" id="technicalTitle" name="technicalTitle"  class="form-control" datatype="*" errormsg="请输入技术职称" />
+                </td>
+            </tr>
+            <tr>
+            	<td class="th_bg">注册资格证书编号<i class="red">*</i></td>
+                <td colspan="3">
+                	<input type="text" id="credentialsNumber" name="credentialsNumber"  class="form-control" datatype="*" errormsg="请输入注册资格证书编号" />
+                </td>
+            </tr>
+            <tr>
+                <td class="th_bg">工作单位<i class="red">*</i></td>
+                <td colspan="3">
+                	<input type="text" id="company" name="company"  class="form-control" datatype="*" errormsg="请输入工作单位" />
+                </td>
+            </tr>
+            <tr>
+            	<td class="th_bg">备注</td>
+                <td colspan="3">
+                	<textarea class="form-control" rows="3" id="remark" name="remark" style="resize: none;"  data-max-length="500"></textarea>
+                </td>
+            </tr>
+    	</table>
+    </form>
+    <div class="bottom-btn">
+        <button type="button" class="btn btn-primary" id="btnSubmit"><span class="glyphicon glyphicon-saved"></span>确定</button>
+        <button type="button" class="btn btn-default" id="btnClose"><span class="glyphicon glyphicon-remove"></span>取消</button>
+    </div>
+    
+    <script type="text/javascript" src="../../../media/js/jquery/jquery.js"></script>
+    <script type="text/javascript" src="../../../media/js/jquery/jquery.extend.js"></script>
+    <script type="text/javascript" src="../../../media/js/base/util.js"></script>
+    <script type="text/javascript" src="../../../media/js/base/common.js"></script>
+    <script type="text/javascript" src="../../../media/js/bootstrap/js/bootstrap.js"></script>
+    <script type="text/javascript" src="../../../media/js/layer/layer.js"></script>
+    
+    <script type="text/javascript" src="../../public.js"></script>
+    <script type="text/javascript" src="../js/editTender.js"></script>
+   
+</body>
+
+</html>

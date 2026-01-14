@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="pragma" content="no-cache">
+		<!-- 禁止浏览器从本地机的缓存中调阅页面内容 -->
+		<meta http-equiv="cache-control" content="no-cache, must-revalidate">
+		<meta http-equiv="expires" content="0">
+		<title>项目公告审核详情</title>
+		<link rel="stylesheet" href="../../../../../media/js/bootstrap/css/bootstrap.css" />
+		<link rel="stylesheet" href="../../../../../media/js/bootstrap/css/bootstrap-table.min.css" />	
+	</head>
+
+	<body style="width:99%; padding-left: 10px; padding-top: 10px;">
+	<table class="table table-bordered " style="margin-bottom: 0px;">
+     	<tr>
+            <td colspan="4" style="font-weight: bold;border: none;" class="active">报名信息</td>     		
+        </tr>
+        <tr >
+            <td class="th_bg" style="width: 250px">企业名称</td>
+            <td style="text-align: left;width: 300px">
+            	<div id="enterpriseName"></div>           	
+            </td>
+            <td class="th_bg" style="width: 250px">报名时间</td>
+            <td style="text-align: left;width: 300px">
+            	<div id="subDate"></div>           	
+            </td>  
+        </tr>
+		 <tr>
+		    <td class="th_bg">联系人</td>
+		    <td style="text-align: left;">
+		    	<div id="linkMen"></div>
+		    </td>
+		    <td class="th_bg">联系人电话</td>
+		    <td style="text-align: left;">
+		    	<div id="linkTel"></div>
+		    </td>
+		 </tr>
+     </table>  
+	 <table class="table  table-bordered " id="tableWorkflow" style="display: none;">
+			<tr class="active">
+				<th colspan="2">审核</th>
+			</tr>
+			<tr id="auditrow1">
+				<td class="th_bg"  width="20%">审核状态</td>
+				<td style="text-align: left;">
+					<input type="radio" name="checkState" value="1" />通过
+					<input type="radio" name="checkState" value="2" />不通过
+
+				</td>
+			</tr>
+<!--			<tr id="auditrow2">
+				<td class="th_bg"  width="20%">选择审核人</td>
+				<td>
+					<select name="" id="employeeId" class="form-control" style="width: 180px;">
+
+					</select>
+				</td>
+			</tr>-->
+			<tr class="searched" id="auditrow3">
+				<td class="th_bg"  width="20%">审核说明</td>
+				<td><textarea rows="5" id="reason" class="form-control"  style="width: 90%;height: 80px;resize:none;" name="content"></textarea></td>
+			</tr>			 		
+		</table>
+		
+		<table class="table table-bordered" id="workflowList">
+			<tr class="active">
+				<th>审核流程</th>
+			</tr>
+			<tr>
+				<td>
+					<table class="table table-bordered" id="workflowListDetail"></table>
+				</td>
+			</tr>
+		</table>
+
+		<div style="width: 100%;height: 70px;">
+		</div>
+		<div style="width: 100%;height: 50px;text-align:center;position: fixed;bottom: 0;background-color: #FFFFFF;">
+			<button type="button" id="btn_submit" class="btn btn-primary"><span class="glyphicon glyphicon-saved"></span>确定</button>
+			<button type="button" id="btn_close" class="btn btn-default"><span class="glyphicon glyphicon-remove"></span>关闭</button>
+		</div>
+		<style>
+			.table>thead>tr>th,
+			.table>tbody>tr>th,
+			.table>tfoot>tr>th,
+			.table>thead>tr>td,
+			.table>tbody>tr>td,
+			.table>tfoot>tr>td {
+				vertical-align: middle;
+			}
+			
+			.none {
+				display: none;
+			}
+		</style>
+		<script type="text/javascript" src="../../../../../media/js/jquery/jquery.js"></script>
+		<script type="text/javascript" src="../../../../../media/js/jquery/jquery.extend.js"></script>
+		<script type="text/javascript" src="../../../../../media/js/jquery/jquery.params.js"></script>
+		<script type="text/javascript" src="../../../../../media/js/base/common.js"></script>
+		<script type="text/javascript" src="../../../../../media/js/layer/layer.js"></script>
+		<script type="text/javascript" src="../../../../../media/js/bootstrap/js/bootstrap.js"></script>
+		<script type="text/javascript" src="../../../../../media/js/bootstrap/js/bootstrap-table.min.js"></script>
+		<script type="text/javascript" src="../../../../../media/js/bootstrap/js/bootstrap-table-zh-CN.min.js"></script>
+<!--		<script type="text/javascript" src="../../../../../media/js/base/WorkflowInfo.js"></script>-->
+<!--		<script type="text/javascript" src="../../../../../media/js/base/digital.js" ></script>		-->
+		<script type="text/javascript" src="../js/viewaudit.js"></script>
+<!--		<script type="text/javascript" src="../js/supplierInfo.js"></script>
+ 		<script type="text/javascript" src="../js/suppliment.js"></script>-->
+	</body>
+
+</html>

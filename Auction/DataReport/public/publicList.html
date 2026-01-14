@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>业务统计报表（公共）</title>
+		<!-- 网页不会被缓存 -->
+		<meta http-equiv="pragma" content="no-cache">
+		<!-- 禁止浏览器从本地机的缓存中调阅页面内容 -->
+		<meta http-equiv="cache-control" content="no-cache, must-revalidate">
+		<meta http-equiv="expires" content="0">
+	</head>
+	<style>
+		.table>thead>tr>th,
+		.table>tbody>tr>th,
+		.table>tfoot>tr>th,
+		.table>thead>tr>td,
+		.table>tbody>tr>td,
+		.table>tfoot>tr>td {
+			vertical-align: middle;
+		}
+	</style>
+
+	<body>
+		<div class="container-fluid">
+			<input type="hidden" name="departmentName" id="departmentName" datatype="*" errormsg="请选择项目归属部门" />
+			<input type="hidden" name="dept" id="dept" datatype="*" errormsg="请选择项目归属部门" />
+
+			<div id="query">
+
+			</div>
+			
+			<table class="table table-hover table-bordered" id="table"></table>
+		</div>
+		<script language="javascript" type="text/javascript" src="media/js/My97DatePicker/WdatePicker.js"></script>
+		<script type="text/javascript" src="media/js/Model/public.js" ></script>
+		<script type="text/javascript" src="Auction/DataReport/public/js/publicList.js"></script>
+
+	</body>
+
+</html>

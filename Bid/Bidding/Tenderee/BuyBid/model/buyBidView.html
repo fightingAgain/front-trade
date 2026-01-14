@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta http-equiv="pragma" content="no-cache"><!-- 禁止浏览器从本地计算机的缓存中访问页面内容 --> 
+	<meta http-equiv="cache-control" content="no-cache"><!-- 用于指定请求和响应遵循的缓存机制 --> 
+	<meta http-equiv="expires" content="0"><!-- 用于设定网页的到期时间，一旦网页过期，必须到服务器上重新传输； -->
+    <title>项目编辑</title>
+    <link rel="stylesheet" href="../../../../media/js/layer/mobile/need/layer.css" />
+    <link rel="stylesheet" href="../../../../media/js/bootstrap/css/bootstrap.css" />
+    <link rel="stylesheet" href="../../../../media/js/stream/css/stream-v1.css" />
+	<style>
+		html,body { height: 100%;width: 100%;}
+		a { text-decoration: none; cursor: pointer;}
+		a:hover { text-decoration: none;}
+		.readonly{
+			border: none;
+		    background: none !important;
+		    outline: none !important;
+		    box-shadow: none !important;
+		}
+		.iptFile {
+			position: absolute;
+			z-index: 3;
+			top: 0;
+			left: 0;
+			width: 108px;
+			height: 30px;
+			opacity: 0;
+		}
+		.table-comm>tbody>tr>td { width: 35%;}
+		.table-comm>tbody>tr>td.th_bg, .table>tbody>tr>th.th_bg {
+			width: 15%;
+		}
+		.fileListTab { display: none;}
+	</style>
+</head>
+
+<body>
+    <form class="pageModel" id="formName" name="formName">
+    	<div class="panel-group" id="accordion">
+    		<div class="panel panel-accordion panel-default">
+	    		<div class="panel-heading active"  role="tab" id="headingOne">  
+			 		<h4 class="panel-title">
+		            	<a  role="button" data-toggle="collapse" href="#collapseOne" aria-controls="collapseOne"  aria-expanded="true"  >
+		            		基本信息
+		            	</a>
+			 		</h4>  
+			   	</div>  
+			  	<div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">  
+			       	<div class="panel-body">
+			       		<table  class="table table-bordered table-comm">
+			       			<tr>
+			       				<td class="th_bg">订单编号</td>
+					        	<td colspan="3"><span id="orderId"></span></td>
+			       			</tr>
+					        <tr>
+					        	<td class="th_bg">标段编号</td>
+					        	<td><span id="interiorBidSectionCode"></span></td>
+					        	<td class="th_bg">标段名称</td>
+					        	<td><span id="bidSectionName"></span></td>
+					        </tr>
+					        <tr>
+					        	<td class="th_bg">支付时间</td>
+					        	<td><span id="payTime"></span></td>
+					        	<td class="th_bg">支付金额（元）</td>
+					        	<td><span id="money"></span></td>
+					        </tr>
+			       		</table>
+		       		</div>
+	       		</div>
+       		</div>
+   		</div>
+        <div class="bottom-btn">
+            <button type="button" class="btn btn-default" id="btnClose"><span class="glyphicon glyphicon-remove"></span>关闭</button>
+        </div>
+    </form>
+    <script type="text/javascript" src="../../../../media/js/jquery/jquery.js"></script>
+    <script type="text/javascript" src="../../../../media/js/jquery/jquery.extend.js"></script>
+    <script type="text/javascript" src="../../../../media/js/base/util.js"></script>
+    <script type="text/javascript" src="../../../../media/js/base/common.js"></script>
+    <script type="text/javascript" src="../../../../media/js/bootstrap/js/bootstrap.js"></script>
+    <script type="text/javascript" src="../../../Model/js/public.js"></script>
+    <script type="text/javascript" src="../js/buyBidView.js"></script>
+</body>
+
+</html>

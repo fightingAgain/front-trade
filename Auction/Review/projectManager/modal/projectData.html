@@ -1,0 +1,204 @@
+<!--
+ * @Author: your name
+ * @Date: 2020-09-09 15:38:53
+ * @LastEditTime: 2020-09-27 14:58:43
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: \FrameWork_bf\bidPrice\Review\projectManager\modal\projectData.html
+--> 
+<!-- 网页不会被缓存 -->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+	<head>
+		<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+		<meta http-equiv="pragma" content="no-cache">
+		<!-- 禁止浏览器从本地机的缓存中调阅页面内容 -->
+		<meta http-equiv="cache-control" content="no-cache, must-revalidate">
+		<meta http-equiv="expires" content="0">
+		<title>项目信息</title>
+		<style type="text/css">
+			.ipBox span{
+				padding: 2px 4px;
+				border-radius: 4px;
+				margin: 5px 5px;
+				display: inline-block;
+			}
+			.ipBox span.red{
+				background: #ffe7e7;
+				color: red;
+			}
+			.ipBox .green_wrap{
+				background: #d4ffd3;
+			}
+			.ipBox span.green{
+				color: green;
+				background: #d4ffd3;
+			}
+			.ipBox span.default{
+				background:#eee
+			}
+			/* .showIP{
+				display: none;
+			} */
+			.bondList{
+				display: none;
+			}
+		</style>
+</head>
+<body>
+	<form id="formbackage" name="purchase">
+     <table class="table table-bordered " style="margin-bottom: 0px;">
+     	<tr>
+            <td colspan="4" style="font-weight: bold;border: none;" class="active">项目信息</td>
+        </tr>
+        <tr >
+            <td class="th_bg">采购项目名称</td>
+            <td style="text-align: left;width: 35%;">
+            	<div id="projectName"></div>           	
+            </td>
+            <td class="th_bg">采购项目编号</td>
+            <td style="text-align: left;">
+            	<div id="projectCode"></div>           	
+            </td>  
+        </tr>
+         <tr>
+         	<td class="th_bg">资金来源</td>
+            <td  style="text-align: left;">
+            	<div id="sourceFunds"></div>            	
+            </td> 
+         	<td class="th_bg">项目类型</td>
+            <td  style="text-align: left;">
+            	<div id="projectTypeText"></div>            	
+            </td>
+		 </tr> 
+		 <tr>
+			<td class="th_bg">资格审查方式</td>
+			<td colspan="3" style="text-align: left;">
+				<div id="examtypeName"></div>	
+			</td>         
+		 </tr>        
+         <tr class="engineering">
+            <td class="th_bg">项目名称</td>
+            <td colspan="3" style="text-align: left;">
+            	<div id="programmeName"></div>
+            	
+            </td>         
+           
+         </tr>
+         <tr class="engineering">
+         	<td class="th_bg">项目编号</td>
+            <td colspan="3" style="text-align: left;">
+            	<div id="programmeCode"></div>           	
+            </td>
+         </tr>
+         <tr class="engineering">
+            <td class="th_bg">项目地址</td>
+            <td colspan="3" style="text-align: left;">
+            	<div id="programmeAddress"></div>            	
+            </td>
+         </tr>       
+		 <tr class="isAgent1" style="display: none">
+		    <td colspan="4" style="font-weight: bold;" class="active">代理机构信息</td>            
+		 </tr>
+		 <tr class="isAgent1" style="display: none">
+		    <td  class="th_bg">代理机构名称</td>
+		    <td colspan="3" style="text-align: left;">
+		    	<div id="agencyName"></div>
+		    </td>
+		 </tr>
+		 <tr class="isAgent1" style="display: none">
+		    <td  class="th_bg">代理机构地址</td>
+		    <td colspan="3" style="text-align: left;">
+		    	<div id="agencyAddress"></div>
+		    </td>
+		 </tr>
+		 <tr class="isAgent1" style="display: none">
+		    <td class="th_bg">代理机构联系人</td>
+		    <td style="text-align: left;">
+		    	<div id="agencyLinkmen"></div>
+		    </td>
+		    <td class="th_bg">代理机构联系电话</td>
+		    <td style="text-align: left;">
+		    	<div id="agencyTel"></div>
+		    </td>
+		 </tr>
+		 
+		 <tr>
+		    <td colspan="4" style="font-weight: bold;border: none;" class="active">采购人信息</td>
+		 </tr>
+		 <tr>
+		    <td class="th_bg">采购人名称</td>
+		    <td colspan="3" style="text-align: left;">
+		    	<div id = "purchaserName"></div>		    
+		    </td>
+		 </tr>
+		 <tr >
+		    <td class="th_bg">采购人地址</td>
+		    <td colspan="3" style="text-align: left;">
+				<div id = "purchaserAddress" ></div>				
+		    </td>
+		 </tr>
+		 <tr>
+		    <td class="th_bg">联系人</td>
+		    <td style="text-align: left;">
+		    	<!--<div id = "purchaserLinkmen" ></div>-->
+		    	<div id="purchaserLinkmen"></div>
+		    </td>
+		    <td class="th_bg">联系人电话</td>
+		    <td style="text-align: left;">
+		    	<div id="purchaserTel"></div>
+		    </td>
+		</tr>
+		<tbody id="montage"></tbody>	
+		<tr class="tenderTypeW">
+			<td colspan="4">
+				<div id="offerForm"></div>	        
+			</td>
+		</tr>
+		<tbody id="fileHtml" class="tenderTypeW"></tbody>
+        <tr>
+            <td colspan="4" style="font-weight: bold;" class="active">时间安排</td>
+        </tr>
+		<tbody style="border:none ;" id="nowOrOld"></tbody>
+		<tr class="bondList">
+			<td colspan="4" class="active">保证金递交情况</td>
+		</tr>
+		<tr class="bondList">
+			<td colspan="4">
+				<table class="table table-bordered" id="bondList"></table>
+			</td>
+		</tr>
+		<tr class="showIP" style="display: none;">
+		    <td colspan="4" style="font-weight: bold;" class="active">文件递交相关电子信息</td>
+		</tr>
+		<tr class="showIP" style="display: none;">
+			<td colspan="4">
+				<table  class="table table-bordered" id="ipTableList"></table>
+				<div id="">
+					<p style="color:#999;margin-bottom: 5px;">说明：红字标识信息为系统检测到不同供应商的重复IP数据（仅供参考），绿字标识信息为东风咨询有限公司对外提供服务的公用电脑或公用外网IP地址数据。</p>
+					<!-- 描述不准确，且规定内容易变更，删除描述    2024.5.8 -->
+					<!-- <div class="showExplain" style="color: red;display: none;">根据《东风汽车集团有限公司电子采购招投标过程信息监管规定》，有下列情形的，应认定为串通投标行为：1.电子交易系统CA证书号相同的；2.下载或者上传采购招投标文件的IP地址相同的；3.MAC地址相同的；4.硬盘序列号相同的；5.施工项目工程造价软件锁序列号相同的；6.法律法规或公司制度规定的其它串通投标情形。</div> -->
+				</div>
+			</td>
+		</tr>
+		<tr class="showWarningList" style="display: none;">
+			<td colspan="4" class="active">供应商相关信息</td>
+		</tr>
+		<tr class="showWarningList" style="display: none;">
+			<td colspan="4">
+				<div style="width: calc(100vw - 300px);">
+					<table class="table table-bordered" style="overflow: scroll; width: 100vw;" id="reviewWarningList"></table>
+				</div>
+				
+			</td>
+			
+		</tr>
+     </table>   
+ 	</form>
+	<script type="text/javascript" src="../../../../media/js/Model/public.js"></script>
+	<script type="text/javascript" src="../../public/js/public.js" ></script>
+    <script type="text/javascript" src="../js/projectData.js"></script>
+	
+ </body>
+ </html>

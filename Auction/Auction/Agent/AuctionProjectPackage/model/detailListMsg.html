@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="pragma" content="no-cache">
+		<!-- 禁止浏览器从本地机的缓存中调阅页面内容 -->
+		<meta http-equiv="cache-control" content="no-cache, must-revalidate">
+		<meta http-equiv="expires" content="0">
+		<title>竞价采购情况竞价中查看</title>
+		<link rel="stylesheet" href="../../../../../media/js/bootstrap/css/bootstrap.css" />
+		<link rel="stylesheet" href="../../../../../media/js/bootstrap/css/bootstrap-table.css">
+		<link rel="stylesheet" href="../../../../../media/js/datetimepicker/css/jquery.datetimepicker.css" />
+		<link rel="stylesheet" href="../../../../../media/css/style.css" />
+		<style>
+			.container div {
+				text-align: center;
+			}
+			
+			table th,
+			table td {
+				text-align: center;
+				vertical-align: middle !important;
+				/*cursor: pointer;*/
+			}
+			
+			#offerInfo table th,
+			#offerInfo table td {
+				text-align: left;
+			}
+			
+			.table>tbody>tr>td {
+				vertical-align: middle !important;
+			}
+			
+			#offerDetail span {
+				color: red;
+			}
+			
+			.timeInval,
+			.countDown,
+			.notEliminatedCount {
+				font-size: 24px !important;
+				font-weight: bold;
+			}
+			
+			.minPrice {
+				font-size: 20px !important;
+				font-weight: bold;
+			}
+			
+			.align-left {
+				text-align: left;
+			}
+			
+			.align-right {
+				text-align: right;
+			}
+			.table-hover tbody tr:hover>td,.table-hover tbody tr:hover>th{background-color:#FFFFFF}
+			.fixed-table-header{
+				border-bottom: 0.1px solid #ddd
+			}
+		</style>
+
+		<body style="width: 99%;padding: 10px;">
+			<div style="margin-left: 10px;margin-top:10px;padding-bottom: 50px;">
+				<table class="table table-bordered" id="offerInfo">
+					<tr>
+						<th class="th_bg">项目名称</th>
+						<td data-field="projectName" id="projectName" style="text-align: left;"></td>
+						<td class="th_bg">项目编号</td>
+						<td id="projectCode" style="text-align: left;"></td>
+					</tr>
+					<tr>
+						<th class="th_bg">包件编号</th>
+						<td data-field="packageNum" id="packageNum" style="text-align: left;"></td>
+						<th class="th_bg">包件名称</th>
+						<td data-field="packageName" id="packageName" style="text-align: left;"></td>
+					</tr>
+					<tr>
+						<td style="width:100px" class="th_bg">竞价方式</td>
+						<td id="auctionType" style="width:35%;text-align: left;"></td>
+						<td style="width:100px" class="th_bg">竞价类型</td>
+						<td id="auctionModel" style="width:35%;text-align: left;"></td>
+					</tr>
+					<tr>
+						<td style="width:100px" class="th_bg">竞价截止时间</td>
+						<td id="auctionEndDate" style="width:35%;text-align: left;"></td>
+						<td style="width:100px" class="th_bg">参与竞价人数</td>
+						<td id="offerSupplierCount" style="width:35%;text-align: left;"></td>
+					</tr>
+					<!--<tr>
+						<th colspan="4" class="active">清单报价&nbsp;&nbsp;&nbsp;&nbsp;
+						<span style="color: red;" id="endTime" class="set_height"></span></th>
+					</tr>-->
+				</table>
+				<div>
+				<table class="table table-bordered" id="detaillist_msg">
+					<!--<div id="offerDetail" style="width: 100%;">-->
+					<!--<div class="countDown">清单报价</div>-->
+					<!--</div>-->
+				</table>
+				</div>
+			</div>
+			<!--<div style="width: 99%;margin-left: 10px;">-->
+
+			<!--</div>-->
+			<!--<div style="width: 100%;height:80px;">
+			</div>-->
+			<div class="bottom-btn">
+				<button type="button" id="btn_close" class="btn btn-default">关闭</button>
+			</div>
+		</body>
+		<script type="text/javascript" src="../../../../../media/js/jquery/jquery.js"></script>
+		<script type="text/javascript" src="../../../../../media/js/jquery/jquery.extend.js"></script>
+		<script type="text/javascript" src="../../../../../media/js/bootstrap/js/bootstrap.js"></script>
+		<script type="text/javascript" src="../../../../../media/js/bootstrap/js/bootstrap-table.min.js"></script>
+		<script type="text/javascript" src="../../../../../media/js/layer/layer.js"></script>
+		<script type="text/javascript" src="../../../../../media/js/layer/laydate.js"></script>
+		<script type="text/javascript" src="../../../../../media/js/datetimepicker/js/jquery.datetimepicker.js"></script>
+		<script type="text/javascript" src="../../../../../media/js/base/util.js"></script>
+		<script src="../js/detailListMsg.js"></script>
+
+</html>

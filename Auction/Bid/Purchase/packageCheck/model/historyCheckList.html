@@ -1,0 +1,161 @@
+<meta http-equiv="pragma" content="no-cache">
+<!-- 禁止浏览器从本地机的缓存中调阅页面内容 -->
+<meta http-equiv="cache-control" content="no-cache, must-revalidate">
+<meta http-equiv="expires" content="0">
+<link rel="stylesheet" href="../../../../../media/js/bootstrap/css/bootstrap.css" />
+<form id="formP">
+	<div class="container-fluid" style="width: 99%;padding-left: 10px;padding-top: 10px;margin-bottom: 0;">
+		<table class="table table-bordered " id="Check_Plan_0">
+			<tr>
+				<td class="th_bg" style="width: 150px">评审项目名称<i class="red">*</i></td>
+				<td>
+					<input type="text" name="checkNames" id="checkName" placeholder="请输入评审内容" class="form-control">
+
+				</td>
+			</tr>
+			<tr>
+				<td class="th_bg" style="width: 150px">排序<i class="red">*</i></td>
+				<td style="text-align: left;">
+					<div class="btn-group" role="group">
+						<button type="button" class="btn btn-default reduceNum" id="reduceNum"
+							style="width: 40px;height: 34px;"><span class="glyphicon glyphicon-minus"
+								aria-hidden="true"></span></button>
+						<input type="text" class="btn btn-default" value="0" name="sort" id="sort" readonly="readonly"
+							style="width: 60px;">
+						<button type="button" class="btn btn-default addNum" id="addNum" style="width: 40px;height: 34px;"><span
+								class="glyphicon glyphicon-plus" aria-hidden="true"></span></button>
+					</div>
+					<span style="vertical-align: middle;" class="red">(注：该排序决定评委评审的顺序)</span>
+				</td>
+			</tr>
+			<tr>
+				<td class="th_bg" style="width: 150px">评审方式<i class="red">*</i></td>
+				<td style="text-align: left;">
+					<span class="checkType0" style="display: none"><input type="radio" name="checkType" class="Check_Typedsa"
+							value="0" checked="checked" />合格制 </span>
+					<span class="checkType1" style="display: none"><input type="radio" name="checkType" class="Check_Typedsa"
+							value="1" />评分制</span>
+					<span class="checkType2" style="display: none"><input type="radio" name="checkType" class="Check_Typedsa"
+							value="2" />偏离制</span>
+					<span class="checkType3" style="display: none"><input type="radio" name="checkType" class="Check_Typedsa"
+							value="3" />评分合格制</span>
+					<span class="checkType4" style="display: none"><input type="radio" name="checkType" class="Check_Typedsa"
+							value="4" />竞价</span>
+				</td>
+			</tr>
+			<tr style="display:none" class="isOpenDarkDoc">
+				<td class="th_bg" style="width: 150px">是否启用暗标<i class="red">*</i></td>
+				<td>
+					<input type="radio" name="isShadowMark" checked="checked" value="0">否
+					<input type="radio" name="isShadowMark" value="1">是
+				</td>
+			</tr>
+			<tr style="display:none" id="isShowEnvelope">
+				<td class="th_bg" style="width: 150px">信封级别<i class="red">*</i></td>
+				<td>
+					<input type="radio" name="envelopeLevel" checked="checked" value="1">第一封
+					<input type="radio" name="envelopeLevel" value="2">第二封
+				</td>
+			</tr>
+			<tr style="display:none" id="Weights">
+				<td class="th_bg" style="width: 150px">权重值(0~1)<i class="red">*</i></td>
+				<td><input type="text" name="weight" id="weight" placeholder="请输入权重值" class="form-control"></td>
+			</tr>
+			<tr style="display:none" class="isSetTotal">
+				<td class="th_bg" style="width: 150px">允许最大偏离项数<i class="red">*</i></td>
+				<td style="text-align: left;">
+					<input name="deviate" id="deviate" class="form-control" />
+				</td>
+			</tr>
+			<tr style="display:none" class="isSetTotal">
+				<td class="th_bg" style="width: 150px">是否计入总数<i class="red">*</i></td>
+				<td style="text-align: left;">
+					<input type="radio" name="isSetTotal" value="0" />是
+					<input type="radio" name="isSetTotal" value="1" checked="checked" />否
+				</td>
+			</tr>
+			<tr style="display:none" class="isAddPrice">
+				<td class="th_bg" style="width: 150px">是否<span class="checkPlan4">加</span>价<i class="red">*</i></td>
+				<td style="text-align: left;">
+					<input type="radio" name="isAddPrice" value="0" />是
+					<input type="radio" name="isAddPrice" value="1" checked="checked" />否
+				</td>
+			</tr>
+			<tr class="addPrice" style="display:none">
+				<td class="th_bg" style="width: 150px">偏离<span class="checkPlan4">加</span>价幅度<i class="red">*</i></td>
+				<td colspan="2" style="text-align: left;">
+					<input class="selected" style="width: 100px;padding: 5px 8px;" name="addPrice" id="addPrice">%
+				</td>
+			</tr>
+			<tr class="gather" style="display:none">
+				<td class="th_bg" style="width: 150px">汇总方式<i class="red">*</i></td>
+				<td style="text-align: left;">
+					<select class="selected" id="denominator" name="totalM" style="width: 80px;padding: 5px 8px;">
+						<option value="2">2</option>
+						<option value="3">3</option>
+						<option value="4">4</option>
+						<option value="5">5</option>
+						<option value="6">6</option>
+						<option value="7">7</option>
+						<option value="8">8</option>
+						<option value="9">9</option>
+					</select>
+					分之
+					<select class="selected" id="numerator" name="totalN" style="width: 80px;padding: 5px 8px;">
+					</select>
+					<p class="red">评委全体成员按照少数服从多数（<span id="totalM">二</span>分之<span id="totalN">一</span>）的原则判定评价标准是否合格。</p>
+				</td>
+			</tr>
+			<tr class="gather3" style="display:none">
+				<td colspan="2">
+					<p class="red">当最终得分低于<input id="lowerScore" name="lowerScore"
+							style="width: 80px;padding: 5px 8px;" />分时，供应商被淘汰</p>
+					<p class="red">仅基于评委打分是否淘汰供应商，不计入供应商总得分</p>
+				</td>
+			</tr>
+			<tr class="packageSet" style="display:none">
+				<td class="th_bg" style="width: 150px">价格评审方式<i class="red">*</i></td>
+				<td colspan="2" style="text-align: left;">
+					<input type="radio" name="priceCheckMode" value="0" checked="checked" />重新计算排名
+					<input type="radio" name="priceCheckMode" value="1" />不重新计算排名
+				</td>
+			</tr>
+			<tr class="packageSet" style="display:none">
+				<td class="th_bg" style="width: 150px">竞价起始价计算方式<i class="red">*</i></td>
+				<td colspan="2" style="text-align: left;">
+					<input type="radio" name="bidStartPriceFrom" value="0" checked="checked" />参与竞价供应商最低报价
+					<input type="radio" name="bidStartPriceFrom" value="1" />未淘汰供应商最低报价
+					<input type="radio" name="bidStartPriceFrom" value="2" />参与报价供应商最低报价
+				</td>
+			</tr>
+			<tr class="packageSet" style="display:none">
+				<td class="th_bg" style="width: 150px">竞价参数<i class="red">*</i></td>
+				<td colspan="2" style="text-align: left;">
+					<button type="button" class="btn btn-primary" id="packageSetBtn">编辑竞价设置</button>
+				</td>
+			</tr>
+			<tr class="packageSet" style="display:none">
+				<td colspan="3" style="text-align: left;" class="text-danger">
+					合格供应商通过竞价方式再次报价，竞价后价格作为排名的依据
+				</td>
+			</tr>
+		</table>
+		<input type="hidden" name="scoreTotal" id="scoreTotal">
+		<input type="hidden" name="totalType" id="totalType">
+		<input type="hidden" name="isShowCheck" id="isShowCheck" value="0">
+		<input type="hidden" name="showCheckInfo" id="showCheckInfo" value="0,1,2,3">
+	</div>
+</form>
+<div class="bottom-btn" style="z-index: 11000;">
+	<!-- <button type="button" class="btn btn-primary" id="btnHold"><span class="glyphicon glyphicon-ok"></span>保存</button>-->
+	<button type="button" class="btn btn-primary" id="btnSave"><span class="glyphicon glyphicon-ok"></span>提交</button>
+	<button type="button" class="btn btn-default" id="btnClose"><span
+			class="glyphicon glyphicon-remove"></span>关闭</button>
+</div>
+<script type="text/javascript" src="../../../../../media/js/jquery/jquery.js"></script>
+<script type="text/javascript" src="../../../../../media/js/base/common.js"></script>
+<script type="text/javascript" src="../../../../../media/js/base/util.js"></script>
+<script type="text/javascript" src="../../../../../media/js/jquery/jquery.extend.js"></script>
+<script type="text/javascript" src="../../../../../media/js/jquery/jquery.params.js"></script>
+<script type="text/javascript" src="../../../../../media/js/base/digital.js"></script>
+<script type="text/javascript" src="../js/historyCheckList.js"></script>

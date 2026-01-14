@@ -1,0 +1,152 @@
+
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8">
+		<meta http-equiv="pragma" content="no-cache"><!-- 禁止浏览器从本地计算机的缓存中访问页面内容 --> 
+		<meta http-equiv="cache-control" content="no-cache"><!-- 用于指定请求和响应遵循的缓存机制 --> 
+		<meta http-equiv="expires" content="0"><!-- 用于设定网页的到期时间，一旦网页过期，必须到服务器上重新传输； -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>招标公告</title>
+    <link rel="stylesheet" href="../../../../../media/js/layer/mobile/need/layer.css" />
+    <link rel="stylesheet" href="../../../../../media/js/bootstrap/css/bootstrap.css" />
+    <link rel="stylesheet" href="../../../../../media/js/stream/css/stream-v1.css" />
+    
+	<style>
+		html,body { height: 100%;width: 100%;}
+		.readonly{
+		    border: none;
+		    background: none !important;
+		    outline: none !important;
+		    box-shadow: none !important;
+		}
+		
+	</style>
+</head>
+
+<body>
+    <form class="pageModel" id="formEle" name="formName">
+        <table class="table table-bordered ">
+        	<tr>
+	            <td colspan="4" style="font-weight: bold;" class="active">基本信息</td>
+	        </tr>
+	        <tr>
+	        	<td class="th_bg">标段编号<i class="red">*</i></td>
+                <td colspan="3">
+                    <input type="text"  name="" id="interiorBidSectionCode" class="form-control readonly" readonly="readonly" datatype="*" errormsg="请输入标段编号"/>
+                    <input type="hidden"  name="bidSectionId" id="bidSectionId" />
+                </td>
+               
+	        </tr>
+	        <tr>
+	        	 <td class="th_bg">标段名称<i class="red">*</i></td>
+                <td colspan="3">
+                    <input type="text"  name="" id="bidSectionName" class="form-control readonly" readonly="readonly"/>
+                </td>
+	        </tr>
+	        <tr>
+	        	<td class="th_bg">招标人<i class="red">*</i></td>
+                <td>
+                    <input type="text"  name="tendererName" id="tendererName" class="form-control readonly" readonly="readonly"/>
+                    <input type="hidden"  name="tendererId" id="tendererEnterprisId" />
+                </td>
+                <td class="th_bg">机构代码<i class="red">*</i></td>
+                <td>
+                    <input type="text"  name="tenderCode" id="tendererCode" class="form-control readonly" readonly="readonly"/>
+                </td>
+	        </tr>
+	        <tr>
+	        	<td class="th_bg">中标单位<i class="red">*</i></td>
+                <td>
+                    <input type="text"  name="bidderName" id="bidderName" class="form-control readonly" readonly="readonly"/>
+                    <input type="hidden"  name="bidderId" id="bidderId" />
+                </td>
+                <td class="th_bg">机构代码<i class="red">*</i></td>
+                <td>
+                    <input type="text"  name="bidderCode" id="bidderCode" class="form-control readonly" readonly="readonly"/>
+                </td>
+	        </tr>
+	        <tr>
+	        	<td class="th_bg">合同金额及币种<i class="red">*</i></td>
+                <td colspan="3">
+                    <input type="number"  name="contractPrice" id="contractPrice" class="form-control" style="display: inline-block;width: 200px;" datatype="*" errormsg="请输入合同金额及币种"  />
+                    <select name="priceUnit" class="form-control" style="width: 80px;display: inline-block;">
+                    	<option value="1">万元</option>
+                    	<option value="0">元</option>
+                    </select>
+                    <select name="priceCurrency" class="form-control" style="width: 100px;display: inline-block;">
+                    	<option value="156">人民币</option>
+                    </select>
+                </td>
+	        </tr>
+	        <tr>
+	        	<td class="th_bg">合同期限<i class="red">*</i></td>
+                <td colspan="3">
+                    <input type="text"  name="limitStartTime" id="limitStartTime" class="form-control Wdate" autocomplete="off" style="width: 260px;display: inline-block;" datatype="*" errormsg="请选择合同开始时间"/>
+                    <span style="padding: 0 10px;">至</span>
+                    <input type="text"  name="limitEndTime" id="limitEndTime" class="form-control Wdate" autocomplete="off" style="width: 260px;display: inline-block;" datatype="*" errormsg="请选择合同截止时间"/>
+                </td>
+	        </tr>
+	        <tr>
+	        	<td class="th_bg">合同结算金额<i class="red">*</i></td>
+                <td>
+                    <input type="number"  name="contractSettlementPrice" id="contractSettlementPrice" class="form-control" datatype="*" errormsg="请输入合同结算金额"  />
+                </td>
+                <td class="th_bg">合同签署日期<i class="red">*</i></td>
+                <td>
+                    <input type="text"  name="contractSignTime" id="contractSignTime" class="form-control Wdate"  autocomplete="off" style="width: 260px;display: inline-block;" datatype="*" errormsg="请选择合同签署日期"/>
+                </td>
+	        </tr>
+	        <tr>
+	        	<td class="th_bg">质量要求<i class="red">*</i></td>
+                <td colspan="3">
+                	<textarea name="qualityRequire" id="qualityRequire" rows="3" cols="" class="form-control" style="resize: none;" datatype="*" errormsg="请输入质量要求"></textarea>
+                </td>
+	        </tr>
+	        <tr>
+	        	<td class="th_bg">合同内容<i class="red">*</i></td>
+                <td colspan="3">
+                	<textarea name="contractContent" id="contractContent" rows="3" cols="" class="form-control" style="resize: none;"  datatype="*" errormsg="请输入合同内容"></textarea>
+                </td>
+	        </tr>
+	        <tr>
+	        	<td class="th_bg">合同附件<i class="red">*</i></td>
+                <td colspan="3">
+                	<button type="button" class="btn btn-sm btn-primary" id="fileUp"   style="float: right;margin-right: 50px;">
+	            		<span class="glyphicon glyphicon-folder-open"></span>选择文件
+	            	</button>
+	            	<button type="button"  id="fileLoad" style="display: none;"></button>
+	            	<div id="fileContent">
+	            		
+	            	</div>
+                </td>
+	        </tr>
+	        
+	        <tr>
+	        	<td class="th_bg">招标人确认意见<i class="red">*</i></td>
+                <td colspan="3">
+                	<textarea name="tenderConfirmation" id="tenderConfirmation" rows="3" cols="" class="form-control" style="resize: none;" datatype="*" errormsg="请输入招标人确认意见"></textarea>
+                </td>
+	        </tr>
+	    </table>
+        <div class="bottom-btn" style="z-index: 11000;">
+            <button type="button" class="btn btn-primary" id="btnSave"><span class="glyphicon glyphicon-ok"></span>保存</button>
+            <button type="button" class="btn btn-primary" id="btnSubmit"><span class="glyphicon glyphicon-saved"></span>确认</button>
+            <button type="button" class="btn btn-default" id="btnClose"><span class="glyphicon glyphicon-remove"></span>取消</button>
+        </div>
+    </form>
+    <script type="text/javascript" src="../../../../../media/js/jquery/jquery.js"></script>
+    <script type="text/javascript" src="../../../../../media/js/jquery/jquery.extend.js"></script>
+    <script type="text/javascript" src="../../../../../media/js/base/util.js"></script>
+    <script type="text/javascript" src="../../../../../media/js/base/common.js"></script>
+    <script type="text/javascript" src="../../../../../media/js/bootstrap/js/bootstrap.js"></script>
+    <script type="text/javascript" src="../../../../../media/js/My97DatePicker/WdatePicker.js"></script>
+    <script type="text/javascript" src="../../../../../media/js/stream/js/stream-v1.js"></script>
+    <script type="text/javascript" src="../../../../../media/js/base/StreamUpload.js"></script>
+    <script type="text/javascript" src="../../../../Model/js/public.js"></script>
+    <script type="text/javascript" src="../js/contractEdit.js"></script>
+</body>
+
+</html>

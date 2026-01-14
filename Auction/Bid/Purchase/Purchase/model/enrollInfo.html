@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<!-- 网页不会被缓存 -->
+		<meta http-equiv="pragma" content="no-cache">
+		<!-- 禁止浏览器从本地机的缓存中调阅页面内容 -->
+		<meta http-equiv="cache-control" content="no-cache, must-revalidate">
+		<meta http-equiv="expires" content="0">
+		<title></title>
+		<link rel="stylesheet" href="../../../../../media/js/bootstrap/css/bootstrap.css" />
+		<link rel="stylesheet" href="../../../../../media/js/bootstrap/css/bootstrap-table.min.css" type="text/css"/>
+	</head>
+	<body>
+		<table class="table table-bordered" style="margin-bottom: 60px">
+			<tbody>
+				<th class="active" colspan="4">项目信息</th>
+				<tr>
+					<td class="th_bg"  >项目编号</td>
+					<td >
+						<div id="projectCode"></div>
+					</td>
+					<td class="th_bg" >项目名称</td>
+					<td >
+						<div id="projectName"></div>
+					</td>
+				</tr>
+				<tr>
+					<td class="th_bg"  >包件编号</td>
+					<td>
+						<div id="packageNum"></div>
+					</td>
+					<td class="th_bg">包件名称</td>
+					<td>
+						<div id="packageName"></div>
+					</td>
+				</tr>
+				<tr class="active shopType1Show">
+					<th colspan="4"><span class="examTitle">报名信息</span></th>
+				</tr>
+				<tr class="shopType1Show">
+					<td colspan="4">
+						<table class="table table-bordered" id="enrollList" style="margin-bottom: 0px;">
+                              
+						</table>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+		<div style="width: 100%;height: 50px;text-align:center;position: fixed;bottom: 0;background-color: #FFFFFF;z-index: 100001">
+			<button type="button" id="btn_close" class="btn btn-default"><span class="glyphicon glyphicon-remove"></span>关闭</button>
+		</div>
+		  <style>
+			 .table > thead > tr > th, 
+			 .table > tbody > tr > th, 
+			 .table > tfoot > tr > th, 
+			 .table > thead > tr > td, 
+			 .table > tbody > tr > td, 
+			 .table > tfoot > tr > td{
+			 	vertical-align: middle;
+			 }
+		   </style>
+	</body>
+	<script type="text/javascript" src="../../../../../media/js/jquery/jquery.js" ></script>
+	<script type="text/javascript" src="../../../../../media/js/jquery/jquery.extend.js"></script>
+	<script type="text/javascript" src="../../../../../media/js/base/common.js" ></script>
+ 	<script type="text/javascript" src="../../../../../media/js/bootstrap/js/bootstrap-table.min.js"></script>
+ 	<script type="text/javascript" src="../../../../../media/js/bootstrap/js/bootstrap-table-zh-CN.min.js"></script>
+	<script type="text/javascript" src="../../../../../media/js/Model/public.js"></script>
+	<script>
+		var examType = getUrlParam('examType');//预审采购文件还是询比采购文件
+		var projectId=getUrlParam('projectId');
+		var packageId=getUrlParam('packageId');
+		function getUrlParam(name) {
+			var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); // 构造一个含有目标参数的正则表达式对象  
+			var r = window.location.search.substr(1).match(reg); // 匹配目标参数  
+			if(r != null) return unescape(r[2]);
+			return null; // 返回参数值  
+		}
+		$(function(){
+			du();
+			$("#btn_close").on('click',function(){
+				parent.layer.close(parent.layer.getFrameIndex(window.name));	
+			})
+		})
+		function du(rowData){			
+			$.ajax({
+				url:config.bidhost+'/ProjectReviewController/findProjectPackageInfo.do',
+				type:'post',
+				//dataType:'json',
+				async:false,
+				//contentType:'application/json;charset=UTF-8',
+				data:{
+					"packageId":packageId
+				},
+				success:function(data){
+					if(data.success){	   	  	
+						packageInfo=data.data;//包件信息	
+						$('div[id]').each(function(){
+							$(this).html(packageInfo[this.id]);
+						});
+					}
+																	
+				},
+				
+				error:function(data){
+					parent.layer.alert("获取失败")
+				}
+			});
+			$.ajax({
+				type: "post",
+				url: config.bidhost+'/PurchaseController/findSupplierSignList.do',
+				dataType: 'json',
+				data: {
+					'packageId':packageId
+				},
+				async: false,
+				success: function(result) {
+					if(result.success) {
+						tableList(result.data,examType)
+					} 
+				}
+			})
+			
+		}
+		
+		function tableList(data,examType){
+			var enrollList='<thead>'
+                           	+'<tr>'
+                           		+'<th style="width:50px">序号</th>'
+                           		+'<th>企业名称</th>'
+                           		+'<th style="width:80px;text-align:center">联系人</th>'
+                           		+'<th style="width:120px;text-align:center">联系电话</th>'
+                           		+'<th style="width:80px;text-align:center">报名情况</th>'
+                           		+'<th style="width:150px;text-align:center">报名时间</th>'
+                           		+'<th style="width:120px;text-align:center">费用类型</th>'
+                           		+'<th style="width:80px;text-align:center">缴费状态</th>'
+                           		+'<th style="width:100px;text-align:center">金额(元)</th>'
+                           		//+'<th style="width:150px;text-align:center">缴费时间</th>'
+                           	+'</tr>'
+                          +'</thead>'
+                          if(data.length>0){
+							var RenameData = getBidderRenameData(packageId);//供应商更名信息
+                          	for(var i=0;i<data.length;i++){
+                          		var projectPricesList=[];
+                          		for(var l=0;l<data[i].projectPrices.length;l++){
+                          			if(data[i].projectPrices[l].priceName!='平台服务费'){
+                          				projectPricesList.push(data[i].projectPrices[l])
+                          			}
+                          			if(data[i].projectPrices[l].priceName=='报名费'){
+                          				var projectstatus=data[i].projectPrices[l].status
+                          			}
+                          		}
+								enrollList+='<tr>'
+								enrollList+='<td style="text-align:center" '+(projectPricesList.length>0?"rowspan='"+ projectPricesList.length +"'":'')+'>'+(i+1)+'</td>'
+								enrollList+='<td  '+(projectPricesList.length>0?"rowspan='"+ projectPricesList.length +"'":'')+'>'+ showBidderRenameList(data[i].supplierId, data[i].enterpriseName, RenameData, 'body')+'</td>'
+								enrollList+='<td style="text-align:center" '+(projectPricesList.length>0?"rowspan='"+ projectPricesList.length +"'":'')+'>'+ data[i].linkMen+'</td>'
+								enrollList+='<td style="text-align:center" '+(projectPricesList.length>0?"rowspan='"+ projectPricesList.length +"'":'')+'>'+ data[i].linkTel+'</td>'
+								enrollList+='<td style="text-align:center" '+(projectPricesList.length>0?"rowspan='"+ projectPricesList.length +"'":'')+'><span class="'+ (projectPricesList.length>0?"text-success":"") +'">'+(data[i].status==1?"报名完成":"报名中") +'</span></td>'
+								enrollList+='<td style="text-align:center" '+(projectPricesList.length>0?"rowspan='"+ projectPricesList.length +"'":'')+'>'+ data[i].subDate+'</td>'
+								if(projectPricesList.length>0){									
+									enrollList+='<td style="text-align:center">'+ projectPricesList[0].priceName+'</td>'
+									enrollList+='<td style="text-align:center">'+ (projectPricesList[0].status==3?'<span class="text-success">已缴费</span>':'<span class="text-danger">未缴费</span>')+'</td>'
+								    enrollList+='<td style="text-align:center">'+ projectPricesList[0].price+'</td>'
+								    //enrollList+='<td style="text-align:center">'+ data[i].projectPrices[0].payDate+'</td>'
+								}else{
+									enrollList+='<td style="text-align:center">无</td>'
+									enrollList+='<td style="text-align:center">无</td>'
+								    enrollList+='<td style="text-align:center">无</td>'
+								    //enrollList+='<td style="text-align:center">无</td>'
+								}
+								enrollList+='</tr>'
+								if(projectPricesList.length>1){
+									for(var m=1;m<projectPricesList.length;m++){
+										enrollList+='<tr>'
+										enrollList+='<td style="text-align:center">'+ projectPricesList[m].priceName+'</td>'
+										enrollList+='<td style="text-align:center">'+ (projectPricesList[m].status==3?'<span class="text-success">已缴费</span>':'<span class="text-danger">未缴费</span>')+'</td>'
+									    enrollList+='<td style="text-align:center">'+projectPricesList[m].price+'</td>'
+									   	//enrollList+='<td style="text-align:center">'+ data[i].projectPrices[m].payDate+'</td>'
+										enrollList+='</tr>'
+									}
+								}
+							}
+                          }else{
+                          	enrollList+='<tr><td colspan="10" style="text-align:center">暂无数据</td></tr>'
+                          }
+			
+			$('#enrollList').html(enrollList)
+		}	
+		
+	</script>
+</html>

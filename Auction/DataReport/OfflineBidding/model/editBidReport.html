@@ -1,0 +1,396 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+
+<head>
+    <!-- 网页不会被缓存 -->
+    <meta http-equiv="pragma" content="no-cache">
+    <!-- 禁止浏览器从本地机的缓存中调阅页面内容 -->
+    <meta http-equiv="cache-control" content="no-cache, must-revalidate">
+    <meta http-equiv="expires" content="0">
+    <link rel="stylesheet" href="../../../../media/js/layer/mobile/need/layer.css" />
+    <link rel="stylesheet" href="../../../../media/js/layer/theme/default/laydate.css" />
+    <link rel="stylesheet" href="../../../../media/js/bootstrap/css/bootstrap.css" />
+    <link rel="stylesheet" href="../../../../media/js/bootstrap/css/bootstrap-table.min.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../media/js/datetimepicker/css/jquery.datetimepicker.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../media/js/bootstrap/css/bootstrap-select.min.css" />
+    <!-- <script type="text/javascript" charset="utf-8" src="../../../../../media/js/ueditor/ueditor.config.js"></script>
+		<script type="text/javascript" charset="utf-8" src="../../../../../media/js/ueditor/ueditor.all.js"> </script> -->
+    <!--建议手动加在语言，避免在ie下有时因为加载语言失败导致编辑器加载失败-->
+    <!--这里加载的语言文件会覆盖你在配置项目里添加的语言类型，比如你在配置项目里配置的是英文，这里加载的中文，那最后就是中文-->
+    <!-- <script type="text/javascript" charset="utf-8" src="../../../../../media/js/ueditor/lang/zh-cn/zh-cn.js"></script> -->
+    <style type="text/css">
+        label {
+            font-weight: normal;
+        }
+    </style>
+</head>
+
+<body>
+    <form id="formbackage" name="purchase" style="width: 99%;padding-left: 10px;padding-top: 10px;margin-bottom: 60px;">
+        <table class="table table-bordered " style="margin-bottom: 0px;">
+            <tr>
+                <td colspan="4" style="font-weight: bold;border: none;" class="active">项目信息</td>
+                <input type="hidden" name="tenderProjectID" id="tenderProjectID">
+            </tr>
+            <!-- <tr>
+                <td class="th_bg">项目名称</td>
+                <td style="text-align: left;">
+                    <div id="tenderProjectName"></div>
+                    <input type="hidden" name="tenderProjectName" id="tenderProjectName">
+                </td>
+                <td class="th_bg">项目编号</td>
+                <td style="text-align: left;">
+                    <div id="tenderProjectCode"></div>
+                    <input type="hidden" name="tenderProjectCode" id="tenderProjectCode">
+                    <input type="hidden" name="bidSectionName" id="bidSectionName">
+                    <input type="hidden" name="bidSectionCode" id="bidSectionCode">
+                </td>
+            </tr> -->
+            <tr>
+                <td class="th_bg">标段名称</td>
+                <td style="text-align: left;">
+                    <div id="bidSectionName"></div>
+                    <input type="hidden" name="bidSectionName">
+
+                    <input type="hidden" name="bidSectionId">
+                    <input type="hidden" name="projectId">
+                    <input type="hidden" name="projectName">
+                    <input type="hidden" name="interiorProjectCode">
+                    <input type="hidden" name="purchaserId">
+                    <input type="hidden" name="enterpriseId">
+                </td>
+                <td class="th_bg">标段编号</td>
+                <td style="text-align: left;">
+                    <div id="bidSectionCode"></div>
+                    <input type="hidden" name="bidSectionCode">
+                    <input type="hidden" name="tenderProjectName">
+                    <input type="hidden" name="tenderProjectCode">
+                </td>
+            </tr>
+            <tr>
+                <td class="th_bg">项目类型<i class="red">*</i></td>
+                <td style="text-align: left;">
+
+                    <select class="form-control" id="projectType" datatype="*" errormsg="请选择项目类型">
+                        <option value="A">工程</option>
+                        <option value="B">货物</option>
+                        <option value="C">服务</option>
+                        <option value="C50" selected="selected">广宣</option>
+                    </select>
+                    <input type="hidden" name="projectType" />
+                </td>
+                <td class="th_bg">项目所属公司<i class="red">*</i></td>
+                <td style="text-align: left;">
+                    <input type="text" name="enterpriseName" class="form-control" style="text-align: left" datatype="*"
+                        errormsg="请填写项目所属公司" />
+                </td>
+            </tr>
+            <tr>
+                <td class="th_bg">市场类型<i class="red">*</i></td>
+                <td>
+                    <select class="form-control" id="marketType" datatype="*" errormsg="请选择市场类型" name="marketType">
+                        <option value="DF" selected>东风市场</option>
+                        <option value="JP">社会军品</option>
+                        <option value="SH">社会民品</option>
+                    </select>
+                </td>
+                <td class="th_bg">项目经理所属处室<i class="red">*</i></td>
+                <td style="text-align: left;">
+                    <input type="hidden" name="departmentId">
+                    <input type="text" name="departmentName" style="cursor: pointer;"
+                        class="form-control departmentName" readonly placeholder="请选择项目经理所属处室" datatype="*"
+                        errormsg="请选择项目经理所属处室">
+                </td>
+            </tr>
+            <tr class="isAgent1">
+                <td class="th_bg">招标人/委托单位<i class="red">*</i></td>
+                <td style="text-align: left;">
+                    <input type="text" name="purchaserName" class="form-control  purchaserName" style="text-align: left"
+                        datatype="*" errormsg="请填写委托单位" />
+                </td>
+                <td class="th_bg">项目归属处室 <i class="red">*</i></td>
+                <td style="text-align: left;">
+                    <input type="hidden" name="projectDepartmentId">
+                    <input type="text" name="projectDepartmentName" style="cursor: pointer;"
+                        class="form-control projectDepartmentName" readonly placeholder="请选择项目归属处室" datatype="*"
+                        errormsg="请选择项目归属处室">
+                    <!-- <input type="hidden" class="form-control" id="agencyDepartmentId" name="agencyDepartmentId" /> -->
+                </td>
+            </tr>
+            <tr>
+                <td class="th_bg">采购员/招标人代表<i class="red">*</i></td>
+                <td style="text-align: left;">
+                    <input type="text" name="purchaserLinkmen" class="form-control  purchaserLinkmen"
+                        style="text-align: left" datatype="*" errormsg="请填写采购员" />
+                </td>
+                <td class="th_bg">项目经理<i class="red">*</i></td>
+                <td style="text-align: left;">
+                    <input type="text" name="tenderAgencyLinkmen" class="form-control  " style="text-align: left"
+                        datatype="*" errormsg="请填写项目经理" />
+                </td>
+            </tr>
+            <tr class="isAgent1">
+                <td class="th_bg">交易平台<i class="red">*</i></td>
+                <td style="text-align: left;">
+                    <select class="form-control" id="tenderDesk" datatype="*" errormsg="请选择交易平台" name="tenderDesk">
+                        <option value="0" selected>东风</option>
+                        <option value="1">政府</option>
+                        <option value="2">长安</option>
+                        <option value="3">线下</option>
+                    </select>
+                </td>
+                <td class="th_bg">招标方式<i class="red">*</i></td>
+                <td style="text-align: left;">
+                    <select class="form-control" id="tenderMode" datatype="*" errormsg="请选择招标方式" name="tenderMode">
+                        <option value="1" selected>公开</option>
+                        <option value="2">邀请</option>
+                        <!--<option value="2">竞争性</option>
+                        <option value="3">谈判</option>
+                        <option value="4">单一</option>
+                        <option value="5">询价采购</option>
+                        <option value="6">预研</option>-->
+                    </select>
+                </td>
+            </tr>
+
+            <tr>
+                <td class="th_bg">评审方法</td>
+                <td style="text-align: left;">
+                    <div id="bidCheckType"></div>
+                    <input type="hidden" name="bidCheckType">
+                </td>
+
+            </tr>
+
+            <tr>
+                <td class="th_bg ">
+                    是否政府采购<i class="red">*</i>
+                </td>
+                <td colspan="3">
+                    <input type="radio" name="publlcProcurement" value="0" checked="checked" />是
+                    <input type="radio" name="publlcProcurement" value="1" />否
+                </td>
+            </tr>
+            <tr>
+                <td class="th_bg ">
+                    项目实施地点<i class="red">*</i>
+                </td>
+                <td colspan="3">
+                    <div id="areaBlock"></div>
+                    <!-- <input type="text" name="projectImplementAdder" class="form-control  priceNumber" style="text-align: left" datatype="*" errormsg="请输入项目实施地点" /> -->
+                </td>
+            </tr>
+
+            <!-- <tr>
+		            <td colspan="4" style="font-weight: bold;border: none;" class="active">时间安排</td> -->
+            <!-- <td class="active" style="text-align: right;border: none;" class="searched">
+		     			<input class="btn btn-sm btn-primary ageinBtn" type="button" value="时间重置"/>	
+		     		</td> -->
+            <!-- </tr> -->
+            <tr>
+                <td colspan="4" style="font-weight: bold;" class="active">项目时间安排</td>
+            </tr>
+            <tr>
+                <td style="width: 200px;" class="th_bg">派项时间<i class="red">*</i></td>
+                <td style="text-align: left;">
+                    <input type="text" autocomplete="off" class="btn btn-default" id="subDate" name="subDate"
+                        style="text-align: left;" datatype="*" errormsg="请选择派项时间">
+                </td>
+                <td style="width: 200px;" class="th_bg">开标时间<i class="red">*</i></td>
+                <td style="text-align: left;">
+                    <input type="text" autocomplete="off" class="btn btn-default" id="bidOpenTime" name="bidOpenTime"
+                        style="text-align: left;" datatype="*" errormsg="请选择开标时间">
+                </td>
+            </tr>
+            <tr>
+
+                <td style="width: 200px;" class="th_bg">中选通知书发出时间</td>
+                <td style="text-align: left;">
+                    <div id="noticeSendTime"></div>
+
+                </td>
+                <td style="width: 200px;" class="th_bg">完成月份</td>
+                <td style="text-align: left;">
+                    <div id="complectMonth"></div>
+                </td>
+            </tr>
+
+            <tr class="exceptionView1" style="display: none;">
+                <td colspan="4" style="font-weight: bold;" class="active">项目异常</td>
+            </tr>
+            <tr class="exceptionView1" style="display: none;">
+                <td class="th_bg" style="width: 250px;">异常<i class="red">*</i></td>
+                <td style="text-align: left;">
+                    <div id="exception"></div>
+                    <input type="hidden" name="exception">
+
+                </td>
+                <td class="th_bg" style="width: 200px;">异常原因<i class="red">*</i></td>
+                <td style="text-align: left;">
+                    <div id="exceptionCause"></div>
+                    <input type="hidden" name="exceptionCause" />
+                </td>
+            </tr>
+            <tr>
+                <td colspan="4" style="font-weight: bold;" class="active">招标采购参数</td>
+            </tr>
+            <tr>
+                <td class="th_bg" style="width: 250px;">投标人家数<i class="red">*</i></td>
+                <td style="text-align: left;">
+                    <input name="tenderNumber" class="form-control priceNumber" id="tenderNumber" datatype="*"
+                        errormsg="请填写投标人家数" />
+                </td>
+                <td class="th_bg" style="width: 250px;" id="legalNameView1">中标人<i class="red">*</i></td>
+                <td style="text-align: left;" id="legalNameView2">
+                    <input type="text" name="legalName" class="form-control" id="legalName" datatype="*"
+                        errormsg="请填写中标人" />
+                </td>
+
+            </tr>
+
+            <tr>
+                <td class="th_bg" style="width: 200px;">委托金额（预算）（万元）<i class="red">*</i></td>
+                <td style="text-align: left;">
+                    <input name="entrsuSum" class="form-control priceNumber" id="entrsuSum" datatype="*"
+                        errormsg="请填写委托金额" />
+                </td>
+                <td class="th_bg" style="width: 200px;">中标金额（万元）<i class="red">*</i></td>
+                <td style="text-align: left;">
+                    <input type="text" name="contractSettlementPrice" class="form-control priceNumber"
+                        id="contractSettlementPrice" datatype="*" errormsg="请填写中标金额" />
+                </td>
+
+            </tr>
+            <tr>
+                <td class="th_bg" style="width: 200px;">招标代理服务费-不打折（不含造价服务费）（万元）<i class="red">*</i></td>
+                <td style="text-align: left;">
+                    <input name="tenderAgenPrice" class="form-control priceNumber" id="tenderAgenPrice" datatype="*"
+                        errormsg="请填写招标代理服务费-不打折" />
+                </td>
+                <td class="th_bg" style="width: 200px;">招标代理服务费（不含造价服务费）（万元）<i class="red">*</i></td>
+                <td style="text-align: left;">
+                    <input name="realAgentPrice" class="form-control priceNumber" id="realAgentPrice" datatype="*"
+                        errormsg="请填写招标代理服务费" />
+                </td>
+
+            </tr>
+            <tr>
+                <td class="th_bg" style="width: 200px;">标书款（合计,万元）<i class="red">*</i></td>
+                <td style="text-align: left;">
+                    <input name="tenderStyle" class="form-control priceNumber" id="tenderStyle" datatype="*"
+                        errormsg="请填写标书款" />
+                </td>
+                <td class="th_bg" style="width:200px;">服务费小计(招标代理服务费+标书款)（万元）<i class="red">*</i></td>
+                <td style="text-align: left;">
+                    <input id="compositeServiceSubtoral" disabled name="compositeServiceSubtoral"
+                        class="form-control priceNumber" datatype="*" errormsg="请填写服务费小计" />
+                </td>
+            </tr>
+            <tr>
+                <td class="th_bg" style="width: 200px;">评审费小计（万元）<i class="red">*</i></td>
+                <td style="text-align: left;">
+                    <input name="reviewFeeSubtotal" class="form-control priceNumber" id="reviewFeeSubtotal" datatype="*"
+                        errormsg="请填写评审费小计" />
+                </td>
+                <td class="th_bg" style="width:200px;">工作人员费用小计（万元）
+                    <i class="red">*</i>
+                </td>
+                <td style="text-align: left;"><input id="staffCostSubtotal" name="staffCostSubtotal"
+                        class="form-control priceNumber" datatype="*" errormsg="请填写工作人员费用小计" /></td>
+
+            </tr>
+            <tr>
+                <td class="th_bg" style="width: 200px;">综合服务费小计（包含专家餐费、住宿、交通、租赁开标室费用、打印、零食等）（万元）<i class="red">*</i>
+                </td>
+                <td style="text-align: left;">
+                    <input name="serviceFeleSubtotal" class="form-control priceNumber" id="serviceFeleSubtotal"
+                        datatype="*" errormsg="请填写综合服务费小计" />
+                </td>
+                <td class="th_bg" style="width:200px;">项目成本费用小计（万元）(评审费小计+工作人员费用小计+综合服务费小计)<i class="red">*</i></td>
+                <td style="text-align: left;"><input disabled id="projectCostSubtotal" name="projectCostSubtotal"
+                        class="form-control priceNumber" datatype="*" errormsg="请填写项目成本费用小计" /></td>
+
+            </tr>
+            <tr>
+                <td class="th_bg" style="width: 200px;">费用到账状况<i class="red">*</i></td>
+                <td style="text-align: left;" colspan="3">
+                    <select id="payStatep" name="payStatep" class="form-control"
+                        style="width:196px;height: 32px;cursor:pointer;" datatype="*" errormsg="请选择费用到账状况">
+                        <option value="足额到账" selected>足额到账</option>
+                        <option value="未足额到账">未足额到账</option>
+                        <option value="未到账">未到账</option>
+                    </select>
+                </td>
+
+
+            </tr>
+            <tr>
+                <td class="th_bg" style="width: 200px;">备注<i class="red"></i></td>
+                <td colspan="3" style="text-align: left;">
+                    <textarea name="backups" id="content" style="width: 100%;height: 50px;"
+                        class="form-control"></textarea>
+                </td>
+            </tr>
+            <tr class="employee">
+                <td class="th_bg">添加审核人<i class="red">*</i></td>
+                <td colspan="3" style="text-align: left;">
+                    <select id="employeeId" class="form-control" style="width: 200px;" name="checkerId"></select>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td colspan="4">
+                    <script id="editor" type="text/plain" style="width:100%;height:500px;"></script>
+                    <input type="hidden" name="remark" id="remark" />
+                </td>
+            </tr>
+            <tr class="record" style="display: none;">
+                <td class="active" colspan="4" style="border: none;"><strong>流程审核记录</strong></td>
+            </tr>
+            <tr class="record" style="display: none;">
+                <td colspan="4">
+                    <table class="table table-bordered" id="workflowListDetail">
+
+                    </table>
+                </td>
+            </tr>
+        </table>
+    </form>
+    <div
+        style="width: 100%;height: 50px;text-align:center;position: fixed;bottom: 0;background-color: #FFFFFF;z-index: 100001">
+        <button type="button" id="btn_bao" class="btn btn-default"><span
+                class="glyphicon glyphicon-saved"></span>保存</button>
+        <button type="button" id="btn_submit" class="btn btn-primary"><span
+                class="glyphicon glyphicon-saved"></span>提交</button>
+        <button type="button" id="btn_close" class="btn btn-default"><span
+                class="glyphicon glyphicon-remove"></span>关闭</button>
+    </div>
+    <script type="text/javascript" src="../../../../media/js/jquery/jquery.js"></script>
+    <script type="text/javascript" src="../../../../media/js/jquery/jquery.extend.js"></script>
+    <script type="text/javascript" src="../../../../media/js/base/common.js"></script>
+    <script type="text/javascript" src="../../../../media/js/base//util.js"></script>
+    <script type="text/javascript" src="../../../../media/js/bootstrap/js/bootstrap.js"></script>
+    <script type="text/javascript" src="../../../../media/js/bootstrap/js/bootstrap-table.min.js"></script>
+    <script type="text/javascript" src="../../../../media/js/bootstrap/js/bootstrap-table-zh-CN.min.js"></script>
+    <script type="text/javascript" src="../../../../media/js/bootstrap/js/bootstrap-select.min.js"></script>
+    <script type="text/javascript" src="../../../../media/js/bootstrap/js/defaults-zh_CN.min.js"></script>
+    <script type="text/javascript" src="../../../../media/js/layer/layer.js"></script>
+    <script type="text/javascript" src="../../../../media/js/datetimepicker/js/jquery.datetimepicker.js"></script>
+    <script type="text/javascript" src="../../../../media/js/datetimepicker/js/timePicker.js"></script>
+    <!-- 公告模板 -->
+    <!-- end -->
+
+    <!-- 地区下拉菜单JS-->
+    <script type="text/javascript" src="../../../../OfflineBidding/Model/js/multiLinkage.js"></script>
+    <!-- <script type="text/javascript" src="../../../../Model/js/public.js"></script> -->
+
+    <script type="text/javascript" src="../js/editBidReport.js"></script>
+    <!-- <script type="text/javascript" src="../js/supplierInfo.js"></script> -->
+    <script type="text/javascript" src="../js/timeDate.js"></script>
+
+    <script type="text/javascript" src="../../../../media/js/base/auditRecords.js"></script>
+
+</body>
+
+</html>

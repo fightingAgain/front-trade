@@ -1,0 +1,74 @@
+<!--
+ * @Author: your name
+ * @Date: 2020-09-22 09:15:38
+ * @LastEditTime: 2020-12-01 11:05:38
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: \FrameWork_bf\bidPrice\Review\projectManager\modal\quotation.html
+--> 
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="pragma" content="no-cache">
+		<!-- 禁止浏览器从本地机的缓存中调阅页面内容 -->
+		<meta http-equiv="cache-control" content="no-cache, must-revalidate">
+		<meta http-equiv="expires" content="0">
+		<link rel="stylesheet" type="text/css" href="../../../../media/js/bootstrap/css/bootstrap-table-fixed-columns.css">
+		<title>报价表</title>
+		<style>
+			th.colstyle {
+				height: 91px !important;
+			}
+
+            /*.fixed-table-container .fixed-table-body-columns{
+            	height: 147px !important;
+            }*/
+			/*td.colstyle {
+				height: 37px !important;
+			}*/
+			/*div.fixed-table-body-columns tr { height: 37px !important;}*/
+			/*.fixed-table-container thead th,.fixed-table-container thead th .th-inner {
+				overflow: auto !important;
+				text-overflow:clip !important;
+				white-space:nowrap !important;
+			}*/
+			.fixed-table-container tbody td .th-inner, .fixed-table-container thead th .th-inner{
+				text-overflow:clip;
+				overflow: visible;
+				/*white-space:normal;*/
+			}
+			/*@media only screen and (min-width: 820px) {
+				.supplierW { width: 200px !important; min-width: 200px !important;}
+			}*/
+			::-webkit-scrollbar {
+			    /*滚动条整体样式*/
+			    height: 10px;
+		    }
+
+		</style>
+	</head>
+	<body style="overflow:auto;">
+        <div style="padding-bottom: 10px;">
+            <div style="border-left: 4px solid #1a7acd ;height: 36px ; line-height: 36px;padding-left: 5px;margin-bottom: 10px;">
+                                              报价表
+                <div style="float: right;">
+                <button type="button" class="btn btn-primary btn-sm" id="offerExcel">报价一览表导出Excel</button>
+                <button type="button" class="btn btn-primary btn-sm" id="offerDown">分项报价表打包下载</button>
+               </div>
+            </div>
+            <table class="table table_list" id="quotationTable"></table>
+            
+        </div>
+       
+        <div>
+            <div style="border-left: 4px solid #1a7acd ;height: 36px ; line-height: 36px;padding-left: 5px;margin-bottom: 10px;">
+                报价说明
+            </div>
+            <div style="padding-left: 10px;line-height: 30px;" id="offerAttention">
+            </div>
+        </div>
+	</body>
+	
+	<script type="text/javascript" src="../js/quotation.js?version=3.4.25"></script>
+</html>

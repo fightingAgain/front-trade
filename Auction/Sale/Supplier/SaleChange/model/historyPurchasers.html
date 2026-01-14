@@ -1,0 +1,131 @@
+
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>历史变更记录</title>
+		<!-- 禁止浏览器从本地机的缓存中调阅页面内容 -->
+	    <meta http-equiv="Pragma" content="no-cache">
+	    <!-- 用来防止别人在框架里调用你的页面 -->
+	    <meta http-equiv="Window-target" content="_top">
+	    <!-- content的参数有all，none，index，noindex，follow，nofollow，默认是all -->
+	    <meta name="robots" content="none">
+	    <!-- 收藏图标 -->
+	    <link rel="Shortcut Icon" href="favicon.ico">
+	    <!-- 网页不会被缓存 -->
+	    <meta http-equiv="Cache-Control" content="no-cache, must-revalidate">
+	    <!-- 解决部分兼容性问题，如果安装了GCF，则使用GCF来渲染页面，如果未安装GCF，则使用最高版本的IE内核进行渲染。 -->
+	    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	    <!-- 页面按原比例显示 -->
+	    <meta name="viewport" content="width=device-width, initial-scale=1">	   
+	    <!--[if lt IE 9]>
+	       <script src="https://cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+	       <script src="https://cdn.bootcss.com/respond.js/1.4.2/respond.js"></script>
+	    <![endif]-->
+		<link rel="stylesheet" href="../../../../../media/js/bootstrap/css/bootstrap.min.css">
+		<link rel="stylesheet" href="../../../../../media/js/bootstrap/css/bootstrap-table.min.css">
+		
+	</head>
+	<body>
+		<div class="container-fluid" style="margin-top: 5px;">
+
+	        <table id="Purchasers" class="table table-bordered" data-toolbar="#toolbar"></table>
+	
+		</div>
+		<script src="../../../../../media/js/jquery/jquery.min.js"></script>
+		<script src="../../../../../media/js/jquery/jquery.extend.js" ></script>
+		<script src="../../../../../media/js/bootstrap/js/bootstrap.js"></script>
+		<script src="../../../../../media/js/bootstrap/js/bootstrap-table.min.js"></script>
+		<script src="../../../../../media/js/bootstrap/js/bootstrap-table-zh-CN.min.js"></script>
+		<script src="../../../../../media/js/base/index.js"></script>
+		<script src="../../../../../media/js/layer/layer.js"></script>
+		<script src="../../../../../media/js/base/common.js"></script>
+		<script type="text/javascript">
+			var searchPachaser =parent.config.AuctionHost + "/ProjectSupplementController/findProjectSupplementInfo";
+			
+			var projectId = getUrlParam("projectId");
+			var tenderTypeCode = getUrlParam("tenderType"); 
+			//页面加载后显示
+			$(function() {
+				// tenderType + projectId
+				// /BidPriceService/ProjectSupplementController/findProjectSupplementInfo
+			});
+			
+			//设置查询条件
+			function queryParams(params) {
+				return {
+					'enterpriseType':'0',
+					'projectId':projectId,
+                    'tenderType':tenderTypeCode,
+					// 'pageNumber':params.offset/params.limit+1,//当前页数
+					// 'pageSize': params.limit, // 每页显示数量
+					// 'offset':params.offset, // SQL语句偏移量	
+				}
+			}									
+			//var enterprojectId= JSON.parse(sessionStorage.getItem('enterprojectId'));//项目id
+			var PurchasersData="";
+			var projectCode="";
+			var PurchasersData_data;
+			function du(uid){
+				initTable()
+				PurchasersData_data=uid
+				$.ajax({
+					url:searchPachaser,
+					type:'post',
+					//dataType:'json',
+					async:false,
+					//contentType:'application/json;charset=UTF-8',
+					data:{
+						'enterpriseType':1,
+						'projectId':projectId,
+						'tenderType':tenderTypeCode,
+						'supplementType': 3
+					},
+					success:function(res){
+						$("#Purchasers").bootstrapTable('load',res.data.projectSupplements)
+					}
+				});
+			}
+
+			function initTable(){
+				$("#Purchasers").bootstrapTable({
+					undefinedText: "",
+					pagination: false,
+					columns: [
+						{
+							field: 'title',title: '变更次数'
+						},
+						{
+							field: 'subDate',title: '变更时间'
+						},
+						{
+							field: '#',
+							title: '操作',
+							width:'100',
+							formatter: function(value, row, index) {
+								var deletes='<button href="javascript:void(0)" type="button" class="btn-sm btn-primary" style="text-decoration:none;border: none;" onclick=btn(\"'+index+'\",\"'+row.enterpriseId+'\")>选择</button>'
+								return '<div class="btn-group-sm" >'+deletes+'</div>';
+							}
+						}
+					]
+				});
+			}
+			
+			function btn($index,uid){				
+				var rowData=$('#Purchasers').bootstrapTable('getData');//bootstrap获取当前页的数据
+				PurchasersData=rowData[$index];
+                var dcmt = parent.iframeWind;
+				dcmt.showPurchse(PurchasersData);
+                parent.layer.close(parent.layer.getFrameIndex(window.name));				
+			}
+		 
+		 
+		   function getUrlParam(name) {
+				var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); // 构造一个含有目标参数的正则表达式对象  
+				var r = window.location.search.substr(1).match(reg); // 匹配目标参数  
+				if(r != null) return unescape(r[2]);
+				return null; // 返回参数值  
+			} 
+		</script>
+	</body>
+</html>

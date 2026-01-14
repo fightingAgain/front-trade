@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8">
+		<meta http-equiv="pragma" content="no-cache"><!-- 禁止浏览器从本地计算机的缓存中访问页面内容 --> 
+		<meta http-equiv="cache-control" content="no-cache"><!-- 用于指定请求和响应遵循的缓存机制 --> 
+		<meta http-equiv="expires" content="0"><!-- 用于设定网页的到期时间，一旦网页过期，必须到服务器上重新传输； -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>招标公告</title>
+    <link rel="stylesheet" href="../../../../media/js/layer/mobile/need/layer.css" />
+    <link rel="stylesheet" href="../../../../media/js/bootstrap/css/bootstrap.css" />
+    <!--<link rel="stylesheet"  href="../../../../media/js/bootstrap-fileinput-master/css/fileinput.css"/>-->
+    <link rel="stylesheet" href="../../../../media/js/stream/css/stream-v1.css" />
+    <link rel="stylesheet" href="../../../../media/js/bootstrap/css/bootstrap-table.min.css" type="text/css"/>
+    
+	<style>
+		html,body { width: 100%;}
+		.readonly{
+		    border: none;
+		    background: none !important;
+		    outline: none !important;
+		    box-shadow: none !important;
+		}
+		.pretrial,.revise{
+			display: none;
+		}
+		.enterFull{
+			position: absolute;
+			top: 0;
+			left: 0;
+			background: #ffffff;
+			visibility: visible;
+			filter: Alpha(opacity=90);
+		}
+		.display_none{
+			display: none;
+		}
+		.file-input .kv-upload-progress{
+			display: none !important;
+		}
+		tr .file-input{
+			display: inline-block;
+			float: right;
+			margin-right: 50px;
+		}
+		a,a:link,a:visited,a:hover,a:active{
+			color: #333333;
+			text-decoration: none;
+		}
+		.calendar_icon{
+			color: #3995C8;
+		}
+		.padding_button{
+			padding: 5px 8px !important;
+			line-height: 30px !important;
+		}
+		.set_height{
+		    display: inline-block;
+			padding: 6px 12px;
+		}
+	</style>
+</head>
+
+<body>
+    <form class="pageModel" id="addNotice" name="formName">
+    	<div class="panel-group" id="accordion">
+    		<div class="panel panel-accordion panel-default">
+	    		<div class="panel-heading active"  role="tab" id="headingOne">  
+			 		<h4 class="panel-title">
+		            	<a  role="button" data-toggle="collapse"  href="#collapseOne" aria-expanded="true" aria-controls="collapseOne" >
+		            		基本信息
+		            	</a>
+			 		</h4>  
+			   	</div>  
+			  	<div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">  
+			       	<div class="panel-body">
+			       		<table  class="table table-bordered ">
+			       			<tr>
+					        	<td class="th_bg">招标项目编号</td>
+				                <td colspan="3">
+				                	<span id="interiorTenderProjectCode" class="set_height"></span>
+				                	<input type="hidden" name="examType" id="examType" value="1" />
+				                </td>
+					        </tr>
+					        <tr>
+					        	<td class="th_bg">招标项目名称</td>
+				                <td >
+				                	<span id="tenderProjectName" class="set_height"></span>
+				                </td>
+				                <td class="th_bg">招标项目类型</td>
+				                <td>
+				                	<span id="tenderProjectTypeTxt" class="set_height"></span>
+				                </td>
+					        </tr>
+					        <tr>
+					        	<td class="th_bg">标段编号</td>
+				                <td colspan="3">
+				                	<span id="interiorBidSectionCode" class="set_height"></span>
+				                </td>
+				                
+					        </tr>
+					        <tr>
+					        	<td class="th_bg">标段名称</td>
+				                <td>
+				                	<span id="bidSectionName" class="set_height"></span>
+				                </td>
+				                <td class="th_bg">文件开启方式</td>
+				                <td>
+				                	<span id="pretrialOpenType" class="set_height"></span>
+				                </td>
+					        </tr>
+					        <tr>
+					        	<td class="th_bg">招标人</td>
+				                <td >
+				                	<span id="tendererName" class="set_height"></span>
+				                </td>
+				                <td class="th_bg">招标代理机构</td>
+								<td >
+									<span id="tenderAgencyName" class="set_height"></span>
+								</td>
+					        </tr>
+					        <tr>
+					        	<td class="th_bg">项目负责人</td>
+				                <td>
+				                	<span id="tenderAgencyLinkmen" class="set_height"></span>
+				                </td>
+				                <td class="th_bg">项目负责人电话</td>
+				                <td>
+				                	<span id="tenderAgencyLinktel" class="set_height"></span>
+				                </td>
+					        </tr>
+			       		</table>
+		       		</div>
+	       		</div>
+       		</div>
+	    	<div class="panel panel-accordion panel-default">
+	    		<div class="panel-heading active"  role="tab" id="headingFour">  
+			 		<h4 class="panel-title">
+		            	<a class="collapsed" role="button" data-toggle="collapse"  href="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+		            		会议室预约
+			            	
+		            	</a>
+			 		</h4>  
+			   	</div>  
+			  	<div  id="collapseFour" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingFour">  
+			       	<div class="panel-body">
+						<button type="button" class="btn btn-primary btn-sm " data-stage="1" id="relateRoom"
+							style="float: right;margin-right: 50px;margin-bottom: 10px;">
+							<span class="glyphicon glyphicon-sort-by-order"></span>关联会议室
+						</button>
+			       		<button type="button" class="btn btn-primary btn-sm "  data-stage="1" id="orderRoom" style="float: right;margin-right: 50px;margin-bottom: 10px;">
+			            		<span class="glyphicon glyphicon-sort-by-order"></span>预约会议室
+		            	</button>
+		            	<button type="button" class="btn btn-danger btn-sm " data-stage="1" id="cancelRoom" style="float: right;margin-right: 50px;margin-bottom: 10px;display: none;">
+			            		<span class="glyphicon glyphicon-sort-by-order"></span>取消预约
+		            	</button>
+		            	<table class="table table-bordered" id="biddingRooms">
+			       			
+		        		</table>
+		       		</div>
+		       	</div>
+	    	</div>
+	    	<div class="panel panel-accordion panel-default">
+	    		<div class="panel-heading active"  role="tab" id="headingFive">  
+			 		<h4 class="panel-title">
+		            	<a class="collapsed" role="button" data-toggle="collapse"  href="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
+		            		公告基本信息
+		            	</a>
+			 		</h4>  
+			   	</div>  
+			  	<div  id="collapseFive" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingFive">  
+			       	<div class="panel-body">
+			       		<table class="table table-bordered">
+					    	<tr>
+					        	<td class="th_bg">公告标题<i class="red">*</i></td>
+					        	<td colspan="2">
+					        		<input type="text" name="noticeName" id="noticeName" class="form-control" datatype="*" errormsg="请输入公告标题"/>
+					        		
+					        	</td>
+					        	<td>
+					        		<!--<button type="button" class="btn btn-primary "  id="emptyTime" >
+					            		<span class="glyphicon glyphicon-time"></span>重置时间
+					            	</button>-->
+					        	</td>
+					        </tr>
+					        <tr>
+					        	<td class="th_bg">原公告发布时间</td>
+					        	<td><div id="oldnoticeSendTime" style="min-width: 260px;"></div></td>
+					        	<td class="th_bg">原公告发布时间<i class="red">*</i></td>
+				                <td>
+				                	<div style="position: relative;width: 260px;">
+				                		<input type="text"  name="noticeSendTime" id="noticeSendTime" class="form-control Wdate" autocomplete="off" style="width: 260px;" datatype="*" errormsg="请选择公告发布时间"/>
+									</div>
+				                    <input type="hidden" name="noticeId" id="noticeId"/><!--原始公告ID，修改原始公告和变更公告时 必传-->
+				                    <input type="hidden" name="bidSections[0].id" id="bidId" /><!--标段id，修改原始公告和变更公告时 必传-->
+				                    <input type="hidden" name="bidSections[0].bidSectionName" id="bidSectionName" /><!--标段名称，修改原始公告和变更公告时 必传-->
+				                    <input type="hidden" name="tenderProjectId" id="tenderProjectId" /><!--招标项目id，修改原始公告和变更公告时 必传-->
+				                    <input type="hidden" name="bidSections[0].interiorBidSectionCode" id="interiorBidSectionCode" /><!--标段编号，修改原始公告和变更公告时 必传-->
+				                    <input type="hidden" name="bulletinType" id="bulletinType" value="2" /><!--招标方式，修改原始公告和变更公告时 必传-->
+				                    <!--<input type="hidden" name="noticeName" id="noticeName"  />公告标题，修改原始公告和变更公告时 必传-->
+				                </td>
+					        </tr>
+					        <tr>
+				                <td class="th_bg">原公告发布截止时间</td>
+				                <td><span id="oldnoticeEndTime"></span></td>
+				                <td class="th_bg">公告发布截止时间<i class="red">*</i></td>
+				                <td>
+				                	<div style="position: relative;width: 260px;">
+				                    	<input type="text"  name="noticeEndTime" id="noticeEndTime" class="form-control times Wdate" autocomplete="off" style="width: 260px;" datatype="*" errormsg="请选择公告发布截止时间"/>
+				                	</div>
+				                </td>
+					        </tr>
+					        <tr class="signUp">
+					        	<td class="th_bg">原报名开始时间</td>
+				                <td><span id="oldsignStartDate"></span></td>
+					        	<td class="th_bg">原报名开始时间<i class="red">*</i></td>
+				                <td>
+				                    <div style="position: relative;width: 260px;">
+				                    	<input type="text"  name="signStartDate" id="signStartDate" class="form-control times Wdate" autocomplete="off" style="width: 260px;" datatype="*" errormsg="请选择报名开始时间"/>
+				                	</div>
+				                </td>
+				           	</tr>
+				           	<tr class="signUp">
+				           		<td class="th_bg">原报名截止时间</td>
+				                <td><span id="oldsignEndDate"></span></td>
+				                <td class="th_bg">报名截止时间<i class="red">*</i></td>
+				                <td>
+				                    <div style="position: relative;width: 260px;">
+				                    	<input type="text"  name="signEndDate" id="signEndDate" class="form-control times Wdate" autocomplete="off" style="width: 260px;" datatype="*" errormsg="请选择报名截止时间"/>
+				                	</div>
+				                </td>
+					        </tr>
+					        <tr>
+					        	<td class="th_bg">原资格预审文件获取开始时间</td>
+				                <td><span id="olddocGetStartTime"></span></td>
+					        	<td class="th_bg"><span class="tender">原资格预审文件获取开始时间</span><span class="pretrial">资格预审文件获取开始时间</span><i class="red">*</i></td>
+				                <td>
+				                	<div style="position: relative;width: 260px;">
+				                		<input type="text"  name="docGetStartTime" id="docGetStartTime" class="form-control times Wdate" autocomplete="off" style="width: 260px;" datatype="*" errormsg="请选择招标文件获取开始时间"/>
+									</div>
+				                    
+				                </td>
+				            </tr>
+				            <tr>
+				            	<td class="th_bg">原资格预审文件获取截止时间</td>
+				                <td><span id="olddocGetEndTime"></span></td>
+				                <td class="th_bg"><span class="tender">资格预审文件获取截止时间</span><span class="pretrial">资格预审文件获取截止时间</span><i class="red">*</i></td>
+				                <td>
+				                	<div style="position: relative;width: 260px;">
+				                		<input type="text"  name="docGetEndTime" id="docGetEndTime" class="form-control times Wdate" autocomplete="off" style="width: 260px;" datatype="*" errormsg="请选择招标文件获取截止时间"/>
+									</div>
+				                    
+				                </td>
+					        </tr>
+					        <tr>
+					        	<td class="th_bg">原提出澄清截止时间</td>
+				                <td><span id="oldclarifyTime"></span></td>
+								<td class="th_bg timeName">提出澄清截止时间<i class="red">*</i></td>
+								<td style="text-align: left;">
+									<div style="position: relative;width: 260px;">
+										<input style="display: inline-block;width: 260px;" type="text" id="clarifyTime" name="clarifyTime" autocomplete="off" datatype="*" errormsg="请选择提出澄清截止时间" class="form-control times Wdate" />
+									</div>
+								</td>
+							</tr>
+							<tr>
+								<td class="th_bg">原答复截止时间</td>
+				                <td><span id="oldanswersEndDate"></span></td>
+								<td class="th_bg timeName">答复截止时间<i class="red">*</i></td>
+								<td style="text-align: left;">
+									<div style="position: relative;width: 260px;">
+										<input style="display: inline-block;width: 260px;" type="text" id="answersEndDate" name="answersEndDate" autocomplete="off" datatype="*" errormsg="请选择答复截止时间" class="form-control times Wdate" />
+									</div>
+								</td>
+							</tr>
+					        <tr>
+					        	<td class="th_bg">原资格申请文件递交截止时间</td>
+				                <td><span id="oldbidDocReferEndTime"></span></td>
+				                <td class="th_bg"><span class="tender">资格申请文件递交截止时间</span><span class="pretrial">资格预审申请文件递交截止时间</span><i class="red">*</i></td>
+				                <td>
+				                	<div style="position: relative;width: 260px;">
+				                		<input type="text"  name="bidDocReferEndTime" id="bidDocReferEndTime" class="form-control times Wdate" autocomplete="off" style="width: 260px;" datatype="*" errormsg="请选择投标文件递交截止时间" />
+									</div>
+				                </td>
+				             </tr>
+				             <tr>
+				             	<td class="th_bg">原文件开启时间</td>
+				                <td><span id="oldbidOpenTime"></span></td>
+				                <td class="th_bg"><span class="tender">文件开启时间<i class="red">*</i></span></td>
+				                <td>
+				                	<div style="position: relative;width: 260px;">
+				                		<input type="text"   name="bidOpenTime" id="bidOpenTime" class="form-control times Wdate" autocomplete="off" style="width: 260px;" datatype="*" errormsg="请选择开启时间" />
+									</div>
+				                </td>
+					        </tr>
+					        
+					       <!--<tr>
+					        	<td class="th_bg">公告发布责任人<i class="red">*</i></td>
+				                <td colspan="3">
+				                    <input type="text" name="bulletinDuty" id="bulletinDuty" readonly="readonly" class="form-control readonly" style="width: 260px;" datatype="*" errormsg="请输入公告发布责任人"/>
+				                    <input type="hidden" name="bulletinDutyId" id="bulletinDutyId" />
+				                </td>
+					        </tr>-->
+					        <tr>
+					        	<td class="th_bg">资格预审文件开启地点<i class="red">*</i></td>
+					        	<td colspan="3">
+					        		<input type="text" name="openAddress" id="openAddress" class="form-control" datatype="*" errormsg="请输入资格预审文件开启地点"/>
+					        	</td>
+					        </tr>
+				        </table>   
+		       		</div>
+		       	</div>
+	    	</div>
+	    	<div class="panel panel-accordion panel-default">
+	    		<div class="panel-heading active"  role="tab" id="headingSix">  
+			 		<h4 class="panel-title">
+		            	<a class="collapsed" role="button" data-toggle="collapse"  href="#collapseSix" aria-expanded="false" aria-controls="collapseSix">
+		            		公告发布媒体
+		            	</a>
+			 		</h4>  
+			   	</div>  
+			  	<div  id="collapseSix" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingSix">  
+			       	<div class="panel-body">
+			       		<table class="table table-bordered">
+					    	<tr>
+					            <td colspan="4" class="media-box">
+					            	
+					            </td>
+					        </tr>
+				        </table>   
+		       		</div>
+		       	</div>
+	    	</div>
+	    	<div class="panel panel-accordion panel-default">
+	    		<div class="panel-heading active"  role="tab" id="headingSeven">  
+			 		<h4 class="panel-title">
+		            	<a class="collapsed" role="button" data-toggle="collapse"  href="#collapseSeven" aria-expanded="false" aria-controls="collapseSeven">
+		            		公告内容
+			            	
+		            	</a>
+			 		</h4>  
+			   	</div>  
+			  	<div  id="collapseSeven" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingSeven">  
+			       	<div class="panel-body">
+			       		<table id="ueditorContent" class="table table-bordered">
+					    	<!-- <tr>
+				                <td class="th_bg">公告模板</td>
+				                <td colspan="3">
+				                    <select class="form-control" name="noticeTemplate" id="noticeTemplate" style="width: 260px;display: inline-block;">
+					                	
+					                </select>
+					                <button type="button" class="btn btn-primary" id="btnModel" style="vertical-align:top;"><span class="glyphicon glyphicon-refresh" style="vertical-align:-2px;"></span>生成模板</button>
+					                <button type="button" class="btn btn-primary fullScreen"   style="float: right;margin-right: 20px;">
+					            		<span class="glyphicon glyphicon-fullscreen"></span>全屏
+					            	</button>
+					                
+				                </td>
+				            </tr>
+				            <tr>
+				            	<td colspan="4">
+				            		<div id="container" name="content" style="min-height: 600px;"></div>
+				            		<input type="hidden" name="noticeContent" id="remark" value="" />
+				            	</td>
+				            </tr> -->
+				        </table>   
+		       		</div>
+		       	</div>
+	    	</div>
+	    	<div class="panel panel-accordion panel-default">
+	    		<div class="panel-heading active"  role="tab" id="headingEight">  
+			 		<h4 class="panel-title">
+		            	<a class="collapsed" role="button" data-toggle="collapse"  href="#collapseEight" aria-expanded="false" aria-controls="collapseEight">
+		            		相关附件
+			            	
+			            	<span class="red" style="font-size: 14px;font-weight: normal;">（请上传200M以内的文件）</span>
+			            	
+		            	</a>
+			 		</h4>  
+			   	</div>  
+			  	<div  id="collapseEight" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingEight">  
+			       	<div class="panel-body">
+			       		<button type="button" class="btn btn-sm btn-primary" id="fileUp"   style="float: right;margin-right: 50px;margin-bottom: 10px;">
+		            		<span class="glyphicon glyphicon-folder-open"></span>上传
+		            	</button>
+		            	<button type="button"  id="fileLoad" style="display: none;"></button>
+			       		<div id="fileContent">
+			       			
+			       		</div>  
+		       		</div>
+		       	</div>
+	    	</div>
+	    	<div id="approval">
+	    		
+	    	</div>
+	    	
+   		</div>
+        <div class="bottom-btn" style="z-index: 11000;">
+            <button type="button" class="btn btn-primary" id="btnSave"><span class="glyphicon glyphicon-ok"></span>保存</button>
+            <button type="button" class="btn btn-primary" id="btnSubmit"><span class="glyphicon glyphicon-saved"></span>提交</button>
+            <button type="button" class="btn btn-default" id="btnClose"><span class="glyphicon glyphicon-remove"></span>取消</button>
+        </div>
+    </form>
+    <script type="text/javascript" src="../../../../media/js/jquery/jquery.js"></script>
+    <script type="text/javascript" src="../../../../media/js/jquery/jquery.extend.js"></script>
+    <script type="text/javascript" src="../../../../media/js/base/util.js"></script>
+    <script type="text/javascript" src="../../../../media/js/base/common.js"></script>
+    
+    <!-- 编辑器源码文件 -->
+    <script type="text/javascript" src="../../../../media/js/ueditor/ueditor.config.js"></script>
+    <script type="text/javascript" src="../../../../media/js/ueditor/ueditor.all.js"></script>
+    <script type="text/javascript" src="../../../../media/js/base/UEditorFun.js"></script>
+    <script type="text/javascript" src="../../../../media/js/bootstrap/js/bootstrap.js"></script>
+    <script type="text/javascript" src="../../../../media/js/bootstrap/js/bootstrap-table.min.js"></script>
+	<script type="text/javascript" src="../../../../media/js/bootstrap/js/bootstrap-table-zh-CN.min.js"></script>
+    <script type="text/javascript" src="../../../../media/js/stream/js/stream-v1.js"></script>
+    <script type="text/javascript" src="../../../../media/js/My97DatePicker/WdatePicker.js"></script>
+    <script type="text/javascript" src="../../../../media/js/base/md5.js"></script>
+    <script type="text/javascript" src="../../../../media/js/ca.js"></script>
+    <script type="text/javascript" src="../../../Model/js/public.js"></script>
+    <script type="text/javascript" src="../../../../media/js/base/WorkflowInfoNew.js"></script>
+    <script type="text/javascript" src="../../../../media/js/base/StreamUpload.js"></script>
+    <script type="text/javascript" src="../../../Model/js/dataLinkage.js"></script>
+    <script type="text/javascript" src="../../../Model/js/orderRoom.js"></script>
+    <script type="text/javascript" src="../js/noticeEdit.js"></script>
+</body>
+
+</html>

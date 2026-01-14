@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="pragma" content="no-cache"><!-- 禁止浏览器从本地计算机的缓存中访问页面内容 --> 
+		<meta http-equiv="cache-control" content="no-cache"><!-- 用于指定请求和响应遵循的缓存机制 --> 
+		<meta http-equiv="expires" content="0"><!-- 用于设定网页的到期时间，一旦网页过期，必须到服务器上重新传输； -->
+		<title>招标文件编辑页面</title>
+		<link rel="stylesheet" href="../../../../../media/js/bootstrap/css/bootstrap.css" />
+		<link rel="stylesheet" href="../../../../../media/js/bootstrap/css/bootstrap-table.min.css" type="text/css"/>
+		<style>
+			/*.myTab { border-bottom: 0px;}*/
+			.reviewSecTabs {padding-right: 250px; overflow: hidden;}
+			#reviewDetailTabs {white-space:nowrap; height: 50px; overflow-x: auto;}
+	    	#reviewDetailTabs li {display: inline-block; float: none;}
+	    	#reviewDetailTabs::-webkit-scrollbar {
+			    height: 8px;
+			    background-color: #eee;
+			}
+			
+			#reviewDetailTabs::-webkit-scrollbar-track {
+			    background-color: #eee;
+			}
+			
+			#reviewDetailTabs::-webkit-scrollbar-thumb {
+			    background: #b9dfff;
+			}
+			
+			#reviewDetailTabs {
+				scrollbar-face-color: #b9dfff; /*立体滚动条的颜色（包括箭头部分的背景色）*/
+				scrollbar-3dlight-color: #b9dfff; /*立体滚动条亮边的颜色*/
+				scrollbar-highlight-color: #b9dfff; /*滚动条的高亮颜色（左阴影？）*/
+				scrollbar-shadow-color: #b9dfff; /*立体滚动条阴影的颜色*/
+				scrollbar-darkshadow-color: #b9dfff; /*立体滚动条外阴影的颜色*/
+				scrollbar-track-color: #eee; /*立体滚动条背景颜色*/
+				scrollbar-base-color:#eee; /*滚动条的基色*/
+				scrollbar-arrow-color: #eee; /**//*三角箭头的颜色*/ 
+			}
+			.relevantBid{
+				color: blue;
+				cursor: pointer;
+			}
+		</style>
+	</head>
+	<body>
+		<div  name="Filepurchase" style="width: 99%;padding-left: 10px;padding-top: 10px;margin-bottom: 60px;">
+			<div class="panel-group" id="accordion">
+	    		<div class="panel panel-accordion panel-default">
+		    		<div class="panel-heading active"  role="tab" id="headingOne">  
+				 		<h4 class="panel-title">
+			            	<a  role="button" data-toggle="collapse" href="#collapseOne" aria-controls="collapseOne"  aria-expanded="true"  >
+			            		基本信息
+			            	</a>
+				 		</h4>  
+				   	</div>  
+				  	<div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">  
+				       	<div class="panel-body">
+				       		<table  class="table table-bordered ">
+				       			<tr>
+									<td  class="th_bg">标段编号</td>
+									<td colspan="3" style="text-align: left;">
+										<div id="interiorBidSectionCode"></div>
+									</td>
+								</tr>
+								<tr>
+									<td  class="th_bg">标段名称</td>
+									<td colspan="3" style="text-align: left;">
+										<div id="bidSectionName"></div>
+									</td>
+								</tr>
+								<tr class="change" style="display: none;">
+									<td  class="th_bg">标题</td>
+									<td colspan="3" style="text-align: left;">
+										<div id="docName"></div>
+									</td>
+								</tr>
+								<tr class="change" style="display: none;">
+									<td  class="th_bg">变更类型</td>
+									<td colspan="3">
+										<label style="padding-right: 20px;margin-bottom: 0;">
+								        	<input type="checkbox" name="isChange" disabled="disabled" style="vertical-align: -2px;margin-right: 5px;" />
+								        	资格预审文件变更
+								        </label>
+										<label style="padding-right: 20px;margin-bottom: 0;">
+								    		<input type="checkbox" name="isReplenish" disabled="disabled" style="vertical-align: -2px;margin-right: 5px;" />
+								    		时间变更
+								    	</label>
+									</td>
+								</tr>
+				       		</table>
+			       		</div>
+		       		</div>
+	       		</div>
+	       		<div class="panel panel-accordion panel-default fileWrap" style="display: none;">
+		    		<div class="panel-heading active"  role="tab" id="headingTwo">  
+				 		<h4 class="panel-title">
+			            	<a class="collapsed" role="button" data-toggle="collapse" href="#collapseTwo" aria-controls="collapseTwo"  aria-expanded="false">
+			            		资格预审文件
+			            	</a>
+				 		</h4>  
+				   	</div>  
+				  	<div  id="collapseTwo" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingTwo">  
+				       	<div class="panel-body">
+							<button type="button" class="btn btn-primary" id="btnPreview" style="display: none;">预览</button>
+				       		<div id="bidFile">
+				       			
+				       		</div>  
+			       		</div>
+			       	</div>
+		    	</div>
+		    	<div class="panel panel-accordion panel-default timeWrap" style="display: none;">
+		    		<div class="panel-heading active"  role="tab" id="headingThree">  
+		    	 		<h4 class="panel-title">
+		    	        	<a class="collapsed" role="button" data-toggle="collapse" href="#collapseThree" aria-controls="collapseThree"  aria-expanded="false">
+		    	        		时间变更
+		    	        	</a>
+		    	 		</h4>  
+		    	   	</div>  
+		    	  	<div  id="collapseThree" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingThree">  
+		    	       	<div class="panel-body">
+		    	       		<!--<div id="addendumFile" style="margin-bottom: 10px;">
+		    	       			
+		    	       		</div>-->
+		    	       		<table class="table table-bordered">
+		    			      	<tr class="addendum">
+		    						<td class="th_bg">提出澄清截止时间</td>
+		    						<td style="text-align: left;">
+		    							<span id="clarifyTime"></span>
+		    						</td>
+		    						<td class="th_bg">答疑截止时间</td>
+		    						<td style="text-align: left;">
+		    							<span id="answersEndDate"></span>
+		    							
+		    						</td>
+		    					</tr>
+		    					<tr class="addendum">
+		    						<td class="th_bg">资格预审文件递交截止时间</td>
+		    						<td style="text-align: left;">
+		    							<span id="pretrialDocReferEndTime"></span>
+		    							
+		    						</td>
+		    						<td class="th_bg">资格预审文件开启时间</td>
+		    						<td style="text-align: left;">
+		    							<span id="pretrialOpenTime"></span>
+		    							
+		    						</td>
+		    					</tr>
+		    		        </table>   
+		    	   		</div>
+		    	   	</div>
+		    	</div>
+		    	<div class="panel panel-accordion panel-default reviewShow" style="display: none;">
+		    		<div class="panel-heading active"  role="tab" id="headingFive">  
+				 		<h4 class="panel-title">
+			            	<a class="collapsed" role="button" data-toggle="collapse" href="#collapseFive" aria-controls="collapseFive"  aria-expanded="false">
+			            		评审项
+			            	</a>
+				 		</h4>  
+				   	</div>  
+				  	<div  id="collapseFive" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingFive">  
+				       	<div class="panel-body">
+				       		<div id="review">
+				       			<div class="reviewSecTabs">
+			            			<ul class="nav nav-pills" id="reviewDetailTabs">
+			            			</ul>
+			            		</div>
+			            		<div class="table-responsive">
+									<table class="table table-bordered" id="reviewTab"></table>
+								</div>
+				       		</div> 
+			       		</div>
+			       	</div>
+		    	</div>
+		    	<div id="approval">
+		    		
+		    	</div>
+		    	<div class="panel panel-accordion panel-default changeBlock historyWrap" >
+		    		<div class="panel-heading active"  role="tab" id="headingSix">  
+				 		<h4 class="panel-title">
+			            	<a class="collapsed" role="button" data-toggle="collapse" href="#collapseSix" aria-controls="collapseSix"  aria-expanded="false">
+			            		资格预审文件历史
+			            	</a>
+				 		</h4>  
+				   	</div>  
+				  	<div  id="collapseSix" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingSix">  
+				       	<div class="panel-body">
+			        		<div class="panel-body" id="changeHis">
+	       		
+	       					</div>
+			       		</div>
+			       	</div>
+		    	</div>
+	   		</div>
+		</div>
+	    <div style="width: 100%;height: 50px;text-align:center;position: fixed;bottom: 0;background-color: #FFFFFF;">
+	    	<button type="button" class="btn btn-primary" id="btnPass" style="display: none;"><span class="glyphicon glyphicon-saved"></span>审核通过</button>
+        	<button type="button" class="btn btn-default" id="btnNoPass" style="display: none;"><span class="glyphicon glyphicon-remove"></span>审核不通过</button>
+			<button type="button" class="btn btn-default" id="btnClose"><span class="glyphicon glyphicon-remove"></span>关闭</button>
+		</div>
+		<form id="formFile"></form>
+	     <script type="text/javascript" src="../../../../../media/js/jquery/jquery.js" ></script>
+		 <script type="text/javascript" src="../../../../../media/js/jquery/jquery.extend.js"></script>
+		 <script type="text/javascript" src="../../../../../media/js/base/common.js" ></script>
+		 <script type="text/javascript" src="../../../../../media/js/base/util.js" ></script>
+		 <script type="text/javascript" src="../../../../../media/js/bootstrap/js/bootstrap.js" ></script>
+		 <script type="text/javascript" src="../../../../../media/js/bootstrap/js/bootstrap-table.min.js"></script>
+		 <script type="text/javascript" src="../../../../../media/js/bootstrap/js/bootstrap-table-zh-CN.min.js"></script>
+		 <script type="text/javascript" src="../../../../../media/js/layer/layer.js"></script>
+		 <script type="text/javascript" src="../../../../Model/js/public.js"></script>
+		 <script type="text/javascript" src="../../../../../media/js/base/WorkflowInfoNew.js"></script>
+		 <script type="text/javascript" src="../../../../../media/js/base/StreamUpload.js"></script>
+		 <script type="text/javascript" src="../js/bidFileView.js?version=3.4.26" ></script>
+	</body>
+</html>

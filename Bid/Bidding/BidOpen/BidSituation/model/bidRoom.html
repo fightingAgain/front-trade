@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+	<meta http-equiv="pragma" content="no-cache"><!-- 禁止浏览器从本地计算机的缓存中访问页面内容 --> 
+	<meta http-equiv="cache-control" content="no-cache"><!-- 用于指定请求和响应遵循的缓存机制 --> 
+	<meta http-equiv="expires" content="0"><!-- 用于设定网页的到期时间，一旦网页过期，必须到服务器上重新传输； -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>开标室</title>
+    <link rel="stylesheet" href="../../css/style.css">
+</head>
+<body>
+    <!-- &&&&& 头部信息 &&&&& -->
+    <header>
+        <!-- &&&&& 标题 &&&&& -->
+        <div class="h-top">
+            <a href="#">
+                开标室
+            </a>
+            <!--<button>&times;</button>-->
+        </div>
+    </header>
+    <!-- &&&& 开标内容详情 &&&&& -->
+    <div class="main" style="margin-top:0px">
+        <!-- &&&&& 开标看板 &&&&& -->
+        <div class="m2-l" id="bidderList">
+            <ul>
+                
+            </ul>
+        </div>
+        <div class="m2-r">
+            <div class="h-time openCount">
+                <img src="../../images/second.jpg" alt="时钟"/>
+                <span id="countDown"></span>
+            </div>
+            <div class="m-l openPanel">
+                <h2>开标看板</h2>
+                <div class="l-content">
+                    <ul id="logBoard">
+                        
+                    </ul>
+                </div>     
+            </div>
+            <!-- &&&&& 消息看板 &&&&& -->
+            <div class="m-l m-r openPanel">
+                <h2>消息看板</h2>
+                <div class="l-content r-content">
+                    <ul id="msgBoard">
+                       
+                    </ul>
+                </div>     
+            </div>
+            <div style="clear:both"></div>
+            <footer class="openBtn">
+                <button type="button" id="btnView">查看签到信息</button>
+    			<button type="button" id="btnOrder">下达开标指令</button>
+    			<button type="button" id="btnDecrypt">投标文件解密/确认查看</button>
+    			<button type="button" id="btnOpen">开标一览表查看</button>
+    			<button type="button" id="btnCreate">生成一览表</button>
+    			<button type="button" id="btnPause">暂停开标</button>
+    			<button type="button" id="btnReview" style="display: none;">恢复开标</button>
+    			<button type="button" id="btnEnd">结束开标</button>
+    			<button type="button" id="btnSend">发送消息</button>
+            </footer>
+        </div>
+        
+    </div>
+    <!-- &&&&& 底部信息 &&&&&& -->
+     <script type="text/javascript" src="../../../../media/js/jquery/jquery.js"></script>
+    <script type="text/javascript" src="../../../../media/js/jquery/jquery.extend.js"></script>
+    <script type="text/javascript" src="../../../../media/js/base/util.js"></script>
+    <script type="text/javascript" src="../../../../media/js/base/common.js"></script>
+    <script type="text/javascript" src="../../../../media/js/bootstrap/js/bootstrap.js"></script>
+    <script type="text/javascript" src="../js/bidRoom.js"></script>
+</body>
+</html>

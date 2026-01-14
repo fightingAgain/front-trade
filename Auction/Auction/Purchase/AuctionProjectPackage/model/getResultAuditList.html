@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="pragma" content="no-cache">
+		<!-- 禁止浏览器从本地机的缓存中调阅页面内容 -->
+		<meta http-equiv="cache-control" content="no-cache, must-revalidate">
+		<meta http-equiv="expires" content="0">
+		<title>选择用户</title>
+		<link rel="stylesheet" href="../../../../../media/js/bootstrap/css/bootstrap.css">
+		<link rel="stylesheet" href="../../../../../media/js/bootstrap/css/bootstrap-table.css">
+	</head>
+
+	<body>
+		<div class="container-fluid" style="margin-top: 5px;margin-left: 6px;">
+
+			<div id="toolbar">
+				<div class="input-group" style="width:180px;float: left;">
+					<span class="input-group-addon">用户姓名</span>
+					<input type="text" class="form-control" name="userName" id="userName" style="width:180px">
+				</div>
+
+				<div class="input-group" style="width:180px;float: left;padding-left: 10px;">
+					<span class="input-group-addon">登录帐号</span>
+					<input type="text" class="form-control" name="logCode" id="logCode" style="width:180px">
+				</div>
+
+				<div class="btn-group" style="padding-left:10px ;">
+					<button type="button" id="btnSearch" class="btn btn-primary">
+		                <span class="glyphicon glyphicon-search" aria-hidden="true"></span> 查 询
+		            </button>
+					<button id="btnAdd" type="button" class="btn btn-primary">
+		                 <span class="glyphicon glyphicon-ok" aria-hidden="true"></span> 确 定
+		            </button>
+				</div>
+			</div>
+
+			<table id="EmployeeList" class="" data-toolbar="#toolbar"></table>
+
+		</div>
+
+		<input type="hidden" id="employeeId" />
+
+		<script src="../../../../../media/js/jquery/jquery.min.js"></script>
+		<script src="../../../../../media/js/jquery/jquery.extend.js"></script>
+
+		<script src="../../../../../media/js/jquery/jquery.timers-1.2.js"></script>
+		<script src="../../../../../media/js/bootstrap/js/bootstrap.js"></script>
+		<script src="../../../../../media/js/bootstrap/js/bootstrap-table.min.js"></script>
+		<script src="../../../../../media/js/bootstrap/js/bootstrap-table-zh-CN.min.js"></script>
+			<script type="text/javascript" src="../../../../../media/js/layer/layer.js"></script>
+
+		<script type="text/javascript">
+			var tempEmployeeId = [];
+			var tempEmployeeName = [];
+
+			function BindWorkflowCheckerInfo() {
+				if($("#employeeId").val() != "") {
+					tempEmployeeId = $("#employeeId").val().split(',');
+
+				}
+				$("#EmployeeList").bootstrapTable({
+					url: top.config.Syshost + "/EmployeeController/pageViewForWorkFlow.do",
+					dataType: 'json',
+					method: 'get',
+					cache: false, // 是否使用缓存，默认为true，所以一般情况下需要设置一下这个属性（*）
+					locale: "zh-CN",
+					pagination: true, // 是否启用分页
+					showPaginationSwitch: false, // 是否显示 数据条数选择框
+					pageSize: 15, // 每页的记录行数（*）
+					pageNumber: 1, // table初始化时显示的页数					
+					clickToSelect: true, //是否启用点击选中行
+					search: false, // 不显示 搜索框
+					sidePagination: 'server', // 服务端分页
+					classes: 'table table-bordered', // Class样式
+					//showRefresh : true, // 显示刷新按钮
+					silent: true, // 必须设置刷新事件
+					queryParams: function(params) {
+						var paramData = {
+							pageSize: params.limit,
+							pageNumber: (params.offset / params.limit) + 1, //页码
+							'userInformation.userName': $("#userName").val(),
+							'logCode': $("#logCode").val(),
+							'employeeState': 0
+						};
+						return paramData;
+					},
+					striped: true,
+					columns: [
+						[{
+								field: 'Id',
+								checkbox: true,
+								formatter: function(value, row, index) {
+									for(i = 0; i < tempEmployeeId.length; i++) {
+										if(row.id == tempEmployeeId[i]) {
+											return {
+												checked: true, //设置选中
+												disabled: true //设置是否可用
+											};
+										}
+									}
+
+								}
+							},
+							{
+								field: 'userName',
+								title: '用户姓名'
+							},
+							{
+								field: 'logCode',
+								title: '登录帐号'
+							},
+							{
+								field: 'tel',
+								title: '手机号码'
+							},
+							{
+								field: 'email',
+								title: '电子邮箱'
+							}
+						]
+					]
+				});
+			}
+
+			function stateFormatter(value, row, index) {
+				if(row.state == true)
+					return {
+						disabled: true, //设置是否可用
+						checked: true //设置选中
+					};
+				return value;
+			}
+
+			$("#btnSearch").click(function() {
+				$('#EmployeeList').bootstrapTable('refresh', {
+					url: top.config.Syshost + "/EmployeeController/pageView.do"
+				});
+			});
+			$('#EmployeeList').on('uncheck.bs.table check.bs.table check-all.bs.table uncheck-all.bs.table', function(e, rows) {
+				var datas = $.isArray(rows) ? rows : [rows]; // 点击时获取选中的行或取消选中的行
+				examine(e.type, datas); // 保存到全局 Array() 里
+			});
+
+			function examine(type, datas) {
+				if(type.indexOf('uncheck') == -1) {
+					$.each(datas, function(i, v) {
+						// 添加时，判断一行或多行的 id 是否已经在数组里 不存则添加　
+						tempEmployeeId.indexOf(v.id) == -1 ? tempEmployeeId.push(v.id) : -1;
+						tempEmployeeName.indexOf(v.userName) == -1 ? tempEmployeeName.push(v.userName) : -1;　　　　
+					});
+				} else {
+					$.each(datas, function(i, v) {
+						tempEmployeeId.splice(tempEmployeeId.indexOf(v.id), 1); //删除取消选中行
+						tempEmployeeName.splice(tempEmployeeId.indexOf(v.userName), 1);
+					});
+				};
+			};
+			$("#btnAdd").click(function() {
+				var EmployeeData = tempEmployeeId;
+				if(EmployeeData.length == 0) {
+					parent.layer.alert('请选择要添加的用户信息！');
+					return;
+				}
+			//	localStorage.setItem("EmployeeData",EmployeeData)
+			//	localStorage.setItem("tempEmployeeName",tempEmployeeName)
+				// var index = parent.layer.getFrameIndex(window.name);
+//				 var contentWindow = window.parent.$("#layui-layer-iframe" )[0].contentWindow;
+//				 contentWindow.callBackEmployee(EmployeeData,tempEmployeeName);
+//				 console.log(contentWindow)
+  //  parent.layer.close(index);
+				//parent.layer.closeAll();
+//				console.log(parent.layer.getFrameIndex(window.name))
+				parent.callBackEmployee(EmployeeData,tempEmployeeName);
+			});
+		</script>
+	</body>
+
+</html>

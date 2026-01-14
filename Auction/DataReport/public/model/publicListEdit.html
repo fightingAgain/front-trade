@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="pragma" content="no-cache">
+		<!-- 禁止浏览器从本地机的缓存中调阅页面内容 -->
+		<meta http-equiv="cache-control" content="no-cache, must-revalidate">
+		<meta http-equiv="expires" content="0">
+		<title>业务统计报表</title>
+		<link rel="stylesheet" href="../../../../media/js/layer/mobile/need/layer.css" />
+		<link rel="stylesheet" href="../../../../media/js/layer/theme/default/laydate.css" />
+		<link rel="stylesheet" href="../../../../media/js/bootstrap/css/bootstrap.css">
+		<link rel="stylesheet" href="../../../../media/js/bootstrap/css/bootstrap-table.min.css" />
+		<link rel="stylesheet" href="../../../../media/js/bootstrap/css/bootstrap-select.min.css" />
+		<style type="text/css">
+			.fystyle{
+				width: 90%;
+				float: left;
+			}
+			
+		</style>
+	</head>
+
+	<body>
+		<form id="formbackage" name="purchase" style="width: 99%;padding-left: 10px;padding-top: 10px;margin-bottom: 60px;">
+			<table class="table table-bordered" style="margin-bottom: 50px;" align="center">
+				<tr>
+					<td colspan="4" style="font-weight: bold;" class="active">项目信息</td>
+				</tr>
+				<tr>
+					<td class="th_bg">标段/包件编号</td>
+					<td style="width: calc(40%);">
+						<div id="bidSectionCode" style="float: left;"></div>
+						<button type="button" id="changeName" class="btn btn-primary" style="float: right;margin-right: 5px;"><span class="	glyphicon glyphicon-refresh"></span>切换</button>
+						<button type="button" id="changeNameCz" class="btn btn-primary" style="float: right;margin-right: 5px;"><span class="	glyphicon glyphicon-refresh"></span>重置</button>
+						<p class="red red_tips" style="width: 100%;display: inline-block;margin-top: 10px;margin-bottom: 0px;">*若默认带出业主项目编号，请点击"切换"更改为系统项目编号，谨慎操作!</p>
+					</td>
+					<td class="th_bg">系统外编号</td>
+					<td>
+						<input type="text" class="form-control" name="outSystemNumber" id="outSystemNumber" />
+					</td>
+				</tr>
+				<tr>
+					<td class="th_bg">标段/包件名称</td>
+					<td colspan="3">
+						<div id="bidSectionName"></div>
+					</td>
+				</tr>
+				<tr>
+					<td class="th_bg">招标人/委托单位</td>
+					<td>
+						<div id="purchaserName" style="float: left;line-height:34px;" class="hover_table"></div>
+						<button type="button" class="btn btn-primary" id="reset_tender" style="float: right;margin-right: 5px;">修改</button>
+					</td>
+					<td class="th_bg"><i class="red">*</i>项目归属部门</td>
+					<td>
+						<input type="text" name="projectDepartmentName" id="projectDepartmentName" style="cursor: pointer;" class="form-control projectDepartmentName" placeholder="请选择项目归属部门" datatype="*" errormsg="请选择项目归属部门">
+						<input type="hidden" name="projectDepartmentId" id="projectDepartmentId" value="" />
+					</td>
+				</tr>
+				<tr>
+					<td class="th_bg"><i class="red">*</i>项目归属处室</td>
+					<td>
+						<input type="text" id="projectOfficeName" name="projectOfficeName" class="form-control departmentName" placeholder="请选择项目归属处室" datatype="*" errormsg="请选择项目归属处室" />
+						<input type="hidden" name="projectOfficeId" id="projectOfficeId" value="" />
+						
+					</td>
+					<td class="th_bg">市场类型</td>
+					<td>
+						<div id="marketType"></div>
+					</td>
+				</tr>
+				<tr>
+					<td class="th_bg"><i class="red">*</i>代理机构<div class="red business" style="font-style:oblique; display: none;">(注：东风咨询有限公司/东风国际招标有限公司/襄阳致远工程咨询有限公司/河北行远工程咨询有限公司)</div></td>
+					<td>
+						<div id="enterpriseName"></div>
+					</td>
+					<td class="th_bg"><i class="red">*</i>项目实施地点(省/市)</td>
+					<td>
+						<!--<div id="areaBlock"></div>-->
+						<select class="form-control" style="width: 50%;float: left;" name="project.province" id="Province"></select>
+						<input type="hidden" name="project.provinceName" id="provinceName" />
+						<select class="form-control" style="width: 50%;float: left;" name="project.city" id="City"></select>
+						<input type="hidden" name="project.cityName" id="cityName" />
+					</td>
+				</tr>
+				<tr>
+					<td class="th_bg">委托金额（预算）</td>
+					<td>
+						<input type="text" name="entrsuSum" id="entrsuSum" class="form-control delDatatype priceNumber fystyle" datatype="*" errormsg="请输入委托金额" /><span style="float: right;margin-top: 6px;">元</span>
+						<!-- <div style="float: left;" id="entrsuSum"></div><span style="float: left;">元</span> -->
+					</td>
+					<td class="th_bg">项目分配时间</td>
+					<td>
+						<div id="bidOpeningEndTime"></div>
+					</td>
+				</tr>
+				<tr>
+					<td class="th_bg">项目经理</td>
+					<td>
+						<div id="tenderAgencyLinkmen"></div>
+					</td>
+					<td class="th_bg"></td>
+					<td></td>
+				</tr>
+				<!--采购信息-->
+				<tr>
+					<td colspan="4" style="font-weight: bold;" class="active">采购信息</td>
+				</tr>
+				<tr>
+					<td class="th_bg"><i class="red">*</i>采购员/招标人代表</td>
+					<td>
+						<input type="text" name="purchaserLinkmen" id="purchaserLinkmen" class="form-control" datatype="*" errormsg="请输入采购员/招标人代表名称" maxlength=20>
+					</td>
+					<td class="th_bg"><i class="red">*</i>采购员联系电话</td>
+					<td>
+						<input type="text" name="purchaserLinkphone" id="purchaserLinkphone" class="form-control" placeholder="请输入采购员联系电话" datatype="contact" errormsg="请输入采购员联系电话">
+					</td>
+				</tr>
+				<tr>
+					<td class="th_bg">采购员联系邮箱</td>
+					<td>
+						<input type="text" name="purchaserLinkemail" id="purchaserLinkemail" class="form-control" placeholder="请输入采购员联系邮箱" datatype="email" ignore="ignore" errormsg="请输入采购员联系邮箱">
+					</td>
+					<td class="th_bg"><i class="red">*</i>项目类型</td>
+					<td>
+						<!-- 建安工程/国内货物/国际货物/服务/广宣/废旧物资/装备/后勤物资 -->
+						<select name="projectType" id="projectType" class="form-control select zb" selectname="projectType">
+							<option value="A">建安工程</option>
+							<option value="B">国内货物</option>
+							<option value="9">国际货物</option>
+							<option value="C">服务</option>
+							<option value="C50" selected="selected">广宣</option>
+							<option value="4">废旧物资</option>
+							<option value="11">装备</option>
+							<option value="12">后勤物资</option>
+						</select>
+						<select name="dataTypeName" id="dataTypeName" class="form-control select xb" selectname="dataTypeName">
+							<option value="0">建安工程</option>
+							<option value="1">国内货物</option>
+							<option value="9">国际货物</option>
+							<option value="2">服务</option>
+							<option value="3" selected="selected">广宣</option>
+							<option value="4">废旧物资</option>
+							<option value="11">装备</option>
+							<option value="12">后勤物资</option>
+						</select>
+					</td>
+				</tr>
+				<tr>
+					<td class="th_bg"><i class="red">*</i>采购方式</td>
+					<td>
+						
+						<div id="tenderType"></div>
+						<select name="tenderType" class="form-control select business" selectname="tenderType" datatype="*" errormsg="请选择采购方式" style="display: none;">
+							<option value="">请选择</option>
+							<option value="4">招标</option>
+							<!-- <option value="13">竞争性磋商</option> -->
+							<!-- <option value="12">竞争性谈判</option> -->
+							<option value="6">单一</option>
+							<!-- <option value="3">询价采购</option> -->
+							<option value="0">询比采购</option>
+							<option value="1">竞价采购</option>
+							<option value="2">竞卖采购</option>
+							<!-- <option value="90">评审确认（预研）</option> -->
+							<!-- <option value="91">遴选（比选）</option> -->
+						</select>
+					</td>
+					<td class="th_bg">交易平台</td>
+					<td>
+						<div id="tenderDesk"></div>
+						<select name="tenderDesk" class="form-control select business" selectname="tenderDesk" datatype="*" errormsg="请选择交易平台" style="display: none;">
+							<option value="">请选择</option>
+							<option value="0">东风平台</option>
+							<option value="2">长安平台</option>
+							<option value="3">企采平台</option>
+							<option value="8">中汽创智平台</option>
+							<option value="9">国际招标网</option>
+							<option value="4">政府采购平台</option>
+							<option value="6">政府交易平台</option>
+							<option value="99">其他交易平台</option>
+							<option value="7">线下项目</option>
+						</select>
+					</td>
+				</tr>
+				<tr>
+					<td class="th_bg"><i class="red">*</i>是否为政府采购</td>
+					<td colspan="3">
+						<select name="publlcProcurement" id="publlcProcurement" class="form-control" style="width: 100px;">
+							<option value="1">否</option>
+							<option value="0">是</option>
+						</select>
+					</td>
+				</tr>
+				<tr>
+					<td class="th_bg"><i class="red">*</i>评审方法</td>
+					<td>
+						<div id="bidCheckType"></div>
+						<input name="bidCheckType" class="form-control business" datatype="*" errormsg="请输入评审方法" maxlength="50" style="display: none;" />
+					</td>
+					<td class="th_bg"><i class="red">*</i>公开/邀请</td>
+					<td>
+						<div id="tenderMode"></div>
+						<select name="tenderMode" class="form-control select business" selectname="tenderMode" datatype="*" errormsg="请选择公开/邀请" style="width: 100px;display: none;">
+							<option value="">请选择</option>
+							<option value="1">公开</option>
+							<option value="2">邀请</option>
+						</select>
+					</td>
+				</tr>
+				<tr>
+					<td class="th_bg"><i class="red">*</i>项目状态</td>
+					<td>
+						<select name="projectState" id="projectState" class="form-control select" selectname="projectState" datatype="*" errormsg="请选择项目状态">
+							<!-- 正常结束（已发通知书）/已发放通知书，项目取消/经评审有候选人，但未发通知书/经评审无候选人/已发公告，未开标/已建项，未启动 -->
+							<option value="">请选择</option>
+							<!-- <option value="1">正常结束且已发通知书</option>
+							<option value="2">流标未产生收入也未发生费用</option>
+							<option value="3">流标但已产生收入或已发生费用</option> -->
+							<option value="4">正常结束（已发通知书）</option>
+							<option value="5">已发放通知书，项目取消</option>
+							<option value="6">经评审有候选人，但未发通知书时项目取消</option>
+							<option value="7">经评审无候选人</option>
+							<option value="8">已发公告，未开标</option>
+							<option value="9">已建项，未启动</option>
+
+						</select>
+					</td>
+					<td class="th_bg noticeStartDate"><i class="red">*</i>公告发布时间/招标文件开始发售时间（年/月/日）</td>
+					<td>
+						<div id="noticeStartDate"></div>
+						<input type="text" name="noticeStartDate" id="" class="form-control business Wdate" autocomplete="off" style="width: 260px;display: none;" datatype="*" errormsg="请选择公告发布时间/招标文件开始发售时间（年/月/日）" />
+						<!-- <input type="text" name="noticeStartDate" class="form-control business" id="" value="" /> -->
+					</td>
+				</tr>
+				<tr>
+					<td class="th_bg bidOpenTime"><i class="red">*</i>开标时间/评审/报价时间</td>
+					<td>
+						<div id="bidOpenTime"></div>
+						<input type="text" name="bidOpenTime" id="" class="form-control business Wdate" autocomplete="off" style="width: 260px;display: none;" datatype="*" errormsg="请选择开标时间" />
+					</td>
+					<td class="th_bg provinceNameKb"><i class="red">*</i>开标地点</td>
+					<td>
+						<select class="form-control" style="width: 50%;float: left;" name="project.provinceKb" id="ProvinceKb"></select>
+						<input type="hidden" name="project.provinceNameKb" id="provinceNameKb" />
+						<select class="form-control" style="width: 50%;float: left;" name="project.cityKb" id="CityKb"></select>
+						<input type="hidden" name="project.cityNameKb" id="cityNameKb" />
+					  <!-- <div id="bidOpenAdder"></div>-->
+					</td>
+				</tr>
+				<tr>
+					<td class="th_bg tenderNumber"><i class="red">*</i>参加开标的投标人家数</td>
+					<td colspan="3">
+						<input type="text" name="tenderNumber" id="tenderNumber" class="form-control delDatatype positiveInt" />
+					</td>
+				</tr>
+				<!--费用信息-->
+				<tr>
+					<td colspan="4" style="font-weight: bold;" class="active">费用信息</td>
+				</tr>
+				<tr>
+					<td class="th_bg reviewFeeSubtotal"><i class="red">*</i>评审费小计<div class="red business" style="font-style:oblique;display: none;">注：单位元，保留2位小数</div></td>
+					<td>
+						<input type="text" name="reviewFeeSubtotal" id="reviewFeeSubtotal" class="form-control delDatatype priceNumber fystyle" datatype="*" errormsg="请输入评审费小计" /><span style="float: right;margin-top: 6px;">元</span>
+					</td>
+					<td class="th_bg staffCostSubtotal"><i class="red">*</i>工作人员费用小计<div class="red business" style="font-style:oblique;display: none;">注：单位元，保留2位小数</div></td>
+					<td>
+						<input type="text" name="staffCostSubtotal" id="staffCostSubtotal" class="form-control delDatatype priceNumber fystyle" datatype="*" errormsg="请输入工作人员费用小计" /><span style="float: right;margin-top: 6px;">元</span>
+					</td>
+				</tr>
+				<tr>
+					<td class="th_bg serviceFeleSubtotal"><i class="red">*</i>综合服务费小计
+						<br /><span class="red" style="font-style:oblique">(注:包含专家餐费、打印、交通、租赁开标室费用、打印、零食等；单位元，保留2位小数)</span></td>
+					<td>
+						<input type="text" name="serviceFeleSubtotal" id="serviceFeleSubtotal" class="form-control delDatatype priceNumber fystyle" datatype="*" errormsg="请输入综合服务费小计" /><span style="float: right;margin-top: 6px;">元</span>
+					</td>
+					<td class="th_bg">项目成本费用小计<div class="red business" style="font-style:oblique;display: none;">注：自动计算</div></td>
+					<td>
+						<input type="text" name="projectCostSubtotal" id="projectCostSubtotal" class="form-control sunprice fystyle" readonly/><span style="float: right;margin-top: 6px;">元</span>
+					</td>
+				</tr>
+				<tr>
+					<td class="th_bg"><i class="red">*</i>项目结束时间（月度更新）<br /><span class="red" style="font-style:oblique">注：中标通知书发出时间/项目异常的公告时间/开标失败的开标时间</span></td>
+					<td>
+						<!--<input type="text" name="winNoticeDate" id="winNoticeDate" class="form-control delDatatype" readonly datatype="*"
+                        errormsg="中标通知书发出时间/项目终止时间" />-->
+						<div id="noticeSendTime"></div>
+						<input type="text" name="noticeSendTime" id="" class="form-control business Wdate" autocomplete="off" style="width: 260px;display: none;" datatype="*" errormsg="请选择项目结束时间" />
+					</td>
+					<td class="th_bg"><span class="noBusiness">完成月份</span></td>
+					<td>
+						<div id="complectMonth" class="noBusiness"></div>
+					</td>
+				</tr>
+				<tr>
+					<td class="th_bg"><i class="red">*</i>中标人</td>
+					<td>
+						<div id="legalName"></div>
+						<!--<input type="text" name="bidWinner" id="bidWinner" class="form-control delDatatype"  maxlength=200 datatype="*"
+                        errormsg="请输入中标人"  />-->
+					</td>
+					<td class="th_bg"><i class="red">*</i>是否存在正式异议/投诉</td>
+					<td>
+						<select id="isObjection" class="form-control">
+							<option value="0" text="否" selected="selected">否</option>
+							<option value="1" text="是">是</option>
+						</select>
+					</td>
+				</tr>
+				<tr>
+					<td class="th_bg">多个中标人时备注<div class="red business" style="font-style:oblique;display: none;">注：中标人A，报价金额（报价与中标价不同时填写），中标金额，中标服务费；中标人B...</div></td>
+					<td colspan="3">
+						<textarea name="manyBidderRemark" id="manyBidderRemark" class="form-control" style="resize: none;" rows="3" cols="" maxlength=500 placeholder="示例：中标人A，报价金额（报价与中标价不同时填写），中标金额，中标服务费"></textarea>
+						<p class="manyBidderRemarkP" style="display: none;color: #BB2413;margin-bottom: 0px;margin-top: 10px;">请同时在区域内填写修改原因</p>
+					</td>
+
+				</tr>
+				<tr>
+					<td class="th_bg"><i class="red projectState4">*</i>中标联系人<br /><span class="red" style="font-style:oblique">注：当存在多个中标人时,按格式 中标人A,中标人联系人A';中标人B,中标人联系人B'...</span></td>
+					<td colspan="3">
+						<input type="text" name="manyBidderLinkmen" id="manyBidderLinkmen" class="form-control" errormsg="请输入中标联系人" />
+					</td>
+				</tr>
+				<tr>
+					<td class="th_bg"><i class="red projectState4">*</i>中标人联系电话<br /><span class="red" style="font-style:oblique">注：当存在多个中标人时,按格式 中标人A,中标人联系电话A'‘;中标人B,中标人联系电话B'’...</span></td>
+					<td colspan="3">
+						<input type="text" name="manyBidderLinkphone" id="manyBidderLinkphone" class="form-control" errormsg="请输入中标人联系电话" />
+					</td>
+				</tr>
+				<tr>
+					<td class="th_bg"><i class="red projectState4">*</i>中标人联系邮箱<br /><span class="red" style="font-style:oblique">注：当存在多个中标人时,按格式 中标人A,中标人联系邮箱A'‘‘;中标人B,中标人联系邮箱B'’’...</span></td>
+					<td colspan="3">
+						<input type="text" name="manyBidderLinkemail" id="manyBidderLinkemail" class="form-control" errormsg="请输入中标人联系邮箱" />
+					</td>
+				</tr>
+				<tr>
+					<td class="th_bg fzb"><i class="red projectState4">*</i>成交人合计报价金额<div class="red business" style="font-style:oblique">注：单位元，保留两位小数</div></td>
+					<td class="fzb">
+						<input type="text" name="dealTotalAmount" id="dealTotalAmount" class="form-control delDatatype priceNumber fystyle" datatype="*" errormsg="请输入成交人合计报价金额" /><span class="noBusiness" style="float: right;margin-top: 6px;">元</span>
+					</td>
+					<td class="th_bg"><i class="red projectState4">*</i>合计中标金额<div class="red business" style="font-style:oblique">注：单位元，保留两位小数</div></td>
+					<td>
+						<div class="noBusiness"><div style="float: left;" id="contractSettlementPriceSum"></div><span style="float: left;">元</span></div>
+						<input type="text" name="contractSettlementPriceSum"  class="form-control delDatatype priceNumber business fystyle" datatype="*" errormsg="请输入合计中标金额" maxlength=14 />
+					</td>
+				</tr>
+				
+				<tr>
+					<td class="th_bg"><i class="red projectState4">*</i>合计代理服务费-按代理合同计取
+						<br /><span class="red" style="font-style:oblique">(收到的全部费用,含非招标项目的评审费等供应商直接支付的费用，不含造价咨询费、标书费)</span>
+					</td>
+					<td>
+						<input type="text" name="agencyServiceNoFee" id="agencyServiceNoFee" class="form-control delDatatype priceNumber fystyle" datatype="*" errormsg="请输入合计代理服务费-不打折" /><span class="noBusiness" style="float: right;margin-top: 6px;">元</span>
+					</td>
+					<td class="th_bg"><i class="red projectState4">*</i>合计代理服务费 <br />
+						<span class="red" style="font-style:oblique">(收到的全部费用,含非招标项目的评审费等供应商直接支付的费用,不含造价咨询费、标书费，代理服务费实收金额，与代理合同计算方式不一致时，应当先经审批。)</span>
+					</td>
+					<td>
+						<input type="text" name="agencyServiceFee" id="agencyServiceFee" class="form-control delDatatype priceNumber fystyle" datatype="*" errormsg="请输入合计代理服务费" /><span class="noBusiness" style="float: right;margin-top: 6px;">元</span>
+					</td>
+				</tr>
+				<tr>
+					<td class="th_bg feeConfirmVersion">业务收入：合计招标代理服务费</td>
+					<td class="feeConfirmVersion">
+						<div id="businessIncomeServiceFee"></div>
+					</td>
+					<td class="th_bg">造价咨询费<div class="red business" style="font-style:oblique">注：单位元，保留两位小数</div></td>
+					<td>
+						<input type="text" name="costConsultingFee" id="costConsultingFee" class="form-control delDatatype priceNumber fystyle" errormsg="请输入造价咨询费" /><span class="noBusiness" style="float: right;margin-top: 6px;">元</span>
+					</td>
+				</tr>
+				<tr>
+					<td class="th_bg">采购文件售卖金额（元/份）</td>
+					<td>
+						<input type="text" name="filePrice" id="filePrice" class="form-control fystyle" readonly/>
+					</td>
+					<td class="th_bg">合计标书款收入<div class="red business" style="font-style:oblique">注：单位元，保留两位小数</div></td>
+					<td>
+						<input type="text" name="totalBidAmount" id="totalBidAmount" class="form-control fystyle" readonly/><span class="noBusiness" style="float: right;margin-top: 6px;">元</span>
+					</td>
+				</tr>
+				<tr>
+					<td class="th_bg">不含造价咨询服务费小计<div class="red business" style="font-style:oblique">注：单位元，保留两位小数，自动计算</div></td>
+					<td>
+						<input type="text" name="notCostConsultingFee" id="notCostConsultingFee" class="form-control sunprice fystyle" readonly/><span class="noBusiness" style="float: right;margin-top: 6px;">元</span>
+					</td>
+					<td class="th_bg">含造价咨询费服务费小计<div class="red business" style="font-style:oblique">注：单位元，保留两位小数，自动计算</div></td>
+					<td>
+						<input type="text" name="haveCostConsultingFee" id="haveCostConsultingFee" class="form-control sunprice fystyle" readonly /><span class="noBusiness" style="float: right;margin-top: 6px;">元</span>
+					</td>
+				</tr>
+				<tr>
+					<td class="th_bg">最终收入确认（含税，元）</td>
+					<td style="text-align: left">
+						<input type="text" name="finalIncome" id="finalIncome" class="form-control fystyle" readonly/>
+					</td>
+					<td class="th_bg">投标保证金实退日期</td>
+					<td style="text-align: left">
+						<input type="text" name="refundActualTime" id="refundActualTime" class="form-control fystyle" readonly/>
+					</td>
+				</tr>
+				<tr>
+					<td class="th_bg">备注</td>
+					<td colspan="3">
+						<textarea name="backups" id="backups" class="form-control" style="resize: none;" rows="3" cols="" maxlength="1000"></textarea>
+					</td>
+				</tr>
+				<tr class="files" style="display: none;">
+					<td colspan="4" style="font-weight: bold;" class="active">附件信息（项目经理用）<span class="red" style="font-size: 14px;font-weight: normal;">（请上传200M以内的文件）</span></td>
+				</tr>
+				<tr  class="files" style="display: none;">
+					<td colspan="4">
+						<button type="button" class="btn btn-sm btn-primary" id="fileUp" style="float: right;margin-right: 50px;margin-bottom: 10px;">
+							<span class="glyphicon glyphicon-folder-open"></span>选择文件
+						</button>
+						<button type="button"  id="fileLoad" style="display: none;"></button>
+						<div id="fileContent" style="margin-top: 40px;">
+							
+						</div>   
+					</td>
+				</tr>
+				<tr class="employee">
+					<td colspan="4" style="font-weight: bold;" class="active">审核信息</td>
+				</tr>
+				<tr class="employee">
+					<td class="th_bg">添加审核人<i class="red">*</i></td>
+					<td colspan="3" style="text-align: left;">
+						<select id="employeeId" class="form-control" style="width: 200px;" name="checkerId"></select>
+					</td>
+				</tr>
+				
+				<tr>
+					<td colspan="4">
+						<script id="editor" type="text/plain" style="width:100%;height:500px;"></script>
+						<input type="hidden" name="remark" id="remark" />
+					</td>
+				</tr>
+				<tr class="record" style="display: none;">
+					<td class="active" colspan="4" style="border: none;"><strong>流程审核记录</strong></td>
+				</tr>
+				<tr class="record" style="display: none;">
+					<td colspan="4">
+						<table class="table table-bordered" id="workflowListDetail">
+
+						</table>
+					</td>
+				</tr>
+			</table>
+		</form>
+		
+		<div class="bottom-btn">
+			<button type="button" class="btn btn-primary" id="btn_bao"><span class="glyphicon glyphicon-ok"></span>保存</button>
+			<button type="button" class="btn btn-primary" id="btn_submit"><span class="glyphicon glyphicon-saved"></span>提交</button>
+			<button type="button" class="btn btn-default" id="btn_close"><span class="glyphicon glyphicon-remove"></span>关闭</button>
+		</div>
+		<script type="text/javascript" src="../../../../media/js/jquery/jquery.js"></script>
+		<script type="text/javascript" src="../../../../media/js/jquery/jquery.extend.js"></script>
+		<script type="text/javascript" src="../../../../media/js/base/common.js"></script>
+		<script type="text/javascript" src="../../../../media/js/base/util.js"></script>
+		<script type="text/javascript" src="../../../../media/js/bootstrap/js/bootstrap.js"></script>
+		<script type="text/javascript" src="../../../../media/js/bootstrap/js/bootstrap-table.js"></script>
+		<script type="text/javascript" src="../../../../media/js/bootstrap/js/bootstrap-table-zh-CN.min.js"></script>
+		<script type="text/javascript" src="../../../../media/js/bootstrap/js/bootstrap-select.min.js"></script>
+		<script type="text/javascript" src="../../../../media/js/bootstrap/js/defaults-zh_CN.min.js"></script>
+		<script type="text/javascript" src="../../../../media/js/base/ProvinceCityData.js"></script>
+		<script type="text/javascript" src="../../../../media/js/layer/layer.js"></script>
+		<script type="text/javascript" src="../../../../media/js/zTree/js/jquery.ztree.all-3.5.min.js"></script>
+        <script type="text/javascript" src="../../../../media/js/xlsx.full.min.js" ></script>
+		<script type="text/javascript" src="../../../../media/js/My97DatePicker/WdatePicker.js"></script>
+		<script type="text/javascript" src="../../../../media/js/stream/js/stream-v1.js"></script>
+		<script type="text/javascript" src="../../../../media/js/base/StreamUpload.js"></script>
+		<script type="text/javascript" src="../../../currencyControl/js/tree.js" ></script>
+		<!-- 评标办法-->
+		<script type="text/javascript" src="../../../../Bidding/Model/js/public.js"></script>
+		<script type="text/javascript" src="../js/ProvinceCityData.js"></script>
+		<script type="text/javascript" src="../js/publicListEdit.js"></script>
+	</body>
+
+</html>

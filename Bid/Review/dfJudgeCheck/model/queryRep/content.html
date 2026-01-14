@@ -1,0 +1,51 @@
+<div id="clnBidReportWarp" style="width:98%;margin:10px 10px 0px 10px">
+	<div class="showExplain red" style="margin-bottom: 10px;display: none;">根据《东风汽车集团有限公司电子采购招投标过程信息监管规定》，有下列情形的，应认定为串通投标行为：<br/>1.投标文件（响应文件）异常一致的（预设标准文本或模板除外）；<br/>2.报价呈规律性差异的；<br/>3.投标文件（响应文件）的实质性内容存在两处及以上细节错误一致的；<br/>4.法律法规或公司制度规定的其他雷同性情形。<br/>可使用查重软件辅助评审。</div>
+    <ul id='queryRepList' class="nav nav-tabs" style="margin:5px auto">
+		<li role="presentation" class="active queryRepTab"><a href="#queryRep_DBW" aria-controls="queryRep_DBW" role="tab" data-toggle="tab">比对王</a></li>
+		<li role="presentation" class="queryRepTab"><a href="#queryRep_GLD" aria-controls="queryRep_GLD" role="tab" data-toggle="tab">广联达</a></li>
+	</ul>
+    <div class="tab-content">
+        <div role="tabpanel" class="tab-pane active" id="queryRep_DBW">
+			<div style="height: 35px;">
+				<button type="button" class="btn btn-primary" id="btnQueryRepAllFilesDbw" style="float: left;margin-right: 5px;">一键下载招投标文件</button>
+				<button type="button" class="btn btn-primary" id="btnQueryRepUploadFilesDbw" style="display: none;float: left;margin-right: 5px;">上传报告</button>
+				<!-- <button type="button" class="btn btn-primary" id="btnCaptionDbw" style="float: left;">操作引导</button> -->
+				<a class="btn btn-primary" id="btnCaptionDbw" style="float: left;" href="../../media/image/queryRep/比对王查重软件操作手册（招标）.pdf" download="比对王查重软件操作手册（招标）.pdf">操作引导</a>
+			</div>
+			<div class="progress_cont" id="fileContent_dbw"></div>
+			<table class='table table-bordered' style="margin-top: 10px;" id="clearResultTable">
+				<tr>
+					<td class="active" colspan="4">查重报告</td>
+				</tr>
+				<tr>
+					<td colspan="4">
+						<table class='table table-bordered' style="margin-top: 10px;" id="dbwQueryRepResultTable"></table>
+					</td>
+				</tr>
+			</table> 
+		</div>
+        <div role="tabpanel" class="tab-pane" id="queryRep_GLD">
+			<div>
+				<button type="button" class="btn btn-primary" id="btnOpenGld">一键查重</button>
+				<button type="button" class="btn btn-primary" id="btnResultGld" style="display: none;">获取报告</button>
+				<!-- <button type="button" class="btn btn-primary" id="btnCaptionGld">操作引导</button> -->
+				<a class="btn btn-primary" id="btnCaptionGld" href="../../media/image/queryRep/广联达查重软件操作手册（招标）.pdf" download="广联达查重软件操作手册（招标）.pdf">操作引导</a>
+				<button type="button" class="btn btn-primary" id="btnQueryRepUploadFilesGld" style="display: none;float: right;">上传报告</button>
+				<button type="button" class="btn btn-primary" id="btnQueryRepAllFilesGld" style="float: right;margin-right: 5px;">一键下载招投标文件</button>
+			</div>
+			<div class="progress_cont" id="fileContent_gld"></div>
+			<table class='table table-bordered' style="margin-top: 10px;" id="clearResultTable">
+				<tr>
+					<td class="active" colspan="4">查重报告</td>
+				</tr>
+				<tr>
+					<td colspan="4">
+						<table class='table table-bordered' style="margin-top: 10px;" id="gldQueryRepResultTable"></table>
+					</td>
+				</tr>
+			</table> 
+			
+		</div>
+      </div>
+</div>
+

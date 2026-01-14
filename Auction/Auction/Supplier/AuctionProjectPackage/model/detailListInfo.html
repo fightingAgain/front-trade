@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="pragma" content="no-cache">
+		<!-- 禁止浏览器从本地机的缓存中调阅页面内容 -->
+		<meta http-equiv="cache-control" content="no-cache, must-revalidate">
+		<meta http-equiv="expires" content="0">
+		<title></title>
+		<link rel="stylesheet" href="../../../../../media/js/bootstrap/css/bootstrap.css" />
+		<link rel="stylesheet" href="../../../../../media/js/bootstrap/css/bootstrap-table.min.css">
+		<link rel="stylesheet" type="text/css" href="../../../../../media/js/bootstrap-fileinput-master/css/fileinput.min.css" />
+		<style>
+			.container div {
+				text-align: center;
+			}
+			
+			table th,
+			table td {
+				vertical-align: middle;
+				/*text-align: center;*/
+			}
+			
+			.table>tbody>tr>td {
+				vertical-align: middle;
+			}
+			
+			.timeInval,
+			.minPrice {
+				font-size: 24px !important;
+				font-weight: bold;
+			}
+		</style>
+	</head>
+
+	<body style="width: 99%;padding: 10px;">
+		<div class="container-fluid" style="padding-bottom: 50px;">
+			<table class="table table-bordered" id="offerInfo" style="margin-bottom: 0px;">
+				<tr>
+					<td style="width:220px" class="th_bg">项目编号</td>
+					<td data-field="projectCode" id="projectCode" style="width:25%"></td>
+					<td class="th_bg">项目名称</td>
+					<td data-field="projectName" id="projectName" style="width:25%"></td>
+				</tr>
+				<tr>
+					<td class="th_bg">包件编号</td>
+					<td data-field="packageNum" id="packageNum"></td>
+					<td class="th_bg">包件名称</td>
+					<td data-field="packageName" id="packageName"></td>
+
+				</tr>
+	
+				<tr id="filesOthers">
+					<td style="text-align: left;" class="th_bg">
+						上传盖章版报价文件<span class="red">*(只能上传PDF格式文件)</span>
+					</td>
+					<td>
+						<input type="file" class="fileloading" name="files" id="detailedgzList" accept="application/pdf"  />
+					</td>
+					<td style="text-align: left;" class="th_bg">
+						上传其他文件<span class="red">(只能上传文档、表格、JPG图片、PDF格式和压缩文件)</span>
+					</td>
+					<td>
+						<input type="file" class="fileloading" name="files" id="otherFileList"  />
+						
+					</td>
+					
+					<!--<td style="text-align: left;" colspan="2"><span class="red">注只能上传Excel文件（后缀为.xls或.xlsx）</span></td>-->
+				</tr>
+				
+
+				<tr>
+					<td colspan="4" class="active">盖章版报价文件及其他附件</td>
+
+				</tr>
+
+				<table class="table table-hover" id="filetable"></table>
+			</table>
+
+			<div class="detilInfo">
+				<table class="table table-bordered detailed_list" style="width: 100%;margin-bottom: 0;">
+					<tr>
+						<td colspan="4" class="active">清单报价文件</td>
+
+					</tr>
+
+					<tr class="detailed_list">
+						<td style="text-align: left;width: 25%;" class="th_bg">
+							上传竞价文件
+						</td>
+						<td style="text-align: left;width: 25.5%;">
+							<input type="file" class="fileloading" name="files" id="detailedList" accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel" />
+						</td>
+						<td style="text-align: left;" colspan="2"><span class="red">注只能上传Excel文件（后缀为.xls或.xlsx）</span></td>
+					</tr>
+
+					
+				</table>
+				<table  class="table table-bordered" style="width: 100%;">
+					<tr>
+						<td colspan="4" class="active">竞价文件&nbsp;&nbsp;<span id="endTime" style="color: red;"></span></td>
+					</tr>
+				</table>
+				<table class="table table-hover" id="filesData"></table>
+				<table class="table table-bordered">
+					<td colspan="4" class="active">清单报价明细<span style="color: red;">（金额单位：元）</span></td>
+				</table>
+
+				<table class="table table-hover" id="detaillist_operation_table"></table>
+
+				<div class="bottom-btn">
+					<button type="button" class="btn btn-primary" id="btnSumit" style="display: none;" onclick="btnSumit()">提交</button>
+					<button type="button" class="btn btn-danger" id="btnClose" style="display: none;" onclick="btnClose()">撤回</button>
+					<button type="button" id="btn_close" class="btn btn-default">关闭</button>
+				</div>
+			</div>
+		</div>
+	</body>
+	<script type="text/javascript" src="../../../../../media/js/jquery/jquery.js"></script>
+	<script type="text/javascript" src="../../../../../media/js/jquery/jquery.extend.js"></script>
+	<script type="text/javascript" src="../../../../../media/js/bootstrap-fileinput-master/js/fileinput.js"></script>
+	<script type="text/javascript" src="../../../../../media/js/bootstrap-fileinput-master/js/locales/zh.js"></script>
+	<script type="text/javascript" src="../../../../../media/js/bootstrap/js/bootstrap.js"></script>
+	<script type="text/javascript" src="../../../../../media/js/bootstrap/js/bootstrap-table.min.js"></script>
+	<script type="text/javascript" src="../../../../../media/js/layer/layer.js"></script>
+	<script type="text/javascript" src="../../../../../media/js/base/util.js"></script>
+	<script src="../js/detailListInfo.js"></script>
+
+</html>

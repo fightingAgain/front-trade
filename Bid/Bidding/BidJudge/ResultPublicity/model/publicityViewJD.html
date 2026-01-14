@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8">
+		<meta http-equiv="pragma" content="no-cache"><!-- 禁止浏览器从本地计算机的缓存中访问页面内容 --> 
+		<meta http-equiv="cache-control" content="no-cache"><!-- 用于指定请求和响应遵循的缓存机制 --> 
+		<meta http-equiv="expires" content="0"><!-- 用于设定网页的到期时间，一旦网页过期，必须到服务器上重新传输； -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>中标结果公告</title>
+    <link rel="stylesheet" href="../../../../media/js/layer/mobile/need/layer.css" />
+    <link rel="stylesheet" href="../../../../media/js/bootstrap/css/bootstrap.css" />
+    
+	<style>
+		html,body { width: 100%;}
+		.readonly{
+		    border: none;
+		    background: none !important;
+		    outline: none !important;
+		    box-shadow: none !important;
+		}
+		.pretrial,.revise{
+			display: none;
+		}
+		.enterFull{
+			position: absolute;
+			top: 0;
+			left: 0;
+			background: #ffffff;
+			visibility: visible;
+			filter: Alpha(opacity=90);
+		}
+		.display_none{
+			display: none;
+		}
+		.file-input .kv-upload-progress{
+			display: none !important;
+		}
+		tr .file-input{
+			display: inline-block;
+			float: right;
+			margin-right: 50px;
+		}
+		a,a:link,a:visited,a:hover,a:active{
+			color: #333333;
+			text-decoration: none;
+		}
+		.set_height{
+			display: inline-block;
+			padding: 6px 12px;
+		}
+		
+	</style>
+</head>
+
+<body>
+    <form class="pageModel" id="addNotice" name="formName">
+    	<div class="panel-group" id="accordion">
+    		<div class="panel panel-accordion panel-default">
+	    		<div class="panel-heading active"  role="tab" id="headingOne">  
+			 		<h4 class="panel-title">
+		            	<a  role="button" data-toggle="collapse" href="#collapseOne" aria-controls="collapseOne"  aria-expanded="true"  >
+		            		基本信息
+		            	</a>
+			 		</h4>  
+			   	</div>  
+			  	<div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">  
+			       	<div class="panel-body">
+			       		<table  class="table table-bordered ">
+			       			<tr>
+					        	<td class="th_bg">标段编号</td>
+				                <td colspan="3">
+				                	<span class="set_height" id="interiorBidSectionCode"></span>
+				                </td>
+				               
+					        </tr>
+					        <tr>
+					        	 <td class="th_bg">标段名称</td>
+				                <td colspan="3">
+				                	<span class="set_height" id="bidSectionName"></span>
+				                </td>
+					        </tr>
+					        <tr>
+					        	 <td class="th_bg">招标项目名称</td>
+				                <td colspan="3">
+				                	<span class="set_height" id="tenderProjectName"></span>
+				                </td>
+					        </tr>
+					        <tr>
+					        	<td class="th_bg">评标时间</td>
+				                <td colspan="3">
+				                	<span class="set_height" id="checkEndDate"></span>
+				                </td>
+					        </tr>
+					        <tr>
+					        	<td class="th_bg">项目经理</td>
+				                <td>
+				                	<span class="set_height" id="tenderAgencyLinkmen"></span>
+				                </td>
+				                <td class="th_bg">联系电话</td>
+				                <td>
+				                	<span class="set_height" id="tenderAgencyLinktel"></span>
+				                </td>
+					        </tr>
+					        <tr>
+					        	<td class="th_bg">中标结果公告标题</td>
+				                <td colspan="3">
+				                	<span class="set_height" id="noticeName"></span>
+				                </td>
+					        </tr>
+					        <tr>
+					        	<td class="th_bg">公告开始时间</td>
+				                <td>
+				                	<span class="set_height" id="noticeStartTime"></span>
+				                </td>
+				                <td class="th_bg">公告截止时间</td>
+				                <td>
+				                	<span class="set_height" id="noticeEndTime"></span>
+				                </td>
+					        </tr>
+					         <tr>
+					            <td class="th_bg" >中标人及中标价</td>
+					            <td  colspan="3">
+					            	<table class="table table-bordered JD_view" id="candidates">
+					            		
+					            	</table>
+					            </td>
+					        </tr>
+					        <!--<tr>
+					        	<td class="th_bg">公告形式</td>
+				                <td colspan="3">
+				                   
+				                    <input type="text"  name="modality" id="modality" class="form-control readonly" readonly="readonly" style="width: 70%;"/>
+				                </td>
+					        </tr>-->
+			       		</table>
+		       		</div>
+	       		</div>
+       		</div>
+       		<div class="panel panel-accordion panel-default">
+	    		<div class="panel-heading active"  role="tab" id="headingFive">  
+			 		<h4 class="panel-title">
+		            	<a class="collapsed" role="button" data-toggle="collapse" href="#collapseFive" aria-controls="collapseFive"  aria-expanded="false">
+		            		公告发布媒体
+		            	</a>
+			 		</h4>  
+			   	</div>  
+			  	<div  id="collapseFive" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingFive">  
+			       	<div class="panel-body">
+			       		<table class="table table-bordered">
+					      	<tr>
+					            <td colspan="4" class="media-box">
+					            	<!--<div><input type="checkbox" name="noticeMedia" value="001" disabled="disabled" style="margin-right: 5px;"/>东风综合网站</div>
+					            	<div><input type="checkbox" name="noticeMedia" value="002" disabled="disabled" style="margin-right: 5px;"/>湖北省公共服务平台</div>
+					            	<div><input type="checkbox" name="noticeMedia" value="000" disabled="disabled" style="margin-right: 5px;"/>国家公共服务平台</div>
+					            	<div><input type="checkbox" name="noticeMedia" value="003" disabled="disabled" style="margin-right: 5px;"/>襄阳市公共服务平台</div>
+					            	<div><input type="checkbox" name="noticeMedia" value="005" disabled="disabled" style="margin-right: 5px;"/>采招网</div>-->
+					            </td>
+					        </tr>
+				        </table>   
+		       		</div>
+		       	</div>
+	    	</div>
+       		<div class="panel panel-accordion panel-default">
+	    		<div class="panel-heading active"  role="tab" id="headingTwo">  
+			 		<h4 class="panel-title">
+		            	<a class="collapsed" role="button" data-toggle="collapse" href="#collapseTwo" aria-controls="collapseTwo"  aria-expanded="false">
+		            		公告基本信息
+		            	</a>
+			 		</h4>  
+			   	</div>  
+			  	<div  id="collapseTwo" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingTwo">  
+			       	<div class="panel-body">
+						<table id="ueditorContent" class="table table-bordered">
+				        </table>  
+		       		</div>
+		       	</div>
+	    	</div>
+	    	<div class="panel panel-accordion panel-default">
+	    		<div class="panel-heading active"  role="tab" id="headingThree">  
+			 		<h4 class="panel-title">
+		            	<a class="collapsed" role="button" data-toggle="collapse" href="#collapseThree" aria-controls="collapseThree"  aria-expanded="false">
+		            		相关附件
+		            	</a>
+			 		</h4>  
+			   	</div>  
+			  	<div  id="collapseThree" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingThree">  
+			       	<div class="panel-body">
+			       		<div id="fileContent">
+			       			
+			       		</div>  
+		       		</div>
+		       	</div>
+	    	</div>
+	    	<div class="panel panel-accordion panel-default">
+	    		<div class="panel-heading active"  role="tab" id="headingSix">  
+			 		<h4 class="panel-title">
+		            	<a class="collapsed" role="button" data-toggle="collapse" href="#collapseSix" aria-controls="collapseSix"  aria-expanded="false">
+		            		中标结果公告历史
+		            	</a>
+			 		</h4>  
+			   	</div>  
+			  	<div  id="collapseSix" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingSix">  
+			       	<div class="panel-body">
+			       		<table id="historyList" class="table table-bordered table-striped" >
+					    	<!--<thead>
+					    		<tr>
+					    			<th style="width: 50px; text-align: center;">序号</th>
+					    			<th>标题</th>
+					    			<th style="width: 200px; text-align: center;">更新时间</th>
+					    			<th style="width: 100px; text-align: center;">操作</th>
+					    		</tr>
+					    	</thead>
+					    	<tbody></tbody>-->
+					    </table> 
+		       		</div>
+		       	</div>
+	    	</div>
+	    	<div id="approval">
+	    		
+	    	</div>
+   		</div>
+        <div class="bottom-btn" style="z-index: 11000;">
+        	<button type="button" class="btn btn-default" id="btnPrint" onclick="printbox();"><span class="glyphicon glyphicon-saved"></span>打印</button>
+            <button type="button" class="btn btn-default" id="btnClose"><span class="glyphicon glyphicon-remove"></span>关闭</button>
+        </div>
+    </form>
+    <script type="text/javascript" src="../../../../media/js/jquery/jquery.js"></script>
+    <script type="text/javascript" src="../../../../media/js/jquery/jquery.extend.js"></script>
+    <script type="text/javascript" src="../../../../media/js/base/util.js"></script>
+    <script type="text/javascript" src="../../../../media/js/base/common.js"></script>
+	<script type="text/javascript" src="../../../../media/js/base/UEditorFun.js"></script>
+    <script type="text/javascript" src="../../../../media/js/bootstrap/js/bootstrap.js"></script>
+    <script type="text/javascript" src="../../../../media/js/stream/js/stream-v1.js"></script>
+    <script type="text/javascript" src="../../../../media/js/base/StreamUpload.js"></script>
+    <script src="../../../Model/js/public.js"></script>
+    <script src="../../../../media/js/base/WorkflowInfoNew.js"></script>
+    <script type="text/javascript" src="../js/publicityView.js"></script>
+</body>
+
+</html>

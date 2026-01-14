@@ -1,0 +1,287 @@
+﻿<head>
+	<meta http-equiv="pragma" content="no-cache">
+	<!-- 禁止浏览器从本地机的缓存中调阅页面内容 -->
+	<meta http-equiv="cache-control" content="no-cache, must-revalidate">
+	<meta http-equiv="expires" content="0">
+</head>
+
+<link rel="stylesheet" href="../../../../../../media/js/bootstrap/css/bootstrap.css" />
+<link rel="stylesheet" href="../../../../../../media/js/datetimepicker/css/jquery.datetimepicker.css" />
+<link rel="stylesheet" href="../../../../../../media/js/bootstrap/css/bootstrap-table.min.css" type="text/css" />
+<form id="form" name="purchase" style="width: 99%;padding-left: 10px;padding-top: 10px;margin-bottom: 60px;">
+	<table class="table table-bordered " style="margin-bottom: 0px;">
+		<tr>
+			<td colspan="5" style="font-weight: bold;" class="active">项目信息</td>
+			<input type="hidden" name="tenderProjectID">
+			<input type="hidden" name="bidSectionId">
+				<input type="hidden" name="projectId">
+				<input type="hidden" name="projectName">
+				<input type="hidden" name="interiorProjectCode">
+				<input type="hidden" name="purchaserId">
+				<input type="hidden" name="enterpriseId">
+				<input type="hidden" name="bidSectionCode">
+				  <input type="hidden" name="bidSectionName">
+		</tr>
+		<tr>
+			<td style="width: 200px;" class="th_bg">项目名称</td>
+			<td style="text-align: left;">
+				<div id="tenderProjectName"  ></div>
+				<input type="hidden" name="tenderProjectName">
+			</td>
+			<td style="width: 200px;" class="th_bg">项目编号</td>
+			<td style="text-align: left;">
+				<div id="tenderProjectCode"   ></div>
+				<input type="hidden" name="tenderProjectCode">
+			</td>
+		</tr>
+		<tr>
+			<td class="th_bg">业主单位<i class="red">*</i></td>
+			<td style="text-align: left;">
+				<input type="text" name="purchaserName" class="form-control  purchaserName" style="text-align: left" datatype="*" errormsg="请填写业主单位" />
+			</td>
+			<td class="th_bg">业主采购员<i class="red">*</i></td>
+			<td style="text-align: left;">
+				<input type="text" name="purchaserLinkmen" class="form-control  purchaserLinkmen" style="text-align: left" datatype="*" errormsg="请填写业主采购员" />
+			</td>
+		</tr>
+		<tr>
+			<td style="width: 200px;" class="th_bg">项目经理<i class="red">*</i></td>
+			<td style="text-align: left;">
+				<input type="text" name="tenderAgencyLinkmen" class="form-control  tenderAgencyLinkmen" style="text-align: left" datatype="*" errormsg="请填写项目经理" />
+			</td>
+			<td class="th_bg">项目所属公司<i class="red">*</i></td>
+			<td style="text-align: left;">
+				<input type="text" name="enterpriseName" class="form-control" style="text-align: left" datatype="*" errormsg="请填写项目所属公司" />
+			</td>
+		</tr>
+		<tr>
+			<td class="th_bg">市场类型<i class="red">*</i></td>
+			<td>
+				<select class="form-control" id="marketType" datatype="*" errormsg="请选择市场类型" name="marketType">
+					<option value="DF" selected>东风市场</option>
+					<option value="JP">社会军品</option>
+					<option value="SH">社会民品</option>
+				</select>
+			</td>
+			<td class="th_bg">项目经理所属处室</td>
+			<td style="text-align: left;">
+				<input type="hidden" name="departmentId">
+				<input type="text" name="departmentName" style="cursor: pointer;" class="form-control departmentName" readonly placeholder="请选择项目经理所属处室" datatype="*" errormsg="请选择项目经理所属处室">
+			</td>
+		</tr>
+		<tr>
+			<td class="isRowspan th_bg">采购方式<i class="red">*</i></td>
+			<td style="text-align: left;">
+				<input type="radio" name="tenderMode" value="1" checked="checked" />公开
+				<input type="radio" name="tenderMode" value="2" />邀请
+			</td>
+			<td style="width: 200px;" class="th_bg">项目归属处室<i class="red">*</i></td>
+			<td style="text-align: left;">
+				<input type="hidden" name="projectDepartmentId">
+				<input type="text" name="projectDepartmentName" style="cursor: pointer;" class="form-control projectDepartmentName" readonly placeholder="请选择项目归属处室" datatype="*" errormsg="请选择项目归属处室">
+			</td>
+		</tr>
+		<tr>
+			<td colspan="4" style="font-weight: bold;" class="active">项目时间安排</td>
+		</tr>
+		<tr>
+			<td style="width: 200px;" class="th_bg"><span class="tenderModeName">公告发布时间</span><i class="red">*</i></td>
+			<td style="text-align: left;">
+				<input type="text" autocomplete="off" data-min="today" data-datename="公告开始时间" class="btn btn-default" id="noticeStartDate"
+				 name="noticeStartDate" style="text-align: left;" datatype="*" errormsg="请选择公告开始时间">
+			</td>
+			<td style="width: 200px;" class="th_bg">项目分配时间<i class="red">*</i></td>
+			<td style="text-align: left;">
+				<input type="text" autocomplete="off" data-min="noticeStartDate" data-datename="项目分配时间" class="btn btn-default" id="bidOpeningEndTime"
+				 name="bidOpeningEndTime" style="text-align: left;" datatype="*" errormsg="请选择项目分配时间">
+			</td>
+		</tr>
+		<tr>
+			<td style="width: 200px;" class="th_bg">报价时间<i class="red">*</i></td>
+			<td style="text-align: left;">
+				<input type="text" autocomplete="off" data-min="noticeEndDate" data-datename="报价时间" class="btn btn-default" name="offerStartDate"
+				 id="offerStartDate" style="text-align: left;" datatype="*" errormsg="请选择报价时间">
+			</td>
+			<td style="width: 200px;" class="th_bg">中选结果发布时间</td>
+			<td style="text-align: left;">
+				<div id="noticeEndDate"  ></div>
+
+			</td>
+		</tr>
+		<tr>
+			<td style="width: 200px;" class="th_bg">完成月份</td>
+			<td style="text-align: left;">
+				<div id="complectMonth"  ></div>
+			
+			</td>
+		</tr>
+		<tr class="exceptionView1" style="display: none;">
+					<td colspan="4" style="font-weight: bold;" class="active">项目异常</td>
+				</tr>
+				<tr class="exceptionView2" style="display: none;">
+					<td class="th_bg" style="width: 250px;">异常<i class="red">*</i></td>
+					<td style="text-align: left;">
+						<div id="exception"></div>
+						<input type="hidden" name="exception">
+
+					</td>
+					<td class="th_bg" style="width: 200px;">异常原因<i class="red">*</i></td>
+					<td style="text-align: left;">
+						<div id="exceptionCause"></div>
+						<input type="hidden" name="exceptionCause" />
+					</td>
+				</tr>
+		<tr>
+			<td colspan="4" style="font-weight: bold;" class="active">竞卖参数</td>
+		</tr>
+		<tbody style=" margin-bottom: 0px;">
+			<tr>
+				<td style="width: 200px;" class="th_bg">竞卖起始价（万元）<i class="red">*</i></td>
+				<td><input  name="pawPrice" id="pawPrice" class="form-control priceNumber" datatype="*" errormsg="请输入竞卖起始价" /></td>
+				<td style="width: 200px;" class="th_bg">竞卖数量<i class="red">*</i></td>
+				<td style="text-align: left;">
+					<input  name="auctionNumber" id="auctionNumber" class="form-control priceNumber" datatype="*" errormsg="请输入竞卖数量"/>
+				</td>
+			</tr>
+			<tr>
+				<td class="th_bg" style="width: 250px;" id="legalNameView1">中选单位<i class="red">*</i></td>
+				<td style="text-align: left;" id="legalNameView2">
+					<input type="text" name="legalName" class="form-control legalName" id="legalName" datatype="*" errormsg="请输入中选单位" />
+				</td>
+				<td class="th_bg" style="width: 200px;">中选金额(万元)<i class="red">*</i></td>
+				<td style="text-align: left;">
+					<input type="text" name="contractSettlementPrice" class="form-control priceNumber" id="contractSettlementPrice" datatype="*" errormsg="请输入中选金额" />
+				</td>
+			</tr>
+
+			<tr>
+				<td class="th_bg" style="width: 200px;">代理服务费应收（不含造价服务费）(万元)<i class="red">*</i></td>
+				<td style="text-align: left;">
+					<input  name="shouldAgentPrice" class="form-control priceNumber" id="shouldAgentPrice" datatype="*" errormsg="请输入代理服务费应收" />
+				</td>
+				<td class="th_bg" style="width: 200px;">代理服务费实收（不含造价服务费）(万元)<i class="red">*</i></td>
+				<td style="text-align: left;">
+					<input  name="realAgentPrice" class="form-control priceNumber" id="realAgentPrice" datatype="*" errormsg="请输入代理服务费实收" />
+				</td>
+			</tr>
+			<tr>
+				<td class="th_bg" style="width: 200px;">费用到账状况<i class="red">*</i></td>
+				<td style="text-align: left;">
+					<select id="payStatep"  name="payStatep"  class="form-control"  style="height: 32px;cursor:pointer;" datatype="*" errormsg="请选择完成月份">		
+						<option value="足额到账"  selected>足额到账</option>
+						<option value="未足额到账">未足额到账</option>
+						<option value="未到账">未到账</option>					
+					</select>
+				</td>
+				<td class="th_bg" style="width: 200px;">缴纳家数<i class="red">*</i></td>
+				<td style="text-align: left;">
+					<input  name="plymentMumber" class="form-control priceNumber" id="plymentMumber" datatype="*" errormsg="请输入缴纳家数" />
+				</td>
+			</tr>
+			<tr>
+				<!-- <td class="th_bg" style="width:200px;">预算价(含税)(元)<i class="red">*</i></td>
+				<td style="text-align: left;"><input id="budgetPrice"  name="project.auctionProjectPackages[0].budgetPrice"
+					 class="form-control priceNumber" /></td> -->
+				<td class="th_bg" style="width: 200px;">平台服务费总额（万元）<i class="red">*</i></td>
+				<td style="text-align: left;">
+					<input  name="payMoney" class="form-control priceNumber" id="payMoney" datatype="*" errormsg="请输入平台服务费总额" />
+				</td>
+			</tr>
+			<tr>
+				<td class="th_bg" style="width: 200px;">备注</td>
+				<td colspan="3" style="text-align: left;">
+					<textarea name="backups" id="content" style="width: 100%;height: 50px;" class="form-control"></textarea>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+
+	<!-- <table class="table table-bordered" style=" margin-bottom: 0px;">
+		
+		<tr>
+			<td colspan="4" style="font-weight: bold;border: none;" class="active">供应商信息</td>     		
+		</tr>
+
+	</table> -->
+	<table class="table table-bordered" style=" margin-bottom: 0px;">
+<!-- 
+		<tr>
+			<td colspan="4" style="font-weight: bold;border: none;" class="active">竞卖公告信息</td>
+		</tr> -->
+		<!-- <tr>
+			<td class="th_bg">选择竞卖公告模板</td>
+			<td colspan="3">
+				<select class="form-control" id="noticeTemplate" style="width: 260px;display: inline-block;">
+				
+				</select>
+				<button type="button" class="btn btn-primary" id="btnModel" style="vertical-align:top;"><span class="glyphicon glyphicon-refresh" style="vertical-align:-2px;"></span>生成竞卖公告内容</button>
+			</td>
+		</tr>
+		<tr>
+			<td class="th_bg">选择发布媒体</td>
+			<td colspan="3" style="text-align: left;">
+				<select class="selectpicker" id="optionName" multiple onchange="getOptoions(this)" style="width: 100%">
+								
+				</select>
+				<input type="hidden" name="project.optionName" id="optionNames" />
+				<input type="hidden" name="project.optionId" id="optionId" />
+				<input type="hidden" name="project.optionValue" id="optionValue"/>
+			</td>  	 
+		</tr> -->
+		<div id="checkerV"></div>
+		<tr class="employee">
+			<td style="width: 250px;" class="th_bg">添加审核人</td>
+			<td colspan="4" style="text-align: left;">
+				<select id="employeeId" class="form-control" style="width: 180px;" name="checkerId"></select>
+			</td>
+		</tr>
+		<!-- <tr>
+			<td  colspan="4">
+				<script id="editor" type="text/plain" style="width:100%;height:400px;"></script>
+			</td>
+			<input type="hidden"  name="content" id="content"/>
+		</tr> -->
+		<tr class="record" style="display: none;">
+			<td class="active" colspan="4"><strong>审核记录</strong></td>
+		</tr>
+		<tr class="record" style="display: none;">
+			<td colspan="4">
+				<table class="table  table-bordered" id="workflowListDetail">
+					<tr>
+						<td colspan="4">
+							当前没有审核记录
+						</td>
+					</tr>
+				</table>
+			</td>
+		</tr>
+	</table>
+
+
+</form>
+<form id="forms"></form>
+<form id="formss"></form>
+<div class="bottom-btn" style="z-index: 11000;">
+	<button type="button" class="btn btn-default" id="btn_bao"><span class="glyphicon glyphicon-ok"></span>保存</button>
+	<button type="button" class="btn btn-primary" id="btn_submit"><span class="glyphicon glyphicon-ok"></span>提交</button>
+	<button type="button" class="btn btn-default" id="btn_close"><span class="glyphicon glyphicon-remove"></span>关闭</button>
+</div>
+<style>
+	.table > thead > tr > th, .table > tbody > tr > th, .table > tfoot > tr > th, .table > thead > tr > td, .table > tbody > tr > td, .table > tfoot > tr > td{
+ 	vertical-align: middle;
+ }
+ </style>
+<script type="text/javascript" src="../../../../../../media/js/jquery/jquery.js"></script>
+<script type="text/javascript" src="../../../../../../media/js/jquery/jquery.extend.js"></script>
+<script type="text/javascript" src="../../../../../../media/js/base/common.js"></script>
+<script type="text/javascript" src="../../../../../../media/js/base//util.js"></script>
+<script type="text/javascript" src="../../../../../../media/js/bootstrap/js/bootstrap.js"></script>
+<script type="text/javascript" src="../../../../../../media/js/bootstrap/js/bootstrap-table.min.js"></script>
+<script type="text/javascript" src="../../../../../../media/js/bootstrap/js/bootstrap-table-zh-CN.min.js"></script>
+
+<script type="text/javascript" src="../../../../../../media/js/datetimepicker/js/jquery.datetimepicker.js"></script>
+<script type="text/javascript" src="../../../../../../media/js/datetimepicker/js/timePicker.js"></script>
+<script type="text/javascript" src="../../../../../../media/js/layer/layer.js"></script>
+<script type="text/javascript" src="../js/edit_model.js"></script>
+<script type="text/javascript" src="../js/timeDate.js"></script>
+<script type="text/javascript" src="../../../../../../media/js/base/auditRecords.js"></script>

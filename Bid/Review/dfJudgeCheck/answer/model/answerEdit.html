@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="pragma" content="no-cache"><!-- 禁止浏览器从本地计算机的缓存中访问页面内容 --> 
+		<meta http-equiv="cache-control" content="no-cache"><!-- 用于指定请求和响应遵循的缓存机制 --> 
+		<meta http-equiv="expires" content="0"><!-- 用于设定网页的到期时间，一旦网页过期，必须到服务器上重新传输； -->
+		<title>提交答疑</title>
+		
+		<link rel="stylesheet" href="../../../../media/js/bootstrap/css/bootstrap.css" />
+		<link rel="stylesheet" type="text/css" href="../../../../media/js/bootstrap/css/bootstrap-table.css">
+		<link rel="stylesheet" href="../../../../media/js/stream/css/stream-v1.css" />
+		<style>
+			html,body { height: 100%;width: 100%;}
+			label {
+				font-weight: normal;
+			}
+			
+			.form-group {
+				margin: 0px;
+			}
+			pre{
+			    display: block;
+			    padding: 0px;
+			    margin: 0px;
+			    font-size: 14px;
+			    line-height: 1.42857143;
+			    color: #333;
+			    word-break: break-all;
+			    word-wrap: break-word;
+			    background-color:#fff;
+			    border: none;
+			    border-radius: 0px;
+			}
+			table td,table th{
+				white-space:normal;
+			}
+			#fileContent table{
+				display: none;
+			}
+		</style>
+	</head>
+
+	<body>
+
+		<form id="formAnswers" name="AskAnswers" style="width:99%;margin-left:3px;margin-bottom: 50px;">
+			<table class="table table-bordered" id="answerBox" style="width:99%;margin-left:3px;margin-top: 10px;">	
+				<tr>
+					<td class="th_bg" >提问内容</td>
+					<td colspan="3">
+						<div id="askContent"></div>
+					</td>
+				</tr>
+				<tr>
+					<td class="th_bg" >提问附件</td>
+					<td colspan="3">
+						<table class="table table-bordered" id="askFlie">
+							
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td class="th_bg" >答复内容<span style='color: red;'>*</span></td>
+					<td colspan="3">
+						<div class="form-group">
+							<textarea type="text" id="answersContent" name="answersContent" class="form-control" rows="10"></textarea>
+						</div>
+					</td>
+				</tr>
+				<tr>
+					<td class="th_bg">
+						上传附件
+					</td>
+					<td colspan="3">
+						<!--<input type="file" class="fileloading" name="file" id="FileName"/>
+						<span style='float:right;color: red;'>*上传格式(pdf、表格、文档、图片、压缩包)</span>-->
+						<a  class="btn btn-primary" id="fileLoad"   style="float: right;margin-right: 50px;">
+		            		<span class="glyphicon glyphicon-folder-open"></span>选择文件
+		            	</a>
+					</td>
+				</tr>
+				<tr>
+		        	<td colspan="4">
+		        		<table class="table table-bordered" id="answerFlie">
+							
+						</table>
+		        		<!--<div id="answerFlie"></div>-->
+		        		<!--<div id="i_stream_files_queue"></div>-->
+		        		<div id="fileContent"></div>
+		        	</td>
+		        	
+		       </tr>		        
+			</table>
+			<object id="UCAPI" classid="CLSID:39E08D82-C8AC-4934-BE07-F6E816FD47A1" event="OnModSignature(Index, Effect)"  width="99%" height="500px" style="display: none;"></object>
+		</form>
+		
+		<div style="width: 100%;height: 50px;text-align:center;position: fixed;bottom: 0;background-color: #FFFFFF;">
+			<a  class="btn btn-primary" id="btnSubmit"><span class="glyphicon glyphicon-ok"></span>生成回复函</a>
+			<!--<button type="button" class="btn btn-primary" id="btnSubmit"><span class="glyphicon glyphicon-ok"></span>PDF</button>-->
+			<button type="button" class="btn btn-primary" id="btnSign" style="display: none;"><span class="glyphicon glyphicon-ok"></span>签章</button>
+			<button type="button" class="btn btn-primary" id="btnSure" style="display: none;"><span class="glyphicon glyphicon-ok"></span>确认</button>
+			<a  class="btn btn-default" id="btnClose"><span class="glyphicon glyphicon-remove"></span>关闭</a>
+		</div>
+	</body>
+
+	<script type="text/javascript" src="../../../../media/js/jquery/jquery.js"></script>
+	<script type="text/javascript" src="../../../../media/js/base/common.js"></script>
+	<script type="text/javascript" src="../../../../media/js/jquery/jquery.extend.js"></script>
+	<script type="text/javascript" src="../../../../media/js/bootstrap/js/bootstrap.js"></script>
+	<script type="text/javascript" src="../../../../media/js/bootstrap/js/bootstrap-table.min.js"></script>
+	<script type="text/javascript" src="../../../../media/js/bootstrap/js/bootstrap-table-zh-CN.min.js"></script>
+	<script type="text/javascript" src="../../../../media/js/layer/layer.js"></script>
+	<script type="text/javascript" src="../../../../media/js/stream/js/stream-v1.js"></script>
+	<script type="text/javascript" src="../../../../media/js/base/md5.js"></script>
+	<script type="text/javascript" src="../../../../media/js/ca.js"></script>
+	<script type="text/javascript" src="../js/public.js"></script>
+	<script type="text/javascript" src="../../../../media/js/base/util.js"></script>
+	<script type="text/javascript" src="../../../../media/js/base/StreamUpload.js"></script>
+	<script type="text/javascript" src="../js/answerEdit.js"></script>
+<!--	
+	<script language="javascript" for=WebPDF event="OnAddSignature(Index)">
+		alert("添加签章" + Index );
+	</script>-->
+</html>

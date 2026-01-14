@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="pragma" content="no-cache">
+		<!-- 禁止浏览器从本地计算机的缓存中访问页面内容 -->
+		<meta http-equiv="cache-control" content="no-cache">
+		<!-- 用于指定请求和响应遵循的缓存机制 -->
+		<meta http-equiv="expires" content="0">
+		<!-- 用于设定网页的到期时间，一旦网页过期，必须到服务器上重新传输； -->
+		<title>确认回避</title>
+		<link rel="stylesheet" href="../../../../media/js/bootstrap/css/bootstrap.css" />
+		<link rel="stylesheet" href="../../../../media/js/bootstrap/css/bootstrap-table.css">
+		<style>
+			html,
+			body {
+				height: 100%;
+				width: 100%;
+				
+			}
+			
+			label {
+				font-weight: normal;
+			}
+			
+			.form-group {
+				margin: 0px;
+			}
+			.red{
+				margin-right: 3px;
+			}
+			.remarks_tips{
+				display: none;
+			}
+		</style>
+	</head>
+
+	<body style="box-shadow: rgba(102, 102, 102, 0.4) 0px 0px 5px 2px inset;">
+		<form  id="formName" class="not_first" style="width: 100%;margin-bottom: 60px;">
+			<div style="background: #3995C8;height: 40px;padding-left: 20px;color: #fff;line-height: 40px;">确认回避信息</div>
+			<div style="padding: 10px;">
+				<div id="confirm_avoid_content" style="padding: 20px 30px 0px 30px;">
+					<div style="padding:5px;">
+						<span style="margin-right:5px;"><i class="red">*</i>是否有回避条款情况：</span>
+						<input type="radio" name="isAvoid" id="" value="0" style="vertical-align:-2px;" /> 无
+						<input type="radio" name="isAvoid" id="" value="1" style="vertical-align:-2px;margin-left:30px;" /> 有
+					</div>
+					<div>
+						<div style="padding-bottom:5px;padding-left: 5px;"><i class="red remarks_tips">*</i>备注：</div>
+						<div><textarea rows="5" cols="" style="resize: none;width: 100%;border-radius: 4px !important;padding:5px;" name="remarks"></textarea></div>
+					</div>
+				</div>
+			</div>
+			<div style="width: 490px;height: 50px;text-align:center;position: fixed;bottom: 5px;background-color: #FFFFFF;left: 5px;">
+				<button type="button" class="btn btn-primary" id="btnSubmit"><span class="glyphicon glyphicon-ok"></span>确定</button>
+				<button type="button" class="btn btn-default" id="btnClose"><span class="glyphicon glyphicon-remove"></span>取消</button>
+			</div>
+			<!-- <div id="confirm_avoid_content" style="padding: 30px;">
+				<div>
+					<span><i class="red">*</i>是否有回避条款情况：</span>
+					<input type="radio" name="isAvoid" id="" value="0" /> 无
+					<input type="radio" name="isAvoid" id="" value="1" /> 有
+				</div>
+				<div>
+					<div>备注：</div>
+					<div><textarea rows="5" cols="" class="form-control" style="resize: none;width: 100%;border-radius: 4px;" name="remarks"></textarea></div>
+				</div>
+			</div> -->
+       	</form>
+	</body>
+	<script type="text/javascript" src="../../../../media/js/jquery/jquery.js"></script>
+	<script type="text/javascript" src="../../../../media/js/base/common.js"></script>
+	<script type="text/javascript" src="../../../../media/js/jquery/jquery.extend.js"></script>
+	<script type="text/javascript" src="../../../../media/js/bootstrap/js/bootstrap.js"></script>
+	<script type="text/javascript" src="../../../../media/js/bootstrap/js/bootstrap-table.min.js"></script>
+	<script type="text/javascript" src="../../../../media/js/layer/layer.js"></script>
+	<script type="text/javascript" src="../../../../media/js/base/util.js"></script>
+	<!-- <script type="text/javascript" src="../../public.js"></script> -->
+	<script>
+		function passMessage(callback){
+			$('[name=isAvoid]').change(function(){
+				if($('[name=isAvoid]:checked').val() == '0'){
+					$('[name=remarks]').val('不需要回避');
+					$('.remarks_tips').hide();
+				}else if($('[name=isAvoid]:checked').val() == '1'){
+					// top.layer.alert('');
+					$('[name=remarks]').val('');
+					$('.remarks_tips').show();
+				}
+			})
+			$('#btnSubmit').click(function(){
+				isAvoid = $('[name=isAvoid]:checked').val();
+				remarks = $.trim($('[name=remarks]').val());
+				if(!isAvoid || isAvoid == ''){
+					top.layer.alert('温馨提示：请选择是否有回避条款情况！');
+					return
+				}else if(isAvoid == '1'){
+					if(remarks == ''){
+						top.layer.alert('温馨提示：请输入备注！');
+						return
+					}
+				}
+				if(remarks.length > 200){
+					top.layer.alert('温馨提示：备注输入限制200字（含）以内');
+					return
+				}
+				callback({remarks:remarks,isAvoid:isAvoid});
+				var index=parent.layer.getFrameIndex(window.name);
+				parent.layer.close(index);
+			});
+			$('#btnClose').click(function(){
+				var index=parent.layer.getFrameIndex(window.name);
+				parent.layer.close(index);
+			})
+		}
+	</script>
+</html>

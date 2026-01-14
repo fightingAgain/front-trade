@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="pragma" content="no-cache">
+    <!-- 禁止浏览器从本地机的缓存中调阅页面内容 -->
+    <meta http-equiv="cache-control" content="no-cache, must-revalidate">
+    <meta http-equiv="expires" content="0">
+    <title></title>
+    <link rel="stylesheet" href="../../../../../media/js/layer/layer.js" />
+    <link rel="stylesheet" href="../../../../../media/js/bootstrap/css/bootstrap.css" />
+    <link rel="stylesheet" type="text/css"
+        href="../../../../../media/js/bootstrap-fileinput-master/css/fileinput.min.css" />
+    <link rel="stylesheet" href="../../../../../media/js/bootstrap/css/bootstrap-table.min.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../../media/js/bootstrapvalidator/css/bootstrapValidator.css"
+        type="text/css" />
+    <style>
+        .container div {
+            text-align: center;
+        }
+
+        table th,
+        table td {
+            vertical-align: middle;
+            /*text-align: center;*/
+        }
+
+        .table>tbody>tr>td {
+            vertical-align: middle;
+        }
+
+        .timeInval,
+        .minPrice {
+            font-size: 24px !important;
+            font-weight: bold;
+        }
+
+        .content-view {
+            box-sizing: border-box;
+        }
+
+        .content-view>div {
+            vertical-align: top;
+        }
+
+        #content-left .time-view {
+            font-size: 24px !important;
+            font-weight: bold;
+        }
+
+        #content-left .time-view span {
+            color: red;
+        }
+
+        .offerPrice-view {
+            margin-top: 20px;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body style="width: 99%;padding: 10px;">
+    <div class="container-fluid">
+        <table class="table table-bordered" id="offerInfo">
+            <tr>
+                <td rowspan="3" style="width: 15%;">
+                    <h1 style="text-align: center;">单项目竞价</h1>
+                </td>
+                <th style="width: 15%;" class="th_bg">包件编号</th>
+                <td data-field="packageNum"></td>
+                <th style="width: 15%;" class="th_bg">包件名称</th>
+                <td data-field="packageName"></td>
+            </tr>
+            <tr>
+                <th class="th_bg">竞买人</th>
+                <td data-field="curUser"></td>
+                <th class="th_bg">竞买号</th>
+                <td></td>
+            </tr>
+            <tr>
+                <th class="th_bg">竞价类型</th>
+                <td style="border: none;"></td>
+                <th class="th_bg notaxprice">预算价(不含税) (元)</th>
+                <td class="notaxprice" style="border: none;"></td>
+            </tr>
+        </table>
+        <div class="tip-span" style="color: red;margin-bottom: 20px;">
+            温馨提示：报价文件需同页面报价保持一致，若上传报价文件与页面填写的报价不一致时，以页面填写的报价为准。</div>
+        <!-- <div id="offerDetail" style="width: 100%; text-align: center;"></div>
+        <table id="offerLogsTable"></table> -->
+        <div class="content-view">
+            <div id="content-left" style="display: inline-block;width: 39.5%;">
+                <form action="#" id="formName" name="formName" onsubmit=" return false">
+                    <table class="table table-bordered" id="offerInfo">
+                        <tr>
+                            <td colspan="2" class="time-view"></td>
+                        </tr>
+                        <tr class="inputItem">
+                            <td class="th_bg" style="width: 30%;">报价总价(不含税)</td>
+                            <td><input type="text" name="noTaxRateTotalPrice" class="form-control taxEvent"></td>
+                        </tr>
+                        <tr class="inputItem">
+                            <td class="th_bg">税率(%)</td>
+                            <td><input type="text" name="taxRate" class="form-control taxEvent"></td>
+                        </tr>
+                        <tr class="inputItem">
+                            <td class="th_bg">报价总价(含税)</td>
+                            <td><input type="text" name="taxRateTotalPrice" class="form-control"></td>
+                        </tr>
+                        <!-- <tr>
+                            <td>
+                                <span>项目清单文件模板</span>
+                                <span>项目清单文件模板.xls</span>
+                            </td>
+                            <td style="text-align: center;">
+                                <button class="btn btn-primary" type="button"
+                                    onclick=" excelDownload()">下载清单报价模板</button>
+                            </td>
+                        </tr> -->
+                        <tr>
+                            <td class="th_bg">项目清单文件附件<i class="red">*</i></td>
+                            <td>
+                                <input type="file" class="fileloading" name="files" id="offerList"
+                                    accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel, .doc, .docx" />
+									<!-- 同时限制上传.xls、.xlsx文件 application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel -->
+                                <table class="table table-hover table-bordered" id="offerlist_operation_tables"></table>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="th_bg">报价文件附件<i class="red">*</i></td>
+                            <td>
+                                <input type="file" class="fileloading" name="files" id="detailedList"
+                                    accept=".PDF, .JPG, .PNG, .rar, .zip" />
+                                <table class="table table-hover table-bordered" id="detaillist_operation_table"></table>
+                            </td>
+                        </tr>
+                    </table>
+                </form>
+
+            </div>
+            <div id="content-right" style="display: inline-block;width: 60%;box-sizing: border-box;"></div>
+        </div>
+        <div class="offerPrice-view">
+            <!-- 报价按钮 -->
+            <div>
+                <button type="button" id="sendOfferPrice" class="btn btn-primary">报价</button>
+                <button type="button" id="backOfferPrice" class="btn btn-primary">撤回报价</button>
+                <button style="display: none;" type="button" id="btn_close" class="btn">关闭</button>
+            </div>
+        </div>
+    </div>
+</body>
+<script type="text/javascript" src="../../../../../media/js/jquery/jquery.js"></script>
+<script type="text/javascript" src="../../../../../media/js/jquery/jquery.extend.js"></script>
+<script type="text/javascript" src="../../../../../media/js/bootstrap/js/bootstrap.js"></script>
+<script type="text/javascript" src="../../../../../media/js/bootstrap/js/bootstrap-table.min.js"></script>
+<script type="text/javascript" src="../../../../../media/js/bootstrapvalidator/js/bootstrapValidator.js"></script>
+<script type="text/javascript" src="../../../../../media/js/bootstrap-fileinput-master/js/fileinput.js"></script>
+<script type="text/javascript" src="../../../../../media/js/bootstrap-fileinput-master/js/locales/zh.js"></script>
+<script type="text/javascript" src="../../../../../media/js/base/common.js"></script>
+<script type="text/javascript" src="../../../../../media/js/layer/layer.js"></script>
+<script type="text/javascript" src="../../../../../media/js/base/util.js"></script>
+<script src="../js/singleBidding.js"></script>
+
+
+</html>

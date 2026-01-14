@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="pragma" content="no-cache">
+		<!-- 禁止浏览器从本地机的缓存中调阅页面内容 -->
+		<meta http-equiv="cache-control" content="no-cache, must-revalidate">
+		<meta http-equiv="expires" content="0">
+		<title>项目审批流程设置</title>
+		<link rel="stylesheet" href="../../../media/js/bootstrap/css/bootstrap.css">
+	    <link rel="stylesheet" href="../../../media/js/bootstrap/css/bootstrap-table.css">
+	</head>
+	<body>
+		<form id="formWorkflow" class="form-horizontal" style="width:80%; padding-top: 20px;">
+	    	<div class="form-group">
+			    <label class="col-sm-2 control-label"><span class="titles">审批</span>级别:</label>
+			    <div class="col-sm-2">
+			    	<label class="radio">
+			    		<input type="radio" name="workflowLevel" checked="checked" value="0"> 不<span class="titles">审批</span>
+			    	</label>
+			    </div>
+			    <div class="col-sm-2">
+			    	<label class="radio">
+			    		<input type="radio" name="workflowLevel" value="1"> 一级<span class="titles">审批</span>
+			    	</label>
+			    </div>
+			    <div class="col-sm-2">
+			    	<label class="radio">
+			    		<input type="radio" name="workflowLevel" value="2"> 二级<span class="titles">审批</span>
+			    	</label>
+			    </div>
+			    <div class="col-sm-2">
+			    	<label class="radio">
+			    		<input type="radio" name="workflowLevel" value="3"> 三级<span class="titles">审批</span>
+			    	</label>
+			    </div>
+			    <div class="col-sm-2">
+			    	<label class="radio">
+			    		<input type="radio" name="workflowLevel" value="4"> 四级<span class="titles">审批</span>
+			    	</label>
+			    </div>
+			</div>
+	    </form>	
+	    
+	    <script src="../../../media/js/jquery/jquery.min.js"></script>
+		<script src="../../../media/js/jquery/jquery.extend.js" ></script>
+		<script src="../../../media/js/base/util.js" ></script>
+		<script src="../../../media/js/bootstrap/js/bootstrap.js"></script>
+		<script>
+			var title=getUrlParam('WORKFLOWTYPE');
+			$('.titles').html('审批')
+			$.ajax({
+				type:"post",
+				url:top.config.AuctionHost + '/WorkflowController/findjjcgjgWorkflowLevel',
+				async:false,
+				success:function(res){
+					if(res.success){
+						if(res.data){
+							$("input:radio[name=workflowLevel][value=" + res.data.workflowLevel + "]").attr("checked",true);
+						}else{
+							$("input:radio[name=workflowLevel][value=" + 0 + "]").attr("checked",true);
+						}
+						
+					}
+				}
+			});
+//			if(title=="jjhq"){
+//				$('.titles').html('会签');
+//				$.ajax({
+//					type: "post",
+//					url: top.config.Syshost + "/SysCountersignController/findNewCountersign.do",
+//					dataType: "json",
+//					async:false,
+//					success: function (response) {
+//						if(response.success){
+//							$("input:radio[name=workflowLevel][value=" + response.data.countersignLevel + "]").attr("checked",true);
+//						}
+//					}
+//				});
+//			}else{
+//				$('.titles').html('审批')
+//			}
+		</script>
+	</body>
+</html>

@@ -1,0 +1,213 @@
+<!-- 网页不会被缓存 -->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+	<head>
+		<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+		<meta http-equiv="pragma" content="no-cache">
+		<!-- 禁止浏览器从本地机的缓存中调阅页面内容 -->
+		<meta http-equiv="cache-control" content="no-cache, must-revalidate">
+		<meta http-equiv="expires" content="0">
+		<link rel="stylesheet" href="../../media/js/layer/mobile/need/layer.css" />
+		<link rel="stylesheet" href="../../media/js/layer/theme/default/laydate.css" />
+		<link rel="stylesheet" href="../../media/js/bootstrap/css/bootstrap.css" />
+		<link rel="stylesheet" href="../../media/js/bootstrap/css/bootstrap-table.min.css" type="text/css"/>
+		<link rel="stylesheet" href="../../media/js/datetimepicker/css/jquery.datetimepicker.css" type="text/css"/>		
+		<style type="text/css">
+			label {
+				font-weight: normal;
+			}
+			body{
+				font-weight: normal;
+				font-weight: '宋体';
+			}
+			pre {
+				/*font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;*/
+			    font-size: 14px;
+			    line-height: 1.42857143;
+			    color: #333;
+				background: #fff;
+				/*border: none;*/
+				white-space: pre-wrap;
+				white-space: -moz-pre-wrap;
+				white-space: -pre-wrap;
+				white-space: -o-pre-wrap;
+				*word-wrap: break-word;
+				*white-space : normal ;  
+			}
+			 .table > thead > tr > th, .table > tbody > tr > th, .table > tfoot > tr > th, .table > thead > tr > td, .table > tbody > tr > td, .table > tfoot > tr > td{
+			 	vertical-align: middle;
+			 }
+			
+		</style>
+
+</head>
+<body>
+<form id="formbackage" name="purchase" style="width: 99%;padding-left: 10px;padding-top: 10px;margin-bottom: 60px;">
+	<div class="panel-group" id="accordion">
+        <div class="panel panel-accordion panel-default">
+            <div class="panel-heading active" role="tab" id="headingOne">  
+				<h4 class="panel-title">
+					<a role="button" data-toggle="collapse"  href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">项目信息</a>
+				</h4>  
+			</div>
+			<div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">  
+				<div class="panel-body">
+					<table class="table table-bordered " style="margin-bottom: 0px;">
+						<!--<tr>
+						   <td colspan="4" style="font-weight: bold;border: none;" class="active">项目信息</td>
+					   	</tr>-->
+					   	<tr>
+						   	<td class="th_bg">采购项目名称0000</td>
+						   	<td style="text-align: left;width: 30%">
+							   <div id="projectName"></div>           	
+						   	</td>
+						   	<td class="th_bg">采购类型</td>
+						   	<td style="text-align: left;">
+							   <div id="tenderType"></div>           	
+						   	</td>  
+					   	</tr>
+					   	<tr >
+							<td class="th_bg">资格审查方式</td>
+							<td style="text-align: left;">
+								<div id="examType"></div>           	
+							</td>
+							<td class="th_bg">评审方法</td>
+							<td style="text-align: left;">
+								<div id="checkPlan"></div>           	
+							</td>  
+					   	</tr>
+					   	<tr>
+							<td class="th_bg">是否是委托项目</td>
+							<td  style="text-align: left;">
+								<div id="isAgent"></div>            	
+							</td> 
+								<td class="th_bg">所选地区</td>
+							<td  style="text-align: left;">
+								<div id="proviceCity"></div>            	
+							</td>
+					   	</tr>
+					   	<tr>
+							<td class="th_bg">采购人名称</td>
+							<td  style="text-align: left;">
+								<div id="purchaserName"></div>            	
+							</td> 
+							<td class="th_bg">采购人地址</td>
+							<td  style="text-align: left;">
+								<div id="purchaserAddress"></div>            	
+							</td>
+					   	</tr>
+					   	<tr>
+							<td class="th_bg">联系人名称</td>
+							<td  style="text-align: left;">
+								<div id="purchaserLinkmen"></div>            	
+							</td> 
+							<td class="th_bg">联系人电话</td>
+							<td  style="text-align: left;">
+							   <div id="purchaserTel"></div>            	
+						   	</td>
+						</tr>
+						<tr>
+							<td class="th_bg">预算价（含税）(元)</td>
+							<td  style="text-align: left;">
+								<div id="budget"></div>            	
+							</td> 
+							<td class="th_bg">是否需提供分项报价表</td>
+							<td  style="text-align: left;">
+								<div id="isOfferDetailedItem"></div>            	
+							</td>
+						</tr>
+						<tr>
+							<td class="th_bg">最少供应商数量</td>
+							<td  style="text-align: left;">
+								<div id="supplierCount"></div>            	
+							</td> 
+							<td class="th_bg">公开范围</td>
+							<td  style="text-align: left;">
+								<div id="isPublic"></div>            	
+							</td>
+						</tr>
+					</table>		
+				</div>  
+			</div>  
+		</div>
+		<div class="panel panel-accordion panel-default">
+			<div class="panel-heading active" role="tab" id="headingBidOne">
+				<h4 class="panel-title">
+					<a class="collapsed" role="button" data-toggle="collapse" 
+					   href="#collapseBidOne" aria-expanded="false" aria-controls="collapseBidOne">附件列表</a>
+				</h4>
+			</div>
+			<div id="collapseBidOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingBidOne">
+				<div class="panel-body">
+					<table class="table table-bordered " style="margin-bottom: 0px;" id="attachFiletable"></table>
+				</div>
+			</div>
+		</div>
+		<div class="panel panel-accordion panel-default">
+			<div class="panel-heading active" role="tab" id="headingTwo">  
+				<h4 class="panel-title">
+				<a class="collapsed" role="button" data-toggle="collapse"  href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">项目经理列表</a>
+				</h4>  
+			</div>  
+			<div id="collapseTwo" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingTwo">  
+				<div class="panel-body">
+					<table class="table table-bordered " style="margin-bottom: 0px;">
+						<tr>
+							<td class="th_bg">代理机构</td>
+							<td style="text-align: left;width: 30%">
+								<div id="agencyDetailDiv" style="text-align: left;">
+									<select id="agencyDetail" class="form-control"   style="text-align: left;
+									background-color: white;">
+										<option value="741814d4bce640dea9bb0dd42e961ae4">东风咨询有限公司</option>
+										<option value="6a21e3d8d37b48b9b039298c65e47ef7">东风（武汉）工程咨询有限公司</option>
+									</select>
+								</div>
+							</td>
+							<td class="th_bg">项目经理</td>
+							<td  style="text-align: left;">
+								<div id="projectManagerName"></div>
+							</td>
+						</tr>
+					</table>
+				</div>
+			</div>
+		</div>
+
+        <div class="panel panel-accordion panel-default">
+            <div class="panel-heading active" role="tab" id="headingThree">
+                <h4 class="panel-title">
+                    <a class="collapsed" role="button" data-toggle="collapse" 
+                       href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">项目列表</a>
+                </h4>
+            </div>
+            <div id="collapseThree" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingThree">
+                <div class="panel-body">
+					<table class="table table-bordered " style="margin-bottom: 0px;">
+						<tr>
+							<td class="th_bg">项目名称</td>
+							<td  style="text-align: left;">
+								<div id="projectBidName"></div>
+							</td>
+						</tr>
+					</table>
+                </div>
+            </div>
+        </div>
+    </div> 
+	<div class="bottom-btn" style="z-index: 11000;">
+	<!-- <button type="button" class="btn btn-default" id="btnHold"><span class="glyphicon glyphicon-ok"></span>保存</button> -->
+		<button type="button" class="btn btn-primary" id="btnSave"><span class="glyphicon glyphicon-ok"></span>提交</button>
+		<button type="button" class="btn btn-default" id="btnClose"><span class="glyphicon glyphicon-remove"></span>关闭</button>
+	</div>
+ </form>
+ <script type="text/javascript" src="../../media/js/jquery/jquery.js" ></script>
+ <script type="text/javascript" src="../../media/js/jquery/jquery.extend.js"></script>
+ <script type="text/javascript" src="../../media/js/base/util.js"></script>
+ <script type="text/javascript" src="../../media/js/base/common.js" ></script>
+ <script type="text/javascript" src="../../media/js/bootstrap/js/bootstrap.js" ></script>
+ <script type="text/javascript" src="../../media/js/bootstrap/js/bootstrap-table.min.js"></script>
+ <script type="text/javascript" src="../../media/js/bootstrap/js/bootstrap-table-zh-CN.min.js"></script>
+ <script type="text/javascript" src="js/appointInfoDetail.js" ></script>
+ </body>
+ </html>

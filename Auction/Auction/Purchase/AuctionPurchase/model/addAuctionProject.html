@@ -1,0 +1,141 @@
+<head>
+		<meta http-equiv="pragma" content="no-cache">
+		<!-- 禁止浏览器从本地机的缓存中调阅页面内容 -->
+		<meta http-equiv="cache-control" content="no-cache, must-revalidate">
+		<meta http-equiv="expires" content="0">
+	</head>
+	<link rel="stylesheet" href="../../../../../media/js/layer/mobile/need/layer.css" />
+	<link rel="stylesheet" href="../../../../../media/js/layer/theme/default/laydate.css" />
+	<link rel="stylesheet" href="../../../../../media/js/bootstrap/css/bootstrap-select.min.css" />
+	<link rel="stylesheet" href="../../../../../media/js/bootstrap/css/bootstrap.css" />
+	<form  id="form" name="purchase" style="width: 99%;padding-left: 10px;padding-top: 10px;">
+		<table class="table table-bordered " style="margin-bottom: 60px;"> 
+			<tr>
+				<td colspan="4" style="font-weight: bold;" class="active">项目信息</td>
+				<input type="hidden" name="project.projectState"  id="projectState" class="form-control"/>           	
+				<input name="project.projectSource" type="hidden" value="0" id="projectSource"/>
+				<input type="hidden" name="project.tenderType" value="1" id="tenderType"/><!--询价采购-->                            
+				<input type="hidden" name="isFile" value="0" id="isFile"/>  
+				<input type="hidden" name="isPublic" value="0" id="isPublic"/>
+				<input type="hidden" name="project.isAgent" value="0" id="isAgent"/>
+				<input type="hidden" name="id" id="purchaseId"/>
+				<input type="hidden" name="project.id"  id="projectId"/>
+				<input type="hidden" name="project.platformProjectCode"  id="platformProjectCode"/>
+				<input type="hidden" name="project.tenderProjectClassify"/>
+				<input type="hidden" name="project.industriesType"/>
+			</tr>
+			<tr class="add_tr searched">
+				<td class="th_bg">采购项目名称<i class="red">*</i></td>
+				<td colspan="3" style="text-align: left;">
+					<input type="text" name="project.projectName"  id="projectName" class="form-control"/>
+					<div class="notice_title_tips">请勿包含下列特殊字符：空格 * & ￥ @  / \</div>
+				</td>
+			</tr>
+			<tr class="add_tr searched">
+				<td class="th_bg">采购项目编号<i class="red">*</i></td>
+				<td colspan="3" style="text-align: left;"><input type="text" name="project.projectCode" id="projectCode" class="form-control"/></td>     
+			</tr>
+			<tr>
+				<td  style="width: 200px" class="th_bg">地区选择</td>
+				<td  style="text-align: left;width: 300px">
+					<table>
+						<tr>
+							<td style="width: 120px;" class="form-group">
+								<select class="form-control" name="project.province" id="Province"></select>
+								<input type="hidden" name="project.provinceName" id="provinceName"/>
+							</td>
+							<td style="width:5px"></td>
+							<td style="width: 120px;" class="form-group">
+								<select class="form-control" name="project.city" id="City"></select>
+								<input type="hidden" name="project.cityName" id="cityName"/>
+							</td>
+						</tr>
+					</table>
+				</td>
+				<td class="th_bg" style="width: 200px">项目类型<i class="red">*</i></td>
+				<td style="text-align: left;">
+					<select  name="project.projectType"  class="form-control" id="projectType">
+						<option value="0">工程</option>
+						<option value="1">设备</option>
+						<option value="2">服务</option>
+						<option value="3" selected="selected">广宣</option>
+						<option value="4">废旧物资</option>
+					</select>
+				</td>
+			</tr>
+			<tr>
+				<td class="th_bg">采购项目分类<i class="red">*</i></td>
+				<td colspan="3">
+					<div id="tenderProjectClassify" style="min-width: 300px;"></div>
+				</td>
+			</tr>
+			<tr>
+				<td class="th_bg">项目行业分类<i class="red">*</i></td>
+				<td colspan="3">
+					<div id="industriesType"></div>
+				</td>
+			</tr>
+			 <tr class="engineering" style="display: none">
+				<td class="th_bg">项目名称</td>
+				<td colspan="3" style="text-align: left;">
+					<input type="text" name="project.programmeName" id="programmeName" class="form-control"/>
+				</td>         
+			   
+			 </tr>
+			 <tr class="engineering" style="display: none">
+				 <td class="th_bg">项目编号</td>
+				<td colspan="3" style="text-align: left;">
+					<input type="text" name="project.programmeCode" id="programmeCode" class="form-control"/>
+				</td>
+			 </tr>
+			 <tr class="engineering" style="display: none">
+				<td class="th_bg">项目地址</td>
+				<td colspan="3" style="text-align: left;">
+					<input type="text" name="project.programmeAddress" id="programmeAddress" class="form-control"/>
+				</td>
+			 </tr>
+			 <tr>
+				<td colspan="4" style="font-weight: bold;" class="active">采购人信息</td>
+			</tr>
+			<tr>
+				<td class="th_bg">采购人名称<i class="red">*</i></td>
+				<td colspan="3" style="text-align: left;">
+				<span id="purchaserNames" style="margin-right:15px ;"></span>
+				<input type="hidden" name="purchaserName" id="purchaserName" class="form-control" readonly="readonly"/>
+				<input type="hidden" name="purchaserId" id="purchaserId" class="form-control" readonly="readonly"/>
+			</td>
+			</tr>
+			<tr>
+				<td class="th_bg">采购人地址<i class="red">*</i></td>
+				<td colspan="3" style="text-align: left;"><input type="text" name="purchaserAddress" id="purchaserAddress" class="form-control"/></td>
+			</tr>
+			
+			<tr id="projectMember">
+				<td style="width: 200px;" class="th_bg">联系人<i class="red">*</i></td>
+				<td style="text-align: left;"><input type="text" readonly name="purchaserLinkmen" id="purchaserLinkmen" class="form-control"/></td>
+				<td style="width: 200px;" class="th_bg">联系人电话<i class="red">*</i></td>
+				<td style="text-align: left;"><input type="text" readonly name="purchaserTel" id="purchaserTel" class="form-control"/></td>
+			</tr>
+										
+		 </table>
+	 </form>
+	 <div class="bottom-btn" style="z-index: 11000;">
+		<button type="button" class="btn btn-default" id="btnHold" style="display: none;"><span class="glyphicon glyphicon-ok"></span>保存</button>
+		<button type="button" class="btn btn-primary" id="btnSave"><span class="glyphicon glyphicon-ok"></span>下一步</button>
+		<button type="button" class="btn btn-default" id="btnClose"><span class="glyphicon glyphicon-remove"></span>关闭</button>
+	</div>
+	 <style>
+	 .table > thead > tr > th, .table > tbody > tr > th, .table > tfoot > tr > th, .table > thead > tr > td, .table > tbody > tr > td, .table > tfoot > tr > td{
+		 vertical-align: middle;
+	 }
+	 </style>
+	 <script type="text/javascript" src="../../../../../media/js/jquery/jquery.js" ></script>
+	 <script type="text/javascript" src="../../../../../media/js/jquery/jquery.extend.js"></script>
+	 <script type="text/javascript" src="../../../../../media/js/base/common.js" ></script>
+	 <script type="text/javascript" src="../../../../../media/js/base/ProvinceCityData.js"></script>
+	 <script type="text/javascript" src="../../../../../media/js/bootstrap/js/bootstrap-select.min.js" ></script>
+	 <script type="text/javascript" src="../../../../../media/js/bootstrap/js/defaults-zh_CN.min.js" ></script>
+	 <script type="text/javascript" src="../../../../../media/js/Model/projectMembers.js" ></script>
+	 <script type="text/javascript" src="../../../../../media/js/Model/public.js?verson=1.02" ></script>
+	 <script type="text/javascript" src="../../../../../media/js/Model/js/dataLinkage.js" ></script>
+	 <script type="text/javascript" src="../js/addAuctionProject.js" ></script>

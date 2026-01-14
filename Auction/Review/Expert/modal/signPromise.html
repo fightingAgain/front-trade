@@ -1,0 +1,39 @@
+<!--
+ * @Author: your name
+ * @Date: 2020-09-09 15:43:28
+ * @LastEditTime: 2020-09-27 17:15:30
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: \FrameWork_bf\bidPrice\Review\projectManager\modal\progress.html
+--> 
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="pragma" content="no-cache">
+		<!-- 禁止浏览器从本地机的缓存中调阅页面内容 -->
+		<meta http-equiv="cache-control" content="no-cache, must-revalidate">
+		<meta http-equiv="expires" content="0">
+		<title>签订承诺书</title>
+	</head>
+	<body style="overflow:auto;">
+		<iframe id="signPromiseBox" style="width: 99%;height: 100%;display: none;"></iframe>
+		<iframe allowtransparency="true" style="background:transparent;border:none; display: none;width: 0;height: 0;" id="show_open"></iframe>
+		<div id="confirm_avoid" style="display: none;">
+			<div id="confirm_avoid_content" style="padding: 30px;">
+				<div>
+					<span><i class="red">*</i>是否有回避条款情况：</span>
+					<input type="radio" name="isAvoid" id="" value="0" /> 无
+					<input type="radio" name="isAvoid" id="" value="1" /> 有
+				</div>
+				<div>
+					<div>备注：</div>
+					<div><textarea rows="5" cols="" style="resize: none;width: 100%;border-radius: 4px;" name="remarks"></textarea></div>
+				</div>
+			</div>
+		</div>
+	</body>
+	<script type="text/javascript" src="../js/signPromise.js"></script>
+</html>
+

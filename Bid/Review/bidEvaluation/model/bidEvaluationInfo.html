@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="pragma" content="no-cache"><!-- 禁止浏览器从本地计算机的缓存中访问页面内容 -->
+		<meta http-equiv="cache-control" content="no-cache"><!-- 用于指定请求和响应遵循的缓存机制 -->
+		<meta http-equiv="expires" content="0"><!-- 用于设定网页的到期时间，一旦网页过期，必须到服务器上重新传输； -->
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta http-equiv="X-UA-Compatible" content="ie=edge">
+		<title></title>
+	  	<link rel="stylesheet" type="text/css" href="../../../media/js/layer/mobile/need/layer.css" />
+	    <link rel="stylesheet" type="text/css" href="../../../media/js/bootstrap/css/bootstrap.css" />
+	    <link rel="stylesheet" type="text/css" href="../../../media/js/bootstrap/css/bootstrap-table.min.css">
+	</head>
+	<body style="padding: 10px;">
+		<table class="table table-bordered">
+    		<tr>
+    			<td colspan="3" class="active" style="border-left: none;">
+					招标人代表（评委）列表
+    			</td>
+    			<td class="active" style="text-align: right;border-left: none;">
+					<!--<a  href='javascript:void(0)' class='btn-sm btn-primary' id='selectionTenderer' style='text-decoration:none'>选择招标人代表</a>-->
+					<a  href='javascript:void(0)' class='btn-sm btn-primary' id='addTenderer' style='text-decoration:none;display: none;'>添加招标人代表（评委）</a>
+    			</td>
+    		</tr>
+    		<tr>
+    			<td colspan="4">
+    				<table class="table table-bordered" id="tendererList">
+    					
+    				</table>
+    			</td>
+    		</tr>
+    	</table>
+    	<table class="table table-bordered">
+    		<tr>
+    			<td colspan="3" class="active" style="border-left: none;">
+    				评委列表
+    			</td>
+    			<td class="active" style="text-align: right;border-left: none;">
+					<!--<a  href='javascript:void(0)' class='btn-sm btn-primary' id='selectionJudges' style='text-decoration:none'>选择评委</a>-->
+					<!--<a  href='javascript:void(0)' class='btn-sm btn-primary' id='addJudges' style='text-decoration:none'>添加评委</a>-->
+    			</td>
+    		</tr>
+    		<tr>
+    			<td colspan="4">
+    				<table class="table table-bordered" id="expertsList">
+    					
+    				</table>
+    			</td>
+    		</tr>
+    	</table>
+	</body>
+	<script type="text/javascript" src="../../../media/js/jquery/jquery.js" ></script>
+	<script type="text/javascript" src="../../../media/js/jquery/jquery.extend.js"></script>
+	<script type="text/javascript" src="../../../media/js/base/common.js" ></script>
+	<script type="text/javascript" src="../../../media/js/base/util.js" ></script>
+	<script type="text/javascript" src="../../../media/js/bootstrap/js/bootstrap.js" ></script>
+	<script type="text/javascript" src="../../../media/js/bootstrap/js/bootstrap-table.min.js"></script>
+	<script type="text/javascript" src="../../../media/js/bootstrap/js/bootstrap-table-zh-CN.min.js"></script>
+	<script type="text/javascript" src="../../../media/js/layer/layer.js"></script>
+	<script type="text/javascript" src="../js/bidEvaluationInfo.js"></script>
+</html>

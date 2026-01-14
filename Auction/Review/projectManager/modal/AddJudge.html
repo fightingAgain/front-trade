@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="pragma" content="no-cache">
+		<!-- 禁止浏览器从本地机的缓存中调阅页面内容 -->
+		<meta http-equiv="cache-control" content="no-cache, must-revalidate">
+		<meta http-equiv="expires" content="0">
+		<title>添加评委</title>
+		<link rel="stylesheet" type="text/css" href="../../../../media/js/bootstrap/css/bootstrap.css">
+	</head>
+	<body style="width: 98%;margin: 1%;">
+		<form id="form">
+			 <table class="table table-bordered">
+				<tr>
+					<td class="th_bg" style="width: 15%;">评委姓名<i class="text-danger">*</i></td>
+					<td colspan="3"><input type="text" class="form-control" name="expertName"/></td>
+				</tr>
+				<tr>
+					<td class="th_bg" style="width: 15%;">证件类型<i class="text-danger">*</i></td>
+					<td>
+						<select class="form-control" name="identityCardType">
+							<option value="0">身份证</option>
+							<option value="1">军官证</option>							
+							<option value="2">护照</option>
+						</select>
+					</td>
+					<td class="th_bg" style="width: 15%;">证件编码<i class="text-danger">*</i></td>
+					<td><input type="text" class="form-control" name="identityCardNum"/></td>
+				</tr>
+				<tr>
+					<td class="th_bg" style="width: 15%;">手机号<i class="text-danger">*</i></td>
+					<td><input type="text" class="form-control" name="expertTel"/></td>
+					<td class="th_bg" style="width: 15%;">所在单位<i class="text-danger">*</i></td>
+					<td><input type="text" class="form-control" name="companyName"/></td>
+				</tr>
+				<tr>
+					<td class="th_bg" style="width: 15%;">所在省市<i class="text-danger">*</i></td>
+					<td colspan="3">
+						<table>
+							<tr>
+								<td style="width: 180px;" class="form-group">
+									<select class="form-control" name="province" id="Province"></select>
+									<input type="hidden" name="provinceName" id="provinceName"/>
+								</td>
+								<td style="width:5px"></td>
+								<td style="width: 180px;" class="form-group">
+									<select class="form-control" name="city" id="City"></select>
+									<input type="hidden" name="cityName" id="cityName"/>
+								</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td class="th_bg" style="width: 15%;">专业<i class="text-danger">*</i></td>
+					<td colspan="3">
+						<textarea type="text" name="dataTypeName" id="dataTypeName" class="form-control"  readonly="readonly" placeholder="点击添加专业，最多不能超过20个" onclick="dataType()" style="min-height: 80px;max-height: 150px;"></textarea>
+					    <input type="hidden" name="dataTypeId" id="dataTypeId"/>
+			            <input type="hidden" name="dataTypeCode" id="dataTypeCode"/>
+					</td>
+				</tr>
+				<tr>
+					<td class="th_bg" style="width: 15%;">备注</td>
+					<td colspan="3">
+						<textarea type="text" class="form-control"  style="min-height: 80px;max-height: 150px;"></textarea>
+					</td>
+				</tr>
+			</table>
+			<input type="hidden" name="projectId"  id="projectId"/>
+			<input type="hidden" name="packageId"  id="packageId"/>
+		</form>
+		
+	<script type="text/javascript" src="../../../../media/js/jquery/jquery.js"></script>
+	<script type="text/javascript" src="../../../../media/js/jquery/jquery.ajax.js"></script>
+	<script type="text/javascript" src="../../../../media/js/base/common.js" ></script>
+	<!-- <script type="text/javascript" src="../../../../media/js/base/IndexMenu.js" ></script> -->
+	<script type="text/javascript" src="../../../../media/js/bootstrap/js/bootstrap.js"></script>
+	<script type="text/javascript" src="../../../../media/js/bootstrap/js/bootstrap-table.min.js"></script>
+	<script type="text/javascript" src="../../../../media/js/bootstrap/js/bootstrap-table-zh-CN.min.js"></script>
+	<script type="text/javascript" src="../../../../media/js/base/ProvinceCityData.js"></script>
+	<script type="text/javascript" src="../js/AddJudge.js"></script>
+	<style>
+		.table>tbody>tr>td, .table>tbody>tr>th, .table>tfoot>tr>td, .table>tfoot>tr>th, .table>thead>tr>td, .table>thead>tr>th {
+		    line-height: 1.42857143;
+		    vertical-align: middle;		   
+		}
+	</style>
+	</body>
+	
+</html>

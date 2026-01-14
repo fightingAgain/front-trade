@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<!-- 网页不会被缓存 -->
+		<meta http-equiv="pragma" content="no-cache">
+		<!-- 禁止浏览器从本地机的缓存中调阅页面内容 -->
+		<meta http-equiv="cache-control" content="no-cache, must-revalidate">
+		<meta http-equiv="expires" content="0">
+		<title></title>
+		<link rel="stylesheet" href="../../../../../media/js/bootstrap/css/bootstrap.css" />
+		<link rel="stylesheet" href="../../../../../media/js/bootstrap/css/bootstrap-table.min.css" type="text/css"/>
+		<link rel="stylesheet" href="../../../../../media/js/bootstrap-fileinput-master/css/fileinput.min.css" type="text/css"/>
+	</head>
+	<body>
+		<div  name="purchase" style="width: 99%;padding-left: 10px;padding-top: 10px;margin-bottom: 60px;">
+			<table class="table table-bordered " style="margin-bottom: 0px;">
+				<tr>
+					<td colspan="4" style="font-weight: bold;" class="active">公告基本信息</td>
+				</tr>
+				<tr>
+					<td style="width:250px;" class="th_bg">项目名称</td>
+					<td style="text-align: left;">
+						<div id="projectName"></div>
+					</td>
+					<td style="width:250px;" class="th_bg">项目编号</td>
+					<td style="text-align: left;">
+						<div id="projectCode"></div>
+					</td>
+				</tr>
+				<tr>
+					<td style="width:250px;" class="th_bg">包件名称</td>
+					<td style="text-align: left;">
+						<div id="packageName"></div>
+					</td>
+					<td style="width:250px;" class="th_bg">包件编号</td>
+					<td style="text-align: left;">
+						<div id="packageNum"></div>
+					</td>
+				</tr>
+				<tr id="trUploadFile" style="display: none">
+					<td class="th_bg" style="width:250px;">上传分项报价文件</td>
+					<td style="text-align: left;">
+						<input type="file" class="fileloading" multiple name="files" id="FileName" />
+					</td>
+					<td colspan="2" style="text-align: left;">
+						<p class="red">1、只允许上传一个附件、文件格式为文档、表格、PDF格式和压缩文件；</p>
+						<p class="red">2、如果是多个文件，需打包成rar、zip格式后再上传；</p>
+						<p class="red">3、文件不能超过50M；</p>
+						<p class="red">4、上传后不能撤回、删除。</p>
+					</td>
+				</tr>
+				<tr>
+					<td colspan="4">
+						<table class="table" id="fileTables"></table>
+					</td>
+				</tr>
+				<tr class="active" id = 'resetTable' >
+					<th colspan="4">文件驳回记录</th>
+				</tr>
+				<tr id="trHistoryFile">
+					<td colspan="4">
+						<table class="table" id="historyFileTable"></table>
+					</td>
+				</tr>	
+			</table>
+		</div>	     
+	    <div style="width: 100%;height: 50px;text-align:center;position: fixed;bottom: 0;background-color: #FFFFFF;">
+			<button type="button" id="btn_close" class="btn btn-default" style="width: 100px;">取消</button>
+		</div>
+		<form id="formFile"></form>
+	     <script type="text/javascript" src="../../../../../media/js/jquery/jquery.js" ></script>
+		 <script type="text/javascript" src="../../../../../media/js/jquery/jquery.extend.js"></script>
+		 <script type="text/javascript" src="../../../../../media/js/base/common.js" ></script>
+		 <script type="text/javascript" src="../../../../../media/js/base/util.js" ></script>
+		 <script type="text/javascript" src="../../../../../media/js/bootstrap/js/bootstrap.js" ></script>
+		 <script type="text/javascript" src="../../../../../media/js/bootstrap/js/bootstrap-table.min.js"></script>
+		 <script type="text/javascript" src="../../../../../media/js/bootstrap/js/bootstrap-table-zh-CN.min.js"></script>
+		 <script type="text/javascript" src="../../../../../media/js/bootstrap-fileinput-master/js/fileinput.js"></script>
+		 <script type="text/javascript" src="../../../../../media/js/bootstrap-fileinput-master/js/locales/zh.js"></script>
+		 <script type="text/javascript" src="../js/fileInfo.js" ></script>
+	</body>
+</html>

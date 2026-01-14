@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="pragma" content="no-cache">
+		<!-- 禁止浏览器从本地机的缓存中调阅页面内容 -->
+		<meta http-equiv="cache-control" content="no-cache, must-revalidate">
+		<meta http-equiv="expires" content="0">
+		<title>查看结果通知书</title>
+		<link rel="stylesheet" href="../../../../../media/js/bootstrap/css/bootstrap.min.css">
+		<style>
+			h3 {
+				font-weight: 700;
+				color: #1A8FFF;
+			}
+			
+			.resultContent {			
+				margin: auto;
+				background-image: url(../../../../../media/image/images/watermarkOne.png);
+				overflow: auto;
+			}
+			.w-e-text-container { height: 250px !important;}
+			.resultContent .th_bg{
+				width: 150px;
+				vertical-align: middle;
+			}
+		</style>
+	</head>
+
+	<body style="width: 99%;padding-left: 10px;padding-top: 10px;">
+		<div class='resultContent'>
+			<!-- <div id="NewsContent" style="padding: 25px;"></div> -->
+			<table class="table table-bordered" id="ueditorContent"></table>
+		</div>
+	</body>
+	<script type="text/javascript" src="../../../../../media/js/jquery/jquery.js"></script>
+	<script type="text/javascript" src="../../../../../media/js/jquery/jquery.params.js"></script>
+	<script type="text/javascript" src="../../../../../media/js/jquery/jquery.extend.js"></script>
+	<script type="text/javascript" src="../../../../../media/js/bootstrap/js/bootstrap.js"></script>
+	<script type="text/javascript" src="../../../../../media/js/base/UEditorFun.js" ></script>
+   <script>
+   	function getUrlParam(name) {
+		var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); // 构造一个含有目标参数的正则表达式对象  
+		var r = window.location.search.substr(1).match(reg); // 匹配目标参数  
+		if(r != null) return unescape(r[2]);
+		return null; // 返回参数值  
+	}
+   	var BidNotice = JSON.parse(sessionStorage.getItem("BidNotice")); //操作数据行
+	var projectId;
+	var type = getUrlParam("type"); //update发布公示  view查看详情
+	var examType = getUrlParam("examType"); 
+
+	var enterpriseType = getUrlParam("enterpriseType"); 
+	var tenderTypeCode = sessionStorage.getItem("tenderTypeCode");
+	$(function() {
+		new UEditorEdit({
+			pageType: "view",
+			examType:examType,
+			contentKey:"noticeContent"
+		});
+		var para;
+		var para = {
+				id: BidNotice.id,
+				tenderType: tenderTypeCode,//0为询比采购，1为竞价采购，2为竞卖
+				examType:examType
+			}
+	    $.ajax({
+				url: top.config.bidhost + "/BidNoticeController/findBidNoticeInfo.do",
+				data: para,
+				async: false,
+				success: function(data) {
+					if(data.success) {
+						data = data.data;	
+						mediaEditor.setValue(data);				 
+						// $("#NewsContent").html(data.noticeContent)
+					}
+					
+				}
+			});
+	});
+   </script>
+</html>

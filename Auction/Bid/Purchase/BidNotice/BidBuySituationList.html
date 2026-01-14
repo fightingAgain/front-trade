@@ -1,0 +1,69 @@
+﻿<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>询比采购情况分页</title>
+		<!-- 网页不会被缓存 -->
+		<meta http-equiv="pragma" content="no-cache">
+		<!-- 禁止浏览器从本地机的缓存中调阅页面内容 -->
+		<meta http-equiv="cache-control" content="no-cache, must-revalidate">
+		<meta http-equiv="expires" content="0">
+	</head>
+
+	<body>
+		<div class="container-fluid">
+
+			<div id="toolbar">
+				<!--<div class="input-group" style="width:180px;float: left;">
+					<span class="input-group-addon">报价状态</span>
+					<select class="form-control" name="offerState" id="offerState">
+						<option value="">全部</option>
+						<option value="0">未开始</option>
+						<option value="1">报价中</option>
+						<option value="2">已结束</option>
+					</select>
+				</div>
+				
+				<div class="input-group" style="width:280px;float: left; padding-left: 10px;">
+					<span class="input-group-addon">报告审核状态</span>
+					<select class="form-control" name="isCheck" id="isCheck">
+						<option value="">全部</option>
+						<option value="0">未审核</option>
+						<option value="1">退回重审</option>
+						<option value="2">审核通过</option>
+						<option value="3">审核未通过</option>				
+					</select>
+				</div> -->             				
+				<div class="input-group" style="width:150px;float: left;">
+					<span class="input-group-addon">项目名称</span>
+					<input type="text" class="form-control" name="projectName" id="projectName" style="width:180px">
+				</div>
+
+				<div class="input-group" style="width:150px;float: left;padding-left: 10px;">
+					<span class="input-group-addon">项目编号</span>
+					<input type="text" class="form-control" name="projectCode" id="projectCode" style="width:180px">
+				</div>
+                <div class="input-group" style="width:180px;float: left;padding-left: 10px;">
+					<span class="input-group-addon">包件名称</span>
+		    		<input type="text" class="form-control" name="packageName" id="packageName" style="width:180px">	
+		    	</div>
+		    	<div class="input-group" style="width:180px;float: left;padding-left: 10px;">
+					<span class="input-group-addon">包件编号</span>
+		    		<input type="text" class="form-control" name="packageNum" id="packageNum" style="width:180px">	
+		    	</div>	   
+				<div class="btn-group" style="padding-left:10px ;">
+					<button type="button" id="btnSearch" class="btn btn-primary">
+		                <span class="glyphicon glyphicon-search" aria-hidden="true"></span> 查 询
+		           </button>
+				</div>
+			</div>
+
+			<table id="BidSituationList" class="" data-toolbar="#toolbar"></table>
+
+		</div>
+
+		<script src="Auction/common/Purchase/BidNotice/js/BidBuySituationList.js"></script>
+	</body>
+
+</html>

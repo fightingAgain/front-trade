@@ -1,0 +1,91 @@
+<!--
+ * @Author: your name
+ * @Date: 2020-09-09 11:29:07
+ * @LastEditTime: 2021-01-21 09:14:09
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: \FrameWork_bf\bidPrice\Review\projectManager\modal\PackageInfo.html
+--> 
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="pragma" content="no-cache">
+		<!-- 禁止浏览器从本地机的缓存中调阅页面内容 -->
+		<meta http-equiv="cache-control" content="no-cache, must-revalidate">
+		<meta http-equiv="expires" content="0">
+		<title>评审管理</title>
+		<link rel="stylesheet" type="text/css" href="../../../../media/js/bootstrap/css/bootstrap.css">
+
+		<link rel="stylesheet" type="text/css" href="../../../../media/js/bootstrap/css/bootstrap-table.min.css">
+		<link rel="stylesheet" type="text/css" href="../../../../media/js/bootstrap/css/bootstrap-select.min.css" />
+        <link rel="stylesheet" type="text/css" href="../../../../media/js/datetimepicker/css/jquery.datetimepicker.css"/>
+        <link rel="stylesheet" type="text/css" href="../../public/css/style.css"/>
+		<!--<link rel="stylesheet" type="text/css" href="media/js/bootstrap-editable/css/bootstrap-editable.css">-->
+	</head>
+		<!-- <style>
+			.table > tbody > tr > td.active:first-child{
+				
+			}
+		</style> -->
+	<body>
+        <div class="chear">
+            <div class="left">
+                <ul id="menu" style="overflow-y: auto;">
+                </ul>
+            </div>
+            <div class="right">
+
+				<div id="jindu" style="height: 120px;padding: 5px 0px; margin: 0px 15px; overflow: hidden;position: relative;"> 
+					
+				</div>
+
+				<div id="BtnShow" style="height: 50px;margin: 0px 15px;display: none;" >
+					<div style="float: left;margin-top: 10px;display:none;" class="showNTB">			
+						<button class="btn btn-primary btn-sm envelopeLevelFile" data-envelopelevel="1" style="display: none"><span class="glyphicon glyphicon-download"></span>第一信封打包下载</button>
+						<button class="btn btn-primary btn-sm envelopeLevelFile2"  data-envelopelevel="2" style="display: none"><span class="glyphicon glyphicon-download"></span>第二信封打包下载</button>
+						<button class="btn btn-primary btn-sm " id="downloadAllFile"><span class="glyphicon glyphicon-download"></span>一键打包下载</button>
+						<button class="btn btn-danger btn-sm StopCheckBtn" id="StopCheckPw"><span class="glyphicon glyphicon-remove"></span><span class="queRen"></span>项目失败</button>		
+					</div>
+					<div style="float: left;margin-top: 16px;margin-left: 100px;;display:none;" class="showNTB">			
+						<span class="red StopCheck" style="font-weight: bold;display: none;" id="StopChecks">专家评委提出项目失败，</span>
+						<span class="red StopCheck" style="font-weight: bold;display: none;" id="StopCheckl">项目失败原因：<span id="viewReason"></span></span>									
+					</div>
+				</div>
+
+                <div id="reportContent" style="overflow-y: auto; border-top: 1px solid #ccc; padding-top: 10px;"></div>
+			</div>
+			<div class="bottom-btn" style="border-top: 1px solid #ccc">
+				<button type="button" class="btn btn-primary" id="btnOfOrder" style="display: none;">下达评审指令</button>
+				<button type="button" class="btn btn-primary" id="btnOfReOrder" style="display: none;">重新下达评审指令</button>
+				<button type="button" class="btn btn-primary" id="btnRefresh"><span class="glyphicon glyphicon-refresh"></span>刷新</button>
+				<button type="button" class="btn btn-default" id="btnClose"><span class="glyphicon glyphicon-remove"></span>关闭</button>
+			</div>
+        </div>
+		
+	</body>
+	<script type="text/javascript" src="../../../../media/js/jquery/jquery.min.js"></script>
+	<script type="text/javascript" src="../../../../media/js/jquery/jquery.ajax.js"></script>
+	<script type="text/javascript" src="../../../../media/js/base/util.js"></script>
+	<script type="text/javascript" src="../../../../media/js/bootstrap/js/bootstrap.js" ></script>
+	<script type="text/javascript" src="../../../../media/js/bootstrap/js/bootstrap-table.min.js"></script>
+	<script type="text/javascript" src="../../../../media/js/bootstrap/js/bootstrap-table-zh-CN.min.js"></script>
+	<script type="text/javascript" src="../../../../media/js/layer/laydate.js"></script>
+    <script type="text/javascript" src="../../../../media/js/datetimepicker/js/jquery.datetimepicker.js" ></script>
+	<script type="text/javascript" src="../../../../media/js/base/auditRecords.js"></script>
+	<script type="text/javascript" src="../../../../media/js/layer/layer.js"></script>
+	<!-- <script type="text/javascript" src="../../../../media/js/bootstrap/js/bootstrap.js" ></script> -->
+	<script type="text/javascript" src="../../../../media/js/bootstrap/js/bootstrap-select.min.js" ></script>
+	<script type="text/javascript" src="../../../../media/js/bootstrap/js/defaults-zh_CN.min.js" ></script>
+	<script type="text/javascript" src="../../../../media/js/base/ProvinceCityData.js"></script>
+	<script type="text/javascript" src="../../../../media/js/base/common.js"></script>
+	<script type="text/javascript" src="../../public/js/base64.js" ></script>
+	<script type="text/javascript" src="../../public/js/bigNumber.js" ></script>
+	<script type="text/javascript" src="../../public/js/public.js" ></script>
+	<script type="text/javascript" src="../../../currencyControl/js/offerForm.js" ></script>
+	<script type="text/javascript" src="../../../currencyControl/js/subitemFile.js" ></script>
+	<script type="text/javascript" src="../js/packageView.js" ></script>
+	<script type="text/javascript" src="../js/index.js"></script>
+	<script type="text/javascript" src="../js/bootstrap-table-fixed-columns.js"></script>
+</html>

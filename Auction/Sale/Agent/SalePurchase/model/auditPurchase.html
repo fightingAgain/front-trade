@@ -1,0 +1,464 @@
+<head>
+	<meta http-equiv="pragma" content="no-cache">
+	<!-- 禁止浏览器从本地机的缓存中调阅页面内容 -->
+	<meta http-equiv="cache-control" content="no-cache, must-revalidate">
+	<meta http-equiv="expires" content="0">
+</head>
+<link rel="stylesheet" href="../../../../../media/js/bootstrap/css/bootstrap.css" />
+<link rel="stylesheet" href="../../../../../media/js/layer/mobile/need/layer.css" />
+<link rel="stylesheet" href="../../../../../media/js/bootstrap/css/bootstrap-table.min.css" type="text/css"/>
+<div style="width: 98%;margin: 10px auto ;padding-bottom: 60px;">
+	<table class="table table-bordered " style="margin-bottom: 0px;">
+		<tr>
+			<td colspan="3" style="font-weight: bold;border-right: none;" class="active">项目信息</td>
+			<td style="text-align: right;border: none;" class="active">
+				<button type="button" style="display: none;" id="viewPushInfo" class="btn btn-primary">查看派项信息</button>
+			</td>
+		</tr>
+		<tr>
+			<td class="th_bg">竞卖项目名称</td>
+			<td style="text-align: left;width: 320px;"><div id="projectName"></div></td>
+			<td class="th_bg">竞卖项目编号</td>
+			<td style="text-align: left;width: 320px;"><div id="projectCode"></div></td>   
+		</tr>
+		<tr>
+			<td class="th_bg">是否代理项目</td>
+			<td style="text-align: left;"><div id="isAgentText"></div></td>
+			<td class="th_bg">项目来源</td>
+				<td style="text-align: left;">
+				<div id="projectSourceText"></div>
+			</td>
+		</tr>
+		<tr>
+			<td class="th_bg">
+			   所选地区
+			</td>
+			<td style="text-align: left;" colspan="3">
+			   <span id="provinceName"></span>-
+			   <span id="cityName"></span>
+			</td> 
+		</tr>
+		<tr>
+		   <td style="width: 200px;" class="th_bg">公开范围</td>
+		   <td  style="text-align: left;">
+			   <div id="isPublicText"></div>
+		   </td>
+		   <td class="th_bg">项目类型</td>
+		   <td  style="text-align: left;">
+			   <div id="projectTypeText">
+			   </div>
+		   </td>
+		</tr>
+		<tr>
+			<td class="th_bg">采购项目分类</td>
+			<td colspan="3">
+				<div id="tenderProjectClassify"></div>
+			</td>
+		</tr>
+		<tr>
+			<td class="th_bg">项目行业分类</td>
+			<td colspan="3">
+				<div id="industriesType"></div>
+			</td>
+		</tr>
+		<tr>
+		   <td style="width:200px;"  class="th_bg">代理机构所属部门</td>
+		   <td style="text-align: left;">
+			   <span id="agencyDepartmentName"></span> 		
+		   </td>
+		   <td class="th_bg" style="width:200px;">采购人所属部门</td>
+		   <td  style="text-align: left;">
+			   <span id="purchaserDepartmentName"></span>  		   
+		   </td>
+		   </tr>
+		<tr class="engineering">
+			<td class="th_bg">项目名称</td>
+			<td colspan="3" style="text-align: left;">
+				<div id="programmeName"></div>
+			</td>
+		</tr>
+		<tr class="engineering">
+			<td class="th_bg">项目编号</td>
+			<td colspan="3" style="text-align: left;">
+				<div id="programmeCode"></div>
+			</td>
+		</tr>
+		<tr class="engineering">
+			<td class="th_bg">建设工程项目地址</td>
+			<td colspan="3" style="text-align: left;">
+				<div id="programmeAddress"></div>
+			</td>
+		</tr>
+		<tr>
+		<td colspan="4" style="font-weight: bold;" class="active">代理机构信息</td>            
+		</tr>
+		<tr>
+		   <td class="th_bg">代理机构名称</td>
+		   <td colspan="3" style="text-align: left;">
+			   <div id="agencyName"></div>			    	
+		   </td>
+		</tr>
+		<tr>
+		   <td class="th_bg">代理机构地址</td>
+		   <td colspan="3" style="text-align: left;">
+			   <div id="agencyAddress"></div>			    	
+		</tr>
+		<tr>
+		   <td class="th_bg">代理机构联系人</td>
+		   <td style="text-align: left;">
+			   <div id="agencyLinkmen"></div>
+		   <td class="th_bg">代理机构联系电话</td>
+		   <td style="text-align: left;"><div id="agencyTel"></div></td>
+		</tr>
+	   <tr>
+		   <td colspan="4" style="font-weight: bold;" class="active">采购人信息</td>
+		  </tr>
+	   <tr>
+		   <td class="th_bg">采购人名称</td>
+		   <td colspan="3" style="text-align: left;"><div id="purchaserName"></div></td>
+	   </tr>
+	   <tr>
+		   <td class="th_bg">采购人地址</td>
+		   <td colspan="3" style="text-align: left;"><div id="purchaserAddress"></div></td>
+	   </tr>
+	   <tr>
+		   <td class="th_bg">联系人</td>
+		   <td style="text-align: left;"><div id="purchaserLinkmen"></div></td>
+		   <td class="th_bg">联系人电话</td>
+		   <td style="text-align: left;"><div id="purchaserTel"></div></td>
+	   </tr> 
+	</table>
+	<table class="table table-bordered " style="margin-bottom: 0px;">    
+	   <tr class="publicTable">
+		   <td style="font-weight: bold;" class="active">邀请供应商</td>
+		   <td  colspan="3" style="text-align: right;border: none;" class="active">          	
+			   <input type="button" style="display: none" value="追加邀请供应商" class="btn btn-primary addSupplier" onclick="add_supplier()"/>
+			   <input type="button" style="display: none" value="追加邀请供应商发送短信" class="btn btn-primary sendMsg"/>
+		   </td>
+	   </tr>	        
+	   <tr class="publicTable">
+		   <td colspan="4">
+			   <table class="table table-bordered" id="tableList"></table>
+		   </td>
+	   </tr>
+	</table>
+	<table class="table table-bordered " style="margin-bottom: 0px;">
+		<tr>
+		   <td colspan="4" style="font-weight: bold;" class="active">项目时间安排</td>
+		   </tr>
+		<tbody id="timeTbody"></tbody>
+		<tr>
+			<td colspan="4" style="text-align: left;">
+				<div class="red">请所有竞卖人于<span id="StartDate">1990-01-01 00:00:00</span>至<span id="endDate">2100-12-31 00:00:00</span>登录<span id="webTitle">长安汽车询价竞卖电子交易平台</span>，网址<a href="jacascript::void(0)" id="browserUrl" target="_blank"> http://xjpt.dongfengtc.com</a>参与网上报名。</div>
+				<div class="red">竞卖人于竞卖文件递交截止时间前完成竞卖文件的递交，审核通过后，在项目的公告开始时间至公告截止时间内完成平台服务费、代理费、保证金的缴纳，否则将无法参与后续竞卖。请合理安排竞卖文件递交时间、缴费时间，以免影响您参与报价。 </div>
+			</td>
+		</tr>
+	</table>
+	<div id="depositHtml"></div>
+	<table class="table table-bordered " style="margin-bottom: 0px;">
+		<tr>
+		   <td colspan="4" style="font-weight: bold;" class="active">竞卖参数</td>
+	   </tr>
+		<tr>
+		   <td class="th_bg">竞卖方式</td>
+		   <td style="text-align: left;width: 320px;">
+			   <div id="auctionTypeText"></div>
+		   </td>
+		   <td class="th_bg">预算价(含税) (元)</td>
+		   <td style="text-align: left;width: 320px;">
+			   <div id="budgetPrice"></div>
+		   </td>
+	   </tr>
+	   <tbody style="margin-bottom: 0px;border: none;" id="auctionType_0">
+		   <tr>
+			   <td class="th_bg">项目类型</td>
+			   <td colspan="3" style="text-align: left;">
+				   <div id="dataTypeName"></div>											
+			   </td>
+		   </tr>
+		   <tr id="timeLimits">
+			   <td class="th_bg">限时</td>
+			   <td colspan="3" style="text-align: left;" class="searched">			
+				   限时 <span id="timeLimit"></span> 分	
+			   </td>
+		   </tr>
+		   <tr>
+			   <td class="th_bg">竞卖时长（分）</td>
+			   <td colspan="3"  style="text-align: left;">
+				   <div id="auctionDuration"></div>
+			   </td>				
+		   </tr>
+	   </tbody>
+	   <tbody  class=" none" style="margin-bottom: 0px;border: none;" id="auctionType_2">
+			<tr>
+				<td class="th_bg">每轮竞卖间隔时间（分）</td>
+				<td style="text-align: left;width: 320px;">
+					<div id="intervalTime"></div>													
+				</td>
+				<td class="th_bg">设置淘汰方式 </td>
+				<td style="text-align: left;width: 320px;">
+					<div id="outTypeText"></div>											
+				</td>		
+			</tr>
+			<tr>
+				<td class="th_bg">第1轮竞卖时长(分) </td>
+				<td colspan="3" style="text-align: left;">
+					<div id="firstAuctionTime"></div>												
+				</td>		
+			</tr>
+			<tr class="Supplier">
+				<td class="th_bg">第1轮淘汰供应商数 </td>
+				<td style="text-align: left;">
+					<div id="firstOutSupplier"></div>										
+				</td>
+				<td class="th_bg">第1轮最低保留供应商数 </td>
+				<td style="text-align: left;">
+					<div id="firstKeepSupplier"></div>											
+				</td>
+			</tr>
+			<tr>
+				<td class="th_bg">第2轮竞卖时长(分) </td>
+				<td colspan="3" style="text-align: left;">
+					<div id="secondAuctionTime"></div>
+	
+				</td>		
+			</tr>
+			<tr class="none third Supplier">
+				<td class="th_bg">第2轮淘汰供应商数 </td>
+				<td  style="text-align: left;">
+					<div id="secondOutSupplier"></div>										
+				</td>
+				<td class="th_bg">第2轮最低保留供应商数 </td>
+				<td style="text-align: left;">
+					<div id="secondKeepSupplier"></div>												
+				</td>
+			</tr>
+			<tr class="none thirds">
+				<td class="th_bg">第3轮竞卖时长(分) </td>
+				<td colspan="3" style="text-align: left;">
+					<div id="thirdAuctionTime"></div>												
+				</td>		
+			</tr>
+			<tr>
+				<td class="th_bg" rowspan="2">
+				每轮淘汰供应商数设置:
+				</td>
+				<td colspan="3" style="text-align: left;">
+					<div id="outSupplierd"></div>
+				</td>
+			</tr>
+			<tr>
+				<td colspan="4" class="red" style="text-align: left;">
+					<div class="outSupplierp"></div>
+				</td>
+			</tr>
+	   </tbody>
+		<tr>
+			<td class="th_bg">报价类型</td>
+			<td  style="text-align: left;" colspan="3">
+				<div id="quotationType"></div>
+			</td>  
+		</tr>
+		<tr>
+			<td class="th_bg">报价方式</td>
+			<td  style="text-align: left;">
+				<div id="quotationMethod"></div>
+			</td>
+			<td class="th_bg">报价单位</td>
+			<td  style="text-align: left;">
+				<div id="quotationUnit"></div>
+			</td>
+		</tr>
+	   <tr>
+		   <td class="th_bg">竞卖起始价（<span class="quotationTypeUnit"></span>）</td>
+		   <td  style="text-align: left;">
+			   <div id="rawPrice"></div>
+		   </td>
+		   <td  class="th_bg">涨价幅度（<span class="quotationTypeUnit"></span>）</td>
+		   <td class="isPriceM" style="text-align: left;">
+			   <div id="priceReduction"></div>												
+		   </td>
+	   </tr>
+	   <tr>
+		   <td colspan="4" class="active" style="border: none;"><strong>费用信息</strong></td>
+	   </tr>
+	   <tr>
+		   <td class="th_bg">是否缴纳项目保证金</td>
+		   <td colspan="3">
+			   <div id="isPayDeposit"></div>				
+		   </td>				
+	   </tr>
+	   <tr class="isDepositShow">
+		   <td class="th_bg">保证金缴纳方式</td>
+		   <td style="width: 320px;">
+			   <div id="payMethod"></div>				
+		   </td>
+		   <td class="th_bg">保证金金额(元)</td>
+		   <td  style="text-align: left;width: 320px;">
+			   <div id="price1"></div>						
+		   </td>
+	   </tr>
+	   <tr class="isDepositShow type_offline">
+			<td class="th_bg">虚拟子账户生成银行</td>
+			<td colspan="3">
+				<div id="bankType"></div>
+			</td>
+	   </tr>
+	   <tr class="isDepositShow DepositPriceShow" >
+		   <td class="th_bg">保证金收取机构</td>
+		   <td style="text-align: left;width: 320px;">
+			   <div id="agentType"></div>				
+		   </td>
+		   <td class="th_bg">保证金账户名</td>
+		   <td style="text-align: left;width: 320px;">
+			   <div id="bankAccount"></div>										    			
+		   </td>	
+	   </tr>
+	   <tr class="DepositPriceShow isDepositShow">						
+		   <td class="th_bg">保证金开户银行</td>
+		   <td style="text-align: left;" >
+			   <div id="bankName"></div>		    			
+		   </td>
+		   <td class="th_bg">保证金账号</td>
+		   <td style="text-align: left;" >
+			   <div id="bankNumber"></div>	    			
+		   </td>
+	   </tr>
+	   
+	   <tr>						
+		   <td class="th_bg">是否缴纳竞价采购文件费</td>
+		   <td style="text-align: left;" class="isSellCols">
+			   <div id="isSellFile"></div>
+								   
+		   </td>
+		   <td class="th_bg isSellShow">竞价采购文件费金额(元)</td>
+		   <td style="text-align: left;" class="isSellShow">
+			   <div id="price2"></div>
+					   
+		   </td>
+	   </tr>
+	   <!--start 采购代理服务费-->
+	   <tr class="agentBlock" style="display: none;"></tr>
+	</table>
+	<table class="table table-bordered " style="margin-bottom: 0px;">
+		<!--end 采购代理服务费-->
+	   <tr>
+		   <td colspan="4" style="font-weight: bold;" class="active">设备信息</td>
+	   </tr>
+	   <tr>
+		   <td class="th_bg">商品名称</td>
+		   <td colspan="3" style="text-align: left;">
+			   <div id="detailedName"></div>           	
+		   </td>
+	   </tr>
+	   <tr>
+		   <td class="th_bg">数量</td>
+		   <td style="text-align: left;width: 320px;">
+			   <div id="detailedCount"></div>            	
+		   </td>
+		   <td class="th_bg">单位</td>
+		   <td style="text-align: left;width: 320px;">
+			   <div id="detailedUnit"></div>            	
+		   </td>
+		</tr>
+		<tr>
+	   <tr>
+		   <td class="th_bg">品牌信息</td>
+		   <td colspan="3" style="text-align: left;">
+			   <div id="brand"></div>            	
+		   </td>
+	   </tr>
+		<tr>
+		   <td class="th_bg">型号规格及参数</td>
+		   <td colspan="3" style="text-align: left;">
+			   <div id="detailedVersion"></div>            
+		   </td>
+	   </tr>
+	   <tr>
+		   <td class="th_bg">商品详情</td>
+		   <td colspan="3" style="text-align: left;">
+			   <div id="detailedContent"></div>	        	
+		   </td>
+	   </tr>
+	   <tr>
+		   <td class="th_bg">竞卖人资质要求</td>
+		   <td colspan="3" style="text-align: left;">
+			   <div id="detailedRemark"></div>	        	
+		   </td>
+	   </tr>
+	   <tr>
+		   <td class="active"  colspan="5"><strong>附件信息</strong></td>
+	   </tr>
+	   <tr>			
+		   <td colspan="4">
+			   <table  class="table table-bordered" id="filesData" style="margin-bottom: 0;">
+												 
+				</table>
+		   </td>
+	   </tr>
+	   <tr>
+		   <td class="active"  colspan="4"><strong>竞卖公告信息</strong></td>
+	   </tr>
+	   <tr>
+			<td class="th_bg">选择发布媒体</td>
+			<td colspan="3" style="text-align: left;">
+				<MediaSelect></MediaSelect>
+			</td>
+		</tr>
+		<tr>
+			<td colspan="4">
+				<table id="ueditorContent" class="table table-bordered"></table>
+			</td>
+		</tr>
+	   <!-- <tr>           
+		   <td colspan="4">
+			   <div style="height: 400px;overflow-y: auto;">
+				   <div id="content" style="width: 820px;margin: auto;">
+					
+				   </div>
+				</div> 
+		   </td>
+	   </tr> -->
+	   <tr id="projectMember"></tr>
+	   <tr>
+		   <td class="active"  colspan="4"><strong>审核记录</strong></td>
+	   </tr>
+	   <tr>
+		   <td colspan="4">
+			   <table class="table  table-bordered"  id="workflowListDetail">
+				   <tr>
+					   <td colspan="4">
+						   当前没有审核记录
+					   </td>	
+				   </tr>
+			   </table>
+		   </td>
+	   </tr>
+	</table>
+</div>
+<div class="bottom-btn">
+	<button type="button" class="btn btn-default" id="btn_close"><span class="glyphicon glyphicon-remove"></span>关闭</button>
+</div>
+<style>
+.table > thead > tr > th, .table > tbody > tr > th, .table > tfoot > tr > th, .table > thead > tr > td, .table > tbody > tr > td, .table > tfoot > tr > td{
+vertical-align: middle;
+}
+</style>
+<script type="text/javascript" src="../../../../../media/js/jquery/jquery.js" ></script>
+<script type="text/javascript" src="../../../../../media/js/jquery/jquery.extend.js"></script>
+<script type="text/javascript" src="../../../../../media/js/jquery/jquery.params.js" ></script> 
+<script type="text/javascript" src="../../../../../media/js/base/common.js" ></script>
+<script type="text/javascript" src="../../../../../media/js/bootstrap/js/bootstrap.js" ></script>
+<script type="text/javascript" src="../../../../../media/js/bootstrap/js/bootstrap-table.min.js"></script>
+<script type="text/javascript" src="../../../../../media/js/bootstrap/js/bootstrap-table-zh-CN.min.js"></script>
+<script type="text/javascript" src="../../../../../media/js/layer/layer.js" ></script>
+<script type="text/javascript" src="../../../../../media/js/Model/public.js?version=1.0.2" ></script>
+<script type="text/javascript" src="../../../../../media/js/Model/projectMembers.js" ></script>
+<script type="text/javascript" src="../../../../../media/js/Model/js/dataLinkage.js" ></script>
+<script type="text/javascript" src="../../../../../media/js/base/UEditorFun.js"></script>
+<script type='text/javascript' src='../../../../currencyControl/js/department.js'></script>
+<script type='text/javascript' src='../../../../currencyControl/js/againDeposit.js'></script>
+<script type="text/javascript" src="../js/audit_purchase.js"></script>
+<script type="text/javascript" src="../../../../Public/js/PublishingMedia.js"></script>
+<script type="text/javascript" src="../js/supplement.js"></script>
+<script type="text/javascript" src="../../../../../media/js/base/auditRecords.js"></script>

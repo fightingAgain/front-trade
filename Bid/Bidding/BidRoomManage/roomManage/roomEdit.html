@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="pragma" content="no-cache"><!-- 禁止浏览器从本地计算机的缓存中访问页面内容 --> 
+		<meta http-equiv="cache-control" content="no-cache"><!-- 用于指定请求和响应遵循的缓存机制 --> 
+		<meta http-equiv="expires" content="0"><!-- 用于设定网页的到期时间，一旦网页过期，必须到服务器上重新传输； -->
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta http-equiv="X-UA-Compatible" content="ie=edge">
+		<title>评标室添加/编辑</title>
+		<link rel="stylesheet" href="../../../media/js/layer/mobile/need/layer.css" />
+		<link rel="stylesheet" href="../../../media/js/bootstrap/css/bootstrap.css" />
+		<link rel="stylesheet" href="../../../media/js/bootstrap/css/bootstrap-table.css">
+		<style>
+			html,
+			body {
+				height: 100%;
+			}
+			.calendar_icon{
+				color: #3995C8;
+			}
+		</style>
+	</head>
+
+	<body>
+		<form class="pageModel" id="formName" name="formName">
+			<table class="table table-bordered">
+				<tr>
+					<td colspan="4" style="font-weight: bold;" class="active">评标室信息</td>
+				</tr>
+				<tr>
+					<td class="th_bg">会议室名称<i class="red">*</i></td>
+					<td colspan="3">
+						<input type="text" name="biddingRoomName" id="biddingRoomName" class="form-control" datatype="*" errormsg="请正确输入评标室名称" />
+						<!--<input type="hidden" name="projectId" id="projectId" />
+-->					</td>
+				</tr>
+				<tr>
+					<td class="th_bg">类型<i class="red">*</i></td>
+					<td>
+						<label style="padding-right: 20px;margin-bottom: 0;">
+							<input type="radio" id="biddingRoomType" name="biddingRoomType" value="0" style="vertical-align: -2px;margin-right: 5px;" >自有场地
+						</label>
+						<label style="padding-right: 20px;margin-bottom: 0;">
+							<input type="radio" id="biddingRoomType" name="biddingRoomType" value="1" style="vertical-align: -2px;margin-right: 5px;" >外部场地
+						</label>
+					</td>
+					<td class="th_bg">是否开放<i class="red">*</i></td>
+					<td>
+						<label style="padding-right: 20px;margin-bottom: 0;">
+							<input type="radio" id="isOpen" name="isOpen" value="1" style="vertical-align: -2px;margin-right: 5px;" >是
+						</label>
+						<label style="padding-right: 20px;margin-bottom: 0;">
+							<input type="radio" id="isOpen" name="isOpen" value="0" style="vertical-align: -2px;margin-right: 5px;" >否
+						</label>
+						
+						
+					</td>
+				</tr>
+				<tr>
+					<td class="th_bg">负责人<i class="red">*</i></td>
+					<td>
+						<input type="text" name="chargePerson" id="chargePerson" class="form-control" datatype="*" errormsg="请正确输入负责人" style="display: inline-block;" />
+					</td>
+					<td class="th_bg">联系电话<i class="red">*</i></td>
+					<td>
+						<input type="text" name="chargeTel" datatype="*" errormsg="请正确输入联系电话" class="form-control" />
+					</td>
+				</tr>
+				<tr>
+					<!--<td class="th_bg">开放开始时间<i class="red">*</i></td>
+					<td>
+						<input type="text" name="openStartDate" datatype="*" errormsg="请正确输入开放开始时间" class="form-control" />
+					</td>
+					<td class="th_bg">开放结束时间<i class="red">*</i></td>
+					<td>
+						<input type="text" name="openEndDate" datatype="*" errormsg="请正确输入开放结束时间" class="form-control" />
+					</td>-->
+					
+					<td class="th_bg" >
+						开放开始时间<i class="red">*</i>
+					</td>
+					<td style="position: relative;">
+						<div style="position: relative;">
+	                		<input type="text" id="openStartDate" name="openStartDate" datatype="*" errormsg="请正确输入开放开始时间" class="form-control Wdate" />
+						</div>
+						
+						<!--<span style="color: #59abf0 ; position: absolute; top: 17px;right: 14px; font-size:18px;" class="glyphicon glyphicon-calendar"></span>-->
+					</td>
+					<td class="th_bg">
+						开放结束时间<i class="red">*</i>
+					</td>
+					<td  style="position: relative;">
+						<div style="position: relative;">
+	                		<input width="100px" type="text" id="openEndDate" name="openEndDate" datatype="*" errormsg="请正确输入开放结束时间" class="form-control Wdate" />
+						</div>
+						<!--<input width="100px" type="text" id="openEndDate" name="openEndDate" datatype="*" errormsg="请正确输入开放结束时间" class="form-control" />
+						<span style="color: #59abf0 ; position: absolute; top: 17px;right: 14px; font-size:18px;" class="glyphicon glyphicon-calendar"></span>-->
+					</td>
+				</tr>
+				<tr>
+					<td class="th_bg">所在区域<i class="red">*</i></td>
+					<td>
+						<select name="areaCode" class="form-control select" selectName="areaCode" datatype="*" errormsg="请输入所在区域" style="width: 130px;">
+							<option value="">--请选择--</option>
+							<!--<option value="4206">襄阳</option>
+							<option value="4203">十堰</option>
+							<option value="4201">武汉</option>
+							<option value="6101">西安</option>
+							<option value="1101">北京</option>
+							<option value="1306">保定</option>
+							<option value="4401">广州</option>
+							<option value="5001">重庆</option>-->
+						</select>
+					</td>
+	                <td class="th_bg">会议室类型<i class="red">*</i></td>
+	                <td >
+	                    <label style="padding-right:20px;margin-bottom: 0;">
+	                		<input type="checkbox" name="useType"  value="1"  style="vertical-align: -2px;margin-right: 5px;" >开标
+	                	</label>
+	                	<label style="padding-right:20px;margin-bottom: 0;">
+	                		<input type="checkbox" name="useType" value="2"  style="vertical-align: -2px;margin-right: 5px;" >评审
+	                	</label>
+	                	<label style="padding-right:20px;margin-bottom: 0;">
+	                		<input type="checkbox" name="useType" value="9"  style="vertical-align: -2px;margin-right: 5px;" >其他
+	                	</label>
+	                </td>
+				</tr>
+				<tr>
+					<td class="th_bg">详细地址<i class="red">*</i></td>
+					<td colspan="3">
+						<input type="text" name="address" datatype="*" errormsg="请输入详细地址" class="form-control" />
+					</td>
+				</tr>
+				<tr>
+					<td class="th_bg">备注</td>
+					<td colspan="3">
+						<textarea class="form-control" rows="3" name="remark"></textarea>
+					</td>
+				</tr>
+			</table>
+		</form>
+		<div class="bottom-btn">
+			<button type="button" class="btn btn-primary" id="btnSave"><span class="glyphicon glyphicon-ok"></span>保存</button>
+			<button type="button" class="btn btn-default" id="btnClose"><span class="glyphicon glyphicon-remove"></span>关闭</button>
+		</div>
+
+		<script type="text/javascript" src="../../../media/js/jquery/jquery.js"></script>
+		<script type="text/javascript" src="../../../media/js/jquery/jquery.extend.js"></script>
+		<script type="text/javascript" src="../../../media/js/base/util.js"></script>
+		<script type="text/javascript" src="../../../media/js/base/common.js"></script>
+		<script type="text/javascript" src="../../../media/js/My97DatePicker/WdatePicker.js"></script>
+		<script type="text/javascript" src="../../../media/js/bootstrap/js/bootstrap.js"></script>
+		<script src="../../../media/js/bootstrap/js/bootstrap-table.js"></script>
+		<script src="../../../media/js/bootstrap/js/bootstrap-table-zh-CN.min.js"></script>
+		<script type="text/javascript" src="../../../media/js/layer/layer.js"></script>
+		
+		
+		<!--<script type="text/javascript" src="../../../Bidding/Model/js/public.js"></script>-->
+		<script type="text/javascript" src="../../Model/js/public.js"></script>
+    	<script type="text/javascript" src="../../Model/js/multiLinkage.js"></script>
+    	<script type="text/javascript" src="../roomManage/js/roomEdit.js"></script>
+		
+	</body>
+
+</html>

@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8">
+		<meta http-equiv="pragma" content="no-cache"><!-- 禁止浏览器从本地计算机的缓存中访问页面内容 --> 
+		<meta http-equiv="cache-control" content="no-cache"><!-- 用于指定请求和响应遵循的缓存机制 --> 
+		<meta http-equiv="expires" content="0"><!-- 用于设定网页的到期时间，一旦网页过期，必须到服务器上重新传输； -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>中标人结果公告审核</title>
+    <link rel="stylesheet" href="../../../../media/js/layer/mobile/need/layer.css" />
+    <link rel="stylesheet" href="../../../../media/js/bootstrap/css/bootstrap.css" />
+    
+	<style>
+		html,body { height: 100%;width: 100%;}
+		.readonly{
+		    border: none;
+		    background: none !important;
+		    outline: none !important;
+		    box-shadow: none !important;
+		}
+		.pretrial,.revise{
+			display: none;
+		}
+		.enterFull{
+			position: absolute;
+			top: 0;
+			left: 0;
+			background: #ffffff;
+			visibility: visible;
+			filter: Alpha(opacity=90);
+		}
+		.display_none{
+			display: none;
+		}
+		.file-input .kv-upload-progress{
+			display: none !important;
+		}
+		tr .file-input{
+			display: inline-block;
+			float: right;
+			margin-right: 50px;
+		}
+		a,a:link,a:visited,a:hover,a:active{
+			color: #333333;
+			text-decoration: none;
+		}
+		
+		
+	</style>
+</head>
+
+<body>
+    <form class="pageModel" id="addNotice" name="formName">
+        <table class="table table-bordered ">
+        	<tr>
+	            <td colspan="4" style="font-weight: bold;" class="active">标段信息
+	            </td>
+	        </tr>
+	        <tr>
+	        	<td class="th_bg"><span >标段编号</span> </td>
+                <td colspan="3">
+                	<span id="interiorBidSectionCode"></span>
+                </td>
+	        </tr>
+	        <tr>
+	        	 <td class="th_bg"><span >标段名称</span> </td>
+                <td colspan="3">
+                	<span id="bidSectionName"></span>
+                </td>
+	        </tr>
+	       <!-- <tr>
+	        	<td class="th_bg"><span >是否社会公开</span> </td>
+                <td colspan="3">
+                	<span id="bidType"></span>
+                </td>
+	        </tr>-->
+	        <tr>
+	        	<td class="th_bg"><span >招标人名称</span> </td>
+                <td colspan="3">
+                	<span id="tenderName"></span>
+                </td>
+                
+	        </tr>
+	        <tr>
+	        	<td class="th_bg"><span >招标人地址</span> </td>
+                <td colspan="3">
+                	<span id="tenderAddress"></span>
+                </td>
+	        </tr>
+	        <tr>
+	        	<td class="th_bg"><span >联系人</span> </td>
+                <td >
+                	<span id="agentName"></span>
+                </td><td class="th_bg"><span >联系电话</span> </td>
+                <td >
+                	<span id="agentTel"></span>
+                </td>
+	        </tr>
+	        <tr>
+	        	<td class="th_bg"><span >公告开始时间</span> </td>
+                <td colspan="3">
+                	<span id="noticeSendTime"></span>
+                </td>
+                </td>
+	        </tr>
+	    </table>
+	    <table class="table table-bordered ">
+        	<tr>
+	            <td colspan="4" style="font-weight: bold;" class="active">公告发布媒体</td>
+	        </tr>
+	        <tr>
+	            <td colspan="4" >
+	            	<div><input type="checkbox" checked="checked" disabled="disabled" style="margin-right: 5px;"/>襄阳市人民政府门户网站</div>
+	            	<div><input type="checkbox" checked="checked" disabled="disabled" style="margin-right: 5px;"/>襄阳市公共资源交易网</div>
+	            	<div><input type="checkbox" checked="checked" disabled="disabled" style="margin-right: 5px;"/>湖北省公共资源交易电子服务平台</div>
+	            	<div><input type="checkbox" checked="checked" disabled="disabled" style="margin-right: 5px;"/>国家公共服务平台</div>
+	            </td>
+	        </tr>
+	        <tr>
+	            <td colspan="4" style="font-weight: bold;" class="active">中标人</td>
+	        </tr>
+	        <tr>
+	            <td colspan="4" >
+	            	<table class="table table-bordered " id="candidates">
+	            		<thead>
+	            			<tr>
+		            			<th style="width: 50px;text-align: center;">排名</th>
+		            			<th>投标人名称</th>
+		            			<th >统一社会信用代码</th>
+		            			<th style="width: 150px;text-align: center;">投标价格（元/人民币）</th>
+		            			<!--<th style="width: 150px;text-align: center;">操作</th>-->
+		            		</tr>
+	            		</thead>
+	            		<tbody>
+	            		</tbody>
+	            		
+	            	</table>
+	            	<!--<lable style="margin-right: 30px;"><input type="checkbox" name=""  style="margin-right: 5px;vertical-align: -2px;"/>供应商1</lable>
+	            	<lable style="margin-right: 30px;"><input type="checkbox"  name="" style="margin-right: 5px;vertical-align: -2px;"/>供应商2</lable>
+	            	<lable style="margin-right: 30px;"><input type="checkbox" name="" style="margin-right: 5px;vertical-align: -2px;"/>供应商3</lable>
+	            	<lable style="margin-right: 30px;"><input type="checkbox" name="" style="margin-right: 5px;vertical-align: -2px;"/>供应商4</lable>-->
+	            	
+	            </td>
+	        </tr>
+	        <tr>
+	            <td colspan="4" style="font-weight: bold;" class="active">公告基本信息
+	            	<button type="button" class="btn btn-primary fullScreen"   style="float: right;margin-right: 50px;">
+	            		<span class="glyphicon glyphicon-fullscreen"></span>全屏查看
+	            	</button>
+	            </td>
+	        </tr>
+	        <!--<tr>
+                <td class="th_bg">公告模板 </td>
+                <td colspan="3">
+                    <select class="form-control" name="noticeTemplate" id="noticeTemplate" style="width: 260px;display: inline-block;">
+	                	<option value="">请选择公告模板</option>
+	                	
+	                </select>
+	                <button type="button" class="btn btn-primary" id="btnModel" style="vertical-align:top;"><span class="glyphicon glyphicon-refresh" style="vertical-align:-2px;"></span>生成模板</button>
+	                
+                </td>
+            </tr>-->
+            <tr>
+            	<td colspan="4">
+            		<div id="noticeContent" ></div>
+            		<!--<input type="hidden" name="noticeContent" id="remark" value="" />-->
+            	</td>
+            </tr>
+            <tr>
+		 		<td colspan="4" id="approval" style="padding: 0;"></td>
+		 	</tr> 
+	    </table>
+        <div class="bottom-btn" style="z-index: 11000;">
+        	<button type="button" class="btn btn-primary" id="btnPass" style="display: none;"><span class="glyphicon glyphicon-saved"></span>审核通过</button>
+        	<button type="button" class="btn btn-default" id="btnNoPass" style="display: none;"><span class="glyphicon glyphicon-remove"></span>审核不通过</button>
+            <button type="button" class="btn btn-default" id="btnClose"><span class="glyphicon glyphicon-remove"></span>取消</button>
+        </div>
+    </form>
+    <script type="text/javascript" src="../../../../media/js/jquery/jquery.js"></script>
+    <script type="text/javascript" src="../../../../media/js/jquery/jquery.extend.js"></script>
+    <script type="text/javascript" src="../../../../media/js/base/util.js"></script>
+    <script type="text/javascript" src="../../../../media/js/base/common.js"></script>
+    <script type="text/javascript" src="../../../../media/js/bootstrap/js/bootstrap.js"></script>
+    <script src="../../../Model/js/public.js"></script>
+    <script src="../../../../media/js/base/WorkflowInfoNew.js"></script>
+    <script type="text/javascript" src="../js/resultAudit.js"></script>
+</body>
+
+</html>

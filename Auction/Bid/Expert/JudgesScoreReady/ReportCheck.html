@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="pragma" content="no-cache">
+		<!-- 禁止浏览器从本地机的缓存中调阅页面内容 -->
+		<meta http-equiv="cache-control" content="no-cache, must-revalidate">
+		<meta http-equiv="expires" content="0">
+		<title></title>
+	</head>
+
+	<body>
+		<div class="container-fluid">
+			<form class="form-inline margin-bottom-10">
+				<div class="input-group">
+					<div class="btn-group">
+						<a class="btn btn-primary search-type" href="javascript:;" name="projectName">采购项目名称</a>
+						<a class="btn btn-primary dropdown-toggle" data-toggle="dropdown"><span class="caret"></span></a>
+						<ul class="dropdown-menu search-type">
+							<li class="active"><a href="javascript:;" name="projectName">采购项目名称</a></li>
+							<li><a href="javascript:;" name="projectCode">采购项目编号</a></li>
+						</ul>
+					</div>
+				</div>
+				<div class="input-group">
+					<input type="text" class="form-control" name="search-query">
+				</div>
+				<button type="button" class="btn btn-primary search-btn">
+					<span class="glyphicon glyphicon-search" aria-hidden="true"></span>查询
+				</button>
+			</form>
+			<table id="projectlist"></table>
+		</div>
+	</body>
+	<script src="0502/Bid/JudgesScoreReady/js/reportCheck.js"></script>
+</html>

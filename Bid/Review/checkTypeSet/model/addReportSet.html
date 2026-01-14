@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8">
+		<meta http-equiv="pragma" content="no-cache"><!-- 禁止浏览器从本地计算机的缓存中访问页面内容 --> 
+		<meta http-equiv="cache-control" content="no-cache"><!-- 用于指定请求和响应遵循的缓存机制 --> 
+		<meta http-equiv="expires" content="0"><!-- 用于设定网页的到期时间，一旦网页过期，必须到服务器上重新传输； -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>添加评标报告</title>
+    <link rel="stylesheet" href="../../../media/js/layer/mobile/need/layer.css" />
+    <link rel="stylesheet" href="../../../media/js/bootstrap/css/bootstrap.css" />
+    <link rel="stylesheet" href="../../../media/js/bootstrap/css/bootstrap-table.css">
+	<style>
+		html,body { height: 100%;width: 100%;}
+		.input-group{
+			margin:10px 20px 5px;
+		}
+	</style>
+</head>
+
+<body>
+    <form class="pageModel" id="formName" name="formName">
+		<div class="input-group">
+			<span class="input-group-addon" style="width:110px">评标报告类型</span>
+			<select id="checkReportType"  class="form-control" style="width:110px">
+				<option value="1">评标报告</option>
+				<option value="2">流标报告</option>
+			</select>
+		</div>
+		<div class="input-group">
+			<span class="input-group-addon" style="width:110px">是否依法</span>
+			<select id="isLaw"  class="form-control" style="width:80px">
+				<option value="0">否</option>
+				<option value="1">是</option>
+			</select>
+		</div>
+
+		<div class="input-group">
+			<span class="input-group-addon" style="width:110px">评标报告编号</span>
+			<span class="form-control" id="checkReportCode"  style="width:340px;"></span>
+		</div>
+
+		<div class="input-group">
+			<span class="input-group-addon" style="width:110px">评标报告名称</span>
+			<span class="form-control" id="checkReportName"  style="width:340px;"></span>
+		</div>
+
+		<div class="input-group">
+			<span class="input-group-addon" style="width:110px">评标报告描述</span>
+			<span class="form-control" id="checkReportDescribe"  style="width:340px; height: 100px"></span>
+		</div>
+    </form>
+	<div class="bottom-btn">
+		<button type="button" class="btn btn-primary" id="btnSubmit"><span class="glyphicon glyphicon-saved"></span>保存</button>
+		<button type="button" class="btn btn-default" id="btnClose"><span class="glyphicon glyphicon-remove"></span>取消</button>
+	</div>
+    <script type="text/javascript" src="../../../media/js/jquery/jquery.js"></script>
+    <script type="text/javascript" src="../../../media/js/jquery/jquery.extend.js"></script>
+    <script type="text/javascript" src="../../../media/js/base/common.js"></script>
+    <script type="text/javascript" src="../../../media/js/bootstrap/js/bootstrap.js"></script>
+    <script type="text/javascript" src="../../../media/js/layer/layer.js"></script>
+    <script type="text/javascript" src="../js/addReportSet.js"></script>
+</body>
+
+</html>

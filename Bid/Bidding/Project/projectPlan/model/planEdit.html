@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8">
+		<meta http-equiv="pragma" content="no-cache"><!-- 禁止浏览器从本地计算机的缓存中访问页面内容 --> 
+		<meta http-equiv="cache-control" content="no-cache"><!-- 用于指定请求和响应遵循的缓存机制 --> 
+		<meta http-equiv="expires" content="0"><!-- 用于设定网页的到期时间，一旦网页过期，必须到服务器上重新传输； -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>编辑包件信息</title>
+    <link rel="stylesheet" href="../../../../media/js/layer/mobile/need/layer.css" />
+    <link rel="stylesheet" href="../../../../media/js/bootstrap/css/bootstrap.css" />
+    <link rel="stylesheet" href="../../../../media/js/datetimepicker/css/jquery.datetimepicker.css">
+	<style>
+		html,body { height: 100%;}
+		.readonly{
+			border: none;
+		    background: none !important;
+		    outline: none !important;
+		    box-shadow: none !important;
+		}
+		.calendar_icon{
+			color: #3995C8;
+		}
+		.padding_button{
+			padding: 5px 8px !important;
+			line-height: 30px !important;
+		}
+	</style>
+</head>
+
+<body>
+    <form class="pageModel" id="formName" name="formName">
+        <table class="table table-bordered ">
+        	<tr>
+	            <td colspan="4" style="font-weight: bold;" class="active">标段基本信息</td>
+	        </tr>
+	        <tr>
+	        	<td class="th_bg">标段编号</td>
+                <td colspan="3">
+                    <input type="text" name="" readonly="readonly" id="interiorBidSectionCode" class="form-control readonly" />
+                </td>
+            	
+            </tr>
+            <tr>
+            	<td class="th_bg">标段名称</td>
+                <td colspan="3">
+                    <input type="text" name="" readonly="readonly" id="bidSectionName" class="form-control readonly"  />
+                </td>
+            </tr>
+            <tr>
+	            <td colspan="4" style="font-weight: bold;" class="active">标段时间信息
+	            	<button type="button" class="btn btn-primary btn-sm "  id="emptyTime" style="float: right;margin-right: 50px;">
+	            		<span class="glyphicon glyphicon-time"></span>重置时间
+	            	</button>
+	            </td>
+	        </tr>
+	        <tr>
+            	<td class="th_bg timeName">招标公告发布开始时间<i class="red">*</i></td>
+                <td>
+                    <div style="position: relative;width: 260px;">
+                		<input type="text"  name="noticeSendTime" id="noticeSendTime" class="form-control"  style="width: 260px;" autocomplete="off" datatype="*" errormsg="请选择招标文件获取截止时间"/>
+						<span style="position: absolute; top: 10px;right: 10px; font-size:18px;cursor: pointer;background: #ffffff;"  class="glyphicon glyphicon-calendar calendar_icon"></span>
+					</div>
+                </td><td class="th_bg timeName">招标公告发布截止时间<i class="red">*</i></td>
+                <td>
+                    <div style="position: relative;width: 260px;">
+                		<input type="text"  name="noticeEndTime" id="noticeEndTime" class="form-control time"  style="width: 260px;" autocomplete="off" datatype="*" errormsg="请选择招标文件获取截止时间"/>
+						<span style="position: absolute; top: 10px;right: 10px; font-size:18px;cursor: pointer;background: #ffffff;"  class="glyphicon glyphicon-calendar calendar_icon"></span>
+					</div>
+                </td>
+            </tr>
+            <tr>
+	        	<td class="th_bg timeName">招标文件发布时间<i class="red">*</i></td>
+                <td colspan="3">
+                	<div style="position: relative;width: 260px;">
+                		<input type="text"  name="" id="docSendTime" class="form-control time"style="width: 260px;" autocomplete="off" datatype="*" errormsg="请选择招标文件获取开始时间"/>
+						<span style="position: absolute; top: 10px;right: 10px; font-size:18px;cursor: pointer;background: #ffffff;" class="glyphicon glyphicon-calendar calendar_icon"></span>
+					</div>
+                    
+                </td>
+                <!--<td class="th_bg timeName">招标文件获取截止时间<i class="red">*</i></td>
+                <td>
+                	<div style="position: relative;width: 260px;">
+                		<input type="text"  name="docGetEndTime" id="docGetEndTime" class="form-control time"  style="width: 260px;" datatype="*" errormsg="请选择招标文件获取截止时间"/>
+						<span style="position: absolute; top: 10px;right: 10px; font-size:18px;cursor: pointer;background: #ffffff;" class="glyphicon glyphicon-calendar calendar_icon"></span>
+					</div>
+                    
+                </td>-->
+	        </tr>
+	        <!--<tr>
+	        	<td class="th_bg timeName">招标文件获取开始时间<i class="red">*</i></td>
+                <td>
+                	<div style="position: relative;width: 260px;">
+                		<input type="text"  name="docGetStartTime" id="docGetStartTime" class="form-control time"style="width: 260px;" datatype="*" errormsg="请选择招标文件获取开始时间"/>
+						<span style="position: absolute; top: 10px;right: 10px; font-size:18px;cursor: pointer;background: #ffffff;" class="glyphicon glyphicon-calendar calendar_icon"></span>
+					</div>
+                    
+                </td>
+                <td class="th_bg timeName">招标文件获取截止时间</span><i class="red">*</i></td>
+                <td>
+                	<div style="position: relative;width: 260px;">
+                		<input type="text"  name="docGetEndTime" id="docGetEndTime" class="form-control time"  style="width: 260px;" datatype="*" errormsg="请选择招标文件获取截止时间"/>
+						<span style="position: absolute; top: 10px;right: 10px; font-size:18px;cursor: pointer;background: #ffffff;" class="glyphicon glyphicon-calendar calendar_icon"></span>
+					</div>
+                    
+                </td>
+	        </tr>-->
+	        <tr>
+				<td class="th_bg timeName">提出澄清截止时间<i class="red">*</i></td>
+				<td style="text-align: left;">
+					<div style="position: relative;width: 260px;">
+						<input style="display: inline-block;width: 100%;" type="text" id="clarifyEndTime" autocomplete="off" name="" datatype="*" errormsg="请正确输入提出澄清截止时间" class="form-control time" />
+						<span style="position: absolute; top: 10px;right: 10px; font-size:18px;background: #ffffff;cursor: pointer;	"  class="glyphicon glyphicon-calendar calendar_icon"></span>
+					</div>
+				</td>
+				<td class="th_bg timeName">答复截止时间<i class="red">*</i></td>
+				<td style="text-align: left;">
+					<div style="position: relative;width: 260px;">
+						<input style="display: inline-block;width: 100%;" type="text" id="answersEndDate" name="" autocomplete="off" datatype="*" errormsg="请正确输入答复截止时间" class="form-control time" />
+						<span style="position: absolute; top: 10px;right: 10px; font-size:18px;background: #ffffff;cursor: pointer;	"  class="glyphicon glyphicon-calendar calendar_icon"></span>
+					</div>
+				</td>
+			</tr>
+			<tr>
+				<td class="th_bg timeName">投标文件递交截止时间<i class="red">*</i></td>
+				<td style="text-align: left;">
+					<div style="position: relative;width: 260px;">
+						<input style="display: inline-block;width: 100%;" type="text" id="bidDocReferEndTime" autocomplete="off" name="" datatype="*" errormsg="请正确输入投标文件递交截止时间" class="form-control time" />
+						<span style="position: absolute; top: 10px;right: 10px; font-size:18px;background: #ffffff;cursor: pointer;	"  class="glyphicon glyphicon-calendar calendar_icon"></span>
+					</div>
+				</td>
+				<td class="th_bg timeName">开标时间<i class="red">*</i></td>
+				<td style="text-align: left;">
+					<div style="position: relative;width: 260px;">
+						<input style="display: inline-block;width: 100%;" type="text" id="bidOpenTime" autocomplete="off" name="" datatype="*" errormsg="请正确输入开标时间" class="form-control time" />
+						<span style="position: absolute; top: 10px;right: 10px; font-size:18px;background: #ffffff;cursor: pointer;	" class="glyphicon glyphicon-calendar calendar_icon"></span>
+					</div>
+				</td>
+			</tr>
+			<tr>
+				<td class="th_bg timeName">评审委员会组建时间<i class="red">*</i></td>
+				<td style="text-align: left;">
+					<div style="position: relative;width: 260px;">
+						<input style="display: inline-block;width: 100%;" type="text" id="formatTime" autocomplete="off" name="" datatype="*" errormsg="请正确输入评审委员会组件时间" class="form-control time" />
+						<span style="position: absolute; top: 10px;right: 10px; font-size:18px;background: #ffffff;cursor: pointer;	"  class="glyphicon glyphicon-calendar calendar_icon"></span>
+					</div>
+				</td>
+				<td class="th_bg timeName">评标时间<i class="red">*</i></td>
+				<td style="text-align: left;">
+					<div style="position: relative;width: 260px;">
+						<input style="display: inline-block;width: 100%;" type="text" id="checkStartDate" autocomplete="off" name="" datatype="*" errormsg="请正确输入评标时间" class="form-control time" />
+						<span style="position: absolute; top: 10px;right: 10px; font-size:18px;background: #ffffff;cursor: pointer;	"  class="glyphicon glyphicon-calendar calendar_icon"></span>
+					</div>
+				</td>
+			</tr>
+			<tr>
+				<td class="th_bg timeName">中标候选人公示开始时间<i class="red">*</i></td>
+				<td style="text-align: left;">
+					<div style="position: relative;width: 260px;">
+						<input style="display: inline-block;width: 100%;" type="text" id="publicityStartTime" autocomplete="off" name="" datatype="*" errormsg="请正确输入中标候选人公示开始时间" class="form-control time" />
+						<span style="position: absolute; top: 10px;right: 10px; font-size:18px;background: #ffffff;cursor: pointer;	"  class="glyphicon glyphicon-calendar calendar_icon"></span>
+					</div>
+				</td>
+				<td class="th_bg timeName">中标候选人公示截止时间<i class="red">*</i></td>
+				<td style="text-align: left;">
+					<div style="position: relative;width: 260px;">
+						<input style="display: inline-block;width: 100%;" type="text" id="publicityEndTime" autocomplete="off" name="" datatype="*" errormsg="请正确输入中标候选人公示截止时间" class="form-control time" />
+						<span style="position: absolute; top: 10px;right: 10px; font-size:18px;background: #ffffff;cursor: pointer;	"  class="glyphicon glyphicon-calendar calendar_icon"></span>
+					</div>
+				</td>
+			</tr>
+			<tr>
+				<td class="th_bg timeName">确定中标人时间<i class="red">*</i></td>
+				<td style="text-align: left;">
+					<div style="position: relative;width: 260px;">
+						<input style="display: inline-block;width: 100%;" type="text" id="sureBidderTime" autocomplete="off" name="" datatype="*" errormsg="请正确输入确定中标人时间" class="form-control time" />
+						<span style="position: absolute; top: 10px;right: 10px; font-size:18px;background: #ffffff;cursor: pointer;	"  class="glyphicon glyphicon-calendar calendar_icon"></span>
+					</div>
+				</td>
+				<td class="th_bg timeName">中标结果通知书发送时间<i class="red">*</i></td>
+				<td style="text-align: left;">
+					<div style="position: relative;width: 260px;">
+						<input style="display: inline-block;width: 100%;" type="text" id="bidderNoticeTime" autocomplete="off" name="" datatype="*" errormsg="请正确输入中标结果通知书发送时间" class="form-control time" />
+						<span style="position: absolute; top: 10px;right: 10px; font-size:18px;background: #ffffff;cursor: pointer;	"  class="glyphicon glyphicon-calendar calendar_icon"></span>
+					</div>
+				</td>
+			</tr>
+			<tr>
+				<td class="th_bg timeName">中标合同备案时间<i class="red">*</i></td>
+				<td colspan="3" style="text-align: left;">
+					<div style="position: relative;width: 260px;">
+						<input style="display: inline-block;width: 100%;" type="text" id="contractTime" autocomplete="off" name="" datatype="*" errormsg="请正确输入中标合同备案时间" class="form-control time" />
+						<span style="position: absolute; top: 10px;right: 10px; font-size:18px;background: #ffffff;cursor: pointer;	"  class="glyphicon glyphicon-calendar calendar_icon"></span>
+					</div>
+				</td>
+			</tr>
+			<tr>
+				<td class="th_bg">备注</td>
+				<td colspan="3" style="text-align: left;">
+					<textarea name="" rows="5" cols="" id="workPlan" class="form-control" style="width: 100%;resize: none;"></textarea>
+				</td>
+			</tr>
+            
+	        
+            
+        </table>
+    </form>
+    <div class="bottom-btn">
+        <!--<button type="button" class="btn btn-primary" id="btnSave"><span class="glyphicon glyphicon-ok"></span>保存</button>-->
+        <button type="button" class="btn btn-primary" id="btnSub"><span class="glyphicon glyphicon-saved"></span>确认</button>
+        <button type="button" class="btn btn-default" id="btnClose"><span class="glyphicon glyphicon-remove"></span>取消</button>
+    </div>
+    
+    <script type="text/javascript" src="../../../../media/js/jquery/jquery.js"></script>
+    <script type="text/javascript" src="../../../../media/js/jquery/jquery.extend.js"></script>
+    <script type="text/javascript" src="../../../../media/js/base/util.js"></script>
+    <script type="text/javascript" src="../../../../media/js/base/common.js"></script>
+    <script type="text/javascript" src="../../../../media/js/bootstrap/js/bootstrap.js"></script>
+    <script type="text/javascript" src="../../../../media/js/layer/layer.js"></script>
+    <script type="text/javascript" src="../../../../media/js/datetimepicker/js/jquery.datetimepicker.js"></script>
+    <script type="text/javascript" src="../../../Model/js/public.js"></script>
+    <script type="text/javascript" src="../js/planEdit.js"></script>
+    <!--<script type="text/javascript" src="../../Model/js/dataLinkage.js"></script>-->
+</body>
+
+</html>

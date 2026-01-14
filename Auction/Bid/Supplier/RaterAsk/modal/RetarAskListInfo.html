@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>评审答复详情</title>
+		<link rel="stylesheet" href="../../../../../media/js/bootstrap/css/bootstrap.css">
+		<link rel="stylesheet" type="text/css" href="../../../../../media/js/bootstrap-fileinput-master/css/fileinput.css" />
+		<link rel="stylesheet" href="../../../../../media/js/bootstrap/css/bootstrap-table.css" />
+	</head>
+
+	<body style="width: 99%;padding-left: 10px;padding-top: 10px;margin-bottom: 0;">
+		<div style="margin-bottom: 55px;">
+		<table class="table table-bordered">
+			<th class="active" colspan="4">采购项目详细</th>
+			<tr>
+				<td  class="th_bg" >采购项目名称</td>
+				<td colspan="3">
+					<div id="projectName"></div>
+				</td>
+			</tr>
+			<tr>
+				<td  class="th_bg" width="25%" >包件编号</td>
+				<td width="25%">
+					<div id="packageNum"></div>
+				</td>
+				<td  class="th_bg" width="25%" >包件名称</td>
+				<td width="25%">
+					<div id="packageName"></div>
+				</td>
+			</tr>
+			<tr>
+				<td  class="th_bg" >采购人名称</td>
+				<td colspan="3">
+					<div id="purchaserName"></div>
+				</td>
+			</tr>
+			<tr class="purchaserShow" style="display: none;">
+				<td  class="th_bg" >联系人</td>
+				<td>
+					<div id="purchaserLinkMen"></div>
+				</td>
+				<td  class="th_bg" >联系电话(座机)</td>
+				<td>
+					<div id="purchaserTel"></div>
+				</td>
+			</tr>
+			<tr>
+				<td  class="th_bg"  id="firstDate">评审开始时间</td>
+				<td colspan="3">
+					<div id="checkEndDate"></div>
+				</td>
+			</tr>
+			<tr class="active">
+				<td colspan="4">评审互动</td>
+			</tr>
+			<tr>
+				<td  class="th_bg" >提问时间</td>
+				<td colspan="3">
+					<div id="askDate"></div>
+				</td>
+			</tr>
+			<tr>
+				<td  class="th_bg" >评委提问</td>
+				<td colspan="3">
+					<div id="askContent"></div>
+				</td>
+			</tr>
+			<tr>
+				<td  class="th_bg" >供应商答复时间</td>
+				<td>
+					<div id="answerDate"></div>
+				</td>
+				<td  class="th_bg" >答复状态</td>
+				<td>
+					<div id="answerState"></div>
+				</td>
+			</tr>
+			<tr>
+				<td  class="th_bg" >答复内容<i class="red">*</i></td>
+				<td colspan="3">
+					<textarea id="answerContentInput" class="form-control" oninput="answerContentInput()" placeholder="填写答复"></textarea>
+					<div id="answerContent" style="display: none;"></div>
+				</td>
+			</tr>
+			<tr id="notUpdatedAccessoryTr" style="display: none;">
+				<td  class="th_bg" >上传答复附件</td>
+				<td colspan="3">
+					<div id="divEdit" class="form-group" style="margin-bottom:0px ;">
+						<div>
+							<input type="file" class="fileloading" multiple name="files" id="FileName" />
+						</div>
+					</div>
+				</td>
+			</tr>
+			<tr>
+				<td colspan="4" style="padding: 0px;">
+					<table id="files"></table>
+				</td>
+			</tr>
+		</table>
+		</div>
+		<div id="divButton" style="width:100%;height:55px;background-color:#FFFFFF;text-align: center;display:none;position: fixed;bottom: 0;">
+			<button type="button" style="width: 100px;display: none;margin-top: 10px;" class="btn btn-primary " id="btn_submit">提交</button>
+			<button type="button" style="width: 100px;margin-top: 10px;" class="btn btn-default " id="btn_close">关闭</button>
+		</div>
+
+		<style>
+			.krajee-default.file-preview-frame .kv-file-content {
+				width: 130px;
+				height: 50px;
+			}
+			
+			.krajee-default .file-other-icon {
+				font-size: 3em;
+			}
+			
+			.krajee-default .file-caption-info,
+			.krajee-default .file-size-info {
+				width: 130px;
+			}
+		</style>
+
+		<script type="text/javascript" src="../../../../../media/js/jquery/jquery.js"></script>
+		<script type="text/javascript" src="../../../../../media/js/jquery/jquery.extend.js"></script>
+		<script type="text/javascript" src="../../../../../media/js/bootstrap/js/bootstrap.js"></script>
+		<script type="text/javascript" src="../../../../../media/js/bootstrap/js/bootstrap-table.min.js"></script>
+		<script type="text/javascript" src="../../../../../media/js/bootstrap/js/bootstrap-table-zh-CN.min.js"></script>
+		<script type="text/javascript" src="../../../../../media/js/bootstrap-fileinput-master/js/fileinput.js"></script>
+		<script src="../../../../../media/js/bootstrap-fileinput-master/js/locales/zh.js"></script>
+		<script type="text/javascript" src="../../../../../media/js/base/common.js"></script>
+		<script type="text/javascript" src="../../../../../media/js/base/util.js"></script>
+		<script src="../js/RetarAskListInfo.js" type="text/javascript" charset="utf-8"></script>
+	</body>
+
+</html>

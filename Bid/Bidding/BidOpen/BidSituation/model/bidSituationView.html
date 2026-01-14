@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+		<meta http-equiv="pragma" content="no-cache"><!-- 禁止浏览器从本地计算机的缓存中访问页面内容 --> 
+		<meta http-equiv="cache-control" content="no-cache"><!-- 用于指定请求和响应遵循的缓存机制 --> 
+		<meta http-equiv="expires" content="0"><!-- 用于设定网页的到期时间，一旦网页过期，必须到服务器上重新传输； -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>开标室</title>
+    <link rel="stylesheet" href="../../../../media/js/layer/mobile/need/layer.css" />
+    <link rel="stylesheet" href="../../../../media/js/bootstrap/css/bootstrap.css" />
+    <link rel="stylesheet" href="../../../../media/js/bootstrap/css/bootstrap-table.min.css">
+	<style>
+		html,body { height: 100%;}
+		.scroll-y{
+			/*overflow-y: scroll;*/
+			overflow:auto
+		}
+		*{
+			padding: 0;
+			margin: 0;
+		}
+		.border{
+			border: 1px solid #ccc;
+		}
+		ul li{
+			list-style: none;
+			padding: 5px 10px;
+			font-weight: 400;
+		}
+		tr{
+			font-weight: 400;
+		}
+		.fixed-table-pagination{
+			display: none !important;
+		}
+		#tableList td,#tableList th{
+			white-space: nowrap;
+		}
+	</style>
+</head>
+
+<body>
+    <form class="pageModel" id="formName" name="formName" >
+    	<table class="table table-bordered ">
+        	<tr>
+	            <td style="font-weight: bold;" class="active">基本信息</td>
+	        </tr>
+	        <tr>
+	        	<td class="th_bg">
+	        		<div class="container-fluid" style="margin-bottom: 30px;">
+					    <div class="row " style="margin-left: 0;">
+					   		<div class="col-xs-9 col-sm-9 col-md-9 col-lg-9 scroll-y border" id="" style="height: 200px;background: #fff;">
+					   			<ul id="logBoard">
+					   				
+					   			</ul>
+					   		</div>	
+					   		<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 border" id="" style="height: 200px;background: #fff;border-left: none;">
+					   			<div>当前阶段：</div>
+					   			<div>截止时间：</div>
+					   			<div>剩余时间：</div>
+					   		</div>	
+					   	</div>
+					</div>
+					<table class="table table-bordered " id="tableList" >
+						
+					</table>
+					<table class="table table-bordered " style="margin-top: 30px;margin-bottom: 20px;">
+						<tr>
+							<td class="th_bg">总体开标一览表</td>
+							<td >
+								<button type="button" class="btn btn-primary btn-sm" id="btnDownLoad">下载</button>
+								<button type="button" class="btn btn-primary btn-sm" id="btnView">预览</button>
+							</td>
+							<td class="th_bg">开标报告</td>
+							<td >
+								<button type="button" class="btn btn-primary btn-sm" id="btnDownLoad1">下载</button>
+								<button type="button" class="btn btn-primary btn-sm" id="btnView1">预览</button>
+							</td>
+						</tr>
+						<tr>
+							<td class="th_bg">确认一览表开始时间</td>
+							<td>
+								<span id="firstSignTime"></span>
+							</td>
+							<td class="th_bg">确认一览表截止时间</td>
+							<td>
+								<span id="lastSignTime"></span>
+							</td>
+						</tr>
+						<tr>
+							<td class="th_bg">确认报价开始时间</td>
+							<td>
+								<span id="firstOfferDate"></span>
+							</td>
+							<td class="th_bg">确认报价截止时间</td>
+							<td>
+								<span id="lastOfferDate"></span>
+							</td>
+						</tr>
+						<tr>
+							<td class="th_bg">解密开始时间</td>
+							<td>
+								<span id="openingStartDate"></span>
+							</td>
+							<td class="th_bg">解密截止时间</td>
+							<td>
+								<span id="openingEndDate"></span>
+							</td>
+						</tr>
+						<tr>
+							<td class="th_bg">开标时间</td>
+							<td>
+								<span id="bidOpenTime"></span>
+							</td>
+							<td class="th_bg">当前时间</td>
+							<td>
+								<span id="currentTime"></span>
+							</td>
+						</tr>
+						<tr>
+							<td class="th_bg">标段编号</td>
+							<td>
+								<span id="interiorBidSectionCode"></span>
+							</td>
+							<td class="th_bg">标段名称</td>
+							<td>
+								<span id="bidSectionName"></span>
+							</td>
+						</tr>
+						<tr>
+							<td class="th_bg">建设单位</td>
+							<td>
+								<span id="tendererEnterpriseName"></span>
+							</td>
+							<td class="th_bg">截标时间</td>
+							<td>
+								<span id=""></span>
+							</td>
+						</tr>
+						
+					</table>
+					
+	        	</td>
+	        </tr>
+        </table>
+    	
+        <div class="bottom-btn" style="z-index: 11000;">
+            <button type="button" class="btn btn-default" id="btnClose"><span class="glyphicon glyphicon-remove"></span>关闭</button>
+        </div>
+    </form>
+    <script type="text/javascript" src="../../../../media/js/jquery/jquery.js"></script>
+    <script type="text/javascript" src="../../../../media/js/jquery/jquery.extend.js"></script>
+    <script type="text/javascript" src="../../../../media/js/base/util.js"></script>
+    <script type="text/javascript" src="../../../../media/js/base/common.js"></script>
+    <script type="text/javascript" src="../../../../media/js/bootstrap/js/bootstrap.js"></script>
+    <script src="../../../../media/js/bootstrap/js/bootstrap-table.min.js" type="text/javascript"></script>
+	<script src="../../../../media/js/bootstrap/js/bootstrap-table-zh-CN.min.js" type="text/javascript"></script>
+    <script type="text/javascript" src="../js/bidSituationView.js"></script>
+</body>
+
+</html>

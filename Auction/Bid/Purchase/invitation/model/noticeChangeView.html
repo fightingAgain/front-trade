@@ -1,0 +1,260 @@
+<!-- 网页不会被缓存 -->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+	<head>
+		<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+		<meta http-equiv="pragma" content="no-cache">
+		<!-- 禁止浏览器从本地机的缓存中调阅页面内容 -->
+		<meta http-equiv="cache-control" content="no-cache, must-revalidate">
+		<meta http-equiv="expires" content="0">
+		<link rel="stylesheet" href="../../../../../media/js/layer/mobile/need/layer.css" />
+		<link rel="stylesheet" href="../../../../../media/js/layer/theme/default/laydate.css" />
+		<link rel="stylesheet" href="../../../../../media/js/bootstrap/css/bootstrap.css" />
+		<link rel="stylesheet" href="../../../../../media/js/bootstrap/css/bootstrap-table.min.css" type="text/css"/>
+		<link rel="stylesheet" href="../../../../../media/js/datetimepicker/css/jquery.datetimepicker.css" type="text/css"/>		
+		<style type="text/css">
+			label {
+				font-weight: normal;
+			}
+			body{
+				font-weight: normal;
+				font-weight: '宋体';
+			}
+			pre {
+				/*font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;*/
+			    font-size: 14px;
+			    line-height: 1.42857143;
+			    color: #333;
+				background: #fff;
+				/*border: none;*/
+				white-space: pre-wrap;
+				white-space: -moz-pre-wrap;
+				white-space: -pre-wrap;
+				white-space: -o-pre-wrap;
+				*word-wrap: break-word;
+				*white-space : normal ;  
+			}
+			 .table > thead > tr > th, .table > tbody > tr > th, .table > tfoot > tr > th, .table > thead > tr > td, .table > tbody > tr > td, .table > tfoot > tr > td{
+			 	vertical-align: middle;
+			 }
+			
+		</style>
+
+</head>
+<body>
+<form id="formbackage" name="purchase" style="width: 99%;padding-left: 10px;padding-top: 10px;margin-bottom: 0;padding-bottom: 55px;">
+     <table class="table table-bordered " style="margin-bottom: 0px;">
+     	<tr>
+            <td colspan="3" style="font-weight: bold;border: none;" class="active">项目信息</td>
+            <td class="active" style="text-align: right;border: none;">
+            	<button style="padding: 3px 10px ;border: none;" id="chBtn" type="button" class="btn-sm btn-primary" onclick="changeReacod()"><span class="remarkTitleBtn">邀请函历史变更</span> </button>     			  			
+     		</td>
+        </tr>
+        <tr >
+            <td class="th_bg">采购项目名称</td>
+            <td style="text-align: left; width: 320px;">
+            	<div id="projectName"></div>           	
+            </td>
+            <td class="th_bg">采购项目编号</td>
+            <td style="text-align: left;width: 320px;">
+            	<div id="projectCode"></div>           	
+            </td>  
+        </tr>
+         <tr>
+         	<td class="th_bg">资金来源</td>
+            <td  style="text-align: left;">
+            	<div id="sourceFunds"></div>            	
+            </td> 
+         	<td class="th_bg">项目类型</td>
+            <td  style="text-align: left;">
+            	<div id="projectTypeText"></div>            	
+            </td>
+		 </tr>
+		 <tr>
+			<td class="th_bg">资格审查方式</td>
+			<td colspan="3" style="text-align: left;">
+				<div id="examTypeName"></div>	
+			</td>         
+		 </tr> 
+         <tr class="engineering">
+            <td class="th_bg">项目名称</td>
+            <td colspan="3" style="text-align: left;">
+            	<div id="programmeName"></div>
+            	
+            </td>         
+           
+         </tr>
+         <tr class="engineering">
+         	<td class="th_bg">项目编号</td>
+            <td colspan="3" style="text-align: left;">
+            	<div id="programmeCode"></div>           	
+            </td>
+         </tr>
+         <tr class="engineering">
+            <td class="th_bg">项目地址</td>
+            <td colspan="3" style="text-align: left;">
+            	<div id="programmeAddress"></div>            	
+            </td>
+         </tr>       
+		 <tr class="isAgent1">
+		    <td colspan="4" style="font-weight: bold;" class="active">代理机构信息</td>            
+		 </tr>
+		 <tr class="isAgent1">
+		    <td  class="th_bg">代理机构名称</td>
+		    <td colspan="3" style="text-align: left;">
+		    	<div id="agencyName"></div>
+		    </td>
+		 </tr>
+		 <tr class="isAgent1">
+		    <td  class="th_bg">代理机构地址</td>
+		    <td colspan="3" style="text-align: left;">
+		    	<div id="agencyAddress"></div>
+		    </td>
+		 </tr>
+		 <tr class="isAgent1">
+		    <td class="th_bg">代理机构联系人</td>
+		    <td style="text-align: left;">
+		    	<div id="agencyLinkmen"></div>
+		    </td>
+		    <td class="th_bg">代理机构联系电话</td>
+		    <td style="text-align: left;">
+		    	<div id="agencyTel"></div>
+		    </td>
+		 </tr>
+		 
+		 <tr>
+		    <td colspan="4" style="font-weight: bold;border: none;" class="active">采购人信息</td>
+		 </tr>
+		 <tr>
+		    <td class="th_bg">采购人名称</td>
+		    <td colspan="3" style="text-align: left;">
+		    	<div id = "purchaserName"></div>		    
+		    </td>
+		 </tr>
+		 <tr >
+		    <td class="th_bg">采购人地址</td>
+		    <td colspan="3" style="text-align: left;">
+				<div id = "purchaserAddress" ></div>				
+		    </td>
+		 </tr>
+		 <tr>
+		    <td class="th_bg">联系人</td>
+		    <td style="text-align: left;">
+		    	<!--<div id = "purchaserLinkmen" ></div>-->
+		    	<div id="purchaserLinkmen"></div>
+		    </td>
+		    <td class="th_bg">联系人电话</td>
+		    <td style="text-align: left;">
+		    	<div id="purchaserTel"></div>
+		    </td>
+		 </tr>
+		 <tbody id="montage"></tbody>
+		 <!-- <tr class="tenderTypeW">
+			<td colspan="4">
+				<div id="offerForm"></div>	        
+			</td>
+		</tr>
+		<tbody class="tenderTypeW" id="fileHtml"></tbody> -->
+		<tr>
+			<td colspan="4" style="font-weight: bold;border: none;" class="active">邀请供应商</td>			
+		</tr>
+	   	<tr>
+			<td colspan="4" class="yao_btn">
+			  <table class="table  table-bordered" style="margin-bottom: 0px;" id="yao_table">
+				
+			   </table>
+			</td>
+	   	</tr>
+        <tr>
+            <td colspan="4" style="font-weight: bold;" class="active">时间安排</td>
+       	</tr>
+		<tbody style="border:none ;" id="nowOrOld"></tbody>
+		<tr>
+			<td colspan="3" style="font-weight: bold;border: none;" class="active">预约信息</td>
+			<td class="active" style="text-align: right;border: none;" class="searched">
+				<input class="btn btn-sm btn-primary showOrder" type="button" style="display: none" onclick="orderRoom()" value="预约会议室"/>
+				<input class="btn btn-sm btn-primary colseOrder" type="button" style="display: none" id="colseOrder" value="取消预约"/>		
+			 </td>	
+		</tr>
+		<tr>
+			<td class="th_bg">预约标题</td>
+			<td style="text-align: left;">
+				<div id="appointmentTitle"></div>
+			</td>
+			<td class="th_bg">会议室类型</td>
+			 <td style="text-align: left;">
+				<!-- 1开标，2评审，9其他 -->
+				<div id="appointmentType"></div>
+			</td>
+		</tr>
+		<tr>
+			<td class="th_bg">预约开始时间</td>
+			<td style="text-align: left;">
+				<div id="appointmentStartDate"></div>
+			</td>
+			<td class="th_bg">预约截止时间</td>
+			<td style="text-align: left;" >
+				<div id="appointmentEndDate"></div>
+			</td>
+		</tr>
+		<tr>
+			<td colspan="4">
+				<table id="biddingRooms"></table>
+			</td>		           	           
+		</tr>
+        <tr>
+	 		<td colspan="4" style="font-weight: bold;border: none;" class="active"><span class="remarkTitle">公告信息</span></td>
+	 		<!-- <td class="active" style="text-align: right;border: none;">
+	 			<input type="button" class="btn btn-primary" value="全屏预览" onclick="previewYl(2)"/>   			
+     		</td> -->
+        </tr>
+				<tr>
+					<td colspan="4">
+						<table class="table table-bordered" id="ueditorContent"></table>
+					</td>
+				</tr>
+        <!-- <tr>
+	 		<td  colspan="4">
+	 			<div id="remark" style="width:820px;margin:auto;height: 400px;overflow-y: auto;">
+	 				
+	 			</div>	 				 			
+	 		</td>
+	 	</tr> -->
+        <tr class="record">
+		 	<td class="active"  colspan="4" style="border: none;"><strong>流程审核记录</strong></td>
+		</tr>
+		<tr class="record">
+			<td colspan="4">
+				<table class="table table-bordered" id="workflowListDetail">
+					
+				</table>
+			</td>
+		</tr>	
+     </table>   
+ </form>
+<div style="width: 100%;height: 50px;text-align:center;position: fixed;bottom: 0;background-color: #FFFFFF;z-index: 100001;">
+	<button type="button" id="btn_close" class="btn btn-default" style="width: 100px;">关闭</button>
+</div>
+ <script type="text/javascript" src="../../../../../media/js/jquery/jquery.js" ></script>
+ <script type="text/javascript" src="../../../../../media/js/jquery/jquery.extend.js"></script>
+ <script type="text/javascript" src="../../../../../media/js/base/common.js" ></script>
+ <script type="text/javascript" src="../../../../../media/js/bootstrap/js/bootstrap.js" ></script>
+ <script type="text/javascript" src="../../../../../media/js/bootstrap/js/bootstrap-table.min.js"></script>
+ <script type="text/javascript" src="../../../../../media/js/bootstrap/js/bootstrap-table-zh-CN.min.js"></script>
+ <script type="text/javascript" src="../../../../../media/js/base/UEditorFun.js" ></script>
+ <script type="text/javascript" src="../../../../../media/js/Model/public.js"></script>
+ <script type="text/javascript" src="../js/invitationChange.js"></script>
+ <script type="text/javascript" src="../js/orderRoom.js" ></script>
+ <script type="text/javascript" src="../js/supplierInfo.js"></script>
+ <script type="text/javascript" src="../js/packageView.js" ></script>
+ <script type="text/javascript" src="../js/viewPackage.js"></script>
+ <script type="text/javascript" src="../../Purchase/js/price.js"></script>
+ <script type="text/javascript" src="../../Purchase/js/suppliment.js"></script>
+ <script type="text/javascript" src="../../../../../media/js/base/auditRecords.js"></script>
+ <script type="text/javascript" src="../../../../../media/js/preview.js" ></script>
+ <script type="text/javascript" src="../../Purchase/js/packageTest.js"></script>
+<!-- <script type="text/javascript" src="../../../../currencyControl/js/offerForm.js" ></script>
+<script type="text/javascript" src="../../../../currencyControl/js/subitemFile.js" ></script>  -->
+</body>
+ </html>

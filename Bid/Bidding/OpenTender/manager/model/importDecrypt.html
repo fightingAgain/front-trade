@@ -1,0 +1,39 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<link rel="stylesheet" href="../../../../media/js/bootstrap/css/bootstrap.css" />
+	<link rel="stylesheet" href="../../../../media/js/stream/css/stream-v1.css" />
+	<title>解密文件导入</title>
+</head>
+<body>
+	<form class="pageModel" id="formName" name="formName">
+    <table class="table table-bordered ">
+		<input type="hidden" name="bidderId" id="bidderId"/>
+		<input type="hidden" name="bidOpeningId" id="bidOpeningId"/>
+	    <input type="hidden" name="bidSectionId" id="bidSectionId"/>
+	    <input type="hidden" name="fileUrl" id="fileUrl"/>
+		<tr>
+	        <td class="th_bg" style="width:80px">上传文件</td>
+	        <td>
+	            <input type="text" class="form-control" id="fileName" style="float:left;display: inline-block;width:180px;" />
+	            <button type="button"  class="btn btn-primary" id="btnDraw" style="float:left;position: relative;vertical-align: 0;">
+	            	<span class="glyphicon glyphicon-upload"></span>上传
+	            </button>
+	            <font color="green" style="margin-left: 10px;">支持zip、rar格式</font>
+	            <div id="i_stream_files_queue" style="margin-top: 20px;"></div>
+	        </td>
+	   </tr>
+	</table>
+	<div class="bottom-btn">
+        <button type="button" class="btn btn-primary" id="btnSubmit"><span class="glyphicon glyphicon-saved"></span>确认</button>
+        <button type="button" class="btn btn-default" id="btnClose"><span class="glyphicon glyphicon-remove"></span>取消</button>
+    </div>
+	</form>
+	<script type="text/javascript" src="../../../../media/js/jquery/jquery.min.js"></script>
+	<script type="text/javascript" src="../../../../media/js/jquery/jquery.extend.js"></script>
+	<script type="text/javascript" src="../../../../media/js/base/common.js"></script>
+	<script type="text/javascript" src="../../../../media/js/stream/js/stream-v1.js"></script>
+	<script type="text/javascript" src="../js/importDecrypt.js"></script>
+</body>
+</html>

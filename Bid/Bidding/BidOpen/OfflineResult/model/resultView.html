@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta http-equiv="pragma" content="no-cache"><!-- 禁止浏览器从本地计算机的缓存中访问页面内容 --> 
+	<meta http-equiv="cache-control" content="no-cache"><!-- 用于指定请求和响应遵循的缓存机制 --> 
+	<meta http-equiv="expires" content="0"><!-- 用于设定网页的到期时间，一旦网页过期，必须到服务器上重新传输； -->
+    <title>开标结果录入</title>
+    <link rel="stylesheet" href="../../../../media/js/layer/mobile/need/layer.css" />
+    <link rel="stylesheet" href="../../../../media/js/bootstrap/css/bootstrap.css" />
+	<style>
+		html,body { height: 100%;}
+	</style>
+</head>
+
+<body>
+    <form class="pageModel" id="formName" name="formName">
+    	<div class="panel-group" id="accordion">
+				<div class="panel panel-accordion panel-default">
+					<div class="panel-heading active" role="tab" id="headingOne">
+						<h4 class="panel-title">
+		            	<a  role="button" data-toggle="collapse"  href="#collapseOne" aria-expanded="true" aria-controls="collapseOne" >标段信息</a>
+			 		</h4>
+					</div>
+					<div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+						<div class="panel-body">
+							<table class="table table-bordered">
+								<tr>
+									<td class="th_bg">标段编号<i class="red">*</i></td>
+									<td colspan="3">
+										<span id="interiorBidSectionCode"></span>
+									</td>
+								</tr>
+								<tr>
+									<td class="th_bg">标段名称<i class="red">*</i></td>
+									<td colspan="3">
+										<span id="bidSectionName"></span>
+									</td>
+								</tr>
+								<tr>
+									<td class="th_bg">标段状态<i class="red">*</i></td>
+									<td colspan="3">
+										<span id="bidSectionStates"></span>
+									</td>
+								</tr>
+							</table>
+						</div>
+					</div>
+				</div>
+				<div class="panel panel-accordion panel-default">
+					<div class="panel-heading active" role="tab" id="headingTwo">
+						<h4 class="panel-title">
+		            	<a  role="button" data-toggle="collapse"  href="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo" >投标人列表</a>
+			 		</h4>
+					</div>
+					<div id="collapseTwo" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingTwo">
+						<div class="panel-body">
+							<div id="biderBlock"></div>
+						</div>
+					</div>
+				</div>
+				<div class="panel panel-accordion panel-default">
+					<div class="panel-heading active" role="tab" id="headingThree">
+						<h4 class="panel-title">
+		            	<a  role="button" data-toggle="collapse"  href="#collapseThree" aria-expanded="true" aria-controls="collapseThree" >开标信息</a>
+			 		</h4>
+					</div>
+					<div id="collapseThree" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingThree">
+						<div class="panel-body">
+							<table class="table table-bordered">
+								<tr>
+									<td class="th_bg">主持人</td>
+									<td>
+										<div id="host"></div>
+									</td>
+									<td class="th_bg">记录人</td>
+									<td>
+										<div id="noteTaker"></div>
+									</td>
+								</tr>
+								<tr>
+									<td class="th_bg">监标人</td>
+									<td>
+										<div id="supervisor"></div>
+									</td>
+									<td class="th_bg">开标时间</td>
+									<td>
+										<div id="bidOpeningTime">
+										</div>
+									</td>
+								</tr>
+							</table>
+						</div>
+					</div>
+				</div>
+				<div class="panel panel-accordion panel-default">
+					<div class="panel-heading active" role="tab" id="headingFour">
+						<h4 class="panel-title">
+		            	<a  role="button" data-toggle="collapse"  href="#collapseFour" aria-expanded="true" aria-controls="collapseFour" >自定义列</a>
+			 		</h4>
+					</div>
+					<div id="collapseFour" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingFour">
+						<div class="panel-body">
+							<!--<button type="button" class="btn btn-sm btn-primary" id="btnCustom" style="float: right;margin-bottom:10px;"><span class="glyphicon glyphicon-plus"></span>添加</button>-->
+							<table class="table table-bordered" id="tableCustom">
+								<tr>
+									<th>列名</th>
+								</tr>
+							</table>
+						</div>
+					</div>
+				</div>
+				<div id="approval"></div>
+			</div>
+    	
+        <div class="bottom-btn">
+	        <button type="button" class="btn btn-primary" id="btnPass" style="display: none;"><span class="glyphicon glyphicon-saved"></span>审核通过</button>
+	        <button type="button" class="btn btn-default" id="btnNoPass" style="display: none;"><span class="glyphicon glyphicon-remove"></span>审核不通过</button>
+	        <button type="button" class="btn btn-default" id="btnClose"><span class="glyphicon glyphicon-remove"></span>关闭</button>
+        </div>
+    </form>
+    <script type="text/javascript" src="../../../../media/js/jquery/jquery.js"></script>
+    <script type="text/javascript" src="../../../../media/js/jquery/jquery.extend.js"></script>
+    <script type="text/javascript" src="../../../../media/js/base/util.js"></script>
+    <script type="text/javascript" src="../../../../media/js/base/common.js"></script>
+    <script type="text/javascript" src="../../../../media/js/bootstrap/js/bootstrap.js"></script>
+    <script type="text/javascript" src="../../../../media/js/base/WorkflowInfoNew.js"></script>
+    <script type="text/javascript" src="../js/resultView.js"></script>
+</body>
+
+</html>

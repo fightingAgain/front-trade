@@ -1,0 +1,52 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="pragma" content="no-cache"><!-- 禁止浏览器从本地计算机的缓存中访问页面内容 --> 
+		<meta http-equiv="cache-control" content="no-cache"><!-- 用于指定请求和响应遵循的缓存机制 --> 
+		<meta http-equiv="expires" content="0"><!-- 用于设定网页的到期时间，一旦网页过期，必须到服务器上重新传输； -->
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<title>签名盖章</title>
+	</head>
+	<style type="text/css">
+		html,body{
+			height: 99%;
+		}
+		.bottom-btn{
+			height: 50px;
+			text-align: center;
+		}
+		.btn{
+			background: #3995C8;
+		    border:1px solid #2e6da4;
+		    border-radius: 4px;
+		    color: #ffffff;
+		    height: 30px;
+		    margin-top: 8px;
+		    outline: none;
+		    cursor: pointer;
+		}
+	</style>
+	<body>
+		<object id="UCAPISIN" classid="CLSID:39E08D82-C8AC-4934-BE07-F6E816FD47A1" width="100%" height="90%"></object>
+		<div class="bottom-btn">
+			<button type="button" class="btn btn-primary" id="btnSign" style="display: inline-block;"><span class="glyphicon glyphicon-saved"></span>签章</button>
+	        <button type="button" class="btn btn-default" id="btnClose"><span class="glyphicon glyphicon-remove"></span>关闭</button>
+	    </div>
+	    <div id="i_stream_files_queue" style="display: none;"></div>
+	    <div id="i_stream_message_container" style="display: none;"></div>
+		<script type="text/javascript" src="../../../media/js/jquery/jquery.js" ></script>
+		<script type="text/javascript" src="../../../media/js/jquery/jquery.extend.js"></script>
+		<script type="text/javascript" src="../../../media/js/base/common.js" ></script>
+		<script type="text/javascript" src="../../../media/js/base/util.js" ></script>
+		<script type="text/javascript" src="../../../media/js/bootstrap/js/bootstrap.js" ></script>
+		<script type="text/javascript" src="../../../media/js/bootstrap/js/bootstrap-table.min.js"></script>
+		<script type="text/javascript" src="../../../media/js/bootstrap/js/bootstrap-table-zh-CN.min.js"></script>
+		<script type="text/javascript" src="../../../media/js/datetimepicker/js/jquery.datetimepicker.js" ></script>
+		<script type="text/javascript" src="../../../media/js/stream/js/stream-v1.js"></script>
+		<script type="text/javascript" src="../../../media/js/base/StreamUpload.js"></script>
+		<script type="text/javascript" src="../../../media/js/layer/layer.js"></script>
+	    <script type="text/javascript" src="../js/reportSignView.js"></script>
+	    
+	</body>
+</html>

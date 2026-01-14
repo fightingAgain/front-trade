@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+	<link rel="stylesheet" type="text/css" href="../../../media/js/layer/mobile/need/layer.css" />
+	<link rel="stylesheet" type="text/css" href="../../../media/js/layer/css/layui.css" />
+	<link rel="stylesheet" type="text/css" href="../../../media/js/bootstrap/css/bootstrap.css" />
+	<!-- <link rel="stylesheet" type="text/css" href="../../../media/js/bootstrap/css/bootstrap-table.css"> -->
+	<style>
+		.layui-table th{
+			font-weight: 600;
+		}
+		table{
+			margin-bottom: 0px !important;
+		}
+		.layui-input{
+			height: 28px !important;
+		}
+	</style>
+</head>
+
+<body>
+	<div style="margin-bottom: 60px;padding: 5px;">
+		<table class="table table-bordered" id="mainTable"></table>
+	</div>
+
+	<div class="bottom-btn">
+		<button type="button" class="btn btn-primary" id="btnSubmit">提交</button>
+	</div>
+</body>
+<script type="text/javascript" src="../../../media/js/jquery/jquery.js"></script>
+<script type="text/javascript" src="../../../media/js/jquery/jquery.extend.js"></script>
+<script type="text/javascript" src="../../../media/js/base/common.js"></script>
+<script type="text/javascript" src="../../../media/js/layer/layer.js"></script>
+<script type="text/javascript" src="../../../media/js/layer/layui.js"></script>
+<script type="text/javascript" src="../../../media/js/base/util.js"></script>
+<script type="text/javascript" src="../../../media/js/bootstrap/js/bootstrap.js"></script>
+<script type="text/javascript" src="../../../media/js/bootstrap/js/bootstrap-table.min.js"></script>
+<script type="text/javascript" src="../../../media/js/bootstrap/js/bootstrap-table-zh-CN.min.js"></script>
+<script>
+	var bidSectionId = getUrlParam("bidSectionId");//标段Id
+	var bidCheckId = getUrlParam("bidCheckId");//评标id
+	var examType = getUrlParam("examType");
+	var nodeSubType = getUrlParam("nodeSubType");
+	var nodeType = getUrlParam("nodeType");
+	var checkUrl = top.config.Reviewhost + '/ReviewControll/review.do';
+	var checkType = '';//0合格制  1偏离制 2响应制 3打分制
+	var checkData = [], colsData = [], bidCheckItems, scoreList;
+	var height = document.documentElement.clientHeight - 95;
+	//关闭
+	$("#btnClose").click(function () {
+		var index = top.layer.getFrameIndex(window.name);
+		top.layer.close(index);
+	});
+	$.ajax({
+		type: "post",
+		url: checkUrl,
+		async: false,
+		data: {
+			'method': 'getExpertObjectiveCheckItem',
+			'nodeType': nodeType,
+			'bidSectionId': bidSectionId,
+			'examType': examType,
+			'nodeSubType': nodeSubType
+		},
+		success: function (res) {
+			var colsData1 = [
+				{title: '序号', type:'numbers', fixed: 'left', rowspan: '3'},
+				{field:'checkName',  title: '评价内容', fixed: 'left',width:'300', rowspan: '3'},
+				{field:'checkStandard',  title: '评审标准', fixed: 'left',width:'300', rowspan: '3'}
+			], colsData2 = [];//二维数组
+			if (res.success) {
+				if(res.data){
+					checkType = res.data.bidCheck.checkType;
+					if(res.data.supplierDtos){
+						var suppliers = res.data.supplierDtos;//投标人
+						bidCheckItems = res.data.bidCheckItems;//评审内容
+						scoreList = res.data.expertCheckItems;//打分
+						//循环供应商
+						for(var i = 0;i<suppliers.length;i++){
+							//处理一维数组
+							var obj = {title: suppliers[i].enterpriseName ,align:'center', colspan: '2'};
+							colsData1.push(obj);
+							//循环评委
+							let fId = suppliers[i].supplierId;
+							//处理二维数组
+							let objExperts = {field: fId, title: '结果',width:'100',align:'center', templet: function(val){
+								//标记  0为正常 1为标红  2为标绿
+								if(val[fId]){
+									return val[fId].result?val[fId].result:''
+								}
+							}};
+							let objScore = {field: '', title: '原因',width:'200',align:'center', templet: function(val){
+								//标记  0为正常 1为标红  2为标绿
+								if(val[fId]){
+									if(val[fId].scoreTypeFlag && val[fId].scoreTypeFlag == 1){
+										if(val[fId] && val[fId].reason){
+											return '<input class="layui-input reason" data-id="'+val[fId].infoId+'" maxlength="200" value="'+val[fId].reason+'" />'
+										}else{
+											return '<input class="layui-input reason" data-id="'+val[fId].infoId+'" maxlength="200" />'
+										}
+									}else{
+										return val[fId].reason?val[fId].reason:''
+									}
+								}
+							}};
+							colsData2.push(objExperts);
+							colsData2.push(objScore);
+						}
+								
+						// 循环评审内容
+						for(var b=0;b<bidCheckItems.length;b++){
+							//处理打分
+							for(var s=0;s<scoreList.length;s++){
+								if(bidCheckItems[b].id == scoreList[s].checkItemId){
+									let fId = scoreList[s].supplierId;
+									bidCheckItems[b][fId] = {
+										'result': scoreList[s].score,
+										'scoreTypeFlag': scoreList[s].scoreTypeFlag||'',
+										'infoId': scoreList[s].id,
+										'reason': scoreList[s].reason?scoreList[s].reason:''
+									}
+									
+								}
+							}
+						}
+					}
+				}
+				colsData = [colsData1, colsData2];
+				tableHtml(colsData, bidCheckItems);
+				console.log(bidCheckItems)
+			} else {
+				top.layer.alert(res.message);
+			}
+		}
+	});
+	var checkData = [
+		{'bidderName': '111', 'fileSubmitTime':'qq', 'signDate': 'ooo', 'signInDate': 'ppp'},
+		{'bidderName': '222', 'fileSubmitTime':'aa', 'signDate': 'ddd', 'signInDate': 'fff'},
+	];
+	function tableHtml(cols, data){
+		layui.use('table', function(){
+			var table = layui.table;
+			  
+			var tableIns =  table.render({
+				elem: '#mainTable'
+				,limit: Number.MAX_VALUE // 数据表格默认全部显示
+		//		    ,url:'/demo/table/user/'
+		//		    ,width: 892
+			,height: height
+			,cols: cols
+			,data:data
+			});
+		  
+		});
+	};
+	function passMessage(callback){
+		$('#btnSubmit').click(function(){
+			selectResults(callback)
+		});
+		
+	};
+	function selectResults(callback){
+		var data = {
+			'method': 'saveObjectiveReason',
+			'nodeType': nodeType,
+			'bidSectionId': bidSectionId,
+			'examType': examType,
+			'nodeSubType': nodeSubType,
+			'submitType':'2',
+		};
+		var reasons = $('.reason');
+		var isPass = true;
+		for(var b=0;b<reasons.length;b++){
+			var reasonId = reasons.eq(b).attr('data-id')
+			for(var s=0;s<scoreList.length;s++){
+				if(reasonId == scoreList[s].id){
+					if($.trim($('.reason').eq(b).val()) != ''){
+						scoreList[s].reason = $.trim($('.reason').eq(b).val());
+					}else{
+						isPass = false
+					}
+				}
+			}
+		}
+		if(!isPass){
+			top.layer.alert('温馨提示：还有原因未填，请检查');
+			return
+		}
+		data.expertCheckItems = scoreList;
+		$.ajax({
+			type: "post",
+			url: checkUrl,
+			async: false,
+			data: data,
+			success: function (res) {
+				if (res.success) {
+					if(callback){
+						callback();
+					};
+					var index = top.layer.getFrameIndex(window.name);
+					top.layer.close(index);
+				}else{
+					top.layer.alert(res.message)
+				}
+			}
+		});
+	}
+	
+</script>
+
+</html>

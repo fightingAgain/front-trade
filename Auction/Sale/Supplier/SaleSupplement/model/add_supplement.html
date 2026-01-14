@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="pragma" content="no-cache">
+		<!-- 禁止浏览器从本地机的缓存中调阅页面内容 -->
+		<meta http-equiv="cache-control" content="no-cache, must-revalidate">
+		<meta http-equiv="expires" content="0">
+		<title>添加补遗</title>
+		<link rel="stylesheet" href="../../../../../media/js/bootstrap/css/bootstrap.css">
+		<link rel="stylesheet" href="../../../../../media/js/bootstrap/css/bootstrap-table.css">
+		<link rel="stylesheet" href="../../../../../media/js/bootstrapvalidator/css/bootstrapValidator.css">
+		<link rel="stylesheet" href="../../../../../media/js/bootstrap-fileinput-master/css/fileinput.min.css" />
+		<link rel="stylesheet" type="text/css" href="../../../../../media/js/datetimepicker/css/jquery.datetimepicker.css">
+	</head>
+	<style>
+		#supplementfrom {
+			padding: 20px;
+			margin-bottom: 50px;
+		}		
+		td {
+			
+			vertical-align: middle !important;
+		}		
+		.form-group {
+			margin-bottom: 0px;
+		}
+	</style>
+
+	<body style="width: 99%;padding-left: 10px;padding-top: 10px;margin-bottom: 0;">
+		<!--	<form class="form-horizontal" enctype="multipart/form-data" style="padding: 0px;">-->
+		<form id="supplementfrom" style="padding: 0px;">
+			<table class="table table-bordered">
+				<tr>
+					<td  class="th_bg" style="width: 20%;">标题</td>
+					<td colspan="3">
+						<div class='form-group'>
+							<input type="text" name="title" placeholder="" class="form-control" id="title">
+						</div>
+					</td>
+				</tr>
+				<tr>
+					<td  class="th_bg" style="width: 20%;">是否变更时间</td>
+					<td colspan="3">
+						<div class="text-left">
+							<input type="radio" name="isChangeDate" value="0" checked="checked" />否
+							<input type="radio" name="isChangeDate" value="1" />是</div>
+					</td>
+				</tr>
+				<tbody id="supplementDate">
+					<tr>
+						<td  class="th_bg" style="width: 20%;">原公告截止时间</td>
+						<td>
+							<div id="oldNoticeEndDate"></div>
+						</td>
+						<td  class="th_bg" style="width: 20%;">公告截止时间</td>
+						 <td style="text-align: left;" colspan="2">
+		                    <input type="text" class="form-control formDisabled" id="noticeEndDate" name="noticeEndDate" style="width: 200px;text-align: left;cursor: pointer;">
+		                </td>
+					</tr>
+					<tr>
+						<td  class="th_bg" style="width: 20%;">原<span class="yqh"></span>提出澄清截止时间</td>
+						<td>
+							<div id="oldAskEndDate"></div>
+						</td>
+						<td  class="th_bg" style="width: 20%;"><span class="yqh"></span>提出澄清截止时间</td>
+						<td style="text-align: left;" colspan="2">
+		                    <input type="text" class="form-control formDisabled" id="askEndDate" name="askEndDate" style="width: 200px;text-align: left;cursor: pointer;">
+		                </td>
+					</tr>		
+					<tr>
+						<td  class="th_bg" style="width: 20%;">原<span class="yqh"></span>答复截止时间</td>
+						<td>
+							<div id="oldAnswersEndDate"></div>
+						</td>
+						<td  class="th_bg" style="width: 20%;"><span class="yqh"></span>答复截止时间</td>
+						<td style="text-align: left;" colspan="2">
+		                    <input type="text" class="form-control formDisabled" id="answersEndDate" name="answersEndDate" style="width: 200px;text-align: left;cursor: pointer;">
+		                </td>
+					</tr>					
+					<tr class="auctionStartDateDiv">
+						<td  class="th_bg" style="width: 20%;">原竞卖开始时间</td>
+						<td>
+							<div id="oldAuctionStartDate"></div>
+						</td>
+						<td  class="th_bg" style="width: 20%;">
+							<div id='lblauctionStartDate'>竞卖开始时间</div>
+						</td>
+						<td style="text-align: left;" colspan="2">
+		                    <input type="text" class="form-control formDisabled" id="auctionStartDate" name="auctionStartDate" style="width: 200px;text-align: left;cursor: pointer;">
+		                </td>
+					</tr>
+					<tr class="offerEndDateDiv">
+						<td  class="th_bg" style="width: 20%;">原竞卖文件递交截止时间</td>
+						<td>
+							<div id="oldFileEndDate"></div>
+						</td>
+						<td  class="th_bg" style="width: 20%;">
+							<div id='lblauctionStartDate'>竞卖文件递交截止时间</div>
+						</td>
+						<td style="text-align: left;" colspan="2">
+		                    <input type="text" class="form-control formDisabled" id="fileEndDate" name="fileEndDate" style="width: 200px;text-align: left;cursor: pointer;">
+		                </td>
+					</tr>
+					<tr class="offerEndDateDiv">
+						<td  class="th_bg" style="width: 20%;">原竞卖文件审核截止时间</td>
+						<td>
+							<div id="oldFileCheckEndDate"></div>
+						</td>
+						<td  class="th_bg" style="width: 20%;">
+							<div id='lblauctionStartDate'>竞卖文件文件审核截止时间</div>
+						</td>
+						<td style="text-align: left;" colspan="2">
+		                    <input type="text" class="form-control formDisabled" id="fileCheckEndDate" name="fileCheckEndDate" style="width: 200px;text-align: left;cursor: pointer;">
+		                </td>
+					</tr>
+				</tbody>
+					
+				<tr>
+					<td  class="th_bg" style="width: 20%;">说明</td>
+					<td colspan="3">
+						<div class="form-group">
+							<textarea class="form-control" id="supplement" name="supplement"></textarea>
+						</div>
+					</td>
+				</tr>
+				<tr>
+					<td  class="th_bg" style="width: 20%;">附件</td>
+					<td colspan="3" class='text-left'>
+						<input type="file" class="fileloading" multiple name="files" id="FileName" />
+					</td>
+				</tr>
+				<tr class='fileTableRow' style="display: none;padding:inherit;border: 0px solid;">
+					<td colspan="4" style="padding: 0px;">
+						<table class='table table-bordered' style="width: 100%;margin-bottom:auto;display: none;" id="fileTable">
+							<tr>
+								<th>文件名</th>
+								<th class="text-center">操作</th>
+							</tr>
+							<tbody id="fileTabletr"></tbody>
+						</table>
+					</td>
+				</tr>
+				<tr class="employee" >
+					<td  class="th_bg" style="width: 20%;">审核人</td>
+					<td class='text-left' colspan="3">
+						<select name="" id="employeeId" class="form-control" style="width: 180px;">
+						</select>
+					</td>
+				</tr>
+			</table>
+
+			<div class="form-group rowLine" style="width: 100%;height: 50px;text-align:center;position: fixed;bottom: 0;background-color: #FFFFFF;margin-bottom:0px !important;padding-top: 10px;">
+				<button type="button" style="width: 80px;" class="btn btn-primary btn-sm" data-dismiss="modal" id="btn_submit">保存</button>
+				<button type="button" style="width: 80px;" class="btn btn-default btn-sm" data-dismiss="modal" id="btn_close">关闭</button>
+			</div>
+		</form>
+
+		<script type="text/javascript" src="../../../../../media/js/jquery/jquery.min.js"></script>
+		<script type="text/javascript" src="../../../../../media/js/bootstrap/js/bootstrap.js"></script>
+		<script type="text/javascript" src="../../../../../media/js/bootstrap/js/bootstrap-table.min.js"></script>
+		<script type="text/javascript" src="../../../../../media/js/bootstrap/js/bootstrap-table-zh-CN.min.js"></script>
+		<script type="text/javascript" src="../../../../../media/js/base/common.js"></script>
+		<script type="text/javascript" src="../../../../../media/js/layer/layer.js"></script>
+		<script type="text/javascript" src="../../../../../media/js/layer/laydate.js"></script>
+		<script type="text/javascript" src="../../../../../media/js/bootstrapvalidator/js/bootstrapValidator.js"></script>
+		<script type="text/javascript" src="../../../../../media/js/bootstrap-fileinput-master/js/fileinput.js"></script>
+		<script type="text/javascript" src="../../../../../media/js/jquery/jquery.extend.js"></script>
+		<script type="text/javascript" src="../../../../../media/js/datetimepicker/js/jquery.datetimepicker.js"></script>
+		<script type="text/javascript" src="../../../../../media/js/base/util.js"></script>
+		<script type="text/javascript" src="../js/add_supplement.js"></script>
+				
+	</body>
+
+</html>

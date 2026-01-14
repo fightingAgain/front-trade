@@ -1,0 +1,116 @@
+<!doctype html>
+<html>
+
+<head>
+	<meta charset="UTF-8" />
+	<!-- 网页不会被缓存 -->
+	<meta http-equiv="pragma" content="no-cache" />
+	<!-- 禁止浏览器从本地机的缓存中调阅页面内容 -->
+	<meta http-equiv="cache-control" content="no-cache, must-revalidate" />
+	<meta http-equiv="expires" content="0" />
+	<title>采购文件预览</title>
+	<link rel="stylesheet" href="../../../media/js/bootstrap/css/bootstrap.css" />
+	<link rel="stylesheet" href="../../../media/js/bootstrap/css/bootstrap-table.min.css" type="text/css" />
+	<link rel="stylesheet" href="../../../media/js/bootstrap-fileinput-master/css/fileinput.min.css" type="text/css" />
+	<style>
+		.page {
+			padding: 0;
+			margin: 0;
+		}
+		.page-header {
+			padding: 8px;
+			margin: 0;
+		}
+		.page-body {
+			padding: 8px;
+			margin-bottom: 60px;
+		}
+		.page-footer {
+			padding: 10px;
+			height: 54px;
+			width: 100%;
+			text-align: center;
+			position: fixed;
+			bottom: 0;
+			background-color: #FFFFFF;
+			z-index: 200;
+		}
+	</style>
+</head>
+
+<body class="page">
+	<div class="page-header">
+		<div class="btn-group" role="group">
+			<button type="button" style="width: 120px;" target="firstTable" class="btn btn-primary">采购文件附件</button>
+			<button type="button" style="width: 120px;" target="reviewItemTable" class="btn">评审项</button>
+		</div>
+	</div>
+	<div class="page-body">
+		<table class="table table-bordered" id="firstTable">
+			<tr>
+				<td class="th_bg" colspan="4">采购文件</td>
+			</tr>
+			<tr>
+				<td colspan="4" style="margin: 0;">
+					<table class="table" id="purchaseFileTable"></table>
+				</td>
+			</tr>
+			<tr id="uploadClearFile" style="display: none;" class="clearFileWrap">
+				<td class="th_bg"  colspan="4">清单文件</td>
+			</tr>
+			<tr style="display: none;" class="clearFileWrap">
+				<td colspan="4">
+					<table class="table" id="fileTablesOfClear"></table>
+				</td>
+			</tr>
+		</table>
+
+		<table class="table table-bordered" id="reviewItemTable" style="margin-bottom: 0px;display: none;">
+			<tr>
+				<td colspan="4" class="active" style="border: none">
+					<strong>综合评审</strong>
+				</td>
+			</tr>
+			<tr>
+				<td colspan="4" style="padding: 0">
+					<ul id="checkList1" class="nav nav-tabs" style="border-bottom: none"></ul>
+				</td>
+			</tr>
+			<tr>
+				<td colspan="4">
+					<div id="packageDetail" class="tab-content" style="text-align: left"></div>
+				</td>
+			</tr>
+			<tr class="tenderTypeW">
+				<td colspan="4">
+					<div id="offerFileList"></div>
+				</td>
+			</tr>
+			<tr class="tenderTypeW">
+				<td class="active" colspan="4"><strong>价格评审</strong></td>
+			</tr>
+
+			<tbody class="table table-bordered tenderTypeW" id="Assessment"></tbody>
+		</table>
+	</div>
+	<div class="page-footer">
+		<button type="button" class="btn btn-default" id="btnClose">
+			<span class="glyphicon glyphicon-remove"></span>关闭
+		</button>
+	</div>
+	<script type="text/javascript" src="../../../media/js/jquery/jquery.js"></script>
+	<script type="text/javascript" src="../../../media/js/jquery/jquery.extend.js"></script>
+	<script type="text/javascript" src="../../../media/js/base/common.js"></script>
+	<script type="text/javascript" src="../../../media/js/base/util.js"></script>
+	<script type="text/javascript" src="../../../media/js/bootstrap/js/bootstrap.js"></script>
+	<script type="text/javascript" src="../../../media/js/bootstrap/js/bootstrap-table.min.js"></script>
+	<script type="text/javascript" src="../../../media/js/bootstrap/js/bootstrap-table-zh-CN.min.js"></script>
+	<script type="text/javascript" src="../../../media/js/bootstrap-fileinput-master/js/fileinput.js"></script>
+	<script type="text/javascript" src="../../../media/js/bootstrap-fileinput-master/js/locales/zh.js"></script>
+	<script type="text/javascript" src="../../../media/js/base/digital.js"></script>
+
+	<script type="text/javascript" src="../../Bid/Agent/Purchase/js/businessPriceSet.js"></script>
+	<script type="text/javascript" src="./PurchaseFilePreview.js"></script>
+</body>
+
+</html>

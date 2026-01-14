@@ -1,0 +1,329 @@
+<!-- 网页不会被缓存 -->
+<meta http-equiv="pragma" content="no-cache">
+<!-- 禁止浏览器从本地机的缓存中调阅页面内容 -->
+<meta http-equiv="cache-control" content="no-cache, must-revalidate">
+<meta http-equiv="expires" content="0">
+<!--[if lt IE 9]>
+   <script src="../../../../media/js/html5shiv.min.js"></script>
+   <script src="../../../../media/js/respond.js"></script>
+<![endif]-->
+<link rel="stylesheet" href="../../../../../media/js/layer/mobile/need/layer.css" type="text/css"/>
+<link rel="stylesheet" href="../../../../../media/js/bootstrap/css/bootstrap.css" />
+<link rel="stylesheet" href="../../../../../media/js/bootstrap/css/bootstrap-table.min.css" type="text/css"/>
+<link rel="stylesheet" href="../../../../../media/js/layer/theme/default/laydate.css" type="text/css"/>
+<link rel="stylesheet" href="../../../../../media/js/bootstrap-fileinput-master/css/fileinput.min.css" type="text/css"/>
+<link rel="stylesheet" href="../../../../../media/js/datetimepicker/css/jquery.datetimepicker.css" type="text/css"/>
+<link rel="stylesheet" href="../../../../../media/js/bootstrap/css/bootstrap-select.min.css" />
+<form id="formb" name="projectPackages" style="width: 99%;padding-left: 10px;padding-top: 10px;margin-bottom: 60px;">  
+<div class="container-fluid">
+	<table class="table table-bordered" style="margin-bottom: 0px;">
+		<tr>
+			<td colspan="3" class="active" style="border: none;"><strong>包件基本信息</strong></td>
+			<td  style="text-align: right;border: none;" class="active">
+				<!--<input type="button"  id="addProject" class="btn btn-primary" value="选择项目"/>-->
+			</td>
+		</tr>
+		<tr>
+			<td  class="th_bg">包件名称<i class="red">*</i></td>
+			<td colspan="3" style="text-align: left;">
+				<input type="text" name="packageName" id="Package_Name" class="form-control"/>
+				<div class="notice_title_tips">请勿包含下列特殊字符：空格 * & ￥ @  / \</div>
+				<input type="hidden" name="id" id="packageId"/>
+				<input type="hidden" name="sort" id="sort"/>
+				<input type="hidden" name="packageState" id="packageState" value="0"/>
+				<input type="hidden" name="packageSource" id="packageSource" value="0"/>
+				<input type="hidden" name="examType" id="examType" />	
+				<input type="hidden" name="settingNotice"  value="0"/>
+				<input type="hidden" name="projectId"  id="projectId"/>
+			</td>
+		</tr>
+		<tr>
+			<td class="th_bg">包件编号<i class="red">*</i></td>
+			<td style="text-align: left;width: 270px;"><input type="text" name="packageNum" id="Package_Num" class="form-control"/></td>
+			<td class="th_bg">项目类型<i class="red">*</i></td>
+			<td style="text-align: left;width: 270px;">
+				<input type="text" id="dataTypeName" name="dataTypeName" class="form-control" onclick="dataType()" readonly="readonly" placeholder="点击添加项目类型"/>
+				<input type="hidden" name="dataTypeId" id="dataTypeId"/>
+				<input type="hidden" name="dataTypeCode" id="dataTypeCode" />
+			</td>
+		</tr>
+		<tr>
+			<td class="th_bg">系统外编号</td>
+			<td colspan="3">
+				<input type="text" name="outNumber" id="outNumber" class="form-control" maxlength="100" placeholder="选填，可填写业主内部使用的包件编号">
+			</td>
+		</tr>
+		<tr>					
+			<td class="th_bg">采购人所属部门<i class="red">*</i></td>
+			<td style="text-align: left;position: relative;" >
+				<input type="text"  style="cursor: pointer;" class="form-control Department" data-title="purchaser" id="purchaserDepartment" name="purchaserDepartmentName" readonly placeholder="请选择所属部门"/>
+				<input type="hidden"  class="form-control" id="purchaserDepartmentId" name="purchaserDepartmentId"/>
+			</td>
+			<td class="th_bg">预算价(不含税)(元)</td>
+			<td style="text-align: left;"><input id="noTaxBudgetPrice"  oninput="verifyMoney(this, 2)" priceType="预算价(不含税)" name="noTaxBudgetPrice" class="form-control priceNumber"/></td>	
+		</tr>	
+		
+		<tr>					
+			<td class="th_bg">税率(%)</td>
+			<td style="text-align: left;position: relative;" ><input id="taxRate"  name="taxRate" class="form-control posInt"/></td>
+			<td class="th_bg">预算价(含税)(元)<i class="red">*</i></td>
+			<td style="text-align: left;"><input id="budgetPrice"   oninput="verifyMoney(this, 2)" priceType="预算价(含税)" name="budgetPrice" class="form-control priceNumber"/></td>	
+		</tr>
+		<tr class="clearBidding" style="display: none;">
+			<td class="th_bg">清单文件</td>
+			<td>
+			    <label style="padding-right: 20px;margin-bottom: 0;">
+					<input type="radio" name="isHasDetailedListFile" id="" value="1" style="vertical-align: -2px;margin-right: 5px;" />有
+				</label>
+			    <label style="padding-right: 20px;margin-bottom: 0;">
+					<input type="radio" checked="checked" name="isHasDetailedListFile" id="" value="0" style="vertical-align: -2px;margin-right: 5px;" />无
+				</label>
+			</td>
+			<td class="th_bg">控制价</td>
+			<td>
+			    <label style="padding-right: 20px;margin-bottom: 0;">
+					<input type="radio" name="isHasControlPrice" id="" value="1" style="vertical-align: -2px;margin-right: 5px;" />有
+				</label>
+			    <label style="padding-right: 20px;margin-bottom: 0;">
+					<input type="radio" checked="checked" name="isHasControlPrice" id="" value="0" style="vertical-align: -2px;margin-right: 5px;" />无
+				</label>
+			</td>
+		</tr>
+		<tr>
+			<td  class="th_bg"><span class="checkPlanExamTypeS none">资格预审</span>评审方法<i class="red">*</i></td>
+			<td colspan="3" style="text-align: left;">	
+				<span class="checkPlanExamType">
+					<input type="radio" name="checkPlan"  value="0" onclick="Check_Plan_change('0',this)"/>综合评分法
+					<input type="radio" name="checkPlan"  value="1" onclick="Check_Plan_change('1',this)"/>最低评标价法	
+					<input type="radio" name="checkPlan"  value="3" onclick="Check_Plan_change('3',this)"/>最低投标价法
+					<input type="radio" name="checkPlan"  value="5" onclick="Check_Plan_change('5',this)"/>经评审的最低投标价法
+				    <input type="radio" name="checkPlan"  value="2" onclick="Check_Plan_change('2',this)"/>经评审的最低价法(价格评分)
+				</span>
+				<span class="checkPlanExamTypeS">
+					<input type="radio" name="examCheckPlan"  value="0" onclick="Check_Plan_change('0',this)"/>合格制
+				 	<input type="radio" name="examCheckPlan"  value="1" onclick="Check_Plan_change('1',this)"/>有限数量制
+				</span>	
+				<span class="red checkPlanExamTypeS none">(注：询比采购评审方法在发送邀请函时须另行设置)</span>
+			</td>
+		</tr>
+		
+		<tr id="supplierNum">
+			<td  class="th_bg">最多保留供应商数<i class="red">*</i></td>
+			<td colspan="3" style="text-align: left;"><input id="keepNum"  name="keepNum" class="form-control"/></td>			
+		</tr>
+		<tr>
+			<td class="th_bg">是否缴纳保证金<i class="red">*</i></td>
+			<!-- <td  style="text-align: left;"  colspan="3"> -->
+			<td  style="text-align: left;"  class="isDepositCols">
+				<input type="radio" name="isPayDeposit" value="0" checked=""/>是
+				<input type="radio" name="isPayDeposit" value="1" />否
+			</td>
+			<td class="th_bg isDepositShows">保证金缴纳方式<i class="red">*</i></td>
+			<td style="text-align: left;" class="isDepositShows">
+				<select class="form-control" name="projectPrices[3].payMethod" id="payMethod">
+					<!-- <option value="0">虚拟子账号</option> -->
+					<option value="1" selected>指定银行</option>
+				</select>
+			</td>
+		</tr>
+		<tr class="isDepositShow">				
+			<td class="th_bg">保证金收取机构<i class="red">*</i></td>
+			<td style="text-align: left;">
+				<label style="padding:7px 10px 7px 0;margin-bottom: 0;">
+					<input type="radio" name="projectPrices[3].agentType" value="0" checked="checked" style="vertical-align: -2px;margin-right: 5px;"/>平台	
+				</label>
+				<label style="padding:7px 10px 7px 0;margin-bottom: 0;">
+					<input type="radio" name="projectPrices[3].agentType" value="2" style="vertical-align: -2px;margin-right: 5px;"/>采购人
+				</label>
+			</td>
+			<td class="th_bg">保证金账户名<i class="red">*</i></td>
+			<td style="text-align: left;">
+				<div style="position:relative;">
+			      	<select id="bankAccountSelect" size="1" class="form-control" style="width:262px;"></select>  
+			        <input type="text" id="bankAccount" maxlength="50" name="projectPrices[3].bankAccount"style="width: 245px;height: 27px;position: absolute;left: 2px;bottom: 1px;border: none;border-radius:2px ; padding: 6px 12px;">
+				</div>						    			
+			</td>
+		</tr>
+		<tr class="isDepositShow DepositPriceShow">			
+			<td class="th_bg">保证金金额(元)<i class="red">*</i></td>
+			<td  style="text-align: left;" colspan="3">
+				<input  name="projectPrices[3].price" oninput="verifyMoney(this, 2)" class="form-control priceNumber" priceType="保证金金额"/>
+				<input type="hidden" name="projectPrices[3].payWay">
+				<input type="hidden" name="projectPrices[3].priceId">
+				<input type="hidden" name="projectPrices[3].packageId">
+				<input type="hidden" name="projectPrices[3].projectId">
+				<input type="hidden" name="projectPrices[3].priceName">	
+    			<input type="hidden" name="projectPrices[3].payTime"/>
+    			<input type="hidden" name="projectPrices[3].payType"/>
+			</td>				
+		</tr>
+		<tr class="isDepositShow">						
+			<td class="th_bg">保证金开户银行<i class="red">*</i></td>
+			<td style="text-align: left;" >
+				<input type="text" name="projectPrices[3].bankName" maxlength="50" class="form-control" id="bankName"/>				    			
+			</td>
+			<td class="th_bg">保证金账号<i class="red">*</i></td>
+			<td style="text-align: left;" >
+				<input  name="projectPrices[3].bankNumber" maxlength="30" class="form-control" id="bankNumber"/>			    			
+			</td>
+		</tr>
+		<tr>
+			
+				<input type="hidden" name="projectPrices[2].price" class="form-control priceNumber" readonly="readonly"/>
+				<input type="hidden" name="projectPrices[2].payWay">
+				<input type="hidden" name="projectPrices[2].priceId">
+				<input type="hidden" name="projectPrices[2].packageId">
+				<input type="hidden" name="projectPrices[2].projectId">
+				<input type="hidden" name="projectPrices[2].priceName">	
+    			<input type="hidden" name="projectPrices[2].payTime"/>
+    			<input type="hidden" name="projectPrices[2].payType"/>
+			<td  class="th_bg">是否需要报名<i class="red">*</i></td>
+			<td  style="text-align: left;">
+				<span>
+					<input type="radio" name="isSign"  value="1" />需要
+					<input type="radio" name="isSign"  value="0"  />不需要
+				</span>	
+			</td>
+			<td class="th_bg" >
+            	最少供应商数量
+            </td>
+            <td style="text-align: left;">         		
+            	<div class="btn-group" role="group">            	   
+				  <button type="button" class="btn btn-default" id="reduceNum" style="width: 40px;height: 34px;"><span class="glyphicon glyphicon-minus" aria-hidden="true"></span></button>
+				  <input type="text" class="btn btn-default" value="1"  name="supplierCount" id="supplierCount" readonly="readonly" style="width: 60px;">				  
+				  <button type="button" class="btn btn-default" id="addNum" style="width: 40px;height: 34px;"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button>
+				</div>
+            </td>
+		</tr>
+		<tr class="isNoSign">
+			<td  class="th_bg">是否需要缴纳报名费<i class="red">*</i></td>
+			<td  style="text-align: left;" class="colss">
+				<span>
+					<input type="radio" name="isPaySign"  value="0" />需要
+					<input type="radio" name="isPaySign"  value="1"  />不需要
+				</span>	
+			</td>
+			<td  class="th_bg isFtimes">
+				   报名费用(元)<i class="red">*</i>  			
+			</td>
+			<td class="isFtimes">
+				<input type="text"   name="projectPrices[0].price" oninput="verifyMoney(this, 2)" class="form-control priceNumber" priceType="报名费用" style="text-align: left;"/>
+				<input type="hidden" name="projectPrices[0].payWay" >
+				<input type="hidden" name="projectPrices[0].priceId">
+				<input type="hidden" name="projectPrices[0].packageId">
+				<input type="hidden" name="projectPrices[0].projectId">
+				<input type="hidden" name="projectPrices[0].priceName">	
+				<input type="hidden" name="projectPrices[0].payTime"/>
+				<input type="hidden" name="projectPrices[0].payType"/>
+			</td>
+		</tr>
+		 <tr>
+			<td  class="th_bg">是否发售<span class="ys"></span>文件<i class="red">*</i></td>
+			<td  style="text-align: left;" class="cols">
+				<input type="radio"  value="0" name="isSellFile" checked="checked"/>是
+				<input type="radio"  value="1" name="isSellFile" />否  			
+			</td>
+			<td  class="th_bg isFtime">
+				<span id="yhs"></span><i class="red">*</i>  			
+			</td>
+			<td class="isFtime">
+				<input type="text"  name="projectPrices[1].price" oninput="verifyMoney(this, 2)" class="form-control priceNumber" priceType="文件费" style="text-align: left;"/>
+				<input type="hidden" name="projectPrices[1].payWay" >
+				<input type="hidden" name="projectPrices[1].priceId">
+				<input type="hidden" name="projectPrices[1].packageId">
+				<input type="hidden" name="projectPrices[1].projectId">
+				<input type="hidden" name="projectPrices[1].priceName">	
+				<input type="hidden" name="projectPrices[1].payTime"/>
+				<input type="hidden" name="projectPrices[1].payType"/>
+			</td>
+		</tr>
+		<tr>
+			<td class="isRowspan th_bg">公开范围<i class="red">*</i></td>
+			<td style="text-align: left;">
+				<span class="tenderType0">
+					<input type="radio" name="isPublics" value="0"  checked="checked"/>公开
+				</span>
+				<span class="tenderTypeW" style="display: none">
+					<input type="radio" name="isPublics" value="1" />邀请     	
+				</span>		
+			</td>
+			<td style="text-align: left; display: none" colspan="2" class=" isPublics0">
+				<input type="radio" name="isPublic" value="0" />所有供应商
+				<input type="radio" name="isPublic" value="1"/>所有本公司认证供应商	            	
+			</td>
+			<td style="text-align: left;display: none" colspan="2" class="isPublics1">
+				<input type="radio" name="isPublic" value="2" />仅限邀请供应商
+				<input type="radio" name="isPublic" value="3" />仅邀请本公司认证供应商    
+			</td>            
+		</tr>
+		<tr class="tenderTypeW">
+			<td class="th_bg">CA加解密</td>
+			<td colspan="3">
+				<span id="encipherStatus">-</span>
+			</td>
+		</tr>
+		<tr class="isPublics3" style="display: none">	           
+			<td class="th_bg ">
+				供应商分类
+			</td> 
+			<td style="text-align: left;" colspan="3">
+				<input id="CODENAME"  name="supplierClassifyName" class="form-control" placeholder="请选择供应商分类" readonly />
+				<input name="supplierClassifyCode" type="hidden" id="supplierClassifyCode"/>
+			</td>           
+		</tr>
+        <tr class="yao_btn" style="display: none">
+			<td  style="font-weight: bold;border: none;" class="active">邀请供应商</td>
+			<td  colspan="4" style="text-align: right;border: none;" class="active">          	
+				<input type="button" value="添加邀请供应商" class="btn btn-primary" onclick="add_supplier()"/>
+			</td>
+		</tr>
+		<tr class="yao_btn " style="display: none">
+			<td colspan="4" >
+			<table class="table  table-bordered " style="margin-bottom: 0px;" id="yao_table">
+				
+				</table>
+				<div id="projectSuppliers"></div>
+			</td>
+		</tr>
+		<input name="tax" type="hidden" id="tax"  value="6"/>
+		<input name="isTax" type="hidden" id="tax"  value="0"/>
+        </table>	
+</div>
+<div id="hiddeninput"></div>
+</form>
+<div style="width: 100%;height: 50px;text-align:center;position: fixed;bottom: 0;background-color: #FFFFFF;z-index: 100001">
+	<button type="button" id="btn_bao" class="btn btn-default" ><span class="glyphicon glyphicon-saved"></span>保存</button>
+	<button type="button" id="btn_submit" class="btn btn-primary" ><span class="glyphicon glyphicon-saved"></span>提交</button>
+	<button type="button" id="btn_close" class="btn btn-default"><span class="glyphicon glyphicon-remove"></span>关闭</button>
+ </div>
+<style>
+        .fileinput-button {
+            position: relative;
+            display: inline-block;
+            overflow: hidden;
+        }
+
+        .fileinput-button input{
+            position:absolute;
+            right: 0px;
+            top: 0px;
+            opacity: 0;
+            -ms-filter: 'alpha(opacity=0)';
+            font-size: 200px;
+        }
+    </style>
+ <script type="text/javascript" src="../../../../../media/js/jquery/jquery.js" ></script>
+ <script type="text/javascript" src="../../../../../media/js/base/common.js" ></script>
+ <script type="text/javascript" src="../../../../../media/js/jquery/jquery.extend.js" ></script>
+ <script type="text/javascript" src="../../../../../media/js/jquery/jquery.params.js" ></script>
+ <script type="text/javascript" src="../../../../../media/js/bootstrap/js/bootstrap.js" ></script>
+ <script type="text/javascript" src="../../../../../media/js/bootstrap/js/bootstrap-table.min.js"></script>
+ <script type="text/javascript" src="../../../../../media/js/bootstrap/js/bootstrap-table-zh-CN.min.js"></script>
+ <script type="text/javascript" src="../../../../../media/js/bootstrap/js/bootstrap-select.min.js" ></script>
+ <script type="text/javascript" src="../../../../../media/js/bootstrap/js/defaults-zh_CN.min.js" ></script>
+ <script type="text/javascript" src="../../../../../media/js/xlsx.full.min.js" ></script>
+ <script type="text/javascript" src="../../../../../media/js/base/util.js"></script>
+ <script type="text/javascript" src="../../../../../media/js/layer/layer.js" ></script>
+ <script type="text/javascript" src="../js/eidtPackageInfo.js" ></script>
+ <script type="text/javascript" src="../js/supplierInfo.js"></script>
+ <script type="text/javascript" src="../js/editPrice.js"></script>

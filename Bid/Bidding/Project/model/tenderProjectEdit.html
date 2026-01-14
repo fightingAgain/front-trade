@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="pragma" content="no-cache">
+		<!-- 禁止浏览器从本地计算机的缓存中访问页面内容 -->
+		<meta http-equiv="cache-control" content="no-cache">
+		<!-- 用于指定请求和响应遵循的缓存机制 -->
+		<meta http-equiv="expires" content="0">
+		<!-- 用于设定网页的到期时间，一旦网页过期，必须到服务器上重新传输； -->
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta http-equiv="X-UA-Compatible" content="ie=edge">
+		<title>项目编辑</title>
+		<link rel="stylesheet" href="../../../media/js/layer/mobile/need/layer.css" />
+		<link rel="stylesheet" href="../../../media/js/bootstrap/css/bootstrap.css" />
+		<link rel="stylesheet" href="../../../media/js/bootstrap/css/bootstrap-treeview.min.css">
+		<link rel="stylesheet" href="../../../media/js/stream/css/stream-v1.css" />
+		<style>
+			html,
+			body {
+				height: 100%;
+				width: 100%;
+			}
+			
+			.readonly {
+				border: none;
+				background: none !important;
+				outline: none !important;
+				box-shadow: none !important;
+			}
+			
+			button span {
+				margin-right: 3px;
+				vertical-align: -1px;
+			}
+			
+			.btn_adjust {
+				height: 32px;
+				width: 34px;
+				color: #555;
+				cursor: pointer;
+				font-size: 18px;
+				background: #ffffff;
+				border: 1px solid #ccc;
+				border-radius: 4px;
+				outline: none;
+			}
+			
+			.btn_adjust:hover {
+				box-shadow: 0 0 5px #dddddd;
+			}
+			/*.table-comm>tbody>tr>td { width: 35%;}*/
+			.table-comm>tbody>tr>td.th_bg, .table>tbody>tr>th.th_bg {
+				width: 15%;
+			}
+			
+			.td_width {
+				width: 35%;
+			}
+		</style>
+	</head>
+
+	<body>
+		<form class="pageModel" id="formName" name="formName">
+			<div class="panel-group" id="accordion">
+	    		
+	       		<div class="panel panel-accordion panel-default">
+		    		<div class="panel-heading active"  role="tab" id="headingTwo">  
+				 		<h4 class="panel-title">
+			            	<a class="collapsed" role="button" data-toggle="collapse"  href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+			            		招标项目信息
+								<button type="button" style="display: none;float: right;margin-right: 40px;" id="viewPushInfo" class="btn btn-primary">查看派项信息</button>
+							</a>
+				 		</h4>  
+				   	</div>  
+				  	<div  id="collapseTwo" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingTwo">  
+				       	<div class="panel-body">
+				       		<table class="table table-bordered table-comm">
+				       			<tr>
+									<td class="th_bg">项目名称</td>
+									<td colspan="3">
+										<span id="projectName" style="display: inline-block;width: 80%;height: 29px;line-height: 29px;"></span>
+										<input type="hidden" name="projectId" id="projectId" datatype="*" errormsg="请选择项目" />
+										<button type="button" class="btn btn-primary" id="btnProject"><span class="glyphicon glyphicon-check"></span>选择项目</button>
+									</td>
+								</tr>
+						    	<tr>
+									<td class="th_bg">招标项目编号<i class="red">*</i></td>
+									<td colspan="3">
+										<input type="text" name="interiorTenderProjectCode" class="form-control" maxlength="26" onblur="testCode(this)" errormsg="请输入招标项目编号" />
+									</td>
+								</tr>
+								<tr>
+									<td class="th_bg">招标项目名称<i class="red">*</i></td>
+									<td colspan="3">
+										<input type="text" name="tenderProjectName" class="form-control" maxlength="250" datatype="*" errormsg="请正确输入招标项目名称" />
+										<input type="hidden" name="tenderProjectId" id="tenderProjectId" />
+									</td>
+								</tr>
+								<tr>
+									<td class="th_bg">招标项目类型<i class="red">*</i></td>
+									<td colspan="3">
+										<div id="tenderProjectTypeTxt" style="min-width: 300px;"></div>
+										<input type="hidden" name="isPublicProject" value="0" /><!--是否公共资源交易目录内项目-->
+									</td>
+									<!--<td class="th_bg"><span class="publicShow">公共资源交易目录内项目</span></td>
+									<td>
+										<div class="publicShow">
+											<label style="padding-right: 20px;margin-bottom: 0;" class="isAgency">
+					                			<input type="radio" checked="checked" name="isPublicProject" id="" value="1" style="vertical-align: -2px;margin-right: 5px;" />是
+						                	</label>
+											<label style="padding-right: 20px;margin-bottom: 0;">
+						                    	<input type="radio" name="isPublicProject" id="" value="0" style="vertical-align: -2px;margin-right: 5px;" />否
+						                    </label>
+					                    </div>
+									</td>-->
+									
+								</tr>
+								<tr>
+									<td class="th_bg">招标项目分类<i class="red">*</i></td>
+									<td colspan="3">
+										<div id="tenderProjectClassify" style="min-width: 300px;"></div>
+									</td>
+								</tr>
+								<tr>
+									<td class="th_bg">招标方式</td>
+									<td>
+										<label style="padding-right: 20px;margin-bottom: 0;">
+					                		<input type="radio" checked="checked" name="tenderMode" id="" value="1" style="vertical-align: -2px;margin-right: 5px;" />公开招标
+					                	</label>
+										<label style="padding-right: 20px;margin-bottom: 0;">
+					                    	<input type="radio" name="tenderMode" id="" value="2" style="vertical-align: -2px;margin-right: 5px;" />邀请招标
+					                    </label>
+									</td>
+									<td class="th_bg">资格审查方式</td>
+									<td>
+										<label style="padding-right: 20px;margin-bottom: 0;">
+					                    	<input type="radio" checked="checked" name="examType" id="" value="2" style="vertical-align: -2px;margin-right: 5px;" />
+					                    	资格后审
+					                    </label>
+										<label style="padding-right: 20px;margin-bottom: 0;">
+					                		<input type="radio" name="examType" id="" value="1" style="vertical-align: -2px;margin-right: 5px;" />
+					                		资格预审
+					                	</label>
+									</td>
+								</tr>
+								<tr>
+									<td class="th_bg">招标项目所在行政区域<i class="red">*</i></td>
+									<td colspan="3">
+										<div id="areaBlock"></div>
+									</td>
+				
+								</tr>
+								<tr>
+									<td class="th_bg"><span class="superviseTit">项目监督部门<i class="red">*</i></span></td>
+									<td colspan="3">
+										<input type="text" name="superviseDeptName" id="superviseDeptName" value="" class="form-control" maxlength="200" style="width: 260px;display: none;" />
+										<select name="superviseDeptCode" id="superviseDeptCode" datatype="*" errormsg="请选择监督部门" class="form-control select" selectName="superviseDeptCode" style="width: 200px;display: inline-block;">
+											<option value="">请选择</option>
+										</select>
+									</td>
+									
+								</tr>
+								
+								<!--<tr>
+									<td class="th_bg">允许最大中标数<i class="red">*</i></td>
+									<td>
+										<button type="button" class="btn_adjust" id="reduce">-</button>
+										<input type="text" name="bidMax" id="bidMax" value="1" class="form-control " style="display: inline-block;width: 100px;text-align: center;" />
+										<button type="button" class="btn_adjust" id="plus">+</button>
+									</td>
+									<td class="th_bg">是否按招标项目评审<i class="red">*</i></td>
+									<td>
+										<label style="padding-left: 20px;margin-bottom: 0;">
+				                		<input type="radio" name="isProjectCheck" id="" value="1" style="vertical-align: -2px;margin-right: 5px;" />是
+				                	</label>
+										<label style="padding-left: 20px;margin-bottom: 0;">
+				                    	<input type="radio" checked="checked" name="isProjectCheck" id="" value="0" style="vertical-align: -2px;margin-right: 5px;" />否
+				                    </label>
+									</td>
+								</tr>-->
+								
+				
+								<tr>
+									<td class="th_bg">依法招标</td>
+					                <td>
+					                	<label style="padding-right: 20px;margin-bottom: 0;">
+					                		<input type="radio" name="isLaw" value="1" checked="checked" style="vertical-align: -2px;margin-right: 5px;" >是
+					                	</label>
+					                    <label style="padding-right: 20px;margin-bottom: 0;">
+					                    	<input type="radio" name="isLaw" value="0" style="vertical-align: -2px;margin-right: 5px;" >否
+					                    </label>
+					                </td>
+									<td class="th_bg">招标组织形式</td>
+									<td>
+										<label style="padding-right:20px;margin-bottom: 0;">
+					                		<input type="radio" name="tenderOrganizeForm" value="2" checked="checked" style="vertical-align: -2px;margin-right: 5px;" >委托招标
+					                	</label>
+										<label style="padding-right:20px;margin-bottom: 0;">
+					                		<input type="radio" name="tenderOrganizeForm" value="1" style="vertical-align: -2px;margin-right: 5px;" >自行招标
+					                		<!--广宣的默认市场类型为DF且不显示-->
+					                		<input type="hidden" name="marketType" value="DF" />
+										</label>
+									</td>
+								</tr>
+								<!--<tr class="marketShow">
+									<td class="th_bg">市场类型<i class="red">*</i></td>
+									<td colspan="3">
+										<select class="form-control select" name="marketType" selectName="marketType" style="display: inline-block;width:auto;">
+											
+										</select>
+									</td>
+								</tr>-->
+								<tr class="tenderOrganizeForm">
+									<td class="th_bg mandateTit">委托合同</td>
+									<td colspan="3">
+										<input type="text" id="mandateContractName" name="mandateContractName" class="form-control readonly" readonly="readonly" style="display: inline-block;width: 80%;" />
+										<input type="hidden" name="mandateContractId" errormsg="请上传委托合同"/>
+										<button type="button" class="btn btn-primary btn-sm" id="btnContract"><span class="glyphicon glyphicon-search"></span>选择委托合同</button>
+									</td>
+								</tr>
+								<tr>
+									<td class="th_bg">招标内容与范围及<br/>招标方案说明<i class="red">*</i></td>
+									<td colspan="3">
+										<textarea class="form-control" rows="10" name="tenderContent" style="resize: none;" datatype="*" errormsg="请输入招标内容与范围及招标方案说明"></textarea>
+									</td>
+								</tr>
+					        </table>   
+			       		</div>
+			       	</div>
+		    	</div>
+		    	<div class="panel panel-accordion panel-default">
+		    		<div class="panel-heading active"  role="tab" id="headingThree">  
+				 		<h4 class="panel-title">
+			            	<a class="collapsed" role="button" data-toggle="collapse"  href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+			            		招标人信息
+			            	</a>
+				 		</h4>  
+				   	</div>  
+				  	<div  id="collapseThree" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingThree">  
+				       	<div class="panel-body">
+				       		<table class="table table-bordered table-comm">
+						     	<tr class="ownerShow">
+									<td class="th_bg">项目业主</td>
+									<td colspan="3">
+										<input type="text" name="tenderees[0].projectOwner" readonly="readonly" id="projectOwner" class="form-control readonly" />
+									</td>
+								</tr>
+								<tr>
+									<td class="th_bg">招标人<i class="red">*</i></td>
+									<td colspan="3">
+										<input type="text" name="tenderees[0].tendererName" id="mainTenderer" datatype="*" errormsg="请选择招标人" class="form-control readonly" style="display: inline-block;width: 80%;" readonly="readonly" />
+										<input type="hidden" name="tenderees[0].tendererType" value="0" />
+										<input type="hidden" name="tenderees[0].tendererEnterprisId" />
+										<!--<input type="hidden" name="tenderees[0].tendererCode" />-->
+										<input type="hidden" name="tenderees[0].legalPerson" />
+										<button type="button" class="btn btn-primary" id="btnTender"><span class="glyphicon glyphicon-check"></span>选择招标人</button>
+									</td>
+								</tr>
+								<tr style="display: none;">
+									<td class="th_bg">招标人类别</td>
+									<td>
+										<!--<select class="form-control select" selectName="tendererCodeType" name="tenderees[0].tendererCodeType" id="tendererCodeType"></select>-->
+										<!--<input type="text" name="tenderees[0].tendererTypeTxt" class="form-control readonly" readonly="readonly" />
+				                	<input type="hidden" name="tenderees[0].tendererType" />-->
+									</td>
+									<td class="th_bg">招标人代码</td>
+									<td>
+										<input type="text" name="tenderees[0].tendererCode" class="form-control readonly" readonly="readonly" />
+										<input type="text" name="tenderees[0].tendererCodeType" value="2" hidden="hidden"/>
+									</td>
+								</tr>
+								<tr>
+									<td class="th_bg">招标人代表（采购）<i class="red">*</i></td>
+									<td>
+										<input type="hidden" name="tenderees[0].agentId" />
+										<input type="text" name="tenderees[0].agentName" class="form-control readonly" readonly="readonly" maxlength="10" datatype="*" errormsg="请选择招标人联系人" style="width:200px;display:inline-block;" />
+										<button type="button" class="btn btn-primary" id="btnLink" style="float:right;"><span class="glyphicon glyphicon-check"></span>选择</button>
+									</td>
+									<td class="th_bg">联系电话<i class="red">*</i></td>
+									<td>
+										<input type="text" name="tenderees[0].agentTel" maxlength="11" oninput="priceInput(this,0)" class="form-control" maxlength="11" datatype="mobile" errormsg="请正确输入招标人联系电话" />
+									</td>
+								</tr>
+								<!--<tr>
+									<td class="th_bg">法人代表<i class="red">*</i></td>
+									<td>
+										<input type="text" name="tenderees[0].legalPerson" id="legalPerson" class="form-control" />
+									</td>
+				
+								</tr>-->
+								<tr>
+									<td class="th_bg">地址</td>
+									<td>
+										<input type="text" name="tenderees[0].enterpriseAddress" class="form-control" maxlength="650" />
+									</td>
+									<td class="th_bg">邮箱</td>
+									<td>
+										<input type="text" name="tenderees[0].agentEmail" class="form-control" datatype="email" ignore="ignore" errormsg="请正确输入招标人邮箱" />
+									</td>
+								</tr>
+								<!--<tr>
+						        	<td class="th_bg">其他招标人</td>
+					                <td colspan="3">
+					                    <button type="button" class="btn btn-primary" id="btnOtherTender">选择其他招标人</button>
+					                    <div id="enterpriseBlock"></div>
+					                </td>
+						       </tr>-->
+					        </table>   
+			       		</div>
+			       	</div>
+		    	</div>
+		    	<div class="panel panel-accordion panel-default tenderSelfTitle">
+		    		<div class="panel-heading active"  role="tab" id="headingFour">  
+				 		<h4 class="panel-title">
+			            	<a class="collapsed" role="button" data-toggle="collapse"  href="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+			            		招标代理机构
+			            	</a>
+				 		</h4>  
+				   	</div>  
+				  	<div  id="collapseFour" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingFour">  
+				       	<div class="panel-body">
+				       		<table class="table table-bordered table-comm">
+						    	<tr class="tenderSelf">
+									<td class="th_bg">招标代理机构名称</td>
+									<td colspan="3"><input type="text" name="tenderAgencyName" readonly="readonly" id="tenderAgencyName" class="form-control readonly" /></td>
+				
+								</tr>
+								<tr style="display: none;">
+									<td class="th_bg">招标代理机构类别</td>
+									<td>
+										<select class="form-control select" selectName="tendererCodeType" name="tenderAgencyCodeType" id="tenderAgencyCodeType"></select>
+									</td>
+									<td class="th_bg">招标代理机构代码</td>
+									<td><input type="text" name="tenderAgencyCode" id="tenderAgencyCode" readonly="readonly" class="form-control readonly" /></td>
+								</tr>
+								<tr class="tenderSelf">
+									<td class="th_bg">招标代理机构地址</td>
+									<td><input type="text" name="tenderAgencyAddress" id="tenderAgencyAddress" class="form-control" /></td>
+									<td class="th_bg">招标代理机构邮编</td>
+									<td><input type="text" name="tenderAgencyPostalCode" id="tenderAgencyPostalCode" class="form-control" datatype="num" ignore="ignore" errormsg="请正确输入招标代理机构邮编" /></td>
+								</tr>
+								<tr class="tenderSelf">
+									<td class="th_bg">项目经理<i class="red">*</i></td>
+									<td><input type="text" readonly name="tenderAgencyLinkmen" id="tenderAgencyLinkmen" class="form-control" datatype="*" errormsg="请输入招标代理机构项目经理" /></td>
+									<td class="th_bg">联系电话<i class="red">*</i></td>
+									<td><input type="text" readonly maxlength="11" name="tenderAgencyLinktel" oninput="priceInput(this,0)" id="tenderAgencyLinktel" class="form-control" datatype="mobile" errormsg="请正确输入招标代理机构联系电话" /></td>
+								</tr>
+								<tr class="tenderSelf">
+									<td class="th_bg">项目经理邮箱</td>
+									<td><input type="text" readonly name="tenderAgencyEmail" id="tenderAgencyEmail" class="form-control" datatype="email" ignore="ignore" errormsg="请正确输入项目经理邮箱" /></td>
+									<td class="th_bg">项目归属部门<i class="red">*</i></td>
+									<td>
+										<span id="dept" class="dept_view" optionName="dept" style="display: none;"></span>
+										<div style="position: relative;display: none;" id="deptBlock">
+											<input type="text" style="cursor: pointer; border: 1px solid #ccc;" class="form-control readonly" id="department" name="department" readonly placeholder="请选择到具体处室"></input>
+											<input type="hidden"  class="form-control" id="dept" name="dept" datatype="*" errormsg="请选择归属部门"></input>
+											<div id="treeview-checkable" style="max-height: 210px;overflow: auto; display: none;position: absolute;left: 0;right:0;top:33px;z-index: 99;"></div>
+										</div>
+									</td>
+									
+								</tr>
+					        </table>   
+			       		</div>
+			       	</div>
+		    	</div>
+		    	<div class="panel panel-accordion panel-default">
+		    		<div class="panel-heading active"  role="tab" id="headingFive">  
+				 		<h4 class="panel-title">
+			            	<a class="collapsed padding_button" role="button" data-toggle="collapse"  href="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
+			            		标段信息
+			            		
+			            	</a>
+			            	
+				 		</h4>  
+				   	</div>  
+				  	<div  id="collapseFive" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingFive">  
+				       	<div class="panel-body">
+				       		<button type="button" class="btn btn-primary btn-sm" id="btnBidSection" style="float: right;margin-right: 10px;margin-bottom: 10px;">
+			            		<span class="glyphicon glyphicon-plus"></span>添加标段
+			            	</button>
+				       		<div class="bidSectionBlock">
+								<table id="bidList" class="table table-hover table-bordered table-striped">
+									<tr>
+										<th style="width: 50px; text-align: center;">序号</th>
+										<!--<th>标段编号</th>-->
+										<th>标段名称</th>
+										<th style="width: 200px;text-align: center;">操作</th>
+									</tr>
+									<!--<tr>
+		        					<td style="text-align: center;">1</td>
+		        					<td>33333</td>
+		        					<td>标段1</td>
+		        					<td>
+		        						<button type="button" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-edit"></span>编辑</button>
+		        						<button type="button" class="btn btn-danger btn-sm"><span class="glyphicon glyphicon-remove"></span>删除</button>
+		        					</td>
+		        				</tr>-->
+								</table>
+							</div>
+			       		</div>
+			       	</div>
+		    	</div>
+		    	<div class="panel panel-accordion panel-default">
+		    		<div class="panel-heading active"  role="tab" id="headingSix">  
+				 		<h4 class="panel-title">
+			            	<a class="collapsed padding_button" role="button" data-toggle="collapse"  href="#collapseSix" aria-expanded="false" aria-controls="collapseSix">
+			            		项目组成员信息
+			            	</a>
+				 		</h4>  
+				   	</div>  
+				  	<div  id="collapseSix" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingSix">  
+				       	<div class="panel-body">
+				       		<button type="button" class="btn btn-primary btn-sm" id="btnMember" style="float: right;margin-right: 10px;margin-bottom: 10px;">
+			            		<span class="glyphicon glyphicon-plus"></span>设置项目组成员
+			            	</button>
+							<table class="table table-bordered " id="table_member"></table>  
+			       		</div>
+			       	</div>
+		    	</div>
+		    	<div class="panel panel-accordion panel-default">
+		    		<div class="panel-heading active"  role="tab" id="headingSeven">  
+				 		<h4 class="panel-title">
+			            	<a class="collapsed padding_button" role="button" data-toggle="collapse"  href="#collapseSeven" aria-expanded="false" aria-controls="collapseSeven">
+			            		附件
+			            		<span class="red" style="font-size: 14px;font-weight: normal;">（请上传200M以内的文件）</span>
+			            	</a>
+				 		</h4>  
+				   	</div>  
+				  	<div  id="collapseSeven" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingSeven">  
+				       	<div class="panel-body">
+				       		<button type="button" class="btn btn-primary btn-sm " id="fileUp" style="float: right;margin-bottom: 10px;">
+			            		<span class="glyphicon glyphicon-folder-open"></span>上传
+			            	</button>
+			            	<button type="button"  id="fileLoad" style="display: none;"></button>
+				       		<div id="fileContent">
+				       			
+				       		</div>
+			       		</div>
+			       	</div>
+		    	</div>
+				<div id="approval"></div>
+	   		</div>
+			
+			
+			
+			<!--<table class="table table-bordered table-comm">
+				
+				
+				<tr>
+					<td colspan="4" style="font-weight: bold;" class="active">招标项目信息</td>
+				</tr>
+			
+				<tr>
+					<td colspan="4" style="font-weight: bold;" class="active">招标人信息</td>
+				</tr>
+				
+				<tr class="tenderSelf">
+					<td colspan="4" style="font-weight: bold;" class="active">招标代理机构</td>
+				</tr>
+				
+				<tr>
+					<td colspan="4" style="font-weight: bold;" class="active padding_button">
+						标段信息
+						<button type="button" class="btn btn-primary btn-sm" id="btnBidSection" style="float: right;margin-right: 10px;">
+	            		<span class="glyphicon glyphicon-plus"></span>添加标段
+	            	</button>
+					</td>
+				</tr>
+				<tr>
+					<td colspan="4">
+						
+					</td>
+				</tr>
+				
+		        <tr>
+					<td colspan="4" style="font-weight: bold;" class="active padding_button">
+						项目成员信息
+						<button type="button" class="btn btn-primary btn-sm" id="btnMember" style="float: right;margin-right: 10px;">
+	            		<span class="glyphicon glyphicon-plus"></span>设置项目成员
+	            	</button>
+					</td>
+				</tr>
+				
+				<tr>
+					<td class="th_bg">项目成员信息</td>
+					<td colspan="3">
+						<table class="table table-bordered " id="table_member">
+							
+						</table>
+					</td>
+				</tr>
+				<tr>
+		            <td colspan="4" style="font-weight: bold;" class="active padding_button">
+		            	附件
+			            <button type="button" class="btn btn-primary btn-sm " id="fileUp" style="float: right;">
+		            		<span class="glyphicon glyphicon-folder-open"></span>选择文件
+		            	</button>
+		            	<button type="button"  id="fileLoad" style="display: none;"></button>
+		            </td>
+		        </tr>
+		        <tr>
+		        	<td colspan="4" id="fileContent">
+		        		
+		        	</td>
+		        	
+		        </tr>
+			</table>-->
+
+		</form>
+		<div class="bottom-btn">
+			<button type="button" class="btn btn-primary" id="btnSave"><span class="glyphicon glyphicon-ok"></span>保存</button>
+			<button type="button" class="btn btn-primary" id="btnSubmit"><span class="glyphicon glyphicon-saved"></span>确认</button>
+			<button type="button" class="btn btn-default" id="btnClose"><span class="glyphicon glyphicon-remove"></span>取消</button>
+		</div>
+
+		<script type="text/javascript" src="../../../media/js/jquery/jquery.js"></script>
+		<script type="text/javascript" src="../../../media/js/jquery/jquery.extend.js"></script>
+		<script type="text/javascript" src="../../../media/js/base/util.js"></script>
+		<script type="text/javascript" src="../../../media/js/base/common.js"></script>
+		<script type="text/javascript" src="../../../media/js/bootstrap/js/bootstrap.js"></script>
+		<script type="text/javascript" src="../../../media/js/bootstrap/js/bootstrap-treeview.min.js"></script>
+		<script type="text/javascript" src="../../Model/js/dataLinkage.js"></script>
+		<script type="text/javascript" src="../../Model/js/multiLinkage.js"></script>
+		<script type="text/javascript" src="../../Model/js/public.js"></script>
+		<script type="text/javascript" src="../../../media/js/stream/js/stream-v1.js"></script>
+		<script type="text/javascript" src="../../../media/js/base/StreamUpload.js"></script>
+		<script type="text/javascript" src="../../../media/js/Model/public.js" ></script>
+		<script type="text/javascript" src="../../../media/js/base/WorkflowInfoNew.js"></script>
+		<script type="text/javascript" src="../js/tenderProjectEdit.js?version=3.4.27"></script>
+		
+	</body>
+
+</html>

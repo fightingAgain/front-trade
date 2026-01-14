@@ -1,0 +1,92 @@
+<!--<div id="reviewWarp" style="width:98%;margin:10px auto">
+    <ul id='bidderList' class="nav nav-tabs" style="margin:5px auto"></ul>
+    <div id='tableList' style='text-align: right;'>
+        <table id="checkItemList" class="table table-bordered"></table>
+        <div id="totalScore" style='text-align: right;margin:10px; display: none;'></div>
+    </div>
+</div>-->
+<div class="row" id="reviewWarp">
+	<div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 review_left">
+		<div class="checkItemTreeTitle">评审条款</div>
+		<div id="checkItemTree">
+			
+		</div>
+	</div>
+  	<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8 review_middle">
+  		<!--<div>-->
+  			<ul class="nav nav-tabs" role="file_tab" id="file_tab_title">
+			    <li role="presentation" class="active"><a href="#zbwj_box" aria-controls="zbwj_box" role="tab" data-toggle="tab">招标文件</a></li>
+			    <li role="presentation" class="tbwj_li"><a href="#tbwj_box" aria-controls="tbwj_box" role="tab" data-toggle="tab">投标文件</a></li>
+			  </ul>
+			
+			  <!-- Tab panes -->
+			  <div class="tab-content">
+			    <div role="tabpanel" class="tab-pane active" id="zbwj_box">
+					<!-- <div id="zbwjPdf">
+						<div>
+							<button type="button" class="btn btn-xs btn-primary prev">上一页</button>
+							<button type="button" class="btn btn-xs btn-primary next">下一页</button>
+							<span>Page: <input type="text" class="page_num" style="text-align: right;" /> <span class="page_count"></span></span>
+							<button type="button" class="btn btn-xs btn-primary enlarge">放大</button>
+							<button type="button" class="btn btn-xs btn-primary letting">缩小</button>
+							<button type="button" class="btn btn-xs btn-primary pdf_rotate">旋转</button>
+							
+						</div>
+						<div class="canvas_box" style="overflow: auto;text-align: center;">
+							<canvas class="the-canvas"></canvas>
+						</div>
+					</div> -->
+			    	<iframe  id="zbwjPdf" width="100%" class="review_show" style="display: none;"></iframe>
+			    	<div id="review_show_cont" width="100%" class="review_show" style="display: none;"></div>
+			    </div>
+			   <div role="tabpanel" class="tab-pane" id="tbwj_box">
+				  <iframe  width="100%" height="100%" id="tbwjPdf" class="review_tb_show"></iframe>
+				   <!-- <div id="tbwjPdf">
+						<div>
+							<button type="button" class="btn btn-xs btn-primary prev">上一页</button>
+							<button type="button" class="btn btn-xs btn-primary next">下一页</button>
+							<span>Page: <input type="text" class="page_num" style="text-align: right;" /> <span class="page_count"></span></span>
+							<button type="button" class="btn btn-xs btn-primary enlarge">放大</button>
+							<button type="button" class="btn btn-xs btn-primary letting">缩小</button>
+							<button type="button" class="btn btn-xs btn-primary pdf_rotate">旋转</button>
+						</div>
+						<div class="canvas_box" style="overflow: auto;text-align: center;">
+							<canvas class="the-canvas"></canvas>
+						</div>
+						
+				   </div> -->
+					<!-- <div id="all_tbwj_box">
+						<iframe  width="100%" height="100%" id="tbwjPdf_0" class="review_tb_show"></iframe>
+					</div> -->
+			    	
+			    </div>
+			  </div>
+  		<!--</div>-->
+  		<div class="bidder_list_box">
+  			<ul id="bidderList" style="margin:5px auto;"></ul>
+  			<div class="go_left"><span class="glyphicon glyphicon-chevron-left"></span></div>
+  			<div class="go_right"><span class="glyphicon glyphicon-chevron-right"></span></div>
+  		</div>
+  	</div>
+  	<div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 review_right">
+		<div class="file_chapter_page">
+			<span class="review_standard_name">招标文件相关内容页数</span>
+			<span class="file_chapter_page_data"></span>
+		</div>
+  		<div class="review_standard_box">
+  			<div class="review_standard_tit"></div>
+  			<div class="review_standard"></div>
+  		</div>
+  		<div class="review_key">
+  			<span class="review_key_title"></span>
+  			<span class="review_key_cont"></span>
+  		</div>
+  		<div class="review_handle_box">
+  			
+  		</div>
+  		<div class="review_reason">
+  			<!--<textarea class="review_reason_title"></textarea>
+  			<div class="review_reason_cont"></div>-->
+  		</div>
+  	</div>
+</div>

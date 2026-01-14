@@ -1,0 +1,34 @@
+<!--
+ * @Author: your name
+ * @Date: 2020-09-09 15:44:15
+ * @LastEditTime: 2020-12-03 16:58:59
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: \FrameWork_bf\bidPrice\Review\projectManager\modal\packageCheckList.html
+--> 
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="pragma" content="no-cache">
+		<!-- 禁止浏览器从本地机的缓存中调阅页面内容 -->
+		<meta http-equiv="cache-control" content="no-cache, must-revalidate">
+		<meta http-equiv="expires" content="0">
+		<title>报价清单</title>
+		<style>
+			th,td{
+				border:1px solid #ddd; /*一定要同时有border和outline不然滚动会看着不协调*/
+				outline: 1px solid #ddd;
+				background:#fff;
+			}
+		</style>
+	</head>
+	<body style="overflow:auto;">
+		<div id="resonOfScore" style="width:300px;height:auto;border-radius: 4px;background:#fff;z-index:100;border:1px solid #eee;position:fixed;display: none;overflow-y: auto;padding: 10px;"></div>
+        <div id="packageCheckLists">
+            
+		</div>
+	</body>
+	<script type="text/javascript" src="../js/packageCheckList.js"></script>
+</html>

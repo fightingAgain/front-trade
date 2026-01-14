@@ -1,0 +1,54 @@
+<!--
+ * @Author: your name
+ * @Date: 2020-09-09 10:38:02
+ * @LastEditTime: 2020-10-09 17:12:16
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: \FrameWork_bf\bidPrice\Review\projectManager\projectCheckList.html
+--> 
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="pragma" content="no-cache">
+		<!-- 禁止浏览器从本地机的缓存中调阅页面内容 -->
+		<meta http-equiv="cache-control" content="no-cache, must-revalidate">
+		<meta http-equiv="expires" content="0">
+		<title>评审管理</title>
+	</head>
+
+	<body>
+		<div class="container-fluid">   
+		<div id="toolbar">
+			<div class="input-group" style="width:200px;float: left;">
+				<span class="input-group-addon">评审状态</span>
+				<select class="form-control" id="checkResult" style="width:200px;">
+					<option value="">全部</option>
+					<option value="组建评审委员会">组建评审委员会</option>
+					<option value="组建完成，评审未开始">组建完成，评审未开始</option>
+					<option class="ready1" value="资格审查中">资格审查中</option>
+					<option class="ready2" value="资格审查完成">资格审查完成</option>
+					<option  value="1">项目失败</option>
+				</select>
+			 </div>
+			<div class="input-group" style="width:180px;float: left;padding-left: 10px;">
+				<span class="input-group-addon">项目名称</span>
+				<input type="text" class="form-control" id="projectName" style="width: 200px;">
+			</div>
+			
+				<div class="input-group" style="width:180px;float: left;padding-left: 10px;">
+				<span class="input-group-addon">包件名称</span>
+				<input type="text" class="form-control" id="packageName" style="width: 200px;">
+			</div>
+			<div class="btn-group" style="padding-left:10px;">
+				<button type="button" id="btnQuery" class="btn btn-primary">
+					<span class="glyphicon glyphicon-search">查询</span>
+				</button>
+			</div>	 
+		</div>
+		<table class="table table-hover table-bordered" id="ReportChecktable"></table>
+		</div>
+	</body>
+	<script type="text/javascript" src="Auction/Review/projectManager/js/projectCheckList.js"></script>
+</html>

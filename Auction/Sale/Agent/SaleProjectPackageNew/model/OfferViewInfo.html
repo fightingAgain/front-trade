@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="pragma" content="no-cache">
+		<!-- 禁止浏览器从本地机的缓存中调阅页面内容 -->
+		<meta http-equiv="cache-control" content="no-cache, must-revalidate">
+		<meta http-equiv="expires" content="0">
+		<title>竞卖情况竞卖中查看</title>
+		<link rel="stylesheet" href="../../../../../media/js/bootstrap/css/bootstrap.css" />
+		<link rel="stylesheet" href="../../../../../media/js/bootstrap/css/bootstrap-table.css">
+		<link rel="stylesheet" href="../../../../../media/js/datetimepicker/css/jquery.datetimepicker.css"/>
+		<link rel="stylesheet" href="../css/price.css" type="text/css"/>
+ 
+		<style>
+			.container div {
+				text-align: center;
+			}
+			
+			table th,
+			table td {
+				vertical-align: middle;
+			}
+			
+			.table>tbody>tr>td {
+				vertical-align: middle;
+			}
+
+			#offerDetail span {
+				color: red;
+			}
+			
+			.timeInval,
+			.minPrice,.countDown,.notEliminatedCount {
+				font-size: 24px !important;
+				font-weight: bold;
+			}
+			
+			#detailofferRecordTable .no-records-found {
+				display: none;
+			}
+			
+			#packageofferRecordTable .no-records-found {
+				display: none;
+			}
+			
+			#roundAuctionRecordTable .no-records-found {
+				display: none;
+			}
+			.table > thead > tr > th, .table > tbody > tr > th, .table > tfoot > tr > th, .table > thead > tr > td, .table > tbody > tr > td, .table > tfoot > tr > td{
+			 	vertical-align: middle;
+			 }
+		</style>
+	</head>
+
+	<body>
+
+		<div class="priceBox">
+			<div class="leftPanel">
+				<div id="auctionType" class="priceType"></div>
+				<div class="priceInfo">
+					<div class="item">
+						<h4>包件编号</h4>
+						<p data-field="packageCode"></p>
+					</div>
+					<div class="item">
+						<h4>包件名称</h4>
+						<p data-field="packageName"></p>
+					</div>
+					<div class="item">
+						<h4>开始时间</h4>
+						<p data-field="auctionStartDate" class="number"></p>
+					</div>
+					<div class="item">
+						<h4>竞价类型</h4>
+						<p data-field="auctionModel" class="type"></p>
+					</div>
+				</div>
+			</div>
+			<div class="rightPanel">
+
+				<div class="Time">
+					<div class="timeShow"><font id="day">00</font>时<font id="hour">00</font>分<font id="min">00</font>秒</div>
+					<div class="TimeBox">
+						<div class="TimeText"></div>
+						<div class="otherText"></div>
+					</div> 
+				</div>
+ 
+				<table class="table table-bordered" id="offerInfo">
+					<tr class="myView">
+						<th class="th_bg">变更当前阶段截止时间</th>
+						<td style="width: 250px">
+							<div class="form-group" style="margin-bottom: 0px;text-align: left;" >
+								<input type="text" readonly="readonly" data-field="curStageEndTime"
+									style="width: 180px;margin-bottom: 0px;display: inline-block;" class="form-control" id="StageEndTime"/>
+								<button style="vertical-align: middle;margin-left: 5px;" data-event='changeEndTime' class="btn btn-primary btn-sm">确定</button>
+							</div>
+						</td>
+						<th class="th_bg">当前阶段参与供应商数</th>
+						<td>
+							<span class="notEliminatedCount" style="color: red;"></span>
+						</td>
+					</tr>
+ 
+					<tr class="otherView" >
+						
+						<th  class="th_bg">当前阶段参与供应商数</th>
+						<td colspan="3">
+							<span class="notEliminatedCount" style="color: red;"></span>
+						</td>
+					</tr>
+				</table>
+				<div id="offerDetail" style="width: 100%;">
+					<div class="countDown"></div>
+				</div>
+			</div>
+		</div>
+ 
+	<script type="text/javascript" src="../../../../../media/js/jquery/jquery.js"></script>
+	<script type="text/javascript" src="../../../../../media/js/jquery/jquery.extend.js"></script>
+	<script type="text/javascript" src="../../../../../media/js/jquery/jquery.params.js"></script>
+	<script type="text/javascript" src="../../../../../media/js/bootstrap/js/bootstrap.js"></script>
+	<script type="text/javascript" src="../../../../../media/js/bootstrap/js/bootstrap-table.min.js"></script>
+	<script type="text/javascript" src="../../../../../media/js/bootstrap/js/bootstrap-table-zh-CN.min.js"></script>
+	<script type="text/javascript" src="../../../../../media/js/layer/layer.js"></script>
+	<script type="text/javascript" src="../../../../../media/js/layer/laydate.js"></script>
+	<script type="text/javascript" src="../../../../../media/js/datetimepicker/js/jquery.datetimepicker.js" ></script>
+	<script type="text/javascript" src="../../../../../media/js/base/util.js"></script>
+	<script src="../js/OfferViewInfo.js"></script>
+
+</html>

@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="pragma" content="no-cache"><!-- 禁止浏览器从本地计算机的缓存中访问页面内容 --> 
+	<meta http-equiv="cache-control" content="no-cache"><!-- 用于指定请求和响应遵循的缓存机制 --> 
+	<meta http-equiv="expires" content="0"><!-- 用于设定网页的到期时间，一旦网页过期，必须到服务器上重新传输； -->
+	<title>开标大厅</title>
+	<link rel="Shortcut Icon" href="../../../media/image/logo.ico">
+	<!--<link rel="stylesheet" href="../../../media/js/bootstrap/css/bootstrap.css" />-->
+	<!--<link rel="stylesheet" href="../../../media/js/bootstrap/css/bootstrap-table.min.css" />-->
+	<link rel="stylesheet" href="../../layui/css/layui.css" />
+	<link rel="stylesheet" href="../../css/bidRoom.css" />
+	<style>
+		.renameList{
+			top: 50% !important;
+		}
+		#renameListWrap td, #renameListWrap th{
+			padding: 8px !important;
+		}
+		.layui-table-cell{
+			white-space: normal !important;
+			height: auto !important;
+		}
+	</style>
+</head>
+<body>
+	<input id="stageStates" hidden="hidden"/>
+	<!--头部信息-->
+	<div class="room_head">
+		<div class="top">
+			<div class="openState">
+				<span class="openTit">当前阶段</span>
+				<span id="current" class="openStep">解密</span>
+			</div>
+			<div class="djs">
+		    	<img src="../../images/time.png">
+		     	<div class="djs-rt">倒计时
+		     		<span class="djsTime" id="hoursOne">0</span><span class="djsTime" id="hoursTwo">0</span><span class="djsTxt">时</span>
+		     		<span class="djsTime" id="minuteOne">0</span><span class="djsTime" id="minuteTwo">0</span><span class="djsTxt">分</span>
+		     		<span class="djsTime" id="secondOne">0</span><span class="djsTime" id="secondTwo">0</span><span class="djsTxt">秒</span>
+		     	</div>
+		    </div>
+		   	<div class="loginInfo">
+		   		<span>欢迎您,</span>
+		    	<span class="username" id="userName"></span>
+		    </div>
+			<div class="curTime">
+				<span id="ymd"></span>
+		   		<span id="hms"></span>
+			</div>
+		</div>
+		<div class="progress">
+			<div class="open-progress clearfix">
+				<div id="js_2" class="step4"><span class="step-name">结束</span></div>
+				<div id="qd_1" class="step step1"><span class="step-name">签到</span></div>
+				<div id="jm_2" class="step step1"><i></i><span class="step-name">解密</span></div>
+				<div id="qm_2" class="step step1"><span class="step-name">签名</span></div>
+			</div>
+		</div>
+	</div>
+	<div class="room_body" id="room_body">
+		<!--大厅-->
+		<div class="dating">
+			<!--聊天窗口-->
+			<div class="dtl" >
+	  			<div class="dtl_t">
+	  				<p style="width:100%;max-height: 65px;overflow: auto;"><span id="ptitle" scrollamount="5">xxx项目开标大厅</span></p>
+				</div>
+	  			<div class="dtl_ner" style="overflow: auto;">
+					<ul id="chartWin"></ul>
+	  			</div>
+	 		</div>
+	 		<!--项目窗口-->
+	 		<div class="dtr">
+	 			<div class="dtr_t">
+	 				<div class="dtr_t-l" >
+	 					<img src="../../images/qd_27.jpg" class="left tbx" />
+	 					<p>今日开标（共<span id="nums">1</span>个）</p>
+	 				</div>
+	 			</div>
+	 			<div class="dtr_n" style="position: relative;">
+	 				<div style="width:100%;height:calc(100% - 60px);overflow: auto;">
+						<ul id="pojectsData">
+					  	
+					  	</ul>
+				  	</div>
+	  				<div class="an" style="width:100%;text-align:right;position: absolute;bottom: 10px;">
+	  					<a id="jskb" style="display: none;">结束开标</a>
+	  					<a id="kbyy" onclick="openObjection()">开标异议</a>
+						<a id="kbylb" onclick="kbySchedule(this)" pdfurl="">开标一览表</a>
+						<a id="kbgcjl" onclick="kbgcySchedule(this)" pdfurl="" style="width: 100px;display: none;">开标过程记录</a>
+						<a id="kbjl" onclick="openSituation()">开标记录</a>
+						<a id="custom_close" href="javascript:void(0);" style="margin-right: 0px;">退出</a>
+					</div>
+				</div>
+	 		</div>
+	 		<div style="clear: both;"></div>
+		</div>
+		
+		<!--投标人表-->
+		<div class="biao">
+			<div class="biao_tit">
+				<div class="biao-left">
+					<img src="../../images/tenderIcon.jpg" />
+					投标人信息
+				</div>
+				<div class="biao-right">
+					<div class="table_pack">收起<span class="glyphicon glyphicon-chevron-down" style="margin-left: 5px;"></span></div>
+					<div class="table_open" style="display: none;">展开<span class="glyphicon glyphicon-chevron-up" style="margin-left: 5px;"></span></div>
+				</div>
+				
+			</div>
+			<div class="biaonr">
+				<table id="bidtable" class="table table-hover table-bordered table-striped" style="word-break:keep-all;white-space:nowrap;table-layout:automatic;margin: 0;" data-toggle="table"  data-height="180">
+					<!--<thead>
+						<tr>
+							<th data-width="3%">序号</th>
+							<th data-width="15%">投标单位名</th>
+							<th data-width="5%">递交时间</th>
+							<th data-width="5%">是否签到</th>
+							<th data-width="10%">签到时间</th>
+							<th data-width="5%">是否解密</th>
+							<th data-width="10%">解密时间</th>
+							<th data-width="5%">是否签名</th>
+							<th data-width="10%">签名时间</th>
+							<th data-width="27%">CA信息</th>
+						</tr>
+					</thead>
+					<tbody id='tbodyResults'>
+								
+					</tbody>-->
+				</table>
+			</div>
+		</div>
+	</div>	
+		
+	<script type="text/javascript" src="../../../media/js/jquery/jquery.min.js"></script>
+	<script type="text/javascript" src="../../../media/js/jquery/jquery.extend.js"></script>
+	<script type="text/javascript" src="../../../media/js/bootstrap/js/bootstrap.js"></script>
+	<!--<script type="text/javascript" src="../../../media/js/bootstrap/js/bootstrap-table.min.js"></script>-->
+	<script type="text/javascript" src="../../../media/js/layer/layer.js"></script>
+	<script type="text/javascript" src="../../layui/layui.js"></script>
+	<script type="text/javascript" src="../../../media/js/base/common.js"></script>
+	<script type="text/javascript" src="../../../media/js/stream/js/stream-v1.js"></script>
+	<script type="text/javascript" src="../../../media/js/base/util.js"></script>
+	<script type="text/javascript" src="../../../Bidding/Model/js/public.js"></script>
+	<script type="text/javascript" src="../js/bidRoomView.js"></script>
+</body>
+</html>

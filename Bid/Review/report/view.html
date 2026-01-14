@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<meta charset="UTF-8">
+		<link rel="stylesheet" href="../../media/js/bootstrap/css/bootstrap.css" />
+		<title>预览</title>
+	</head>
+	<body>
+		<form method="post" accept-charset="UTF-8">
+			<div id="examType" class="input-group" style="display: none; width:120px; float: left;">
+				<span class="input-group-addon">资格审查方式</span>
+				<select name="examType" class="form-control" style="width:108px;margin-right: 5px;">
+					<option value="2">后审</option>
+					<option value="1">预审</option>
+				</select>
+			</div>
+			<div id="tenderProjectType" class="input-group" style="display: none; width:120px; float: left;">
+				<span class="input-group-addon">项目类型</span>
+				<select name="tenderProjectType" class="form-control" style="width:108px;margin-right: 5px;">
+					<option value="A">工程</option>
+					<option value="B">货物</option>
+					<option value="C">服务</option>
+				</select>
+			</div>
+			<div id="checkType" class="input-group" style="display: none; width:120px; float: left;">
+				<span class="input-group-addon">评标办法</span>
+				<select name="checkType" class="form-control" style="width:158px;margin-right: 5px;">
+					<option value="2">综合评估法</option>
+					<option value="4">最低投</option>
+					<option value="5">最低评</option>
+					<option value="9">综合评估法（无权重）</option>
+					<option value="10">综合评估法（权重）</option>
+				</select>
+			</div>
+			<div class="btn-group">
+				<button id="btnSubmit" class="btn btn-primary" style="display: none;">确定</button>
+			</div>
+
+			<input id="partName" name="partName" type="hidden">
+			<input id="checkReportModelId" name="checkReportModelId" type="hidden">
+			<input id="signatureType" name="signatureType" type="hidden">
+			<input id="transverse" name="transverse" type="hidden">
+			<input id="sort" name="sort" type="hidden">
+			<textarea name="html" id="content" style="width: 100%; min-height: 300px;display: none;"></textarea>
+		</form>
+	</body>
+	<script type="text/javascript" src="../../media/js/base/common.js"></script>
+	<script type="text/javascript" src="../../media/js/ueditor/dialogs/internal.js"></script>
+	<script type="text/javascript" src="../../media/js/ueditor/third-party/jquery-1.10.2.min.js"></script>
+	<script>
+        //可以直接使用以下全局变量
+        //当前打开dialog的实例变量
+        // alert('editor: '+editor);
+        // //一些常用工具
+        // alert('domUtils: '+domUtils);
+        // alert('utils: '+utils);
+        // alert('browser: '+browser);
+        var queryData = {};
+        var token = top.$.getToken();
+
+		var data = {};
+		if(parent.getPartInfo){
+			data = parent.getPartInfo();
+		}
+
+		queryData.partName = data.partName;
+		queryData.checkReportModelId = data.checkReportModelId;
+		queryData.transverse = data.transverse;
+		queryData.signatureType = data.signatureType;
+		queryData.sort = data.sort;
+		queryData.html = getContent(editor);
+		if(data.checkReportModelId){
+			$("#title").show();
+			$("#examType").show();
+			$("#tenderProjectType").show();
+			$("#checkType").show();
+			$("#btnSubmit").show();
+			$("#btnSubmit").click(function(){
+				previewpdf();
+			});
+		}else{
+			previewpdf();
+		}
+
+		function previewpdf(){
+            queryData.examType = $("#examType").val();
+            queryData.tenderProjectType = $("#tenderProjectType").val();
+            queryData.checkType = $("#checkType").val();
+
+            $.ajax({
+                type:"post",
+                url:config.Reviewhost+"/ReviewControll/previewPdf",
+                async:false,
+                beforeSend: function(xhr){
+                    xhr.setRequestHeader("Token",token);
+                },
+                data:queryData,
+                success:function(res){
+                    if(res.success){
+                        window.location.href=siteInfo.sysUrl + '/media/js/pdfjs/web/viewer.html?file='+top.config.FileHost + '/fileView'+res.data;
+                    }
+                }
+            });
+		}
+        function getContent(ue){
+            var content = ue.getContent();
+            content = content.replace(/<pre[^>]+>[^<]+<\/pre>/g, function(html){
+                return UE.utils.html(html).replace(/((\r)?\n)*/g, "");
+            })
+
+            return content;
+        }
+	</script>
+</html>

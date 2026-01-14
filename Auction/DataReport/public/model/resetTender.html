@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="pragma" content="no-cache">
+		<!-- 禁止浏览器从本地机的缓存中调阅页面内容 -->
+		<meta http-equiv="cache-control" content="no-cache, must-revalidate">
+		<meta http-equiv="expires" content="0">
+		<title>修改招标人/委托单位</title>
+		<link rel="stylesheet" href="../../../../media/js/layer/mobile/need/layer.css" />
+		<link rel="stylesheet" href="../../../../media/js/layer/theme/default/laydate.css" />
+		<link rel="stylesheet" href="../../../../media/js/bootstrap/css/bootstrap.css">
+		<link rel="stylesheet" href="../../../../media/js/bootstrap/css/bootstrap-table.min.css" />
+		<link rel="stylesheet" href="../../../../media/js/bootstrap-fileinput-master/css/fileinput.min.css" type="text/css" />
+		<link rel="stylesheet" href="../../../../media/js/datetimepicker/css/jquery.datetimepicker.css" type="text/css" />
+		<link rel="stylesheet" href="../../../../media/js/bootstrap/css/bootstrap-select.min.css" />
+		<style type="text/css">
+			.fystyle{
+				width: 90%;
+				float: left;
+			}
+		</style>
+	</head>
+
+	<body>
+		<form id="formbackage" name="purchase" style="width: 99%;padding-left: 10px;padding-top: 10px;margin-bottom: 60px;">
+			<table class="table table-bordered" style="margin-bottom: 50px;" align="center">
+				<tr>
+					<td class="th_bg"><i class="red">*</i>招标人/委托单位</td>
+					<td colspan="3">
+						<input type="text" name="purchaserName" id="purchaserName" class="form-control" placeholder="请输入修改后的招标人/委托单位"/>
+					</td>
+				</tr>
+				<tr>
+					<td class="th_bg"><i class="red">*</i>修改原因</td>
+					<td colspan="3">
+						<textarea rows="5" cols="" name="reason" id="reason" class="form-control"  placeholder="限100字（含）以内" style="resize: none;"></textarea>
+						<!-- <input type="text" name="reason" id="reason" class="form-control" placeholder="限100字（含）以内"/> -->
+					</td>
+				</tr>
+			</table>
+		</form>
+		<div class="bottom-btn">
+			<button type="button" class="btn btn-primary" id="btn_submit"><span class="glyphicon glyphicon-saved"></span>确定</button>
+			<button type="button" class="btn btn-default" id="btn_close"><span class="glyphicon glyphicon-remove"></span>取消</button>
+		</div>
+		<script type="text/javascript" src="../../../../media/js/jquery/jquery.js"></script>
+		<script type="text/javascript" src="../../../../media/js/jquery/jquery.extend.js"></script>
+		<script type="text/javascript" src="../../../../media/js/base/common.js"></script>
+		<script type="text/javascript" src="../../../../media/js/base/util.js"></script>
+		<script type="text/javascript" src="../../../../media/js/bootstrap/js/bootstrap.js"></script>
+		<script type="text/javascript" src="../../../../media/js/bootstrap/js/bootstrap-table.js"></script>
+		<script type="text/javascript" src="../../../../media/js/bootstrap/js/bootstrap-table-zh-CN.min.js"></script>
+		<script type="text/javascript" src="../../../../media/js/layer/layer.js"></script>
+		<script type="text/javascript">
+			// $(function(){
+				function passMessage(ago, callback){
+					//保存
+					$("#btn_submit").click(function() {
+						var purchaserName = $.trim($("#purchaserName").val());
+						var reason = $.trim($("#reason").val());
+						if(purchaserName == ""){
+					 		parent.layer.alert("招标人/委托单位不能为空");
+					 		return;
+						};
+						if(reason == ""){
+							parent.layer.alert("修改原因不能为空");
+							return;
+						};
+						if(reason.length > 100){
+						 	parent.layer.alert("修改原因长度不能超过100个字");
+						 	return;
+						};
+						var resetData = {
+								'ago': ago,
+								'after': purchaserName,
+								'reason': reason
+							};
+						callback(resetData);
+						parent.layer.close(parent.layer.getFrameIndex(window.name));
+					});
+					//关闭按钮
+					$("#btn_close").click(function() {
+						parent.layer.close(parent.layer.getFrameIndex(window.name));
+					});
+				}
+			// })
+		</script>
+	</body>
+
+</html>

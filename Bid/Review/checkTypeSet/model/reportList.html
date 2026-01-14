@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8">
+	<meta http-equiv="pragma" content="no-cache"><!-- 禁止浏览器从本地计算机的缓存中访问页面内容 --> 
+	<meta http-equiv="cache-control" content="no-cache"><!-- 用于指定请求和响应遵循的缓存机制 --> 
+	<meta http-equiv="expires" content="0"><!-- 用于设定网页的到期时间，一旦网页过期，必须到服务器上重新传输； -->
+    <title>选择评标报告</title>
+    <link rel="stylesheet" href="../../../media/js/layer/mobile/need/layer.css" />
+    <link rel="stylesheet" href="../../../media/js/bootstrap/css/bootstrap.css" />
+    <link rel="stylesheet" href="../../../media/js/bootstrap/css/bootstrap-table.css">
+    <style>
+        .table>tr>td
+            {
+            vertical-align: middle;
+        }
+    </style>
+</head>
+
+<body>
+<div class="container-fluid pageModel">
+    <!--查询模块-->
+    <div id="toolbarTop" class="clearfix">
+        <div class="input-group">
+            <span class="input-group-addon">评标报告名称</span>
+            <input type="text" class="form-control" id="checkReportName">
+        </div>
+        <div class="input-group">
+            <span class="input-group-addon">评标报告类型</span>
+            <select id="checkReportType"  class="form-control" style="width:108px;margin-right: 5px;">
+                <option value="">全部</option>
+                <option value="1">评标报告</option>
+                <option value="2">流标报告</option>
+            </select>
+        </div>
+        <div class="btn-group">
+            <button type="button" id="btnSearch" class="btn btn-primary">
+                <span class="glyphicon glyphicon-search"></span>查询
+            </button>
+        </div>
+    </div>
+    <table id="tableList" class="table table-bordered table-striped"></table>
+    <div class="bottom-btn" style="z-index: 10;">
+        <button type="button" class="btn btn-primary" id="btnSure"><span class="glyphicon glyphicon-ok"></span>确定</button>
+        <button type="button" class="btn btn-default" id="btnClose"><span class="glyphicon glyphicon-remove"></span>取消</button>
+    </div>
+</div>
+    <script src="../../../media/js/jquery/jquery.js"></script>
+    <script src="../../../media/js/jquery/jquery.extend.js"></script>
+    <script src="../../../media/js/base/common.js"></script>
+    <script src="../../../media/js/bootstrap/js/bootstrap.js"></script>
+    <script src="../../../media/js/bootstrap/js/bootstrap-table.js"></script>
+    <script src="../../../media/js/bootstrap/js/bootstrap-table-zh-CN.min.js"></script>
+    <script src="../js/reportList.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="pragma" content="no-cache">
+		<!-- 禁止浏览器从本地机的缓存中调阅页面内容 -->
+		<meta http-equiv="cache-control" content="no-cache, must-revalidate">
+		<meta http-equiv="expires" content="0">
+		<title>竞价采购历史详情</title>
+		<link rel="stylesheet" href="../../../../../media/js/bootstrap/css/bootstrap.css">
+		<link rel="stylesheet" href="../../../../../media/js/bootstrap/css/bootstrap-table.css">
+		<style type="text/css">
+			.table td,
+			.table tr {
+				vertical-align: middle !important;
+			}
+			
+			input {}
+		</style>
+	</head>
+
+	<body style="width: 99%;">
+		<form id="form">
+			<div class="form-group">
+				<!--<div id="toolbar" style="display:none">
+					<div class="input-group" style="width:180px;float: left;margin-bottom: 10px;">
+						<span class="input-group-addon">选择供应商</span>
+						<select class="form-control" name="supplier" id="supplier" style="width:190px" onchange="changeSelt()">
+					
+						</select>
+					</div>
+				</div>-->
+				<table class="table table-bordered" style="margin-bottom: 0;">
+					<tr>
+					<td colspan="4" style="font-weight: bold;" class="active">议价明细&nbsp;&nbsp;&nbsp;&nbsp;
+						<span style="color: red;" id="endTime" class="set_height"></span>
+					</td>
+
+				</tr>
+				</table>
+				<table id='PackageList'></table>
+
+				<div style="width: 100%;height: 50px;text-align:center;position: fixed;bottom: 0;background-color: #FFFFFF;">
+					<button type="button" id="btn_save" class="btn btn-primary" style="width: 100px;display: none;">同意议价</button>
+					<button type="button" id="btn_submit" class="btn btn-danger" style="width: 100px;display: none;">拒绝</button>
+					<button type="button" id="btn_close" class="btn btn-default" style="width: 100px;">关闭</button>
+				</div>
+
+			</div>
+		</form>
+	</body>
+	<script type="text/javascript" src="../../../../../media/js/jquery/jquery.min.js"></script>
+	<script type="text/javascript" src="../../../../../media/js/bootstrap/js/bootstrap.js"></script>
+	<script type="text/javascript" src="../../../../../media/js/bootstrap/js/bootstrap-table.min.js"></script>
+	<script type="text/javascript" src="../../../../../media/js/jquery/jquery.extend.js"></script>
+	<script type="text/javascript" src="../../../../../media/js/jquery/jquery.params.js"></script>
+	<script type="text/javascript" src="../../../../../media/js/base/common.js"></script>
+	<script type="text/javascript" src="../../../../../media/js/base/util.js"></script>
+	<script type="text/javascript" src="../../../../../media/js/layer/layer.js"></script>
+	<script type="text/javascript" src="../js/bargainMsg.js"></script>
+
+</html>

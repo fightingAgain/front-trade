@@ -1,0 +1,71 @@
+<link rel="stylesheet" href="../../../js/layui/css/layui.css" />
+<link rel="stylesheet" href="../../../js/layui/css/modules/layer/default/layer.css" />
+<link rel="stylesheet" href="../../../js/bootstrap/css/bootstrap.css" />
+<link rel="stylesheet" href="../../../css/style.css" />
+<table class="table table-hover table-bordered" style="width: 99%;padding-left: 10px;padding-top: 10px;margin-bottom: 0;">
+   <tr>
+     <td width="20%">采购方式</td>
+     <td style="text-align: left;" colspan="3"><input type="radio" name="TenderType" value="0" />询价采购<input type="radio" name="TenderType" value="1"/>竞价采购</td>
+   </tr>
+   <tr class="Score">
+     <td width="20%">项目名称:</td>
+     <td style="text-align: left;">
+     	<div class="layui-input-inline">
+            <select id="search_1">
+            	<option value="all">全部</option>
+            	<option value="released">已发布</option>
+            	<option value="notrelease">未发布</option>
+            </select>  
+        </div>
+     </td>
+     <td width="20%">包件名称:</td>
+     <td style="text-align: left;">
+     	<div class="layui-input-inline">
+            <select id="search_1">
+            	<option value="all">全部</option>
+            	<option value="released">已发布</option>
+            	<option value="notrelease">未发布</option>
+            </select>  
+        </div>
+     </td>  
+   </tr>
+   <tr class="Score">
+     <td width="20%">评分:</td>
+     <td style="text-align: left;" colspan="3"><input type="text" id="Score" class="layui-input" style="width: 200px;"/></td>   
+   </tr>
+   <tr class="Score">
+     <td width="20%">说明:</td>
+     <td style="text-align: left;" colspan="3"><textarea class="layui-textarea" id="Remark"></textarea></td>   
+   </tr>
+   <tr class="Score">
+     <td width="20%">被评企业:</td>
+     <td style="text-align: left;">
+     	<div class="layui-input-inline">
+            <select id="search_1">
+            	<option value="all">全部</option>
+            	<option value="released">已发布</option>
+            	<option value="notrelease">未发布</option>
+            </select>  
+        </div>
+     </td>
+     <td width="20%">评论企业:</td>
+     <td style="text-align: left;">
+     	<div class="layui-input-inline">
+            <select id="search_1">
+            	<option value="all">全部</option>
+            	<option value="released">已发布</option>
+            	<option value="notrelease">未发布</option>
+            </select>  
+        </div>
+     </td>  
+   </tr>
+    <tr class="Score">
+     <td width="20%">创建人:</td>
+     <td style="text-align: left;" colspan="3"><input type="text" id="Score" class="layui-input" style="width: 200px;"/></td>       
+   </tr>    
+</table>
+ <script type="text/javascript" src="../../../js/jquery/jquery.js" ></script>
+ <script type="text/javascript" src="../../../js/bootstrap/js/bootstrap.js" ></script>
+ <script type="text/javascript" src="../../../js/layui/layui.js" ></script>
+ <script type="text/javascript" src="../../../js/layui/lay/modules/layer.js" ></script>
+ <script type="text/javascript" src="../js/add_model.js" ></script>

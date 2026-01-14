@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="pragma" content="no-cache"><!-- 禁止浏览器从本地计算机的缓存中访问页面内容 -->
+	<meta http-equiv="cache-control" content="no-cache"><!-- 用于指定请求和响应遵循的缓存机制 -->
+	<meta http-equiv="expires" content="0"><!-- 用于设定网页的到期时间，一旦网页过期，必须到服务器上重新传输； -->
+	<title>下载人信息采集--页面</title>
+	<link rel="stylesheet" href="../../../../../media/js/bootstrap/css/bootstrap.css" />
+	<link rel="stylesheet" href="../../../../../media/js/layer/mobile/need/layer.css" />
+	<link rel="stylesheet" href="../../../../../media/js/bootstrapvalidator/css/bootstrapValidator.css">
+	<style>
+		.readonly {
+			border: none;
+			background: none !important;
+			outline: none !important;
+			box-shadow: none !important;
+		}
+
+		.form-group {
+			margin-bottom: 0;
+		}
+	</style>
+</head>
+
+<body>
+	<form id="formFile">
+		<div name="Filepurchase" style="width: 99%;padding-left: 10px;padding-top: 10px;margin-bottom: 60px;">
+			<table class="table table-bordered " id="DownloadReportInfo" style="margin-bottom: 0px;">
+				<tr>
+					<td class="th_bg">企业名称<i class="red">*</i></td>
+					<td colspan="3">
+						<div class="form-group">
+							<input type="text" name="enterpriseName" id="enterpriseName" class="form-control readonly"
+								readonly="readonly" datatype="*" errormsg="请正确输入企业名称" />
+						</div>
+					</td>
+				</tr>
+				<tr>
+					<td class="th_bg">联系人<i class="red">*</i></td>
+					<td>
+						<div class="form-group">
+							<input type="text" name="agentName" id="agentName" class="form-control" datatype="*"
+								errormsg="请正确输入联系人" />
+						</div>
+					</td>
+					<td class="th_bg">联系电话<i class="red">*</i></td>
+					<td>
+						<div class="form-group">
+							<input type="text" name="agentTel" id="agentTel" class="form-control" datatype="mobile"
+								dataMsg="mobile" />
+						</div>
+					</td>
+				</tr>
+				<tr>
+					<td class="th_bg">联系邮箱<i class="red">*</i></td>
+					<td colspan="3">
+						<div class="form-group">
+							<input type="text" name="enterpriseEmail" id="enterpriseEmail" class="form-control"
+								datatype="email" dataMsg="email" />
+						</div>
+					</td>
+				</tr>
+			</table>
+			<div style="margin-top: 4px; color: #BB2413;" role="alert">
+				<strong>温馨提示：</strong>请输入真实的联系人信息，以便接收系统给您发送的短信
+			</div>
+		</div>
+
+		<div style="width: 100%;height: 50px;text-align:center;position: fixed;bottom: 0;background-color: #FFFFFF;">
+			<button type="button" class="btn btn-primary" id="btnSubmit"><span
+					class="glyphicon glyphicon-ok"></span>提交</button>
+			<button type="button" class="btn btn-default" id="btnClose"><span
+					class="glyphicon glyphicon-remove"></span>关闭</button>
+		</div>
+	</form>
+	<script type="text/javascript" src="../../../../../media/js/jquery/jquery.js"></script>
+	<script type="text/javascript" src="../../../../../media/js/jquery/jquery.extend.js"></script>
+	<script type="text/javascript" src="../../../../../media/js/base/common.js"></script>
+	<script type="text/javascript" src="../../../../../media/js/base/util.js"></script>
+	<script type="text/javascript" src="../../../../../media/js/bootstrap/js/bootstrap.js"></script>
+	<script type="text/javascript" src="../../../../../media/js/bootstrapvalidator/js/bootstrapValidator.js"></script>
+	<script type="text/javascript" src="../../../../../media/js/layer/layer.js"></script>
+	<script type="text/javascript" src="../../../../Model/js/public.js"></script>
+	<script type="text/javascript" src="../js/DownloadLinkEdit.js"></script>
+</body>
+
+</html>

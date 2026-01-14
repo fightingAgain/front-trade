@@ -1,0 +1,102 @@
+<!--
+ * @Author: your name
+ * @Date: 2020-09-18 10:03:56
+ * @LastEditTime: 2020-10-05 09:44:59
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: \FrameWork\bidPrice\Review\projectManager\modal\Judge.html
+--> 
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="pragma" content="no-cache">
+		<!-- 禁止浏览器从本地机的缓存中调阅页面内容 -->
+		<meta http-equiv="cache-control" content="no-cache, must-revalidate">
+		<meta http-equiv="expires" content="0">
+		<title>抽取评委</title>
+		<link rel="stylesheet" type="text/css" href="../../../../media/js/bootstrap/css/bootstrap.css">
+		<link rel="stylesheet" type="text/css" href="../../../../media/js/bootstrap/css/bootstrap-table.min.css">
+	</head>
+	<style type="text/css">
+		.table th,
+		.table td {
+			vertical-align: middle !important;
+		}
+	</style>
+
+	<body>
+		<div class="container-fluid">			
+			<form class="form-horizontal Divquerys" style="display: none">				
+				<div class="form-group row" style="margin:15px 0">					
+					<div id="Divquery" >			
+						<table class="table table-bordered " style="width: 99%;margin-left: 10px;">
+							<tr>
+								<td class="th_bg">抽取数量</td>
+								<td class="cols"><input type="text" class="form-control" id="number" ></td>
+								<td class="th_bg extracIsShow">抽取方式</td>
+								<td class="extracIsShow">
+									<select class="form-control" id="extractType">
+						    			<option value="0">采购人库</option>
+						    			<option value="1">代理机构库</option>
+						    			<option value="2">混合抽取</option>
+					    			</select>		
+								</td>		
+							</tr>
+							<tr>
+								<td class="th_bg">所在省</td>
+								<td style="width: 30%;"><select class="form-control" name="province" id="Province"></select></td>
+								<td class="th_bg">所在市</td>
+								<td style="width: 30%;"><select class="form-control" name="city" id="City"></select></td>		
+							</tr>
+							<tr>
+								<td class="th_bg">专业</td>
+								<td colspan="3">
+									<textarea style="width: 100%;height: 50px;" class="form-control" id="dataTypeName"  readonly="readonly"></textarea>
+									<!-- <input type="text" class="form-control" id="dataTypeName"  readonly="readonly"> -->
+									<input type="hidden" name="dataTypeId" id="dataTypeId" />
+									<input type="hidden" name="dataTypeCode" id="dataTypeCode" />
+								</td>	
+							</tr>
+							<tr>
+								<td colspan="4" style="text-align: center;">
+									<button id="SbmJudge" type="button" class="btn btn-primary">抽取</button>&nbsp;&nbsp;
+									<button id="btn_cancle" type="button" class="btn btn-primary">取消</button>
+								</td>
+							<tr>
+						</table>	
+					</div>
+
+				</div>
+			</form>	
+			<div style="margin-left: 10px; display: none" class="JudgeDiv">
+				<div id="toolbar" style="margin-bottom:10px ">
+					<div class="input-group" style="width:120px;float: left;">
+						<select class="form-control" id="selecttype">
+							<option value="expertName">专家姓名</option>
+							<option value="expertTel">手机号码</option>
+						</select>
+					</div>
+					<div class="input-group" style="width:150px;float: left;margin-right: 10px">
+						<input type="text" class="form-control" id="nameorcode" style="width: 150px;">
+					</div>
+					<div class="btn-group">
+						<button id="btnQuery" type="button" class="btn btn-primary">查询</button>
+						<button id="btnConfirm" type="button" class="btn btn-primary">确定</button>
+					</div>
+				</div>		
+				<table id="Judgetable"></table>
+			</div>
+		</div>
+	</body>
+	<script type="text/javascript" src="../../../../media/js/jquery/jquery.js"></script>
+	<script type="text/javascript" src="../../../../media/js/jquery/jquery.ajax.js"></script>
+	<script type="text/javascript" src="../../../../media/js/bootstrap/js/bootstrap.js"></script>
+	<script type="text/javascript" src="../../../../media/js/bootstrap/js/bootstrap-table.min.js"></script>
+	<script type="text/javascript" src="../../../../media/js/bootstrap/js/bootstrap-table-zh-CN.min.js"></script>
+	<script type="text/javascript" src="../../../../media/js/base/ProvinceCityData.js"></script>
+	<script type="text/javascript" src="../js/Judge.js"></script>
+	</body>
+
+</html>

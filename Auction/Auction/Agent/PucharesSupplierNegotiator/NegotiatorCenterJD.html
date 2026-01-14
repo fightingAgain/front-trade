@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="pragma" content="no-cache">
+		<!-- 禁止浏览器从本地机的缓存中调阅页面内容 -->
+		<meta http-equiv="cache-control" content="no-cache, must-revalidate">
+		<meta http-equiv="expires" content="0">
+		<title>谈判(按明细谈判)</title>
+		<link rel="stylesheet" href="../../../../media/js/bootstrap/css/bootstrap.css">
+		<link rel="stylesheet" href="../../../../media/js/bootstrap/css/bootstrap-table.css">
+		<style type="text/css">
+			label {
+				font-weight: normal;
+			}
+			
+			
+		</style>
+	</head>
+	<body>
+		<table id = "priceNegotiator" class="table table-bordered" style="width: 98%;margin-left: 7px;margin-top: 5px;">
+	     		<tr class="active">
+					<td colspan="4"><font size="3" color="black">项目信息</font></td>
+				</tr>
+				
+				<tr>
+					<td class="th_bg" style="width: 20%;text-align: right;">竞价项目编号</td>
+					<td style="width: 30%;"><label id="projectCode"></label></td>
+					<td class="th_bg" style="width: 20%;text-align: right;">竞价项目名称</td>
+					<td style="width: 30%;"><label id="projectName"></label><span id="ppName" class="text-danger"  style="font-weight:bold"></span></td>
+				</tr>
+				<tr>
+					<td class="th_bg" style="text-align: right;">包件编号</td>
+					<td><label id="packageNumber"></label></td>
+					<td class="th_bg" style="text-align: right;">包件名称</td>
+					<td><label id="packageName"></label></td>
+				</tr>
+				<tr class="detiled" style="display: none;" class="active">
+					<td colspan="4"><font size="3" color="black">明细信息</font></td>
+				</tr>
+				<tr class="detiled" style="display: none;">
+					<td  colspan="4">
+						<table id = "details" class="table table-bordered" >
+						
+						</table>
+					</td>
+				</tr>
+				<tr class="notNegotiation" style="display: none;">
+					<td class="th_bg" style="width: 20%;text-align: right;">谈判方式</td>
+					<td><span>不谈判</span></td>
+					<td class="th_bg" style="width: 20%;text-align: right;">谈判最终报价(<span class="prieUnit"></span>)</td>
+					<td><label id="lastPrice" ></label></td>
+				</tr>
+				
+				
+		</table>
+		<!-- <div class='chooseNegotiator' style="display:none;width: 100%;height: 50px;text-align:center;position: fixed;bottom: 0;left:0;background-color: #FFFFFF;">
+			<button onclick="chooseNegotiation()" type='button' class='btn btn-primary'><span class="glyphicon glyphicon glyphicon-pencil" aria-hidden="true"></span>选择谈判方式</button>
+		</div> -->
+	</body>
+	<script type="text/javascript" src="../../../../media/js/jquery/jquery.js" ></script>
+	 <script type="text/javascript" src="../../../../media/js/jquery/jquery.extend.js"></script>
+	 <script type="text/javascript" src="../../../../media/js/bootstrap/js/bootstrap.js" ></script>
+	 <script type="text/javascript" src="../../../../media/js/bootstrap/js/bootstrap-table.min.js" ></script>
+	 <script type="text/javascript" src="../../../../media/js/bootstrap/js/bootstrap-table-zh-CN.min.js" ></script>
+	 <script type="text/javascript" src="../../../../media/js/layer/layer.js" ></script>
+	 <script type="text/javascript" src="../../../../media/js/base/common.js" ></script>
+</html>
+
+<script type="text/javascript">
+	var findProjectNegotiatorInfo = parent.config.AuctionHost + "/NegotiationController/findProjectNegotiatorInfo.do";
+	var searchUrl = parent.config.AuctionHost + "/NegotiationController/findNegotiationForDetialed.do";
+	
+	var projectId = getUrlParam("projectId");
+	var packageId = getUrlParam("id");
+	var createType = getUrlParam("createType") || 0;
+	var tenderType = 1 //竞价采购
+	
+	var negotiations = [];
+	var detailsList = []; 
+	var auctionPackageDetaileds = [];
+	
+	var itemState ="";
+	
+	$(".prieUnit").html(top.prieUnit||"");
+	
+	var rowData;
+	
+	var auctionModel = "";
+	
+	$(function(){
+		
+		$.ajax({
+			type: "post",
+			url:findProjectNegotiatorInfo,
+			datatype: 'json',
+			data:{
+				projectId:projectId,
+				packageId:packageId,
+				tenderType:tenderType,
+			},
+			async: true,
+			success: function(data) {
+				if(data.success) {
+					rowData = data.data;
+					//回显数据
+					getMessage(rowData);
+
+					if(!(rowData.auctionModel != undefined && rowData.auctionModel == 1)){
+						
+						//按包件
+						
+						//判断是否谈判
+						if(rowData.negotiationState == '0') {
+							//已谈判
+							
+							if(rowData.negotiationType == '0'){
+								
+								//线上谈判
+								onLineNegotiation(rowData);
+								
+							}
+							
+							if(rowData.negotiationType == '1') {
+								
+								//线下谈判
+								outLineNegotiation(rowData);
+								
+							}
+									
+							if(rowData.negotiationType == '2') { 
+								//不谈判
+								notNegotiation();
+							}
+								
+						}else{
+							//未谈判
+							if(createType != "undefined" && createType == 1 ){//当前项目不为自己发布的项目时
+								parent.layer.alert("温馨提示：当前项目还未进行谈判！");
+							}else{
+								//选择谈判方式
+								$(".chooseNegotiator").show();
+							}
+						}
+					}
+				}
+			}
+		});
+	})
+	
+	function getMessage(obj){
+			
+		$('label').each(function(){
+			//判断谈判方式
+			$(this).text(obj[this.id]);
+		});
+		
+		if(obj.itemState != undefined && obj.itemState == 2){
+			itemState = 2;
+		}
+		
+		if(obj.projectSource == '1') {
+			$("#ppName").html("(重新竞价)");
+		} else {
+			$("#ppName").html("");
+		}
+		
+		//判断是按明细还是按包件
+		if(obj.auctionModel != undefined && obj.auctionModel == 1){
+			auctionModel = 1;
+			//按明细
+			$(".detiled").show();
+			$(".chooseNegotiator").hide();
+			showDetaileds();
+		}else{
+			auctionModel = 0;
+			//按包件
+			$(".detiled").hide();
+			$(".chooseNegotiator").show();
+		}
+		
+		if(createType != "undefined" && createType == 1 ){
+			//非创建人
+			$(".chooseNegotiator").hide();
+		}
+	}
+	
+	//选择谈判方式
+	function chooseNegotiation(dataInfo){
+		if(itemState == 2){
+			parent.layer.alert("该阶段无法谈判");	
+			return;
+		}
+		
+		var sendData = rowData;
+		if(dataInfo != null){
+			sendData = dataInfo;
+		}
+		
+			
+		
+		//谈判  选择是线上还是线下谈判还是不谈判
+		parent.layer.open({
+			type: 2,
+			title: '选择谈判方式',
+			area: ['650px', '225px'],
+			maxmin: false, //该参数值对type:1和type:2有效。默认不显示最大小化按钮。需要显示配置maxmin: true即可
+			resize: false, //是否允许拉伸
+			content: 'Auction/Auction/Agent/PucharesSupplierNegotiator/NegotiatorMethod.html?projectId='+projectId+'&id='+packageId,
+			success: function(layero, index) {
+				var body = layer.getChildFrame('body', index);
+				var iframeWin = layero.find('iframe')[0].contentWindow;
+				
+				iframeWin.getMessage(sendData);
+				iframeWin.reloadConsole(function(){
+	            	location.reload();
+				})
+				if(auctionModel== 0){
+					//按包件
+					parent.layer.close(parent.layer.getFrameIndex(window.name));
+				} 
+			}
+		});
+		
+		
+	}
+	
+	//线上谈判
+	function onLineNegotiation(dataInfo){
+		
+		//查看
+		parent.layer.open({
+			type: 2 //此处以iframe举例
+				,
+			title: '价格谈判',
+			area: ['1000px', '600px'],
+			content: 'Auction/Auction/Agent/PucharesSupplierNegotiator/pPriceNegotiator.html?'+"createType="+createType+'&projectId='+projectId+'&id='+packageId,
+			success: function(layero, index) {
+				var body = layer.getChildFrame('body', index);
+				var iframeWin = layero.find('iframe')[0].contentWindow;
+				iframeWin.tableShow(dataInfo);
+				if(!(rowData.auctionModel != undefined && rowData.auctionModel == 1)){
+					//按包件
+					parent.layer.close(parent.layer.getFrameIndex(window.name));
+				}
+			}
+		});
+		
+	}
+	
+	//下线谈判
+	function outLineNegotiation(dataInfo){
+		//查看
+		parent.layer.open({
+			type: 2, //此处以iframe举例
+			title: '价格谈判',
+			area: ['80%', '85%'],
+			id: "negotiators",
+			content: 'Auction/Auction/Agent/PucharesSupplierNegotiator/underline.html?projectId='+projectId+'&id='+packageId,
+			success: function(layero, index) {
+				var body = layer.getChildFrame('body', index);
+				var iframeWin = layero.find('iframe')[0].contentWindow;
+				iframeWin.getShow(dataInfo);
+				parent.layer.close(parent.layer.getFrameIndex(window.name));
+			}
+		});
+		
+	}
+	
+	//不谈判
+	function notNegotiation(){
+		$(".notNegotiation").show();
+		$(".chooseNegotiator").hide();
+	}
+
+	
+	window.operateEvents = { //添加一个按钮对应的事件
+		"click #btnCheck": function(e, value, row, index) {
+			//查看 线上谈判
+			onLineNegotiation(row);
+	
+		},
+		"click #btnNot": function(e, value, row, index) {
+			//查看 不谈判
+			parent.layer.open({
+				type: 2 //此处以iframe举例
+					,
+				title: '价格谈判',
+				area: ['900px', '400px'],
+				content: 'Auction/Auction/Agent/PucharesSupplierNegotiator/NotNegotiator.html',
+				success: function(layero, index) {
+					var body = layer.getChildFrame('body', index);
+					var iframeWin = layero.find('iframe')[0].contentWindow;
+					iframeWin.tableShow(row);
+				}
+			});
+	
+		},
+		"click #btnUnderCheck": function(e, value, row, index) {
+			//查看 线下谈判
+			outLineNegotiation(row);
+	
+		},
+		"click #btnNegotiator": function(e, value, row, index) {
+			//选择谈判方式
+			chooseNegotiation(row);
+		},
+		"click #btnView": function(e, value, row, index) {
+		
+			layer.alert("温馨提示：项目发布人还未进行谈判！");	
+		}
+	}
+	
+	function AddFunction(value, row, index) { //把需要创建的按钮封装到函数中
+		if(row.negotiationState == '0' && row.negotiationType == '0') {
+			
+			return [
+				//线上谈判,已谈判
+				'<a href="javascript:void(0)" id="btnCheck" class="btn-sm btn-primary" style="text-decoration:none" ><span class="glyphicon glyphicon-search" aria-hidden="true"></span>查看</a>&nbsp;&nbsp;',
+			].join("")
+		}
+	
+		if(row.negotiationState == '0' && row.negotiationType == '2') {
+			return [
+				//不谈判
+				'<a href="javascript:void(0)" id="btnNot" class="btn-sm btn-primary" style="text-decoration:none" ><span class="glyphicon glyphicon-search" aria-hidden="true"></span>查看</a>&nbsp;&nbsp;',
+			].join("")
+		}
+	
+		if(row.negotiationState == '0' && row.negotiationType == '1') {
+			return [
+				//线下谈判,已谈判
+				'<a href="javascript:void(0)" id="btnUnderCheck" class="btn-sm btn-primary" style="text-decoration:none" ><span class="glyphicon glyphicon-search" aria-hidden="true"></span>查看</a>&nbsp;&nbsp;',
+			].join("")
+		}
+	
+		if(row.negotiationState == '1') {
+			if(createType == 1 ){//当前项目不为自己发布的项目时
+				return [
+					
+					'<a href="javascript:void(0)" id="btnView" class="btn-sm btn-primary" style="text-decoration:none" ><span class="glyphicon glyphicon glyphicon-search" aria-hidden="true"></span>查看</a>&nbsp;&nbsp;',
+	
+				].join("")
+			}else{
+				return [
+					//未谈判
+					'<a href="javascript:void(0)" id="btnNegotiator" class="btn-sm btn-primary" style="text-decoration:none" ><span class="glyphicon glyphicon glyphicon-pencil" aria-hidden="true"></span>谈判</a>&nbsp;&nbsp;',
+	
+				].join("")
+			}
+			
+		}
+	
+	}
+	
+	
+	
+	function showDetaileds(){
+		
+		$("#details").bootstrapTable({
+			url: searchUrl,
+			dataType: 'json',
+			method: 'get',
+			cache: false, // 是否使用缓存，默认为true，所以一般情况下需要设置一下这个属性（*）
+			locale: "zh-CN",
+			queryParams: function(params) {
+		
+				var paramData = {
+					'packageId':packageId,
+					'tenderType': 1 //竟低价采购		
+				}
+				return paramData;
+			},
+			columns: [{
+					title: '序号',
+					align: 'center',
+					width: '50px',
+					formatter: function(value, row, index) {
+						return index + 1; //返回每条的序号： 每页条数 * （当前页 - 1 ）+ 序号 
+					}
+				},
+				{
+					field: 'detailedName',
+					title: '商品名称',
+	
+				},
+				{
+					field: 'brand',
+					title: '品牌要求',
+				},
+				{
+					field: 'detailedVersion',
+					title: '规格型号',
+					width: '160'
+				},
+				{
+					field: 'detailedCount',
+					title: '数量',
+					align: 'center',
+					width: '100'
+				},
+				{
+					field: 'detailedUnit',
+					title: '单位',
+					align: 'center',
+					width: '100'
+				},{
+					field: 'detailedContent',
+					title: '备注',
+					align: 'left',
+					width: '100'
+				},{
+					field: 'negotiationState',
+					title: '谈判状态',
+					align: 'center',
+					width: '100px',
+					formatter: function(value, row, index) {
+						if(row.negotiationState == "0" && 　row.negotiationType == "2") {
+							return "<label >不谈判</label>";
+						}
+						if(row.negotiationState == "0" && 　row.negotiationType != "2") { //已谈判
+							return "<label style='color:red'>已谈判</label>";
+						}
+						if(row.negotiationState == "1") { //未谈判
+							return "<label style='color:black'>未谈判</label>";
+						}
+					}
+				},{
+					field: 'Button',
+					title: '操作',
+					align: 'center',
+					width: '100px',
+					formatter: AddFunction, //表格中添加按钮
+					events: operateEvents, //给按钮注册事件
+	
+				}
+			]
+		})
+	}
+	
+	function getUrlParam(name) {
+		var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); // 构造一个含有目标参数的正则表达式对象  
+		var r = window.location.search.substr(1).match(reg); // 匹配目标参数  
+		if(r != null) return unescape(r[2]);
+		return null; // 返回参数值  
+	}
+	
+</script>

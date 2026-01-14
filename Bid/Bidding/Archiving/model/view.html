@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8">
+		<meta http-equiv="pragma" content="no-cache"><!-- 禁止浏览器从本地计算机的缓存中访问页面内容 --> 
+		<meta http-equiv="cache-control" content="no-cache"><!-- 用于指定请求和响应遵循的缓存机制 --> 
+		<meta http-equiv="expires" content="0"><!-- 用于设定网页的到期时间，一旦网页过期，必须到服务器上重新传输； -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>查看项目资料归档</title>
+    <link rel="stylesheet" href="../../../media/js/layer/mobile/need/layer.css" />
+    <link rel="stylesheet" href="../../../media/js/bootstrap/css/bootstrap.css" />
+    <link rel="stylesheet" href="../../../media/js/bootstrap/css/bootstrap-table.css">
+	
+	<style>
+		html,body { height: 100%;width: 100%;}
+		.file-input .kv-upload-progress{
+			display: none !important;
+		}
+		.padding_button{
+			padding: 5px 8px !important;
+			line-height: 30px !important;
+		}
+		.fileUp div{
+			display: none;
+		}
+		.stream-total-tips{
+			display: none;
+		}
+		.stream-main-upload-box{
+			border-color: #ffffff;
+		}
+		table td{
+			white-space: normal;
+		}
+	</style>
+</head>
+
+<body>
+    <form class="pageModel" id="formName" name="formName">
+    	<div class="panel-group" id="accordion">
+			<div class="panel panel-accordion panel-default show_fallback">
+				<div class="panel-heading active"  role="tab" id="headingfive">  
+			 		<h4 class="panel-title">
+			        	<a  role="button" data-toggle="collapse" href="#collapsefive" aria-controls="collapsefive"  aria-expanded="true"  >
+			        		退回申请记录
+							<button type="button" class="btn btn-primary" id="backHistoryList" style="float: right;margin-right: 50px;">查看历史</button>
+			        	</a>
+			 		</h4>  
+			   	</div>  
+			  	<div id="collapsefive" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingfive">  
+			       	<div class="panel-body">
+			       		<div id="view_fallback"></div>
+			   		</div>
+				</div>
+			</div>
+    		<div class="panel panel-accordion panel-default">
+	    		<div class="panel-heading active"  role="tab" id="headingOne">  
+			 		<h4 class="panel-title">
+		            	<a  role="button" data-toggle="collapse" href="#collapseOne" aria-controls="collapseOne"  aria-expanded="true"  >
+		            		标段信息
+		            	</a>
+			 		</h4>  
+			   	</div>  
+			  	<div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">  
+			       	<div class="panel-body">
+			       		<table  class="table table-bordered">
+			       			<tr>
+				            	<td class="th_bg">标段编号</td>
+				                <td colspan="3">
+				                    <span class="padding_button" id="interiorBidSectionCode"></span>
+				                </td>
+				            </tr>
+				            <tr>
+				                <td class="th_bg">标段名称</td>
+				                <td colspan="3">
+				                    <span class="padding_button" id="bidSectionName"></span>
+				                </td>
+				            </tr>
+				            <tr>
+				            	<td  colspan="4" class="wrapPublic"></td>
+				            </tr>
+			       		</table>
+		       		</div>
+	       		</div>
+       		</div>
+       		<div class="panel panel-accordion panel-default pretrial">
+	    		<div class="panel-heading active"  role="tab" id="headingTwo">  
+			 		<h4 class="panel-title">
+		            	<a class="collapsed" role="button" data-toggle="collapse" href="#collapseTwo" aria-controls="collapseTwo"  aria-expanded="false">
+		            		预审阶段
+		            	</a>
+			 		</h4>  
+			   	</div>  
+			  	<div  id="collapseTwo" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingTwo">  
+			       	<div class="panel-body">
+			       		<div class="wrapPre"></div>
+		       		</div>
+		       	</div>
+	    	</div>
+	    	<div class="panel panel-accordion panel-default">
+	    		<div class="panel-heading active"  role="tab" id="headingThree">  
+			 		<h4 class="panel-title">
+		            	<a class="collapsed" role="button" data-toggle="collapse" href="#collapseThree" aria-controls="collapseThree"  aria-expanded="false">
+		            		后审阶段
+		            	</a>
+			 		</h4>  
+			   	</div>  
+			  	<div  id="collapseThree" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingThree">  
+			       	<div class="panel-body">
+			       		<div class="wrapTrial">
+			       			
+			       		</div>
+		       		</div>
+		       	</div>
+	    	</div>
+	    	<div id="approval">
+	    		
+	    	</div>
+   		</div>
+    </form>
+    <div class="bottom-btn">
+    	<button type="button" class="btn btn-primary" id="btnPass" style="display: none;"><span class="glyphicon glyphicon-saved"></span>审核通过</button>
+        <button type="button" class="btn btn-default" id="btnNoPass" style="display: none;"><span class="glyphicon glyphicon-remove"></span>审核不通过</button>
+        <a href="javascript:;" style="color: #fff;" class="btn btn-primary" id="btnPack" style="display: none;"><span class="glyphicon glyphicon-saved"></span>一键打包</a>
+		<button type="button" class="btn btn-default" id="btnClose"><span class="glyphicon glyphicon-remove"></span>关闭</button>
+    </div>
+    
+    <script type="text/javascript" src="../../../media/js/jquery/jquery.js"></script>
+    <script type="text/javascript" src="../../../media/js/jquery/jquery.extend.js"></script>
+    <!-- <script type="text/javascript" src="../../../media/js/base/util.js"></script> -->
+    <script type="text/javascript" src="../../../media/js/base/common.js"></script>
+    <script type="text/javascript" src="../../../media/js/bootstrap/js/bootstrap.js"></script>
+    <script type="text/javascript" src="../../../media/js/layer/layer.js"></script>
+    <script type="text/javascript" src="../../../media/js/bootstrap/js/bootstrap-table.js"></script>
+    <script type="text/javascript" src="../../../media/js/bootstrap/js/bootstrap-table-zh-CN.min.js"></script>
+	<script type="text/javascript" src="../../../media/js/Model/archivingRollback/js/embed.js"></script>
+    <script type="text/javascript" src="../../Model/js/public.js"></script>
+    <script type="text/javascript" src="../../../Hgh/WorkflowManage/workFlowCheck/js/workFlow.js" ></script>
+	<!-- <script type="text/javascript" src="../js/WorkflowInfoGd.js"></script> -->
+    <script type="text/javascript" src="../js/view.js"></script>
+   
+</body>
+
+</html>

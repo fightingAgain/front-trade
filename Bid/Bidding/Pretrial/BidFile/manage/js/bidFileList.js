@@ -1,0 +1,355 @@
+/**
+ *  Xiangxiaoxia 
+ *  2019-2-25
+ *  代理机构--招标文件列表页面
+ *  方法列表及功能描述
+ *   1、initTable()   分页查询
+ */
+
+var urlBidFileList = config.tenderHost + '/PretrialDocClarifyController/findPretrialDocClarifyPageList.do'; //招标文件--标段查询分页接口
+var resetflieurl = config.tenderHost + '/PretrialDocClarifyController/resetdeletePretrialDocClarify.do'; //撤回招标文件及附件信息
+var deleteUrl = config.tenderHost + '/PretrialDocClarifyController/deletePretrialDocClarify.do'; //删除招标文件及附件信息
+
+var pageEdit = 'Bidding/Pretrial/BidFile/manage/model/bidFileEdit.html';//编辑
+var pageChange = 'Bidding/Pretrial/BidFile/manage/model/bidFileChangeEdit.html';//变更
+var pageView = 'Bidding/Pretrial/BidFile/manage/model/bidFileView.html';
+
+//表格初始化
+$(function() {
+	initTable();
+
+	// 搜索按钮触发事件
+	$("#btnSearch").click(function() {
+		$("#table").bootstrapTable('destroy');
+		initTable();
+	});
+	
+	//编辑
+	$("#btnAdd").on("click", function(){
+		openEdit();
+	});
+	//变更
+	$("#table").on("click", ".btnChange", function() {
+		var index = $(this).attr("data-index");
+		openEdit(index, 'change');
+	});
+	//编辑
+	$("#table").on("click", ".btnEdit", function() {
+		var index = $(this).attr("data-index");
+		openEdit(index);
+	});
+	//查看
+	$("#table").on("click", ".btnView", function() {
+		var index = $(this).attr("data-index");
+		openView(index);
+	});
+
+	
+	
+	//撤回标段文件
+	$("#table").on("click", ".btnCancel", function() {
+		var index = $(this).attr("data-index");
+		var rowData = $('#table').bootstrapTable('getData')[index];
+		parent.layer.confirm('确定撤回该资格预审文件?', {
+			icon: 3,
+			title: '询问'
+		}, function(index) {
+			parent.layer.close(index);
+			$.ajax({
+				url: resetflieurl,
+				type: "post",
+				data: {
+					bidSectionId: rowData.bidSectionId
+				},
+				success: function(data) {
+					if(data.success == false) {
+						parent.layer.alert(data.message);
+						return;
+					}
+					parent.layer.alert("撤回成功", {
+						icon: 1,
+						title: '提示'
+					});
+					$("#table").bootstrapTable("refresh");
+				},
+				error: function(data) {
+					parent.layer.alert("加载失败", {
+						icon: 2,
+						title: '提示'
+					});
+				}
+			});
+		});
+	});
+	//删除文件
+	$("#table").on("click", ".btnDel", function() {
+		var index = $(this).attr("data-index");
+		var rowData = $('#table').bootstrapTable('getData')[index];
+		parent.layer.confirm('确定删除该资格预审文件?', {
+			icon: 3,
+			title: '询问'
+		}, function(index) {
+			parent.layer.close(index);
+			$.ajax({
+				url: deleteUrl,
+				type: "post",
+				data: {
+					id: rowData.id
+				},
+				success: function(data) {
+					if(data.success == false) {
+						parent.layer.alert(data.message);
+						return;
+					}
+					parent.layer.alert("删除成功", {
+						icon: 1,
+						title: '提示'
+					});
+					$("#table").bootstrapTable("refresh");
+				},
+				error: function(data) {
+					parent.layer.alert("加载失败", {
+						icon: 2,
+						title: '提示'
+					});
+				}
+			});
+		});
+	})
+});
+//设置查询条件
+function queryParams(params) {
+	return {
+		'pageNumber': params.offset / params.limit + 1, //当前页数
+		'pageSize': params.limit, // 每页显示数量
+		'offset': params.offset, // SQL语句偏移量
+		'interiorBidSectionCode': $("#interiorBidSectionCode").val(),
+		'bidSectionName': $("#bidSectionName").val()
+	}
+};
+
+/*
+ * 打开编辑窗口
+ * 当index为空时是添加，index不为空时是当前所要编辑的索引，
+ */
+function openEdit(index, type) {
+	var rowData = "",
+		url = pageEdit;
+	if(index != "" && index != undefined){
+		rowData = $('#table').bootstrapTable('getData')[index];
+	}
+	if(Number(rowData.changeCount)>0){//变更保存后的数据从编辑按钮进，此时type!='change'
+		type = 'change';
+	}
+	url = type == 'change'?pageChange:pageEdit;
+	layer.open({
+		type: 2,
+		title: type == 'change'?"资格预审文件变更":"资格预审文件编辑",
+		area: ['100%','100%'],
+		resize: false,
+		content: url + '?id=' + rowData.bidSectionId,
+		success: function(layero, idx) {
+			var iframeWin = layero.find('iframe')[0].contentWindow;	
+			iframeWin.passMessage(rowData,refreshFather);  //调用子窗口方法，传参
+		}
+	});
+}
+/*
+ * 打开查看窗口
+ * index是当前所要查看的索引值，
+ */
+function openView(index) {
+	var width = top.$(window).width() * 0.8;
+	var height = top.$(window).height() * 0.9;
+	var rowData = $('#table').bootstrapTable('getData')[index]; //bootstrap获取当前页的数据
+	layer.open({
+		type: 2,
+		title: "查看资格预审文件",
+		area: ['100%', '100%'],
+		resize: false,
+		content: pageView + "?source=0" + "&id=" + rowData.id + "&isThrough=" + (rowData.pretrialDocClarifyState == 2 ? 1 : 0)+"&bidSectionId="+rowData.bidSectionId, //标段主键id
+		success: function(layero, index) {
+			var iframeWin = layero.find('iframe')[0].contentWindow;	
+			iframeWin.passMessage(rowData);  //调用子窗口方法，传参
+		}
+	});
+}
+
+
+
+function initTable() {
+	$('#table').bootstrapTable({
+		method: 'GET', // 向服务器请求方式
+		contentType: "application/x-www-form-urlencoded", // 如果是post必须定义
+		url: urlBidFileList, // 请求url		
+		cache: false, // 是否使用缓存，默认为true，所以一般情况下需要设置一下这个属性（*）
+		striped: true, // 隔行变色
+		dataType: "json", // 数据类型
+		pagination: true, // 是否启用分页
+		showPaginationSwitch: false, // 是否显示 数据条数选择框
+		pageSize: 15, // 每页的记录行数（*）
+		pageNumber: 1, // table初始化时显示的页数
+		pageList: [10, 15, 20, 25],
+		search: false, // 不显示 搜索框
+		sidePagination: 'server', // 服务端分页
+		classes: 'table table-bordered', // Class样式
+		silent: true, // 必须设置刷新事件
+		toolbar: '#toolbar', // 工具栏ID
+		toolbarAlign: 'left', // 工具栏对齐方式
+		queryParams: queryParams, // 请求参数，这个关系到后续用到的异步刷新
+		queryParamsType: "limit",
+		height: top.tableHeight,
+		toolbar:"#toolbar",
+		onCheck: function(row) {
+			id = row.id;
+			projectId = row.peojectId;
+		},
+		columns: [{
+			field: 'xh',
+			title: '序号',
+			align: 'center',
+			width: '50px',
+			formatter: function(value, row, index) {
+				var pageSize = $('#table').bootstrapTable('getOptions').pageSize || 15; //通过表的#id 可以得到每页多少条  
+				var pageNumber = $('#table').bootstrapTable('getOptions').pageNumber || 1; //通过表的#id 可以得到当前第几页  
+				return pageSize * (pageNumber - 1) + index + 1; //返回每条的序号： 每页条数 * （当前页 - 1 ）+ 序号 
+			}
+		}, {
+			field: 'interiorBidSectionCode',
+			title: '标段编号',
+			align: 'left',
+			cellStyle:{
+				css:widthCode
+			}
+		}, {
+			field: 'bidSectionName',
+			title: '标段名称',
+			align: 'left',
+			cellStyle:{
+				css:widthName
+			}
+		}, {
+			field: 'changeCount',
+			title: '变更次数',
+			align: 'center',
+			cellStyle:{
+				css:widthState
+			},
+			formatter:function(value, row, index){
+				if(value || value == 0){
+					if(value == 0){
+						return "首次";
+					} else {
+						return "第" +value+ "次变更";
+					}
+				}
+			}
+		},{
+			field: 'tenderProjectType',
+			title: '项目类型',
+			align: 'center',
+			cellStyle:{
+				css:widthState
+			},
+			formatter: function(value, row, index) {
+				return getTenderType(value);
+			}
+		},
+		{
+			field: 'createTime', //招标文件主表的创建时间
+			title: '创建时间',
+			align: 'center',
+			cellStyle:{
+				css:widthDate
+			},
+		},
+		{
+			field: 'states', //招标文件主表的创建时间
+			title: '标段状态',
+			align: 'center',
+			cellStyle:{
+				css:widthState
+			},
+			formatter:function(value, row, index){
+				if(value == 1){
+					return "生效";
+				} else {
+					return "<span style='color:red;'>招标异常</span>";
+				}
+			}
+		}, {
+			field: 'pretrialDocClarifyState',
+			title: '审核状态',
+			cellStyle:{
+				css:widthState
+			},
+			align: 'center',
+			formatter: function(value, row, index) {
+				//0为未审核，1为审核中，2为审核通过，3为审核不通过
+				if(value == 0) {
+					return "<span style='color:red;'>未提交</span>";
+				} else if(value == 1) {
+					return "<span style='color:red;'>审核中</span>";
+				} else if(value == 2) {
+					return "<span style='color:green;'>审核通过</span>";
+				} else if(value == 3) {
+					return "<span style='color:red;'>审核不通过</span>";
+				} else if(value == 4){
+					return "<span style='color:red;'>已撤回</span>";
+				} else {
+					return "未编辑";
+				}
+			}
+		},{
+			field: '',
+			title: '操作',
+			align: 'left',
+			width: '250',
+			formatter: function(value, row, index) {
+				var str = "";
+				var strSee = '<button  type="button" class="btn btn-primary btn-sm btnView" data-index="' + index + '"><span class="glyphicon glyphicon-eye-open"></span>查看</button>';
+				var strEdit = '<button  type="button" class="btn btn-primary btn-sm btnEdit" data-index="' + index + '"><span class="glyphicon glyphicon-edit"></span>编辑</button>';
+				var strCancel = '<button  type="button" class="btn btn-danger btn-sm btnCancel" data-index="' + index + '"><span class="glyphicon glyphicon-share-alt"></span>撤回</button>';
+				var strChange = '<button  type="button" class="btn btn-primary btn-sm btnChange" data-index="' + index + '"><span class="glyphicon glyphicon-edit"></span>变更</button>';
+				var strDel = '<button  type="button" class="btn btn-danger btn-sm btnDel" data-index="' + index + '"><span class="glyphicon glyphicon-remove"></span>删除</button>';
+				if(row.owner && row.owner == 1){//权限  是否有操作权限1是  0否
+					if(row.states != 1){
+						if(row.pretrialDocClarifyState || row.pretrialDocClarifyState === 0){
+							return strSee;
+						} else {
+							return "";
+						}
+					}
+					if(row.pretrialDocClarifyState == 0) { //0为临时保存，1为提交审核，2为审核通过，3为审核未通过
+						str += strSee + strEdit + strDel;
+					} else if(row.pretrialDocClarifyState == 1) {
+						str += strSee + strCancel;
+					} else if(row.pretrialDocClarifyState == 2) {
+						str += strSee + strCancel;
+					} else if(row.pretrialDocClarifyState == 3) {
+						str += strSee + strEdit + strDel;
+					} else if(row.pretrialDocClarifyState == 4) {
+						str += strSee + strEdit + strDel;
+					} else {
+						str += strEdit;
+					}
+					if(row.isCanChange == 1){
+						str += strChange;
+					}
+					return str;
+				}else{
+					if(row.pretrialDocClarifyState || row.pretrialDocClarifyState === 0){
+						return strSee;
+					}else{
+						return '';
+					}
+					
+				}
+			}
+		}],
+	})
+}
+function refreshFather(){
+	$('#table').bootstrapTable('refresh');
+}
+

@@ -1,0 +1,70 @@
+﻿<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="pragma" content="no-cache">
+		<!-- 禁止浏览器从本地机的缓存中调阅页面内容 -->
+		<meta http-equiv="cache-control" content="no-cache, must-revalidate">
+		<meta http-equiv="expires" content="0">
+		<title>提问详情</title>
+
+		<link rel="stylesheet" href="../../../media/js/bootstrap/css/bootstrap.css">
+		<link rel="stylesheet" href="../../../media/js/bootstrap/css/bootstrap-table.css">
+		<style type="text/css">
+			label {
+				font-weight: normal;
+			}
+		</style>
+	</head>
+
+	<body style="width: 99%;padding-left: 10px;padding-top: 10px;">
+
+		<table id="appraiseTbale" class="table table-bordered">
+			<!--<tr>
+				<td style="text-align: right;">项目名称</td>
+				<td><label id="projectName"></label><span id="ppName" class="text-danger"  style="font-weight:bold"></span></td>
+				<td style="text-align: right;">项目编号</td>
+				<td><label id="projectCode"></label></td>
+			</tr>-->
+			<tr>
+				<td class="th_bg" width="20%"  >采购项目编号：</td>
+				<td>
+					<label id="projectCode" name="projectCode"></label>
+				</td>
+				<td class="th_bg" width="20%"  >采购项目名称：</td>
+				<td>
+					<label id="projectName" name="projectName"></label>
+				</td>
+			</tr>
+			<tr>
+				<td class="th_bg" width="20%"  >项目包件编号：</td>
+				<td>
+					<label id="packageNum" name="packageNum"></label>
+				</td>
+				<td class="th_bg" width="20%"  >项目包件名称：</td>
+				<td>
+					<label id="packageName" name="packageName"></label>
+				</td>
+			</tr>
+			<tr>
+				<td class="th_bg"  >提出澄清截止时间：</td>
+				<td><label id="askEndDate"></label></td>
+				<td class="th_bg" >答复截止时间：</td>
+				<td><label id="answersEndDate"></label></td>
+			</tr>
+		</table>
+
+		<table class="table table-hover table-bordered" id="table"></table>
+
+		<script type="text/javascript" src="../../../media/js/jquery/jquery.min.js"></script>
+		<script src="../../../media/js/jquery/jquery.extend.js"></script>
+
+		<script type="text/javascript" src="../../../media/js/bootstrap/js/bootstrap-table.min.js"></script>
+		<script src="../../../media/js/bootstrap/js/bootstrap-table-zh-CN.min.js"></script>
+		<script type="text/javascript" src="../../../media/js/bootstrap/js/bootstrap.js"></script>
+		<script type="text/javascript" src="js/Ask.js"></script>
+
+	</body>
+
+</html>

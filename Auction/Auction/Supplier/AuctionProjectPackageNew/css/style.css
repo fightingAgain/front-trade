@@ -1,0 +1,278 @@
+.borderRadius3 {
+  border-radius: 3px;
+}
+.priceBox {
+  display: flex;
+  position: absolute;
+  height: 100%;
+  width: 100%;
+}
+.priceBox .leftPanel {
+  width: 250px;
+  background: linear-gradient(to top, #2990e9, #007eea);
+}
+.priceBox .leftPanel .priceType {
+  font-size: 46px;
+  color: #fff;
+  font-weight: bold;
+  line-height: 2.5em;
+  text-align: center;
+}
+.priceBox .leftPanel .priceInfo {
+  padding: 20px;
+}
+.priceBox .leftPanel .priceInfo .item {
+  position: relative;
+  margin-bottom: 25px;
+}
+.priceBox .leftPanel .priceInfo .item h4 {
+  font-size: 14px;
+  font-weight: bold;
+  color: #ffcf3d;
+  margin-bottom: 10px;
+}
+.priceBox .leftPanel .priceInfo .item p {
+  font-size: 14px;
+  line-height: 18px;
+  color: #fff;
+}
+.priceBox .leftPanel .priceInfo .item p.number {
+  background: #fff;
+  color: #007eea;
+  font-weight: bold;
+  border-radius: 3px;
+  padding: 5px 8px;
+}
+.priceBox .leftPanel .priceInfo .item p.type {
+  border: 1px solid #fff;
+  font-weight: bold;
+  border-radius: 3px;
+  padding: 5px 8px;
+  display: inline-block;
+}
+.priceBox .leftPanel .priceInfo .item:last-child {
+  margin-bottom: 0;
+}
+.priceBox .rightPanel {
+  flex: auto;
+  background: url(../images/price_bg.jpg) #eee;
+  background-size: cover;
+  position: relative;
+}
+.priceBox .rightPanel .Time {
+  padding-top: 5%;
+}
+.priceBox .rightPanel .Time .timeShow {
+  text-align: center;
+  font-size: 40px;
+  font-family: 'Impact';
+  font-size: 20px;
+  color: #333;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+.priceBox .rightPanel .Time .timeShow font {
+  font-weight: 100;
+  font-size: 88px;
+  color: #ffcf3d;
+  margin: 0 10px 0 5px;
+}
+.priceBox .rightPanel .Time .TimeText {
+  text-align: center;
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 30px;
+}
+.priceBox .rightPanel .Time .TimeText span {
+  border-radius: 3px;
+  background: #007eea;
+  color: #fff;
+  font-size: 16px;
+  padding: 5px 10px;
+  margin-left: 15px;
+}
+.priceBox .rightPanel .submitBox {
+  width: 80%;
+  margin: 0 auto;
+  border: 1px solid #007eea;
+  border-radius: 3px;
+  position: relative;
+  padding: 30px;
+  background: #fff;
+  height: 80px;
+}
+.priceBox .rightPanel .submitBox .submitType .submitMain {
+  display: flex;
+}
+.priceBox .rightPanel .submitBox .submitType .submitMain .item {
+  flex: 1;
+  padding: 20px 0 0;
+  height: 60px;
+}
+.priceBox .rightPanel .submitBox .submitType .submitMain .item h4 {
+  font-size: 16px;
+  margin-bottom: 15px;
+}
+.priceBox .rightPanel .submitBox .submitType .submitMain .item p {
+  font-size: 30px;
+  font-weight: bold;
+}
+.priceBox .rightPanel .submitBox .submitType .submitMain .item p span {
+  font-size: 16px;
+}
+.priceBox .rightPanel .submitBox .submitType .submitMain .item .inputText {
+  margin-bottom: 15px;
+  position: relative;
+}
+.priceBox .rightPanel .submitBox .submitType .submitMain .item .inputText:after {
+  position: absolute;
+  content: '元';
+  right: 8px;
+  top: 8px;
+  font-size: 12px;
+}
+.priceBox .rightPanel .submitBox .submitType .submitMain .item .inputText input {
+  padding: 0 0 0 13px;
+  line-height: 30px;
+  height: 30px;
+  border-radius: 3px;
+  border: 1px solid #ccc;
+  width: 100%;
+  box-sizing: border-box;
+}
+.priceBox .rightPanel .submitBox .submitType .submitMain .item .inputButton .submitButton {
+  background: #007eea;
+  border: 0;
+  color: #fff;
+  line-height: 30px;
+  height: 30px;
+  border-radius: 3px;
+  width: 100%;
+  cursor: pointer;
+}
+.priceBox .rightPanel .submitBox .nowPrice {
+  position: absolute;
+  top: -15px;
+  left: 15px;
+  background: #fff;
+  border: 1px solid #007eea;
+  color: #007eea;
+  height: 30px;
+  line-height: 30px;
+  padding: 0 10px;
+  font-size: 16px;
+  border-radius: 3px;
+}
+.priceBox .rightPanel .place {
+  width: 100%;
+  margin: 0 auto;
+  position: absolute;
+  height: 220px;
+  bottom: 0;
+}
+.priceBox .rightPanel .place .place_box {
+  display: flex;
+  align-items: flex-end;
+  flex-shrink: 0;
+  flex-wrap: nowrap;
+  justify-content: center;
+}
+.priceBox .rightPanel .place .place_box .item {
+  text-align: center;
+  position: relative;
+  flex: 1;
+  width: 25%;
+}
+.priceBox .rightPanel .place .place_box .item .info {
+  position: relative;
+  text-align: left;
+  width: 70%;
+  margin: 0 auto;
+  background: #fff;
+  box-shadow: 0 5px 5px rgba(0, 0, 0, 0.15);
+  border: 1px solid #eee;
+  padding: 15px;
+}
+.priceBox .rightPanel .place .place_box .item .info h4 {
+  font-weight: bold;
+  font-size: 14px;
+  color: #007eea;
+  margin-bottom: 5px;
+}
+.priceBox .rightPanel .place .place_box .item .info p {
+  font-size: 12px;
+  margin-bottom: 10px;
+}
+.priceBox .rightPanel .place .place_box .item .info:after {
+  bottom: -20px;
+  left: 50%;
+  margin-left: -10px;
+  content: '';
+  position: absolute;
+  height: 0;
+  width: 0;
+  border-top: 10px solid #fff;
+  border-bottom: 10px solid transparent;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+}
+.priceBox .rightPanel .place .place_box .item .b {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+}
+.priceBox .rightPanel .place .place_box .item .b .dot {
+  margin-top: 15px;
+  width: 15px;
+  height: 15px;
+  background: #28b567;
+  border-radius: 50%;
+  display: inline-block;
+  position: relative;
+  cursor: pointer;
+}
+.priceBox .rightPanel .place .place_box .item .b .text {
+  font-size: 14px;
+  line-height: 25px;
+  font-weight: bold;
+}
+.priceBox .rightPanel .place .place_box .item:first-child::after {
+  display: none;
+}
+.priceBox .rightPanel .place .place_box .item:after {
+  content: '';
+  display: block;
+  position: absolute;
+  height: 5px;
+  width: 80%;
+  background: linear-gradient(to right, #28b567, #28b567);
+  border-radius: 55px;
+  bottom: 32px;
+  left: -40%;
+}
+.priceBox .rightPanel .place .place_box .item.active .dot {
+  background: #007eea;
+}
+.priceBox .rightPanel .place .place_box .item.active .dot:after {
+  content: '';
+  display: block;
+  position: absolute;
+  top: -4px;
+  left: -4px;
+  border-radius: 50%;
+  border: 2px solid #007eea;
+  height: 19px;
+  width: 19px;
+}
+.priceBox .rightPanel .place .place_box .item.active:after {
+  background: linear-gradient(to right, #28b567, #007eea);
+}
+.priceBox .rightPanel .place .place_box .item.noActive {
+  color: #999;
+}
+.priceBox .rightPanel .place .place_box .item.noActive:after {
+  background: #ccc;
+}
+.priceBox .rightPanel .place .place_box .item.noActive .dot {
+  background: #cccccc;
+}

@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<meta http-equiv="pragma" content="no-cache"><!-- 禁止浏览器从本地计算机的缓存中访问页面内容 -->
+	<meta http-equiv="cache-control" content="no-cache"><!-- 用于指定请求和响应遵循的缓存机制 -->
+	<meta http-equiv="expires" content="0"><!-- 用于设定网页的到期时间，一旦网页过期，必须到服务器上重新传输； -->
+	<title>编辑合同信息</title>
+	<link rel="stylesheet" href="../../../media/js/layer/mobile/need/layer.css" />
+	<link rel="stylesheet" href="../../../media/js/bootstrap/css/bootstrap.css" />
+	<link rel="stylesheet" href="../../../media/js/bootstrap/css/bootstrap-treeview.min.css">
+	<link rel="stylesheet" href="../../../media/js/stream/css/stream-v1.css" />
+	<link rel="stylesheet" href="../../../media/js/bootstrapvalidator/css/bootstrapValidator.css">
+	<style>
+		html,
+		body {
+			height: 100%;
+			width: 100%;
+		}
+
+		.readonly {
+			border: none;
+			background: none !important;
+			outline: none !important;
+			box-shadow: none !important;
+		}
+
+		.isShow {
+			display: none;
+		}
+
+		.bottom-btn {
+			z-index: 10005;
+		}
+	</style>
+</head>
+
+<body>
+	<form class="pageModel" id="formName" name="formName">
+		<div class="panel-group" id="accordion">
+			<div class="panel panel-accordion panel-default">
+				<div class="panel-heading active" role="tab" id="headingOne">
+					<h4 class="panel-title">
+						<a role="button" data-toggle="collapse" href="#collapseOne" aria-expanded="true"
+							aria-controls="collapseOne">基本信息</a>
+					</h4>
+				</div>
+				<div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+					<div class="panel-body">
+						<table class="table table-bordered">
+							<tr>
+								<td class="th_bg">委托合同名称<i class="red">*</i></td>
+								<td colspan="3"><input type="text" class="form-control" name="contractName" datatype="*"
+										errormsg="委托合同名称" /></td>
+							</tr>
+							<tr>
+								<td class="th_bg">委托合同类型<i class="red">*</i></td>
+								<td>
+									<select class="form-control" name="contractType" id="contractType"
+										style="width:180px">
+										<option value="1">长期</option>
+										<option value="2">有效</option>
+									</select>
+								</td>
+								<td class="th_bg">服务收费方式<i class="red">*</i></td>
+								<td>
+									<select class="form-control" name="payType" id="payType" style="width:180px">
+										<option value="1">固定金额</option>
+										<option value="2">固定比例</option>
+										<option value="3">标准累进制</option>
+									</select>
+								</td>
+
+							</tr>
+							<tr>
+								<td class="th_bg">项目类型<i class="red">*</i></td>
+								<td>
+									<select class="form-control" name="tenderProbjetType" id="tenderProbjetType"
+										style="width:180px">
+										<option value="A">工程类型</option>
+										<option value="B">货物类型</option>
+										<option value="C">服务类型</option>
+									</select>
+								</td>
+								<td class="th_bg">收费对象<i class="red">*</i></td>
+								<td>
+									<select class="form-control" name="payObject" id="payObject" style="width:180px">
+										<option value="1">招标人</option>
+										<option value="2">中标人</option>
+									</select>
+								</td>
+							</tr>
+							<tr>
+								<td class="th_bg"><span>委托合同生效日期<i class="red">*</i></span></td>
+								<td>
+									<div style="width: 200px;">
+										<input type="text" name="contractEffectiveDate" id="contractEffectiveDate"
+											class="form-control Wdate" autocomplete="off" errormsg="请输入公示开始时间"
+											data-required="true" />
+									</div>
+								</td>
+								<td class="th_bg"><span>委托合同结束日期<i class="red">*</i></span></td>
+								<td>
+									<div style="position: relative;width: 200px;display: inline-block;">
+										<input type="text" name="contractEndDate" id="contractEndDate"
+											class="form-control Wdate" autocomplete="off" errormsg="请输入公示结束时间"
+											data-required="true" />
+									</div>
+								</td>
+							</tr>
+							<tr>
+								<td class="th_bg">委托合同基本内容<i class="red">*</i></td>
+								<td colspan="3">
+									<textarea class="form-control" name="contractContent" datatype="*"
+										errormsg="请输入委托合同基本内容" style="resize: none;" rows="3"
+										data-required="true"></textarea>
+								</td>
+							</tr>
+							<tr>
+								<td class="th_bg">各项收费情况描述<i class="red">*</i></td>
+								<td colspan="3">
+									<textarea class="form-control" name="paySituation" datatype="*"
+										errormsg="请输入各项收费情况描述" style="resize: none;" rows="3"
+										data-required="true"></textarea>
+								</td>
+							</tr>
+						</table>
+					</div>
+				</div>
+			</div>
+			<div class="panel panel-accordion panel-default">
+				<div class="panel-heading active" role="tab" id="headingTwo">
+					<h4 class="panel-title">
+						<a role="button" data-toggle="collapse" href="#collapseTwo" aria-expanded="true"
+							aria-controls="collapseTwo">代理机构信息</a>
+					</h4>
+				</div>
+				<div id="collapseTwo" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingTwo">
+					<div class="panel-body">
+						<table class="table table-bordered">
+							<tr>
+								<td class="th_bg">招标代理机构<i class="red">*</i></td>
+								<td colspan="3">
+									<input type="text" class="form-control readonly" readonly="readonly"
+										name="agencyEnterprisName" datatype="*" errormsg="招标代理机构" />
+								</td>
+							</tr>
+							<tr>
+								<td class="th_bg">联系人<i class="red">*</i></td>
+								<td>
+									<input type="text" class="form-control" name="agencyEnterprisLinkmen" datatype="*"
+										data-required="true" errormsg="联系人" />
+									<!-- <button type="button" class="btn btn-primary btn-sm" id="choseTendererEnterpris"
+										style="margin-left: 20px;">
+										<span class="glyphicon glyphicon-plus"></span>添加联系人
+									</button> -->
+
+								<td class="th_bg">电话<i class="red">*</i></td>
+								<td>
+									<input type="text" class="form-control" name="agencyEnterprisPhone" datatype="*"
+										errormsg="电话" data-required="true" />
+								</td>
+							</tr>
+							<tr>
+								<td class="th_bg">所属部门<i class="red">*</i></td>
+								<td>
+									<!-- <input type="text" class="form-control" name="agencyEnterprisDept" datatype="*"
+										errormsg="所属部门" /> -->
+									<input type="text" style="cursor: pointer; border: 1px solid #ccc;"
+										class="form-control readonly" id="agencyEnterprisDept"
+										name="agencyEnterprisDept" readonly placeholder="请选择归属部门" data-required="true"></input>
+									<input type="hidden" class="form-control" id="agencyEnterprisDeptId"
+										name="agencyEnterprisDeptId" datatype="*" errormsg="请选择归属部门"></input>
+
+									<div id="treeview-checkable"
+										style="max-height: 210px;overflow: auto; display: none;position: absolute;left: 0;right:0;top:33px;z-index: 99;">
+									</div>
+
+									<!-- <button type="button" class="btn btn-primary btn-sm" id="choseTendererEnterpris"
+										style="margin-left: 20px;">
+										<span class="glyphicon glyphicon-plus"></span>添加所属部门
+									</button> -->
+								</td>
+								<td class="th_bg">座机</td>
+								<td>
+									<input type="text" class="form-control" name="agencyEnterprisTel" datatype="*"
+										errormsg="座机" data-required="true" />
+								</td>
+							</tr>
+							<tr>
+								<td class="th_bg">招标代理范围<i class="red">*</i></td>
+								<td colspan="3">
+									<textarea class="form-control" name="agencyRange" datatype="*" errormsg="请输入招标代理范围"
+										style="resize: none;" rows="3" data-required="true"></textarea>
+								</td>
+							</tr>
+							<tr>
+								<td class="th_bg">招标代理权限<i class="red">*</i></td>
+								<td colspan="3">
+									<textarea class="form-control" name="agencyAuthority" datatype="*"
+										errormsg="请输入招标代理权限" style="resize: none;" rows="3"
+										data-required="true"></textarea>
+								</td>
+							</tr>
+						</table>
+					</div>
+				</div>
+			</div>
+			<div class="panel panel-accordion panel-default">
+				<div class="panel-heading active" role="tab" id="headingThree">
+					<h4 class="panel-title">
+						<a role="button" data-toggle="collapse" href="#collapseThree" aria-expanded="true"
+							aria-controls="collapseThree">招标人信息</a>
+					</h4>
+				</div>
+				<div id="collapseThree" class="panel-collapse collapse in" role="tabpanel"
+					aria-labelledby="headingThree">
+					<div class="panel-body">
+						<table class="table table-bordered">
+							<tr>
+								<td class="th_bg">招标人<i class="red">*</i></td>
+								<td colspan="3">
+									<input type="text" class="form-control readonly" readonly="readonly"
+										name="tendererEnterprisName" datatype="*" errormsg="招标人" data-required="true"
+										style="width: 320px;display: inline-block;" />
+									<input type="hidden" class="form-control readonly" readonly="readonly"
+										name="tendererEnterprisId" datatype="*" errormsg="招标人id" />
+									<button type="button" class="btn btn-primary btn-sm" id="choseTendererEnterpris"
+										style="margin-left: 20px;">
+										<span class="glyphicon glyphicon-plus"></span>添加招标人
+									</button>
+								</td>
+							</tr>
+							<tr>
+								<td class="th_bg">联系人<i class="red">*</i></td>
+								<td>
+									<input type="text" class="form-control readonly" readonly="readonly" name="tendererEnterprisLinkmen" datatype="*"
+										errormsg="联系人" style="width: 200px;display: inline-block;"
+										data-required="true" />
+									<button type="button" class="btn btn-primary btn-sm" id="btnLink"
+										style="margin-left: 10px;">
+										<span class="glyphicon glyphicon-plus"></span>添加联系人
+									</button>
+								</td>
+								<td class="th_bg">电话<i class="red">*</i></td>
+								<td>
+									<input type="text" class="form-control" name="tendererEnterprisPhone" datatype="*"
+										data-required="true" errormsg="电话" />
+								</td>
+							</tr>
+							<tr>
+								<td class="th_bg">所属部门<i class="red">*</i></td>
+								<td>
+									<input type="text" class="form-control readonly" readonly="readonly"
+										name="tendererEnterprisDept" datatype="*" data-required="true"
+										errormsg="所属部门" />
+									<input type="hidden" class="form-control readonly" readonly="readonly"
+										name="tendererEnterprisDeptId" datatype="*" errormsg="所属部门" />
+								</td>
+								<td class="th_bg">座机</td>
+								<td>
+									<input type="text" class="form-control" name="tendererEnterprisTel" datatype="*"
+										data-required="true" errormsg="座机" />
+								</td>
+							</tr>
+						</table>
+					</div>
+				</div>
+			</div>
+			<div class="panel panel-accordion panel-default">
+				<div class="panel-heading active" role="tab" id="headingFour">
+					<h4 class="panel-title">
+						<a role="button" data-toggle="collapse" href="#collapseFour" aria-expanded="true"
+							aria-controls="collapseFour">附件信息</a>
+					</h4>
+				</div>
+				<div id="collapseFour" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingFour">
+					<div class="panel-body">
+						<button type="button" class="btn btn-primary btn-sm " id="fileUp"
+							style="float: right;margin-bottom: 10px;">
+							<span class="glyphicon glyphicon-folder-open"></span>选择文件
+						</button>
+						<button type="button" id="fileLoad" style="display: none;"></button>
+						<div id="fileContent"></div>
+					</div>
+				</div>
+			</div>
+			<div id="approval"></div>
+		</div>
+
+
+		<div class="bottom-btn">
+			<button type="button" class="btn btn-primary" id="btnSave"><span
+					class="glyphicon glyphicon-ok"></span>保存</button>
+			<button type="button" class="btn btn-primary" id="btnSubmit"><span
+					class="glyphicon glyphicon-saved"></span>提交</button>
+			<button type="button" class="btn btn-default" id="btnClose"><span
+					class="glyphicon glyphicon-remove"></span>取消</button>
+		</div>
+	</form>
+	<script type="text/javascript" src="../../../media/js/jquery/jquery.js"></script>
+	<script type="text/javascript" src="../../../media/js/jquery/jquery.extend.js"></script>
+	<script type="text/javascript" src="../../../media/js/base/util.js"></script>
+	<script type="text/javascript" src="../../../media/js/base/common.js"></script>
+	<script type="text/javascript" src="../../../media/js/bootstrap/js/bootstrap.js"></script>
+	<script type="text/javascript" src="../../../media/js/bootstrap/js/bootstrap.js"></script>
+	<script type="text/javascript" src="../../../media/js/bootstrap/js/bootstrap-treeview.min.js"></script>
+	<script type="text/javascript" src="../../../media/js/bootstrapvalidator/js/bootstrapValidator.js"></script>
+	<!-- 编辑器源码文件 -->
+	<script type="text/javascript" src="../../../media/js/ueditor/ueditor.config.js"></script>
+	<script type="text/javascript" src="../../../media/js/ueditor/ueditor.all.js"></script>
+	<script type="text/javascript" src="../../../media/js/My97DatePicker/WdatePicker.js"></script>
+	<script type="text/javascript" src="../../../media/js/base/md5.js"></script>
+	<script type="text/javascript" src="../../../media/js/ca.js"></script>
+	<!--<script type="text/javascript" src="../../../Model/js/sign.js"></script>-->
+	<script type="text/javascript" src="../../Model/js/public.js"></script>
+	<script type="text/javascript" src="../../../media/js/stream/js/stream-v1.js"></script>
+	<script type="text/javascript" src="../../../media/js/base/StreamUpload.js"></script>
+	<script type="text/javascript" src="../../../media/js/base/WorkflowInfoNew.js"></script>
+	<!-- 该页面的专用方法 -->
+
+	<script type="text/javascript" src="../js/newContrac.js"></script>
+</body>
+
+</html>

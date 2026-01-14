@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>竞卖审核详情</title>
+		<link rel="stylesheet" href="../../../../../media/js/layer/theme/default/layer.css">
+		<link rel="stylesheet" href="../../../../../media/js/layer/theme/default/laydate.css">
+		<link rel="stylesheet" href="../../../../../media/js/bootstrap/css/bootstrap.css" />
+		<link rel="stylesheet" href="../../../../../media/js/bootstrap/css/bootstrap-select.min.css" />
+		<link rel="stylesheet" href="../../../../../media/js/bootstrap/css/bootstrap.min.css">
+		<link rel="stylesheet" href="../../../../../media/js/bootstrap/css/bootstrap-table.min.css" />
+		<link rel="stylesheet" href="../../../../../media/js/datetimepicker/css/jquery.datetimepicker.css" />
+	</head>
+
+	<body style="width: 99%;padding-left: 10px;padding-top: 10px;">
+		<input type="hidden" id="id" />
+		<table class="table table-bordered " style="margin-bottom: 0px;">
+			<tr>
+				<td colspan="5" style="font-weight: bold;" class="active">项目信息</td>
+			</tr>
+			<tr>
+				<td style="width: 200px;" class="th_bg">竞卖项目名称</td>
+				<td style="text-align: left;">
+					<div id="projectName"></div>
+				</td>
+				<td style="width: 200px;" class="th_bg">竞卖项目编号</td>
+				<td style="text-align: left;">
+					<div id="projectCode"></div>
+				</td>
+			</tr>
+			<tr>
+				<td style="width: 200px;" class="th_bg">是否代理项目</td>
+				<td style="text-align: left;">
+					<div id="isAgentText"></div>
+				</td>
+				<td style="width: 200px;" class="th_bg">项目来源</td>
+				<td style="text-align: left;">
+					<div id="projectSourceText"></div>
+				</td>
+			</tr>
+			<tr>
+				<td style="width: 200px;" class="th_bg">公开范围</td>
+				<td style="text-align: left;">
+					<div id="isPublicText"></div>
+				</td>
+				<td class="th_bg">项目类型</td>
+				<td style="text-align: left;">
+					<div id="dataTypeName">
+					</div>
+				</td>
+			</tr>
+			<tr>
+				<td colspan="5" style="font-weight: bold;" class="active">竞卖时间</td>
+			</tr>
+			<tr>
+				<td class="text-right">竞卖开始时间：</td>
+				<td>
+					<input type="text" autocomplete="off" data-datename="竞卖开始时间" class="btn btn-default" id="auctionStartDate" name="auctionStartDate" placeholder="请选择竞卖开始时间" style="text-align: left;"/>
+				</td>
+				<td class="text-right">竞卖结束时间：</td>
+				<td>
+					<input type="text" autocomplete="off" data-min="auctionStartDate" data-datename="竞卖结束时间" id="auctionDateEnd" class="btn btn-default" name="auctionDateEnd" placeholder="请选择竞卖结束时间" style="text-align: left;" />
+				</td>
+			</tr>
+		</table>
+		<div class="bottom-btn" style="z-index: 11000;">
+			<button type="button" class="btn btn-primary" id="btn_bao"><span class="glyphicon glyphicon-ok"></span>提交</button>
+			<!--<button type="button" class="btn btn-primary" id="btn_submit"><span class="glyphicon glyphicon-ok"></span>提交</button>-->
+			<button type="button" class="btn btn-default" id="btn_close"><span class="glyphicon glyphicon-remove"></span>关闭</button>
+		</div>
+		<style>
+			.table>thead>tr>th,
+			.table>tbody>tr>th,
+			.table>tfoot>tr>th,
+			.table>thead>tr>td,
+			.table>tbody>tr>td,
+			.table>tfoot>tr>td {
+				vertical-align: middle !important;
+			}
+		</style>
+		<script type="text/javascript" src="../../../../../media/js/jquery/jquery.js"></script>
+		<script type="text/javascript" src="../../../../../media/js/bootstrap/js/bootstrap.js"></script>
+		<script type="text/javascript" src="../../../../../media/js/bootstrap/js/bootstrap-table.min.js"></script>
+		<script type="text/javascript" src="../../../../../media/js/bootstrap/js/bootstrap-table-zh-CN.min.js"></script>
+		<script type="text/javascript" src="../../../../../media/js/datetimepicker/js/jquery.datetimepicker.js"></script>
+        <script type="text/javascript" src="../../../../../media/js/datetimepicker/js/timePicker.js"></script>
+		<script type="text/javascript" src="../../../../../media/js/jquery/jquery.extend.js"></script>
+		<script type="text/javascript" src="../../../../../media/js/base/common.js"></script>
+		<script type="text/javascript" src="../../SalePurchase/js/timeDate.js"></script>
+		<script src="../js/SaleTimeEdit.js" type="text/javascript" charset="utf-8"></script>
+
+	</body>
+
+</html>

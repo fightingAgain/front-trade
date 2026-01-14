@@ -1,0 +1,727 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="pragma" content="no-cache">
+		<!-- 禁止浏览器从本地机的缓存中调阅页面内容 -->
+		<meta http-equiv="cache-control" content="no-cache, must-revalidate">
+		<meta http-equiv="expires" content="0">
+		<title>供应商价格谈判(记录明细)</title>
+		<link rel="stylesheet" href="../../../media/js/bootstrap/css/bootstrap.css">
+		<link rel="stylesheet" href="../../../media/js/bootstrap/css/bootstrap-table.css">
+		<link rel="stylesheet" type="text/css" href="../../../media/js/bootstrap-fileinput-master/css/fileinput.min.css" />
+		<style type="text/css">
+			label {
+				font-weight: normal;
+			}
+		</style>
+
+	</head>
+
+	<body>
+		<form id="priceCheck">
+			<table class="table table-bordered " style="width: 98%;margin-left: 7px;margin-top: 5px;">
+				<tr class="active">
+					<td colspan="4" style="border-right: 0px;">
+						项目信息
+					</td>
+				</tr>
+				<tr>
+					<td class="th_bg" style="width:190px;">采购项目名称</td>
+					<td colspan="3"><label id="projectName"></label></td>
+				</tr>
+				<tr>
+					<td class="th_bg" >包件编号</td>
+					<td><label id="packageNumber"></label></td>
+					<td class="th_bg" >包件名称</td>
+					<td><label id="packageName"></label></td>
+				</tr>
+				<tr>
+					<td class="th_bg" >采购人名称</td>
+					<td colspan="3"><label id="purchaserName"></label></td>
+				</tr>
+
+				<tr>
+					<td class="th_bg" >联系人</td>
+					<td><label id="purchaserLinkmen"></label></td>
+					<td class="th_bg" >联系电话</td>
+					<td><label id="purchaserTel"></label></td>
+				</tr>
+
+				<tr>
+					<td class="active" colspan="4">价格谈判</td>
+				</tr>
+
+				<tr class='online'>
+					<td class="th_bg" >价格确认截止时间</td>
+					<td><label id="endDate"></label></td>
+					<td colspan="2">
+						<label style="color: red;">请在此时间前确认,超时未确认将默认判定为拒绝.</label>
+					</td>
+				</tr>
+
+				<tr class='online'>
+					<td class="th_bg" >评审委员会提出价格</td>
+					<td colspan="3">
+						<label style="color: red;" id="negotiationPrice"></lable>
+	            </td>
+	        </tr>
+	        
+	        <tr class='online'>
+	        	<td class="th_bg" >评审委员会发出谈判内容</td>
+	            <td colspan="3">
+	            	<label id="content"></lable>
+	            </td>
+	        </tr>
+	        <tr class='underline' style="display: none;">
+				<td class="th_bg" style="width: 20%;">谈判类型</td>
+				<td style="width: 30%;">
+					<label id="negotiationType"></lable>
+	            </td>
+	            <td class="th_bg" style="width: 20%;">最终谈判价格</td>
+				<td style="width: 30%;">
+					<label  id="lastPrice"></lable>
+	            </td>
+	        </tr>
+
+	        
+	        <tr>
+	            <td class="th_bg" >答复状态</td>
+	            <td colspan="3">
+	            	<input type="radio" name="isAccept" value="0" checked >接受
+	            	<input type="radio" name="isAccept" value="1" >拒绝		
+	            </td>
+	        </tr>
+	       
+	         <tr id = 'aggreeType'>
+	            <td class="th_bg" >是否同意价格</td>
+	            <td colspan="3" id = "isage">
+	            	<input type="radio" name="isAgree" value="0" checked >同意
+	            	<input type="radio" name="isAgree" value="1" >拒绝		
+	            </td>
+	        </tr>
+	      
+	      	 <tr class='online'>
+	            <td class="th_bg" rowspan="2" >答复内容</td>
+	            <td  id="anwserContent">供应商本次报价</td>
+	            <td colspan="2">
+	            	<input type="text"  id="replyPrice" name="replyPrice" readonly="readonly" class="form-control layui-input" style="width: 50%;"/>
+	            </td>
+	        </tr>
+	        
+	       	<tr class='online'>
+	            <td colspan="3">
+	            	<textarea class="form-control layui-textarea" rows="4" id="replyContent" name="replyContent" style="width: 95%;"></textarea>	
+	            </td>
+	        </tr>
+	        <tr id="answer1" style="display: none;" class='online'>
+	            <td class="th_bg" >上传答复附件</td>
+	            <td colspan="2">
+	            	<span id='fileIn' style="float:left;"><input class="fileloading" name="file" id="fileName" type="file" value="上传"/></span>
+				    <span id= 'butt'>
+	            	
+	            </td>
+	            <td>
+	            	<label style="color: red;"  id="text" >请上传pdf格式的文件</label>
+					</td>
+				</tr>
+				<tr id="answer2" class="online" style="display: none;">
+					<td class="th_bg" >答复附件</td>
+					<td id="fileUp" colspan="3">
+
+					</td>
+
+				</tr>
+				
+				<tr id = 'fujian' class="fufile online" style="display: none;"> 
+					<td class="active" colspan="4">答复附件</td>
+				</tr>
+	
+				<tr class="fufile" style="display: none;">
+					<td colspan='4'>
+						<table class="table table-bordered" style="width: 99%;margin-left: 2px;margin-top: 2px;">
+						<tr>
+							<td style="width:50px">序号</td>
+							<td>附件名称</td>
+							<td style="width:150px;text-align: center;">操作</td>
+						</tr>
+						<tbody id="imgList"></tbody>
+						</table>
+					</td>
+				</tr>
+				
+				
+				<tr id="Answer" class='online'>
+					<td colspan="4" style="text-align: center;">
+						<button id="btnAnswer" type="button" class="btn btn-primary">立即答复</button>
+					</td>
+				</tr>
+			</table>
+			
+			<table class="table table-bordered underline" style="display: none;width: 98%;margin-left: 7px;margin-top: 5px;" >
+				<tr class="active">
+		            <td colspan="5" >谈判小组</td>
+		        </tr>
+				<!--谈判组-->
+				<tr>
+					<td style='width: 50px;text-align: center;'>序号</td>
+					<td>姓名</td>
+					<td>登录名</td>
+					<td>手机号</td>
+					<td>邮箱</td>
+				</tr>
+				<tbody id = "ngnations">
+				</tbody>
+				<tr id="ngna">
+					<td style='text-align: center;' colspan='6'>暂无谈判人员</td>
+				</tr>
+			</table>
+			
+			<table  class="table table-bordered underline" style="display: none;width: 98%;margin-left: 7px;margin-top: 5px;">
+				<tr class="active">
+		            <td colspan="4" >谈判附件</td>
+		        </tr>
+				<tr>
+					<td style='width: 50px;text-align: center;'>序号</td>
+					<td>文件名称</td>
+					<td>文件大小</td>
+					<td style="width: 100px;text-align: center;">操作</td>
+				</tr>
+				<tbody  id = "files"> 
+					
+				</tbody>
+				<tr id="showFi">
+					<td style='text-align: center;' colspan='6'>暂无信息</td>
+				</tr>
+			</table>
+			
+			
+			
+		</form>
+	</body>
+	<script type="text/javascript" src="../../../media/js/jquery/jquery.min.js"></script>
+	<script src="../../../media/js/jquery/jquery.extend.js"></script>
+
+	<script type="text/javascript" src="../../../media/js/bootstrap/js/bootstrap-table.min.js"></script>
+	<script src="../../../media/js/bootstrap/js/bootstrap-table-zh-CN.min.js"></script>
+	<script type="text/javascript" src="../../../media/js/bootstrap/js/bootstrap.js"></script>
+	<script type="text/javascript" src="../../../media/js/bootstrap-fileinput-master/js/fileinput.js" ></script>
+	<script type="text/javascript" src="../../../media/js/bootstrap-fileinput-master/js/locales/zh.js"></script>
+	<script type="text/javascript" src="../../../media/js/base/util.js"></script>
+	<script src="../../../media/js/layer/layer.js"></script>
+	<script>
+		var searchUrl = parent.config.bidhost + '/NegotiationController/pageNegotiationItemForSupplier.do';
+		var findNegotiatorUrl = parent.config.bidhost + "/NegotiationController/findOneNegotiationItem.do" //查询明细
+		var saveFileUrl = parent.config.bidhost + "/FileController/upload.do"; //文件上传地址
+		var loadFile = parent.config.bidhost + "/FileController/download.do"; //文件下载地址
+		var fileList = parent.config.bidhost + "/PurFileController/list.do" //查找文件
+		var updateNegotiatorItem = parent.config.bidhost + "/NegotiationController/updateNegotiationItem"; //修改谈判明细
+		var fileSave = parent.config.bidhost + "/PurFileController/saveBatch.do"; //保存上传文件
+		var negotiationId = "";
+		//操作类型
+		var type = getUrlParam('type');
+		var tenderTypeCode = sessionStorage.getItem('tenderTypeCode');//项目类型
+		var isAgree;
+		var imgList = [];
+		var filesList = [];
+		var employeeList = [];
+//		$(".prieUnit").html(top.prieUnit||"元")
+		function method() {
+			if(type == "check") {
+			
+				//查看 不现实回复按钮  价格为只读
+				$("#Answer").hide();
+				$("#text").hide();
+				$("#replyPrice").val(replyPrice);
+				$("#replyContent").attr("readonly", "readonly");
+				
+
+				if(negotiationType == 1){
+					$(".online").hide();
+					
+					$(".underline").show();
+					underline();
+				}else{
+					$("#answer2").show();
+					fileDownload();
+				}
+				
+
+			} else {
+				//答复
+				$("#answer1").show();
+				$("#replyPrice").val(negotiationPrice);
+				$("#replyContent").val("");
+				//价格按钮
+
+				//是否同意谈判
+				$('input[name="isAccept"]').change(function() {
+					var value = $('input[name="isAccept"]:checked').val();
+					if(value == '0') { // 0为接受谈判，1为不接受谈判
+						//接受
+						$("#isage").show();
+						$("#replyPrice").show();
+						$("#aggreeType").show();
+						$("#anwserContent").show();
+					} else {
+						//拒绝
+						$("#isage").hide();
+						$("#replyPrice").hide();
+						$("#aggreeType").hide();
+						$("#anwserContent").hide();
+					}
+				});
+
+				//是否同意价格
+				$('input[name="isAgree"]').change(function() {
+					var value = $('input[name="isAgree"]:checked').val();
+					if(value == '0') {
+						//接受
+						$('input[name="replyPrice"]').attr("readonly", "readonly");
+						$("#replyPrice").val(negotiationPrice); //接受价格 , 供应商本次报价 readonly 回显采购人的报价
+					} else {
+						//不同意
+						$('input[name="replyPrice"]').val("");
+						$('input[name="replyPrice"]').removeAttr("readonly");
+					}
+				})
+			}
+
+			var oFileInput = new FileInput();
+			oFileInput.Init("#fileName", saveFileUrl);
+		}
+		
+		var Id;
+		var replyPrice;
+		var negotiationPrice;
+		var negotiationType = "";
+		//数据回显
+		function show(obj) {
+			Id = obj.id;
+			negotiationId = obj.negotiationId;
+			if(obj.negotiation != undefined){
+				negotiationType = obj.negotiation.negotiationType;
+				
+				if(negotiationType == 1){
+					$("#negotiationType").text("线下谈判");
+					if(obj.negotiation.lastPrice != undefined){
+						$("#lastPrice").text(obj.negotiation.lastPrice);
+					}
+				}
+				
+			}
+			//查询单条明细
+			$.ajax({ //修改谈判明细
+				url: findNegotiatorUrl,
+				type: 'post',
+				dataType: 'json',
+				data: {
+					'id':Id,
+					'tenderType':tenderTypeCode
+				},
+				success: function(data) {
+					if(data.success) {
+						var datas = data.data;
+						$("#projectName").text(datas.negotiation.projectName);
+						$("#packageName").text(datas.negotiation.packageName);
+						$("#packageNumber").text(datas.negotiation.packageNumber);
+						$("#purchaserName").text(datas.negotiation.purchaserName);
+						$("#purchaserLinkmen").text(datas.negotiation.purchaserLinkmen);
+						$("#purchaserTel").text(datas.negotiation.purchaserTel);
+						$("#negotiationPrice").text(datas.negotiationPrice);
+						negotiationPrice = datas.negotiationPrice;
+						$("#content").text(datas.content);
+						$("#endDate").text(datas.endDate);
+
+						$("#replyPrice").text(datas.replyPrice);
+						replyPrice = datas.replyPrice;
+						$("#replyContent").text(datas.replyContent);
+
+						if(datas.fileList != undefined){
+							filesList = datas.fileList;
+						}
+						
+						if(datas.employeeList != undefined){
+							employeeList = datas.employeeList;
+						}
+						
+						if(datas.isAccept != null) {
+							var isAccept = datas.isAccept;
+							if(isAccept == '1') { //拒绝
+								$("input[name='isAccept'][value='1']").attr('checked', true);
+								$("input[name='isAccept'][value='0']").attr("disabled","disabled");
+								$("#aggreeType").hide();
+							} else {
+								$("input[name='isAccept'][value='0']").attr('checked', true);
+								$("input[name='isAccept'][value='1']").attr("disabled","disabled");
+								$("#aggreeType").show();
+							}
+						}
+
+						if(datas.isAgree != null) {
+							var isAgree = datas.isAgree;
+							if(isAgree == '1') { //拒绝
+								$("input[name='isAgree'][value='1']").attr('checked', true);
+								$("input[name='isAgree'][value='0']").attr("disabled","disabled");
+
+							} else {
+								$("input[name='isAgree'][value='0']").attr('checked', true);
+								$("input[name='isAgree'][value='1']").attr("disabled","disabled");
+							}
+						}
+
+						method();
+					}
+				},
+			});
+
+		}
+
+		var negoItem;
+		var nPrice;
+		//点击立即答复
+		$("#btnAnswer").click(function() {
+			nPrice = $("#replyPrice").val();
+			if($('input[name="isAccept"]:checked').val() == '0'){
+				if($('input[name="isAgree"]:checked').val() == '1') {
+					//拒绝
+					if($("#replyPrice").val() == '') {
+						layer.alert("请输入您的报价!")
+						return;
+					}
+					
+					if(!(/^((\d+\.\d*[0-9]\d*)|(\d*[0-9]\d*\.\d+)|(\d*[0-9]\d*))$/.test(nPrice))){ 
+						parent.layer.alert("谈判价格只能是数字"); 	
+						return;
+					};
+			 		
+			 		if(nPrice.split('.').length >1 && nPrice.split('.')[1].length>6){ 
+						parent.layer.alert("谈判价格只能保留六位小数"); 	
+						return;
+					};
+			 		nPrice = parseFloat(nPrice).toFixed(top.prieNumber||2);
+			 		if( nPrice.split('.')[0].length>20 ){
+			 			parent.layer.alert("谈判价格不能超过20位");
+			 			return;
+			 		}
+					
+					
+					if($("#replyPrice").val().length>15){
+						layer.alert("报价不能超过15位");
+						return;
+					}
+				}
+			}
+			if($("#replyContent").val() !=  null){
+				if($("#replyContent").val().length>1000){
+					layer.alert("回复内容不超过1000字");
+					return;
+				}
+			}
+			
+
+			if($('input[name="isAccept"]:checked').val() == '1') {
+				//拒绝
+				negoItem = {
+					'id': Id,
+					'negotiationId':negotiationId,
+					'replyContent': $("#replyContent").val(),
+					'isAccept': '1',
+					'type': 1
+				}
+			} else {
+				negoItem = {
+					'id': Id,
+					'replyPrice': nPrice,
+					'replyContent': $("#replyContent").val(),
+					'isAccept': '0',
+					'negotiationId':negotiationId,
+					'isAgree': $('input[name="isAgree"]:checked').val(),
+					'type': 1 //未超时
+				}
+			}
+
+
+			//if(EnterpiseApplyFileList.length>0){
+			$.ajax({ //修改谈判明细
+				url: updateNegotiatorItem,
+				type: 'post',
+				dataType: 'json',
+				data: negoItem,
+				success: function(data) {
+					if(data.success) {
+						if(EnterpiseApplyFileList.length > 0) {
+							fileUp();
+						}
+						parent.layer.close(parent.layer.getFrameIndex(window.name));
+						parent.layer.alert("答复成功!");
+						parent.$('#SupplierNegotiator').bootstrapTable('refresh', {
+							url: searchUrl
+						});
+					} else {
+						parent.layer.close(parent.layer.getFrameIndex(window.name));
+						parent.layer.alert("答复失败!");
+					}
+				}
+			});
+			/*}else{
+				parent.layer.alert("请上传附件");
+			}*/
+
+		});
+
+		function fileUp() {
+
+			var file = "";
+			for(var k = 0; k < EnterpiseApplyFileList.length; k++) {
+				file += "&purFiles[" + k + "].modelName=" + "JJ_PUR_NEGOTIATION_ITEM";
+				file += "&purFiles[" + k + "].modelId=" + Id;
+				file += "&purFiles[" + k + "].fileType=" + EnterpiseApplyFileList[k].fileType;
+				file += "&purFiles[" + k + "].fileName=" + EnterpiseApplyFileList[k].fileName;
+				file += "&purFiles[" + k + "].filePath=" + EnterpiseApplyFileList[k].filePath;
+				file += "&purFiles[" + k + "].fileSize=" + EnterpiseApplyFileList[k].fileSize;
+			}
+
+			//上传文件
+			$.ajax({
+				type: "post",
+				url: fileSave,
+				async: true,
+				data: file,
+				datatype: 'json',
+				success: function(data) {
+					if(data.success) {
+						if(data.success) {
+							//上传图片
+							parent.layer.close(parent.layer.getFrameIndex(window.name));
+							parent.layer.alert("答复成功!");
+							parent.$('#SupplierNegotiator').bootstrapTable('refresh', {
+								url: searchUrl
+							});
+
+						} else {
+							parent.layer.close(parent.layer.getFrameIndex(window.name));
+							parent.layer.alert("答复失败!");
+						}
+					}
+				}
+			});
+
+		}
+
+
+		function fileDownload() {
+			//根据modelId和modelName查找所有的附件
+			$.ajax({
+				type: "post",
+				url: fileList,
+				async: true,
+				data: {
+					'modelId': Id,
+					'modelName': "JJ_PUR_NEGOTIATION_ITEM"
+				},
+				datatype: 'json',
+				success: function(data) {
+					if(data.success) {
+						if(data.success) {
+							imgList = data.data;
+							if(imgList.length > 0){
+								
+								setImage();
+								$('.fufile').show();
+								//$('.upp').show();
+								$('#answer2').hide();
+							}else{
+								var str = "<span>无附件信息</span>";
+								$("#fileUp").html(str);
+							}
+						}
+					}
+				}
+			});
+
+		}
+		
+		//显示图片
+		function setImage(){
+			$("#imgList").empty();
+			for(var i=0;i<imgList.length;i++){
+				var strHtml = "<tr><td style='text-align:center;'>" + (i + 1) + "</td>";
+				strHtml += "<td>" + imgList[i].fileName + "</td>";
+				strHtml += "<td style='text-align: center;'>";
+				strHtml += "<a href='javascript:void(0)' class='btn-sm btn-primary ' onclick=downloadFile("+i+")><span class='glyphicon glyphicon-arrow-down' aria-hidden='true'></span>下载</a>&nbsp;&nbsp";
+				strHtml += "<a href='javascript:void(0)' class='btn-sm btn-primary del' style='display:none' onclick=delImage('" + i + "')><span class='glyphicon glyphicon-remove' aria-hidden='true'></span>删除</a></td></tr>&nbsp";
+				$("#imgList").append(strHtml);
+			}
+		}
+		
+		//查找图片
+		function showImage(obj){
+			openPreview(obj,"850px","600px");
+		}
+		
+		function delImage(i) {
+
+			layer.confirm('你确定删除附件吗？', {
+				btn: ['确定', '取消'] //按钮
+			}, function() {
+				imgList.splice(i,1);
+				EnterpiseApplyFileList.splice(i,1);
+				if(imgList.length == 0){
+					$('.fufile').hide();
+				}
+				setImage();
+				
+				layer.alert("删除成功!");
+			})
+		 
+		}
+
+		//文件下载
+		function downloadFile(i){
+			var newUrl = loadFile + "?ftpPath=" + imgList[i].filePath + "&fname=" + imgList[i].fileName;
+			window.location.href = $.parserUrlForToken(newUrl);
+		}
+		
+		//线下谈判
+		function underline(){
+			if(filesList.length > 0) {
+				imgList = filesList;
+				$("#showFi").hide();
+				var str = "";
+				for(var k = 0; k < filesList.length; k++) {
+					str += "<tr ><td style='width: 50px;text-align: center;'>" + (k + 1) + "</td>";
+					filesList[k].fileName != null ? str += "<td>" + filesList[k].fileName + "</td>" : str += "<td></td>";
+					filesList[k].fileSize != null ? str += "<td>" + filesList[k].fileSize + "</td>" : str += "<td></td>";
+					str += "<td style='text-align: center;'> <a href='javascript:void(0)' onclick=downloadFile(" + k + ") class='btn-sm btn-primary download' style='text-decoration:none;'><span class='glyphicon glyphicon-arrow-down' aria-hidden='true'></span>下载</a></td></tr>";
+				}
+				
+				$("#files").html(str);
+			}else{
+				$("#showFi").show();
+			}
+			
+			
+			if(employeeList.length>0){
+				$("#ngna").hide();
+				var html = "";
+				for(var i = 0; i < employeeList.length; i++) {
+					html += "<tr><td style='width: 50px;text-align: center;'>" + (i + 1) + "</td>";
+					employeeList[i].userName != null ? html += "<td>" + employeeList[i].userName + "</td>" : html += "<td></td>";
+					employeeList[i].logCode != null ? html += "<td>" + employeeList[i].logCode + "</td>" : html += "<td></td>";
+					employeeList[i].tel != null ? html += "<td>" + employeeList[i].tel + "</td>" : html += "<td></td>";
+					employeeList[i].email != null ? html += "<td>" + employeeList[i].email + "</td>" : html += "<td></td>";
+				}
+				$("#ngnations").html(html);
+			}else{
+				$("#ngna").show();
+			}
+		}
+
+		var fileType;
+		var fileName;
+		var filePath;
+		var fileSize;
+		var EnterpiseApplyFileList = [];
+		var EnterpiseApplyFile;
+		//文件上传的插件
+		//初始化fileinput
+		var FileInput = function() {
+			var oFile = new Object();
+
+			//初始化fileinput控件（第一次初始化）
+			oFile.Init = function(ctrlName, uploadUrl) {
+				$(ctrlName).fileinput({
+					language: 'zh', //设置语言
+					uploadUrl: uploadUrl, //上传的地址
+					autoReplace: true,
+					showRemove: false,
+					allowedFileExtensions: ['jpg', 'bmp', 'png','jpeg','pdf','zip','rar','doc','docx','xls','xlsx'
+				,'JPG', 'BMP', 'PNG','JPEG','PDF','ZIP','RAR','DOC','DOCX','XLS','XLSX'], //接收的文件后缀
+					hideThumbnailContent: true, 
+					showCaption: false, //是否显示标题  
+					browseClass: "btn btn-sm btn-primary", //按钮样式       
+					dropZoneEnabled: false, //是否显示拖拽区域  
+					maxFileCount: 1, //表示允许同时上传的最大文件个数
+					uploadAsync: false,
+					showPreview: false,
+					showUpload: false,//是否显示上传按钮
+					layoutTemplates: {
+						actionUpload: '', //取消上传按钮
+						actionZoom: '', //取消预览按钮
+						actionDelete: '' //取消删除按钮
+					}
+				}).on("filebatchselected", function(event, files) {
+					if(event.currentTarget.files.length>1){
+						parent.layer.alert('单次上传文件数只能为1个');				
+						$(this).fileinput("reset"); //选择的格式错误 插件重置
+					    return ;
+					}
+					var upFileName = event.currentTarget.files[0].name;
+					var index1=upFileName.lastIndexOf(".");
+					var index2=upFileName.length;
+					//var filesnames=upFileName.substring(index1+1,index2).toUpperCase();//后缀名
+					var filesnames = event.currentTarget.files[0].name.substring(event.currentTarget.files[0].name.lastIndexOf(".") + 1).toUpperCase();
+					if(filesnames != 'PDF' &&  filesnames != 'PNG' && filesnames != 'JPG' && filesnames != 'BMP' && filesnames != 'JPEG'&& filesnames != 'ZIP'
+									&& filesnames != 'RAR'&& filesnames != 'DOC'&& filesnames != 'DOCX' && filesnames != 'XLSX'&& filesnames != 'XLS'){
+						parent.layer.alert('只能上传PDF、表格、文档、图片、压缩包格式的附件');				
+						$(this).fileinput("reset"); //选择的格式错误 插件重置
+					    return ;
+					};
+					if(event.currentTarget.files[0].size>2*1024*1024*1024){
+						parent.layer.alert('上传的文件不能大于2G');				
+						$(this).fileinput("reset"); //选择的格式错误 插件重置
+					    return ;
+					};			
+			        $(this).fileinput("upload");
+				}).on("filebatchuploadsuccess", function(event, data, previewId, index) {
+					
+					//console.log(data);
+					var f = data.files[0];
+					size = f.size;
+					fileSize = Math.ceil(size / 1024) + "KB";
+					fileType = f.type;
+					//fileType = fileType;
+					var name = f.name;
+					fileName = name;
+					//filePath = f.filePath;
+					var path = data.response.data;
+					filePath = path;
+
+					$(".file-caption-name").val(data);
+					EnterpiseApplyFile = {
+						fileType: fileType,
+						fileName: fileName,
+						filePath: filePath,
+						fileSize: fileSize,
+					};
+					
+					imgList.push(EnterpiseApplyFile);
+					setImage();
+					$(".fufile").show();
+					$(".del").show();
+					
+					EnterpiseApplyFileList.push(EnterpiseApplyFile);
+					
+
+				}).on('filebatchuploaderror', function(event, data, msg) {
+					parent.layer.alert("失败");
+				});
+			}
+
+			return oFile;
+		};
+
+		function getUrlParam(name) {
+			var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); // 构造一个含有目标参数的正则表达式对象  
+			var r = window.location.search.substr(1).match(reg); // 匹配目标参数  
+			if(r != null) return unescape(r[2]);
+			return null; // 返回参数值  
+		}
+	
+		
+		
+	</script>
+
+</html>

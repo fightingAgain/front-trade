@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8">
+	<meta http-equiv="pragma" content="no-cache"><!-- 禁止浏览器从本地计算机的缓存中访问页面内容 --> 
+	<meta http-equiv="cache-control" content="no-cache"><!-- 用于指定请求和响应遵循的缓存机制 --> 
+	<meta http-equiv="expires" content="0"><!-- 用于设定网页的到期时间，一旦网页过期，必须到服务器上重新传输； -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>模板编辑</title>
+ 	<link rel="stylesheet" href="../../../media/js/layer/mobile/need/layer.css" />
+    <link rel="stylesheet" href="../../../media/js/bootstrap/css/bootstrap.css" />
+    <link rel="stylesheet" href="../../../media/js/bootstrap/css/bootstrap-table.min.css" type="text/css"/>	
+	<style>
+		html,body { height: 100%;width: 100%;}
+		/*设置编辑器宽度*/
+		#edui1{
+			width: 100% !important;
+		}
+	</style>
+</head>
+
+<body>
+    <form id="formName" name="formName" style="width: 99%;padding-left: 10px;padding-top: 10px;margin-bottom: 60px;">
+    <table class="table table-bordered " style="margin-bottom: 0px;">
+     	<tr>
+            <td colspan="4" style="font-weight: bold;" class="active">模板信息</td>
+        </tr>
+ 		
+		<tr>
+			<td class="th_bg">采购类型</td>
+			<td colspan="3">
+				<span id="projectKind"></span>
+			</td>
+		</tr>
+ 		
+		<tr>
+			<td class="th_bg">模板类型</td>
+			<td style="width: 200px;">
+				<span id="tempTypeName"></span>
+			</td>
+			<td class="th_bg">项目类型</td>
+			<td style="width: 200px;">
+				<span id="projectType"></span>
+			</td>
+		</tr>
+		<tr class="type_change">
+			<td class="th_bg type_4">招标方式</td>
+			<td class="type_4">
+				<span id="bidType"></span>
+            </td>
+            
+            <td class="th_bg type_0 type_4">审查方式</td>
+			<td class="type_0 type_4">
+				<span id="examinationType"></span>
+            </td>
+		</tr>
+		<tr  class="type_change">
+			<td class="th_bg type_4">是否依法</td>
+			<td class="type_4">
+				<span id="isLegal"></span>
+            </td>
+            <td class="th_bg type_4">交易流程</td>
+			<td class="type_4">
+				<span id="isNet"></span>
+            </td>
+		</tr>
+		<tr class="isNotice">
+			
+			<td class="th_bg">是否中选</td>
+			<td colspan="3">
+				<span id="isWin"></span>
+            </td>
+		</tr>
+		<tr>
+			<td class="th_bg">模板名称</td>
+			<td colspan="3">
+				<span id="tempName"></span>
+			</td>
+		</tr>
+		<tr>
+			<td colspan="4" class="alwaysShow" style="vertical-align: middle;border-right: 0px;background-color: #d3e5fc !important;box-shadow: 5px 0px 0px #59abf0 inset;">
+				<i class="glyphicon glyphicon-book" style="font-size: 18px;color: #95a4ad;margin-left: 15px;"></i>
+				<font size="4" style="color: #222222 !important;font-weight: 800;">模板内容</font>
+			</td>
+		</tr>
+		<tr>
+			<td colspan="4">
+				<div id="container" name="content" style="overflow:auto;height:320px;width:99%;margin: auto;"></div>
+			</td>
+		</tr>				
+	</table>
+	<table class="table  table-bordered " id="tableWorkflow">
+		<tr class="active">
+			<th colspan="2">审核</th>
+		</tr>
+		<tr id="auditrow1">
+			<td class="th_bg"  width="20%">审核状态</td>
+			<td style="text-align: left;">
+				<input type="radio" name="auditState" value="0" />通过
+				<input type="radio" name="auditState" value="1" />不通过
+
+			</td>
+		</tr>
+		<tr id="auditrow2">
+			<td class="th_bg"  width="20%">选择审核人</td>
+			<td>
+				<select name="" id="employeeId" class="form-control" style="width: 180px;">
+
+				</select>
+			</td>
+		</tr>
+		<tr class="searched" id="auditrow3">
+			<td class="th_bg"  width="20%">审核说明</td>
+			<td><textarea rows="5"  class="form-control"  style="width: 90%;height: 80px;" name="content"></textarea></td>
+		</tr>
+		<tr>
+	</table>
+	<table class="table table-bordered" id="workflowList">
+		<tr class="active">
+			<th>审核流程</th>
+		</tr>
+		<tr>
+			<td>
+				<table class="table table-bordered" id="workflowListDetail"></table>
+			</td>
+		</tr>
+	</table>
+	</form>
+    <div class="bottom-btn">
+		<button type="button" class="btn btn-primary" id="btn_submit"><span class="glyphicon glyphicon-ok"></span>确认</button>
+		<button type="button" class="btn btn-default" id="btn_close"><span class="glyphicon glyphicon-remove"></span>关闭</button>	
+    </div>
+    <script type="text/javascript" src="../../../media/js/jquery/jquery.js"></script>
+    <script type="text/javascript" src="../../../media/js/jquery/jquery.extend.js"></script>
+    <script type="text/javascript" src="../../../media/js/base/util.js"></script>
+    <script type="text/javascript" src="../../../media/js/base/common.js"></script>
+    <script type="text/javascript" src="../../../media/js/bootstrap/js/bootstrap-table.min.js"></script>
+	<script type="text/javascript" src="../../../media/js/bootstrap/js/bootstrap-table-zh-CN.min.js"></script>
+    <script type="text/javascript" src="../../../media/js/layer/layer.js"></script>
+    <script type="text/javascript" src="../../../media/js/base/WorkflowInfo.js"></script>
+    <script type="text/javascript" src="../js/FormworkView.js"></script>
+   
+</body>
+
+</html>

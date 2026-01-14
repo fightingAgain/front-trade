@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="pragma" content="no-cache"><!-- 禁止浏览器从本地计算机的缓存中访问页面内容 --> 
+		<meta http-equiv="cache-control" content="no-cache"><!-- 用于指定请求和响应遵循的缓存机制 --> 
+		<meta http-equiv="expires" content="0"><!-- 用于设定网页的到期时间，一旦网页过期，必须到服务器上重新传输； -->
+		<title>招标文件编辑页面</title>
+		<link rel="stylesheet" href="../../../media/js/bootstrap/css/bootstrap.css" />
+		<link rel="stylesheet" href="../../../media/js/bootstrap/css/bootstrap-table.min.css" type="text/css"/>
+		<link rel="stylesheet" href="../../../media/js/stream/css/stream-v1.css" />
+		<style>
+			label {
+				font-weight: normal;
+			}
+			
+			body {
+				height: 100%;
+				width: 100%;
+			}
+			.calendar_icon{
+				color: #3995C8;
+			}
+			.padding_button{
+				padding: 5px 8px !important;
+				line-height: 30px !important;
+			}
+			.readonly{
+				border: none;
+			    background: none !important;
+			    outline: none !important;
+			    box-shadow: none !important;
+			}
+			.iptFile {
+				position: absolute;
+				z-index: 3;
+				top: 0;
+				left: 0;
+				width: 108px;
+				height: 30px;
+				opacity: 0;
+			}
+		</style>
+	</head>
+	<body>
+		<form  id="formName" class="pageModel">
+			
+       		<table class="table table-bordered">
+       			<tr>
+       				<td class="active" colspan="2">基本信息</td>
+       			</tr>
+       			<tr>
+					<td  class="th_bg">标段编号</td>
+					<td>
+						<span id="interiorBidSectionCode"></span>
+					</td>
+				</tr>
+				<tr>
+					<td  class="th_bg">标段名称</td>
+					<td>
+						<span id="bidSectionName"></span>
+					</td>
+				</tr>
+				<!--<tr>
+					<td  class="th_bg">评审方法</td>
+					<td>
+						<span id="examType"></span>
+					</td>
+				</tr>-->
+				
+				<tr id="divideBlock">
+       				<td class="active" colspan="2"><span style="padding-top:10px;">评审项设置</span>
+       				</td>
+       			</tr>
+       			<tr>
+       				<td colspan="2">
+       					<ul class="nav nav-pills" id="reviewFirst" style="margin-bottom: 5px;">
+       						<li style="float:right;" id="btnCheckBlock">
+       							<button type="button" class="btn btn-primary btn-sm" id="btnCheckView">查看</button>
+       						</li>
+						</ul>
+						<table class="table table-bordered" id="checkInfo">
+							<tr>
+								<td class="th_bg">评审阶段</td>
+								<td style="min-width: 280px;">
+									<span id="checkStage"></span>
+								</td>
+								<td class="th_bg">评审方式</td>
+								<td style="min-width: 280px;">
+									<span id="checkType"></span>
+								</td>
+							</tr>
+							<tr class="checkType checkTypeCom">
+								<td class="th_bg">评审规则</td>
+								<td colspan="3">
+									<span id="ratioMolecular" style="padding-right: 10px;"></span>
+									评委评审合格才算合格
+								</td>
+							</tr>
+							<tr class="checkType checkType1" style="display: none;">
+								<td class="th_bg">最大偏离项</td>
+								<td>
+									<span id="maxDeviate"></span>
+								</td>
+								<td class="th_bg">是否计入偏离总项</td>
+								<td>
+									<span id="isAddToTotal"></span>
+								</td>
+							</tr>
+							<tr class="checkType checkType1 isAddPriceModule" style="display: none;">
+								<td class="th_bg">偏离<span class="checkType8">加</span>价</td>
+								<td>
+									<span id="isAddPrice"></span>
+								</td>
+								<td class="th_bg"><span class="isAddPriceShow" style="display: none;"><span class="checkType8">加</span>价幅度</span></td>
+								<td>
+									<span class="isAddPriceShow" id="addPriceRatio" style="display: none;"> %</span>
+								</td>
+							</tr>
+							<tr class="checkType checkType3" style="display: none;">
+								<td class="th_bg">满分</td>
+								<td>
+									<span id="score"></span>
+								</td>
+								<td class="th_bg"><span class="weightShow">权重</span></td>
+								<td>
+									<span class="weightShow" id="weight"></span>
+								</td>
+								
+							</tr>
+							<tr class="checkType checkType3" style="display: none;">
+								<td class="th_bg">打分方式</td>
+								<td>
+									<span id="scoreType" style="padding-right:20px;"></span>
+									
+								</td>
+								<td class="th_bg"><span class="avgTypeShow">计算方式</span></td>
+								<td>
+									<span id="avgType" class="avgTypeShow"></span>
+								</td>
+							</tr>
+						</table>
+						
+						<table class="table table-bordered table-striped" id="reviewSecond">
+							
+						</table>
+       				</td>
+       			</tr>
+       		</table>
+		</form>
+	     
+	    <div class="bottom-btn">
+			<button type="button" class="btn btn-default" id="btnClose"><span class="glyphicon glyphicon-remove"></span>关闭</button>
+		</div>
+	     <script type="text/javascript" src="../../../media/js/jquery/jquery.js" ></script>
+		 <script type="text/javascript" src="../../../media/js/jquery/jquery.extend.js"></script>
+		 <script type="text/javascript" src="../../../media/js/base/common.js" ></script>
+		 <script type="text/javascript" src="../../../media/js/base/util.js" ></script>
+		 <script type="text/javascript" src="../../../media/js/bootstrap/js/bootstrap.js" ></script>
+		 <script type="text/javascript" src="../../../media/js/bootstrap/js/bootstrap-table.min.js"></script>
+		 <script type="text/javascript" src="../../../media/js/bootstrap/js/bootstrap-table-zh-CN.min.js"></script>
+		 <script type="text/javascript" src="../../../media/js/layer/layer.js"></script>
+		 <script type="text/javascript" src="../js/reviewView.js?version=3.4.25" ></script>
+	</body>
+</html>

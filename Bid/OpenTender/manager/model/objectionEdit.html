@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8">
+		<meta http-equiv="pragma" content="no-cache"><!-- 禁止浏览器从本地计算机的缓存中访问页面内容 --> 
+		<meta http-equiv="cache-control" content="no-cache"><!-- 用于指定请求和响应遵循的缓存机制 --> 
+		<meta http-equiv="expires" content="0"><!-- 用于设定网页的到期时间，一旦网页过期，必须到服务器上重新传输； -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>招标公告</title>
+    <link rel="stylesheet" href="../../../media/js/layer/mobile/need/layer.css" />
+    <link rel="stylesheet" href="../../../media/js/bootstrap/css/bootstrap.css" />
+    <link rel="stylesheet" href="../../../media/js/stream/css/stream-v1.css" />
+    <link rel="stylesheet" href="../../../media/js/datetimepicker/css/jquery.datetimepicker.css">
+    
+	<style>
+		html,body { height: 100%;width: 100%;}
+		.readonly{
+		    border: none;
+		    background: none !important;
+		    outline: none !important;
+		    box-shadow: none !important;
+		}
+		.pretrial,.revise{
+			display: none;
+		}
+		.enterFull{
+			position: absolute;
+			top: 0;
+			left: 0;
+			background: #ffffff;
+			visibility: visible;
+			filter: Alpha(opacity=90);
+		}
+		.display_none{
+			display: none;
+		}
+		.file-input .kv-upload-progress{
+			display: none !important;
+		}
+		tr .file-input{
+			display: inline-block;
+			float: right;
+			margin-right: 50px;
+		}
+		a,a:link,a:visited,a:hover,a:active{
+			color: #333333;
+			text-decoration: none;
+		}
+		.calendar_icon{
+			color: #3995C8;
+		}
+		.padding_button{
+			padding: 5px 8px !important;
+			line-height: 30px !important;
+		}
+		input[type=number] {  
+		    -moz-appearance:textfield;  
+		}  
+		input[type=number]::-webkit-inner-spin-button,  
+		input[type=number]::-webkit-outer-spin-button {  
+		    -webkit-appearance: none;  
+		    margin: 0;  
+		}  
+	</style>
+</head>
+
+<body>
+    <form class="pageModel" id="addNotice" name="formName">
+    	<input type="hidden"  name="bidSectionId" id="bidSectionId" />
+        <table class="table table-bordered ">
+        	<tr>
+	            <td colspan="4" style="font-weight: bold;" class="active padding_button">基本信息</td>
+	        </tr>
+	        <tr>
+	        	<td class="th_bg">异议阶段</td>
+                <td colspan="3">
+                	<span class="set_height" id="objectionType" optionName="objectionType" style="padding-left: 12px;"></span>
+                </td>
+	        </tr>
+	        <tr>
+	        	<td class="th_bg">标段名称</td>
+                <td colspan="3">
+                    <input type="text"  name="" id="bidSectionName" class="form-control readonly" readonly="readonly" style="display: inline-block;width: 80%;" />
+                    <input type="hidden"  name="id" id="dataId" />
+                </td>
+	        </tr>
+	        <tr>
+	        	<td class="th_bg">异议提出人</td>
+                <td colspan="3">
+                	<span class="set_height" id="enterpriseName"  style="padding-left: 12px;"></span>
+                </td>
+	        </tr>
+	        <tr>
+	        	<td class="th_bg">异议标题</td>
+                <td colspan="3">
+                    <input type="text"  name="" id="objectionTitle" class="form-control readonly" readonly="readonly"  />
+                </td>
+	        </tr>
+	        <tr>
+	        	<td class="th_bg">异议内容</td>
+                <td colspan="3">
+                    <textarea name="" id="objectionContent" class="form-control readonly" readonly="readonly" style="resize: none;" rows="5" cols=""></textarea>
+                </td>
+	        </tr>
+	        <tr>
+	        	<td class="th_bg">项目异议书上传</td>
+                <td colspan="3">
+	            	<div id="fileContent">
+	            		
+	            	</div>
+                </td>
+	        </tr>
+	        <tr>
+	        	<td class="th_bg">联系人</td>
+                <td>
+                    <input type="text"  name="" id="linkMan" class="form-control readonly" readonly="readonly" style="width: 260px;"/>
+                </td>
+                <td class="th_bg">联系人手机号</td>
+                <td>
+                    <input type="text"  name="" id="linkMobile" class="form-control readonly" readonly="readonly" style="width: 260px;"/>
+                </td>
+	        </tr>
+	        <tr class="after_sign" style="display: none;">
+	        	<td class="th_bg">异议状态<i class="red">*</i></td>
+	        	<td colspan="3">
+                	<label style="padding: 7px 20px;margin-bottom: 0;">
+                		<input type="radio" name="status" value="4" style="vertical-align: -2px;margin-right: 5px;" >受理
+                	</label>
+                    <label style="padding: 7px 20px;margin-bottom: 0;">
+                    	<input type="radio" name="status" value="5" style="vertical-align: -2px;margin-right: 5px;" >不予受理
+                    </label>
+                </td>
+	        </tr>
+	        <tr class="no_accept" style="display: none;">
+	        	<td class="th_bg">不予受理通知书</td>
+                <td colspan="3">
+                    <button type="button" class="btn btn-sm btn-primary" id="fileUp" style="float: right;margin-right: 50px;">
+	            		<span class="glyphicon glyphicon-folder-open"></span>选择文件
+	            	</button>
+	            	<div id="noAcceptContent" style="margin-top: 45px;">
+	            		
+	            	</div>
+                </td>
+	        </tr>
+	        <tr class="reply">
+	        	<td class="th_bg">答复标题<i class="red">*</i></td>
+                <td colspan="3">
+                    <input type="text"  name="answersTitle" id="answersTitle" class="form-control reply_check"  errormsg="请输入答复标题"/>
+                </td>
+	        </tr>
+	        <tr class="reply">
+	        	<td class="th_bg">答复内容<i class="red">*</i></td>
+                <td colspan="3">
+                    <textarea name="answersContent" id="answersContent" class="form-control reply_check" style="resize: none;" rows="5" cols="" errormsg="请输入答复内容"></textarea>
+                </td>
+	        </tr>
+	        <tr class="reply">
+	        	<td class="th_bg">异议答复函</td>
+                <td colspan="3">
+                    <button type="button" class="btn btn-sm btn-primary" id="fileLoad"   style="float: right;margin-right: 50px;">
+	            		<span class="glyphicon glyphicon-folder-open"></span>选择文件
+	            	</button>
+	            	<div id="replayContent" style="margin-top: 45px;">
+	            		
+	            	</div>
+                </td>
+	        </tr>
+			<tr class="reply">
+				<td class="th_bg">异议答复附件</td>
+				<td colspan="3">
+					<button type="button" class="btn btn-sm btn-primary" id="replyAppendixFileUpload"
+						style="float: right;margin-right: 50px;">
+						<span class="glyphicon glyphicon-folder-open"></span>选择文件
+					</button>
+					<div id="replyAppendixFile" style="margin-top: 45px;">
+
+					</div>
+				</td>
+			</tr>
+
+			<tr class="reply yycljg">
+				<td class="th_bg">异议处理完毕<i class="red">*</i></td>
+				<td colspan="3">
+					<label style="padding-right: 20px;margin-bottom: 0;">
+						<input type="radio" name="isOver" value="1" style="vertical-align: -2px;margin-right: 5px;" />
+						是
+					</label>
+					<label style="padding-right: 20px;margin-bottom: 0;">
+						<input type="radio" name="isOver" value="0" style="vertical-align: -2px;margin-right: 5px;" />
+						否
+					</label>
+					<label class="red">温馨提示：选择是，对本异议不能再新增回复；选择否，异议处理完毕前，本项目招投标活动暂停。</label>
+				</td>
+			</tr>
+			<tr class="reply deal_sel yycljg">
+				<td class="th_bg">异议处理结果<i class="red">*</i></td>
+				<td colspan="3">
+					<select name="results" id="results" ignore="ignore" datatype="*" errormsg="请选择异议处理结果" class="form-control select" style="width: 200px;display: inline-block;">
+						<option value="">请选择</option>
+					</select>
+				</td>
+			</tr>
+			
+	    </table>
+        <div class="bottom-btn" style="z-index: 11000;">
+        	<button type="button" class="btn btn-sm btn-primary" id="sign_in" ><span class="glyphicon glyphicon-ok-sign"></span>签收</button>
+            <button type="button" class="btn btn-primary" id="btnSubmit"><span class="glyphicon glyphicon-saved"></span>确认</button>
+            <button type="button" class="btn btn-default" id="btnClose"><span class="glyphicon glyphicon-remove"></span>取消</button>
+        </div>
+    </form>
+    <script type="text/javascript" src="../../../media/js/jquery/jquery.js"></script>
+    <script type="text/javascript" src="../../../media/js/jquery/jquery.extend.js"></script>
+    <script type="text/javascript" src="../../../media/js/base/util.js"></script>
+    <script type="text/javascript" src="../../../media/js/base/common.js"></script>
+    <script type="text/javascript" src="../../../media/js/bootstrap/js/bootstrap.js"></script>
+    <script type="text/javascript" src="../../../media/js/datetimepicker/js/jquery.datetimepicker.js"></script>
+    <script type="text/javascript" src="../../../media/js/stream/js/stream-v1.js"></script>
+    <script type="text/javascript" src="../js/public.js"></script>
+    <script type="text/javascript" src="../../../media/js/base/WorkflowInfoNew.js"></script>
+    <script type="text/javascript" src="../../../media/js/base/StreamUpload.js"></script>
+	<script type="text/javascript" src="../js/resultSelectOptions.js"></script>
+    <script type="text/javascript" src="../js/objectionEdit.js"></script>
+</body>
+
+</html>

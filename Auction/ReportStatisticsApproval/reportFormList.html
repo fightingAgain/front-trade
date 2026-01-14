@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<title>项目公告审核分页</title>
+		<meta http-equiv="pragma" content="no-cache">
+		<!-- 禁止浏览器从本地机的缓存中调阅页面内容 -->
+		<meta http-equiv="cache-control" content="no-cache, must-revalidate">
+		<meta http-equiv="expires" content="0">
+	</head>
+	<style>
+		.input-group {
+			float: left;
+			width: 120px;
+		}
+	</style>
+
+	<body>
+		<div class="container-fluid ">
+			<input type="hidden" name="departmentName" id="departmentName" datatype="*" errormsg="请选择项目归属部门" />
+					<input type="hidden" name="dept" id="dept" datatype="*" errormsg="请选择项目归属部门" />
+			<input type="hidden" name="projectOfficeId" id="projectOfficeId"/>
+			<div id="query">
+				
+			</div>
+			
+			<table id="ProjectAuditTable"></table>
+		</div>
+	</body>
+	<script language="javascript" type="text/javascript" src="media/js/My97DatePicker/WdatePicker.js"></script>
+		
+	<script type="text/javascript" src="Auction/ReportStatisticsApproval/js/reportFormList.js"></script>
+
+</html>

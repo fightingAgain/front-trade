@@ -1,0 +1,46 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<script src="../js/multibrowser.js"></script>
+	<script type="text/javascript" src="../../../media/js/jquery/jquery.min.js"></script>
+	<script type="text/javascript" src="../../../media/js/jquery/jquery.extend.js"></script>
+	<script type="text/javascript" src="../../../media/js/base/common.js"></script>
+	<link rel="stylesheet" href="../../../media/js/bootstrap/css/bootstrap.css" />
+	<title>CA解密</title>
+</head>
+<body>
+	<object id="UCAPI" classid="CLSID:18201fef-1ac1-4900-8862-5ec6154bb307" hidden="hidden"></object>
+	<form class="pageModel" >
+	<table class="table table-bordered ">
+		<tr>
+			<td class="th_bg" style="width:80px">解密方式</td>
+			<td>
+				<span id="decryptType">CA解密</span>
+			</td>
+		</tr>
+		<tr id="envelope" style="display: none;">
+	        <td class="th_bg" style="width:80px">信封码：</td>
+	        <td>
+	            <input type="text" class="form-control" id="keyText"  name="keyText" style="display: inline-block;width:200px;" />
+    			<button type="button" onclick="$('#files').click()" class="btn btn-primary" id="btnImport" style="position: relative;vertical-align: 0;">
+    				<span class="glyphicon glyphicon-upload"></span>导入
+    			</button>
+    			<input type="file" name="" id="files" accept=".txt" style="display: inline-block;width: 70px;position: absolute;left: 0;top: 0;overflow: hidden;opacity: 0;filter: 'alpha(opacity=0)';height: 34px;"  />
+	        </td>
+	   </tr>
+	</table>
+	<div style="width: 100%;position:fixed;bottom:55px;right:8px;">
+		<div style="float: right;">
+			<input id="select"  type="checkbox" name="testradio" value="1" /><span style="margin-left: 5px;">其他方式</span>
+		</div>
+	</div>	
+	<div class="bottom-btn">
+        <button type="button" class="btn btn-primary" id="btnSubmit"><span class="glyphicon glyphicon-saved"></span>确认</button>
+        <button type="button" class="btn btn-default" id="btnClose"><span class="glyphicon glyphicon-remove"></span>取消</button>
+    </div>
+	</form>
+	<script type="text/javascript" src="../../../media/js/ca.js"></script>
+	<script type="text/javascript" src="../js/casignal.js"></script>
+</body>
+</html>

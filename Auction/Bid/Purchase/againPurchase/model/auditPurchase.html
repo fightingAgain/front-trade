@@ -1,0 +1,248 @@
+<link rel="stylesheet" href="../css/style.css" />
+<link rel="stylesheet" href="../../../../media/js/bootstrap/css/bootstrap.css" />
+    <table class="table table-bordered " style="width: 99%;padding-left: 10px;padding-top: 10px;margin-bottom: 0;">
+	     	  <tr>
+	            <td colspan="4" style="font-weight: bold;" class="active">项目信息</td>
+	        </tr>
+	        <tr>
+	            <td  class="th_bg">采购项目名称</td>
+	            <td colspan="3" style="text-align: left;"><div id="projectName"></div></td>
+	        </tr>
+	        <tr>
+	            <td  class="th_bg">采购项目编号</td>
+	            <td colspan="3" style="text-align: left;"><div id="projectCode"></div></td>           
+	        </tr>
+	        <tr>
+	            <td  class="th_bg">项目名称</td>
+	            <td colspan="3" style="text-align: left;"><div id="programmeName"></div></td>         
+	        </tr>
+	        <tr>
+	        	<td  class="th_bg">项目编号</td>
+	            <td colspan="3" style="text-align: left;"><div id="programmeCode"></div></td>
+	        </tr>
+	        <tr>
+	            <td  class="th_bg">项目地址</td>
+	            <td colspan="3" style="text-align: left;"><div id="programmeAddress"></div></td>
+	        </tr>
+	        <tr>
+	            <td colspan="4" style="font-weight: bold;" class="active">采购人信息</td>
+	         </tr>
+	        <tr>
+	            <td  class="th_bg">采购人名称</td>
+	            <td colspan="3" style="text-align: left;"><div id="purchaserName"></div></td>
+	        </tr>
+	        <tr>
+	            <td  class="th_bg">采购人地址</td>
+	            <td colspan="3" style="text-align: left;"><div id="purchaserAddress"></div></td>
+	        </tr>
+	        <tr>
+	            <td  class="th_bg" style="width: 20%;">联系人</td>
+	            <td style="text-align: left; width:40%"><div id="purchaserLinkmen"></div></td>
+	            <td  class="th_bg" style="width: 20%;">联系人电话</td>
+	            <td style="text-align: left; width:40%"><div id="purchaserTel"></div></td>
+	        </tr>
+	        <tr>
+	            <td colspan="4" style="font-weight: bold;" class="active">项目基本信息</td>
+	        </tr>
+	        <tr>
+	            <td  class="th_bg">资金来源</td>
+	            <td colspan="3" style="text-align: left;">
+	            	<!--<select style="width: 150px;" name="projectSource" id="projectSource" disabled="disabled">
+	            		<option value="0">首次发布公告</option>
+	            		<option value="1">重新采购</option>
+	            	</select>-->
+            		<div id="projectSource"></div>
+            	</td>
+	        </tr>
+	        <tr>
+	            <td  class="th_bg">采购方式</td>
+	            <td colspan="4" style="text-align: left;">           	
+	            	<input type="radio" name="project.tenderType" value="0"  disabled="disabled"/>询比采购
+	            </td>
+	        </tr>
+	        <tr>
+	            <td  class="th_bg">报价轮数</td>
+	            <td colspan="4" style="text-align: left;">
+	            	一轮报价
+	            </td>
+	        </tr>
+	         <tr>
+	            <td  class="th_bg">公开范围<i class="red">*</i></td>
+	            <td colspan="4" style="text-align: left;">
+	            	<input type="radio" name="isPublic" value="0" disabled="disabled"/>所有供应商
+	            	<input type="radio" name="isPublic" value="1" disabled="disabled"/>所有本公司认证供应商
+	            	<input type="radio" name="isPublic" value="2" disabled="disabled"/>仅限邀请供应商
+	            	<input type="radio" name="isPublic" value="3" disabled="disabled"/>仅限邀请供应商
+	            </td>
+	         </tr>
+	         <tr>
+	            <td colspan="5" style="font-weight: bold;" class="active">邀请供应商</td>
+	        </tr>	        
+	        <tr>
+	        	<td colspan="5">
+	        		<table class="table table-bordered" id="tableList"></table>
+	        	</td>
+	        </tr>
+	     	<tr>
+	            <td colspan="4" style="font-weight: bold;" class="active">项目时间安排</td>
+	        </tr>
+	     	<tr>
+	     		<td  class="th_bg">公告开始时间</td>
+	     		<td colspan="3">
+	     			<div id="noticeStartDate"></div>
+	     		</td>
+	     	</tr>
+	     	<tr>
+	     		<td  class="th_bg">公告截止时间</td>
+	     		<td>
+	     			<div id="noticeEndDate"></div>
+	     		</td>
+	     		<td  class="th_bg">原始公告截止时间</td>
+	     		<td>
+	     			<div id="noticeEndDateOld"></div>
+	     		</td>   		
+	     	</tr>
+	     	<tr>
+	     		<td  class="th_bg">提出澄清截止时间</td>
+	     		<td>
+	     			<div id="askEndDate"></div>
+	     		</td>
+	     		<td  class="th_bg">原始提出澄清截止时间</td>
+	     		<td>
+	     			<div id="askEndDateOld"></div>
+	     		</td>   		
+	     	</tr>
+	     	<tr>
+	     		<td  class="th_bg">答复截止时间</td>
+	     		<td>
+	     			<div id="answersEndDate"></div>
+	     		</td>
+	     		<td  class="th_bg">原始答复截止时间</td>
+	     		<td>
+	     			<div id="answersEndDateOld"></div>
+	     		</td>   		
+	     	</tr>
+	     	<tr>
+	     		<td  class="th_bg">报价截止时间</td>
+	     		<td>
+	     			<div id="bidEndDate"></div>
+	     		</td>
+	     		<td  class="th_bg">原始公共报价截止时间</td>
+	     		<td>
+	     			<div id="bidEndDateOld"></div>
+	     		</td>   		
+	     	</tr>
+	     	<tr>
+	     		<td  class="th_bg">询比评审时间</td>
+	     		<td>
+	     			<div id="checkEndDate"></div>
+	     		</td>
+	     		<td  class="th_bg">原始公告询比评审时间</td>
+	     		<td>
+	     			<div id="checkEndDateOld"></div>
+	     		</td>
+	     	</tr>
+     		<tr>
+	            <td colspan="4" style="font-weight: bold;" class="active">包件信息</td>
+        	</tr>
+	        <tr>
+	        	<!--<button type="button" value="包件" onclick="findPackage()"></button>-->
+	        	<td colspan="4" id="projectPackage"></td>
+	        </tr>	
+	        <tr>
+	            <td  class="th_bg">包件名称</td>
+	            <td colspan="2" style="text-align: left;"><div id="packageName"></div></td>
+	            <td colspan="2" id="purchaseButton"></td>
+	        </tr>
+	       <tr>
+	            <td  class="th_bg">包件编号</td>
+	            <td colspan="3" style="text-align: left;width: 260px;"><div id="packageNum"></div></td>           
+	        </tr>
+	        <tr>
+	            <td  class="th_bg">评审方式</td>
+	            <td colspan="3" style="text-align: left;width: 260px;"><div id="checkPlan"></div></td>           
+	        </tr>
+	        <tr>
+	            <td  class="th_bg">平台服务费金额</td>
+	            <td colspan="3" style="text-align: left;width: 260px;"><div id="serviceCharge"></div></td>           
+	        </tr>
+	        <tr>
+	            <td colspan="4" style="font-weight: bold;" class="active">评审内容</td>
+        	</tr>
+	        <tr>
+	        	<td colspan="4">
+	        		<ul class="nav nav-tabs" role="checkList" id="checkList"></ul>
+	        	</td>
+	        </tr>
+	        <tr>
+	            <td  class="th_bg" colspan="2">评审方式：<span id="checkType"></span></td>
+	            <td colspan="2" style="text-align: left;width: 260px;"></td>           
+	        </tr>
+	        <tr>
+        		<td colspan="4">
+        			<table class="table table-bordered">
+        				<thead>
+        					<tr>
+					     		<th class="text-center">序号</th>
+				     			<th class="text-center">评价内容</th>
+				     			<th class="text-center">评价标准</th>
+				     			<th class="text-center">是否关键要求</th>
+				     			<th class="text-center">备注</th>
+					     	</tr>
+        				</thead>
+				     	<tbody id="packageCheckList"></tbody>
+        			</table>
+        		</td>
+        	</tr>
+			<tr>
+	            <td colspan="4" style="font-weight: bold;" class="active">明细信息</td>
+        	</tr>
+        	<tr>
+        		<td colspan="4">
+        			<table class="table table-bordered">
+        				<thead>
+        					<tr>
+					     		<th class="text-center">序号</th>
+				     			<th class="text-center">名称</th>
+				     			<th class="text-center">型号规格</th>
+				     			<th class="text-center">数量</th>
+				     			<th class="text-center">单位</th>
+				     			<th class="text-center">备注</th>
+				     			<th class="text-center">操作</th>     		
+					     	</tr>
+        				</thead>
+				     	<tbody id="packageDetail"></tbody>
+        			</table>
+        		</td>
+        	</tr>
+     		<tr>
+	            <td  class="th_bg">其他说明</td>
+	            <td colspan="3" style="text-align: left;"><div id="content"></div></td>
+        	</tr>
+	 		<tr>
+	            <td  class="th_bg" colspan="4" style="font-weight: bold;" class="active">采购文件</td>
+    		</tr>
+	 		<tr>
+	 			<td colspan="4" >
+	 				<table class="table table-bordered">
+	 					<tr>
+				     		<th class="text-center">序号</th>
+			     			<th class="text-center">文件名称</th>
+				     	</tr>
+				     	<tbody id="FileDownload"></tbody>
+	 				</table>
+	 			</td>
+     			
+     		</tr>
+		</table>
+ <style>
+ .table > thead > tr > th, .table > tbody > tr > th, .table > tfoot > tr > th, .table > thead > tr > td, .table > tbody > tr > td, .table > tfoot > tr > td{
+ 	vertical-align: middle;
+ }
+ </style>
+ <script type="text/javascript" src="../../../../media/js/jquery/jquery.js" ></script>
+ <script type="text/javascript" src="../../../../media/js/jquery/jquery.extend.js"></script>
+ <script type="text/javascript" src="../../../../media/js/jquery/jquery.params.js" ></script> 
+ <script type="text/javascript" src="../../../../media/js/base/common.js" ></script>
+ <script type="text/javascript" src="../../../../media/js/bootstrap/js/bootstrap.js" ></script>
+ <script type="text/javascript" src="../js/audit_purchase.js"></script>

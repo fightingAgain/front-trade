@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="pragma" content="no-cache">
+		<!-- 禁止浏览器从本地机的缓存中调阅页面内容 -->
+		<meta http-equiv="cache-control" content="no-cache, must-revalidate">
+		<meta http-equiv="expires" content="0">
+		<title>偏离明细</title>
+		<link rel="stylesheet" type="text/css" href="../../../../media/js/bootstrap/css/bootstrap.css">
+		<link rel="stylesheet" type="text/css" href="../../../../media/js/bootstrap/css/bootstrap-table.css">
+		<style>
+			.row div {
+				padding-top: 10px;
+				padding-bottom: 10px;
+				border: 1px solid rgba(86, 61, 124, .2);
+				border-top: 0px;
+				border-left: 0px;
+			}
+			
+			.topborder {
+				border-top: 1px solid rgba(86, 61, 124, .2) !important;
+			}
+			
+			.leftborder {
+				border-left: 1px solid rgba(86, 61, 124, .2) !important;
+			}
+			
+			.radio {
+				display: inline;
+			}
+			
+			.NowReviewerTalbe {
+				background-color: #FBFBFB;
+			}
+			
+			.spacing {
+				padding-top: 10px;
+			}
+			
+			.show {
+				opacity: 1;
+			}
+			#myTab li a {
+				color: #FFFFFF !important;
+			}
+			
+			#myTab .active a {
+				color: #222 !important;
+				background: #fff !important;
+			}
+			
+			.table td,
+			.table th {
+				vertical-align: middle !important;
+				
+			}
+			
+			#checkTotalTable td{
+				white-space:pre-wrap !important;
+			}
+			
+			.itemChecks td{
+				white-space:pre-wrap !important;
+			}
+		</style>
+	</head>
+	<body>
+		<div style="width: 98%;margin: 15px;">			
+			<div id="myTabContent" class="tab-content" style="width: 980px;margin: auto; overflow: auto;height: 450px;">
+				<table id="table" class="table table-bordered">
+					<thead id="th">
+						
+					</thead>	
+					<tbody id="tbody"></tbody>
+				</table>
+			</div>
+		</div>
+		
+		<script type="text/javascript" src="../../../../media/js/jquery/jquery.min.js"></script>
+		<script type="text/javascript" src="../../../../media/js/jquery/jquery.ajax.js"></script>
+		<script type="text/javascript" src="../../../../media/js/base/util.js"></script>
+		<script type="text/javascript" src="../../../../media/js/bootstrap/js/bootstrap-table.min.js"></script>
+		<script>
+		    var projectId=getUrlParam('projectId');
+		    var packageId=getUrlParam('packageId');
+		    var packageCheckLists,priceChecks
+			$.ajax({
+				type: "post",
+				url: top.config.AuctionHost + "/ProjectReviewController/getDeviateInfo.do",
+				data: {
+					'projectId': projectId,
+					'packageId': packageId,
+					'examType':1
+				},
+				async: false,
+				success: function(resrul) {		
+					if(resrul.success){
+						data = resrul.data;
+						packageCheckLists=data.packageCheckLists;
+						priceChecks=data.priceChecks
+						packageCheckListTabs(packageCheckLists)
+					}
+					
+				}
+			})
+			function packageCheckListTabs(data){
+				var th='<tr>'
+					+'<th style="width:50px;text-align:center">序号</th>'
+					+'<th>供应商</th>'
+					for(var i=0;i<data.length;i++){
+						th+='<th>'+data[i].checkName+'</th>'
+					}
+					th+='<th>累计偏离项数</th>'
+					th+='<th>计入总数偏离项数</th>'
+					th+='</tr>'	
+					$("#th").html(th);
+					var tbody="";
+					for(var h=0;h<priceChecks.length;h++){
+						tbody+='<tr>'
+							+'<td style="width:50px;text-align:center">'+(h+1)+'</td>'
+							+'<td>'+(priceChecks[h].enterpriseName||"")+'</td>'
+							for(var m=0; m<priceChecks[h].packageCheckLists.length;m++){								
+								for(var i=0;i<data.length;i++){
+									if(priceChecks[h].packageCheckLists[m].id==data[i].id){
+										tbody+='<td>'+(priceChecks[h].packageCheckLists[m].supplierDeviate!==undefined?priceChecks[h].packageCheckLists[m].supplierDeviate:'/')+'</td>'
+									}								
+								}								
+							}
+							tbody+='<td>'+(priceChecks[h].deviateNumTotal!==undefined?priceChecks[h].deviateNumTotal:'/')+'</td>'
+							tbody+='<td>'+(priceChecks[h].deviateNum!==undefined?priceChecks[h].deviateNum:'/')+'</td>'
+						tbody+='</tr>'
+					}
+					$("#tbody").html(tbody)
+			}			
+			function getUrlParam(name) {
+				var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); // 构造一个含有目标参数的正则表达式对象  
+				var r = window.location.search.substr(1).match(reg); // 匹配目标参数  
+				if(r != null) return unescape(r[2]);
+				return null; // 返回参数值  
+			}
+		</script>
+	</body>
+</html>

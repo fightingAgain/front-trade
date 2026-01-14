@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="pragma" content="no-cache"><!-- 禁止浏览器从本地计算机的缓存中访问页面内容 -->
+		<meta http-equiv="cache-control" content="no-cache"><!-- 用于指定请求和响应遵循的缓存机制 -->
+		<meta http-equiv="expires" content="0"><!-- 用于设定网页的到期时间，一旦网页过期，必须到服务器上重新传输； -->
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta http-equiv="X-UA-Compatible" content="ie=edge">
+		<title>回避单位</title>
+	  	<link rel="stylesheet" type="text/css" href="../../../media/js/layer/mobile/need/layer.css" />
+	    <link rel="stylesheet" type="text/css" href="../../../media/js/bootstrap/css/bootstrap.css" />
+	    <link rel="stylesheet" type="text/css" href="../../../media/js/bootstrap/css/bootstrap-table.min.css">
+	</head>
+	<style>
+		pre{
+			    display: block;
+			    padding: 0px;
+			    margin: 0px;
+			    font-size: 14px;
+			    line-height: 1.42857143;
+			    color: #333;
+			   	white-space:pre-wrap !important;
+    			word-break: normal;
+			    background:none;
+			    border: none;
+			    border-radius: 0px;
+			}	
+	</style>
+	<body style="padding: 10px;">
+    	<table class="table table-bordered" id="clarifyTable"></table>
+	</body>
+	<script type="text/javascript" src="../../../media/js/jquery/jquery.js" ></script>
+	<script type="text/javascript" src="../../../media/js/jquery/jquery.extend.js"></script>
+	<script type="text/javascript" src="../../../media/js/base/common.js" ></script>
+	<script type="text/javascript" src="../../../media/js/base/util.js" ></script>
+	<script type="text/javascript" src="../../../media/js/bootstrap/js/bootstrap.js" ></script>
+	<script type="text/javascript" src="../../../media/js/bootstrap/js/bootstrap-table.min.js"></script>
+	<script type="text/javascript" src="../../../media/js/bootstrap/js/bootstrap-table-zh-CN.min.js"></script>
+	<script type="text/javascript" src="../../../media/js/layer/layer.js"></script>
+	<script>
+		var SectionEnterpriseUrl=config.Reviewhost  + '/ReviewControll/findBidSectionEnterprise.do';
+		var bidSectionId=getUrlParam("bidSectionId");//标段Id
+		var examType=getUrlParam("examType");
+		var sipplementdata=[];
+		$.ajax({
+			type:"get",
+			url:SectionEnterpriseUrl,
+			async:false,
+			data:{
+				'bidSectionId':bidSectionId,
+				'examType':examType
+			},
+			success:function(res){
+				if(res.success){
+					sipplementdata=res.data;
+					isReplenishList()
+				}
+			}
+		});
+		function isReplenishList(){
+			$('#clarifyTable').bootstrapTable({
+				pagination: false,
+				undefinedText: "",
+				height: 490,
+				columns: [
+				{
+				    field: "xuhao",
+					title: "序号",
+					align: "center",
+					halign: "center",
+					width: "50px",
+					formatter: function(value, row, index) {
+						return index + 1;
+					},
+				
+				},
+				{
+					field: "enterpriseName",
+					title: "单位名称",
+					align: "left",
+					halign: "left",									
+				},
+				{
+					field: "shieldingReasons",
+					title: "回避原因",
+					align: "left",
+					halign: "left",									
+				},				
+				]
+			});
+			$('#clarifyTable').bootstrapTable("load",sipplementdata); //重载数据
+		}
+	</script>
+</html>
