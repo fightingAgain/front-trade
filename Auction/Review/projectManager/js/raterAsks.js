@@ -1,10 +1,4 @@
 /*
- * @Author: your name
- * @Date: 2020-09-11 14:56:36
- * @LastEditTime: 2020-10-13 18:21:53
- * @LastEditors: Please set LastEditors
- * @Description: In User Settings Edit
- * @FilePath: \FrameWork_bf\bidPrice\Review\projectManager\js\raterAsks.js
  */ 
 var AskOffers=new Array();
 $(function(){

@@ -1,10 +1,4 @@
 /*
- * @Author: your name
- * @Date: 2021-02-05 10:26:50
- * @LastEditTime: 2021-02-05 17:06:04
- * @LastEditors: Please set LastEditors
- * @Description: In User Settings Edit
- * @FilePath: \FrameWork\bidPrice\currencyControl\js\tree.js
  */ 
 ; (function ($, window, document, undefined) {
     "use strict";

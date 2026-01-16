@@ -1,10 +1,4 @@
 /*
- * @Author: your name
- * @Date: 2020-09-22 09:15:38
- * @LastEditTime: 2020-09-14 14:05:31
- * @LastEditors: Please set LastEditors
- * @Description: In User Settings Edit
- * @FilePath: \FrameWork_bf\bidPrice\Review\projectManager\js\quotation.js
  */ 
 var viewURL = top.config.AuctionHost+'/PackagePriceListController/findPackageQuateList.do';//回显接口
 var getPriceURL = top.config.AuctionHost+'/PackagePriceListController/getSuppliersPriceList.do';//获取供应商报价

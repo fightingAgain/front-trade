@@ -1,8 +1,6 @@
 /*
- * @Author: jin
- * @Date: 2020-07-21 08:52:22
- * @LastEditTime: 2020-08-03 15:20:23
- * @LastEditors: Please set LastEditors
+
+
  * @Description: In User Settings Edit
  * @Description: 打印功能
  * @FilePath: \FrameWork\bidPrice\currencyControl\js\Printing.js

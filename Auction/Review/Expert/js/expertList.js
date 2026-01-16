@@ -1,10 +1,4 @@
 /*
- * @Author: your name
- * @Date: 2020-09-12 11:10:52
- * @LastEditTime: 2020-10-08 17:05:29
- * @LastEditors: Please set LastEditors
- * @Description: In User Settings Edit
- * @FilePath: \FrameWork_bf\bidPrice\Review\Expert\js\expertList.js
  */
 //var nowDate = new Date();
 var systemTime;

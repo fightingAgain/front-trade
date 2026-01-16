@@ -1,10 +1,4 @@
 /*
- * @Author: your name
- * @Date: 2020-06-28 16:26:30
- * @LastEditTime: 2021-01-12 09:39:54
- * @LastEditors: Please set LastEditors
- * @Description: In User Settings Edit
- * @FilePath: \FrameWork_bf\bidPrice\currencyControl\js\department.js
  */ 
 var sendUrl = config.Syshost + '/EnterpriseController/findDepsByEnterpriseId.do'; 
 var url = window.location.search;

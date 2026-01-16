@@ -1,10 +1,4 @@
 /*
- * @Author: your name
- * @Date: 2020-09-11 11:05:38
- * @LastEditTime: 2020-09-11 11:24:00
- * @LastEditors: Please set LastEditors
- * @Description: In User Settings Edit
- * @FilePath: \FrameWork_bf\bidPrice\Review\projectManager\js\PackageOffer.js
  */ 
 //清单报价
 

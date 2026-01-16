@@ -1,10 +1,4 @@
 /*
- * @Author: your name
- * @Date: 2020-09-11 13:42:19
- * @LastEditTime: 2020-12-25 14:08:45
- * @LastEditors: Please set LastEditors
- * @Description: In User Settings Edit
- * @FilePath: \FrameWork_bf\bidPrice\Review\projectManager\js\PriceFile.js
  */ 
 //报价文件供应商
 var offerFileData=new Array();

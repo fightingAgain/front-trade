@@ -1,10 +1,4 @@
 /*
- * @Author: your name
- * @Date: 2020-09-12 09:15:32
- * @LastEditTime: 2020-11-04 09:21:45
- * @LastEditors: Please set LastEditors
- * @Description: In User Settings Edit
- * @FilePath: \FrameWork_bf\bidPrice\Review\projectManager\js\CheckReport.js
  */
 /*==========   评审报告   ==========*/
 var WORKFLOWTYPE = 'psbg';

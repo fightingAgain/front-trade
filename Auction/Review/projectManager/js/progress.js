@@ -1,10 +1,4 @@
 /*
- * @Author: your name
- * @Date: 2020-09-11 10:35:38
- * @LastEditTime: 2020-12-14 16:17:05
- * @LastEditors: Please set LastEditors
- * @Description: In User Settings Edit
- * @FilePath: \FrameWork_bf\bidPrice\Review\projectManager\js\progress.js
  */
 //评审进度管理
 var ProgressData = new Object();

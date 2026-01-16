@@ -1,11 +1,5 @@
 /*
- * @Author: your name
- * @Date: 2020-09-09 10:38:07
 
- * @LastEditTime: 2020-12-15 16:32:15
- * @LastEditors: Please set LastEditors
- * @Description: In User Settings Edit
- * @FilePath: \FrameWork_bf\bidPrice\Review\projectManager\js\projectCheckList.js
  */ 
 var tenderTypeCode;
 var examType = "";

@@ -1,10 +1,4 @@
 /*
- * @Author: your name
- * @Date: 2020-09-09 13:49:58
- * @LastEditTime: 2020-12-10 14:56:03
- * @LastEditors: Please set LastEditors
- * @Description: In User Settings Edit
- * @FilePath: \FrameWork_bf\bidPrice\Review\projectManager\js\Formation.js
  */ 
 //进入页面，赋值
 var FormaData;

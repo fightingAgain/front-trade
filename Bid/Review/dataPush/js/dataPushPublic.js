@@ -1,11 +1,5 @@
 /*
- * @Author: yiwen
- * @Date: 2021-12-03
 
- * @LastEditTime: 2021-12-03 15:21:38
- * @LastEditors: Please set LastEditors
- * @Description: In User Settings Edit
- * @FilePath: \FrameWork\bidPrice\DataPush\js\dataPushInfo.js
  */
 //var pushUrl = top.config.Reviewhost + '/ReviewControll/publishReviewByNoticeInfo.do'; //推送接口
 var pushUrl = top.config.tenderHost + '/pushCheckPublicityProject/publicityPush.do'; //推送接口

@@ -1,10 +1,4 @@
 /*
- * @Author: your name
- * @Date: 2020-12-08 15:01:10
- * @LastEditTime: 2020-12-24 15:40:05
- * @LastEditors: Please set LastEditors
- * @Description: In User Settings Edit
- * @FilePath: \FrameWork\bidPrice\Sale\Purchase\SalePurchase\js\againAddProject.js
  */ 
 var checkboxed;
 //初始化

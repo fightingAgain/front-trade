@@ -1,10 +1,4 @@
 /*
- * @Author: your name
- * @Date: 2020-11-19 09:30:51
- * @LastEditTime: 2021-01-26 08:53:07
- * @LastEditors: Please set LastEditors
- * @Description: In User Settings Edit
- * @FilePath: \FrameWork\bidPrice\Auction\Agent\AuctionPurchase\js\viewSupplier.js
  */ 
 function du(data) {
 	publicData = data;

@@ -1,11 +1,5 @@
 /*
- * @Author: your name
- * @Date: 2020-09-11 15:40:11
 
- * @LastEditTime: 2021-01-22 15:31:51
- * @LastEditors: Please set LastEditors
- * @Description: In User Settings Edit
- * @FilePath: \FrameWork_bf\bidPrice\Review\projectManager\js\packageCheckList.js
  */ 
 //刷新竞价起始价--参与竞价供应商最低价
 var backState;

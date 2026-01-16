@@ -1,10 +1,4 @@
 /*
- * @Author: your name
- * @Date: 2020-10-13 18:56:24
- * @LastEditTime: 2021-01-18 17:05:22
- * @LastEditors: Please set LastEditors
- * @Description: In User Settings Edit
- * @FilePath: \FrameWork\bidPrice\Auction\Agent\AuctionPurchase\js\auctionHtml.js
  */ 
 var typeAll=0;
 function auctionTypeBtn(type){

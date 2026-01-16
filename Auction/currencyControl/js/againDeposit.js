@@ -1,11 +1,5 @@
 /*
- * @Author: Jin
- * @Date: 2020-10-27 11:16:36
 
- * @LastEditTime: 2021-01-25 14:37:23
- * @LastEditors: Please set LastEditors
- * @Description: In User Settings Edit
- * @FilePath: \FrameWork\bidPrice\currencyControl\js\againDeposit.js
  */ 
 ; (function ($, window, document, undefined) {
     "use strict";

@@ -1,11 +1,5 @@
 /*
- * @Author: yiwen
- * @Date: 2021-11-16
 
- * @LastEditTime: 2021-01-13 15:21:38
- * @LastEditors: Please set LastEditors
- * @Description: In User Settings Edit
- * @FilePath: \FrameWork\bidPrice\DataPush\SelfProcurement\js\dataPushInfo.js
  */
 //var pushUrl = top.config.AuctionHost + '/projectReceptionController/push.do'; //推送接口
 var pushUrl = top.config.AuctionHost + '/projectReceptionController/NoticeEndProjectPush.do'; //推送接口

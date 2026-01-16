@@ -1,11 +1,5 @@
 /*
- * @Author: your name
- * @Date: 2020-09-11 16:29:00
 
- * @LastEditTime: 2021-01-20 09:39:28
- * @LastEditors: Please set LastEditors
- * @Description: In User Settings Edit
- * @FilePath: \FrameWork_bf\bidPrice\Review\projectManager\js\PriceCheckTotal.js
  */ 
 /*==========   评审记录汇总   ==========*/
 var CheckTotals;

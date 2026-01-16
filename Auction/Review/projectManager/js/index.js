@@ -1,11 +1,5 @@
 /*
- * @Author: your name
- * @Date: 2020-09-09 13:39:40
 
- * @LastEditTime: 2021-03-01 10:14:49
- * @LastEditors: Please set LastEditors
- * @Description: In User Settings Edit
- * @FilePath: \FrameWork_bf\bidPrice\Review\projectManager\js\PackageInfo.js
  */ 
 var url = top.config.AuctionHost;
 var loadFile = top.config.FileHost + "/FileController/download.do"; //文件下载

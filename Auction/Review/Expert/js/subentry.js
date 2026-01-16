@@ -1,10 +1,4 @@
 /*
- * @Author: your name
- * @Date: 2020-09-11 11:42:31
- * @LastEditTime: 2020-09-12 14:22:10
- * @LastEditors: Please set LastEditors
- * @Description: In User Settings Edit
- * @FilePath: \FrameWork_bf\bidPrice\Review\projectManager\js\subentry.js
  */ 
 //分项报价文件
 $(function(){

@@ -1,10 +1,4 @@
 /*
- * @Author: your name
- * @Date: 2020-09-11 13:54:59
- * @LastEditTime: 2021-01-18 17:31:37
- * @LastEditors: Please set LastEditors
- * @Description: In User Settings Edit
- * @FilePath: \FrameWork_bf\bidPrice\Review\projectManager\js\PriceCheck.js
  */ 
 /*==========   价格评审    ==========*/
 var priceChecks;

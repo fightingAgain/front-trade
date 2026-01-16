@@ -1,11 +1,5 @@
 /*
- * @Author: your name
- * @Date: 2020-09-09 13:49:49
 
- * @LastEditTime: 2021-03-08 14:30:47
- * @LastEditors: Please set LastEditors
- * @Description: In User Settings Edit
- * @FilePath: \FrameWork_bf\bidPrice\Review\projectManager\js\ReportSet.js
  */ 
 var packageCount="";
 var checkCount = "";

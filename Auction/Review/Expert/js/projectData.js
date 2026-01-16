@@ -1,10 +1,4 @@
 /*
- * @Author: your name
- * @Date: 2020-09-09 16:08:16
- * @LastEditTime: 2020-10-21 16:03:37
- * @LastEditors: Please set LastEditors
- * @Description: In User Settings Edit
- * @FilePath: \FrameWork_bf\bidPrice\Review\projectManager\js\projectData.js
  */ 
 var findPurchaseUrl=top.config.AuctionHost + '/ProjectReviewController/findProjectInfo.do'//根据项目ID获取所有项目信息内容
 var projectData=[];

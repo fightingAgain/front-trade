@@ -1,10 +1,4 @@
 /*
- * @Author: your name
- * @Date: 2020-10-06 16:25:39
- * @LastEditTime: 2020-10-23 10:28:30
- * @LastEditors: Please set LastEditors
- * @Description: In User Settings Edit
- * @FilePath: \FrameWork\bidPrice\Review\public\js\bigNumber.js
  */ 
 // 解决四维运算,js计算失去精度的问题 
  

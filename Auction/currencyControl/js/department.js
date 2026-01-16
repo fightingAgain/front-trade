@@ -1,10 +1,4 @@
 /*
- * @Author: your name
- * @Date: 2020-06-29 13:35:23
- * @LastEditTime: 2020-06-30 16:51:21
- * @LastEditors: Please set LastEditors
- * @Description: In User Settings Edit
- * @FilePath: \FrameWork_bf\bidPrice\currencyControl\js\department.js
  */
 /*=======报价文件目录的封装js===== 
 *========== JIN ===========
