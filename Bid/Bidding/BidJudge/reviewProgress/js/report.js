@@ -1,5 +1,5 @@
 /**
- * 2019-04-18 by hwf
+
  */
 var findBidCheckScoresUrl = config.tenderHost +  "/BidCheckReportController/findBidCheckScores.do";
 var buildCheckReportUrl = config.tenderHost + "/BidCheckReportController/buildCheckReport.do";

@@ -25,7 +25,7 @@ function du(isPublic,purchaserId,classificaCode){
 	if(data2!=null){
     	/*
     	 * 注释代码，添加邀请函，每次只添加新增的供应商
-    	 * 2021-01-27 by hwf
+    	
     	 */
     	
 //  	data=data2;

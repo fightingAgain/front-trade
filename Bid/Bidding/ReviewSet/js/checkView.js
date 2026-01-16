@@ -1,5 +1,5 @@
 /**
- * 2019-05-21 by hwf
+
  * 上传招标文件
  */
 var saveUrl = config.tenderHost + '/CheckAuditController/saveCheckAudit'; //保存

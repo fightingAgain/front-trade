@@ -1,5 +1,5 @@
 /**
- * 2019-03-27 by hwf
+
  */
 
 var pageProject = "Bidding/BidJudge/Supervise/model/projectView.html";  //项目详情页面

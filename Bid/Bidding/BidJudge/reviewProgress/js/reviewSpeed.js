@@ -1,6 +1,4 @@
-/**
- * 2019-04-10 by zhouyan
- */
+
 
 var getUrl = config.tenderHost + '/CheckBackController/findExpertCheckState.do';//查询评委所有评审项
 var backUrl = config.tenderHost + '/CheckBackController/resetCheck.do';//查询评委所有评审项

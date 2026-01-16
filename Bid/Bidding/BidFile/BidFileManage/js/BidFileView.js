@@ -1,5 +1,5 @@
 /**
- * 2019-05-21 by hwf
+
  * 上传招标文件
  */
 var detailUrl = config.tenderHost + '/DocClarifyController/findDetailByBidSectionId.do';  //招标文件详情（控制台）

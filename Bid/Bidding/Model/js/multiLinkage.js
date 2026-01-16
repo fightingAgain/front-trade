@@ -1,5 +1,4 @@
 /**
- * 2019-05-27  by  hwf
  * @param {Object} options  参数
  * @param {Object} target   目标元素
  */

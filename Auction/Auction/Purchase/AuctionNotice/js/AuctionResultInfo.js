@@ -2185,7 +2185,7 @@ function commitRst() {
 }
 
 /**
- * modify by hwf
+
  * 验证黑名单
  * 暂时注释
  */

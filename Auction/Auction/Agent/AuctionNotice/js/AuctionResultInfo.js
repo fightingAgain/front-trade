@@ -2272,7 +2272,7 @@ $("#btn_submit").on("click", function () {
 
 
 /**
- * modify by hwf
+
  * 验证黑名单
  */
 function commit() {
