@@ -24,7 +24,7 @@ var examType; //资格审查方式
 
 var typeCode = "A"; //标段类型
 var isPublicProject = "0"; //是否公共资源项目
-var isAgency; //是否东风咨询公司
+var isAgency; //是否咨询公司
 var tenderMode; // 招标方式，邀请招标不用报名
 
 var checkTypeData;
@@ -38,7 +38,7 @@ var feeConfirmVersion = 2;//服务费版本号
 $(function() {
 	//下拉框数据初始化
 	initSelect('.select');
-	//东风的保障金收取默认代理机构
+	//的保障金收取默认代理机构
 	$("[name='depositCollect']").val(2);
 	$(".isBidPriceShow").show();
 
@@ -46,7 +46,7 @@ $(function() {
 	if($.getUrlParam("tenderProjectId") && $.getUrlParam("tenderProjectId") != "undefined") {
 		tenderProjectId = $.getUrlParam("tenderProjectId");
 	}
-	//是否东风咨询公司
+	//是否咨询公司
 	if($.getUrlParam("isAgency") && $.getUrlParam("isAgency") != "undefined") {
 		isAgency = $.getUrlParam("isAgency");
 	} else {
@@ -337,7 +337,7 @@ function passMessage(data, callback) {
 			if(isSubTips) {
 				var tips = '招标阶段，如修改了资格预审阶段默认获取的“拟采用评标办法”、“是否有工程量清单”、“是否有招标控制价”字段信息，请重新编辑招标文件;如未修改,则无需做处理。'
 				if(isPublicProject == 0) { //非公共资源
-					if(isAgency == 1) { //东风
+					if(isAgency == 1) { //
 						tips = '招标阶段，如修改了资格预审阶段默认获取的“拟采用评标办法”、“是否单独设置评审条款”、“是否有工程量清单”、“是否有招标控制价”字段信息，请重新编辑招标文件;如未修改,则无需做处理。'
 					}
 				}

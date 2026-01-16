@@ -52,7 +52,7 @@ var workflowLevel = 0;
 //是否为提交过审核人
 var isReloadCheck = false;
 var isEndCheck;
-var isDfcm = false;//是否东风传媒自主采购项目
+var isDfcm = false;//是否传媒自主采购项目
 var isShowPrice = '';//是否显示当前最低报价
 var RenameData = {};//投标人更名信息
 $(function() {

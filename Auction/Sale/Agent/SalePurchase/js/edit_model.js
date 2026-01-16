@@ -37,7 +37,7 @@ var projectIds = getUrlParam('projectId'),
 	projectSource;
 var optiondata = []; //媒体数组
 var isDf = false,
-	depositList; //是否是东风工程或是东风咨询企业
+	depositList; //是否是工程或是咨询企业
 var WORKFLOWTYPE = 'xmgg';
 var manual; //是否开启竞卖报价设置
 //文件上传参数

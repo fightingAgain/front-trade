@@ -110,7 +110,7 @@ function priceExaminel(_b){
 			'<input class="change-disabled"  type="radio" name="checkType" value="6" onclick="scoreTypeBtnl(6)"/>固定比例取整法' +
 			'<input class="change-disabled" type="radio" name="checkType" value="7" onclick="scoreTypeBtnl(7)"/>固定差值法' +
 			'<input class="change-disabled" type="radio" name="checkType" value="8" onclick="scoreTypeBtnl(8)"/>直接比较法' +
-			'<input class="change-disabled" type="radio" name="checkType" value="9" onclick="scoreTypeBtnl(9)"/>东风评价算法'
+			'<input class="change-disabled" type="radio" name="checkType" value="9" onclick="scoreTypeBtnl(9)"/>评价算法'
 			$('#scoreType').html(scoreTypes);	
 		}else if(_b==1||_b==2||_b==3||_b==4||_b==5){			
 		   scoreTypes+='<input  type="radio" name="checkType" value="0" onclick="scoreTypeBtnl(0)"/>自定义计算法'
@@ -547,17 +547,17 @@ function scoreTypeBtnl(_c){
 			'</tr>'
 	};
 
-	//东风评价算法
+	//评价算法
 	if(_c == 9) {
 		Assessment += '<tr>' +
-			'<input class="form-control" type="hidden" name="businessName" value="东风评价算法"/>' +
+			'<input class="form-control" type="hidden" name="businessName" value="评价算法"/>' +
 			'<td class="th_bg">权重值（0~1）<i class="red">*</i></td>' +
 			'<td><input class="form-control" type="text" style="width:200px" name="weight"  id="weight" readonly="readonly"/></td>' +
 			'<td class="th_bg">商务报价分值<i class="red">*</i></td>' +
 			'<td><input type="text" class="form-control priceNumber" style="width:200px;display:inline" name="baseScore" id="baseScore" /></td>' +
 			'</tr>' +
 			'<tr>' +
-			'<td colspan="4" style="text-align: left;"><strong>东风评价算法</strong></td>' +
+			'<td colspan="4" style="text-align: left;"><strong>评价算法</strong></td>' +
 			'</tr>' +
 			'<tr>' +
 			'<td id="tdRows" rowspan="4" class="th_bg">1、商务报价参数<i class="red">*</i></td>' +
@@ -720,7 +720,7 @@ function basePriceRoleClick(value) {
 		$("#Assessment").find("#supplierTotal").removeAttr("readonly");
 	}
 };
-//计算东风评标法最大加分值
+//计算评标法最大加分值
 function maxUpScoreChange(){
 	var _addScoreScope=$("#Assessment").find("#addScoreScope").val();
 	var _basePriceProportionLow=$("#Assessment").find("#basePriceProportionLow").val();

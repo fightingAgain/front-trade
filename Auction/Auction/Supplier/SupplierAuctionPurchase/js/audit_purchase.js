@@ -15,8 +15,8 @@ var typeShow;
 var showPrice;
 var budgetIsShow;
 var actionType;
-var isDfcm = false;//是否东风传媒自主采购项目
-var isShowDfcm = false;//东风传媒的自由、单轮、多轮及不限轮次竞价 不一样
+var isDfcm = false;//是否传媒自主采购项目
+var isShowDfcm = false;//传媒的自由、单轮、多轮及不限轮次竞价 不一样
 var islink = 1;//是否采集信息
 //初始化
 $(function () {

@@ -859,14 +859,14 @@ function setWinner(data,type,code,discount,changeValue){
 					+'<option value="4">服务标准收费费率</option>'
 					+'<option value="1">广告标准费率</option>'
 					+'<option value="2">非广告标准费率</option>'
-					+'<option value="3">东风日产收费标准</option></select>';
+					+'<option value="3">日产收费标准</option></select>';
 				if(data[i].calculation == 4 || !data[i].calculation){
 					countType = '4';
 					options = '<select class="form-control payType" name="" data-index="'+i+'">'
 					+'<option value="4">服务标准收费费率</option>'
 					+'<option value="1">广告标准收费费率（旧）</option>'
 					+'<option value="2">非广告标准收费费率（旧）</option>'
-					+'<option value="3">东风日产收费标准</option></select>';
+					+'<option value="3">日产收费标准</option></select>';
 					
 				}else if(data[i].calculation == 1){
 					countType = '1';
@@ -874,7 +874,7 @@ function setWinner(data,type,code,discount,changeValue){
 					+'<option value="4">服务标准收费费率</option>'
 					+'<option value="1" selected>广告标准收费费率（旧）</option>'
 					+'<option value="2">非广告标准收费费率（旧）</option>'
-					+'<option value="3">东风日产收费标准</option></select>';
+					+'<option value="3">日产收费标准</option></select>';
 					
 				}else if(data[i].calculation == 2){
 					countType = '2';
@@ -882,7 +882,7 @@ function setWinner(data,type,code,discount,changeValue){
 					+'<option value="4">服务标准收费费率</option>'
 					+'<option value="1">广告标准收费费率（旧）</option>'
 					+'<option value="2" selected>非广告标准收费费率（旧）</option>'
-					+'<option value="3">东风日产收费标准</option></select>';
+					+'<option value="3">日产收费标准</option></select>';
 					
 					
 				}else if(data[i].calculation == 3){
@@ -891,7 +891,7 @@ function setWinner(data,type,code,discount,changeValue){
 					+'<option value="4">服务标准收费费率</option>'
 					+'<option value="1">广告标准收费费率（旧）</option>'
 					+'<option value="2">非广告标准收费费率（旧）</option>'
-					+'<option value="3" selected>东风日产收费标准</option></select>';
+					+'<option value="3" selected>日产收费标准</option></select>';
 					
 				}
 				

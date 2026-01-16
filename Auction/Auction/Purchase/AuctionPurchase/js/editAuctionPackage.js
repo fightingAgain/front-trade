@@ -42,7 +42,7 @@ var checkListData;
 var thisFrame = parent.window.document.getElementById("packageclass").getElementsByTagName("iframe")[0].id;
 var dcmt = parent.$('#' + thisFrame)[0].contentWindow;
 var oFileInput;
-var isDfcm = false;//是否东风传媒自主采购项目
+var isDfcm = false;//是否传媒自主采购项目
 function excelDownload() {
 	if(isDfcm){
 		var newUrl = excelDownloadUrl + "?fname=清单式竞价模板&filePath=AuctionDfcmQdjyTemplate.xlsx";
@@ -823,7 +823,7 @@ function detailEdit($index) {
 //导出模版
 function exportExcel() {
 	if(isDfcm){
-		var url = config.FileHost + "/FileController/download.do" + "?fname=材料设备模板-东风传媒.xls&ftpPath=/Templates/Pur/Pur_Equipment_Bill_Of_Material_Template_Of_Media.xls";
+		var url = config.FileHost + "/FileController/download.do" + "?fname=材料设备模板-传媒.xls&ftpPath=/Templates/Pur/Pur_Equipment_Bill_Of_Material_Template_Of_Media.xls";
 	}else{
 		var url = config.FileHost + "/FileController/download.do" + "?fname=材料设备模板.xls&ftpPath=/Templates/Pur/Pur_Equipment_Bill_Of_Material_Template.xls";
 	}

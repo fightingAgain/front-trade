@@ -9,7 +9,7 @@ var auctionTypes;
 var reg = /^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}$/;
 var typeShow;
 var showPrice;
-var isDfcm = false;//是否东风传媒自主采购项目
+var isDfcm = false;//是否传媒自主采购项目
 var createType = getUrlParam('projectId');// 1项目授权中被授权的人，只能查看
 function getUrlParam(name) {
 	var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); // 构造一个含有目标参数的正则表达式对象  

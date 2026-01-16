@@ -94,7 +94,7 @@ function getDetail() {
                     if(arr[key]==0){
                         $("#"+key).html('中（选）标单位'); 
                     }else{
-                        $("#"+key).html('东风咨询');
+                        $("#"+key).html('咨询');
                     }
                 } else {
                    

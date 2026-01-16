@@ -12,7 +12,7 @@ var examType; //资格审查方式
 
 var typeCode = ""; //标段类型
 var isPublicProject = "0"; //是否公共资源项目
-var isAgency; //是否东风咨询公司
+var isAgency; //是否咨询公司
 var tenderMode;
 var tenderProjectState = "2"; //2为审核通过
 var source = ""; // 1是重新招标
@@ -26,7 +26,7 @@ $(function() {
 	if ($.getUrlParam("isBlank") && $.getUrlParam("isBlank") == "1") {
 		$('.bottom-btn').hide();
 	}
-	//是否东风咨询公司
+	//是否咨询公司
 	if($.getUrlParam("isAgency") && $.getUrlParam("isAgency") != "undefined") {
 		isAgency = $.getUrlParam("isAgency");
 	} else {

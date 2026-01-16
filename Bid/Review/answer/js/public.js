@@ -65,7 +65,7 @@ if(!window.top.options){
 		isProjectCheck:{val:{"0":"否", "1":"是"}},
 		
 		//市场类型
-		marketType:{val:{"df":"东风市场", "sh":"社会市场"}},
+		marketType:{val:{"df":"市场", "sh":"社会市场"}},
 		
 		//拟采用的评标办法
 		pretrialCheckType:{val:{"1":"合格制", "2":"有限数量制", "3":"评标制"}},

@@ -8,7 +8,7 @@ var getUrl = config.tenderHost + '/BidSectionController/getBidSectionPretrialInf
 var detailUrl = config.tenderHost + '/BidExcepitonController/getExcepiton.do'; // 旧标段详情
 var id = '';//标段id
 var bidSectionId = '';//重新招标时标段id
-var isAgency; //是否东风咨询公司
+var isAgency; //是否咨询公司
 var typeCode = "A";  //标段类型
 var examType;  //资格审查方式
 var source = "";  // 1是重新招标
@@ -25,7 +25,7 @@ $(function(){
  	if($.getUrlParam("examType") && $.getUrlParam("examType") != "undefined"){
 		examType =$.getUrlParam("examType");
 	}
-	//是否东风咨询公司
+	//是否咨询公司
  	if($.getUrlParam("isAgency") && $.getUrlParam("isAgency") != "undefined"){
 		isAgency =$.getUrlParam("isAgency");
 	} else {

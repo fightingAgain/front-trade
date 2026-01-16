@@ -50,7 +50,7 @@ function getUrlParam(name) {
 //实例化编辑器
 //建议使用工厂方法getEditor创建和引用编辑器实例，如果在某个闭包下引用该编辑器，直接调用UE.getEditor('editor')就能拿到相关的实例
 var ue = UE.getEditor('editor');
-var isDf=false;//是否是东风工程或是东风咨询企业
+var isDf=false;//是否是工程或是咨询企业
 //提交审核
 $("#btn_submit").click(function() {
 	if(!mediaEditor.isValidate()){

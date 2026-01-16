@@ -8,7 +8,7 @@
  var findEnterpriseInfo=config.Syshost+'/EnterpriseController/findEnterpriseInfo.do'//当前登录人的信息
  var sourceFundsId = ""; //资金来源Id
  var enterpriseList;
- var isDf=false;//是否是东风工程或是东风咨询企业
+ var isDf=false;//是否是工程或是咨询企业
  //初始化
 $(function(){
 	//设置项目组成员
@@ -38,7 +38,7 @@ $(function(){
 	$("#provinceName").val('湖北省');	
 	$("#cityName").val('武汉市');	
 	sourceFunds();
-	//是否是东风工程或是东风咨询企业
+	//是否是工程或是咨询企业
 	if(sysEnterpriseId){
 		var arrlist = sysEnterpriseId.split(',');
 		if(arrlist.indexOf(top.enterpriseId)!=-1){

@@ -18,7 +18,7 @@ var auctionOutTypeData = [] //不限轮次淘汰方式
 var typeShow;
 var showPrice;
 var projectSource;
-var isDfcm = false;//是否东风传媒自主采购项目
+var isDfcm = false;//是否传媒自主采购项目
 //初始化
 $(function () {
 

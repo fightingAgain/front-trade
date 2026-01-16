@@ -96,7 +96,7 @@ function Purchase() {
 			}
 		}else if(key=='marketType'){
 			if(projectData[key]=='DF'){
-				$("#"+key).html('东风市场')
+				$("#"+key).html('内部市场')
 			}
 			if(projectData[key]=='JP'){
 				$("#"+key).html('社会军品')
@@ -152,7 +152,7 @@ function Purchase() {
 	}
 
 	if(tenderDesk == 0) {
-		$("#tenderDesk").html("东风");
+		$("#tenderDesk").html("");
 	} else if(tenderDesk == 1) {
 		$("#tenderDesk").html("政府");
 	} else if(tenderDesk == 2) {

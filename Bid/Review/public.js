@@ -107,7 +107,7 @@ if(!window.top.options){
 		isProjectCheck:{val:{"0":"否", "1":"是"}, isCustom:true},
 		
 		//市场类型
-		marketType:{val:{"SH":"社会市场", "DF":"东风市场"}, isCustom:true},
+		marketType:{val:{"SH":"社会市场", "DF":"内部市场"}, isCustom:true},
 		
 		//拟采用的评标办法
 		pretrialCheckType:{val:{"1":"合格制", "2":"有限数量制", "3":"评审制"}, isCustom:true},
@@ -556,7 +556,7 @@ function maxTest(ele,maxLength,isEmpty){
 }
 
 //var noticeMedia = {
-//	'001':'东风电子采购网站',
+//	'001':'电子采购网站',
 //	'000':'中国招标投标公共服务平台',
 //	'002':'湖北省公共资源交易电子服务平台',
 //	'003':'襄阳市公共交易平台',

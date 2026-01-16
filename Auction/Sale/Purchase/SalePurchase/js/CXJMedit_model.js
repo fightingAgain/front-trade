@@ -37,7 +37,7 @@ var projectSupplierList = "" //当是ie9浏览器的时候邀请供应商的数�
 var projectIds = getUrlParam('projectId'),
 	projectSource;
 var optiondata = []; //媒体数组
-var isDf = false; //是否是东风工程或是东风咨询企业
+var isDf = false; //是否是工程或是咨询企业
 var WORKFLOWTYPE = 'xmgg';
 //文件上传参数
 var files = {

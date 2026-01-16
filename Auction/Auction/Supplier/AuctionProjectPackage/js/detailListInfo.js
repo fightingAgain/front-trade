@@ -23,7 +23,7 @@ var pageSize;
 var pageIndex;
 var start;
 var end;
-var isDfcm = false;//是否东风传媒自主采购项目
+var isDfcm = false;//是否传媒自主采购项目
 var gzFile = [], otherFile = [];
 $.ajax({
 	url: top.config.AuctionHost + '/AuctionProjectPackageController/findAuctionDetail.do',

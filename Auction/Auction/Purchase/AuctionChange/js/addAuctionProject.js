@@ -31,7 +31,7 @@ var urlProjectId = getUrlParam('projectId')
 var mid = getUrlParam('id')
 var projectSourceCount = getUrlParam('projectSourceCount')
 var checkState=getUrlParam('checkState');
-var isDfcm = false;//是否东风传媒自主采购项目
+var isDfcm = false;//是否传媒自主采购项目
 function getUrlParam(name) {
 	var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); // 构造一个含有目标参数的正则表达式对象  
 	var r = window.location.search.substr(1).match(reg); // 匹配目标参数  

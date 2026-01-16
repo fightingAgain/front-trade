@@ -11,7 +11,7 @@ var lowPrice;									// 当前最低价格
 var _roundData; 								// 所有轮次数据 多轮/无限
 var _open = false;
 var endTimeTips = '';
-var isDfcm = false;//是否东风传媒自主采购项目
+var isDfcm = false;//是否传媒自主采购项目
 $.ajax({
 	url: top.config.AuctionHost + '/AuctionQuoteController/detail.do',
 	data: {

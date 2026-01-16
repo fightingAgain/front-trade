@@ -7,7 +7,7 @@
  var wordTest=config.bidhost +'/WordConversionController/showTestFirst.do'//自定义模接口
 var findEnterpriseInfo=config.Syshost+'/EnterpriseController/findEnterpriseInfo.do'//当前登录人的信息
 var sourceFundsId = ""; //资金来源Id
-var isDf=false;//是否是东风工程或是东风咨询企业
+var isDf=false;//是否是工程或是咨询企业
 var tenderProjectClassify = '',industriesType = '';//采购项目分类 项目行业分类 （需求dfdzcg-3822）
  //初始化
 $(function(){
@@ -24,7 +24,7 @@ $(function(){
 	$("#cityName").val('武汉市');
 	Usersupplier();
 	sourceFunds();
-	//是否是东风工程或是东风咨询企业
+	//是否是工程或是咨询企业
 	if(sysEnterpriseId){
 		var arrlist = sysEnterpriseId.split(',');
 		if(arrlist.indexOf(top.enterpriseId)!=-1){

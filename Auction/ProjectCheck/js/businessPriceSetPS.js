@@ -330,11 +330,11 @@ function scoreTypeBtn(_c, _d, businessPriceSetData) {
 			+ '</tr>'
 	};
 
-	//东风评价法
+	//评价法
 	if (_c == 9) {
 		Assessment += '<tr>'
 			+ '<td class="th_bg">报价类型</td>'
-			+ '<td colspan="3" style="text-align: left;">东风评价法</td>'
+			+ '<td colspan="3" style="text-align: left;">评价法</td>'
 			+ '</tr>'
 			+ '<tr>'
 			+ '<td class="th_bg">权重值（0~1）</td>'

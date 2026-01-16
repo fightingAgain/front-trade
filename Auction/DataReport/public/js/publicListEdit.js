@@ -1171,7 +1171,7 @@ function PurchaseData() {
 	}
 
 	if(projectData.marketType == 'DF') {
-		$("#marketType").html('东风市场')
+		$("#marketType").html('内部市场')
 	}
 	$("#purchaserName").html(projectData.purchaserName);
 	//交易平台
@@ -1179,14 +1179,14 @@ function PurchaseData() {
 	 * 
 	 * 线下 platformType 
 	 * {
-            '1': '东风交易平台',
+            '1': '交易平台',
             '2': '政府平台',
             '3': '国际招标平台',
             '4': '其他',
         },
 	 *  线上 tenderDesk
 		{
-			0: '东风平台',
+			0: '平台',
 			2: '长安平台',
 			3: '企采平台',
 			4: '政府采购平台',
@@ -1200,17 +1200,17 @@ function PurchaseData() {
 	 */
 	if (processType == '2') {
 		var dic = {
-            '1': '东风平台',
+            '1': '平台',
             '2': '政府平台',
             '3': '国际招标平台',
             '4': '其他',
         }
-		$("#tenderDesk").html(dic[projectData.tenderDesk] || '东风平台')
+		$("#tenderDesk").html(dic[projectData.tenderDesk] || '平台')
 	} else {
 		if(projectData.tenderDesk == "0") {
-			$("#tenderDesk").html('东风平台');
+			$("#tenderDesk").html('平台');
 		} else if (projectData.tenderDesk == "1") {
-			$("#tenderDesk").html('东风平台');
+			$("#tenderDesk").html('平台');
 		} else if(projectData.tenderDesk == "2") {
 			$("#tenderDesk").html('长安平台');
 		} else if(projectData.tenderDesk == "3") {

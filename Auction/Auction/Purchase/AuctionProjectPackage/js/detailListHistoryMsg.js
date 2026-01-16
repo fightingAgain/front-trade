@@ -74,7 +74,7 @@ var start;
 var end;
 var submitState; //提交状态，true已提交，false未提交
 var sfcBarginStatus; //议价结果
-var isDfcm = false;//是否东风传媒自主采购项目
+var isDfcm = false;//是否传媒自主采购项目
 var RenameData = {};//投标人更名信息
 $(function() {
 	RenameData = getBidderRenameData(projectId);//供应商更名信息

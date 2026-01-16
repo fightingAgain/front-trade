@@ -11,12 +11,12 @@ var projectData=[];
 var packageInfo =[];
 
 var sourceFundsId = ""; //资金来源Id
-var isDf=false;//是否是东风工程或是东风咨询企业
+var isDf=false;//是否是工程或是咨询企业
 var oldProjectId='';
 var tenderProjectClassify = '',industriesType = '';//采购项目分类 项目行业分类 （需求dfdzcg-3822）
  //初始化
 $(function(){
-	//是否是东风工程或是东风咨询企业
+	//是否是工程或是咨询企业
 	if(sysEnterpriseId){
 		var arrlist = sysEnterpriseId.split(',');
 		if(arrlist.indexOf(top.enterpriseId)!=-1){

@@ -87,7 +87,7 @@ if(!window.top.options){
 		isProjectCheck:{val:{"0":"否", "1":"是"}, isCustom:true},
 		
 		//市场类型
-		marketType:{val:{"SH":"社会市场", "DF":"东风市场"}, isCustom:true},
+		marketType:{val:{"SH":"社会市场", "DF":"内部市场"}, isCustom:true},
 		
 		//拟采用的评标办法
 		pretrialCheckType:{val:{"1":"合格制", "2":"有限数量制", "3":"评审制"}, isCustom:true},
@@ -534,7 +534,7 @@ function maxTest(ele,maxLength,isEmpty){
 }
 
 //var noticeMedia = {
-//	'001':'东风电子采购网站',
+//	'001':'电子采购网站',
 //	'000':'中国招标投标公共服务平台',
 //	'002':'湖北省公共资源交易电子服务平台',
 //	'003':'襄阳市公共交易平台',
@@ -548,7 +548,7 @@ function maxTest(ele,maxLength,isEmpty){
 /***
  * 公告发布媒体
  * 1）	依法必招的项目强制勾选中国招标投标公共服务平台，不可修改；非依法必招的项目默认勾选，可以修改。
- * 2）	所有项目均强制勾选东风交易中心（企采平台），仅一种情况除外：邀请类项目后续的公示公告默认勾选，可以修改。
+ * 2）	所有项目均强制勾选交易中心（企采平台），仅一种情况除外：邀请类项目后续的公示公告默认勾选，可以修改。
  * @param {Object} para
  */
 function initMedia(para){

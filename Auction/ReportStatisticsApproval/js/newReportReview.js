@@ -114,7 +114,7 @@ function Purchase() {
 	for(key in projectData) {
 		if(key == 'marketType') {
 			if(projectData[key] == 'DF') {
-				$("#" + key).html('东风市场')
+				$("#" + key).html('内部市场')
 			}
 			if(projectData[key] == 'JP') {
 				$("#" + key).html('社会军品')
@@ -675,18 +675,18 @@ function Purchase() {
 	}
 	if (projectData.processType == '2') {
 		var dic = {
-            '1': '东风平台',
+            '1': '平台',
             '2': '政府平台',
             '3': '国际招标平台',
             '4': '其他',
         }
-		$("#tenderDesk").html(dic[projectData.tenderDesk] || '东风平台')
+		$("#tenderDesk").html(dic[projectData.tenderDesk] || '平台')
 	} else {
 		//交易类型
 		if(projectData.tenderDesk == "0") {
-			$("#tenderDesk").html('东风平台');
+			$("#tenderDesk").html('平台');
 		} else if(projectData.tenderDesk == "1") {
-			$("#tenderDesk").html('东风平台');
+			$("#tenderDesk").html('平台');
 		} else if(projectData.tenderDesk == "2") {
 			$("#tenderDesk").html('长安平台');
 		} else if(projectData.tenderDesk == "3") {

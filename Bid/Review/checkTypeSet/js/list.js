@@ -68,7 +68,7 @@ function getTendereeList(){
             title: '平台',
             align: 'center',
             formatter:function(value, row, index){
-                var sysTypeTxt = {"CA":"长安","DF":"东风","BD":"保定","XY":"襄阳"}
+                var sysTypeTxt = {"CA":"长安","DF":"内部"}
                 return sysTypeTxt[value];
             }
         },

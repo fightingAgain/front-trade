@@ -19,7 +19,7 @@ var examType;  //资格审查方式
 
 var typeCode = "A";  //标段类型
 var isPublicProject = "0"; //是否公共资源项目
-var isAgency; //是否东风咨询公司
+var isAgency; //是否咨询公司
 var tenderMode; // 招标方式，邀请招标不用报名
 
 var checkTypeData;
@@ -33,14 +33,14 @@ var from = $.getUrlParam("from")
 $(function () {
 	//下拉框数据初始化
 	initSelect('.select');
-	//东风的保障金收取默认代理机构
+	//的保障金收取默认代理机构
 	$("[name='depositCollect']").val(2);
 
 	// 获取连接传递的参数
 	if ($.getUrlParam("tenderProjectId") && $.getUrlParam("tenderProjectId") != "undefined") {
 		tenderProjectId = $.getUrlParam("tenderProjectId");
 	}
-	//是否东风咨询公司
+	//是否咨询公司
 	if ($.getUrlParam("isAgency") && $.getUrlParam("isAgency") != "undefined") {
 		isAgency = $.getUrlParam("isAgency");
 	} else {
@@ -98,7 +98,7 @@ $(function () {
 			$("[name='depositCollect']").attr("disabled", "disabled");
 		} else {
 			className = "TENDER_PROJECT_CLASSIFY_0CODE";  //标段分类
-			if (isAgency == 1) {//东风
+			if (isAgency == 1) {//
 				$(".aloneSetCheckShow").show();
 			} else {
 				$(".aloneSetCheckShow").hide();

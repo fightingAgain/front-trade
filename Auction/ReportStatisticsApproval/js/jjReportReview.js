@@ -91,7 +91,7 @@ function Purchase() {
 			}
 		} else if(key=='marketType'){
 			if(purchaseaData[key]=='DF'){
-				$("#"+key).html('东风市场')
+				$("#"+key).html('内部市场')
 			}
 			if(purchaseaData[key]=='JP'){
 				$("#"+key).html('社会军品')

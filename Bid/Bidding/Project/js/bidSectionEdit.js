@@ -13,7 +13,7 @@ var id = "",tenderProjectId = "";//标段id、招标项目id
 var bidSectionId = "";  //重新招标id
 var source = "";  // 1是重新招标
 var tenderProjectClassifyCode = "";
-var isAgency; //是否东风咨询公司
+var isAgency; //是否咨询公司
 var examType, tenderMode, tenderProjectId;
 var bidderArr = [];//重新招标选择标段后查询标段下购买过文件的投标人
 var isSubFile;//有无(招标)预审文件
@@ -39,7 +39,7 @@ $(function(){
 	if ($.getUrlParam("feeConfirmVersion") && $.getUrlParam("feeConfirmVersion") != "undefined") {
 		feeConfirmVersion = $.getUrlParam("feeConfirmVersion");
 	}
-	//是否东风咨询公司
+	//是否咨询公司
 	if ($.getUrlParam("isAgency") && $.getUrlParam("isAgency") != "undefined") {
 		isAgency = $.getUrlParam("isAgency");
 	} else {
@@ -419,7 +419,7 @@ function changeExamType(val){
 		isBidFile(val, 0);
 		//下拉框数据初始化
 		initSelect('.select');
-		//东风的保障金收取默认代理机构
+		//的保障金收取默认代理机构
 		$("[name='depositCollect']").val(2);
 		//保证金收取方式
 		depositChange('2');

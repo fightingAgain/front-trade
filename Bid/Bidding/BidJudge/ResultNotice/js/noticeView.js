@@ -233,7 +233,7 @@ function setWinner(data,type,code,discount,changeValue){
 				}else if(data[i].calculation == 2){
 					options = '非广告标准收费费率（旧）';
 				}else if(data[i].calculation == 3){
-					options = '东风日产收费标准';
+					options = '日产收费标准';
 				}
 				
 			}

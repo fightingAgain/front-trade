@@ -20,7 +20,7 @@ var packageData, curStage, detailedCount;
 
 var recordOnceData;
 
-var isDfcm = false;//是否东风传媒自主采购项目
+var isDfcm = false;//是否传媒自主采购项目
 $(function () {
 	isDfcm = checkPurchaserAgent(packageId);
 	//项目基础信息	

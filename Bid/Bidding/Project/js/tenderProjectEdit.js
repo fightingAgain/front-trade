@@ -40,18 +40,18 @@
  var members = []; //成员id
 
  var bidArr = [];
- var isAgency = employeeInfo.isAgency; //是否东风咨询公司
+ var isAgency = employeeInfo.isAgency; //是否咨询公司
  var oldProjectId='';
  var isSubFile = false;//是否有提交招标（预审）文件
  var sourceFrom;//数据来源
  $(function() {
- 	//东风只有非公共资源
+ 	//只有非公共资源
  	if(systemType == 'df') {
  		$('.isAgency').hide();
  		$('[name=isPublicProject][value=0]').prop('checked', true)
  	}
 
- 	//东风代理机构不用输入编号
+ 	//代理机构不用输入编号
  	if(isAgency == 1) {
  		$('[name=interiorTenderProjectCode]').val('');
  		$('[name=interiorTenderProjectCode]').attr('readonly', 'readonly');

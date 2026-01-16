@@ -794,7 +794,7 @@ function editPackage(uid,num){
         ,btn: ['保存','取消']
         ,success:function(layero,index){        	
         	var iframeWind=layero.find('iframe')[0].contentWindow; 
-        	iframeWind.du(purchaseaData.openServiceFee); //代理服务费，是否是东风咨询
+        	iframeWind.du(purchaseaData.openServiceFee); //代理服务费，是否是咨询
         }
         //确定按钮
         ,yes: function(index,layero){            
