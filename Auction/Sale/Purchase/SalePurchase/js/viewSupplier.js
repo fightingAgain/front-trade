@@ -1,9 +1,8 @@
 /*
 
- * @LastEditTime: 2021-01-26 08:55:47
- * @LastEditors: your name
- * @Description: In User Settings Edit
- * @FilePath: \FrameWork\bidPrice\Sale\Purchase\SalePurchase\js\viewSupplier.js
+
+
+
  */ 
 function du(data) {
 	publicData = data;

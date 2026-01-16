@@ -1,9 +1,8 @@
 /*
 
- * @LastEditTime: 2020-11-23 09:19:27
- * @LastEditors: your name
- * @Description: In User Settings Edit
- * @FilePath: \FrameWork\bidPrice\Bid\Supplier\Supplement\js\noticeView.js
+
+
+
  */ 
 var findPurchaseUrl=config.bidhost + '/ProjectReviewController/findProjectInfo.do'//根据项目ID获取所有项目信息内容
 var WorkflowUrl=config.bidhost+"/WorkflowController/findWorkflowCheckerByType.do"//项目审核人列表数据接口

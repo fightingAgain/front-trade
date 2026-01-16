@@ -1,9 +1,9 @@
 /*
 
 
- * @Description: In User Settings Edit
+
  * @Description: 打印功能
- * @FilePath: \FrameWork\bidPrice\currencyControl\js\Printing.js
+
  */ 
 //打印
 function previewBtn(oper,isPortrait){
